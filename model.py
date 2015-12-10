@@ -50,10 +50,16 @@ def truncate_population(population):
 def get_population_summary(population, generation):
     ave_fitness = math.fsum([x.fitness for x in population])/len(population)
     ave_correlation = math.fsum([x.correlation for x in population])/len(population)
-    sd_fitness = statistics.stdev([x.fitness for x in population])
-    sd_correlation = statistics.stdev([x.correlation for x in population])
 
-    summary = "{0:>5} {1:>10} {2:10.2f} {3:10.2f} {4:12.2f} {5:10.2f}".format(generation, len(population), ave_fitness, sd_fitness, ave_correlation, sd_correlation)
+    if len(population) > 1:
+        sd_fitness = statistics.stdev([x.fitness for x in population])
+        sd_correlation = statistics.stdev([x.correlation for x in population])
+        format_string = "{0:>5} {1:>10} {2:10.2f} {3:10.2f} {4:12.2f} {5:10.2f}"
+    else:
+        sd_fitness = sd_correlation = "n/a"
+        format_string = "{0:>5} {1:>10} {2:10.2f} {3:>10} {4:12.2f} {5:>10}"
+
+    summary = format_string.format(generation, len(population), ave_fitness, sd_fitness, ave_correlation, sd_correlation)
     if generation==0:
         header = "\n{0:>5} {1:>10} {2:>10} {3:>10} {4:>12} {5:>10}\n".format("gen","pop","ave fit","sd fit","ave cor","sd cor")
         return header + summary

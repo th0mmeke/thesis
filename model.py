@@ -1,5 +1,4 @@
 import random
-import itertools
 import math
 import statistics
 

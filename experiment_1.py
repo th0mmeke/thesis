@@ -2,11 +2,7 @@ import model
 import random
 import os
 
-def my_derive(source, correlation):
-    '''
-    Source and correlation as mean and s.d., respectively, of a gaussian (normal) distribution
-    '''
-    return max(0.0,min(1.0, random.gauss(source, correlation)))
+
 
 def my_get_offspring(x):
     '''
@@ -22,7 +18,7 @@ def my_get_offspring(x):
 model.P_REPRODUCE = 1.0 # All parents reproduce
 model.P_SURVIVE = 0.0 # No parents survive
 model.N_OFFSPRING = (0,5)
-model.derive = my_derive
+model.derive = model.gaussian_derive
 model.get_offspring = my_get_offspring
 
 def init_population(n):

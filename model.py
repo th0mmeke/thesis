@@ -18,6 +18,15 @@ import statistics
 # Sensitivity - experiment design to determine effect of each parameter - ANOVA
 # Sensitivity - experiment runner
 
+
+# BUILDING BLOCKS
+def gaussian_derive(source, correlation):
+    '''
+    Source and correlation as mean and s.d., respectively, of a gaussian (normal) distribution
+    '''
+    return max(0.0,min(1.0, random.gauss(source, correlation)))
+
+# SKELETON
 class Element:
     def __init__(self, fitness=None, correlation=None):
         self.fitness = fitness if fitness != None else random.uniform(0.0,0.3)

@@ -2,8 +2,6 @@ import model
 import random
 import os
 
-
-
 def my_get_offspring(x):
     '''
     Correlated correlation values
@@ -27,4 +25,4 @@ def init_population(n):
 print("{}".format(os.path.basename(__file__)))
 
 for repeat in range(0,30):
-    model.run(init_population(1000), 20)
+    model.run(init_population(1000), 100)

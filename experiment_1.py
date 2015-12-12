@@ -3,7 +3,6 @@ import random
 import os
 
 
-
 def my_get_offspring(x):
     '''
     Correlated fitness and correlation values

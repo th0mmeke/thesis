@@ -2,50 +2,46 @@ import random
 import math
 import statistics
 
-# VERY SENSITIVE TO ABSOLUTE FITNESS - goes extinct with max initial fitness below 0.29 or so if no way to improve fitness beyond that
-
 # Endogenise fitness (make relative) and population (restriction from resource constraints)
 # Show: from low correlation to high correlation (inheritance)
 # Show: from highest correlation to high correlation (inheritance)
 
-# Controls: fitness and correlation
 # Independent - offspring fitness correlated with parent, but not correlation
 # Dependent - offspring fitness and correlation based on parent's
 
-# TODO:
-# relate to bourrat results
-# run with independent fitness/correlation
-# Sensitivity - experiment design to determine effect of each parameter - ANOVA
-# Sensitivity - experiment runner
-
-
-# BUILDING BLOCKS
-def gaussian_derive(source, correlation):
-    '''
-    Source and correlation as mean and s.d., respectively, of a gaussian (normal) distribution
-    '''
-    return max(0.0,min(1.0, random.gauss(source, correlation)))
-
 # SKELETON
 class Element:
-    def __init__(self, fitness=None, correlation=None):
-        self.fitness = fitness if fitness != None else random.uniform(0.0,0.3)
-        self.correlation = correlation if correlation != None else random.uniform(0.0,0.5)
+    def __init__(self, factors, fitness=None, correlation=None):
+        self.fitness = fitness if fitness != None else random.uniform(0.0,0.3 if factors[7] else 0.9)
+        self.correlation = correlation if correlation != None else random.uniform(0.0 if factors[7] else 0.5,0.3 if factors[7] else 0.9)
 
     def __str__(self):
         return str(self.fitness)
 
-def get_random_boolean(p1, p2):
-    return random.random() < (p1*p2)  # assumes uniform distribution?
+def get_random_boolean(p):
+    return random.random() < p
 
-def reproduction(population):
-    return [x for y in population for x in get_offspring(y)]
+def reproduction(factors, population):
 
-def selection(population):
-    return [x for x in population if get_random_boolean(x.fitness,P_SURVIVE)]
+    def get_offspring(factors, parent):
+        p_reproduce = parent.fitness if factors[0] == 0 else factors[0]
+        if not get_random_boolean(p_reproduce):
+            return []
 
-def truncate_population(population):
-    return population
+        fitness_correlation = parent.correlation if factors[5] else random.random()
+        correlation_correlation = parent.correlation if factors[6] else random.random()
+        offspring = []
+
+        for i in range(random.randint(0,factors[2])):
+            fitness = factors[4](parent.fitness, fitness_correlation)
+            correlation = factors[4](parent.correlation, correlation_correlation)
+            offspring.append(Element(factors, fitness, correlation))
+        return offspring
+
+    return [x for y in population for x in get_offspring(factors, y)]
+
+def selection(factors, population):
+    return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
 
 def get_population_summary(population, generation):
     ave_fitness = math.fsum([x.fitness for x in population])/len(population)
@@ -66,18 +62,22 @@ def get_population_summary(population, generation):
     else:
         return summary
 
-def run(population,generations):
+def run(factors, population, generations, population_limit):
+
+    original_population_size = len(population)
+    population_limit *= original_population_size # multiple of original population
 
     for i in range(0,generations):
 
         print(get_population_summary(population, i))
 
-        parent_population = selection(population)
-        offspring_population = reproduction(population)
+        parent_population = selection(factors, population)
+        offspring_population = reproduction(factors, population)
         population = parent_population + offspring_population
-        population = truncate_population(population)
+        if factors[3] and len(population) > original_population_size:
+            population = random.sample(population, original_population_size)
 
-        if len(population) == 0:
+        if len(population) == 0 or len(population) > population_limit:
             break
 
     return population

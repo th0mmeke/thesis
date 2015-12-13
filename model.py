@@ -1,6 +1,8 @@
 import random
 import math
 import statistics
+from tabulate import tabulate
+from collections import OrderedDict
 
 # Endogenise fitness (make relative) and population (restriction from resource constraints)
 # Show: from low correlation to high correlation (inheritance)
@@ -50,26 +52,21 @@ def get_population_summary(population, generation):
     if len(population) > 1:
         sd_fitness = statistics.stdev([x.fitness for x in population])
         sd_correlation = statistics.stdev([x.correlation for x in population])
-        format_string = "{0:>5} {1:>10} {2:10.2f} {3:10.2f} {4:12.2f} {5:10.2f}"
     else:
-        sd_fitness = sd_correlation = "n/a"
-        format_string = "{0:>5} {1:>10} {2:10.2f} {3:>10} {4:12.2f} {5:>10}"
+        sd_fitness = sd_correlation = "NaN"
 
-    summary = format_string.format(generation, len(population), ave_fitness, sd_fitness, ave_correlation, sd_correlation)
-    if generation==0:
-        header = "\n{0:>5} {1:>10} {2:>10} {3:>10} {4:>12} {5:>10}\n".format("gen","pop","ave fit","sd fit","ave cor","sd cor")
-        return header + summary
-    else:
-        return summary
+    summary = {'gen':generation, 'pop':len(population), 'ave fit':ave_fitness, 'sd fit':sd_fitness, 'ave cor':ave_correlation, 'sd cor':sd_correlation}
+    return OrderedDict(sorted(summary.items(),key=lambda t: t[0]))
 
 def run(factors, population, generations, population_limit):
 
     original_population_size = len(population)
     population_limit *= original_population_size # multiple of original population
 
-    for i in range(0,generations):
+    initial_summary = get_population_summary(population, 0)
+    results = [initial_summary.keys()]
 
-        print(get_population_summary(population, i))
+    for i in range(0,generations):
 
         parent_population = selection(factors, population)
         offspring_population = reproduction(factors, population)
@@ -77,9 +74,10 @@ def run(factors, population, generations, population_limit):
         if factors[3] and len(population) > original_population_size:
             population = random.sample(population, original_population_size)
 
+        results.append(get_population_summary(population, i).values())
+
         if len(population) == 0 or len(population) > population_limit:
             break
 
-    return population
-
-#print([str(x) for x in population])
+    print(tabulate(results, headers="firstrow"))
+    return get_population_summary(population, i)

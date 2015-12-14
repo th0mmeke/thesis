@@ -1,25 +1,30 @@
 import os
 import random
+import itertools
 import model
 
+# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
 experiments = [
-    [0,  0,  0,  0,  0,  0,  0,  0],
-    [1,  0,  0,  0,  0,  1,  1,  1],
-    [0,  1,  0,  0,  1,  0,  1,  1],
-    [1,  1,  0,  0,  1,  1,  0,  0],
-    [0,  0,  1,  0,  1,  1,  1,  0],
-    [1,  0,  1,  0,  1,  0,  0,  1],
-    [0,  1,  1,  0,  0,  1,  0,  1],
-    [1,  1,  1,  0,  0,  0,  1,  0],
-    [0,  0,  0,  1,  1,  1,  0,  1],
-    [1,  0,  0,  1,  1,  0,  1,  0],
-    [0,  1,  0,  1,  0,  1,  1,  0],
-    [1,  1,  0,  1,  0,  0,  0,  1],
-    [0,  0,  1,  1,  0,  0,  1,  1],
-    [1,  0,  1,  1,  0,  1,  0,  0],
-    [0,  1,  1,  1,  1,  0,  0,  0],
-    [1,  1,  1,  1,  1,  1,  1,  1]
+#   X1  X2  X3  X4  X5  X6  X7
+#   --------------------------
+    [0,  0,  0,  0,  0,  0,  0],
+    [1,  0,  0,  0,  1,  0,  1],
+    [0,  1,  0,  0,  1,  1,  0],
+    [1,  1,  0,  0,  0,  1,  1],
+    [0,  0,  1,  0,  1,  1,  1],
+    [1,  0,  1,  0,  0,  1,  0],
+    [0,  1,  1,  0,  0,  0,  1],
+    [1,  1,  1,  0,  1,  0,  0],
+    [0,  0,  0,  1,  0,  1,  1],
+    [1,  0,  0,  1,  1,  1,  0],
+    [0,  1,  0,  1,  1,  0,  1],
+    [1,  1,  0,  1,  0,  0,  0],
+    [0,  0,  1,  1,  1,  0,  0],
+    [1,  0,  1,  1,  0,  0,  1],
+    [0,  1,  1,  1,  0,  1,  0],
+    [1,  1,  1,  1,  1,  1,  1]
 ]
+#experiments = itertools.product(range(2), repeat=8)
 
 factor_defns = [
     [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
@@ -29,7 +34,6 @@ factor_defns = [
     [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source, 1.0-correlation)))],
     [False,    True],   # 5 = FITNESS_CORRELATION
     [False,    True],   # 6 = CORRELATION_CORRELATION
-    [False,    True]    # 7 = Start with low values for correlation and fitness
 ]
 
 def init_population(factors, n):
@@ -38,23 +42,26 @@ def init_population(factors, n):
 f = open("results.data", "w")
 
 header_added = False
-header = "p_reproduce, p_selection, n_offspring, truncate, distribution, fitness_correlation, correlation_correlation, low_start"
+header = "p_reproduce, p_selection, n_offspring, truncate, distribution, fitness_correlation, correlation_correlation"
 
 for experiment in experiments:
 
     factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
     print(factors)
-    experiment_factors = ",".join([str(x) for x in experiment])
+    experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
-    for repeat in range(0,1):
-        results = model.run(factors, population=init_population(factors, 1000), generations=50, population_limit=10)
+    for repeat in range(0,5):
+        (initial, final) = model.run(factors, population=init_population(factors, 1000), generations=250, population_limit=10)
 
-        if not header_added:
-            f.write(",".join(results.keys()) + header + "\n")
+        if not header_added: # use the header information returned from the model, but only once
+            initial_header = ",".join(["initial_" + x for x in initial.keys()])
+            final_header = ",".join(["final_" + x for x in final.keys()])
+            f.write(initial_header + "," + final_header + "," + header + "\n")
             header_added = True
 
-        str_results = [str(x) for x in results.values()]
-        f.write(",".join(str_results) + "," + experiment_factors + "\n")
+        str_initial = ",".join([str(x) for x in initial.values()])
+        str_final = ",".join([str(x) for x in final.values()])
+        f.write(str_initial + "," + str_final + "," + experiment_factors + "\n")
 
     print("\n")
 

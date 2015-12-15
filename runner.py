@@ -31,38 +31,44 @@ factor_defns = [
     [0.0,      1.0],    # 1 = P_SELECTION - 0 = fitness
     [2,        5],      # 2 = N_OFFSPRING
     [False,    True],   # 3 = TRUNCATE_POPULATION RANDOMLY
-    [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source, 1.0-correlation)))],
+    # gauss is described by mean=source, sd=1-correlation, then clipped to [0,1]
+    # uniform to range [source-(1-correlation), source+(1+correlation)], then clipped to [0,1]
+    [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source-(1.0-correlation), source+(1.0-correlation))))],
     [False,    True],   # 5 = FITNESS_CORRELATION
     [False,    True],   # 6 = CORRELATION_CORRELATION
 ]
 
-def init_population(factors, n):
-    return [model.Element(factors) for x in range(0,n)]
+def init_population(n):
+    return [model.Element() for x in range(0,n)]
 
-f = open("results.data", "w")
+def main():
+    f = open("results.data", "w")
 
-header_added = False
-header = "p_reproduce, p_selection, n_offspring, truncate, distribution, fitness_correlation, correlation_correlation"
+    header_added = False
+    header = "p_reproduce, p_selection, n_offspring, truncate, distribution, fitness_correlation, correlation_correlation"
 
-for experiment in experiments:
+    for experiment in experiments:
 
-    factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
-    print(factors)
-    experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
+        factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
+        print(factors)
+        experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
-    for repeat in range(0,5):
-        (initial, final) = model.run(factors, population=init_population(factors, 1000), generations=250, population_limit=10)
+        for repeat in range(0,10):
+            (initial, final) = model.run(factors, population=init_population(5000), generations=250, population_limit=10)
 
-        if not header_added: # use the header information returned from the model, but only once
-            initial_header = ",".join(["initial_" + x for x in initial.keys()])
-            final_header = ",".join(["final_" + x for x in final.keys()])
-            f.write(initial_header + "," + final_header + "," + header + "\n")
-            header_added = True
+            if not header_added: # use the header information returned from the model, but only once
+                initial_header = ",".join(["initial_" + x for x in initial.keys()])
+                final_header = ",".join(["final_" + x for x in final.keys()])
+                f.write(initial_header + "," + final_header + "," + header + "\n")
+                header_added = True
 
-        str_initial = ",".join([str(x) for x in initial.values()])
-        str_final = ",".join([str(x) for x in final.values()])
-        f.write(str_initial + "," + str_final + "," + experiment_factors + "\n")
+            str_initial = ",".join([str(x) for x in initial.values()])
+            str_final = ",".join([str(x) for x in final.values()])
+            f.write(str_initial + "," + str_final + "," + experiment_factors + "\n")
 
-    print("\n")
+        print("\n")
 
-f.close()
+    f.close()
+
+if __name__ == "__main__":
+    main()

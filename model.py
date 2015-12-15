@@ -9,7 +9,7 @@ from collections import OrderedDict
 # Show: from highest correlation to high correlation (inheritance)
 
 class Element:
-    def __init__(self, factors, fitness=None, correlation=None):
+    def __init__(self, fitness=None, correlation=None):
         low_start = True
         self.fitness = fitness if fitness != None else random.uniform(0.0,0.3 if low_start else 0.9)
         self.correlation = correlation if correlation != None else random.uniform(0.0 if low_start else 0.5,0.3 if low_start else 0.9)
@@ -37,7 +37,7 @@ def reproduction(factors, population):
         for i in range(random.randint(0,factors[2])):
             fitness = factors[4](parent.fitness, fitness_correlation)
             correlation = factors[4](parent.correlation, correlation_correlation)
-            offspring.append(Element(factors, fitness, correlation))
+            offspring.append(Element(fitness, correlation))
         return offspring
 
     return [x for y in population for x in get_offspring(factors, y)]

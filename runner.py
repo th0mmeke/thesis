@@ -38,10 +38,14 @@ factor_defns = [
     [False,    True],   # 6 = CORRELATION_CORRELATION
 ]
 
-def init_population(n):
-    return [model.Element() for x in range(0,n)]
+def init_population(n, low_start):
+    return [model.Element(low_start = low_start) for x in range(0,n)]
 
 def main():
+
+    changing_environment = True
+    low_start = True
+
     f = open("results.data", "w")
 
     header_added = False
@@ -54,7 +58,7 @@ def main():
         experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
         for repeat in range(0,10):
-            (initial, final) = model.run(factors, population=init_population(5000), generations=250, population_limit=10)
+            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=250, population_limit=10, changing_environment=changing_environment)
 
             if not header_added: # use the header information returned from the model, but only once
                 initial_header = ",".join(["initial_" + x for x in initial.keys()])

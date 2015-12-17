@@ -9,8 +9,8 @@ from collections import OrderedDict
 # Show: from highest correlation to high correlation (inheritance)
 
 class Element:
-    def __init__(self, fitness=None, correlation=None):
-        low_start = True
+    def __init__(self, fitness=None, correlation=None, low_start = True):
+        '''low_start only relevant if fitness or correlation not provided'''
         self.fitness = fitness if fitness != None else random.uniform(0.0,0.3 if low_start else 0.9)
         self.correlation = correlation if correlation != None else random.uniform(0.0 if low_start else 0.5,0.3 if low_start else 0.9)
 
@@ -45,11 +45,12 @@ def reproduction(factors, population):
 def selection(factors, population):
     return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
 
+def tweak_fitness(factors, population):
+    return [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
+
 def get_population_summary(population, generation):
     fitness = [x.fitness for x in population]
     correlation = [x.correlation for x in population]
-    ave_fitness = math.fsum(fitness)/len(population)
-    ave_correlation = math.fsum(correlation)/len(population)
 
     if len(population) > 1:
         sd_fitness = statistics.stdev(fitness)
@@ -57,17 +58,23 @@ def get_population_summary(population, generation):
     else:
         sd_fitness = sd_correlation = "NaN"
 
+    if len(population) > 0:
+        ave_fitness = math.fsum(fitness)/len(population)
+        ave_correlation = math.fsum(correlation)/len(population)
+    else:
+        ave_fitness = ave_correlation = "NaN"
+
     summary = {'gen':generation, 'pop':len(population), 'ave_fit':ave_fitness, 'sd_fit':sd_fitness, 'ave_cor':ave_correlation, 'sd_cor':sd_correlation}
     return OrderedDict(sorted(summary.items(),key=lambda t: t[0])) # to guarantee ordering if we extract values later
 
-def run(factors, population, generations, population_limit):
+def run(factors, population, generations, population_limit, changing_environment):
 
     original_population_size = len(population)
     population_limit *= original_population_size # stop when population size reaches a multiple of original population - generally some form of exponential growth
 
     # starting summary
     initial_summary = get_population_summary(population, 0)
-    results = [initial_summary.keys()]
+    results = [initial_summary] # headers and starting conditions
 
     for i in range(0,generations):
 
@@ -77,10 +84,13 @@ def run(factors, population, generations, population_limit):
         if factors[3] and len(population) > original_population_size: # if fixed population size
             population = random.sample(population, original_population_size)
 
-        results.append(get_population_summary(population, i).values())
-
-        if len(population) == 0 or len(population) > population_limit:
+        if len(population) < 3 or len(population) > population_limit:
             break
 
-    print(tabulate(results, headers="firstrow"))
-    return (initial_summary, get_population_summary(population, i)) # (initial, final) results
+        results.append(get_population_summary(population, i))
+
+        if changing_environment:
+            population = tweak_fitness(factors, population)
+
+    print(tabulate([x.values() for x in results], headers=results[0].keys()))
+    return (initial_summary, results[-1]) # (initial, final) results

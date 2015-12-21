@@ -1,14 +1,11 @@
-# ave cor,ave fit,gen,pop,sd cor,sd fit
-# 0.5545283508318075,0.8419380979405692,6,10380,0.3873342071576403,0.25925553541282276,0,0,0,0,0,0,0,0
-
 load_df <- function(t){
   while ("df" %in% search()) {detach(df)}
-
   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
-  df <- read.csv(t, colClasses=colClasses, header=T)
+  df <- read.csv(t, colClasses=colClasses)
+  #df <- read.csv(t)
   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
-  df[df$truncate==1,]
+  df
 }
 
 model <- function(df) {
@@ -18,13 +15,29 @@ model <- function(df) {
   fit
 }
 
-# Check effect of population limits
+# 1. Check effect of population limits
+
+df <- load_df("results_untruncated.data")
+summary(df)
+library(lattice)
+
+densityplot(~df$response_cor|df$truncate, data=df) # strongly non-normal
+bwplot(df$response_cor~df$truncate)
+qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor)
+ks.test(df[df$truncate==-1,]$response_cor,df[df$truncate==1,]$response_cor)
+# data:  df[df$truncate == -1, ]$response_cor and df[df$truncate == 1, ]$response_cor
+# D = 0.39844, p-value < 2.2e-16
+# alternative hypothesis: two-sided
 
 
 #twoway.plots(df1$diff,df1$correlation_correlation,df1$fitness_correlation)
 
+# 2. Check power
+
 df_high <- load_df("results_highstart.data")
 df_low <- load_df("results_lowstart.data")
+df_high <- df_high[df_high$truncate==1,]
+df_low <- df_low[df_low$truncate==1,]
 
 between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
 within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
@@ -32,8 +45,21 @@ power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=withi
 # or alternatively...
 # power.anova.test(groups=2,between.var=between,within.var=within, sig.level=0.05, power=0.999) returns n=10.43...
 
+# 3. Model low_start=True
 df_low <- load_df("results_lowstart.data")
-m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation+correlation_correlation)^2, data=df_low)
+df_low <- df_low[df_low$truncate==1,]
+plot(df_low$response_cor)
+densityplot(~df_low$response_cor)
+densityplot(~df_low$final_ave_cor) # Strongly non-normal data - bimodal, with cluster
+densityplot(~df_low$final_ave_fit) # less bimodal, although non-normal
+
+df_low[df_low$final_ave_cor>0.8,] # correlation_correlation == 1
+df_low[df_low$final_ave_cor<=0.8,] # correlation_correlation == -1
+
+df_test <- df_low[df_low$correlation_correlation == -1,]
+m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
+summary(m0)
+anova(m0)
 # Check model m0 for fit
 plot(m0,which=c(1,2)) # residuals and qq plot - residuals decreasing variability (wider range at lhs), qq plot strongly s-shaped
 # Try to improve model
@@ -73,12 +99,6 @@ anova(fit_low_changing)
 # # FACTOR INTERACTIONS
 #
 # interaction.plot(Energy,FoodSet,Number.of.cycles)
-#
-# # CHECK POWER OF TEST
-#
-# between <- var(c(mean(df_1$Number.of.cycles),mean(df_2$Number.of.cycles)))
-# within <- mean(c(var(df_1$Number.of.cycles),var(df_2$Number.of.cycles)))
-# power.anova.test(groups=2,between.var=between,within.var=within,sig.level=0.05,n=length(df_1$Number.of.cycles))
 #
 # library(PASWR) # For checking.plots
 # library(car) # For leveneTest

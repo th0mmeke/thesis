@@ -4,27 +4,27 @@ import itertools
 import model
 
 # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
-experiments = [
-#   X1  X2  X3  X4  X5  X6  X7
-#   --------------------------
-    [0,  0,  0,  0,  0,  0,  0],
-    [1,  0,  0,  0,  1,  0,  1],
-    [0,  1,  0,  0,  1,  1,  0],
-    [1,  1,  0,  0,  0,  1,  1],
-    [0,  0,  1,  0,  1,  1,  1],
-    [1,  0,  1,  0,  0,  1,  0],
-    [0,  1,  1,  0,  0,  0,  1],
-    [1,  1,  1,  0,  1,  0,  0],
-    [0,  0,  0,  1,  0,  1,  1],
-    [1,  0,  0,  1,  1,  1,  0],
-    [0,  1,  0,  1,  1,  0,  1],
-    [1,  1,  0,  1,  0,  0,  0],
-    [0,  0,  1,  1,  1,  0,  0],
-    [1,  0,  1,  1,  0,  0,  1],
-    [0,  1,  1,  1,  0,  1,  0],
-    [1,  1,  1,  1,  1,  1,  1]
-]
-#experiments = itertools.product(range(2), repeat=8)
+# experiments = [
+# #   X1  X2  X3  X4  X5  X6  X7
+# #   --------------------------
+#     [0,  0,  0,  0,  0,  0,  0],
+#     [1,  0,  0,  0,  1,  0,  1],
+#     [0,  1,  0,  0,  1,  1,  0],
+#     [1,  1,  0,  0,  0,  1,  1],
+#     [0,  0,  1,  0,  1,  1,  1],
+#     [1,  0,  1,  0,  0,  1,  0],
+#     [0,  1,  1,  0,  0,  0,  1],
+#     [1,  1,  1,  0,  1,  0,  0],
+#     [0,  0,  0,  1,  0,  1,  1],
+#     [1,  0,  0,  1,  1,  1,  0],
+#     [0,  1,  0,  1,  1,  0,  1],
+#     [1,  1,  0,  1,  0,  0,  0],
+#     [0,  0,  1,  1,  1,  0,  0],
+#     [1,  0,  1,  1,  0,  0,  1],
+#     [0,  1,  1,  1,  0,  1,  0],
+#     [1,  1,  1,  1,  1,  1,  1]
+# ]
+experiments = itertools.product(range(2), repeat=7)
 
 factor_defns = [
     [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
@@ -43,13 +43,13 @@ def init_population(n, low_start):
 
 def main():
 
-    changing_environment = True
+    changing_environment = False
     low_start = True
 
     f = open("results.data", "w")
 
     header_added = False
-    header = "p_reproduce, p_selection, n_offspring, truncate, distribution, fitness_correlation, correlation_correlation"
+    headers = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation"
 
     for experiment in experiments:
 
@@ -58,12 +58,12 @@ def main():
         experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
         for repeat in range(0,10):
-            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=250, population_limit=10, changing_environment=changing_environment)
+            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=15, population_limit=50, changing_environment=changing_environment)
 
             if not header_added: # use the header information returned from the model, but only once
                 initial_header = ",".join(["initial_" + x for x in initial.keys()])
                 final_header = ",".join(["final_" + x for x in final.keys()])
-                f.write(initial_header + "," + final_header + "," + header + "\n")
+                f.write(initial_header + "," + final_header + "," + headers + "\n")
                 header_added = True
 
             str_initial = ",".join([str(x) for x in initial.values()])

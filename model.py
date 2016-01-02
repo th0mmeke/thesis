@@ -89,7 +89,7 @@ def run(factors, population, generations, population_limit, changing_environment
 
         results.append(get_population_summary(population, i))
 
-        if changing_environment: # and i % 10 == 0:
+        if changing_environment and i % 5 == 0:
             population = tweak_fitness(factors, population)
 
     print(tabulate([x.values() for x in results], headers=results[0].keys()))

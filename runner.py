@@ -50,7 +50,7 @@ def main():
     f = open("results.data", "w")
 
     header_added = False
-    headers = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation"
+    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation"
 
     for experiment in experiments:
 
@@ -59,17 +59,15 @@ def main():
         experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
         for repeat in range(0,10):
-            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=1000, population_limit=50, changing_environment=changing_environment)
+            raw_data = model.run(factors, population=init_population(5000, low_start), generations=1000, population_limit=50, changing_environment=changing_environment)
 
             if not header_added: # use the header information returned from the model, but only once
-                initial_header = ",".join(["initial_" + x for x in initial.keys()])
-                final_header = ",".join(["final_" + x for x in final.keys()])
-                f.write(initial_header + "," + final_header + "," + headers + "\n")
+                str_header = ",".join(["final_" + x for x in raw_data[0].keys()])
+                f.write(str_header + "," + str_factors + "\n")
                 header_added = True
 
-            str_initial = ",".join([str(x) for x in initial.values()])
-            str_final = ",".join([str(x) for x in final.values()])
-            f.write(str_initial + "," + str_final + "," + experiment_factors + "\n")
+            f.write("\n".join([",".join([str(x) for x in gen.values()]) + "," + experiment_factors for gen in raw_data]))
+            f.write("\n")
 
         print("\n")
 

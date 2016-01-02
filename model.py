@@ -93,4 +93,4 @@ def run(factors, population, generations, population_limit, changing_environment
             population = tweak_fitness(factors, population)
 
     print(tabulate([x.values() for x in results], headers=results[0].keys()))
-    return (initial_summary, results[-1]) # (initial, final) results
+    return results

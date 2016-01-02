@@ -56,10 +56,44 @@ densityplot(~df_low$final_ave_fit) # less bimodal, although non-normal
 df_low[df_low$final_ave_cor>0.8,] # correlation_correlation == 1
 df_low[df_low$final_ave_cor<=0.8,] # correlation_correlation == -1
 
+summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
+
 df_test <- df_low[df_low$correlation_correlation == -1,]
 m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
 summary(m0)
 anova(m0)
+
+# 4. Model low_start=False
+df_high <- load_df("results_highstart.data")
+df_high <- df_high[df_high$truncate==1,]
+plot(df_high$response_cor)
+densityplot(~df_high$response_cor)
+densityplot(~df_high$final_ave_cor) # Strongly non-normal data - bimodal, with cluster
+densityplot(~df_high$final_ave_fit) # less bimodal, although non-normal
+
+df_high[df_high$final_ave_cor>0.8,] # correlation_correlation == 1
+df_high[df_high$final_ave_cor<=0.8,] # correlation_correlation == -1
+
+summary(df_high[df_high$final_ave_cor>=0.8,]$final_ave_cor)
+
+df_test <- df_high[df_high$correlation_correlation == -1,]
+m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
+summary(m0)
+anova(m0)
+
+# 5. Changing environment, low_start = True
+
+df_lc <- load_df("results_lowstart_changing.data")
+plot(df_lc$response_cor) # quite varied
+
+densityplot(~df_lc$response_cor)
+densityplot(~df_lc$final_ave_cor)
+densityplot(~df_lc$final_ave_fit)
+
+df <- df_lc[df_lc$correlation_correlation == 1,]
+
+# Other...
+
 # Check model m0 for fit
 plot(m0,which=c(1,2)) # residuals and qq plot - residuals decreasing variability (wider range at lhs), qq plot strongly s-shaped
 # Try to improve model

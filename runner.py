@@ -24,7 +24,8 @@ import model
 #     [0,  1,  1,  1,  0,  1,  0],
 #     [1,  1,  1,  1,  1,  1,  1]
 # ]
-experiments = itertools.product(range(2), repeat=7)
+# experiments = itertools.product(range(2), repeat=7)
+experiments = [[0,0,0,1,0,1,1]]
 
 factor_defns = [
     [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
@@ -43,7 +44,7 @@ def init_population(n, low_start):
 
 def main():
 
-    changing_environment = False
+    changing_environment = True
     low_start = True
 
     f = open("results.data", "w")
@@ -58,7 +59,7 @@ def main():
         experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
         for repeat in range(0,10):
-            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=15, population_limit=50, changing_environment=changing_environment)
+            (initial, final) = model.run(factors, population=init_population(5000, low_start), generations=1000, population_limit=50, changing_environment=changing_environment)
 
             if not header_added: # use the header information returned from the model, but only once
                 initial_header = ",".join(["initial_" + x for x in initial.keys()])

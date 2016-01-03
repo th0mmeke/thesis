@@ -62,7 +62,7 @@ def main():
             raw_data = model.run(factors, population=init_population(5000, low_start), generations=1000, population_limit=50, changing_environment=changing_environment)
 
             if not header_added: # use the header information returned from the model, but only once
-                str_header = ",".join(["final_" + x for x in raw_data[0].keys()])
+                str_header = ",".join([x for x in raw_data[0].keys()])
                 f.write(str_header + "," + str_factors + "\n")
                 header_added = True
 

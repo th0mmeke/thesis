@@ -1,10 +1,18 @@
+# load_df <- function(t){
+#   while ("df" %in% search()) {detach(df)}
+#   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
+#   df <- read.csv(t, colClasses=colClasses)
+#   #df <- read.csv(t)
+#   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
+#   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
+#   df
+# }
+
+# load_df for commits 9b3312fae and on (saving every generation)
 load_df <- function(t){
   while ("df" %in% search()) {detach(df)}
-  colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
+  colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
   df <- read.csv(t, colClasses=colClasses)
-  #df <- read.csv(t)
-  df$response_cor <- df$final_ave_cor-df$initial_ave_cor
-  df$response_fit <- df$final_ave_fit-df$initial_ave_fit
   df
 }
 

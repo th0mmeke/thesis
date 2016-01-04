@@ -67,7 +67,7 @@ def get_population_summary(population, generation):
     summary = {'gen':generation, 'pop':len(population), 'ave_fit':ave_fitness, 'sd_fit':sd_fitness, 'ave_cor':ave_correlation, 'sd_cor':sd_correlation}
     return OrderedDict(sorted(summary.items(),key=lambda t: t[0])) # to guarantee ordering if we extract values later
 
-def run(factors, population, generations, population_limit, changing_environment):
+def run(factors, population, generations, population_limit, environment_change_frequency):
 
     original_population_size = len(population)
     population_limit *= original_population_size # stop when population size reaches a multiple of original population - generally some form of exponential growth
@@ -89,7 +89,7 @@ def run(factors, population, generations, population_limit, changing_environment
 
         results.append(get_population_summary(population, i))
 
-        if changing_environment and i % 5 == 0:
+        if environment_change_frequency > 0 and i % environment_change_frequency == 0:
             population = tweak_fitness(factors, population)
 
     print(tabulate([x.values() for x in results], headers=results[0].keys()))

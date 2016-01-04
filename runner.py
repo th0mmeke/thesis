@@ -44,32 +44,28 @@ def init_population(n, low_start):
 
 def main():
 
-    changing_environment = True
     low_start = True
-
     f = open("results.data", "w")
 
-    header_added = False
-    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation"
+    # Write initial header line to file
+    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation,environment_change_frequency"
+    _summary = model.get_population_summary(init_population(2,low_start),0)
+    str_header = ",".join([x for x in _summary.keys()])
+    f.write(str_header + "," + str_factors + "\n")
 
     for experiment in experiments:
 
         factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
         print(factors)
-        experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment])
 
-        for repeat in range(0,10):
-            raw_data = model.run(factors, population=init_population(5000, low_start), generations=1000, population_limit=50, changing_environment=changing_environment)
+        for environment_change_frequency in [0,1,5,10]:
+            experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment]) + "," + str(environment_change_frequency)
+            for repeat in range(0,10):
+                results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=50, environment_change_frequency=environment_change_frequency)
+                f.write("\n".join([",".join([str(x) for x in generation.values()]) + "," + experiment_factors for generation in results]))
+                f.write("\n")
 
-            if not header_added: # use the header information returned from the model, but only once
-                str_header = ",".join([x for x in raw_data[0].keys()])
-                f.write(str_header + "," + str_factors + "\n")
-                header_added = True
-
-            f.write("\n".join([",".join([str(x) for x in gen.values()]) + "," + experiment_factors for gen in raw_data]))
-            f.write("\n")
-
-        print("\n")
+            print("\n")
 
     f.close()
 

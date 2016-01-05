@@ -130,6 +130,18 @@ fit_low_changing <- model(df_low_changing)
 summary(fit_low_changing)
 anova(fit_low_changing)
 
+
+# Check of hypothesis 2
+
+df1<-split(df,df$gen)
+df2<-df1$`500` # last gen
+#df2[df2$environment_change_frequency==0,]
+#df2[df2$environment_change_frequency==5,]
+#df2[df2$environment_change_frequency==10,]
+#ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
+bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
+bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
+#
 #
 # boxplot(Correlation~Distribution, data=df, main="X", names=c("Gauss","Uniform"), ylab="Correlation")
 #

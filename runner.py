@@ -25,7 +25,8 @@ import model
 #     [1,  1,  1,  1,  1,  1,  1]
 # ]
 # experiments = itertools.product(range(2), repeat=7)
-experiments = [[0,0,0,1,0,1,1]]
+#experiments = [[0,0,0,1,0,1,1]]
+experiments = [[0,0,0,1,1,1,1]]
 
 factor_defns = [
     [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness

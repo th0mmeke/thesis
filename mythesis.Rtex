@@ -1,0 +1,66 @@
+\documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
+
+\usepackage{paralist,array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
+\usepackage[lined,boxed,linesnumbered,commentsnumbered,figure]{algorithm2e}
+\usepackage[figuresright]{rotating}
+\usepackage[update,prepend]{epstopdf}
+\usepackage[font=scriptsize]{subcaption}
+\usepackage{upgreek}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{subscript} % provides \textsubscript
+
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+\fvset{fontsize=\scriptsize}
+
+\usetikzlibrary{calc,intersections,through,backgrounds,matrix,mindmap}
+\usepackage{tikz-3dplot}
+
+\numberwithin{equation}{section} % amsmath - numbering scheme two deep for equations
+\setcounter{tocdepth}{2}
+
+% Options for 'ntheorem'
+\usepackage[standard]{ntheorem}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+\theorembodyfont{\normalfont}
+\theoremstyle{break}
+\renewtheorem{proposition}{Proposition}
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\sc}\theorembodyfont{\upshape}
+\newtheorem{reasoning}{Reasoning}
+
+% Options for 'framed'
+\setlength\FrameSep{0.5cm}
+\setlength\FrameRule{0.1pt}
+\setlength{\epigraphrule}{0pt}
+\setlength\extrarowheight{3pt}
+
+\newcommand{\eg}{e.g.,}
+\newcommand{\ie}{i.e.,}
+\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{\Large\guillemotleft}#1{\Large\guillemotright}\footnote{#2}}}
+\newcommand\Small{\fontsize{9}{9.2}\selectfont}
+\newcommand*\LSTfont{\Small\ttfamily\lsstyle}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\DontPrintSemicolon
+\author{Thom Young}
+\title{Feature Emergence in an Artificial Chemistry}
+\degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
+Science in the University of Canterbury}
+\abstract{
+This research explores the emergence of behaviour in a parameterised Artificial Chemistry. The molecules within an Artificial Chemistry form an evolutionary system, capable under certain conditions of displaying interesting emergent behaviours.}
+\acknowledgements{Dedicated to my family, and to all those who helped me.}
+
+\usereferences
+\addtoreferences{../References/mythesis}
+\biblatexstyle{authoryear}
+
+\begin{document}
+\include{glossary}
+\include{body}
+\part{Appendices}
+\appendix{
+\include{appendices}
+}
+\end{document}

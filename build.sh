@@ -2,7 +2,9 @@
 
 Rscript -e "library(knitr); knit('mythesis.Rtex')" # simply to add in the knitr latex environments and commands for later tex includes
 Rscript -e "library(knitr); knit('body.Rtex')" # doesn't add in knitr environments as only a document fragment (no documentclass)
-latexmk -pdf mythesis.tex
+latexmk -pdf mythesis
+makeglossaries mythesis
+latexmk -pdf mythesis
 latexmk -c mythesis
 
 # Latex -> Pandoc markdown citations

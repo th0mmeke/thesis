@@ -801,8 +801,7 @@ structure.
 Second, by extension, \autocite{Gavrilets:1997qt} and
 \autocite{Gravner:2007yd} have shown that in cases involving many gene
 loci under well-defined conditions there is a path between viable
-phenotypes that requires only neutral mutations (see
-\ref{fig:fitnesslandscapes}.)
+phenotypes that requires only neutral mutations.
 
 Third, behaviours such as learning, rather than purely genetic
 mechanisms, can influence the form of this \gls{gpmap} in combination
@@ -843,8 +842,8 @@ genes. The most common regulatory mechanism
 \autocite[542]{Watson:2008fm} is the use of proteins
 \emph{\glspl{tf}}) to control the initiation of \gls{transcription} (the
 production of RNA from a segment of DNA, the first stage of gene
-expression), as illustrated by the CAP and repressor proteins in
-\textit{Box \ref{box:lacoperon}: The} lac \textit{Operon}. Post
+expression), as illustrated by the CAP and repressor proteins in the
+\textit{lac} operon. Post
 transcription, other processes involving RNA molecules can then edit and
 splice the RNA products of transcription in bacteria and
 \glspl{eukaryote} prior to \gls{translation} (the production of a
@@ -942,7 +941,7 @@ cascade. It is thought that these common elements show both a common
 ancestry, and reflects a \emph{\gls{deephomology}}.
 
 As another example forms of the homeotic genes \emph{hox} and others are
-found in every animal, as described in section \ref{sec:modularity}.
+found in every animal.
 
 \subparagraph{Regulation allows environmental signals to trigger
 adaptive phenotypic change
@@ -1240,8 +1239,8 @@ TODO: rewrite, properly mark quotations + references!
 The field of artificial life is synonymous with simulation
 \autocite[chap.2]{Aicardi2010}. In other forms of science however
 practitioners make use of a number of tools, including experiments,
-mathematical models, thought experiments, and simulations
-(\ref{box:tools}). Each method is well suited to some types of
+mathematical models, thought experiments, and simulations.
+Each method is well suited to some types of
 questions, and inappropriate for others. Is the use of simulation
 justified for our proposed investigation?
 
@@ -1249,7 +1248,7 @@ Simulations are becoming central to some disciplines in natural history.
 Ecology - \glspl{abm} or \glspl{ibm} (reviewed in
 \autocite{DeAngelis2005}; also see
 \autocite{Grimm:2006fk,Grimm:2005wd,Grimm:1999kf,Hogeweg:1990jz}).
-\glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}. 
+\glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}.
 
 The value of simulation over experiments for
 \gls{ibm} study lies in a reduction in costs; the difficulties in
@@ -1330,7 +1329,7 @@ synthesis that claims the middle ground.
 
 a computational means to solve analytically intractable equations
 \autocite[31]{Winsberg2010}, producing nothing new (just consequences
-of what is ``fed in'`\autocite{DiPaolo2000}), nothing empirical. 
+of what is ``fed in'`\autocite{DiPaolo2000}), nothing empirical.
 
 \autocite{Eldridge}, quoting from Dennett 1979 p192 ``A simulation is ultimately
 only a high-speed generator of the consequences that some theory assigns
@@ -1352,7 +1351,7 @@ particular scenarios. The more accurate the simulation however, and
 hence the more valuable the results, the harder it is to generalize to
 other cases. It is hard to understand the behaviour of complicated
 simulations, and the causes of particular behaviours of interest may be
-unclear if there are many variables in play. 
+unclear if there are many variables in play.
 
 Instead, \autocite{MaynardSmith1974} prefers the use of simple models, designed
 to illuminate the ``causes of differences of behaviour between different
@@ -1392,7 +1391,7 @@ They certainly have elements of uncertainty and error, like experiments.
 
 TODO Paul Humphreys 1994 says Monte Carlo simulations are experiments; Von
 Neumann ``replace a computation from an unquestioned theory by direct
-measurement'' (quoted in TODO [28]{Winkler et al 1987}). 
+measurement'' (quoted in TODO [28]{Winkler et al 1987}).
 
 Norton and Suppe 2001 argue that they are experiments, when proper conditions met: ``Empirical
 data about real phenomena are produced under conditions of experimental
@@ -1835,13 +1834,98 @@ Exogenous models for simplicity of understanding - make factors explicit
 \includegraphics[width=0.95\linewidth]{figures/model}
 \end{figure}
 
+
+\begin{algorithm}[h]
+\DontPrintSemicolon
+\KwData{$P_{reproduce}, COR_{fitness}, COR_{correlation}, N, f$}
+\KwResult{a list of children of this parent}
+\SetKwFunction{f}{f}
+
+    $\text{children}=\{\}$\;
+    $p_{reproduce}\leftarrow \text{parent's fitness if } P_{REPRODUCE} = 0 \text{ else } p_{reproduce}\leftarrow P_{REPRODUCE}$\;
+    \BlankLine
+    $\text{With probability} p_{reproduce}\text{:}$\;
+    \Indp
+
+        $cor_{fitness}\leftarrow \text{correlation value of parent if } COR_{fitness} \text{ else some random x, where } x\in [0,1]$\;
+        $cor_{correlation}\leftarrow \text{correlation value of parent if } COR_{correlation} \text{ else some random x, where } x\in [0,1]$\;
+        $n\leftarrow \text{some random integer between 0 and  }N \text{ inclusive}$\;
+        \BlankLine
+        \For{each of the $n$ children}{
+            child's fitness $\leftarrow $\f{parent's fitness, $cor_{fitness}$}\;
+            correlation value for child $\leftarrow$ \f{parent's correlation value, $cor_{correlation}$}\;
+            Add new child with these values for fitness and correlation to $children$\;
+        }
+      return $children$\;
+
+\caption{Get children for a parent}
+\end{algorithm}
+
+\begin{verbatim}
+
+      def __init__(self, fitness=None, correlation=None, low_start = True):
+          '''low_start only relevant if fitness or correlation not provided'''
+          self.fitness = fitness if fitness != None else random.uniform(0.0,0.3 if low_start else 0.9)
+          self.correlation = correlation if correlation != None else random.uniform(0.0 if low_start else 0.5,0.3 if low_start else 0.9)
+
+
+def reproduction:
+  return [x for y in population for x in get_offspring(factors, y)]
+
+def selection(factors, population):
+    return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
+
+def tweak_fitness(factors, population):
+    return [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
+
+def run(factors, population, generations, population_limit, environment_change_frequency):
+
+    original_population_size = len(population)
+    population_limit *= original_population_size # stop when population size reaches a multiple of original population - generally some form of exponential growth
+
+    # starting summary
+    initial_summary = get_population_summary(population, 0)
+    results = [initial_summary] # headers and starting conditions
+
+    for i in range(1,generations+1):
+
+        parent_population = selection(factors, population)
+        offspring_population = reproduction(factors, population)
+        population = parent_population + offspring_population
+        if factors[3] and len(population) > original_population_size: # if fixed population size
+            population = random.sample(population, original_population_size)
+
+        if len(population) < 3 or len(population) > population_limit:
+            break
+
+        results.append(get_population_summary(population, i))
+
+        if environment_change_frequency > 0 and i % environment_change_frequency == 0:
+            population = tweak_fitness(factors, population)
+
+    print(tabulate([x.values() for x in results], headers=results[0].keys()))
+    return results
+
+
+    factor_defns = [
+        [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
+        [0.0,      1.0],    # 1 = P_SELECTION - 0 = fitness
+        [2,        5],      # 2 = N_OFFSPRING
+        [False,    True],   # 3 = TRUNCATE_POPULATION RANDOMLY
+        # gauss is described by mean=source, sd=1-correlation, then clipped to [0,1]
+        # uniform to range [source-(1-correlation), source+(1+correlation)], then clipped to [0,1]
+        [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source-(1.0-correlation), source+(1.0-correlation))))],
+        [False,    True],   # 5 = FITNESS_CORRELATION
+        [False,    True],   # 6 = CORRELATION_CORRELATION
+    ]
+\end{verbatim}
+
 Entities have two properties
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  fitness \[0,1\] - selection(entity) returns entity if rand(0,1)
-  \textless{} fitness else null
+  fitness \[0,1\] - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
 \item
   bias or variation \[0,1\]
 \end{enumerate}
@@ -1872,10 +1956,8 @@ opposite
 \end{enumerate}
 
 In next model, these parameters themselves become endogenized into the
-copying/variation mechanism
-
-For now though keeping these as explicit parameters makes clear their
-effect on the model
+copying/variation mechanism. For now though keeping these as explicit
+parameters makes clear their effect on the model.
 
 \subsection{Test two cases}\label{test-two-cases}
 
@@ -1944,9 +2026,11 @@ H1: correlation changes over a run, given some factor values
 Identify factors and values where end\_correlation - start\_correlation
 \textgreater{} 0 (inheritance)
 
-\subsection{Replicates?}\label{replicates}
+\subsection{Number of replicates}\label{number-of-replicates}
 
-Depends on sd of results
+The number of replicates required for a particular statistical power is dependent on the
+standard deviation of the result. So we begin with an estimate of 10 replicates for each run,
+and confirm that the power achieved is sufficient (see \ref{power}.)
 
 \subsection{Response variables - from testable
 definition}\label{response-variables---from-testable-definition}
@@ -2735,7 +2819,7 @@ principles. Because of the complexities of real-world chemistry this
 later method appears to be quite difficult, and the goal of a realistic,
 computationally practical, artificial chemistry remains open. However,
 the more limited objective of a less realistic, but still fully
-constructive chemistry, has been achieved (see Table \ref{tab1} for
+constructive chemistry, has been achieved (see Table \ref{classification-of-artificial-chemistries} for
 examples.). A constructive chemistry (\autocite{Fontana1994}) is one
 where new components may be generated through the action of other
 components, and where those new components may themselves take part in
@@ -2937,7 +3021,7 @@ reaction network discovery, where the goal is to describe a closed set
 of reactions and reactants from some initial reactants and reactions
 (e.g., \autocite{Faulon2001}). Both applications effectively produce
 static descriptions of dynamic processes, and are less useful for
-exploring the changes in a network over time. 
+exploring the changes in a network over time.
 
 \autocite{Hartenfeller2012} suggests that
 R=\{set of 58 reactions\} might meet requirements for de-novo drug
@@ -2958,7 +3042,7 @@ The primary requirement is fidelity with real-world chemistry, which
 requires either a library of empirically derived reaction definitions
 and rates, or a model capable of accurately simulating
 quantum-mechanical processes. The latter approach has been taken by a
-family of Artificial Chemistries, beginning with 
+family of Artificial Chemistries, beginning with
 \autocite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters
 taken directly from chemical experiments and later extended (for example
 in \autocite{Benko2005}) to a general purpose model with parameters
@@ -3287,10 +3371,7 @@ Desirable properties from \autocite{Faulconbridge2011}:
 \item
   \autocite[sec.4.4]{Faulconbridge2011} contains an interesting
   discussion mapping these desirable properties onto the emergent
-  properties that are then required of an \gls{achem}, similar in
-  concept to the earlier mapping of properties onto sufficient
-  conditions for creativity
-  (\ref{tab:sufficientconditionsforcreativity})
+  properties that are then required of an \gls{achem}.
 \end{itemize}
 
 Additional properties from \autocite{Hickinbotham2010}:
@@ -3464,10 +3545,7 @@ O=O double bond to a single bond. The reactants H\textsuperscript{+} and
 OH\textsuperscript{-} give two alternative reactions: breaking of the
 O-H bond (giving H+H\textsuperscript{+}+O\textsuperscript{-}) and
 formation of a single bond between H\textsuperscript{+} and O to give
-H\textsubscript{2}O. The Reactor Algorithm selects one of these reaction
-alternatives by choosing from a distribution of reaction alternatives
-weighted by associated energy changes (see sec.
-\ref{sec:reactoralgorithm}.)
+H\textsubscript{2}O.
 
 \section{Atoms and molecules}\label{atoms-and-molecules}
 
@@ -3502,7 +3580,7 @@ internal and potential.
 
 \begin{itemize}
 \item
-  Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$ 
+  Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$
   where $m$ is the mass of a molecule and $v$ its velocity.
 \item
   Internal energy is an abstraction of vibrational energy or heat energy
@@ -3524,10 +3602,10 @@ internal and potential.
   absolutely determined by the atomic number of the two Atoms at either
   end of the bond, and the type of bond itself -- single, double or
   triple. ToyWorld provides a table of standard values in
-  \ref{tbl:default_bond_energies}, based upon real-world chemistry.
+  \ref{default_bond_energies}, based upon real-world chemistry.
   Unspecified bonds are given the average energy of specified bonds of
   the same bond type. Examples of molecules with associated potential
-  energies are given in \ref{tbl:example_potential_energies}.
+  energies are given in \ref{example_potential_energies}.
 \end{itemize}
 
 Our energy model enforces conservation of mass so reactions can be
@@ -3567,8 +3645,26 @@ Quadruple & C & C & 200\\
 \end{tabular}
 \end{center}
 \caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies in kcal per mole -- source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}
-\label{tbl:default_bond_energies}
+\label{default_bond_energies}
 \end{table}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
+\toprule
+Molecule & SMILES & Potential Energy\\
+\midrule
+H$_2$O 			& [H]O[H] 								& -222.0 \\
+H$_2$				& [H][H] 								& -104.2 \\
+O$_2$ 				& O=O 									& -119.0 \\
+N$_2$O$_4$ 	& [O-][N+](=O)[N+]([O-])=O 	& -434.4 \\
+NO$_2$			& N(=O)[O] 							& -198.0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Example potential energies calculated by the DefaultChemistry module using simplified bond energies}
+\label{example_potential_energies}
+\end{table}%
 
 \subsection{Energy transformations}\label{energy-transformations}
 
@@ -3628,7 +3724,7 @@ hence all reaction activity ceases.
 
 A reaction may be seen as two stages in sequence: first, the choice of reactants from a population of possible reactant molecules (the Reactant selection strategy, denoted here by $S_\mathrm{Reactant}$), and second, the determination of products given that set of reactants (Product selection strategy, denoted $S_\mathrm{Product}$). The total energy (that is, potential + kinetic + internal) of the system is maintained, as is the total momentum of the molecules.
 
-\section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies-selecting-reactants-for-a-reaction}
+\section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies}
 
 \autocite{Faulconbridge2011} describes two generic strategies for the
 selection of reactants---spatial and aspatial---where the primary
@@ -3663,7 +3759,7 @@ forces (such as electromagnetism) or external forces (such as gravity or
 heat.)
 
 \section{Product selection strategies: determining the products of a
-reaction}\label{product-selection-strategies-determining-the-products-of-a-reaction}
+reaction}\label{product-selection-strategies}
 
 In the ToyWorld chemical model, all reactions arise solely from the
 properties of the reacting molecules: it therefore defines a
@@ -3689,10 +3785,10 @@ while bond destruction results in an increase. A change in bond type is
 equivalent to a creation and then a destruction. The magnitude of the
 change in potential energy, measured in arbitrary energy units, is taken
 from a table of bond energies for each combination of atoms and bond
-type (\ref{tbl:default_bond_energies}. The standard table is based upon
+type (\ref{default_bond_energies}. The standard table is based upon
 a simplification of real-world chemical bond energies. For example, the
 creation of a H-H bond releases 104.2 units; the breaking of a C=O
-double bond takes 185 energy units. \ref{tbl:example_potential_energies}
+double bond takes 185 energy units. \ref{example_potential_energies}
 shows the potential energy for a sample of molecules.
 
 How should we choose between alternative sets of possible products for
@@ -3729,9 +3825,9 @@ shows an example of the shift in products that occurs as a result of
 this weighting as the overall quantity of energy in the system is
 changed.
 
-pecifically, let $E_i$ denote the energy required for the bond change in the reaction option. If $E_i > 0$ the reaction is exothermic, or releases energy; otherwise it is endothermic, requiring energy to proceed. 
+Specifically, let $E_i$ denote the energy required for the bond change in the reaction option. If $E_i > 0$ the reaction is exothermic, or releases energy; otherwise it is endothermic, requiring energy to proceed.
 
-We calculate a weighted value, $e_i$, based on the combination of $E_i$ and the available energy for the reaction, $E_{avail} > 0$, as follows: 
+We calculate a weighted value, $e_i$, based on the combination of $E_i$ and the available energy for the reaction, $E_{avail} > 0$, as follows:
 
 \begin{displaymath}
 e_i=
@@ -3742,7 +3838,7 @@ e_i=
    \end{cases}
 \end{displaymath}
 
-Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight. 
+Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
 
 As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \ref{fig:reaction_selection_weights}.
 
@@ -3797,7 +3893,7 @@ energies.
 The Reactor Algorithm selects one of the reaction alternatives by
 choosing from a distribution of reaction alternatives weighted by
 associated energy changes (as discussed in
-\ref{sec:reaction_selection}.)
+\ref{product-selection-strategies}.)
 
 \subsection{Setting product velocities and internal energies}\label{setting-product-velocities-and-internal-energies}
 
@@ -4038,14 +4134,14 @@ shown in \ref{fig:collision_diagrams}.
 \draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 \draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
 \end{tikzpicture}}%
-\end{figure}
+\end{figure}\label{fig:collision_diagrams}
 
 \chapter{Model Validation}\label{model-validation}
 
 \section{Introduction}\label{introduction-4}
 
-The design of the reaction model and energy model outlined in Section
-\ref{sec:toyworld} leads to the following expectations, to be tested
+The design outlined in Section
+\ref{toyworld} leads to the following expectations, to be tested
 experimentally.
 
 \begin{enumerate}
@@ -4151,12 +4247,23 @@ In this section we explore the following research questions:
 \item Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?
 \item Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?
 \end{enumerate}
-\end{minipage} 
+\end{minipage}
 \vspace{0.3cm}
 
-To the best of our knowledge, this is the first time that reaction and product selection strategies in Artificial Chemistries have been experimentally compared. Instead, the general approach of previous work, where there has been a quantitative evaluation, has been to propose a particular strategy, build, and evaluate against the initial goals, rather than against alternatives.
+To the best of our knowledge, this is the first time that reaction and product selection strategies
+in Artificial Chemistries have been experimentally compared.
+Instead, the general approach of previous work, where there has been a quantitative evaluation,
+has been to propose a particular strategy, build, and evaluate against the initial goals,
+rather than against alternatives.
 
-Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$. We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters. For simplicity of analysis, all of our factors are two-level, meaning they take one of two possible levels, or values, in each run. The parameter values chosen for each level of $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a set of alternatives used in initial exploratory experiments; in each case they allowed the simulation to run for an extended period without running out of possible reactions (from lack of energy for example.) 
+Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$.
+We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and
+bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
+For simplicity of analysis, all of our factors are two-level, meaning they take one of two
+possible levels, or values, in each run. The parameter values chosen for each level of
+$E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a set of alternatives
+used in initial exploratory experiments; in each case they allowed the simulation to run for an
+extended period without running out of possible reactions (from lack of energy for example.)
 
 \begin{savenotes}
 \begin{table}
@@ -4168,8 +4275,8 @@ Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and
 Factor & +1 value & -1 value & Description\\
 \hline
 \noalign{\smallskip}
-$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \ref{sec:reactants}\\
-$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \ref{sec:products}\\	
+$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \ref{reactant-selection-strategies}\\
+$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \ref{product-selection-strategies}\\
 $E_\mathrm{Vessel}$&		300&							100&		Initial kinetic energy of each molecule in the reaction vessel\\
 $E_\mathrm{Bonds}$&		Single=50, Double=100, Triple=200& Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3&	Energy required to break a bond of the given type\\
 \hline
@@ -4182,14 +4289,14 @@ We concentrate on three related response, or dependent, variables---Number of cy
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
 \section{Experiment Design}
-The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \ref{tbl:factors}. 
+The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \ref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
 For details of the Artificial Chemistry, see \parencite{Young2013}. The chemistry makes use of some low-level components from RDKit \parencite{rdkit}, open-source software for cheminformatics. RDKit provides a number of useful capabilities, including format conversions to and from SMILES and graphical forms of molecules; standard sanity checks for molecular structure, and molecular manipulations. In ToyWorld, atoms are closely based on real-world chemistry atoms, and in fact are implemented as wrappers around the Atom definitions provided by RDKit; we allow any atom type provided by RDKit. Bonds in ToyWorld are represented by RDKit bonds, but the addition or subtraction mechanism makes use of the parameterised ToyWorld energy model.
 
 \section{Results}
-All replicates completed a set of 20,000 reactions; given the initial population size of 800 molecules, and from the summary of results below, we believe that this captures a representative set of reactions. This also simplifies the analysis as we can assume a balanced set of treatments in the statistical sense (that is, the sample sizes for all treatments are equal). 
+All replicates completed a set of 20,000 reactions; given the initial population size of 800 molecules, and from the summary of results below, we believe that this captures a representative set of reactions. This also simplifies the analysis as we can assume a balanced set of treatments in the statistical sense (that is, the sample sizes for all treatments are equal).
 
 \begin{table}[htbp]
 \scriptsize
@@ -4201,10 +4308,10 @@ Statistic&Number of cycles&Length of longest.cycle&Count of most common cycle\\
 \multicolumn{4}{c}{Reactions 4750 to 5000}\\
 \hline\noalign{\smallskip}
 Min.			&0.00	&0.00           	&0.00\\
-1st Quartile	&0.00	&0.00        	&0.00\\             
-Median		&1.50     	&3.50        	&2.50\\             
-Mean		&219.06   &5.04        	&215.80\\            
-3rd Quartile	&91.25     	&7.75       		&96.00\\             
+1st Quartile	&0.00	&0.00        	&0.00\\
+Median		&1.50     	&3.50        	&2.50\\
+Mean		&219.06   &5.04        	&215.80\\
+3rd Quartile	&91.25     	&7.75       		&96.00\\
 Max.			&5704.00 &20.00         	&2728.00\\
 \hline\noalign{\smallskip}
 \multicolumn{4}{c}{Reactions 9750 to 10000}\\
@@ -4230,8 +4337,8 @@ Max.			&237.00	&12.00	&862.00\\
 Min.			&0.00	&0.00	&0.00\\
 1st Quartile	&0.00	&0.00	&0.00\\
 Median		&3.50	&4.00	&4.00\\
-Mean		&20.04	&3.90	&14.62\\            
-3rd Quartile	&20.25	&6.00 	&13.25\\            
+Mean		&20.04	&3.90	&14.62\\
+3rd Quartile	&20.25	&6.00 	&13.25\\
 Max. 		&199.00    &12.00	&216.00\\
 \hline
 \end{tabular}
@@ -4240,7 +4347,7 @@ Max. 		&199.00    &12.00	&216.00\\
 \label{tbl:results}
 \end{table}%
 
-A view of the results is given in Table \ref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently. 
+A view of the results is given in Table \ref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
 %
 %\begin{figure}[htbp]
@@ -4283,7 +4390,7 @@ Figure \ref{fig:partitions} suggests that the first partition, representing the 
 \end{figure}
 
 \subsection{RQ1: Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of Figure \ref{fig:reactant_strategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \ref{fig:product_strategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection. 
+From visual inspection of Figure \ref{fig:reactant_strategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \ref{fig:product_strategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
 We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \ref{fig:reactant_strategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
@@ -4320,7 +4427,7 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \ref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
-The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. 
+The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
 
 The most significant limitation of our analysis overall is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in RQ3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
@@ -4586,4 +4693,3 @@ http://link.springer.com/article/10.1007\%2Fs11084-012-9309-y
 \chapter{Conclusions}
 
 \chapter{Discussion and Conclusions}\label{discussion-and-conclusions}
-

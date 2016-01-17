@@ -45,8 +45,8 @@ def reproduction(factors, population):
 def selection(factors, population):
     return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
 
-def tweak_fitness(factors, population):
-    return [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
+def tweak_fitness(factors, population, correlation=0.95):
+    return [Element(factors[4](x.fitness-0.2, correlation), x.correlation) for x in population]
 
 def get_population_summary(population, generation):
     fitness = [x.fitness for x in population]
@@ -90,7 +90,7 @@ def run(factors, population, generations, population_limit, environment_change_f
         results.append(get_population_summary(population, i))
 
         if environment_change_frequency > 0 and i % environment_change_frequency == 0:
-            population = tweak_fitness(factors, population)
+            population = tweak_fitness(factors, population, 0.70)
 
     print(tabulate([x.values() for x in results], headers=results[0].keys()))
     return results

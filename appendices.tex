@@ -1,4 +1,4 @@
-\subsection{ToyWorld implementation}\label{toyworld-implementation}
+\chapter{ToyWorld implementation}\label{toyworld-implementation}
 
 ToyWorld is custom Python code that uses third-party packages and
 libraries for certain functions. The most significant chunks of external
@@ -9,7 +9,7 @@ the cycle evaluators) and in \url{Molecule} to determine the individual
 molecules within an aggregation, and we use arrays from the Numpy
 package for Python to record the molecular populations.
 
-\subsubsection{RDKit}\label{rdkit}
+\section{RDKit}\label{rdkit}
 
 RDKit provides a number of useful capabilities including format
 conversions to and from SMILES \autocite{smiles}, a standard language
@@ -49,7 +49,7 @@ Model:
 These are so standard that it isn't worth our while to replace them with
 anything specific to ToyWorld.
 
-\subsubsection{PyMunk}\label{pymunk}
+\section{PyMunk}\label{pymunk}
 
 PyMunk is used extensively for 2D Physics calculations, for example:
 
@@ -135,7 +135,7 @@ ShowOrientation&True&Boolean&If \url{Visualize} is \url{True} then show a line r
 \label{tbl:simulation_parameters}
 \end{sidewaystable}
 
-\subsubsection{Workflow}\label{workflow}
+\section{Workflow}\label{workflow}
 
 Each run of an experiment in ToyWorld is usually split into three
 stages:
@@ -172,8 +172,7 @@ between each block. By writing incrementally we attempt to make sure
 that a record of at least a partial set of reactions is recoverable
 should the experiment come to a premature end.
 
-\subsubsection{Evaluation and Analysis
-module}\label{evaluation-and-analysis-module}
+\section{Evaluation and Analysis module}\label{evaluation-and-analysis-module}
 
 ToyWorld provides a number of Evaluators, both numerical and graphical,
 that can be used to analyse the results from each repeat of each

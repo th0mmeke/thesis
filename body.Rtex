@@ -100,49 +100,6 @@ seed or starting point, (plus four specific conditions
   claims to this - the evolution of life was contingent, and because of
   lack of evidence from early stages, no way anyway to test or confirm
 \item
-  The evolution of Technology
-\item
-  Arthur \autocite{Arthur2009} investigates the evolution of technology,
-  where evolution is used in the sense of ``all objects of some class
-  are related by ties of common descent from the collection of earlier
-  objects.''
-\item
-  Evolution is related to innovation: in fact, Arthur claims that by
-  understanding the mechanism by which technologies evolve we will
-  understand how innovations arise. In other words, innovations arise as
-  the result of an evolutionary process, rather than de novo from the
-  brain of a designer.
-\item
-  Darwinian evolution, or natural selection, is not appropriate for
-  technology. Arthur quotes from Samuel Butler's essay ``Darwin Among
-  the Machines'`: ``{[}t{]}here is nothing which our infatuated race
-  would desire more than to see a fertile union between two steam
-  engines\ldots{}'' to illustrate the impossibility of slavish adoption
-  of biological models.
-\item
-  However, we can clearly see descent of form, in the example given by
-  Gilfillan in 1935 tracing the development of various elements of the
-  sailing ship: planking, sails, keels, ribbing and fastenings. In each
-  case we see a line of gradual improvements leading to the present day
-  component. But the point is made that this is not evolution in the
-  full sense, as it lacks both universal scope and an underlying
-  mechanism.
-\item
-  The first obstacle to a more general scope is the existence of
-  innovations such as the jet engine, laser, railroad locomotive, or
-  QuickSort computer algorithm (to name Arthur's examples.) Innovations
-  seem to appear without obvious parentage; they do not appear to be the
-  result of gradual changes or adaptations to earlier technologies.
-\item
-  Arthur's answer is to look inside the innovation and to recognise that
-  each is made up of recognisable components or modules; the key lies in
-  the nature of heredity in technology. Technologies are formed by
-  combining modules of earlier technologies. These groupings start as
-  loose assemblages to meet some new function, but over time become
-  fixed into a standard unit (for example, the change in DNA
-  amplification mechanisms from assemblages of laboratory equipment to
-  standard off-the-shelf products.)
-\item
   Evolution in technology occurs by using earlier technologies as
   building blocks in the composition of new technologies, and these new
   technologies then become building blocks for use in later
@@ -157,22 +114,19 @@ seed or starting point, (plus four specific conditions
 
 \paragraph{Evolution}\label{evolution}
 
-\begin{quote}
-Evolution is a process that results in heritable changes in a population
-spread over many generations.'' {[}sandwalk{]}
-\end{quote}
+\quote{Evolution is a process that results in heritable changes in a population
+spread over many generations.}{
+``Sandwalk: strolling with a skeptical biochemist'',
+\url{http://sandwalk.blogspot.co.nz/2012/10/what-is-evolution.html}}
 
-\begin{quote}
-Biological (or organic) evolution consists of change (modification) in
-the hereditary characteristics of groups of organisms over the course of
-generations. Such groups of organisms, termed populations or species,
-are formed by division of ancestral populations or species, and the
-descendant groups then change independently. Hence, in a long-term
-perspective, evolution is the descent, with modification, of different
-lineages from common ancestors.''
-{[}http://www.rci.rutgers.edu/\textasciitilde{}ecolevol/fulldoc.html
-from sandwalk{]}
-\end{quote}
+\quote{
+Biological evolution consists of change in the hereditary characteristics of groups of organisms
+over the course of generations. Groups of organisms, termed populations and species, are formed
+by the division of ancestral populations or species, and the descendant groups then change
+independently. Hence, from a long-term perspective, evolution is the descent, with modification,
+of different lineages from common ancestors.}{
+``Evolution, Science, and Society: Evolutionary Biology and the National Research Agenda'',
+Working Draft, 28 September 1998, \url{http://www.zoology.ubc.ca/~otto/evolution/Evolwhite.pdf}}
 
 Separate outcome or result from process or mechanism (e.g., adaptation)
 
@@ -181,8 +135,8 @@ Blurring in use of OEE
 \begin{itemize}
 \tightlist
 \item
-  Either in sense of ``an indefinitely large number of structures are
-  each capable of replication.'' \autocite{MaynardSmith1999}, or
+  Either in sense of quote{an indefinitely large number of structures are
+  each capable of replication.}{\autocite{MaynardSmith1999}}, or
 \item
   Additionally meaning novel, interesting, surprising
 \end{itemize}
@@ -208,9 +162,8 @@ Selection)}\label{ens-evolution-by-natural-selection}
 
 \begin{itemize}
 \item
-  Biology based around ENS e.g., ``god and natural selection are, after
-  all, the only workable theories we have of why we exist''
-  \autocite{Dawkins1982}
+  Biology based around ENS e.g., \quote{god and natural selection are, after
+  all, the only workable theories we have of why we exist}{\autocite{Dawkins1982}}
 \item
   But later biology includes HGT (horizontal gene transmission) which
   blurs mechanism somewhat, as does importance of neutral-theory,
@@ -230,26 +183,31 @@ Selection)}\label{ens-evolution-by-natural-selection}
   reconcile, address specific difficulties in particular formulations
   against common problem cases
 \item
-  Core is ``combination of variation, heredity, and fitness
-  differences.'' \autocite{Godfrey-Smith2007}
+  Core is \quote{``combination of variation, heredity, and fitness
+  differences.}{\autocite{Godfrey-Smith2007}}
 \item
   Argument that heredity may in fact be a product of evolution rather
   than a precursor \autocite{Bourrat2015}
 \item
   Heredity seen as method to maintain low entropy over much longer time
-  than possible with non-''biological'' systems \autocite{Adami2015}
+  than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy
+for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only
+limited by the existence of the biosphere). It is then this ability: to persist in a state of
+reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules
+as living, and this set of molecules must achieve that feat via the self-replication of
+information.}{\autocite{Adami2015}}
 \item
   HGT (Horizontal gene transfer)
 \item
   Thought that biological evolution is Evolution by Natural Selection,
   but this is not strictly true:
 \item
-  As \autocite{Watson2012} observes, ``We take it as given that biology
+  \quote{We take it as given that biology
   instantiates ENS {[}Evolution by Natural Selection{]}. That is, ENS
   occurs in biological evolution (there is no need to reiterate the
   evidence for this). However, we wish to separate the conclusion that
   ENS \textit{occurs in} biological evolution from the conclusion that
-  the algorithm of adaptive biological evolution \textit{is} ENS''
+  the algorithm of adaptive biological evolution \textit{is} ENS}{\autocite{Watson2012}}
   (emphasis in original)
 \item
   LGT complicates this
@@ -299,10 +257,10 @@ property in another domain
 
   \begin{itemize}
   \item
-    Arthur \autocite{Arthur2009} investigates the evolution of
-    technology, where evolution is used in the sense of ``all objects of
+    \autocite{Arthur2009} investigates the evolution of
+    technology, where evolution is used in the sense of \quote{all objects of
     some class are related by ties of common descent from the collection
-    of earlier objects.''
+    of earlier objects.}{\autocite{Arthur2009}}
   \item
     Evolution is related to innovation: in fact, Arthur claims that by
     understanding the mechanism by which technologies evolve we will
@@ -312,7 +270,7 @@ property in another domain
   \item
     Darwinian evolution, or natural selection, is not appropriate for
     technology. Arthur quotes from Samuel Butler's essay ``Darwin Among
-    the Machines'`: ``{[}t{]}here is nothing which our infatuated race
+    the Machines'' : ``{[}t{]}here is nothing which our infatuated race
     would desire more than to see a fertile union between two steam
     engines\ldots{}'' to illustrate the impossibility of slavish
     adoption of biological models.
@@ -364,15 +322,14 @@ Algorithms}\label{evolutionary-computationevolutionary-algorithms}
   Since specialized, radiated into new areas
 \item
   Re-unification attempted in works such as \autocite{Paixao2015} but hence not
-  concerned with extension beyond ``models in theoretical population
-  genetics and in the theory of evolutionary computation''
+  concerned with extension beyond \quote{models in theoretical population
+  genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
 \item
-  ``Some EDAs can be regarded abstractions of evolutionary processes:
+  \quote{Some EDAs can be regarded abstractions of evolutionary processes:
   instead of generating new solutions through variation and then
   selecting from these, EDAs use a more direct approach to refine the
   underlying probability distribution. The perspective of updating a
-  probability distribution is similar to the Wright--Fisher model.''
-  \autocite{Paixao2015}
+  probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
 \item
   Major points of difference
 
@@ -418,6 +375,8 @@ What elements of life are required for OEE, and which are not?
 \item
   Not required at all e.g., specific metabolic cycles
 \end{itemize}
+
+
 
 \section{TODO - Previous work}\label{todo---previous-work}
 
@@ -475,6 +434,226 @@ http://evoevo.liris.cnrs.fr/about-evoevo-project/
   applying EvoEvo to ICT problems
 \end{itemize}
 
+\subsection{The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
+
+TODO: rewrite, properly mark quotations + references!
+
+The field of artificial life is synonymous with simulation
+\autocite[chap.2]{Aicardi2010}. In other forms of science however
+practitioners make use of a number of tools, including experiments,
+mathematical models, thought experiments, and simulations.
+Each method is well suited to some types of
+questions, and inappropriate for others. Is the use of simulation
+justified for our proposed investigation?
+
+Simulations are becoming central to some disciplines in natural history.
+Ecology - \glspl{abm} or \glspl{ibm} (reviewed in
+\autocite{DeAngelis2005}; also see
+\autocite{Grimm:2006fk,Grimm:2005wd,Grimm:1999kf,Hogeweg:1990jz}).
+\glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}.
+
+The value of simulation over experiments for
+\gls{ibm} study lies in a reduction in costs; the difficulties in
+cultivation of microbial populations (99\% of known species yet to be
+cultivated), and significantly, that they form \quote{complex systems only
+poorly explained by reduction.}{\autocite{Ferrer:2008hv}} Emergence and
+dynamic behaviours are important, and yet they are hard to capture with
+mathematical models.
+
+Types of investigation
+
+\subsubsection{Thought experiments}\label{thought-experiments}
+
+non-empirical, clarification, contradictions/dissonance, fast, cheap.
+
+\subsubsection{Models}\label{models}
+
+\quote{
+It is seldom the case in biology that a model is derived deductively
+from a more fundamental quantitative theory, with the possible exception
+of population genetics which has its foundations in evolutionary
+theory.}{\autocite{Krakauer2011}}
+
+Models can be ``useful stop-gaps'' towards a theory, by providing a
+testable body of data for experiments and predictions
+\autocite{Krakauer2011}, and may be constructed either bottom-up (such
+as in ABM) or top-down, by the application of constraints
+\autocite{Krakauer2011}. Many types in \eg ecology - eleven according to
+\autocite{Jorgensen2008} - of which fall into two main groups
+
+Mathematical models: complexity, need for abstraction/assumptions
+(\eg Fisher's famous equation describing the changes in allele
+distribution under selection assumes independent genes - extending this
+to realistic cases remains an open problem \autocite{Schuster2011}),
+difficulty in handling dynamism/emergence. Cheap, fast. Non-empirical.
+
+Simulations: bottom-up approaches, holistic, variability so diversity
+closer to real systems, adaptive behaviour/changing
+\autocite{Ferrer:2008hv}. Non-empirical data.
+
+\subsubsection{Experiments}\label{experiments}
+
+reductionism, conflation (difficulty in removing other factors e.g.,
+Heinemann), expense, time (generations). Source of empirical data.
+
+\quote{
+Although this may seem a paradox, all exact science is dominated by the
+idea of approximation.}{The Scientific Outlook, Bertrand Russell}
+
+\subsubsection{Benefits}\label{benefits}
+
+Unique ability to explore subject = unique object of enquiry e.g., study
+of emergence, complex, self-organizing subjects. Biology stands alone in
+the importance of emergence \autocite{Bersini:2006ve}, and the
+interconnection of levels of analysis, \eg behaviour can influence gene
+expression, and genes can affect behaviour \autocite{Krakauer2011}. As
+summarized by \autocite{Krakauer2011}, when asking how much of biology
+can be predicted bottom-up from the application of basic physical and
+chemical laws - ``This question is simple to answer: effectively zero.''
+
+Unique method of enquiry, that is, properties that improve on existing
+techniques, e.g., by relaxing assumptions
+
+\subsubsection{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
+
+Simulations seem to fall somewhere in between thought experiments or
+abstract models, and experiments. They are also relatively novel; common
+use has only come with increased access to digital computers.
+Consequently the nature of simulation - what can be claimed as a result
+of simulation, and what role may be played legitimately by simulation in
+scientific discovery - is a hot topic for philosophers of science. As
+might not be unexpected, there are two opposing positions taken, plus a
+synthesis that claims the middle ground.
+
+\newthought{Simulations are just calculators}\label{simulations-are-just-calculators}
+
+a computational means to solve analytically intractable equations
+\autocite[31]{Winsberg2010}, producing nothing new (just consequences
+of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
+
+ \quote{A simulation is ultimately
+only a high-speed generator of the consequences that some theory assigns
+various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192} If a model, then might take many forms
+- analogy, model, pure exploration \autocite{Webb2009}.
+
+Models are \quote{a purposeful representation. A model needs to have a
+purpose because otherwise there would be no way to decide what to
+include in it. A model's purpose is a filter: the model should not
+include anything not believed essential for explaining the phenomenon
+of interest}{\autocite{Grimm:2009th}}
+
+\autocite{MaynardSmith1974} distinguishes between
+``practical'' descriptions of ecological systems, or ``simulations'', and
+theoretical ones: ``models''.
+
+Simulations are aimed at answering specific questions, or analysing
+particular scenarios. The more accurate the simulation however, and
+hence the more valuable the results, the harder it is to generalize to
+other cases. It is hard to understand the behaviour of complicated
+simulations, and the causes of particular behaviours of interest may be
+unclear if there are many variables in play.
+
+Instead, \autocite{MaynardSmith1974} prefers the use of simple models, designed
+to illuminate the ``causes of differences of behaviour between different
+species or systems'' rather than ``assertions which are true of all
+systems or of all species.''
+
+Hughes 1999 would argue that simulations have genuinely ``mimetic''
+character, particularly ones that present results graphically as
+real-world systems do, that goes beyond plain number-crunching. They use
+a variety of methods beyond calculation (such as graphics) to draw
+inferences from data. They also incorporate approximations and creative
+choices to make the problem tractable, which introduces need for
+justification. Simulations need interpretation and justification - they
+are not self-contained, their own justifications
+\autocite[31]{Winsberg2010}
+
+\newthought{Simulations are themselves an instance of the
+thing}\label{simulations-are-themselves-an-instance-of-the-thing}
+
+That is, the thing is not a shadow but the object. The Animats are
+actually alive, and therefore instances of biology.
+\footnote{And this way leads us to the claims of Strong Alife - the simulation is actually alive.}
+The simulation is a stand-in for the real world, and you can perform
+experiments on it as would any other system
+\autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
+Avida,
+
+\quote{
+These organisms, because they are defined by the sequence of
+instructions that constitute their genome, are not simulated. They are
+physically present in the computer's memory and live there. The world to
+which these creatures adapt, on the other hand, is
+simulated\ldots}{\autocite{Adami2002}}
+
+They certainly have elements of uncertainty and error, like experiments.
+
+TODO Paul Humphreys 1994 says Monte Carlo simulations are experiments; Von
+Neumann ``replace a computation from an unquestioned theory by direct
+measurement'' (quoted in TODO [28]{Winkler et al 1987}).
+
+Norton and Suppe 2001 argue that they are experiments, when proper conditions met:
+``Empirical
+data about real phenomena are produced under conditions of experimental
+control'', although ``lacking other data, we can never evaluate the
+information that these experiments provide'' Hughes 1999 p.142 so no inherent epistemological force to his
+argument. Validity solely depends on validation.
+
+\newthought{A third-way, neither experimental or theoretical}\label{a-third-way-neither-experimental-or-theoretical}
+
+\autocite[31]{Winsberg2010} or an Opaque Thought Experiment"
+\autocite{DiPaolo2000}. A common view, among others Dowling 1999, 264:
+simulation is like theory as about ``manipulating equations'' and
+``developing ideas'' but like experiments as ``fiddling with machines'',
+``trying ideas out'', ``watching to see what happens.'' Simulation is a
+form of Kuhn's theory articulation or ``model building'' - making
+principles apply to local, concrete systems in the real world. In this
+view, \quote{``Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
+
+\subsubsection{The legitimate role of simulation in scientific
+enquiry}\label{the-legitimate-role-of-simulation-in-scientific-enquiry}
+
+Following this third way, simulations might be seen as a source of new
+hypotheses \autocite{Eldridge}. The fundamental question remains
+however: what is the exact relationship between world and simulation? If
+the simulation exhibits an analogous behaviour, under a set of
+assumptions, to the real world, then we can contend that there exist
+similar mechanisms in the real world to the assumptions in our model.
+TODO Noble 1997, quoted in \autocite{Eldridge}). The example given by
+\autocite{Eldridge} is Boids \autocite{Reynolds1987} where flocking behaviour in
+birds is very similar to that that results from a set of three simple
+rules in a simulation.
+
+However, \autocite{Eldridge} identifies three problems with this
+approach: first, logically, similarity does not require congruence
+\autocite{Weitzenfeld1984}, second, how is the degree of similarity to
+be assessed, and third, the impossibility of proving that a simulation
+is an accurate model of a theory. That is, where does attribution lie?
+Is the result a result of the underlying theory or a quirk of the
+implementation? There may be no way of resolving this absolutely as it
+may not even be possible to distinguish between the two
+\autocite{DiPaolo2000} - we cannot prove correctness through testing.
+
+TODO On the other hand, Taylor (1989) in \autocite{Webb2009}, argues for
+``pure exploration'' or ``exploratory tools'' that do not need
+justification, and that may be used to generate ``new questions to ask,
+new terms to employ, or different models to construct'' (Taylor 1989,
+p122). But in this case you might reasonably argue that any insights are
+``insights about a mathematical system'' not necessarily insights into
+the real-world (123–124 Taylor 1989).
+
+In practice then, any form of model claiming a significance beyond its
+own self must show a correspondence with the thing it claims to be
+modelling.
+\quote{However, existence proofs clearly do require comparisons
+between model results and empirical data. One cannot evaluate the claim
+that phenomenon X requires condition Y unless one can show that
+phenomenon X is actually produced (with or without Y). And the claim or
+proof will be stronger or weaker depending on how well the simulated X
+matches the real X; for example, demonstrating successful behaviour in
+the same physical situation as the animal.}{\autocite[278]{Webb2009}}
+The strength of our belief depends on the degree of similarity.
+
 \subsection{Alternative approaches}\label{alternative-approaches}
 
 From Origins-of-Life (OOL)
@@ -528,8 +707,7 @@ From Origins-of-Life (OOL)
   \autocite{Pascal2015} - continuous supply of energy required (explicit
   modelling unlike say \autocite{Fontana1994} where energy only
   implicitly modelled) - and maintained there (by metabolism - e.g., how
-  ``living matter evades the decay to equilibrium''
-  \autocite{Schrodinger1944})
+  \quote{living matter evades the decay to equilibrium}{\autocite{Schrodinger1944}})
 \item
   Eigen threshold for replicators - high mutation rates overwhelm
   heredity
@@ -598,14 +776,14 @@ From Origins-of-Life (OOL)
 
 \begin{quote}
 ``Synthesis and simulation of living systems'' or contemporary
-artificial life as ``an interdisciplinary study of life and life-like
+artificial life as \quote{an interdisciplinary study of life and life-like
 processes, whose two most important qualities are that it focuses on the
 essential rather than the contingent features of living systems and that
 it attempts to understand living systems by artificially synthesizing
-simple forms of them.'' \autocite{Bedau:2007ga}
+simple forms of them.}{\autocite{Bedau:2007ga}}
 \end{quote}
 
-``life-as-it-could-be'' rather than ``life-as-we-know-it'' (TODO Langton?)
+``life-as-it-could-be'' rather than ``life-as-we-know-it'' \autocite{Langton1989}
 
 Implicit rather than explicit fitness
 
@@ -671,7 +849,7 @@ History
 \item
   1818 Mary Shelley ``Frankenstein; or, The Modern Prometheus''
 \item
-  Uptick in mentions of ``Artificial Life'' as quoted in Aguilar2014
+  Uptick in mentions of ``Artificial Life'' as quoted in \autocite{Aguilar2014}
 \item
   Modern field
 \item
@@ -680,7 +858,7 @@ History
   1984 Christopher Langton
 \item
   1987 ``Official'' birth of field - first ``Workshop on the Synthesis
-  and Simulation of living systems'' in Sante Fe, NM, by Langton
+  and Simulation of Living Systems'' in Sante Fe, NM, by Langton
 \item
   Conway Game of Life
 \item
@@ -697,7 +875,7 @@ History
 
 \subsection{Biology}\label{biology-1}
 
-\begin{quote}
+\epigraph{
 Without hesitation or ambiguity, and fully mindful of such
 paleontological wonders as large dinosaurs and African ape-men, I state
 that the invertebrates of the Burgess Shale, found high jn the Canadian
@@ -705,11 +883,48 @@ Rockies in Yoho National Park, on the eastern border of British
 Columbia, are the world's most important animal fossils. Modern
 multicellular animals make their first uncontested appearance in the
 fossil record some 570 million years ago - and with a bang, not a
-protracted crescendo. Wonderful life : the Burgess Shale and the nature
-of history, Stephen Jay Gould
-\end{quote}
+protracted crescendo. }{\textit{Wonderful life : the Burgess Shale and the nature
+of history}\\ \textsc{Stephen Jay Gould}}
 
 Our primary example of life and evolution
+
+\paragraph{What is life?}\label{what-is-life}
+
+Autopoesis
+
+Self-replication
+
+Rosen (M,R) systems
+
+Ganti Chemoton
+
+Autonomy
+
+Or \quote{
+What modifications must be made to this type of
+experiment to allow at least one of the following outcomes:
+‘open-ended evolution’ (Bedau et al., 2000); the origin of
+basic autonomy, i.e. a dissipative system capable of the
+recursive generation of functional constraints (Ruiz-Mirazo
+et al., 2004); a process ultimately capable of the
+production of nucleic acids or other modular replicators
+with unlimited heredity potential (Maynard-Smith and
+Szathmary, 1995; Szathmary, 2000); identification of ‘‘the
+course of evolution by which the determinate order of
+biological metabolism developed out of the chaos of intercrossing
+reactions’’ (Oparin, 1964); the coupled cycling of
+bioelements (Morowitz, 1968, 1971); the maximization of
+entropy production by a biosphere (Kleidon, 2004); the
+minimal unit of life (Ganti, 2003a, b); or an autopoetic unit
+(Maturana and Verela, 1992)?}{\autocite{Fernando:2007pf}}
+
+\paragraph{Arrow of complexity}\label{arrow-of-complexity}
+
+Explored in \autocite{Miconi:2008cy}:
+\begin{itemize}
+\item Passive (inevitable result of non-repeating evolution from simple seed)
+\item Active - some drive towards increasing complexity
+\end{itemize}
 
 \paragraph{Living organisms are supremely well suited to their
 environments, and can adapt to environmental
@@ -741,7 +956,7 @@ adaptions can also lead to genetic change
 driver for long-term
 adaptation}\label{natural-selection-acting-on-populations-is-the-primary-driver-for-long-term-adaptation}
 
-The year 2009 saw the celebration of the 150**\textsuperscript{th}
+The year 2009 saw the celebration of the 150\textsuperscript{th}
 anniversary of the publication of \emph{On the Origin of Species}, the
 explanation of evolution by natural selection, with extensive coverage
 in scientific and popular media. The terms are therefore fairly well
@@ -763,7 +978,12 @@ shoals flash and turn, yet sharks still manage to grab one or two from
 the shoal effectively at random. Averaged over a population however
 these chance events balance out; a succession of random trials leads to
 a skewed distribution of fitness away from the less able.
-\footnote{This introduces two significant differences between \glspl{ea} and biology: first, \glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation. Second, fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment.}
+\footnote{This introduces two significant differences between \glspl{ea}
+and biology: first, \glspl{ea} conduct a series of discrete trials of fitness,
+rather than a continuous evaluation. Second, fitness in an \gls{ea} is
+measured by an explicit \emph{objective function} whereas in biology
+fitness \emph{emerges dynamically} through continuous interaction with
+the environment.}
 
 Reproduction. In this sense, reproduction simply means inheritance. Only
 those characteristics that can be passed on from one generation to the
@@ -983,44 +1203,6 @@ in Hymenoptera; in the presence of JH it is fully expressed leading to
 queens with wings, whereas in JH's absence, wing development is
 suppressed.
 
-\paragraph{What is life?}\label{what-is-life}
-
-Autopoesis
-
-Self-replication
-
-Rosen (M,R) systems
-
-Ganti Chemoton
-
-Autonomy
-
-Or from \autocite{Fernando:2007pf}
-\quote{What modifications must be made to this type of
-experiment to allow at least one of the following outcomes:
-‘open-ended evolution’ (Bedau et al., 2000); the origin of
-basic autonomy, i.e. a dissipative system capable of the
-recursive generation of functional constraints (Ruiz-Mirazo
-et al., 2004); a process ultimately capable of the
-production of nucleic acids or other modular replicators
-with unlimited heredity potential (Maynard-Smith and
-Szathmary, 1995; Szathmary, 2000); identification of ‘‘the
-course of evolution by which the determinate order of
-biological metabolism developed out of the chaos of intercrossing
-reactions’’ (Oparin, 1964); the coupled cycling of
-bioelements (Morowitz, 1968, 1971); the maximization of
-entropy production by a biosphere (Kleidon, 2004); the
-minimal unit of life (Ganti, 2003a, b); or an autopoetic unit
-(Maturana and Verela, 1992)?}
-
-\paragraph{Arrow of complexity}\label{arrow-of-complexity}
-
-Explored in \autocite{Miconi:2008cy}:
-\begin{itemize}
-\item Passive (inevitable result of non-repeating evolution from simple seed)
-\item Active - some drive towards increasing complexity
-\end{itemize}
-
 \paragraph{Synthetic biology}\label{synthetic-biology}
 
 ADD IN NOTES
@@ -1109,7 +1291,7 @@ system with its surrounding environment, according to the ideas of
 autopoiesis and embodiment theory.
 
 bit-string genotype contains 8-bit genes made up of a number of 4-bit
-``activatory'`sites (equally divided between inhibiting and activating
+``activatory'' sites (equally divided between inhibiting and activating
 sites) and a 4-bit ``output template.''
 
 Genes encode 3-bit proteins with the first 3-bits of the output template
@@ -1232,228 +1414,6 @@ Difficulties\ldots{}
   Too special-purpose
 \end{itemize}
 
-\section{The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
-
-TODO: rewrite, properly mark quotations + references!
-
-The field of artificial life is synonymous with simulation
-\autocite[chap.2]{Aicardi2010}. In other forms of science however
-practitioners make use of a number of tools, including experiments,
-mathematical models, thought experiments, and simulations.
-Each method is well suited to some types of
-questions, and inappropriate for others. Is the use of simulation
-justified for our proposed investigation?
-
-Simulations are becoming central to some disciplines in natural history.
-Ecology - \glspl{abm} or \glspl{ibm} (reviewed in
-\autocite{DeAngelis2005}; also see
-\autocite{Grimm:2006fk,Grimm:2005wd,Grimm:1999kf,Hogeweg:1990jz}).
-\glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}.
-
-The value of simulation over experiments for
-\gls{ibm} study lies in a reduction in costs; the difficulties in
-cultivation of microbial populations (99\% of known species yet to be
-cultivated), and significantly, that they form ``complex systems only
-poorly explained by reduction.'' \autocite{Ferrer:2008hv} Emergence and
-dynamic behaviours are important, and yet they are hard to capture with
-mathematical models.
-
-Types of investigation
-
-\subsection{Thought experiments}\label{thought-experiments}
-
-non-empirical, clarification, contradictions/dissonance, fast, cheap.
-
-\subsection{Models}\label{models}
-
-\begin{quote}
-It is seldom the case in biology that a model is derived deductively
-from a more fundamental quantitative theory, with the possible exception
-of population genetics which has its foundations in evolutionary
-theory.`` \autocite{Krakauer2011}.
-\end{quote}
-
-Models can be ``useful stop-gaps`` towards a theory, by providing a
-testable body of data for experiments and predictions
-\autocite{Krakauer2011}, and may be constructed either bottom-up (such
-as in ABM) or top-down, by the application of constraints
-\autocite{Krakauer2011}. Many types in \eg ecology - eleven according to
-\autocite{Jorgensen2008} - of which fall into two main groups
-
-Mathematical models: complexity, need for abstraction/assumptions
-(\eg Fisher's famous equation describing the changes in allele
-distribution under selection assumes independent genes - extending this
-to realistic cases remains an open problem \autocite{Schuster2011}),
-difficulty in handling dynamism/emergence. Cheap, fast. Non-empirical.
-
-Simulations: bottom-up approaches, holistic, variability so diversity
-closer to real systems, adaptive behaviour/changing
-\autocite{Ferrer:2008hv}. Non-empirical data.
-
-\subsection{Experiments}\label{experiments}
-
-reductionism, conflation (difficulty in removing other factors e.g.,
-Heinemann), expense, time (generations). Source of empirical data.
-
-\begin{quote}
-Although this may seem a paradox, all exact science is dominated by the
-idea of approximation. The Scientific Outlook, Bertrand Russell
-\end{quote}
-
-\subsection{Benefits}\label{benefits}
-
-Unique ability to explore subject = unique object of enquiry e.g., study
-of emergence, complex, self-organizing subjects. Biology stands alone in
-the importance of emergence \autocite{Bersini:2006ve}, and the
-interconnection of levels of analysis, \eg behaviour can influence gene
-expression, and genes can affect behaviour \autocite{Krakauer2011}. As
-summarized by \autocite{Krakauer2011}, when asking how much of biology
-can be predicted bottom-up from the application of basic physical and
-chemical laws - ``This question is simple to answer: effectively zero.''
-
-Unique method of enquiry, that is, properties that improve on existing
-techniques, e.g., by relaxing assumptions
-
-\subsection{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
-
-Simulations seem to fall somewhere in between thought experiments or
-abstract models, and experiments. They are also relatively novel; common
-use has only come with increased access to digital computers.
-Consequently the nature of simulation - what can be claimed as a result
-of simulation, and what role may be played legitimately by simulation in
-scientific discovery - is a hot topic for philosophers of science. As
-might not be unexpected, there are two opposing positions taken, plus a
-synthesis that claims the middle ground.
-
-\subsubsection{Simulations are just calculators}\label{simulations-are-just-calculators}
-
-a computational means to solve analytically intractable equations
-\autocite[31]{Winsberg2010}, producing nothing new (just consequences
-of what is ``fed in'`\autocite{DiPaolo2000}), nothing empirical.
-
-\autocite{Eldridge}, quoting from Dennett 1979 p192 ``A simulation is ultimately
-only a high-speed generator of the consequences that some theory assigns
-various antecedent conditions''. If a model, then might take many forms
-- analogy, model, pure exploration \autocite{Webb2009}.
-
-Models are ``a purposeful representation. A model needs to have a
-purpose because otherwise there would be no way to decide what to
-include in it. A model's purpose is a filter: the model should not
-include anything not believed essential for explaining the phenomenon
-of interest (Starfield et al. 1990)'' \autocite{Grimm:2009th}
-
-\autocite{MaynardSmith1974} distinguishes between
-``practical'`descriptions of ecological systems, or ``simulations'`, and
-theoretical ones: ``models''.
-
-Simulations are aimed at answering specific questions, or analysing
-particular scenarios. The more accurate the simulation however, and
-hence the more valuable the results, the harder it is to generalize to
-other cases. It is hard to understand the behaviour of complicated
-simulations, and the causes of particular behaviours of interest may be
-unclear if there are many variables in play.
-
-Instead, \autocite{MaynardSmith1974} prefers the use of simple models, designed
-to illuminate the ``causes of differences of behaviour between different
-species or systems'`rather than ``assertions which are true of all
-systems or of all species.''
-
-Hughes 1999 would argue that simulations have genuinely ``mimetic''
-character, particularly ones that present results graphically as
-real-world systems do, that goes beyond plain number-crunching. They use
-a variety of methods beyond calculation (such as graphics) to draw
-inferences from data. They also incorporate approximations and creative
-choices to make the problem tractable, which introduces need for
-justification. Simulations need interpretation and justification - they
-are not self-contained, their own justifications
-\autocite[31]{Winsberg2010}
-
-\subsubsection{Simulations are themselves an instance of the
-thing}\label{simulations-are-themselves-an-instance-of-the-thing}
-
-That is, the thing is not a shadow but the object. The Animats are
-actually alive, and therefore instances of biology.
-\footnote{And this way leads us to the claims of Strong Alife - the simulation is actually alive.}The
-simulation is a stand-in for the real world, and you can perform
-experiments on it as would any other system
-\autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
-Avida,
-
-\begin{quote}
-These organisms, because they are defined by the sequence of
-instructions that constitute their genome, are not simulated. They are
-physically present in the computer's memory and live there. The world to
-which these creatures adapt, on the other hand, is
-simulated\ldots\autocite{Adami2002}
-\end{quote}
-
-They certainly have elements of uncertainty and error, like experiments.
-
-TODO Paul Humphreys 1994 says Monte Carlo simulations are experiments; Von
-Neumann ``replace a computation from an unquestioned theory by direct
-measurement'' (quoted in TODO [28]{Winkler et al 1987}).
-
-Norton and Suppe 2001 argue that they are experiments, when proper conditions met: ``Empirical
-data about real phenomena are produced under conditions of experimental
-control'', although ``lacking other data, we can never evaluate the
-information that these experiments provide'' Hughes 1999 p.142 so no inherent epistemological force to his
-argument. Validity solely depends on validation.
-
-\subsubsection{A third-way, neither experimental or theoretical}\label{a-third-way-neither-experimental-or-theoretical}
-
-\autocite[31]{Winsberg2010} or an Opaque Thought Experiment"
-\autocite{DiPaolo2000}. A common view, among others Dowling 1999, 264:
-simulation is like theory as about ``manipulating equations'' and
-``developing ideas'' but like experiments as ``fiddling with machines'',
-``trying ideas out'', ``watching to see what happens.'' Simulation is a
-form of Kuhn's theory articulation or ``model building'' - making
-principles apply to local, concrete systems in the real world. In this
-view, ``Simulation is a process of knowledge creation''
-\autocite[6]{Winsberg2010}
-
-\subsection{The legitimate role of simulation in scientific
-enquiry}\label{the-legitimate-role-of-simulation-in-scientific-enquiry}
-
-Following this third way, simulations might be seen as a source of new
-hypotheses \autocite{Eldridge}. The fundamental question remains
-however: what is the exact relationship between world and simulation? If
-the simulation exhibits an analogous behaviour, under a set of
-assumptions, to the real world, then we can contend that there exist
-similar mechanisms in the real world to the assumptions in our model.
-TODO Noble 1997, quoted in \autocite{Eldridge}). The example given by
-\autocite{Eldridge} is Boids \autocite{Reynolds1987} where flocking behaviour in
-birds is very similar to that that results from a set of three simple
-rules in a simulation.
-
-However, \autocite{Eldridge} identifies three problems with this
-approach: first, logically, similarity does not require congruence
-\autocite{Weitzenfeld1984}, second, how is the degree of similarity to
-be assessed, and third, the impossibility of proving that a simulation
-is an accurate model of a theory. That is, where does attribution lie?
-Is the result a result of the underlying theory or a quirk of the
-implementation? There may be no way of resolving this absolutely as it
-may not even be possible to distinguish between the two
-\autocite{DiPaolo2000} - we cannot prove correctness through testing.
-
-TODO On the other hand, Taylor (1989) in \autocite{Webb2009}, argues for
-``pure exploration'`or ``exploratory tools'`that do not need
-justification, and that may be used to generate ``new questions to ask,
-new terms to employ, or different models to construct'`(Taylor 1989,
-p122). But in this case you might reasonably argue that any insights are
-``insights about a mathematical system'' not necessarily insights into
-the real-world (123–124 Taylor 1989).
-
-In practice then, any form of model claiming a significance beyond its
-own self must show a correspondence with the thing it claims to be
-modelling. ``However, existence proofs clearly do require comparisons
-between model results and empirical data. One cannot evaluate the claim
-that phenomenon X requires condition Y unless one can show that
-phenomenon X is actually produced (with or without Y). And the claim or
-proof will be stronger or weaker depending on how well the simulated X
-matches the real X; for example, demonstrating successful behaviour in
-the same physical situation as the animal.'' \autocite[278]{Webb2009}
-The strength of our belief depends on the degree of similarity.
-
 \subsection{Evolutionary Potential}\label{evolutionary-potential}
 
 \subsection{Search for Creativity}\label{search-for-creativity}
@@ -1535,7 +1495,7 @@ the universal physico-chemical laws \autocite{Ruiz-Mirazo2004}
     compositional (where new entity contains some elements of original)
     (as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
   \item
-    ``migrant pools'' \autocite{Watson2015}
+    \quote{migrant pools}{\autocite{Watson2015}}
   \item
     Group fissioning \autocite{Watson2015}
   \item
@@ -1740,7 +1700,9 @@ parent and offspring) increases over time
   increases over time to 1.0
 \end{itemize}
 
-\section{H1: Variation and Inheritance and Selection sufficient for Evolution - V+S+I-\textgreater{}E}\label{h1-variation-and-inheritance-and-selection-sufficient-for-evolution---vsi-e}
+\section{H1: Variation and Inheritance and Selection sufficient for Evolution}\label{h1-variation-and-inheritance-and-selection-sufficient-for-evolution}
+
+V+S+I-\textgreater{}E
 
 From previous work\ldots{}
 
@@ -1769,7 +1731,9 @@ Can we construct a causal diagram from variation and selection that:
   foundation for creativity?
 \end{itemize}
 
-\section{H2: Variation and Selection sufficient for Inheritance - V+S-\textgreater{}I}\label{h2-variation-and-selection-sufficient-for-inheritance---vs-i}
+\section{H2: Variation and Selection sufficient for Inheritance}\label{h2-variation-and-selection-sufficient-for-inheritance}
+
+V+S-\textgreater{}I
 
 \subsection{Testable definition of H2?}\label{testable-definition-of-h2}
 
@@ -1823,7 +1787,7 @@ I-\textgreater{}V+S?
 
 Or to broaden the scope of the claim to other forms of V and S?
 
-\chapter{Experimental test of H2 (V+S-\textgreater{}I) under fixed conditions}\label{experimental-test-of-h2-vs-i-under-fixed-conditions}
+\chapter[Experimental test of H2 under fixed conditions]{Experimental test of H2 (V+S-\textgreater{}I) under fixed conditions}\label{experimental-test-of-h2-vs-i-under-fixed-conditions}
 
 Exogenous models for simplicity of understanding - make factors explicit
 
@@ -1837,76 +1801,58 @@ Exogenous models for simplicity of understanding - make factors explicit
 
 \begin{algorithm}[h]
 \DontPrintSemicolon
-\KwData{$P_{reproduce}, COR_{fitness}, COR_{correlation}, N, f$}
-\KwResult{a list of children of this parent}
+%\KwData{$P_{reproduce}, COR_{fitness}, COR_{correlation}, N, f$}
+%\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 \SetKwFunction{f}{f}
 
-    $\text{children}=\{\}$\;
-    $p_{reproduce}\leftarrow \text{parent's fitness if } P_{REPRODUCE} = 0 \text{ else } p_{reproduce}\leftarrow P_{REPRODUCE}$\;
-    \BlankLine
-    $\text{With probability} p_{reproduce}\text{:}$\;
-    \Indp
+\For{generation $\in 1\dots$number of generations}{
 
-        $cor_{fitness}\leftarrow \text{correlation value of parent if } COR_{fitness} \text{ else some random x, where } x\in [0,1]$\;
-        $cor_{correlation}\leftarrow \text{correlation value of parent if } COR_{correlation} \text{ else some random x, where } x\in [0,1]$\;
-        $n\leftarrow \text{some random integer between 0 and  }N \text{ inclusive}$\;
+  \tcp{Selection}
+  \For{each $element$ in $population$} {
+    $p_{selection}\leftarrow $parent's fitness\;
+    Add $element$ to $population_{new}$ with probability $p_{selection}$\;
+  }
+  $population\leftarrow population_{new}$\;
+  \BlankLine
+  \tcp{Reproduction}
+  $\text{children}=\{\}$\;
+  \For{each $element$ in $population$}{
+    $p_{reproduce}\leftarrow $parent's fitness\;
+    \BlankLine
+    $\text{With probability }p_{reproduce}\text{:}$\;
+    \Indp
+        $n\leftarrow \text{some random integer between 0 and max number of children, inclusive}$\;
         \BlankLine
         \For{each of the $n$ children}{
-            child's fitness $\leftarrow $\f{parent's fitness, $cor_{fitness}$}\;
-            correlation value for child $\leftarrow$ \f{parent's correlation value, $cor_{correlation}$}\;
+            child's fitness $\leftarrow $\f{parent's fitness, parent's correlation value}\;
+            child's correlation $\leftarrow$ \f{parent's correlation value, parent's correlation value}\;
             Add new child with these values for fitness and correlation to $children$\;
         }
-      return $children$\;
+  }
+  $population\leftarrow population + children$\;
+  \BlankLine
+  \tcp{Truncation}
+  \uIf{size of population is limited to $N_{limit}$}{
+    $population\leftarrow \text{sample }N_{limit}\text{ elements from }population\text{ without consideration of fitness}$\;
+  }
+  \BlankLine
+  \tcp{Check if population size is no longer sustainable}
+  \uIf{population size is too small}{
+    break\;
+  }
+  \BlankLine
+  \tcp{Changing environment}
+  \uIf{time to change environment}{
+    \For{each $element$ in $population$}{
+      adjust fitness of $element$ according to distribution with $\mu=fitness-0.2$, sd=0.95, bounded by $[0,1]$\;
+    }
+  }
 
-\caption{Get children for a parent}
+}
+\caption{Model}
 \end{algorithm}
 
 \begin{verbatim}
-
-      def __init__(self, fitness=None, correlation=None, low_start = True):
-          '''low_start only relevant if fitness or correlation not provided'''
-          self.fitness = fitness if fitness != None else random.uniform(0.0,0.3 if low_start else 0.9)
-          self.correlation = correlation if correlation != None else random.uniform(0.0 if low_start else 0.5,0.3 if low_start else 0.9)
-
-
-def reproduction:
-  return [x for y in population for x in get_offspring(factors, y)]
-
-def selection(factors, population):
-    return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
-
-def tweak_fitness(factors, population):
-    return [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
-
-def run(factors, population, generations, population_limit, environment_change_frequency):
-
-    original_population_size = len(population)
-    population_limit *= original_population_size # stop when population size reaches a multiple of original population - generally some form of exponential growth
-
-    # starting summary
-    initial_summary = get_population_summary(population, 0)
-    results = [initial_summary] # headers and starting conditions
-
-    for i in range(1,generations+1):
-
-        parent_population = selection(factors, population)
-        offspring_population = reproduction(factors, population)
-        population = parent_population + offspring_population
-        if factors[3] and len(population) > original_population_size: # if fixed population size
-            population = random.sample(population, original_population_size)
-
-        if len(population) < 3 or len(population) > population_limit:
-            break
-
-        results.append(get_population_summary(population, i))
-
-        if environment_change_frequency > 0 and i % environment_change_frequency == 0:
-            population = tweak_fitness(factors, population)
-
-    print(tabulate([x.values() for x in results], headers=results[0].keys()))
-    return results
-
-
     factor_defns = [
         [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
         [0.0,      1.0],    # 1 = P_SELECTION - 0 = fitness
@@ -1925,9 +1871,9 @@ Entities have two properties
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  fitness \[0,1\] - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
+  fitness {[}0,1{]} - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
 \item
-  bias or variation \[0,1\]
+  bias or variation {[}0,1{]}
 \end{enumerate}
 
 \begin{figure}[h!]
@@ -1958,8 +1904,6 @@ opposite
 In next model, these parameters themselves become endogenized into the
 copying/variation mechanism. For now though keeping these as explicit
 parameters makes clear their effect on the model.
-
-\subsection{Test two cases}\label{test-two-cases}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2130,8 +2074,7 @@ correlation_correlation = parent.correlation if factors[6] else random.random()
 \end{verbatim}
 
 Because some factors are binary, will not use a space-filling design
-such as MaxPro (Joseph, V. R., Gul, E., and Ba, S. (2015) ``Maximum
-Projection Designs for Computer Experiments,'' Biometrika.) which
+such as MaxPro \autocite{Joseph2015} which
 assumes real-valued factors, but instead a simpler conventional
 Fractional Factorial design
 
@@ -2140,10 +2083,8 @@ runs, can reduce without loss of validity with Fractional Factorial on
 assumption that higher-level interactions between factors are not
 significant (e.g., 3-factor interactions or above)
 
-2**(7-3) Fractional Factorial Design with 7 factors, each of 2 levels,
-with resolution 7-3=4
-
-{[}http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt{]}
+$2^{(7-3)}$ Fractional Factorial Design \footnote{\url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} with 7 factors, each of 2 levels,
+with resolution $7-3=4$
 
 Sufficient to separate main effect from any 2-factor interactions
 
@@ -2152,19 +2093,13 @@ Only 16 runs rather than 256 (ignoring replicates)
 \subsection{Initial conditions}\label{initial-conditions}
 
 \paragraph{Low start case}\label{low-start-case}
-
-\begin{verbatim}
 population = [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
-fitness in [0, 0.3]
-correlation in [0, 0.3]
-\end{verbatim}
+fitness in {[}0, 0.3{]}
+correlation in {[}0, 0.3{]}
 
 \paragraph{High start case}\label{high-start-case}
-
-\begin{verbatim}
-fitness in [0, 0.9]
-correlation in [0.5, 0.9]
-\end{verbatim}
+fitness in {[}0, 0.9{]}
+correlation in {[}0.5, 0.9{]}
 
 \section{Analysis}\label{analysis}
 
@@ -2198,13 +2133,15 @@ Check power of test for truncated results
 
 Conclusion: power is adequate
 
-\subsection{Check effect of truncation - require population limits for practicality, but does it bias the results?}\label{check-effect-of-truncation---require-population-limits-for-practicality-but-does-it-bias-the-results}
+\subsection{Check effect of truncation}\label{check-effect-of-truncation}
+
+Require population limits for practicality, but does it bias the results?
 
 H0: means equal, H1:means unequal
 
 First issue - number of generations at termination not equal
 
-%% begin.rcode truncationdensity, echo=FALSE, out.width='0.3\textwidth'
+%% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Density plots'
 % library(lattice)
 % densityplot(~df_low$final_gen|df_low$truncate, data=df_low)
 % densityplot(~df_high$final_gen|df_high$truncate, data=df_high)
@@ -2261,8 +2198,9 @@ also seen in a box plot of response\_cor for truncated and not truncated
 % qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor)
 %% end.rcode
 
-\subsection{General procedure for regression - but bimodal data so a simpler model is available}\label{general-procedure-for-regression---but-bimodal-data-so-a-simpler-model-is-available}
+\subsection{General procedure for regression}\label{general-procedure-for-regression}
 
+(but bimodal data so a simpler model is available)
 Regression, with response variable of (end\_correlation -
 start\_correlation) and independent or predictor variables of the
 previously listed factors
@@ -2330,7 +2268,7 @@ Correlation measures (both response\_cor and final\_ave\_cor) are
 strongly bimodal
 (densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
 
-%% begin.rcode lowstartplots,echo=FALSE,out.width='0.49\textwidth'
+%% begin.rcode lowstartplots,echo=FALSE,out.width='0.45\\linewidth'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
 % plot(df_low$response_cor)
@@ -2388,7 +2326,7 @@ Correlation decreased when starting high and correlation\_correlation ==
 -1 - tended to converge on correlation values seen in low start with
 same correlation\_correlation == -1
 
-%% begin.rcode highstartplots,echo=FALSE,out.width='0.49\textwidth'
+%% begin.rcode highstartplots,echo=FALSE,out.width='0.45\\linewidth'
 % df_high <- load_dfa("results/results_highstart.data")
 % df_high <- df_high[df_high$truncate==1,]
 % plot(df_high$response_cor)
@@ -2407,7 +2345,7 @@ same correlation\_correlation == -1
 % anova(m0)
 %% end.rcode
 
-\chapter{Experimental test of H2 (V+S-\textgreater{}I) under changing conditions}\label{experimental-test-of-h2-vs-i-under-changing-conditions}
+\chapter[Experimental test of H2 under fixed conditions]{Experimental test of H2 (V+S-\textgreater{}I) under changing conditions}\label{experimental-test-of-h2-vs-i-under-changing-conditions}
 
 Where inheritance is using CORRELATION\_CORRELATION mechanism, expect
 that under changing conditions correlation will tend to some lower value

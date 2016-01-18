@@ -43,7 +43,6 @@
 \newcommand*\LSTfont{\Small\ttfamily\lsstyle}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-\DontPrintSemicolon
 \author{Thom Young}
 \title{Feature Emergence in an Artificial Chemistry}
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer

@@ -1607,7 +1607,13 @@ Corollary - addition and removal of elements
   If have no additions, then cannot adjust population proportions
 \end{itemize}
 
-\section{Planned Contributions}\label{planned-contributions-1}
+\section{Contributions}
+
+\begin{itemize}
+\item General model for evolutionary processes
+\item Experimental support for hypothesis that selection and variation sufficient for evolution
+\item Experimental support for ability of a copy mechanism with adjustable fidelity to auto-adjust to changing environmental conditions
+\end{itemize}
 
 \chapter{Synthesis based on first principles}\label{synthesis-based-on-first-principles}
 
@@ -2534,6 +2540,8 @@ interact gives rise to emergent forms---molecules. At a higher level,
 these molecules, under the same interaction rules, also interact in
 patterns---reactions.
 
+TODO: link emergent levels to copy mechanism
+
 Still higher emergent levels emerge under favourable conditions.
 Reactions may form cycles, where a sequence eventually returns to an
 earlier product. Our interest is in identifying the factors that
@@ -2546,39 +2554,31 @@ believe like others (e.g., \autocite{Steel2013}) that cycles, of some
 form, are a necessary building-block for more complicated structures
 again in Artificial Chemistries.
 
-Unfortunately, although the emergence of cycles from a solely
-reaction-based system is certainly possible, and indeed likely under
-many conditions, more complicated structures are very rare. Perhaps it
-is simply a matter of probabilities---they may be theoretically
-possible, but in practice highly unlikely and so most reaction sequences
-do not do anything interesting: a strongly constructive chemistry can
-generate an infinite number of reaction types, and it is of course
-possible for these to combine in sequences that are interesting. But
-from other work the probability of this happening appears to be very low
-\autocite{Maley1999,Channon:2006st}.
+TODO: argue that ToyWorld capable of a tunable copying mechanism, similar to that in biology,
+but that such a mechanism will be difficult to evolve de novo. Previous work on 
+evolution of a DNA/RNA copy mechanism in biology: Eigen's paradox, fidelity requires error-correction,
+proteins etc
 
-\section{Planned Contributions}\label{planned-contributions}
+\section{Contributions}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Progress towards OEE in artificial system - evolution compatible with
+	Open-sourced Artificial Chemistry model
+\item
+	Progress towards useful heredity in an artificial system
+\item
+	Progress towards OEE in artificial system - evolution compatible with
   OEE without necessarily showing OEE (which is hard to measure and
   prove)
 \item
-  Demonstration of formation of ACS in an artificial chemistry (previous
+	Demonstration of formation of ACS in an artificial chemistry (previous
   work with ODEs e.g. \autocite{Hurndall2014} not re-usable in that form)
-\item
-  Demonstration of heredity in an artificial chemistry
-\item
-  Open-sourced Artificial Chemistry model
 \end{enumerate}
 
 \subsection{Hypothesis}\label{hypothesis}
 
-This suggests an Artificial Chemistry - where the rules emerge from the
-underlying components
-
+Because an Artificial Chemistry
 \begin{itemize}
 \item
   Meets known constraints for OEE - and we have OOL as an example of OEE
@@ -2589,7 +2589,11 @@ underlying components
 \item
   Catalysis/autocatalysis possible through emergence in some AChems
   (e.g., \autocite{Virgo2013})
+\item
+	And TODO..
 \end{itemize}
+
+Hx: Compliant copy-mechanism possible in an AChem through analogy with DNA/RNA copying
 
 \chapter{Artificial Chemistries}\label{artificial-chemistries}
 
@@ -4456,7 +4460,7 @@ show response to selective pressure
   Remove a condition (e.g., \autocite{Soros2014})
 \end{itemize}
 
-\part{The Search for Creativity}
+\part{The Search for Creativity}\label{the-search-for-creativity}
 
 \chapter{Introduction}
 
@@ -4639,6 +4643,15 @@ Local entropy (implied by Adami2015)
 Measure of OEE -
 http://link.springer.com/article/10.1007\%2Fs11084-012-9309-y
 
-\chapter{Conclusions}
-
 \chapter{Discussion and Conclusions}\label{discussion-and-conclusions}
+
+We have shown that:
+\begin{itemize}
+\item Selection and Variation are sufficient for Evolution in an Artificial System
+\item Such a system is capable of adjusting to changing environments without preselection of parameters
+\item Such a system can be implemented in an Artificial Chemistry
+\end{itemize}
+
+And therefore that open-ended evolution is possible in an Artificial Chemistry.
+
+TODO: link OEE to selection and variation from work in \ref{the-search-for-creativity}

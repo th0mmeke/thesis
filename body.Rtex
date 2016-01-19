@@ -112,7 +112,7 @@ seed or starting point, (plus four specific conditions
 
 \subsection{Epistemology}\label{epistemology}
 
-\paragraph{Evolution}\label{evolution}
+\subsubsection{Biological Evolution}\label{evolution}
 
 \quote{Evolution is a process that results in heritable changes in a population
 spread over many generations.}{
@@ -144,219 +144,215 @@ Blurring in use of OEE
 Ongoing generation of novel forms
 
 \begin{itemize}
-\tightlist
 \item
   Inevitably leads to increasing complexity as without complexity will
   exhaust new possibilities and cover old ground
 \end{itemize}
 
-\paragraph{Biology}\label{biology}
+\paragraph{Evolution by Natural Selection (ENS))}\label{ens-evolution-by-natural-selection}
 
 ENS is an example of OEE
 
 http://www.protevi.com/john/Morality/evolution4dimensions.pdf - outline
 of Jablonka, summary of evolutionary ``theory'' as of 2005
 
-\subparagraph{ENS (Evolution by Natural
-Selection)}\label{ens-evolution-by-natural-selection}
-
 \begin{itemize}
 \item
-  Biology based around ENS e.g., \quote{god and natural selection are, after
-  all, the only workable theories we have of why we exist}{\autocite{Dawkins1982}}
+Biology based around ENS e.g., \quote{god and natural selection are, after
+all, the only workable theories we have of why we exist}{\autocite{Dawkins1982}}
 \item
-  But later biology includes HGT (horizontal gene transmission) which
-  blurs mechanism somewhat, as does importance of neutral-theory,
-  without invalidating ENS
+But later biology includes HGT (horizontal gene transmission) which
+blurs mechanism somewhat, as does importance of neutral-theory,
+without invalidating ENS
 \item
-  Summaries and formal models attempting to either capture definition
-  (constitutive) or sufficiency (causal) of observed systems
+Summaries and formal models attempting to either capture definition
+(constitutive) or sufficiency (causal) of observed systems
 \item
-  ENS (Evolution by Natural Selection) in biology needs variation,
-  fitness differences, heritability of fitness (Lewontin) or variation,
-  multiplication, heritability (Maynard-Smith)
+ENS (Evolution by Natural Selection) in biology needs variation,
+fitness differences, heritability of fitness (Lewontin) or variation,
+multiplication, heritability (Maynard-Smith)
 \item
-  See \autocite{Griesemer2001} for discussion of differences
+See \autocite{Griesemer2001} for discussion of differences
 \item
-  Review of various formulations in Godfrey-Smith2007; all from starting
-  point of natural evolution -\textgreater{} summary -\textgreater{}
-  reconcile, address specific difficulties in particular formulations
-  against common problem cases
+Review of various formulations in Godfrey-Smith2007; all from starting
+point of natural evolution -\textgreater{} summary -\textgreater{}
+reconcile, address specific difficulties in particular formulations
+against common problem cases
 \item
-  Core is \quote{``combination of variation, heredity, and fitness
-  differences.}{\autocite{Godfrey-Smith2007}}
+Core is \quote{``combination of variation, heredity, and fitness
+differences.}{\autocite{Godfrey-Smith2007}}
 \item
-  Argument that heredity may in fact be a product of evolution rather
-  than a precursor \autocite{Bourrat2015}
+Argument that heredity may in fact be a product of evolution rather
+than a precursor \autocite{Bourrat2015}
 \item
-  Heredity seen as method to maintain low entropy over much longer time
-  than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy
+Heredity seen as method to maintain low entropy over much longer time
+than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy
 for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only
 limited by the existence of the biosphere). It is then this ability: to persist in a state of
 reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules
 as living, and this set of molecules must achieve that feat via the self-replication of
 information.}{\autocite{Adami2015}}
 \item
-  HGT (Horizontal gene transfer)
+HGT (Horizontal gene transfer)
 \item
-  Thought that biological evolution is Evolution by Natural Selection,
-  but this is not strictly true:
+Thought that biological evolution is Evolution by Natural Selection,
+but this is not strictly true:
 \item
-  \quote{We take it as given that biology
-  instantiates ENS {[}Evolution by Natural Selection{]}. That is, ENS
-  occurs in biological evolution (there is no need to reiterate the
-  evidence for this). However, we wish to separate the conclusion that
-  ENS \textit{occurs in} biological evolution from the conclusion that
-  the algorithm of adaptive biological evolution \textit{is} ENS}{\autocite{Watson2012}}
-  (emphasis in original)
+\quote{We take it as given that biology
+instantiates ENS {[}Evolution by Natural Selection{]}. That is, ENS
+occurs in biological evolution (there is no need to reiterate the
+evidence for this). However, we wish to separate the conclusion that
+ENS \textit{occurs in} biological evolution from the conclusion that
+the algorithm of adaptive biological evolution \textit{is} ENS}{\autocite{Watson2012}}
+(emphasis in original)
 \item
-  LGT complicates this
+LGT complicates this
 \item
-  Exaptations more common than thought, meaning that evolutionary driver
-  shifting towards neutrality from pure selection \autocite{Barve2013}
+Exaptations more common than thought, meaning that evolutionary driver
+shifting towards neutrality from pure selection \autocite{Barve2013}
 \item
-  Junk DNA/Neutral theory - not a highly selective environment
-  (http://sandwalk.blogspot.co.nz/2008/02/theme-genomes-junk-dna.html)
+Junk DNA/Neutral theory - not a highly selective environment
+(http://sandwalk.blogspot.co.nz/2008/02/theme-genomes-junk-dna.html)
 \item
-  Random genetic drift
+Random genetic drift
 \item
-  Problems with ENS beyond classical organisms
+Problems with ENS beyond classical organisms
 \item
-  Previous work in application of ENS to levels of biological hierarchy
-  (Griesemer2005)
+Previous work in application of ENS to levels of biological hierarchy
+(Griesemer2005)
 \item
-  issue in identifying ``individuals'' or ``entities'' in ENS
-  formulations - part of the ``unit of selection'' problem
+issue in identifying ``individuals'' or ``entities'' in ENS
+formulations - part of the ``unit of selection'' problem
 \item
-  issue in meaning of heredity without genotypes - needs a causal
-  formulation for pre-cellular evolution akin to that in
-  \autocite{Bourrat2015} or presented in \autocite{Griesemer2005} for
-  Weismannian causal relationship between genes and organisms
+issue in meaning of heredity without genotypes - needs a causal
+formulation for pre-cellular evolution akin to that in
+\autocite{Bourrat2015} or presented in \autocite{Griesemer2005} for
+Weismannian causal relationship between genes and organisms
 \end{itemize}
 
-\subparagraph{Lamarck}\label{lamarck}
+\paragraph{Lamarck}\label{lamarck}
 
 Inheritance of acquired characteristics - e.g., epigenetics, but
 probably not significant as evolutionary mechanism in biology. But
 alternative
 
-\paragraph{Evolution without life}\label{evolution-without-life}
+\subsubsection{Evolution without life}\label{evolution-without-life}
 
 Not attempting to understand life, but as a guide to achieving a similar
 property in another domain
 
 \begin{itemize}
 \item
-  Random search - Random search/walk will explore possibilities, but
-  without meaning\ldots{}
+Random search - Random search/walk will explore possibilities, but
+without meaning\ldots{}
 \item
-  Compositional - \autocite{Watson2002} discusses compositional evolution and
-  building blocks
+Compositional - \autocite{Watson2002} discusses compositional evolution and
+building blocks
 \item
-  Technology evolution - by components (Arthur2009)
+Technology evolution - by components (Arthur2009)
 
-  \begin{itemize}
-  \item
-    \autocite{Arthur2009} investigates the evolution of
-    technology, where evolution is used in the sense of \quote{all objects of
-    some class are related by ties of common descent from the collection
-    of earlier objects.}{\autocite{Arthur2009}}
-  \item
-    Evolution is related to innovation: in fact, Arthur claims that by
-    understanding the mechanism by which technologies evolve we will
-    understand how innovations arise. In other words, innovations arise
-    as the result of an evolutionary process, rather than de novo from
-    the brain of a designer.
-  \item
-    Darwinian evolution, or natural selection, is not appropriate for
-    technology. Arthur quotes from Samuel Butler's essay ``Darwin Among
-    the Machines'' : ``{[}t{]}here is nothing which our infatuated race
-    would desire more than to see a fertile union between two steam
-    engines\ldots{}'' to illustrate the impossibility of slavish
-    adoption of biological models.
-  \item
-    However, we can clearly see descent of form, in the example given by
-    Gilfillan in 1935 tracing the development of various elements of the
-    sailing ship: planking, sails, keels, ribbing and fastenings. In
-    each case we see a line of gradual improvements leading to the
-    present day component. But the point is made that this is not
-    evolution in the full sense, as it lacks both universal scope and an
-    underlying mechanism.
-  \item
-    The first obstacle to a more general scope is the existence of
-    innovations such as the jet engine, laser, railroad locomotive, or
-    QuickSort computer algorithm (to name Arthur's examples.)
-    Innovations seem to appear without obvious parentage; they do not
-    appear to be the result of gradual changes or adaptations to earlier
-    technologies.
-  \item
-    Arthur's answer is to look inside the innovation and to recognise
-    that each is made up of recognisable components or modules; the key
-    lies in the nature of heredity in technology. Technologies are
-    formed by combining modules of earlier technologies. These groupings
-    start as loose assemblages to meet some new function, but over time
-    become fixed into a standard unit (for example, the change in DNA
-    amplification mechanisms from assemblages of laboratory equipment to
-    standard off-the-shelf products.)
-  \item
-    \autocite{Bourrat2015} comments that distributive evolution (where
-    distribution of elements changes, as result of selection or drift)
-    cannot result in novelties
-  \item
-    Arthur's response is that novelty comes from incorporating new
-    phenomena\ldots{}
-  \end{itemize}
+\begin{itemize}
 \item
-  HGT e.g., \autocite{Ochman2000}
+\autocite{Arthur2009} investigates the evolution of
+technology, where evolution is used in the sense of \quote{all objects of
+some class are related by ties of common descent from the collection
+of earlier objects.}{\autocite{Arthur2009}}
 \item
-  \autocite{Pross2011} - Dynamic Kinetic Stability
+Evolution is related to innovation: in fact, Arthur claims that by
+understanding the mechanism by which technologies evolve we will
+understand how innovations arise. In other words, innovations arise
+as the result of an evolutionary process, rather than de novo from
+the brain of a designer.
+\item
+Darwinian evolution, or natural selection, is not appropriate for
+technology. Arthur quotes from Samuel Butler's essay ``Darwin Among
+the Machines'' : ``{[}t{]}here is nothing which our infatuated race
+would desire more than to see a fertile union between two steam
+engines\ldots{}'' to illustrate the impossibility of slavish
+adoption of biological models.
+\item
+However, we can clearly see descent of form, in the example given by
+Gilfillan in 1935 tracing the development of various elements of the
+sailing ship: planking, sails, keels, ribbing and fastenings. In
+each case we see a line of gradual improvements leading to the
+present day component. But the point is made that this is not
+evolution in the full sense, as it lacks both universal scope and an
+underlying mechanism.
+\item
+The first obstacle to a more general scope is the existence of
+innovations such as the jet engine, laser, railroad locomotive, or
+QuickSort computer algorithm (to name Arthur's examples.)
+Innovations seem to appear without obvious parentage; they do not
+appear to be the result of gradual changes or adaptations to earlier
+technologies.
+\item
+Arthur's answer is to look inside the innovation and to recognise
+that each is made up of recognisable components or modules; the key
+lies in the nature of heredity in technology. Technologies are
+formed by combining modules of earlier technologies. These groupings
+start as loose assemblages to meet some new function, but over time
+become fixed into a standard unit (for example, the change in DNA
+amplification mechanisms from assemblages of laboratory equipment to
+standard off-the-shelf products.)
+\item
+\autocite{Bourrat2015} comments that distributive evolution (where
+distribution of elements changes, as result of selection or drift)
+cannot result in novelties
+\item
+Arthur's response is that novelty comes from incorporating new
+phenomena\ldots{}
+\end{itemize}
+\item
+HGT e.g., \autocite{Ochman2000}
+\item
+\autocite{Pross2011} - Dynamic Kinetic Stability
 \end{itemize}
 
-\subparagraph{Evolutionary Computation/Evolutionary
+\paragraph{Evolutionary Computation/Evolutionary
 Algorithms}\label{evolutionary-computationevolutionary-algorithms}
 
 \begin{itemize}
 \item
-  EAs originally abstracted/inspired by biological ENS
+EAs originally abstracted/inspired by biological ENS
 \item
-  Since specialized, radiated into new areas
+Since specialized, radiated into new areas
 \item
-  Re-unification attempted in works such as \autocite{Paixao2015} but hence not
-  concerned with extension beyond \quote{models in theoretical population
-  genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
+Re-unification attempted in works such as \autocite{Paixao2015} but hence not
+concerned with extension beyond \quote{models in theoretical population
+genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
 \item
-  \quote{Some EDAs can be regarded abstractions of evolutionary processes:
-  instead of generating new solutions through variation and then
-  selecting from these, EDAs use a more direct approach to refine the
-  underlying probability distribution. The perspective of updating a
-  probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
+\quote{Some EDAs can be regarded abstractions of evolutionary processes:
+instead of generating new solutions through variation and then
+selecting from these, EDAs use a more direct approach to refine the
+underlying probability distribution. The perspective of updating a
+probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
 \item
-  Major points of difference
+Major points of difference
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Mutation combines copying errors with genetic drift (and probably
-    more)
-  \item
-    Search through a fixed space, cannot surprise \eg \autocite{Nellis2014}
-  \item
-    Fitness mechanism - implicit vs explicit
-  \item
-    top-down for EAs - specific constructs without endogenous evolution
-    (processes used not subject to evolution)
-  \end{itemize}
+\begin{itemize}
+\tightlist
 \item
-  Thought experiments - models
+Mutation combines copying errors with genetic drift (and probably
+more)
 \item
-  DaisyWorld (Gaia Hypothesis) - \autocite{Saunders1994} - regulation as
-  model for evolution (selection a hindrance)
+Search through a fixed space, cannot surprise \eg \autocite{Nellis2014}
 \item
-  MWUA - meta-model?
+Fitness mechanism - implicit vs explicit
 \item
-  \autocite{Chastain2014}
+top-down for EAs - specific constructs without endogenous evolution
+(processes used not subject to evolution)
+\end{itemize}
 \item
-  \autocite{Barton2014}
+Thought experiments - models
+\item
+DaisyWorld (Gaia Hypothesis) - \autocite{Saunders1994} - regulation as
+model for evolution (selection a hindrance)
+\item
+MWUA - meta-model?
+\item
+\autocite{Chastain2014}
+\item
+\autocite{Barton2014}
 \end{itemize}
 
 Seems tightly linked to life - requirements for OEE (hypothesised) look
@@ -368,12 +364,12 @@ What elements of life are required for OEE, and which are not?
 \begin{itemize}
 \tightlist
 \item
-  Exact elements (same thing) - e.g., evolution?
+Exact elements (same thing) - e.g., evolution?
 \item
-  Equivalent elements (same concept/function/purpose, different detail)
-  e.g., compartments/membranes?
+Equivalent elements (same concept/function/purpose, different detail)
+e.g., compartments/membranes?
 \item
-  Not required at all e.g., specific metabolic cycles
+Not required at all e.g., specific metabolic cycles
 \end{itemize}
 
 
@@ -385,25 +381,25 @@ Experimental tests
 \begin{itemize}
 \tightlist
 \item
-  \autocite{Taylor:1999sc}
+\autocite{Taylor:1999sc}
 \item
-  \autocite{Sayama2011}
+\autocite{Sayama2011}
 \item
-  \autocite{Maley1999}
+\autocite{Maley1999}
 \item
-  \autocite{Nellis2014}
+\autocite{Nellis2014}
 \item
-  \autocite{Hickinbotham2011a}
+\autocite{Hickinbotham2011a}
 \item
-  \autocite{Tominaga2005}
+\autocite{Tominaga2005}
 \item
-  \autocite{Lucht2012}
+\autocite{Lucht2012}
 \item
-  \autocite{Gardiner2007}
+\autocite{Gardiner2007}
 \item
-  \autocite{Fernando:2008xy}
+\autocite{Fernando:2008xy}
 \item
-  \autocite{Faulconbridge2010}
+\autocite{Faulconbridge2010}
 \end{itemize}
 
 \section{Approach}\label{approach}
@@ -414,7 +410,7 @@ Much previous work aimed at understanding biology - assumes that domain
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=\linewidth]{figures/approach}
+\includegraphics[width=\linewidth]{figures/approach}
 \end{center}
 \end{figure}
 
@@ -424,14 +420,14 @@ http://evoevo.liris.cnrs.fr/about-evoevo-project/
 
 \begin{itemize}
 \item
-  Presupposes microbial evolution, ``at the level of genomes, biological
-  networks and populations.''
+Presupposes microbial evolution, ``at the level of genomes, biological
+networks and populations.''
 \item
-  Focus on four specific properties of a genotype-phenotype mapping -
-  Variability, Robustness, Evolvability, Open-endedness
+Focus on four specific properties of a genotype-phenotype mapping -
+Variability, Robustness, Evolvability, Open-endedness
 \item
-  Later work to remove biological specificity to provide framework for
-  applying EvoEvo to ICT problems
+Later work to remove biological specificity to provide framework for
+applying EvoEvo to ICT problems
 \end{itemize}
 
 \subsection{The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
@@ -531,7 +527,7 @@ a computational means to solve analytically intractable equations
 \autocite[31]{Winsberg2010}, producing nothing new (just consequences
 of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
 
- \quote{A simulation is ultimately
+\quote{A simulation is ultimately
 only a high-speed generator of the consequences that some theory assigns
 various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192} If a model, then might take many forms
 - analogy, model, pure exploration \autocite{Webb2009}.
@@ -660,114 +656,114 @@ From Origins-of-Life (OOL)
 
 \begin{itemize}
 \item
-  Theory - an artificial chemistry capable of Evolution
+Theory - an artificial chemistry capable of Evolution
 \item
-  Guided by earlier work, stripped of biological assumptions
+Guided by earlier work, stripped of biological assumptions
 \item
-  hypercycles \autocite{Eigen1971}
+hypercycles \autocite{Eigen1971}
 \item
-  autocatalysis
-  \begin{itemize}
-  \item
-    present in all three elements (\autocite{Ganti:2003hl} - or
-    earlier?) of life
-  \item
-    DNA replicates with enzymatic help
-  \item
-    some metabolites, such as ATP, exclusively autocatalytic
-  \item
-    lipids in a membrane enhance addition of other lipids - Formation of
-    autocatalytic cycles/sets (\autocite{Hordijk2004}) - percolation increases
-    likelihood
-  \item
-    \autocite{Sousa2015} for detection of RAF sets in e coli metabolic
-    networks
-  \item
-    Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \autocite{Fernando:2005ly})
-  \item
-    \autocite{Fernando:2007pf} - selection/liposomes/chemical avalanches
-    based on Wachtershauser
-  \item
-    autocatalytic cores (\autocite{Vasas2012})
-  \item
-    Kauffman's original Reflexively Autocatalytic Polymer Networks
-    (RAPN) \autocite{Kauffman1986,Farmer1986} are not capable of
-    non-digital evolution. RAPN stabilise into single network without
-    variation
-  \end{itemize}
+autocatalysis
+\begin{itemize}
 \item
-  GARD (fixed catalysts) \autocite{Segre1998} not capable of evolution -
-  lack heredity of variation (mutations overwhelm heredity) \autocite{Vasas2010}
+present in all three elements (\autocite{Ganti:2003hl} - or
+earlier?) of life
 \item
-  Bimolecular rearrangements (\autocite{Fernando:2008xy,Fernando:2007pf})?
+DNA replicates with enzymatic help
 \item
-  template replicators - highly unlikely without intermediate steps
+some metabolites, such as ATP, exclusively autocatalytic
 \item
-  Must be driven far-from-equilibrium (many references e.g.,
-  \autocite{Pascal2015} - continuous supply of energy required (explicit
-  modelling unlike say \autocite{Fontana1994} where energy only
-  implicitly modelled) - and maintained there (by metabolism - e.g., how
-  \quote{living matter evades the decay to equilibrium}{\autocite{Schrodinger1944}})
+lipids in a membrane enhance addition of other lipids - Formation of
+autocatalytic cycles/sets (\autocite{Hordijk2004}) - percolation increases
+likelihood
 \item
-  Eigen threshold for replicators - high mutation rates overwhelm
-  heredity
+\autocite{Sousa2015} for detection of RAF sets in e coli metabolic
+networks
 \item
-  Biological evolutionary theory
+Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \autocite{Fernando:2005ly})
 \item
-  Extension beyond biology
+\autocite{Fernando:2007pf} - selection/liposomes/chemical avalanches
+based on Wachtershauser
+\item
+autocatalytic cores (\autocite{Vasas2012})
+\item
+Kauffman's original Reflexively Autocatalytic Polymer Networks
+(RAPN) \autocite{Kauffman1986,Farmer1986} are not capable of
+non-digital evolution. RAPN stabilise into single network without
+variation
+\end{itemize}
+\item
+GARD (fixed catalysts) \autocite{Segre1998} not capable of evolution -
+lack heredity of variation (mutations overwhelm heredity) \autocite{Vasas2010}
+\item
+Bimolecular rearrangements (\autocite{Fernando:2008xy,Fernando:2007pf})?
+\item
+template replicators - highly unlikely without intermediate steps
+\item
+Must be driven far-from-equilibrium (many references e.g.,
+\autocite{Pascal2015} - continuous supply of energy required (explicit
+modelling unlike say \autocite{Fontana1994} where energy only
+implicitly modelled) - and maintained there (by metabolism - e.g., how
+\quote{living matter evades the decay to equilibrium}{\autocite{Schrodinger1944}})
+\item
+Eigen threshold for replicators - high mutation rates overwhelm
+heredity
+\item
+Biological evolutionary theory
+\item
+Extension beyond biology
 
-  \begin{itemize}
-  \item
-    Previous work on extending evolution - \autocite{Bourrat2015} etc
-  \item
-    Evolution of culture, language, technology
-  \end{itemize}
+\begin{itemize}
 \item
-  OOL is focussed on plausible explanations for life-as-we-know-it
+Previous work on extending evolution - \autocite{Bourrat2015} etc
 \item
-  And must be constrained by biological givens, i.e.
+Evolution of culture, language, technology
+\end{itemize}
 \item
-  Starting point consistent with what is known about archaic Earth
+OOL is focussed on plausible explanations for life-as-we-know-it
 \item
-  Must lead to end-point consistent with earliest known life
+And must be constrained by biological givens, i.e.
 \item
-  In a reasonable time period
+Starting point consistent with what is known about archaic Earth
 \item
-  single-step astronomically unlikely (single RNA strand probability
-  about 10E-60, based on 100 monomers - \autocite{Pascal2013})
+Must lead to end-point consistent with earliest known life
 \item
-  Requires a series of steps - akin to OOL where single-step
-  astronomically unlikely (single RNA strand probability about 10E-60,
-  based on 100 monomers - \autocite{Pascal2013})
+In a reasonable time period
 \item
-  Contingent and specific - constraints
+single-step astronomically unlikely (single RNA strand probability
+about 10E-60, based on 100 monomers - \autocite{Pascal2013})
 \item
-  starting point compatible with what is known of prebiotic conditions
-  (either on earth or extraterrestrially)
+Requires a series of steps - akin to OOL where single-step
+astronomically unlikely (single RNA strand probability about 10E-60,
+based on 100 monomers - \autocite{Pascal2013})
 \item
-  end point of ENS at something that might be LUCA
+Contingent and specific - constraints
 \item
-  Must be simplified and abstracted
+starting point compatible with what is known of prebiotic conditions
+(either on earth or extraterrestrially)
 \item
-  Choosing an artificial chemistry similar to natural chemistry enables
-  an argument by analogy
+end point of ENS at something that might be LUCA
 \item
-  Meets known constraints for OEE - and we have OOL as an example of OEE
-  from natural chemistry
+Must be simplified and abstracted
 \item
-  Catalysis/autocatalysis possible through emergence in some AChems
-  (\eg \autocite{Virgo2013})
+Choosing an artificial chemistry similar to natural chemistry enables
+an argument by analogy
 \item
-  Some fundamental differences remain however between our domain and the
-  natural domain
+Meets known constraints for OEE - and we have OOL as an example of OEE
+from natural chemistry
 \item
-  The sheer size of the Biosphere means we can never duplicate the
-  number of individual evolutionary ``trials'' (selection, mutation and
-  reproduction) events in our model
+Catalysis/autocatalysis possible through emergence in some AChems
+(\eg \autocite{Virgo2013})
 \item
-  The Biosphere is underpinned by a phenomenally rich set of physical
-  and chemical laws, implicitly constraining each and every action and
-  interaction
+Some fundamental differences remain however between our domain and the
+natural domain
+\item
+The sheer size of the Biosphere means we can never duplicate the
+number of individual evolutionary ``trials'' (selection, mutation and
+reproduction) events in our model
+\item
+The Biosphere is underpinned by a phenomenally rich set of physical
+and chemical laws, implicitly constraining each and every action and
+interaction
 \end{itemize}
 
 \section{TODO - Related work}\label{todo---related-work}
@@ -789,13 +785,13 @@ Implicit rather than explicit fitness
 
 \begin{itemize}
 \item
-  The mapping between representation and fitness must be implicit
+The mapping between representation and fitness must be implicit
 \item
-  a property that arises from the representation itself rather than from
-  an external measure
+a property that arises from the representation itself rather than from
+an external measure
 \item
-  difficult to imagine how to pre-specify a mapping that remains
-  relevant in an open-ended system
+difficult to imagine how to pre-specify a mapping that remains
+relevant in an open-ended system
 \end{itemize}
 
 Life a subset of Alife
@@ -812,65 +808,65 @@ Purposes
 
 \begin{itemize}
 \item
-  Insights into life
+Insights into life
 \item
-  Swimming - \autocite{Terzopoulos1994}
+Swimming - \autocite{Terzopoulos1994}
 \item
-  Foundations for other fields e.g., AI
+Foundations for other fields e.g., AI
 \item
-  In own right - life ``de novo''
+In own right - life ``de novo''
 \item
-  Philosophy - what is living?
+Philosophy - what is living?
 \end{itemize}
 
 Themes \autocite{Aguilar2014}
 
 \begin{itemize}
 \item
-  Properties of living systems - Origins of life, autonomy,
-  self-organization, adaptation (evolution, development, and learning)
+Properties of living systems - Origins of life, autonomy,
+self-organization, adaptation (evolution, development, and learning)
 \item
-  Life at different scales - Ecology, artificial societies, behaviour,
-  computational biology, artificial chemistries
+Life at different scales - Ecology, artificial societies, behaviour,
+computational biology, artificial chemistries
 \item
-  Understanding, uses and descriptions of the living - information,
-  living technology, art and philosophy
+Understanding, uses and descriptions of the living - information,
+living technology, art and philosophy
 \end{itemize}
 
 History
 
 \begin{itemize}
 \item
-  Prehistory
+Prehistory
 \item
-  Various automata
+Various automata
 \item
-  Philosophy about automata
+Philosophy about automata
 \item
-  1818 Mary Shelley ``Frankenstein; or, The Modern Prometheus''
+1818 Mary Shelley ``Frankenstein; or, The Modern Prometheus''
 \item
-  Uptick in mentions of ``Artificial Life'' as quoted in \autocite{Aguilar2014}
+Uptick in mentions of ``Artificial Life'' as quoted in \autocite{Aguilar2014}
 \item
-  Modern field
+Modern field
 \item
-  1951 Von Neumann - first formal model
+1951 Von Neumann - first formal model
 \item
-  1984 Christopher Langton
+1984 Christopher Langton
 \item
-  1987 ``Official'' birth of field - first ``Workshop on the Synthesis
-  and Simulation of Living Systems'' in Sante Fe, NM, by Langton
+1987 ``Official'' birth of field - first ``Workshop on the Synthesis
+and Simulation of Living Systems'' in Sante Fe, NM, by Langton
 \item
-  Conway Game of Life
+Conway Game of Life
 \item
-  Cellular Automata
+Cellular Automata
 \item
-  Tierra, Avida
+Tierra, Avida
 \item
-  Dawkin's Biomorphs
+Dawkin's Biomorphs
 \item
-  Bedau Challenges
+Bedau Challenges
 \item
-  Overlap with Brooks's robotics, AI, etc
+Overlap with Brooks's robotics, AI, etc
 \end{itemize}
 
 \subsection{Biology}\label{biology-1}
@@ -888,7 +884,7 @@ of history}\\ \textsc{Stephen Jay Gould}}
 
 Our primary example of life and evolution
 
-\paragraph{What is life?}\label{what-is-life}
+\subsubsection{What is life?}\label{what-is-life}
 
 Autopoesis
 
@@ -918,7 +914,7 @@ entropy production by a biosphere (Kleidon, 2004); the
 minimal unit of life (Ganti, 2003a, b); or an autopoetic unit
 (Maturana and Verela, 1992)?}{\autocite{Fernando:2007pf}}
 
-\paragraph{Arrow of complexity}\label{arrow-of-complexity}
+\subsubsection{Arrow of complexity}\label{arrow-of-complexity}
 
 Explored in \autocite{Miconi:2008cy}:
 \begin{itemize}
@@ -926,7 +922,7 @@ Explored in \autocite{Miconi:2008cy}:
 \item Active - some drive towards increasing complexity
 \end{itemize}
 
-\paragraph{Living organisms are supremely well suited to their
+\subsubsection{Living organisms are supremely well suited to their
 environments, and can adapt to environmental
 changes}\label{living-organisms-are-supremely-well-suited-to-their-environments-and-can-adapt-to-environmental-changes}
 
@@ -952,7 +948,7 @@ on individuals during their lifespan: learning, where behavioural
 adaptions can also lead to genetic change
 (\eg \autocite{Hinton:1987vy}.)
 
-\paragraph{Natural selection, acting on populations, is the primary
+\subsubsection{Natural selection, acting on populations, is the primary
 driver for long-term
 adaptation}\label{natural-selection-acting-on-populations-is-the-primary-driver-for-long-term-adaptation}
 
@@ -1032,7 +1028,7 @@ with natural selection, as illustrated by the Baldwin effect
 Finally, \glspl{grn} provide another mechanism to modify the \gls{gpmap}
 and hence to guide natural selection.
 
-\paragraph{Regulation provides a source of variation in populations and
+\subsubsection{Regulation provides a source of variation in populations and
 is an important mechanism for adaptability in individual
 organisms}\label{regulation-provides-a-source-of-variation-in-populations-and-is-an-important-mechanism-for-adaptability-in-individual-organisms}
 
@@ -1071,7 +1067,7 @@ protein from mRNA). As a result of RNA regulation many alternative
 proteins from one transcript can be produced, triggered by environmental
 or other factors.
 
-\paragraph{\texorpdfstring{The \textit{lac} Operon - an example of how
+\subsubsection{\texorpdfstring{The \textit{lac} Operon - an example of how
 regulation can enable a cell to respond appropriately to environmental
 triggers}{The  Operon - an example of how regulation can enable a cell to respond appropriately to environmental triggers}}\label{the-operon---an-example-of-how-regulation-can-enable-a-cell-to-respond-appropriately-to-environmental-triggers}
 
@@ -1129,7 +1125,7 @@ In summary, in the presence of glucose lactose processing is repressed;
 if glucose is absent but lactose present, lactose processing is
 activated: the cell preferentially processes glucose over lactose.
 
-\subparagraph{Novelties often arise from new regulatory connections
+\paragraph{Novelties often arise from new regulatory connections
 rather than changes to
 genes}\label{novelties-often-arise-from-new-regulatory-connections-rather-than-changes-to-genes}
 
@@ -1145,7 +1141,7 @@ changes may happen quickly; however, it is hard to see how a new
 functional gene can be constructed other than over many, many
 generations.
 
-\subparagraph{Elements under regulatory control may be conserved over
+\paragraph{Elements under regulatory control may be conserved over
 long periods of
 time}\label{elements-under-regulatory-control-may-be-conserved-over-long-periods-of-time}
 
@@ -1163,7 +1159,7 @@ ancestry, and reflects a \emph{\gls{deephomology}}.
 As another example forms of the homeotic genes \emph{hox} and others are
 found in every animal.
 
-\subparagraph{Regulation allows environmental signals to trigger
+\paragraph{Regulation allows environmental signals to trigger
 adaptive phenotypic change
 (``polyphenism'')}\label{regulation-allows-environmental-signals-to-trigger-adaptive-phenotypic-change-polyphenism}
 
@@ -1174,7 +1170,7 @@ reviews. Two forms of polyphenism are generally distinguished:
 irreversible changes during development, and reversible changes during
 adulthood.
 
-\subparagraph{Regulation enables reversible environmental change in
+\paragraph{Regulation enables reversible environmental change in
 adult
 phenotypes}\label{regulation-enables-reversible-environmental-change-in-adult-phenotypes}
 
@@ -1203,7 +1199,7 @@ in Hymenoptera; in the presence of JH it is fully expressed leading to
 queens with wings, whereas in JH's absence, wing development is
 suppressed.
 
-\paragraph{Synthetic biology}\label{synthetic-biology}
+\subsubsection{Synthetic biology}\label{synthetic-biology}
 
 ADD IN NOTES
 
@@ -1211,28 +1207,28 @@ Minimal cells
 
 \begin{itemize}
 \item
-  Minimal cell created either by removing elements from simple cell to
-  produce functioning minimal cell or alternatively by synthesising cell
-  from bottom-up from a set of hypothesised necessary elements.
+Minimal cell created either by removing elements from simple cell to
+produce functioning minimal cell or alternatively by synthesising cell
+from bottom-up from a set of hypothesised necessary elements.
 \item
-  ``chemical reaction networks coupled to containers'' - protocell
-  definition, from Protocells:Back to the Future workshop materials
-  (http://www.unamur.be/en/sci/naxys/pb2f).
+``chemical reaction networks coupled to containers'' - protocell
+definition, from Protocells:Back to the Future workshop materials
+(http://www.unamur.be/en/sci/naxys/pb2f).
 \item
-  Containers useful for protection, for concentration of elements, and
-  for selection, allowing benefits to accrue to originator.
+Containers useful for protection, for concentration of elements, and
+for selection, allowing benefits to accrue to originator.
 \item
-  Ganti's observation that contemporary living things always have a
-  metabolic subsystem, a heritable control system, and a boundary system
-  to contain (in \autocite{Szathmary:2006ty}).
+Ganti's observation that contemporary living things always have a
+metabolic subsystem, a heritable control system, and a boundary system
+to contain (in \autocite{Szathmary:2006ty}).
 \end{itemize}
 
-\paragraph{Modelling - understanding biological
+\subsubsection{Modelling - understanding biological
 processes}\label{modelling---understanding-biological-processes}
 
 Regulation Network modelling - perhaps just one or two examples only
 
-\subparagraph{Aevol}\label{aevol}
+\paragraph{Aevol}\label{aevol}
 
 Describes the genotype-phenotype map of an artificial organism modelled
 closely on a prokaryotic cell
@@ -1265,7 +1261,7 @@ but not inhibited processes
 Selection modelled by a distribution. The closer the match between the
 phenotype and the environment distribution, the fitter the organism
 
-\subparagraph{Regulatory or RAevol}\label{regulatory-or-raevol}
+\paragraph{Regulatory or RAevol}\label{regulatory-or-raevol}
 
 fine-grained time model; protein concentrations vary dynamically
 (instead of remaining static as in aevol), and the organism's proteome
@@ -1284,7 +1280,7 @@ Interaction with the environment: during simulation, a signalling
 protein of set sequence that has no metabolic function but can act as a
 \gls{tf} is sent to the organism when the target environment changes.
 
-\subparagraph{Biosys}\label{biosys}
+\paragraph{Biosys}\label{biosys}
 
 Signalling protein concentrations to continually connect the developing
 system with its surrounding environment, according to the ideas of
@@ -1306,7 +1302,7 @@ in the environmental connection, and in the modelling of the affect of
 work by \autocite{Rohlf:2009sh}, \autocite{Banzhaf:2003kx} and
 \autocite{Kuo:2006fv}.
 
-\subparagraph{Knabe2006}\label{knabe2006}
+\paragraph{Knabe2006}\label{knabe2006}
 
 gene can have multiple regulatory modules (``\emph{cis}-regulatory
 modules'') and each module can contain multiple protein binding sites
@@ -1330,7 +1326,7 @@ companion regulatory protein, are used to further modify the binding
 action of the regulatory protein, where the concentration of the
 associated SF adjusts the sensitivity of the binding
 
-\paragraph{Systems Chemistry}\label{systems-chemistry}
+\subsubsection{Systems Chemistry}\label{systems-chemistry}
 
 Transition to biology - Origins of life
 
@@ -1359,22 +1355,22 @@ interactions with world
 
 \begin{itemize}
 \item
-  Similar approach to emergent Alife
+Similar approach to emergent Alife
 \item
-  The AL approach to AI
+The AL approach to AI
 \end{itemize}
 
 Similar problems to Alife
 
 \begin{itemize}
 \item
-  ``Life'' and ``Intelligence'' are both hard to define and measure
+``Life'' and ``Intelligence'' are both hard to define and measure
 \item
-  Both appear emergent - that is, hard to measure progress - either yes
-  or no
+Both appear emergent - that is, hard to measure progress - either yes
+or no
 \item
-  Best measures for both may be Turing-like - if it quacks like a
-  duck\ldots{}comparison to existing life or human intelligence
+Best measures for both may be Turing-like - if it quacks like a
+duck\ldots{}comparison to existing life or human intelligence
 \end{itemize}
 
 \section{Guide to this work}\label{guide-to-this-work}
@@ -1404,14 +1400,14 @@ Difficulties\ldots{}
 
 \begin{itemize}
 \item
-  Reflective of Pattee's criticism of Alife models in \autocite{Taylor2001} -
-  ``simulations that are dependent on ad hoc and special-purpose rules
-  and constraints for their mimicry cannot be used to support theories
-  of life'' \autocite[68]{Pattee1988}
+Reflective of Pattee's criticism of Alife models in \autocite{Taylor2001} -
+``simulations that are dependent on ad hoc and special-purpose rules
+and constraints for their mimicry cannot be used to support theories
+of life'' \autocite[68]{Pattee1988}
 \item
-  Too biological
+Too biological
 \item
-  Too special-purpose
+Too special-purpose
 \end{itemize}
 
 \subsection{Evolutionary Potential}\label{evolutionary-potential}
@@ -1430,18 +1426,31 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  A grounding for Artificial OEE in evolutionary theory
+A grounding for Artificial OEE in evolutionary theory
 \item
-  Continue work towards a non-biological perspective on evolution
+Continue work towards a non-biological perspective on evolution
 \item
-  Progress towards OEE in artificial system - evolution compatible with
-  OEE without necessarily showing OEE (which is hard to measure and
-  prove)
+Progress towards OEE in artificial system - evolution compatible with
+OEE without necessarily showing OEE (which is hard to measure and
+prove)
 \end{enumerate}
 
 \part{Evolutionary Potential}
 
 \chapter{Introduction}
+
+In this section we explore the following research questions:
+
+\vspace{0.3cm}
+\begin{minipage}[l]{0.95\textwidth}
+\begin{enumerate}[label=RQ\arabic*:]
+\item Can inheritance emerge from simple selection and variation?
+\item Can evolution act on the inheritance mechanism to tune it for varying environmental conditions?
+\end{enumerate}
+\end{minipage}
+\vspace{0.3cm}
+
+V+S-\textgreater{}I
 
 ``Context determines fitness'', where the environment is stable and
 affects the development of the entities
@@ -1687,8 +1696,7 @@ similarity, emergent from lower level rules
 
 Reformulate as causal reading
 
-\autocite{Bourrat2015} showed that inheritance bias (correlation in trait between
-parent and offspring) increases over time
+\autocite{Bourrat2015} showed that inheritance bias (correlation in trait between parent and offspring) increases over time
 
 \begin{itemize}
 \tightlist
@@ -1734,7 +1742,8 @@ Can we construct a causal diagram from variation and selection that:
 
 \section{H2: Variation and Selection sufficient for Inheritance}\label{h2-variation-and-selection-sufficient-for-inheritance}
 
-V+S-\textgreater{}I
+Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
+be varied by interaction with the environment.
 
 \subsection{Testable definition of H2?}\label{testable-definition-of-h2}
 
@@ -1799,7 +1808,6 @@ Exogenous models for simplicity of understanding - make factors explicit
 \includegraphics[width=0.95\linewidth]{figures/model}
 \end{figure}
 
-
 \begin{algorithm}[h]
 \DontPrintSemicolon
 \SetKwFunction{f}{f}
@@ -1831,8 +1839,8 @@ Exogenous models for simplicity of understanding - make factors explicit
   $population\leftarrow population + children$\;
   \BlankLine
   \tcp{Truncation}
-  \uIf{size of population is limited to $N_{limit}$}{
-    $population\leftarrow \text{sample }N_{limit}\text{ elements from }population\text{ without consideration of fitness}$\;
+  \uIf{size of population is limited to $N_{population}$}{
+    $population\leftarrow \text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
   }
   \BlankLine
   \tcp{Check if population size is no longer sustainable}
@@ -1851,14 +1859,14 @@ Exogenous models for simplicity of understanding - make factors explicit
 \caption{Model}
 \end{algorithm}
 
-Entities have two properties
+Each entity in the population has two properties, or traits:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  fitness $[0,1]$ - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
+  $fitness$, where $fitness \in [0,1]$ 
 \item
-  bias or variation $[0,1]$
+  $fidelity$ between parent and child, where $fidelity \in [0,1]$
 \end{enumerate}
 
 \begin{figure}[h!]
@@ -1866,8 +1874,7 @@ Entities have two properties
 \includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}
 
-low bias means offspring trait is unrelated to parents; high the
-opposite
+Low fidelity means that the value for the child's trait is unrelated to parent's value for that trait; a high fidelity value, the opposite.
 
 \subsection{Assumptions}\label{assumptions-1}
 
@@ -1902,24 +1909,6 @@ parameters makes clear their effect on the model.
   fitness\ldots{} - bias applies to offspring's bias, and to offspring's fitness
 \end{enumerate}
 
-\subsection{Starting conditions: Mix of fitnesses, mix of ability to
-inherit}\label{starting-conditions-mix-of-fitnesses-mix-of-ability-to-inherit}
-
-Series of models to test different starting conditions to strengthen
-claim
-
-\begin{itemize}
-\tightlist
-\item
-  Number of offspring
-\item
-  Low initial bias (replication)
-\item
-  High initial bias (no inheritance - similar to holistic reproducers
-  where splitting an entity leaves different ``cores'' in different
-  offspring)
-\end{itemize}
-
 \section{Predictions}\label{predictions}
 
 \begin{enumerate}
@@ -1948,45 +1937,27 @@ does it only apply to a subset of factor values? And if the latter, why?
 \subsection{Test hypothesis}\label{test-hypothesis}
 
 H0: fidelity remains the same over a run, for all factor values, or
-end\_fidelity - start\_fidelity = 0
+$\vert fidelity_{end} - fidelity_{start} \vert = 0$
 
-H1: fidelity changes over a run, given some factor values
-
-Identify factors and values where end\_fidelity - start\_fidelity
-\textgreater{} 0 (inheritance)
+H1: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
 
 \subsection{Number of replicates}\label{number-of-replicates}
 
-The number of replicates required for a particular statistical power is dependent on the
+The number of replicates required for a particular statistical power is related to the
 standard deviation of the result. So we begin with an estimate of 10 replicates for each run,
 and confirm that the power achieved is sufficient (see \ref{power}.)
 
-\subsection{Response variables - from testable
-definition}\label{response-variables---from-testable-definition}
+\subsection{Response variables}\label{response-variables}
 
-Perhaps better to look at end\_fidelity as hypothesis is that tends
-to 1.0
+Perhaps better to look at $fidelity_{end}$ as hypothesis is that tends to 1.0 in an unchanging enviroment.
 
 Check also that fidelity increases, regardless of starting position:
 fidelity between parent and offspring trait(s) at start and end of
-run - end\_fidelity - start\_fidelity)
-
-\subsection{Traits (each Element)}\label{traits-each-element}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Fitness
-\item
-  Fidelity - between parent and offspring
-\end{enumerate}
+run - $fidelity_{end} - fidelity_{start} > 0$)
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
 From the model introduced earlier
-
-
 
 \begin{table}
 \begin{center}
@@ -2007,28 +1978,6 @@ From the model introduced earlier
 \end{center}
 \caption{Factor definitions}
 \label{tbl:factor_definitions}
-\end{table}
-
-
-\begin{table}
-\begin{center}
-\tiny
-\begin{tabular}{@{}llllp{10cm}@{}}
-\toprule
-& Parameter&  Low value&  High value& Description\\
-\midrule
-0&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)& Probability of reproduction for an entity\\
-1&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)&   Probability of selection for an entity\\
-2&  $n_{children}$&           2&                5&                      Maximum number of children per parent\\
-3&  $Limit population size$&  false&            true&                   Use initial population size as upper limit on size\\
-4&  $f$&                      Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$&          Function for generating a sample value from a particular distribution\\
-5&  Correlate Fitness&        false&            true&                   Child's fitness is related to parent's fitness (by $f$)\\
-6&  Correlate Fidelity&       false&            true&                   Child's fidelity is related to parent's fidelity (by $f$)\\
-\bottomrule
-\end{tabular}
-\end{center}
-\caption{Factor levels}
-\label{tbl:factor_levels}
 \end{table}
 
 \paragraph{Probabilities}\label{probabilities}
@@ -2103,6 +2052,27 @@ fitness_correlation = parent.correlation if factors[5] else random.random()
 correlation_correlation = parent.correlation if factors[6] else random.random()
 \end{verbatim}
 
+\begin{table}
+\begin{center}
+\tiny
+\begin{tabular}{@{}llllp{10cm}@{}}
+\toprule
+& Parameter&  Low value&  High value& Description\\
+\midrule
+0&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)& Probability of reproduction for an entity\\
+1&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)&   Probability of selection for an entity\\
+2&  $n_{children}$&           2&                5&                      Maximum number of children per parent\\
+3&  $Limit population size$&  false&            true&                   Use initial population size as upper limit on size\\
+4&  $f$&                      Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$&          Function for generating a sample value from a particular distribution\\
+5&  Correlate Fitness&        false&            true&                   Child's fitness is related to parent's fitness (by $f$)\\
+6&  Correlate Fidelity&       false&            true&                   Child's fidelity is related to parent's fidelity (by $f$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Factor levels}
+\label{tbl:factor_levels}
+\end{table}
+
 Because some factors are binary, will not use a space-filling design
 such as MaxPro \autocite{Joseph2015} which
 assumes real-valued factors, but instead a simpler conventional
@@ -2113,14 +2083,26 @@ runs, can reduce without loss of validity with Fractional Factorial on
 assumption that higher-level interactions between factors are not
 significant (e.g., 3-factor interactions or above)
 
-$2^{(7-3)}$ Fractional Factorial Design \footnote{\url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} with 7 factors, each of 2 levels,
-with resolution $7-3=4$
+$2^{(7-3)}$ Fractional Factorial Design \footnote{\url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} with 7 factors, each of 2 levels, with resolution $7-3=4$
 
-Sufficient to separate main effect from any 2-factor interactions
-
-Only 16 runs rather than 256 (ignoring replicates)
+Sufficient to separate main effect from any 2-factor interactions, and needing only 16 runs rather than 256 (ignoring replicates) to investigate the effects and lower-level interactions of the seven factors on the response variable.
 
 \subsection{Initial conditions}\label{initial-conditions}
+
+Series of models to test different starting conditions to strengthen
+claim
+
+\begin{itemize}
+\tightlist
+\item
+Number of offspring
+\item
+Low initial bias (replication)
+\item
+High initial bias (no inheritance - similar to holistic reproducers
+where splitting an entity leaves different ``cores'' in different
+offspring)
+\end{itemize}
 
 \paragraph{Low start case}\label{low-start-case}
 population = [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
@@ -2341,7 +2323,7 @@ Conclusion: H0 can be rejected, and H1 accepted. Inheritance increases
 regardless of the model design, but is strongest when
 correlation\_correlation == 1.
 
-\subsection{High start case - show that can maintain correlation}\label{high-start-case---show-that-can-maintain-correlation}
+\subsection{High start case, to confirm that can maintain correlation}\label{high-start-case---show-that-can-maintain-correlation}
 
 By inspection (plot(df\_high\$response\_cor)), strongly bimodal where
 one cluster around +0.3, and the other between -0.1 and -0.5
@@ -2539,7 +2521,6 @@ Possible extensions
 \item
   Consistency and sufficiency - classification of existing systems
 \end{itemize}
-
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 
 \chapter{Introduction}

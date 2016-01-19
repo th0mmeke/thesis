@@ -1420,9 +1420,10 @@ Difficulties\ldots{}
 
 \section{Previous publications}\label{previous-publications}
 
-Reactant and Product Strategies chapter appeared in ACALCI2015
+A version of Reactant and Product Strategies \ref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
+and material from \ref{model-validation} in \cite{Young2013}.
 
-AI2013
+ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
 \section{Contributions}\label{contributions}
 
@@ -1737,7 +1738,7 @@ V+S-\textgreater{}I
 
 \subsection{Testable definition of H2?}\label{testable-definition-of-h2}
 
-Inheritance means that the correlation between parent and offspring
+Inheritance means that the correlation (or fidelity) between parent and offspring
 trait tends to one, or at least, is significantly greater than control
 correlation
 
@@ -1801,8 +1802,6 @@ Exogenous models for simplicity of understanding - make factors explicit
 
 \begin{algorithm}[h]
 \DontPrintSemicolon
-%\KwData{$P_{reproduce}, COR_{fitness}, COR_{correlation}, N, f$}
-%\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 \SetKwFunction{f}{f}
 
 \For{generation $\in 1\dots$number of generations}{
@@ -1821,12 +1820,12 @@ Exogenous models for simplicity of understanding - make factors explicit
     \BlankLine
     $\text{With probability }p_{reproduce}\text{:}$\;
     \Indp
-        $n\leftarrow \text{some random integer between 0 and max number of children, inclusive}$\;
+        $n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
         \BlankLine
         \For{each of the $n$ children}{
-            child's fitness $\leftarrow $\f{parent's fitness, parent's correlation value}\;
-            child's correlation $\leftarrow$ \f{parent's correlation value, parent's correlation value}\;
-            Add new child with these values for fitness and correlation to $children$\;
+            child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
+            child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+            Add new child with these values for fitness and fidelity to $children$\;
         }
   }
   $population\leftarrow population + children$\;
@@ -1852,28 +1851,14 @@ Exogenous models for simplicity of understanding - make factors explicit
 \caption{Model}
 \end{algorithm}
 
-\begin{verbatim}
-    factor_defns = [
-        [0.0,      1.0],    # 0 = P_REPRODUCE - 0 = fitness
-        [0.0,      1.0],    # 1 = P_SELECTION - 0 = fitness
-        [2,        5],      # 2 = N_OFFSPRING
-        [False,    True],   # 3 = TRUNCATE_POPULATION RANDOMLY
-        # gauss is described by mean=source, sd=1-correlation, then clipped to [0,1]
-        # uniform to range [source-(1-correlation), source+(1+correlation)], then clipped to [0,1]
-        [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source-(1.0-correlation), source+(1.0-correlation))))],
-        [False,    True],   # 5 = FITNESS_CORRELATION
-        [False,    True],   # 6 = CORRELATION_CORRELATION
-    ]
-\end{verbatim}
-
 Entities have two properties
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  fitness {[}0,1{]} - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
+  fitness $[0,1]$ - selection(entity) returns entity if rand(0,1) \textless{} fitness else null
 \item
-  bias or variation {[}0,1{]}
+  bias or variation $[0,1]$
 \end{enumerate}
 
 \begin{figure}[h!]
@@ -1890,14 +1875,14 @@ opposite
 \def\labelenumi{\arabic{enumi}.}
 \item
   Assume bias represents a distribution, centered on some proportion of
-  trait\_parent and with SD of the bias value, bounded by \[0,1\]
+  trait\_parent and with SD of the bias value, bounded by $[0,1]$
 \item
   No distortion as a result of bias - centered rather than with inbuilt
   bias. Parent cannot direct or influence the fitness of children -
   selection is an unseeing hand
 \item
-  Only distortion comes from edge effects - fitness and correlation are
-  both in range \[0,1\] meaning that random sampling at low and high
+  Only distortion comes from edge effects - fitness and fidelity are
+  both in range $[0,1]$ meaning that random sampling at low and high
   ends will be biased towards values in the middle of the range
 \end{enumerate}
 
@@ -1935,7 +1920,7 @@ claim
   offspring)
 \end{itemize}
 
-\section{Prediction}\label{prediction}
+\section{Predictions}\label{predictions}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1962,12 +1947,12 @@ does it only apply to a subset of factor values? And if the latter, why?
 
 \subsection{Test hypothesis}\label{test-hypothesis}
 
-H0: correlation remains the same over a run, for all factor values, or
-end\_correlation - start\_correlation = 0
+H0: fidelity remains the same over a run, for all factor values, or
+end\_fidelity - start\_fidelity = 0
 
-H1: correlation changes over a run, given some factor values
+H1: fidelity changes over a run, given some factor values
 
-Identify factors and values where end\_correlation - start\_correlation
+Identify factors and values where end\_fidelity - start\_fidelity
 \textgreater{} 0 (inheritance)
 
 \subsection{Number of replicates}\label{number-of-replicates}
@@ -1979,12 +1964,12 @@ and confirm that the power achieved is sufficient (see \ref{power}.)
 \subsection{Response variables - from testable
 definition}\label{response-variables---from-testable-definition}
 
-Perhaps better to look at end\_correlation as hypothesis is that tends
+Perhaps better to look at end\_fidelity as hypothesis is that tends
 to 1.0
 
-Check also that correlation increases, regardless of starting position:
-correlation between parent and offspring trait(s) at start and end of
-run - end\_correlation - start\_correlation)
+Check also that fidelity increases, regardless of starting position:
+fidelity between parent and offspring trait(s) at start and end of
+run - end\_fidelity - start\_fidelity)
 
 \subsection{Traits (each Element)}\label{traits-each-element}
 
@@ -1994,12 +1979,57 @@ run - end\_correlation - start\_correlation)
 \item
   Fitness
 \item
-  Correlation - between parent and offspring
+  Fidelity - between parent and offspring
 \end{enumerate}
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
 From the model introduced earlier
+
+
+
+\begin{table}
+\begin{center}
+\tiny
+\begin{tabular}{@{}lllp{10cm}@{}}
+\toprule
+& Parameter&  Values& Description\\
+\midrule
+0&  $p_{reproduction}$&       $[0,1]$&                            Probability of reproduction for an entity\\
+1&  $p_{selection}$&          $[0,1]$&                            Probability of selection for an entity\\
+2&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
+3&  Limit population size&    $\{\mathrm{true}, \mathrm{false}\}$&  Use initial population size as upper limit on size\\
+4&  $f$&                      $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
+5&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  Child's fitness is related to parent's fitness (by $f$)\\
+6&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Factor definitions}
+\label{tbl:factor_definitions}
+\end{table}
+
+
+\begin{table}
+\begin{center}
+\tiny
+\begin{tabular}{@{}llllp{10cm}@{}}
+\toprule
+& Parameter&  Low value&  High value& Description\\
+\midrule
+0&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)& Probability of reproduction for an entity\\
+1&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)&   Probability of selection for an entity\\
+2&  $n_{children}$&           2&                5&                      Maximum number of children per parent\\
+3&  $Limit population size$&  false&            true&                   Use initial population size as upper limit on size\\
+4&  $f$&                      Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$&          Function for generating a sample value from a particular distribution\\
+5&  Correlate Fitness&        false&            true&                   Child's fitness is related to parent's fitness (by $f$)\\
+6&  Correlate Fidelity&       false&            true&                   Child's fidelity is related to parent's fidelity (by $f$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Factor levels}
+\label{tbl:factor_levels}
+\end{table}
 
 \paragraph{Probabilities}\label{probabilities}
 
@@ -2371,7 +2401,7 @@ Significance
 Same setup (low and high start) with single model change to represent
 changing environment
 
-\section{Predictions}\label{predictions}
+\section{Predictions}\label{predictions-2}
 
 If \texttt{CORRELATION\_CORRELATION\ ==\ 1} (precondition)
 

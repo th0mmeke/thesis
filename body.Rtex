@@ -871,16 +871,10 @@ Overlap with Brooks's robotics, AI, etc
 
 \subsection{Biology}\label{biology-1}
 
-\epigraph{
-Without hesitation or ambiguity, and fully mindful of such
-paleontological wonders as large dinosaurs and African ape-men, I state
-that the invertebrates of the Burgess Shale, found high jn the Canadian
-Rockies in Yoho National Park, on the eastern border of British
-Columbia, are the world's most important animal fossils. Modern
-multicellular animals make their first uncontested appearance in the
-fossil record some 570 million years ago - and with a bang, not a
-protracted crescendo. }{\textit{Wonderful life : the Burgess Shale and the nature
-of history}\\ \textsc{Stephen Jay Gould}}
+\settowidth{\epigraphwidth}{Wonderful life : the Burgess Shale and the nature of history}
+\epigraph{%
+Without hesitation or ambiguity, and fully mindful of such paleontological wonders as large dinosaurs andAfrican ape-men, I state that the invertebrates of the Burgess Shale, found high in the Canadian Rockies in YohoNational Park, on the eastern border of British Columbia, are the world's most important animal fossils. Modern multicellular animals make their first uncontested appearance in the fossil record some 570 million years ago - and with a bang, not a protracted crescendo.}% 
+{\textit{\\Wonderful life : the Burgess Shale and the nature of history}\\\textsc{Stephen Jay Gould}}
 
 Our primary example of life and evolution
 
@@ -1715,9 +1709,9 @@ Reformulate as causal reading
   increases over time to 1.0
 \end{itemize}
 
-\section{H1: Variation and Inheritance and Selection sufficient for Evolution}\label{h1-variation-and-inheritance-and-selection-sufficient-for-evolution}
+\section{Hypothesis 1: Variation and Inheritance and Selection are sufficient for Evolution}\label{h1}
 
-V+S+I-\textgreater{}E
+\textit{Hypothesis 1}: Variation and Inheritance and Selection are sufficient for Evolution, or V+S+I-\textgreater{}E
 
 From previous work\ldots{}
 
@@ -1746,16 +1740,15 @@ Can we construct a causal diagram from variation and selection that:
   foundation for creativity?
 \end{itemize}
 
-\section{H2: Variation and Selection sufficient for Inheritance}\label{h2-variation-and-selection-sufficient-for-inheritance}
+\section{Hypothesis 2: Variation and Selection are sufficient for Inheritance}\label{h2}
 
 Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
 be varied by interaction with the environment.
 
-\subsection{Testable definition of H2?}\label{testable-definition-of-h2}
+Full or complete inheritance implies that the correlation (or fidelity) between parent and offspring
+trait approaches 1.0. 
 
-Inheritance means that the correlation (or fidelity) between parent and offspring
-trait tends to one, or at least, is significantly greater than control
-correlation
+\textit{Hypothesis 2}: Variation and Selection are sufficient for Inheritance, or V+S-\textgreater{}E
 
 \section{Theory}\label{theory}
 
@@ -1787,14 +1780,14 @@ Selection strengthens degree of inheritance
 
 \section{Alternative explanations}\label{alternative-explanations-1}
 
-\subsection{H0: Variation alone sufficient for Inheritance - V-\textgreater{}I}\label{h0-variation-alone-sufficient-for-inheritance---v-i}
+\subsection{Variation alone sufficient for Inheritance - V-\textgreater{}I}\label{variation-alone-sufficient-for-inheritance---v-i}
 
 Test: disprove by showing example of not(V-\textgreater{}I) or, V and
 not I
 
 show some example of V and not I
 
-\subsection{H0: Selection alone sufficient for Inheritance, S-\textgreater{}I}\label{h0-selection-alone-sufficient-for-inheritance-s-i}
+\subsection{Selection alone sufficient for Inheritance, S-\textgreater{}I}\label{selection-alone-sufficient-for-inheritance-s-i}
 
 Test: show example of S and not I
 
@@ -1803,7 +1796,7 @@ I-\textgreater{}V+S?
 
 Or to broaden the scope of the claim to other forms of V and S?
 
-\chapter[Experimental test of H2 under fixed conditions]{Experimental test of H2 (V+S-\textgreater{}I) under fixed conditions}\label{experimental-test-of-h2-vs-i-under-fixed-conditions}
+\chapter{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 Exogenous models for simplicity of understanding - make factors explicit
 
@@ -1816,54 +1809,74 @@ Exogenous models for simplicity of understanding - make factors explicit
 
 \begin{algorithm}[h]
 \DontPrintSemicolon
+\SetKwProg{Def}{def}{:}{}
 \SetKwFunction{f}{f}
+\Def{truncation(population)}{
+\Return $\text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
+}
+\BlankLine
+\Def{selection(population)}{
+$population_{new}\leftarrow \{\}$\;
+\For{each $element$ in $population$} {
+$p_{selection}\leftarrow $parent's fitness\;
+Add $element$ to $population_{new}$ with probability $p_{selection}$\;
+}
+\Return $population_{new}$\;
+}       
+\BlankLine
+\Def{reproduction(population)}{
+$children\leftarrow \{\}$\;
+\For{each $element$ in $population$}{
+$p_{reproduce}\leftarrow $parent's fitness\;
+\BlankLine
+$\text{With probability }p_{reproduce}\text{:}$\;
+\Indp
+$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
+\BlankLine
+\For{each of the $n$ children}{
+child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
+child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+Add new child with these values for fitness and fidelity to $children$\;
+}
+}
+\Return $children$\;
+}
+\BlankLine
+\Def{tweakFitness(population)}{
+$population_{new}\leftarrow \{\}$\;
+\For{each $element$ in $population$}{
+$fitness\leftarrow \text{ fitness of }element$\;
+$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{fitness-0.2,0.95}$\;
+}
+\Return $population_{new}$\;
+}
+\caption{Functions}
+\end{algorithm}
 
+\begin{algorithm}[h]
+\DontPrintSemicolon
+\SetKwFunction{f}{f}
 \For{generation $\in 1\dots$number of generations}{
-
-  \tcp{Selection}
-  \For{each $element$ in $population$} {
-    $p_{selection}\leftarrow $parent's fitness\;
-    Add $element$ to $population_{new}$ with probability $p_{selection}$\;
-  }
-  $population\leftarrow population_{new}$\;
-  \BlankLine
-  \tcp{Reproduction}
-  $\text{children}=\{\}$\;
-  \For{each $element$ in $population$}{
-    $p_{reproduce}\leftarrow $parent's fitness\;
-    \BlankLine
-    $\text{With probability }p_{reproduce}\text{:}$\;
-    \Indp
-        $n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
-        \BlankLine
-        \For{each of the $n$ children}{
-            child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
-            child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
-            Add new child with these values for fitness and fidelity to $children$\;
-        }
-  }
-  $population\leftarrow population + children$\;
-  \BlankLine
-  \tcp{Truncation}
-  \uIf{size of population is limited to $N_{population}$}{
-    $population\leftarrow \text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
-  }
-  \BlankLine
-  \tcp{Check if population size is no longer sustainable}
-  \uIf{population size is too small}{
-    break\;
-  }
-  \BlankLine
-  \tcp{Changing environment}
-  \uIf{time to change environment}{
-    \For{each $element$ in $population$}{
-      adjust fitness of $element$ according to distribution with $\mu=fitness-0.2$, sd=0.95, bounded by $[0,1]$\;
-    }
-  }
-
+\tcp{Core algorithm}
+$population\leftarrow selection(population)$\;
+$population\leftarrow population + reproduction(population)$\;
+\uIf{size of population is restricted}{
+$population\leftarrow truncation(population)$\;
+}
+\BlankLine
+\tcp{Check if population size is no longer sustainable}
+\uIf{population size is too small}{
+break\;
+}
+\BlankLine
+\tcp{Changing environment}
+\uIf{time to change environment}{
+$population\leftarrow tweakFitness(population)$\;
+}
 }
 \caption{Model}
 \end{algorithm}
+
 
 Each entity in the population has two properties, or traits:
 
@@ -1936,16 +1949,9 @@ parameters makes clear their effect on the model.
 
 \section{Experimental design}\label{experimental-design}
 
-Goal is to 1) test hypothesis H2 and 2) identify which factors are most
+Goal is to 1) test Hypothesis 2 and 2) identify which factors are most
 influential on the response - do the conclusions hold across all runs or
 does it only apply to a subset of factor values? And if the latter, why?
-
-\subsection{Test hypothesis}\label{test-hypothesis}
-
-H0: fidelity remains the same over a run, for all factor values, or
-$\vert fidelity_{end} - fidelity_{start} \vert = 0$
-
-H1: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
 
 \subsection{Number of replicates}\label{number-of-replicates}
 
@@ -1955,11 +1961,11 @@ and confirm that the power achieved is sufficient (see \ref{power}.)
 
 \subsection{Response variables}\label{response-variables}
 
-Perhaps better to look at $fidelity_{end}$ as hypothesis is that tends to 1.0 in an unchanging enviroment.
+Perhaps better to look at $fidelity_{end}$ as, under Hypothesis 2, $fidelity$ tends to 1.0 in an unchanging enviroment.
 
-Check also that fidelity increases, regardless of starting position:
+Check also that $fidelity$ increases, regardless of starting position:
 fidelity between parent and offspring trait(s) at start and end of
-run - $fidelity_{end} - fidelity_{start} > 0$)
+run - $fidelity_{end} - fidelity_{start} > 0$
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
@@ -2079,10 +2085,8 @@ correlation_correlation = parent.correlation if factors[6] else random.random()
 \label{tbl:factor_levels}
 \end{table}
 
-Because some factors are binary, will not use a space-filling design
-such as MaxPro \autocite{Joseph2015} which
-assumes real-valued factors, but instead a simpler conventional
-Fractional Factorial design
+Because some factors are binary, will not use a space-filling design such as MaxPro \autocite{Joseph2015} which
+assumes real-valued factors, but instead a simpler conventional Fractional Factorial design
 
 Fractional as full design with 7 2-level factors would require 2\^{}7
 runs, can reduce without loss of validity with Fractional Factorial on
@@ -2121,9 +2125,6 @@ correlation in {[}0.5, 0.9{]}
 
 \section{Analysis}\label{analysis}
 
-Understand the system - goal is identify factor values and interactions
-that have a positive effect on inheritance - cases where H1 holds
-
 %% begin.rcode loaddfa, echo=FALSE
 % load_dfa <- function(t){
 %   while ("df" %in% search()) {detach(df)}
@@ -2155,7 +2156,8 @@ Conclusion: power is adequate
 
 Require population limits for practicality, but does it bias the results?
 
-H0: means equal, H1:means unequal
+H$_0$: $\mu_{truncated} = \mu_{untruncated}$
+H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
 
 First issue - number of generations at termination not equal
 
@@ -2280,6 +2282,11 @@ appropriate
 
 \subsection{Low start case - show that inheritance can emerge from low-fidelity copying}\label{low-start-case---show-that-inheritance-can-emerge-from-low-fidelity-copying}
 
+H$_0$: fidelity remains the same over a run, for all factor values, or
+$\vert fidelity_{end} - fidelity_{start} \vert = 0$
+
+H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+
 Check shape of data:
 
 Correlation measures (both response\_cor and final\_ave\_cor) are
@@ -2320,16 +2327,21 @@ By inspection, all runs resulted in increased correlation (measured by
 response\_cor) (plot(df\_low\$response\_cor))
 
 How significant? Fit linear model following earlier procedure - examine
-cluster of least-response factors (i.e.~were correlation\_correlation ==
+cluster of least-response factors (\ie approximately where correlation\_correlation ==
 0)
 
 Result is significant with p-value \textless{} 2.2e-16
 
-Conclusion: H0 can be rejected, and H1 accepted. Inheritance increases
+Conclusion: H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
 regardless of the model design, but is strongest when
 correlation\_correlation == 1.
 
 \subsection{High start case, to confirm that can maintain correlation}\label{high-start-case---show-that-can-maintain-correlation}
+
+H$_0$: fidelity remains the same over a run, for all factor values, or
+$\vert fidelity_{end} - fidelity_{start} \vert = 0$
+
+H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
 
 By inspection (plot(df\_high\$response\_cor)), strongly bimodal where
 one cluster around +0.3, and the other between -0.1 and -0.5
@@ -2363,7 +2375,9 @@ same correlation\_correlation == -1
 % anova(m0)
 %% end.rcode
 
-\chapter[Experimental test of H2 under fixed conditions]{Experimental test of H2 (V+S-\textgreater{}I) under changing conditions}\label{experimental-test-of-h2-vs-i-under-changing-conditions}
+Again, H$_0$ can be rejected and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
+
+\chapter{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using CORRELATION\_CORRELATION mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2514,7 +2528,12 @@ Uniform
 
 \chapter{Conclusions}
 
-From H0+H2, suggest H3: Variation and Selection sufficient for Evolution
+Given:\newline
+Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
+Hypothesis 2 (that Variation and Selection are sufficient for Inheritance),\newline
+we suggest that:
+
+\textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
 
 Possible extensions
 
@@ -2527,6 +2546,7 @@ Possible extensions
 \item
   Consistency and sufficiency - classification of existing systems
 \end{itemize}
+
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 
 \chapter{Introduction}
@@ -3626,8 +3646,8 @@ occur during reactions. The energy at the beginning of the reaction is
 fully bound in the potential, internal and kinetic energies of the
 reactants. At the moment of collision, that portion of the kinetic
 energy due to the collision (kinetic energies of reactants less kinetic
-energy of centre of mass) is transformed into internal energy in the new
-(perhaps momentarily) combined reactants. If a bond forms in this phase
+energy of centre of mass) is transformed into internal energy 
+in the combined reactants. If a bond forms in this phase
 the freed potential energy is added into this pool of internal energy;
 any bond that breaks transforms internal energy into increased potential
 energy. Post-collision, a portion of the the pool of remaining internal
@@ -4327,7 +4347,6 @@ A view of the results is given in Table \ref{tbl:results}: reaction networks bui
 \subsection{Analysis and Discussion}
 Figure \ref{fig:partitions} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \ref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
-
 \begin{figure}[h!]
 \centering
 	\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
@@ -4384,81 +4403,7 @@ The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent 
 
 The most significant limitation of our analysis overall is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in RQ3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
-\chapter{Suggestions for future work}
-
-Requires a series of steps - akin to OOL where single-step
-astronomically unlikely (single RNA strand probability about 10E-60,
-based on 100 monomers - \autocite{Pascal2013})
-
-\section{Step 1 - demonstration of Autocatalytic activity}\label{step-1---demonstration-of-autocatalytic-activity}
-
-Previous work
-
-\begin{itemize}
-\item
-  \autocite{Gordon-Smith2013} - Quite complex systems for replication demonstrated
-  in SimSoup-2, handcrafted molecules
-\item
-  \autocite{Bagley1990}
-\item
-  GARD - \autocite{Segre1998}
-\item
-  \autocite{Ono2002} - Boid-like rules in Lattice Artificial Chemistry leads to
-  membrane formation. Fixed types of particles with associated
-  hydrophobic/hydrophilic/neutral class (with orientation). Fixed
-  reaction paths to form an autocatalytic set of reactions
-\item
-  \autocite{Huning2000}
-\end{itemize}
-
-\section{Step 2 - demonstration of selection between ACS}\label{step-2---demonstration-of-selection-between-acs}
-
-Test of evolution under selection versus drift- artificial selection -
-show response to selective pressure
-
-\section{Step 3 - Evolution in an artificial chemistry}\label{step-3---evolution-in-an-artificial-chemistry}
-
-\section{Alternative explanations}\label{alternative-explanations}
-
-\begin{itemize}
-\tightlist
-\item
-  Thermodynamics
-\item
-  Experimental/Model bias (e.g., discovered bias of GARD inheritance
-  model)
-\end{itemize}
-
-\section{Tests for evolutionary activity}\label{tests-for-evolutionary-activity}
-
-\begin{itemize}
-\tightlist
-\item
-  Sustainability may be undecidable - \autocite{Wiedermann:2005ys}
-\item
-  Alife community - \autocite{Channon:2006st}, etc
-\item
-  Population measures e.g., \autocite{Vasas2015}
-\item
-  Artificial selection
-\item
-  Moran's test
-\item
-  Search mechanism - thermodynamic or ergodic search vs evolutionary
-  search (implied by \autocite{Rasmussen2004})
-\item
-  Local entropy (implied by \autocite{Adami2015})
-\item
-  Measure of OEE - \autocite{Markovitch2012}
-\end{itemize}
-
-\section{Tests for sufficient conditions}\label{tests-for-sufficient-conditions}
-
-\begin{itemize}
-\tightlist
-\item
-  Remove a condition (e.g., \autocite{Soros2014})
-\end{itemize}
+\chapter{Discussion}
 
 \part{The Search for Creativity}\label{the-search-for-creativity}
 
@@ -4516,12 +4461,10 @@ focus on CS?)
 Interesting seems to be different search space, not just bigger space.
 What about better search of same space? Is that interesting?
 
-\begin{quote}
-\ldots{}the processes associated with the major transitions are an
+\quote{\ldots{}the processes associated with the major transitions are an
 automatic consequence of mutation and selection, due to the generation
 of higher levels of selection due to spatial self-organization.''
-{[}Hogeweg1998{]}
-\end{quote}
+{[}Hogeweg1998{]}}
 
 \begin{itemize}
 \tightlist
@@ -4570,9 +4513,9 @@ self-modification - process evolution, capable of ``interesting''
 
 Sufficient condition
 
-\section{\texorpdfstring{H1: Endogenous selection and variation under evolutionary control sufficient for ``novelty-generation'' in evolution}{H1: Endogenous selection and variation under evolutionary control sufficient for novelty-generation in evolution}}\label{h1-endogenous-selection-and-variation-under-evolutionary-control-sufficient-for-novelty-generation-in-evolution}
+\textit{Hypothesis 4}: Endogenous selection and variation under evolutionary control sufficient for ``novelty-generation'' in evolution
 
-From earlier H3, V+S-\textgreater{}E
+From earlier Hypothesis 3, V+S-\textgreater{}E
 
 Endogenous selection by resource competition
 
@@ -4655,3 +4598,77 @@ We have shown that:
 And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
 TODO: link OEE to selection and variation from work in \ref{the-search-for-creativity}
+
+Requires a series of steps - akin to OOL where single-step
+astronomically unlikely (single RNA strand probability about 10E-60,
+based on 100 monomers - \autocite{Pascal2013})
+
+\section{Step 1 - demonstration of Autocatalytic activity}\label{step-1---demonstration-of-autocatalytic-activity}
+
+Previous work
+
+\begin{itemize}
+\item
+\autocite{Gordon-Smith2013} - Quite complex systems for replication demonstrated
+in SimSoup-2, handcrafted molecules
+\item
+\autocite{Bagley1990}
+\item
+GARD - \autocite{Segre1998}
+\item
+\autocite{Ono2002} - Boid-like rules in Lattice Artificial Chemistry leads to
+membrane formation. Fixed types of particles with associated
+hydrophobic/hydrophilic/neutral class (with orientation). Fixed
+reaction paths to form an autocatalytic set of reactions
+\item
+\autocite{Huning2000}
+\end{itemize}
+
+\section{Step 2 - demonstration of selection between ACS}\label{step-2---demonstration-of-selection-between-acs}
+
+Test of evolution under selection versus drift- artificial selection -
+show response to selective pressure
+
+\section{Step 3 - Evolution in an artificial chemistry}\label{step-3---evolution-in-an-artificial-chemistry}
+
+\section{Alternative explanations}\label{alternative-explanations}
+
+\begin{itemize}
+\tightlist
+\item
+Thermodynamics
+\item
+Experimental/Model bias (e.g., discovered bias of GARD inheritance
+model)
+\end{itemize}
+
+\section{Tests for evolutionary activity}\label{tests-for-evolutionary-activity}
+
+\begin{itemize}
+\tightlist
+\item
+Sustainability may be undecidable - \autocite{Wiedermann:2005ys}
+\item
+Alife community - \autocite{Channon:2006st}, etc
+\item
+Population measures e.g., \autocite{Vasas2015}
+\item
+Artificial selection
+\item
+Moran's test
+\item
+Search mechanism - thermodynamic or ergodic search vs evolutionary
+search (implied by \autocite{Rasmussen2004})
+\item
+Local entropy (implied by \autocite{Adami2015})
+\item
+Measure of OEE - \autocite{Markovitch2012}
+\end{itemize}
+
+\section{Tests for sufficient conditions}\label{tests-for-sufficient-conditions}
+
+\begin{itemize}
+\tightlist
+\item
+Remove a condition (e.g., \autocite{Soros2014})
+\end{itemize}

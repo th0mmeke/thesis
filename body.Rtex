@@ -2163,8 +2163,8 @@ First issue - number of generations at termination not equal
 
 %% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Density plots'
 % library(lattice)
-% densityplot(~df_low$final_gen|df_low$truncate, data=df_low)
-% densityplot(~df_high$final_gen|df_high$truncate, data=df_high)
+% densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start', xlab='Final generation')
+% densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start', xlab='Final generation')
 %% end.rcode
 
 Natural, as truncation introduced to allow model to complete more
@@ -2182,12 +2182,12 @@ changing_environment = 0
 low_start = True
 \end{verbatim}
 
-%% begin.rcode truncationplots, echo=FALSE
+%% begin.rcode truncationplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Truncation plots'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
-% densityplot(~df$response_cor|df$truncate, data=df) # strongly non-normal
-% bwplot(df$response_cor~df$truncate)
-% qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor)
+% densityplot(~df$response_cor|df$truncate, data=df, main='Response Fidelity by truncation',) # strongly non-normal
+% bwplot(df$response_cor~df$truncate, main='Fidelity by truncation')
+% qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor, main='Response Fidelity by correlation')
 %% end.rcode
 
 Normal distribution? No, strongly non-normal, so must use non-parametric
@@ -2207,16 +2207,10 @@ Kolmogorov-Smirnov
 % ks.test(df[df$truncate==-1,]$response_cor,df[df$truncate==1,]$response_cor)
 %% end.rcode
 
-Provides strong evidence to reject the null hypothesis that
-df{[}df\$truncate==-1,{]}\(response_cor {\textasciitilde{}} df[df\)truncate==1,{]}\$response\_cor
+Provides strong evidence to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$
 
-So conclude that truncation does make a difference to the results, as
-also seen in a box plot of response\_cor for truncated and not truncated
-(bwplot(df\(response_cor~df\)truncate)), or indeed in a Q-Q plot
-
-%% begin.rcode truncationqqplot, echo=FALSE
-% qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor)
-%% end.rcode
+Conclude that truncation does make a difference to the results, as
+also seen in a box plot of response\_cor for truncated and not truncated, or indeed in a Q-Q plot.
 
 \subsection{General procedure for regression}\label{general-procedure-for-regression}
 
@@ -2293,13 +2287,13 @@ Correlation measures (both response\_cor and final\_ave\_cor) are
 strongly bimodal
 (densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
 
-%% begin.rcode lowstartplots,echo=FALSE,out.width='0.45\\linewidth'
+%% begin.rcode lowstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Low start results'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
-% plot(df_low$response_cor)
-% densityplot(~df_low$response_cor)
-% densityplot(~df_low$final_ave_cor) # Strongly non-normal data - bimodal, with cluster
-% densityplot(~df_low$final_ave_fit) # less bimodal, although non-normal
+% plot(df_low$response_cor, xlab='Experiment run', ylab='Fidelity')
+% densityplot(~df_low$response_cor, xlab='Response Fidelity')
+% densityplot(~df_low$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
+% densityplot(~df_low$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
 
 Fitness is non-normal, but closer than correlation
@@ -2356,13 +2350,13 @@ Correlation decreased when starting high and correlation\_correlation ==
 -1 - tended to converge on correlation values seen in low start with
 same correlation\_correlation == -1
 
-%% begin.rcode highstartplots,echo=FALSE,out.width='0.45\\linewidth'
+%% begin.rcode highstartplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='High start results'
 % df_high <- load_dfa("results/results_highstart.data")
 % df_high <- df_high[df_high$truncate==1,]
 % plot(df_high$response_cor)
 % densityplot(~df_high$response_cor)
-% densityplot(~df_high$final_ave_cor) # Strongly non-normal data - bimodal, with cluster
-% densityplot(~df_high$final_ave_fit) # less bimodal, although non-normal
+% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
+% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 % #df_high[df_high$final_ave_cor>0.8,] # correlation_correlation == 1
 % #df_high[df_high$final_ave_cor<=0.8,] # correlation_correlation == -1
 % summary(df_high[df_high$final_ave_cor>=0.8,]$final_ave_cor)
@@ -2516,6 +2510,7 @@ Gaussian
 % bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
 % bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
 %% end.rcode
+
 Uniform
 %% begin.rcode uniform, echo=FALSE
 % df<-load_dfb("results/results-b67ce0e.data")
@@ -4322,21 +4317,32 @@ Max. 		&199.00    &12.00	&216.00\\
 
 A view of the results is given in Table \ref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
-%
-%\begin{figure}[htbp]
-%\includegraphics[width=0.90\linewidth]{log_cycles}
-%\caption{Log(Cycle Count), log(Cycle Length) and log(Count of Most Common Cycle) by Strategy Combination (reactant strategy:product strategy)}
-%\label{fig:partitions}
+%% begin.rcode loaddfc, echo=FALSE
+%	load_dfc <- function(f){
+%		colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
+%		df <- read.csv(f,colClasses=colClasses)
+%		df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
+%		df
+%	}
+%% end.rcode
+
+%% begin.rcode cyclesbypartition, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
+%	df<-load_dfc("results/EvaluatorActualCycles.out") 
+%	par(mfrow=c(1,3),cex=0.5)
+%	plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
+%	plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle")
+%	plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Partition", ylab="Count of most common cycle")
+%% end.rcode
+\label{fig:partitions}
+
+%\begin{figure}[h]
+%\centering
+%	\includegraphics[width=0.95\linewidth]{figures/partitions}
+%	\caption{Cycles by reaction partition (starting reaction number for each partition along x-axis)}
+%	\label{fig:partitions}
 %\end{figure}
 
-\begin{figure}[h]
-\centering
-	\includegraphics[width=0.95\linewidth]{figures/partitions}
-	\caption{Cycles by reaction partition (starting reaction number for each partition along x-axis)}
-	\label{fig:partitions}
-\end{figure}
-
-
+% No R code...
 \begin{figure}[h]
 \centering
 	\includegraphics[width=0.45\linewidth]{figures/PlotMolecularDiversity-strategies-12-0}
@@ -4345,52 +4351,59 @@ A view of the results is given in Table \ref{tbl:results}: reaction networks bui
 \end{figure}
 
 \subsection{Analysis and Discussion}
-Figure \ref{fig:partitions} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \ref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
+Figure \ref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \ref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
-\begin{figure}[h!]
-\centering
-	\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
-	\caption{Response by $S_\mathrm{Reactant}$}
-	\label{fig:reactant_strategy}
-\end{figure}
+%% begin.rcode reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '
+%	df <- subset(df,df$Partition.Start != "4750")
+%	par(mfrow=c(1,3),cex=0.5)
+%	boxplot(Number.of.cycles~Product.Strategy, data=df, main="Cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
+%	boxplot(Length.of.longest.cycle~Product.Strategy, data=df, main="Cycle length by Product Strategy", names=c("Uniform","Energy"), ylab="Length of longest cycle")
+%	boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
+%% end.rcode
 
-\begin{figure}[h!]
-\centering
-	\includegraphics[width=0.95\linewidth]{figures/product_strategy}
-	\caption{Response by $S_\mathrm{Product}$}
-	\label{fig:product_strategy}
-\end{figure}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
+%\caption{Response by $S_\mathrm{Reactant}$}
+%\label{fig:reactant_strategy}
+%\end{figure}
+
+%% begin.rcode productstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Product Strategy '
+%	par(mfrow=c(1,3),cex=0.5)
+%	boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
+%	boxplot(Length.of.longest.cycle~Reactant.Strategy, data=df, main="Cycle length by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Length of longest cycle")
+%	boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
+%% end.rcode
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=0.95\linewidth]{figures/product_strategy}
+%\caption{Response by $S_\mathrm{Product}$}
+%\label{fig:product_strategy}
+%\end{figure}
 
 \subsection{RQ1: Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of Figure \ref{fig:reactant_strategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \ref{fig:product_strategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
+From visual inspection of Figure \ref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \ref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
-We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \ref{fig:reactant_strategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
+We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \ref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
-%\begin{figure}\label{fig:results}
+%% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
+%	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+%	boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+%	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+%% end.rcode
+
+%\begin{figure}[h!]
 %\centering
-%\begin{subfigure}[b]{0.5\linewidth}
-%\centering
-%	\includegraphics[width=0.95\linewidth]{product_strategy}
-%	\caption{Product Strategy}\label{fig:product_strategy}
-%\end{subfigure}%
-%\begin{subfigure}[b]{0.5\linewidth}
-%\centering
-%	\includegraphics[width=0.95\linewidth]{reactant_strategy}
-%	\caption{Reactant Strategy}\label{fig:reactant_strategy}
-%\end{subfigure}
-%\caption{Response for Product and Reactant strategies}
+%\subcaptionbox{Cycle Count by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_count}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_count}}
+%\subcaptionbox{Cycle Length by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_length}}[0.45\linewidth][l]{\includegraphics[width=0.45\linewidth]{figures/cycle_length}}
+%\subcaptionbox{Count of Most Common Cycle by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_common}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_common}}
+%\caption{Effect of the combination of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ on Response Variables}
 %\end{figure}
-\begin{figure}[h!]
-\centering
-\subcaptionbox{Cycle Count by Strategy Combination ($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_count}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_count}}
-\subcaptionbox{Cycle Length by Strategy Combination ($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_length}}[0.45\linewidth][l]{\includegraphics[width=0.45\linewidth]{figures/cycle_length}}
-\subcaptionbox{Count of Most Common Cycle by Strategy Combination ($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_common}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_common}}
-\caption{Effect of the combination of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ on Response Variables}
-\end{figure}
 
 \subsection{RQ2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
-From Figure \ref{fig:cycle_common} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, from Figures \ref{fig:cycle_count} and \ref{fig:cycle_length} it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
+From Figure \ref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 

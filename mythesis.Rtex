@@ -20,16 +20,6 @@
 \numberwithin{equation}{section} % amsmath - numbering scheme two deep for equations
 \setcounter{tocdepth}{2}
 
-% Options for 'ntheorem'
-\usepackage[standard]{ntheorem}
-\newtheorem{hypothesis}{Hypothesis}[chapter]
-\theorembodyfont{\normalfont}
-\theoremstyle{break}
-\renewtheorem{proposition}{Proposition}
-\theoremstyle{nonumberbreak}
-\theoremheaderfont{\sc}\theorembodyfont{\upshape}
-\newtheorem{reasoning}{Reasoning}
-
 % Options for 'framed'
 \setlength\FrameSep{0.5cm}
 \setlength\FrameRule{0.1pt}

@@ -1873,7 +1873,7 @@ break\;
 $population\leftarrow tweakFitness(population)$\;
 }
 }
-\caption{Model}\label{modelalgorithm}
+\caption{Algorithm for the base Model}\label{base-model-algorithm}
 \end{algorithm}
 
 
@@ -1892,29 +1892,29 @@ Each entity in the population has two properties, or traits:
 \includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}
 
-Low fidelity means that the value for the child's trait is unrelated to parent's value for that trait; a high fidelity value, the opposite.
+Low $fidelity$ means that the value for the child's trait is unrelated to parent's value for that trait; a high $fidelity$ value, the opposite.
 
 \subsection{Assumptions}\label{assumptions-1}
 
+The model contains several assumptions which are worth making explicit:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Assume bias represents a distribution, centered on some proportion of
-  trait\_parent and with SD of the bias value, bounded by $[0,1]$
+  $Fidelity$ represents a distribution, centered on some proportion of
+  the $fidelity$ of the parent and with some \gls{sd}, bounded by $[0,1]$; similarly for fitness.
 \item
-  No distortion as a result of bias - centered rather than with inbuilt
-  bias. Parent cannot direct or influence the fitness of children -
-  selection is an unseeing hand
+  $Fitness$ and $fidelity$ are independent, implying that fidelity changes have no direct effect on fitness (and vice versa.)
 \item
-  Only distortion comes from edge effects - fitness and fidelity are
-  both in range $[0,1]$ meaning that random sampling at low and high
-  ends will be biased towards values in the middle of the range
+	Parent cannot direct or influence the fitness of children - selection is an unseeing hand.
+\item
+  $Fitness$ and $fidelity$ are both bounded to $[0,1]$ with the corollary that sampling at low and high
+  ends will be biased towards the middle of the range.
 \end{enumerate}
 
-In next model, these parameters themselves become endogenized into the
-copying/variation mechanism. For now though keeping these as explicit
-parameters makes clear their effect on the model.
+In the model proposed in Part \ref{the-search-for-creativity}, these parameters themselves become endogenized into the
+copying/variation mechanism. For now, though, keeping these as explicit parameters makes clear their effect on the model.
 
+TODO
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
@@ -1924,17 +1924,19 @@ parameters makes clear their effect on the model.
 \item
   fitness dependent on inheritance - more likely. A mechanism that
   doesn't copy well unlikely to preserve information leading to high
-  fitness\ldots{} - bias applies to offspring's bias, and to offspring's fitness
+  fitness\ldots{} - the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
 \end{enumerate}
 
 \section{Predictions}\label{predictions}
+
+In an unchanging environment, where the relative fitness of an entity with respect to the environment does not change over time, our expectations for the model are:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   Population variance for inheritance will decrease more than chance,
-  average inheritance will tend towards one, perfect inheritance
+  average inheritance will tend towards one, or perfect inheritance.
 \item
   Perfect inheritance rather than some degree of imperfection - varying
   imperfection is a result of EvoEvo, the tuning of the variation
@@ -2012,37 +2014,52 @@ From the model introduced earlier
 \label{tbl:factor_levels}
 \end{table}
 
-Because some factors are binary, will not use a space-filling design such as MaxPro \autocite{Joseph2015} which
-assumes real-valued factors, but instead a simpler conventional Fractional Factorial design
-
 We use a fractional factorial design to reduce the number of experimental runs required compared to a full factorial design \autocite{Montgomery2009}. 
-A full factorial design with seven 2-level factors would require $2^{7}$ or 128 runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, the $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.
+A full factorial design with seven 2-level factors would require $2^{7}$ or 128 runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, the $2^{(7-3)}$ design \footnote{Because the factors are binary rather than real-valued, the conventional Fractional Factorial design is simpler than a newer space-filling design such as MaxPro \autocite{Joseph2015}.} is sufficient to separate the main effect from any 2-factor interactions. 
 
 \subsection{Initial conditions}\label{initial-conditions}
 
-Series of models to test different starting conditions to strengthen
-claim
-
-\begin{itemize}
-\tightlist
-\item
-Number of offspring
-\item
-Low initial bias (replication)
-\item
-High initial bias (no inheritance - similar to holistic reproducers
-where splitting an entity leaves different ``cores'' in different
-offspring)
-\end{itemize}
+Series of models to test different starting conditions to strengthen claim
 
 \paragraph{Low start case}\label{low-start-case}
-population = [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
-fitness in {[}0, 0.3{]}
-correlation in {[}0, 0.3{]}
+
+Entities begin with a low initial fidelity, motivated by two reasons: first, directly from Hypothesis 2 and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities be eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world to the world of Darwinian reproducers.
+
+\begin{table}[ht]
+\begin{center}
+\tiny
+\begin{tabular}{@{}ll@{}}
+\toprule
+Element property&  Initial range\\
+\midrule
+Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
+Fidelity&	$\mathcal{U}$, $[0, 0.3]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Initial conditions for Low Start case}
+\label{tbl:low_start_ic}
+\end{table}
 
 \paragraph{High start case}\label{high-start-case}
-fitness in {[}0, 0.9{]}
-correlation in {[}0.5, 0.9{]}
+
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses. This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
+
+\begin{table}[ht]
+\begin{center}
+\tiny
+\begin{tabular}{@{}ll@{}}
+\toprule
+Element property&  Initial range\\
+\midrule
+Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
+Fidelity&	$\mathcal{U}$, $[0.5, 0.9]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Initial conditions for High Start case}
+\label{tbl:high_start_ic}
+\end{table}
 
 \section{Analysis}\label{analysis}
 
@@ -2055,22 +2072,6 @@ correlation in {[}0.5, 0.9{]}
 %   df
 % }
 %% end.rcode
-
-\subsection{Power}\label{power}
-
-Check power of test for truncated results
-
-%% begin.rcode power, echo=FALSE
-% df_high <- load_dfa("results/results_highstart.data")
-% df_low <- load_dfa("results/results_lowstart.data")
-% df_high <- df_high[df_high$truncate==1,]
-% df_low <- df_low[df_low$truncate==1,]
-% between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
-% within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
-% power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
-%% end.rcode
-
-We conclude that the power of the experimental test appears adequate.
 
 \subsection{Check effect of an upper bound on population size}\label{check-effect-of-truncation}
 
@@ -2110,9 +2111,9 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{modelalgorithm}), iff the pre-sampling population size is greater than $N_{population}$.
+The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{base-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
-%% begin.rcode truncationplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-independent sampling'
+%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-independent sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
@@ -2123,7 +2124,7 @@ The first mechanism uses a fitness-independent sampling of $N_{population}$ elem
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
-From the plots in \ref{fig:truncationplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
+From the plots in \ref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
 %independent continuous random samples where the underlying distributions
@@ -2136,9 +2137,22 @@ From the plots in \ref{fig:truncationplots} it is clear that the results are str
 
 Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:truncationplots}.
+We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+
+This leads to a alternative hypothesis for population restriction - rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
 
 \subsubsection{Fitness-based sampling}
+
+%% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-based sampling'
+% df <- load_dfa("results/results_untruncated.data")
+% library(lattice)
+% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
+% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
+% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
+%% end.rcode
 
 \subsection{General procedure for regression}\label{general-procedure-for-regression}
 
@@ -2201,6 +2215,23 @@ appropriate
 \item
   checking.plots()
 \end{itemize}
+\
+
+\subsection{Power}\label{power}
+
+Next we check the statistical power of the proposed ANOVA test for the population size-restricted results:
+
+%% begin.rcode power, echo=FALSE
+% df_high <- load_dfa("results/results_highstart.data")
+% df_low <- load_dfa("results/results_lowstart.data")
+% df_high <- df_high[df_high$truncate==1,]
+% df_low <- df_low[df_low$truncate==1,]
+% between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
+% within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
+% x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
+%% end.rcode
+
+We conclude that the power with on \rinline{x['groups']} groups and \rinline{x['n']} observations per group appears adequate.
 
 \subsection{Low start case - show that inheritance can emerge from low-fidelity copying}\label{low-start-case---show-that-inheritance-can-emerge-from-low-fidelity-copying}
 
@@ -2227,7 +2258,7 @@ strongly bimodal
 Fitness is non-normal, but closer than correlation
 (densityplot(\textasciitilde{}df\_low\$final\_ave\_fit))
 
-What does the SD do? By hypothesis, should reduce over time Which
+What does the standard deviation do? By hypothesis, should reduce over time Which
 factors are responsible for each peak of correlation?
 
 %% begin.rcode
@@ -2315,33 +2346,62 @@ Significance
   copying/inheritance mechanism, and that EvoEvo can tune this mechanism
   to suit conditions - no preselected parameters required
 \item
-  SD of correlation should be greater than in a fixed environment
+  \gls{sd} of correlation should be greater than in a fixed environment
   (benefit to preserving variation)
 \item
   An environment change results in a change in fitness for entities.
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same setup (low and high start) with single model change to represent
-changing environment
+Same initial conditions (low \ref{low-start-case} and high start \ref{high-start-case} cases) with the addition to the Base Model \ref{base-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+
+\begin{algorithm}[h]
+\DontPrintSemicolon
+\SetKwProg{Def}{def}{:}{}
+\SetKwFunction{f}{f}
+\Def{tweakFitness(population)}{
+$population_{new}\leftarrow \{\}$\;
+\For{each $element$ in $population$}{
+$fitness\leftarrow \text{ fitness of }element$\;
+$mean\leftarrow fitness - 0.2$\;
+$sd\leftarrow 0.95$\;
+$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
+}
+\Return $population_{new}$\;
+}
+\caption{Functions}
+\end{algorithm}
+
+\begin{algorithm}[h]
+\DontPrintSemicolon
+\SetKwFunction{f}{f}
+\For{generation $\in 1\dots$number of generations}{
+\ldots{}
+\BlankLine
+\tcp{Changing environment}
+\uIf{time to change environment}{
+$population\leftarrow tweakFitness(population)$\;
+}
+}
+\caption{Algorithm for the changing conditions Model}\label{changingmodelalgorithm}
+\end{algorithm}
 
 \section{Predictions}\label{predictions-2}
 
-If \texttt{CORRELATION\_CORRELATION\ ==\ 1} (precondition)
+Under changing environmental conditions, where the fitness of an unchanging entity with respect to the environment changes in response to environmental changes, we expect that the model will behave as follows:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  sd of final correlation under changing conditions \textgreater{} that
-  under fixed conditions (test \#1)
+  \gls{sd} of final fidelity under changing conditions \textgreater{} that
+  under fixed conditions (test \#1).
 \item
-  the higher the variability in the environment, the higher the sd
+  The higher the variability in the environment, the higher the \gls{sd} of $fidelity$.
 \item
-  final correlation under changing \textless{} that under fixed
-  conditions (less correlation)
+ $fidelity$ at the end of a run under changing conditions \textless{} that under fixed conditions
 \item
-  final fitness will vary around range given by tweak\_fitness
+  The final $fitness$ will be in the the range described by the $tweakFitness$ function.
 \end{enumerate}
 
 \section{Experimental test}\label{experimental-test}
@@ -2349,7 +2409,7 @@ If \texttt{CORRELATION\_CORRELATION\ ==\ 1} (precondition)
 Fluctuating environment with no trend or direction - modelled by
 \texttt{{[}Element(factors\textbackslash{}{[}4\textbackslash{}{]}(x.fitness,\ 0.2),x.correlation)\ for\ x\ in\ population{]}},
 applying distribution function from parameters (i.e., either gaussian or
-uniform) with sd of 0.2 to fitness each generation. May increase or
+uniform) with \gls{sd} of 0.2 to fitness each generation. May increase or
 decrease individual fitness
 
 \section{Experimental design}\label{experimental-design-1}
@@ -2423,7 +2483,7 @@ no scope for change of fitness \ldots{}
 Rapid change (every generation) leads to population extinction - unable
 to maintain fitness
 
-For 5 and 10 generation change, as predicted. SD of 5 generation change
+For 5 and 10 generation change, as predicted. \gls{sd} of 5 generation change
 higher than for 10; overall fitness for 5 lower than for 10, both less
 correlated and less fit than control
 

@@ -1991,78 +1991,6 @@ From the model introduced earlier
 \label{tbl:factor_definitions}
 \end{table}
 
-\paragraph{Probabilities}\label{probabilities}
-
-0: P\_REPRODUCE \(\in \mathbb{R}, x \in [0,1]\)
-
-\begin{verbatim}
-p_reproduce = parent.fitness if factors[0] == 0 else factors[0]
-if not get_random_boolean(p_reproduce):
-  return []
-\end{verbatim}
-
-1: P\_SELECTION \(\in \mathbb{R}, x \in [0,1]\)
-
-\begin{verbatim}
-return [x for x in population if get_random_boolean(x.fitness if factors[1] == 0 else factors[1])]
-\end{verbatim}
-
-\paragraph{Quantities}\label{quantities}
-
-2: N\_OFFSPRING - integer, number of offspring in {[}0..N\_OFFSPRING{]}
-
-\begin{verbatim}
-for i in range(random.randint(0,factors[2])):
-  fitness = factors[4](parent.fitness, fitness_correlation)
-  correlation = factors[4](parent.correlation, correlation_correlation)
-
-offspring.append(Element(fitness, correlation))
-
-return offspring
-\end{verbatim}
-
-3: Truncate population by taking a random sample of N\_POPULATION from
-population - integer, population size at end of each generation is in
-{[}1..N\_POPULATION{]} (0 terminates run)
-
-\begin{verbatim}
-if factors[3] and len(population) > original_population_size: # if fixed population size
-  population = random.sample(population, original_population_size)
-\end{verbatim}
-
-\paragraph{Trait relationships}\label{trait-relationships}
-
-4: association between parent and offspring traits - distribution,
-either as Gaussian or Uniform
-
-Gaussian (0 value) - lambda source, correlation: max(0.0,min(1.0,
-random.gauss(source, 1.0-correlation)))
-
-Uniform (1 value) - lambda source, correlation: max(0.0,min(1.0,
-random.uniform(source-(1.0-correlation), source+(1.0-correlation)))
-
-\begin{verbatim}
-for i in range(random.randint(0,factors[2])):
-  fitness = factors[4](parent.fitness, fitness_correlation)
-  correlation = factors[4](parent.correlation, correlation_correlation)
-  offspring.append(Element(fitness, correlation))
-
-def tweak_fitness(factors, population):
-  return [Element(factors[4](x.fitness-0.2, 0.95), x.correlation) for x in population]
-\end{verbatim}
-
-5: FITNESS\_CORRELATION - boolean
-
-\begin{verbatim}
-fitness_correlation = parent.correlation if factors[5] else random.random()
-\end{verbatim}
-
-6: CORRELATION\_CORRELATION - boolean
-
-\begin{verbatim}
-correlation_correlation = parent.correlation if factors[6] else random.random()
-\end{verbatim}
-
 \begin{table}
 \begin{center}
 \tiny
@@ -2087,14 +2015,8 @@ correlation_correlation = parent.correlation if factors[6] else random.random()
 Because some factors are binary, will not use a space-filling design such as MaxPro \autocite{Joseph2015} which
 assumes real-valued factors, but instead a simpler conventional Fractional Factorial design
 
-Fractional as full design with 7 2-level factors would require 2\^{}7
-runs, can reduce without loss of validity with Fractional Factorial on
-assumption that higher-level interactions between factors are not
-significant (e.g., 3-factor interactions or above)
-
-$2^{(7-3)}$ Fractional Factorial Design \footnote{\url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} with 7 factors, each of 2 levels, with resolution $7-3=4$
-
-Sufficient to separate main effect from any 2-factor interactions, and needing only 16 runs rather than 256 (ignoring replicates) to investigate the effects and lower-level interactions of the seven factors on the response variable.
+We use a fractional factorial design to reduce the number of experimental runs required compared to a full factorial design \autocite{Montgomery2009}. 
+A full factorial design with seven 2-level factors would require $2^{7}$ or 128 runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, the $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.
 
 \subsection{Initial conditions}\label{initial-conditions}
 
@@ -2148,34 +2070,39 @@ Check power of test for truncated results
 % power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
 %% end.rcode
 
-Conclusion: power is adequate
+We conclude that the power of the experimental test appears adequate.
 
 \subsection{Check effect of an upper bound on population size}\label{check-effect-of-truncation}
 
-There is nothing to prevent a population growing beyond the capacity of the simulation system without restrictions on population size. This is a practical restriction rather than a element of the model, and so to have faith in the simulation and model it's essential we eliminate the possibility of introducing bias to the results from limiting the population size. 
+There is nothing to prevent a population growing beyond the capacity of the simulation system in the absence of any restrictions on population size. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
 
-The size of the population is determined by how elements are introduced and removed. In standard Evolutionary Computation (\eg autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
+The size of the population is determined by how population elements are introduced and removed. In standard Evolutionary Computation (\eg autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. 
 
-This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results.
+This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to sample $N_{population}$ elements from the population, without regard for fitness. The second recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
+
+Given this difference between mechanisms, it is appropriate that population mean fitness is introduced as a proxy for bias; population mean fidelity is also examined as it is the response variable for the overall hypothesis, Hypothesis 2.
+
+In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ examined for both population mean fitness and fidelity):
 
 H$_0$: $\mu_{truncated} = \mu_{untruncated}$
 H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
 
-First issue - number of generations at termination not equal
+One complication is that the number of generations at the conclusion of each run will not necessarily be comparable.
 
 %% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Density plots'
 % library(lattice)
+% par(mfrow=c(1,2),cex=0.5)
 % densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start', xlab='Final generation')
 % densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start', xlab='Final generation')
 %% end.rcode
 
-Natural, as truncation introduced to allow model to complete more
-generations instead of undergoing a population explosion
+This is as expected, as the purpose of a population restriction is to allow the model to complete more
+generations by avoiding a terminal population explosion.
 
-So modify model to complete after 15 generations with a limit of 50
-times original population size ($=50\times 5000$) for fair(er) comparison -
+So for testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50
+times original population size ($=50\times 5000$) for fair(er) comparison.
 still introduces bias as a small proportion of truncated number of
 generations.
 
@@ -2183,14 +2110,17 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population as given in the  $truncation()$ function in \ref{modelalgorithm}, iff the pre-sampling population size is greater than $N_{population}$.
+The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{modelalgorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
-%% begin.rcode truncationplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Truncation plots'
+%% begin.rcode truncationplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-independent sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
-% densityplot(~df$response_cor|df$truncate, data=df, main='Response Fidelity by truncation',) # strongly non-normal
-% bwplot(df$response_cor~df$truncate, main='Fidelity by truncation')
-% qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor, main='Response Fidelity by correlation')
+% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
+% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
+% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
 From the plots in \ref{fig:truncationplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
@@ -2200,14 +2130,15 @@ From the plots in \ref{fig:truncationplots} it is clear that the results are str
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
 %% begin.rcode kstest, echo=FALSE
-% x <- ks.test(df[df$truncate==-1,]$response_cor,df[df$truncate==1,]$response_cor)
+% x_cor <- ks.test(df[df$truncate==-1,]$final_ave_cor,df[df$truncate==1,]$final_ave_cor)
+% x_fit <- ks.test(df[df$truncate==-1,]$final_ave_fit,df[df$truncate==1,]$final_ave_fit)
 %% end.rcode
 
-Applying a \rinline{x['method']} to determine if the truncated and untruncated results are taken from the same distribution provides strong evidence (p-value=\rinline{x['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
+Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude from the formal test that truncation does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:truncationplots}.
+We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:truncationplots}.
 
-TODO: implication - bias present, but little to be done...
+\subsubsection{Fitness-based sampling}
 
 \subsection{General procedure for regression}\label{general-procedure-for-regression}
 

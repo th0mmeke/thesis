@@ -529,8 +529,9 @@ of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
 
 \quote{A simulation is ultimately
 only a high-speed generator of the consequences that some theory assigns
-various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192} If a model, then might take many forms
-- analogy, model, pure exploration \autocite{Webb2009}.
+various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192} 
+
+If a model, then might take many forms - analogy, model, pure exploration \autocite{Webb2009}.
 
 Models are \quote{a purposeful representation. A model needs to have a
 purpose because otherwise there would be no way to decide what to
@@ -604,7 +605,7 @@ simulation is like theory as about ``manipulating equations'' and
 ``trying ideas out'', ``watching to see what happens.'' Simulation is a
 form of Kuhn's theory articulation or ``model building'' - making
 principles apply to local, concrete systems in the real world. In this
-view, \quote{``Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
+view, \quote{Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
 
 \subsubsection{The legitimate role of simulation in scientific
 enquiry}\label{the-legitimate-role-of-simulation-in-scientific-enquiry}
@@ -770,14 +771,12 @@ interaction
 
 \subsection{Artificial Life}\label{artificial-life}
 
-\begin{quote}
 ``Synthesis and simulation of living systems'' or contemporary
 artificial life as \quote{an interdisciplinary study of life and life-like
 processes, whose two most important qualities are that it focuses on the
 essential rather than the contingent features of living systems and that
 it attempts to understand living systems by artificially synthesizing
 simple forms of them.}{\autocite{Bedau:2007ga}}
-\end{quote}
 
 ``life-as-it-could-be'' rather than ``life-as-we-know-it'' \autocite{Langton1989}
 
@@ -1471,15 +1470,15 @@ not necessarily interesting behaviour)
   \autocite{Lehman2012}.
 \end{itemize}
 
-\begin{quote}
+\quote{
 by open-ended evolutionary capacity we understand the potential of a
 system to reproduce its basic functional-constitutive dynamics, bringing
 about an un-limited variety of equivalent systems, of ways of expressing
 that dynamics, which are not subject to any predetermined upper bound of
 organizational complexity (even if they are, indeed, to the
 energetic-material restrictions imposed by a finite environment and by
-the universal physico-chemical laws \autocite{Ruiz-Mirazo2004}
-\end{quote}
+the universal physico-chemical laws.}
+{\autocite{Ruiz-Mirazo2004}}
 
 \begin{itemize}
 \item
@@ -1874,7 +1873,7 @@ break\;
 $population\leftarrow tweakFitness(population)$\;
 }
 }
-\caption{Model}
+\caption{Model}\label{modelalgorithm}
 \end{algorithm}
 
 
@@ -2127,7 +2126,6 @@ correlation in {[}0.5, 0.9{]}
 
 %% begin.rcode loaddfa, echo=FALSE
 % load_dfa <- function(t){
-%   while ("df" %in% search()) {detach(df)}
 %   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
 %   df <- read.csv(t, colClasses=colClasses)
 %   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
@@ -2152,9 +2150,15 @@ Check power of test for truncated results
 
 Conclusion: power is adequate
 
-\subsection{Check effect of truncation}\label{check-effect-of-truncation}
+\subsection{Check effect of an upper bound on population size}\label{check-effect-of-truncation}
 
-Require population limits for practicality, but does it bias the results?
+There is nothing to prevent a population growing beyond the capacity of the simulation system without restrictions on population size. This is a practical restriction rather than a element of the model, and so to have faith in the simulation and model it's essential we eliminate the possibility of introducing bias to the results from limiting the population size. 
+
+The size of the population is determined by how elements are introduced and removed. In standard Evolutionary Computation (\eg autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
+
+Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. 
+
+This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results.
 
 H$_0$: $\mu_{truncated} = \mu_{untruncated}$
 H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
@@ -2171,16 +2175,15 @@ Natural, as truncation introduced to allow model to complete more
 generations instead of undergoing a population explosion
 
 So modify model to complete after 15 generations with a limit of 50
-times original population size (=50*5000) for fair(er) comparison -
+times original population size ($=50\times 5000$) for fair(er) comparison -
 still introduces bias as a small proportion of truncated number of
-generations
+generations.
 
-Also in runner:
+Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \ref{low-start-case}.
 
-\begin{verbatim}
-changing_environment = 0
-low_start = True
-\end{verbatim}
+\subsubsection{Fitness-independent sampling}
+
+The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population as given in the  $truncation()$ function in \ref{modelalgorithm}, iff the pre-sampling population size is greater than $N_{population}$.
 
 %% begin.rcode truncationplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Truncation plots'
 % df <- load_dfa("results/results_untruncated.data")
@@ -2190,27 +2193,21 @@ low_start = True
 % qqplot(df[df$truncate==1,]$response_cor, df[df$truncate==-1,]$response_cor, main='Response Fidelity by correlation')
 %% end.rcode
 
-Normal distribution? No, strongly non-normal, so must use non-parametric
-test
+From the plots in \ref{fig:truncationplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
 
-Wilcoxon (wilcox.test()) or Mann-Whitney tests for comparing two
-independent continuous random samples where underlying distributions
-have same shape - must compare shape
+%Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
+%independent continuous random samples where the underlying distributions
+%are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-Friedman (friedman.test())where samples might be related (e.g., in block
-designs) and objective is to distinguish differences between treatments,
-otherwise same assumptions as for Wilcoxon etc
-
-Kolmogorov-Smirnov
-
-%% begin.rcode kstest
-% ks.test(df[df$truncate==-1,]$response_cor,df[df$truncate==1,]$response_cor)
+%% begin.rcode kstest, echo=FALSE
+% x <- ks.test(df[df$truncate==-1,]$response_cor,df[df$truncate==1,]$response_cor)
 %% end.rcode
 
-Provides strong evidence to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$
+Applying a \rinline{x['method']} to determine if the truncated and untruncated results are taken from the same distribution provides strong evidence (p-value=\rinline{x['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-Conclude that truncation does make a difference to the results, as
-also seen in a box plot of response\_cor for truncated and not truncated, or indeed in a Q-Q plot.
+We conclude from the formal test that truncation does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:truncationplots}.
+
+TODO: implication - bias present, but little to be done...
 
 \subsection{General procedure for regression}\label{general-procedure-for-regression}
 
@@ -2455,8 +2452,20 @@ for repeat in range(0,10):
 
 \section{Results}\label{results-1}
 
-results-229445f.data, with factor environment\_change\_frequency set to
-0 (no change=control),1,5,10 (generations between change of environment)
+%% begin.rcode loaddfb, echo=FALSE
+% load_dfb <- function(t){
+%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
+%   df <- read.csv(t, colClasses=colClasses)
+%   df
+% }
+%% end.rcode
+
+%% begin.rcode changingenvironmentsummary, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.cap='Fitness over time (generations) for four different frequencies of environmental change'
+% df<-load_dfb("results/results-229445f.data")
+% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
+% par(mfrow=c(2,2),cex=0.5)
+% plot(df$ave_fit|df$environment_change_frequency, xlab="Generation",ylab="Average fitness", main="Environment change frequency = " + df$environment_change_frequency)
+%% end.rcode
 
 \section{Analysis}\label{analysis-1}
 
@@ -2489,20 +2498,9 @@ correlated and less fit than control
 
 \subsection{Is the choice of distribution function significant?}\label{is-the-choice-of-distribution-function-significant}
 
-Results appear very similar for uniform to gaussian (slightly higher
-sd\_cor)
+Results appear very similar for uniform and gaussian.
 
-%% begin.rcode loaddfb, echo=FALSE
-% load_dfb <- function(t){
-%   while ("df" %in% search()) {detach(df)}
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df
-% }
-%% end.rcode
-
-Gaussian
-%% begin.rcode gaussian, echo=FALSE
+%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Gaussian distribution function f()'
 % df<-load_dfb("results/results-229445f.data")
 % df1<-split(df,df$gen)
 % df2<-df1$`500` # last gen
@@ -2511,8 +2509,7 @@ Gaussian
 % bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
 %% end.rcode
 
-Uniform
-%% begin.rcode uniform, echo=FALSE
+%% begin.rcode uniform, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Uniform distribution function f()'
 % df<-load_dfb("results/results-b67ce0e.data")
 % df1<-split(df,df$gen)
 % df2<-df1$`500` # last gen
@@ -2537,7 +2534,7 @@ Possible extensions
 \item
   Trend to environmental change
 \item
-  Experimental test: demonstrate E given V+S
+  Experimental test: demonstrate Evolution given Variation and Selection
 \item
   Consistency and sufficiency - classification of existing systems
 \end{itemize}
@@ -2918,15 +2915,15 @@ Alternative classification in \autocite{Faulconbridge2011}:
 
 Novel molecules can arise from artificial chemistry:
 
-\begin{quote}
+\quote{
 A distinguishing feature of chemistry is that the changes of molecules
 upon interaction are not limited to quantitative physical properties
 such as free energy, density, or concentrations, since molecular
 interactions do not only produce more of what is already there --
-rather, novel molecules can be generated. \autocite{Benko2009}
-\end{quote}
+rather, novel molecules can be generated.}
+{\autocite{Benko2009}}
 
-A chemistry is //constructive// \autocite{Fontana1994} if new components
+A chemistry is \textit{constructive} \autocite{Fontana1994} if new components
 may be generated through the action of other components. Both implicit
 laws and implicit molecule definitions are required for constructive
 chemistries:
@@ -2943,23 +2940,22 @@ chemistries:
 
 Constructive (weak and strong) initially defined in \autocite{Fontana1994}:
 
-\begin{quote}
+\quote{
 We refer to models in which new agents are constructed in an unspecific
 (essentially stochastic) fashion as \emph{weakly constructive}. This is
 to be contrasted with a situation in which the encounter of two agents
 \emph{implies} a \emph{specific} third one\ldots{}Models of this kind
 will be termed \emph{strongly constructive}. The prime example of a
-strongly constructive system is chemistry.
-\end{quote}
+strongly constructive system is chemistry.}
+{\autocite{Fontana1994}}
 
 The commentary that immediately follows is also significant:
 
-\begin{quote}
+\quote{
 A strongly constructive system that contains agent \emph{A} must cope
 with the network of its implications. But, then, it also must cope with
-the implications of the implications. And so on.''
-\autocite[217]{Fontana1994}
-\end{quote}
+the implications of the implications. And so on.}
+{\autocite[217]{Fontana1994}}
 
 A strongly constructive system is one which maintains closure, and in
 which there is self-consistency and some form of logical structure
@@ -3281,11 +3277,11 @@ Other work, although superficially similar in that it models objects of
 similar scale, uses different models for the objects and the world (see
 \autocite{Sanchez-Dehesa:2008uq}) and so lack this loop.
 
-\begin{quote}
+\quote{
 Erasing the distinction in simulation between organism and environment
 allows a model to explore the exchange and transformation of matter and
-energy.\autocite{Dorin:2006fk}
-\end{quote}
+energy.}
+{\autocite{Dorin:2006fk}}
 
 \paragraph{Desirable properties}\label{desirable-properties}
 
@@ -4326,7 +4322,7 @@ A view of the results is given in Table \ref{tbl:results}: reaction networks bui
 %	}
 %% end.rcode
 
-%% begin.rcode cyclesbypartition, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
+%% begin.rcode cyclesbypartition, echo=FALSE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
 %	df<-load_dfc("results/EvaluatorActualCycles.out") 
 %	par(mfrow=c(1,3),cex=0.5)
 %	plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
@@ -4387,7 +4383,7 @@ From visual inspection of Figure \ref{fig:reactantstrategy}, there appears to be
 
 We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \ref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
-%% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
+%% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
 %	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 %	boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 %	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
@@ -4463,8 +4459,10 @@ chemistry}\label{requirements-for-chemistry}
 
 \section{Chemistry selection}\label{chemistry-selection}
 
-``Standish (2003), which is that openendedness depends fundamentally on
-the continual production of novelty.'' (Soros2014)
+\quote{
+Standish (2003), which is that openendedness depends fundamentally on
+the continual production of novelty.}
+{\autocite{Soros2014}}
 
 \section{\texorpdfstring{What is interesting? Require formal defn for ``proof''\ldots{}}{What is interesting? Require formal defn for proof\ldots{}}}\label{what-is-interesting-require-formal-defn-for-proof}
 
@@ -4476,8 +4474,8 @@ What about better search of same space? Is that interesting?
 
 \quote{\ldots{}the processes associated with the major transitions are an
 automatic consequence of mutation and selection, due to the generation
-of higher levels of selection due to spatial self-organization.''
-{[}Hogeweg1998{]}}
+of higher levels of selection due to spatial self-organization.}
+{\autocite{Hogeweg1998}}
 
 \begin{itemize}
 \tightlist

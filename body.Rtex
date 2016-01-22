@@ -1697,6 +1697,20 @@ Reformulate as causal reading
 
 \autocite{Bourrat2015} showed that inheritance bias (correlation in trait between parent and offspring) increases over time
 
+
+TODO
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+Fitness independent of inheritance potential - as explored in
+\autocite{Bourrat2015} - bias applied only to bias value of offspring, not fitness
+\item
+fitness dependent on inheritance - more likely. A mechanism that
+doesn't copy well unlikely to preserve information leading to high
+fitness\ldots{} - the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
+\end{enumerate}
+
 \begin{itemize}
 \tightlist
 \item
@@ -1795,13 +1809,17 @@ I-\textgreater{}V+S?
 
 Or to broaden the scope of the claim to other forms of V and S?
 
-\chapter{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
-
-Exogenous models for simplicity of understanding - make factors explicit
+\chapter[Test of Hypothesis 2 under fixed conditions]{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 \section{Model}\label{model}
 
-\begin{figure}[h!]
+We use an exogenous model where the factors and variables, such as fitness, are explicit for ease of understanding. Such a model allows us to directly specify the relationship between fitness and fidelity for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+
+The model defines a population of entities, each of which has only two properties - $fitness$ and $fidelity$, described below - and a set of population-transforming functions. A run of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population.
+
+This is clearly a very general model and as such has broad applicability and range. 
+
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/model}
 \end{figure}
@@ -1876,7 +1894,6 @@ $population\leftarrow tweakFitness(population)$\;
 \caption{Algorithm for the base Model}\label{base-model-algorithm}
 \end{algorithm}
 
-
 Each entity in the population has two properties, or traits:
 
 \begin{enumerate}
@@ -1887,16 +1904,16 @@ Each entity in the population has two properties, or traits:
   $fidelity$ between parent and child, where $fidelity \in [0,1]$
 \end{enumerate}
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}
 
-Low $fidelity$ means that the value for the child's trait is unrelated to parent's value for that trait; a high $fidelity$ value, the opposite.
+$Fidelity = 0$ means that the value for the child's trait is completely unrelated (uncorrelated) to its parent's value for that trait; high $fidelity$ values mean high correlation, and when $fidelity = 1.0$ the child's value is the same as the parent's. The specific relationship between parent and child trait values is given by a mapping, represented in the algorithm by the function $f()$.
 
 \subsection{Assumptions}\label{assumptions-1}
 
-The model contains several assumptions which are worth making explicit:
+The model contains several assumptions which are worth making explicit here:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
@@ -1905,31 +1922,18 @@ The model contains several assumptions which are worth making explicit:
 \item
   $Fitness$ and $fidelity$ are independent, implying that fidelity changes have no direct effect on fitness (and vice versa.)
 \item
-	Parent cannot direct or influence the fitness of children - selection is an unseeing hand.
+	A parent cannot directly influence the fitness of children - selection is an unseeing hand.
 \item
   $Fitness$ and $fidelity$ are both bounded to $[0,1]$ with the corollary that sampling at low and high
   ends will be biased towards the middle of the range.
 \end{enumerate}
 
-In the model proposed in Part \ref{the-search-for-creativity}, these parameters themselves become endogenized into the
-copying/variation mechanism. For now, though, keeping these as explicit parameters makes clear their effect on the model.
-
-TODO
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Fitness independent of inheritance potential - as explored in
-  \autocite{Bourrat2015} - bias applied only to bias value of offspring, not fitness
-\item
-  fitness dependent on inheritance - more likely. A mechanism that
-  doesn't copy well unlikely to preserve information leading to high
-  fitness\ldots{} - the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
-\end{enumerate}
+In the derived model described in Part \ref{the-search-for-creativity}, these parameters themselves become endogenized, in the case of $fitness$ into an implicit relative fitness and for $fidelity$ into the function of the copying/variation mechanism. 
+For now, though, keeping these explicit makes clear their influence on the model.
 
 \section{Predictions}\label{predictions}
 
-In an unchanging environment, where the relative fitness of an entity with respect to the environment does not change over time, our expectations for the model are:
+In an unchanging environment, where the relative fitness of an entity, with respect to the environment, does not change over time, our expectations for the model are:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1938,39 +1942,32 @@ In an unchanging environment, where the relative fitness of an entity with respe
   Population variance for inheritance will decrease more than chance,
   average inheritance will tend towards one, or perfect inheritance.
 \item
-  Perfect inheritance rather than some degree of imperfection - varying
-  imperfection is a result of EvoEvo, the tuning of the variation
-  mechanism to optimise the evolutionary process. Without EvoEvo there
-  is no tuning, and hence no variation. But what explains limit of 1
-  rather than some other particular value? Possible explanation - higher
-  fitness entities will survive longer and reproduce more; higher
-  inheritance reduces variation in fitness and so results in higher
-  fitness being preferred - wording!
+  Inheritance will be `perfect` or in other words, $fidelity$ will approach 1.0.
+  Higher fitness entities will survive longer and reproduce more; higher
+  fidelity reduces variation in fitness and so results in higher
+  fitness being preferred.
 \end{enumerate}
 
 \section{Experimental design}\label{experimental-design}
 
-Goal is to 1) test Hypothesis 2 and 2) identify which factors are most
-influential on the response - do the conclusions hold across all runs or
+Our experimental goals are to 
+\begin{inparaenum}[(i)]
+\item test Hypothesis 2, and 
+\item identify which factors are most influential on the response - that is, does the conclusion hold across all runs or
 does it only apply to a subset of factor values? And if the latter, why?
+\end{inparaenum}
 
 \subsection{Number of replicates}\label{number-of-replicates}
 
 The number of replicates required for a particular statistical power is related to the
-standard deviation of the result. So we begin with an estimate of 10 replicates for each run,
-and confirm that the power achieved is sufficient (see \ref{power}.)
+\gls{sd} of the result. So we begin with an initial estimate of 10 replicates for each run, which appears sufficient
+following the assessment of the resulting statistical power in section \ref{power}.
 
 \subsection{Response variables}\label{response-variables}
 
-Perhaps better to look at $fidelity_{end}$ as, under Hypothesis 2, $fidelity$ tends to 1.0 in an unchanging enviroment.
-
-Check also that $fidelity$ increases, regardless of starting position:
-fidelity between parent and offspring trait(s) at start and end of
-run - $fidelity_{end} - fidelity_{start} > 0$
+From Hypothesis 2 the variable of interest is $fidelity$, or the correlation between a parent's trait and a child's trait, which, therefore, is our response variable. Specifically we use $fidelity_{end}$ as under Hypothesis 2 we expect $fidelity_{end}$ to approach 1.0 in an unchanging environment. In addition, as we predict that $fidelity$ will increase, we expect $fidelity_{end} - fidelity_{start} > 0$.
 
 \subsection{Factors and levels}\label{factors-and-levels}
-
-From the model introduced earlier
 
 \begin{table}
 \begin{center}
@@ -2015,15 +2012,15 @@ From the model introduced earlier
 \end{table}
 
 We use a fractional factorial design to reduce the number of experimental runs required compared to a full factorial design \autocite{Montgomery2009}. 
-A full factorial design with seven 2-level factors would require $2^{7}$ or 128 runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, the $2^{(7-3)}$ design \footnote{Because the factors are binary rather than real-valued, the conventional Fractional Factorial design is simpler than a newer space-filling design such as MaxPro \autocite{Joseph2015}.} is sufficient to separate the main effect from any 2-factor interactions. 
+A full factorial design with seven 2-level factors would require $2^{7}$ or 128 runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, the $2^{(7-3)}$ design \footnote{The conventional Fractional Factorial design is simpler than a newer space-filling design such as MaxPro \autocite{Joseph2015} as the factors are binary rather than real-valued.} is sufficient to separate the main effect from any 2-factor interactions. 
 
 \subsection{Initial conditions}\label{initial-conditions}
 
-Series of models to test different starting conditions to strengthen claim
+We examine two different initial population designs, one called the Low Start case, the other the High Start case. These are described in the two sections below.
 
 \paragraph{Low start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity, motivated by two reasons: first, directly from Hypothesis 2 and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities be eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world to the world of Darwinian reproducers.
+Entities begin with a low initial fidelity, for two reasons: first, directly from Hypothesis 2 and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities be eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world to the world of Darwinian reproducers.
 
 \begin{table}[ht]
 \begin{center}
@@ -2033,7 +2030,7 @@ Entities begin with a low initial fidelity, motivated by two reasons: first, dir
 Element property&  Initial range\\
 \midrule
 Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
-Fidelity&	$\mathcal{U}$, $[0, 0.3]$\\
+Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2053,7 +2050,7 @@ In this case, entities start with a higher initial fidelity and a greater range 
 Element property&  Initial range\\
 \midrule
 Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
-Fidelity&	$\mathcal{U}$, $[0.5, 0.9]$\\
+Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2085,27 +2082,30 @@ This section describes two possible mechanisms to implement an upper bound, and 
 
 Given this difference between mechanisms, it is appropriate that population mean fitness is introduced as a proxy for bias; population mean fidelity is also examined as it is the response variable for the overall hypothesis, Hypothesis 2.
 
-In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ examined for both population mean fitness and fidelity):
+In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity):
 
-H$_0$: $\mu_{truncated} = \mu_{untruncated}$
-H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
+\begin{itemize}[label={}]
+\item H$_0$: $\mu_{truncated} = \mu_{untruncated}$
+\item H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
+\end{itemize}
 
-One complication is that the number of generations at the conclusion of each run will not necessarily be comparable.
-
-%% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Density plots'
-% library(lattice)
-% par(mfrow=c(1,2),cex=0.5)
-% densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start', xlab='Final generation')
-% densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start', xlab='Final generation')
-%% end.rcode
-
+One consideration is that the number of generations at the conclusion of each run will not necessarily be comparable. 
 This is as expected, as the purpose of a population restriction is to allow the model to complete more
 generations by avoiding a terminal population explosion.
 
-So for testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50
+Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50
 times original population size ($=50\times 5000$) for fair(er) comparison.
 still introduces bias as a small proportion of truncated number of
 generations.
+
+%% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
+% library(lattice)
+% df_low <- load_dfa('results/results_lowstart.data')
+% df_high <- load_dfa('results/results_highstart.data')
+% par(mfrow=c(1,2),cex=0.5)
+% densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start case', xlab='Final generation')
+% densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start case', xlab='Final generation')
+%% end.rcode
 
 Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \ref{low-start-case}.
 
@@ -2143,6 +2143,8 @@ This leads to a alternative hypothesis for population restriction - rather than 
 
 \subsubsection{Fitness-based sampling}
 
+TODO
+
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
@@ -2154,70 +2156,8 @@ This leads to a alternative hypothesis for population restriction - rather than 
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
-\subsection{General procedure for regression}\label{general-procedure-for-regression}
 
-(but bimodal data so a simpler model is available)
-Regression, with response variable of (end\_correlation -
-start\_correlation) and independent or predictor variables of the
-previously listed factors
-
-Check model fit
-
-\begin{itemize}
-\tightlist
-\item
-  Visually - look at scatterplot (not really possible for multi-factor
-  data), residuals vs fitted and Q-Q plot
-\item
-  F\_obs = MSR/MSE, where MSR = SSR/1 and MSE = SSE/(n-2), and SSR =
-  regression sum of squares and SSE the error sum of squares i.e.,
-  SST=SSR+SSE in the ANOVA formulation
-\item
-  R\^{}2 = 1-(SSE/SST) = SSR/SST, or adjusted for number of factors,
-  R\^{}2\_a = 1-(MSE/MST)
-\end{itemize}
-
-No particular assumptions required for least-squares model
-
-Improve model using backward elimination
-
-Remove highest p-value term and test
-
-Improve model using AIC/BIC
-
-\begin{itemize}
-\tightlist
-\item
-  stepAIC() from MASS package
-\end{itemize}
-
-Check if reduced model is an improvement, that is, if reduced model is
-same as original but simpler
-
-\begin{itemize}
-\tightlist
-\item
-  anova(original, reduced) - if same then Pr won't be significant (H0
-  for Anova is that there is a difference)
-\item
-  must check assumptions for anova test
-\item
-  or check using glht() from multcomp to test using General Linear
-  Hypothesis (Graybill 1976). Uses a matrix to test H0:KB=m
-\end{itemize}
-
-Check model assumptions - nothing specific for least squares regression,
-but for anova need to check error distribution, and adjust model as
-appropriate
-
-\begin{itemize}
-\tightlist
-\item
-  checking.plots()
-\end{itemize}
-\
-
-\subsection{Power}\label{power}
+\subsection{Examination of Statistical Power}\label{power}
 
 Next we check the statistical power of the proposed ANOVA test for the population size-restricted results:
 
@@ -2233,17 +2173,19 @@ Next we check the statistical power of the proposed ANOVA test for the populatio
 
 We conclude that the power with on \rinline{x['groups']} groups and \rinline{x['n']} observations per group appears adequate.
 
-\subsection{Low start case - show that inheritance can emerge from low-fidelity copying}\label{low-start-case---show-that-inheritance-can-emerge-from-low-fidelity-copying}
+\subsection{Low start case}\label{low-start-case-analysis}
 
-H$_0$: fidelity remains the same over a run, for all factor values, or
+The low start case tests if inheritance can emerge from low-fidelity copying.
+
+\begin{itemize}[label={}]
+\item H$_0$: fidelity remains the same over a run, for all factor values, or
 $\vert fidelity_{end} - fidelity_{start} \vert = 0$
-
-H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+\end{itemize}
 
 Check shape of data:
 
-Correlation measures (both response\_cor and final\_ave\_cor) are
-strongly bimodal
+Correlation measures (both response\_cor and final\_ave\_cor) are strongly bimodal
 (densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
 
 %% begin.rcode lowstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Low start results'
@@ -2255,10 +2197,9 @@ strongly bimodal
 % densityplot(~df_low$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
 
-Fitness is non-normal, but closer than correlation
-(densityplot(\textasciitilde{}df\_low\$final\_ave\_fit))
+Fitness is non-normal, but less so than fidelity.
 
-What does the standard deviation do? By hypothesis, should reduce over time Which
+How does the \gls{sd} change over time? By hypothesis, should reduce over time Which
 factors are responsible for each peak of correlation?
 
 %% begin.rcode
@@ -2273,7 +2214,7 @@ correlation\_correlation == 1 for all runs where final\_ave\_cor
 % df_test <- df_low[df_low$correlation_correlation == -1,]
 % m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
 % summary(m0)
-% anova(m0)
+% x <- anova(m0)
 %% end.rcode
 
 By inspection, all runs resulted in increased correlation (measured by
@@ -2285,16 +2226,16 @@ cluster of least-response factors (\ie approximately where correlation\_correlat
 
 Result is significant with p-value \textless{} 2.2e-16
 
-Conclusion: H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
-regardless of the model design, but is strongest when
-correlation\_correlation == 1.
+In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
+regardless of the model design, but is strongest when correlation\_correlation == 1.
 
-\subsection{High start case, to confirm that can maintain correlation}\label{high-start-case---show-that-can-maintain-correlation}
+\subsection{High start case, to confirm that can maintain correlation}\label{high-start-case-analysis}
 
-H$_0$: fidelity remains the same over a run, for all factor values, or
+\begin{itemize}[label={}]
+\item H$_0$: fidelity remains the same over a run, for all factor values, or
 $\vert fidelity_{end} - fidelity_{start} \vert = 0$
-
-H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+\end{itemize}
 
 By inspection (plot(df\_high\$response\_cor)), strongly bimodal where
 one cluster around +0.3, and the other between -0.1 and -0.5
@@ -2330,7 +2271,7 @@ same correlation\_correlation == -1
 
 Again, H$_0$ can be rejected and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
-\chapter{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+\chapter[Test of Hypothesis 2 under changing conditions]{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using CORRELATION\_CORRELATION mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2369,7 +2310,7 @@ $population_{new}\leftarrow population_{new} + \text{ new Element with fitness }
 }
 \Return $population_{new}$\;
 }
-\caption{Functions}
+\caption{Tweak Fitness Function}
 \end{algorithm}
 
 \begin{algorithm}[h]
@@ -2377,13 +2318,13 @@ $population_{new}\leftarrow population_{new} + \text{ new Element with fitness }
 \SetKwFunction{f}{f}
 \For{generation $\in 1\dots$number of generations}{
 \ldots{}
-\BlankLine
-\tcp{Changing environment}
+\tcp{(otherwise identical to Base Model)}
+\ldots{}
 \uIf{time to change environment}{
 $population\leftarrow tweakFitness(population)$\;
 }
 }
-\caption{Algorithm for the changing conditions Model}\label{changingmodelalgorithm}
+\caption{Algorithm for the Changing Environment Model}\label{changingmodelalgorithm}
 \end{algorithm}
 
 \section{Predictions}\label{predictions-2}
@@ -4348,7 +4289,7 @@ Figure \ref{fig:cyclesbypartition} suggests that the first partition, representi
 %	boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
 %% end.rcode
 
-%\begin{figure}[h!]
+%\begin{figure}[ht]
 %\centering
 %\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
 %\caption{Response by $S_\mathrm{Reactant}$}
@@ -4362,7 +4303,7 @@ Figure \ref{fig:cyclesbypartition} suggests that the first partition, representi
 %	boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
 %% end.rcode
 
-%\begin{figure}[h!]
+%\begin{figure}[ht]
 %\centering
 %\includegraphics[width=0.95\linewidth]{figures/product_strategy}
 %\caption{Response by $S_\mathrm{Product}$}
@@ -4380,7 +4321,7 @@ We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\m
 %	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 %% end.rcode
 
-%\begin{figure}[h!]
+%\begin{figure}[ht]
 %\centering
 %\subcaptionbox{Cycle Count by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_count}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_count}}
 %\subcaptionbox{Cycle Length by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_length}}[0.45\linewidth][l]{\includegraphics[width=0.45\linewidth]{figures/cycle_length}}

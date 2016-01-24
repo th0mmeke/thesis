@@ -2094,7 +2094,6 @@ generations.
 % library(lattice)
 % df_low <- load_dfa('results/results_lowstart.data')
 % df_high <- load_dfa('results/results_highstart.data')
-% par(mfrow=c(2,1),cex=0.5)
 % densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start case', xlab='Final generation')
 % densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start case', xlab='Final generation')
 %% end.rcode
@@ -2135,7 +2134,6 @@ The first mechanism uses a fitness-independent sampling of $N_{population}$ elem
 %% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
-% par(mfrow=c(3,2),cex=0.5)
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
 % densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
 % bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
@@ -2168,7 +2166,6 @@ TODO
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
-% par(mfrow=c(3,2),cex=0.5)
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
 % densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
 % bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
@@ -2209,11 +2206,13 @@ Check shape of data:
 Correlation measures (both response\_cor and final\_ave\_cor) are strongly bimodal
 (densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
 
-%% begin.rcode lowstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Low start results'
+%% begin.rcode lowstartrc, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Low start results'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
 % plot(df_low$response_cor, xlab='Experiment run', ylab='Fidelity')
-% densityplot(~df_low$response_cor, xlab='Response Fidelity')
+%% end.rcode
+
+%% begin.rcode lowstartdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='Low start: density plots for fidelity and fitness'
 % densityplot(~df_low$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
 % densityplot(~df_low$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
@@ -2223,31 +2222,29 @@ Fitness is non-normal, but less so than fidelity.
 How does the \gls{sd} change over time? By hypothesis, the gls{sd} should reduce over time.
 
 %% begin.rcode
-% summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
+%# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
 %% end.rcode
 
-By inspection (df\_low{[}df\_low\$final\_ave\_cor\textgreater{}0.8,{]}),
-correlation\_correlation == 1 for all runs where final\_ave\_cor
-\textgreater{} 0.8, and correlation\_correlation == -1 for all others
+By inspection
+\textbf{Correlate Fidelity} == 1 for all runs where final\_ave\_cor
+\textgreater{} 0.8, and \textbf{Correlate Fidelity} == -1 for all others
 
 %% begin.rcode lowstartanova, echo=FALSE
 % df_test <- df_low[df_low$correlation_correlation == -1,]
 % m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
-% summary(m0)
+% #summary(m0)
 % x <- anova(m0)
 %% end.rcode
 
 By inspection, all runs resulted in increased correlation (measured by
-response\_cor) (plot(df\_low\$response\_cor))
+response\_cor) \ref{fig:lowstartrc}
 
-How significant? Fit linear model following earlier procedure - examine
-cluster of least-response factors (\ie approximately where correlation\_correlation ==
-0)
+How significant? Fit linear model following earlier procedure 
 
-Result is significant with p-value \textless{} rinline{x['p.value']}.
+Result is significant with p-value \textless{} rinline{round(x['p.value'],2)}.
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
-regardless of the model design, but is strongest when correlation\_correlation == 1.
+regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
 
 \subsection{High start case}\label{high-start-case-analysis}
 
@@ -2257,40 +2254,44 @@ $\vert fidelity_{end} - fidelity_{start} \vert = 0$
 \item H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
 \end{itemize}
 
-By inspection (plot(df\_high\$response\_cor)), strongly bimodal where
-one cluster around +0.3, and the other between -0.1 and -0.5
-approximately
-
-Once again, clusters driven by value of correlation\_correlation
-
-% summary(df_high[df_high$final_ave_cor>0.8,]) # correlation_correlation == 1
-% summary(df_high[df_high$final_ave_cor<=0.8,]) # correlation_correlation == -1
-
-Correlation decreased when starting high and correlation\_correlation ==
--1 - tended to converge on correlation values seen in low start with
-same correlation\_correlation == -1
-
-%% begin.rcode highstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='High start results'
+%% begin.rcode highstartrc, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='High start: Response Correlation'
 % df_high <- load_dfa("results/results_highstart.data")
 % df_high <- df_high[df_high$truncate==1,]
-% plot(df_high$response_cor)
-% densityplot(~df_high$response_cor)
+% plot(df_high$response_cor, xlab='Experiment run', ylab='Fidelity')
+%% end.rcode
+
+%% begin.rcode highstartdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='High start: density plots for fidelity and fitness'
 % densityplot(~df_high$final_ave_cor, xlab='Final average fidelity')
 % densityplot(~df_high$final_ave_fit, xlab='Final average fitness') 
 %% end.rcode
 
+%% begin.rcode highstartsummary
+% #summary(df_high[df_high$final_ave_cor>0.8,]) # correlation_correlation == 1
+% #summary(df_high[df_high$final_ave_cor<=0.8,]) # correlation_correlation == -1
+%% end.rcode
+
+By inspection \ref{fig:highstartdensity}, strongly bimodal where
+one cluster around +0.3, and the other between -0.1 and -0.5
+approximately
+
+Once again, clusters driven by value of \textbf{Correlate Fidelity}
+
+Correlation decreased when starting high and \textbf{Correlate Fidelity} ==
+-1 - tended to converge on correlation values seen in low start with
+same \textbf{Correlate Fidelity} == -1
+
 %% begin.rcode highstartanova,echo=FALSE
 % df_test <- df_high[df_high$correlation_correlation == -1,]
 % m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
-% summary(m0)
-% anova(m0)
+% #summary(m0)
+% x <- anova(m0)
 %% end.rcode
 
-Again, H$_0$ can be rejected and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
+Again, H$_0$ can be rejected (p-value \textless{} rinline{round(x['p.value'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
 \chapter[Test of Hypothesis 2 under changing conditions]{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
-Where inheritance is using CORRELATION\_CORRELATION mechanism, expect
+Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
 that under changing conditions correlation will tend to some lower value
 than 1.0, proportional to variance in change (more change, lower
 correlation).

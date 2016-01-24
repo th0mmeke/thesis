@@ -1819,79 +1819,71 @@ The model defines a population of entities, each of which has only two propertie
 
 This is clearly a very general model and as such has broad applicability and range. 
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/model}
 \end{figure}
 
-\begin{algorithm}[h]
-\DontPrintSemicolon
-\SetKwProg{Def}{def}{:}{}
-\SetKwFunction{f}{f}
-\Def{truncation(population)}{
-\Return $\text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
-}
-\BlankLine
-\Def{selection(population)}{
-$population_{new}\leftarrow \{\}$\;
-\For{each $element$ in $population$} {
-$p_{selection}\leftarrow $parent's fitness\;
-Add $element$ to $population_{new}$ with probability $p_{selection}$\;
-}
-\Return $population_{new}$\;
-}       
-\BlankLine
-\Def{reproduction(population)}{
-$children\leftarrow \{\}$\;
-\For{each $element$ in $population$}{
-$p_{reproduce}\leftarrow $parent's fitness\;
-\BlankLine
-$\text{With probability }p_{reproduce}\text{:}$\;
-\Indp
-$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
-\BlankLine
-\For{each of the $n$ children}{
-child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
-child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
-Add new child with these values for fitness and fidelity to $children$\;
-}
-}
-\Return $children$\;
-}
-\BlankLine
-\Def{tweakFitness(population)}{
-$population_{new}\leftarrow \{\}$\;
-\For{each $element$ in $population$}{
-$fitness\leftarrow \text{ fitness of }element$\;
-$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{fitness-0.2,0.95}$\;
-}
-\Return $population_{new}$\;
-}
-\caption{Functions}
-\end{algorithm}
-
-\begin{algorithm}[h]
+\begin{algorithm}[t]
 \DontPrintSemicolon
 \SetKwFunction{f}{f}
 \For{generation $\in 1\dots$number of generations}{
 \tcp{Core algorithm}
 $population\leftarrow selection(population)$\;
 $population\leftarrow population + reproduction(population)$\;
-\uIf{size of population is restricted}{
-$population\leftarrow truncation(population)$\;
-}
 \BlankLine
 \tcp{Check if population size is no longer sustainable}
 \uIf{population size is too small}{
 break\;
 }
-\BlankLine
-\tcp{Changing environment}
-\uIf{time to change environment}{
-$population\leftarrow tweakFitness(population)$\;
-}
 }
 \caption{Algorithm for the base Model}\label{base-model-algorithm}
+\end{algorithm}
+
+\begin{algorithm}[t]
+	\DontPrintSemicolon
+	\SetKwProg{Def}{def}{:}{}
+	\SetKwFunction{f}{f}
+	\Def{truncation(population)}{
+		\Return $\text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
+	}
+	\BlankLine
+	\Def{selection(population)}{
+		$population_{new}\leftarrow \{\}$\;
+		\For{each $element$ in $population$} {
+			$p_{selection}\leftarrow $parent's fitness\;
+			Add $element$ to $population_{new}$ with probability $p_{selection}$\;
+		}
+		\Return $population_{new}$\;
+	}       
+	\BlankLine
+	\Def{reproduction(population)}{
+		$children\leftarrow \{\}$\;
+		\For{each $element$ in $population$}{
+			$p_{reproduce}\leftarrow $parent's fitness\;
+			\BlankLine
+			$\text{With probability }p_{reproduce}\text{:}$\;
+			\Indp
+			$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
+			\BlankLine
+			\For{each of the $n$ children}{
+				child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
+				child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+				Add new child with these values for fitness and fidelity to $children$\;
+			}
+		}
+		\Return $children$\;
+	}
+	\BlankLine
+	\Def{tweakFitness(population)}{
+		$population_{new}\leftarrow \{\}$\;
+		\For{each $element$ in $population$}{
+			$fitness\leftarrow \text{ fitness of }element$\;
+			$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{fitness-0.2,0.95}$\;
+		}
+		\Return $population_{new}$\;
+	}
+	\caption{Functions}
 \end{algorithm}
 
 Each entity in the population has two properties, or traits:
@@ -1904,7 +1896,7 @@ Each entity in the population has two properties, or traits:
   $fidelity$ between parent and child, where $fidelity \in [0,1]$
 \end{enumerate}
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}
@@ -1913,14 +1905,14 @@ $Fidelity = 0$ means that the value for the child's trait is completely unrelate
 
 \subsection{Assumptions}\label{assumptions-1}
 
-The model contains several assumptions which are worth making explicit here:
+The model contains several assumptions which are worth making explicit:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   $Fidelity$ represents a distribution, centered on some proportion of
   the $fidelity$ of the parent and with some \gls{sd}, bounded by $[0,1]$; similarly for fitness.
 \item
-  $Fitness$ and $fidelity$ are independent, implying that fidelity changes have no direct effect on fitness (and vice versa.)
+  $Fitness$ and $fidelity$ are independent, implying that $fidelity$ changes have no direct effect on $fitness$ (and vice versa.)
 \item
 	A parent cannot directly influence the fitness of children - selection is an unseeing hand.
 \item
@@ -1928,7 +1920,7 @@ The model contains several assumptions which are worth making explicit here:
   ends will be biased towards the middle of the range.
 \end{enumerate}
 
-In the derived model described in Part \ref{the-search-for-creativity}, these parameters themselves become endogenized, in the case of $fitness$ into an implicit relative fitness and for $fidelity$ into the function of the copying/variation mechanism. 
+In the derived model described in Part \ref{the-search-for-creativity}, these parameters themselves become endogenized, in the case of $fitness$ into an implicit relative fitness and for $fidelity$ into the outcome of the copying/variation mechanism. 
 For now, though, keeping these explicit makes clear their influence on the model.
 
 \section{Predictions}\label{predictions}
@@ -1942,7 +1934,7 @@ In an unchanging environment, where the relative fitness of an entity, with resp
   Population variance for inheritance will decrease more than chance,
   average inheritance will tend towards one, or perfect inheritance.
 \item
-  Inheritance will be `perfect` or in other words, $fidelity$ will approach 1.0.
+  Inheritance eventually becomes `perfect` or in other words, $fidelity$ will approach 1.0.
   Higher fitness entities will survive longer and reproduce more; higher
   fidelity reduces variation in fitness and so results in higher
   fitness being preferred.
@@ -2022,7 +2014,7 @@ We examine two different initial population designs, one called the Low Start ca
 
 Entities begin with a low initial fidelity, for two reasons: first, directly from Hypothesis 2 and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities be eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world to the world of Darwinian reproducers.
 
-\begin{table}[ht]
+\begin{table}[t]
 \begin{center}
 \tiny
 \begin{tabular}{@{}ll@{}}
@@ -2042,7 +2034,7 @@ Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
 
 In this case, entities start with a higher initial fidelity and a greater range of fitnesses. This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
 
-\begin{table}[ht]
+\begin{table}[t]
 \begin{center}
 \tiny
 \begin{tabular}{@{}ll@{}}
@@ -2070,7 +2062,7 @@ Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
 % }
 %% end.rcode
 
-\subsection{Check effect of an upper bound on population size}\label{check-effect-of-truncation}
+\subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
 There is nothing to prevent a population growing beyond the capacity of the simulation system in the absence of any restrictions on population size. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
 
@@ -2098,29 +2090,57 @@ times original population size ($=50\times 5000$) for fair(er) comparison.
 still introduces bias as a small proportion of truncated number of
 generations.
 
-%% begin.rcode truncationdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
+%% begin.rcode truncationdensity, echo=FALSE, out.width='0.7\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
 % library(lattice)
 % df_low <- load_dfa('results/results_lowstart.data')
 % df_high <- load_dfa('results/results_highstart.data')
-% par(mfrow=c(1,2),cex=0.5)
+% par(mfrow=c(2,1),cex=0.5)
 % densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start case', xlab='Final generation')
 % densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start case', xlab='Final generation')
 %% end.rcode
 
 Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \ref{low-start-case}.
 
+\begin{algorithm}[h]
+	\DontPrintSemicolon
+	\SetKwFunction{f}{f}
+	\For{generation $\in 1\dots$number of generations}{
+		\tcp{Core algorithm}
+		$population\leftarrow selection(population)$\;
+		$population\leftarrow population + reproduction(population)$\;
+		$population\leftarrow truncation(population)$\;
+		\BlankLine
+		\tcp{Check if population size is no longer sustainable}
+		\uIf{population size is too small}{
+			break\;
+		}
+	}
+	\caption{Algorithm for the Model with upper bound on population size}\label{upper-bound-model-algorithm}
+\end{algorithm}
+
+\begin{algorithm}[h]
+	\DontPrintSemicolon
+	\SetKwProg{Def}{def}{:}{}
+	\SetKwFunction{f}{f}
+	\Def{truncation(population)}{
+		\Return $\text{sample }N_{population}\text{ elements from }population\text{ without consideration of fitness}$\;
+	}
+	\caption{Function for population size upper bound}
+\end{algorithm}
+
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{base-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
+The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
-%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-independent sampling'
+%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
+% par(mfrow=c(3,2),cex=0.5)
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
 % densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
 % bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
@@ -2145,14 +2165,15 @@ This leads to a alternative hypothesis for population restriction - rather than 
 
 TODO
 
-%% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='Summary plots for fitness-based sampling'
+%% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
+% par(mfrow=c(3,2),cex=0.5)
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
 % densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
 % bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
@@ -2188,7 +2209,7 @@ Check shape of data:
 Correlation measures (both response\_cor and final\_ave\_cor) are strongly bimodal
 (densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
 
-%% begin.rcode lowstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Low start results'
+%% begin.rcode lowstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Low start results'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
 % plot(df_low$response_cor, xlab='Experiment run', ylab='Fidelity')
@@ -2199,8 +2220,7 @@ Correlation measures (both response\_cor and final\_ave\_cor) are strongly bimod
 
 Fitness is non-normal, but less so than fidelity.
 
-How does the \gls{sd} change over time? By hypothesis, should reduce over time Which
-factors are responsible for each peak of correlation?
+How does the \gls{sd} change over time? By hypothesis, the gls{sd} should reduce over time.
 
 %% begin.rcode
 % summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
@@ -2224,12 +2244,12 @@ How significant? Fit linear model following earlier procedure - examine
 cluster of least-response factors (\ie approximately where correlation\_correlation ==
 0)
 
-Result is significant with p-value \textless{} 2.2e-16
+Result is significant with p-value \textless{} rinline{x['p.value']}.
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
 regardless of the model design, but is strongest when correlation\_correlation == 1.
 
-\subsection{High start case, to confirm that can maintain correlation}\label{high-start-case-analysis}
+\subsection{High start case}\label{high-start-case-analysis}
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity remains the same over a run, for all factor values, or
@@ -2250,16 +2270,13 @@ Correlation decreased when starting high and correlation\_correlation ==
 -1 - tended to converge on correlation values seen in low start with
 same correlation\_correlation == -1
 
-%% begin.rcode highstartplots, echo=FALSE, out.width='0.30\\linewidth',fig.show='hold', fig.cap='High start results'
+%% begin.rcode highstartplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='High start results'
 % df_high <- load_dfa("results/results_highstart.data")
 % df_high <- df_high[df_high$truncate==1,]
 % plot(df_high$response_cor)
 % densityplot(~df_high$response_cor)
-% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
-% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
-% #df_high[df_high$final_ave_cor>0.8,] # correlation_correlation == 1
-% #df_high[df_high$final_ave_cor<=0.8,] # correlation_correlation == -1
-% summary(df_high[df_high$final_ave_cor>=0.8,]$final_ave_cor)
+% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity')
+% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') 
 %% end.rcode
 
 %% begin.rcode highstartanova,echo=FALSE
@@ -2294,7 +2311,7 @@ Significance
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same initial conditions (low \ref{low-start-case} and high start \ref{high-start-case} cases) with the addition to the Base Model \ref{base-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+Same initial conditions (low \ref{low-start-case} and high start \ref{high-start-case} cases) with the addition to the Bounded Model \ref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}[h]
 \DontPrintSemicolon
@@ -2314,16 +2331,22 @@ $population_{new}\leftarrow population_{new} + \text{ new Element with fitness }
 \end{algorithm}
 
 \begin{algorithm}[h]
-\DontPrintSemicolon
-\SetKwFunction{f}{f}
-\For{generation $\in 1\dots$number of generations}{
-\ldots{}
-\tcp{(otherwise identical to Base Model)}
-\ldots{}
-\uIf{time to change environment}{
-$population\leftarrow tweakFitness(population)$\;
-}
-}
+	\DontPrintSemicolon
+	\SetKwFunction{f}{f}
+	\For{generation $\in 1\dots$number of generations}{
+		\tcp{Core algorithm}
+		$population\leftarrow selection(population)$\;
+		$population\leftarrow population + reproduction(population)$\;
+		$population\leftarrow truncation(population)$\;
+		\BlankLine
+		\tcp{Check if population size is no longer sustainable}
+		\uIf{population size is too small}{
+			break\;
+		}
+		\uIf{time to change environment}{
+			$population\leftarrow tweakFitness(population)$\;
+		}
+	}
 \caption{Algorithm for the Changing Environment Model}\label{changingmodelalgorithm}
 \end{algorithm}
 
@@ -2555,7 +2578,7 @@ normal experience for it to be relevant.
 
 All Artificial Chemistry based on this model:
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \begin{tikzpicture}
 \node (silico) at (0,0) {\textit{In Silico}};
@@ -3510,7 +3533,7 @@ taken in graph-based chemistries such as GGL/ToyChem
 \autocite{Benko2003,Benko2005} where reactions are modelled as a series
 of changes to graph edges, or bonds, only.
 
-\begin{table}[ht]
+\begin{table}[t]
 \begin{center}
 \begin{tabular}{@{}lp{2cm}p{2cm}p{2cm}@{}}
 \toprule
@@ -3544,7 +3567,7 @@ Quadruple & C & C & 200\\
 \label{default_bond_energies}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[t]
 \begin{center}
 \begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
 \toprule
@@ -3590,7 +3613,7 @@ energy in the system is always constant, and equal to the sum of the
 initial kinetic energy of all molecules plus the sum of their potential
 energies.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \begin{tikzpicture}
 [enode/.style={circle,draw=gray!50,inner sep=5pt,minimum size=30pt}]
@@ -3738,7 +3761,7 @@ Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e
 
 As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \ref{fig:reaction_selection_weights}.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \begin{tikzpicture}
 [enode/.style={circle,draw=gray!50,fill=white,radius=0.5cm}]
@@ -4289,7 +4312,7 @@ Figure \ref{fig:cyclesbypartition} suggests that the first partition, representi
 %	boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
 %% end.rcode
 
-%\begin{figure}[ht]
+%\begin{figure}[t]
 %\centering
 %\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
 %\caption{Response by $S_\mathrm{Reactant}$}
@@ -4303,7 +4326,7 @@ Figure \ref{fig:cyclesbypartition} suggests that the first partition, representi
 %	boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
 %% end.rcode
 
-%\begin{figure}[ht]
+%\begin{figure}[t]
 %\centering
 %\includegraphics[width=0.95\linewidth]{figures/product_strategy}
 %\caption{Response by $S_\mathrm{Product}$}
@@ -4321,7 +4344,7 @@ We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\m
 %	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 %% end.rcode
 
-%\begin{figure}[ht]
+%\begin{figure}[t]
 %\centering
 %\subcaptionbox{Cycle Count by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_count}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_count}}
 %\subcaptionbox{Cycle Length by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_length}}[0.45\linewidth][l]{\includegraphics[width=0.45\linewidth]{figures/cycle_length}}

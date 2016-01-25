@@ -1767,6 +1767,27 @@ Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
 
 Or to broaden the scope of the claim to other forms of V and S?
 
+\section{Predictions}\label{predictions}
+
+In an unchanging environment, where the relative fitness of an entity, with respect to the environment, does not change over time, our expectations are:
+
+\begin{enumerate}
+	\def\labelenumi{\arabic{enumi}.}
+	\item Average inheritance will tend towards perfect inheritance.
+		Higher fitness entities will survive longer and reproduce more; higher fidelity reduces variation in fitness and so results in higher fitness being preferred.
+	\item Population variance for inheritance will decrease more than chance.		
+\end{enumerate}
+
+Under changing environmental conditions, where the fitness of an unchanging entity with respect to the environment changes in response to environmental changes, we expect:
+
+\begin{enumerate}
+	\def\labelenumi{\arabic{enumi}.}
+	\item The \gls{sd} of final fidelity under changing conditions \textgreater{} that under fixed conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of $fidelity$.
+	\item $fidelity$ at the end of a run under changing conditions \textless{} that under fixed conditions.
+	\item The final $fitness$ will be in the the range described by the distribution applied in the $tweakFitness$ function.
+\end{enumerate}
+
 \section{Theory}\label{theory}
 
 Degree of variation between generations important (no correlation means
@@ -1799,7 +1820,6 @@ Test: show example of S and not I
 
 \chapter[Test of Hypothesis 2 under fixed conditions]{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-
 %% begin.rcode loaddfa, echo=FALSE
 % load_dfa <- function(t){
 %   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
@@ -1809,25 +1829,31 @@ Test: show example of S and not I
 %   df
 % }
 %% end.rcode
+%% begin.rcode loaddfb, echo=FALSE
+% load_dfb <- function(t){
+%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
+%   df <- read.csv(t, colClasses=colClasses)
+%   df
+% }
+%% end.rcode
 
-\section{Model}\label{model}
-
-To restate Hypothesis 2, Variation and Selection are sufficient for Inheritance. Our experimental goals are to 
+Our goal in this section is to
 \begin{inparaenum}[(i)]
-	\item test Hypothesis 2, and 
+	\item experimentally test the predictions of Hypothesis 2 under a fixed environment (therefore the fitness of an entity does not change), and 
 	\item identify the strength of support for the Hypothesis across a variety of possible influences or factors.
 \end{inparaenum}
 
-We use an exogenous model where the factors and variables, such as fitness, are explicit for ease of understanding. Such a model allows us to directly specify the relationship between fitness and fidelity for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+We adopt an exogenous model where the key elements of the hypothesis, such as inheritance fidelity, are explicit for ease of understanding. Such a model allows us to directly specify the relationship between fitness and fidelity for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
 
-The base model \cref{base-model-algorithm} defines a population of entities, each with two properties - 
-\begin{inparaenum}[(i)]
-	\item $fitness$, where $fitness \in [0,1]$ 
-	\item $fidelity$, also $\in [0,1]$
-\end{inparaenum}
-- and a set of population-transforming functions.
+The base model \cref{base-model-algorithm} defines a population of entities, each with two properties -- $fitness$ and $fidelity$ -- and a set of population-transforming functions.
 
-The initial model only includes functions for the two core elements from the Hypothesis, Selection and Variation \cref{base-model-functions}, although later in this discussion we add others to examine the sensitivity of the model to various influences.
+$Fitness$ represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
+
+$Fidelity$ is a measure of the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high $fidelity$ values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's.
+
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f()$. 
+
+The model only includes functions for the two core elements from the Hypothesis, $Selection$ and $Variation$ (defined in \cref{base-model-functions}), although later we add others to examine the sensitivity of the model to various influences.
 
 A run of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
 
@@ -1857,16 +1883,16 @@ break\;
 	\SetKwFunction{f}{f}
 	\Def{Selection(population)}{
 		$population_{new}\leftarrow \{\}$\;
-		\For{each $element$ in $population$} {
+		\For{each $entity$ in $population$} {
 			$p_{selection}\leftarrow $parent's fitness\;
-			Add $element$ to $population_{new}$ with probability $p_{selection}$\;
+			Add $entity$ to $population_{new}$ with probability $p_{selection}$\;
 		}
 		\Return $population_{new}$\;
 	}       
 	\BlankLine
 	\Def{Variation(population)}{
 		$children\leftarrow \{\}$\;
-		\For{each $element$ in $population$}{
+		\For{each $entity$ in $population$}{
 			$p_{reproduce}\leftarrow $parent's fitness\;
 			\BlankLine
 			$\text{With probability }p_{reproduce}\text{:}$\;
@@ -1881,15 +1907,13 @@ break\;
 		}
 		\Return $children$\;
 	}
-	\caption{Functions}\label{base-model-functions}
+	\caption{Algorithms for the Model functions $Selection$ and $Variation$}\label{base-model-functions}
 \end{algorithm}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}
-
-$Fidelity = 0$ means that the value for a child's trait is completely unrelated (uncorrelated) to its parent's value for that trait; high $fidelity$ values mean high correlation, and when $fidelity = 1.0$ the child's value is the same as the parent's. The specific relationship between parent and child trait values is given by a mapping, represented in the algorithm by the function $f()$.
 
 \subsection{Claim of generality}
 
@@ -1900,36 +1924,19 @@ The model as described is general, under the assumptions given below. It is also
 The model incorporates several assumptions which are worth making explicit:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\item $Fidelity$ represents a distribution, centered on some proportion of the $fidelity$ of the parent and with some \gls{sd}, bounded by $[0,1]$; similarly for fitness.
+\item $Fidelity$ and $fitness$ are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd} .
 \item $Fitness$ and $fidelity$ are independent, implying that $fidelity$ changes have no direct effect on $fitness$ (and vice versa.)
 \item A parent cannot directly influence the fitness of children - selection is an unseeing hand.
 \item $Fitness$ and $fidelity$ are both bounded to $[0,1]$ with the corollary that sampling at low and high ends will be biased towards the middle of the range.
-\end{enumerate}
-
-\section{Predictions}\label{predictions}
-
-In an unchanging environment, where the relative fitness of an entity, with respect to the environment, does not change over time, our expectations for the model are:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Population variance for inheritance will decrease more than chance,
-  average inheritance will tend towards one, or perfect inheritance.
-\item
-  Inheritance eventually becomes `perfect` or in other words, $fidelity$ will approach 1.0.
-  Higher fitness entities will survive longer and reproduce more; higher
-  fidelity reduces variation in fitness and so results in higher
-  fitness being preferred.
 \end{enumerate}
 
 \section{Experimental design}\label{experimental-design}
 
 \subsection{Response variables}\label{response-variables}
 
-From Hypothesis 2 the variable of interest is $fidelity$, or the correlation between parent and child trait values. $Fidelity$ therefore is our response variable. 
+From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is $fidelity$, or the correlation between parent and child property values. $Fidelity$ therefore is our response variable. 
 
-Specifically we use $\overline{fidelity}_{end}$, or the mean fidelity at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. In addition, as we predict that $fidelity$ will increase, we expect $\overline{fidelity}_{end} - \overline{fidelity}_{start} > 0$.
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for $fidelity$ (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. In addition, as we predict that $fidelity$ will increase, we expect $\overline{fidelity}_{end} - \overline{fidelity}_{start} > 0$.
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
@@ -2004,16 +2011,14 @@ At the beginning of each run we construct an initial population, according to so
 
 \paragraph{Low start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity and fitness (see \cref{tbl:low_start_ic}.)
-
-This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
+Entities begin with a low initial fidelity and fitness (see \cref{tbl:low_start_ic}.) This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 \begin{center}
 \tiny
 \begin{tabular}{@{}ll@{}}
 \toprule
-Element property&  Initial range\\
+Property&  Initial range\\
 \midrule
 Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
 Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
@@ -2033,7 +2038,7 @@ In this case, entities start with a higher initial fidelity and a greater range 
 \tiny
 \begin{tabular}{@{}ll@{}}
 \toprule
-Element property&  Initial range\\
+Property&  Initial range\\
 \midrule
 Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
 Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
@@ -2046,7 +2051,7 @@ Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
 
 \section{Analysis}\label{analysis}
 
-This analysis is divided conceptually into two - first, a sanity check on the model and experiment design in \cref{check-effect-of-truncation} and then the analysis of the factors of interest from both Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
+This analysis is divided conceptually in two - first, a sanity check on the model and experiment design in \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
 
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
@@ -2089,16 +2094,16 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 \begin{algorithm}[h]
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
-		$population\leftarrow selection(population)$\;
-		$population\leftarrow population + reproduction(population)$\;
-		$population\leftarrow truncation(population)$\;
+		$population\leftarrow Selection(population)$\;
+		$population\leftarrow population + Reproduction(population)$\;
+		$population\leftarrow Truncation(population)$\;
 		\BlankLine
 		\tcp{Check if population size is no longer sustainable}
 		\uIf{population size is too small}{
 			break\;
 		}
 	}
-	\caption{Algorithm for the Model with upper bound on population size}\label{upper-bound-model-algorithm}
+	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a $truncation$ function}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
 
@@ -2108,10 +2113,10 @@ The first mechanism uses a fitness-independent sampling of $N_{population}$ elem
 
 \begin{algorithm}[tbh]
 	\SetKwProg{Def}{def}{:}{}
-	\Def{truncation(population)}{
+	\Def{Truncation(population)}{
 		\Return $\text{Random sample of }N_{population}\text{ elements from }population$\;
 	}
-	\caption{Function for fitness-independent population size upper bound}
+	\caption{Algorithm for a fitness-independent bound $Truncation$ function}
 \end{algorithm}
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling'
@@ -2146,12 +2151,12 @@ This leads to an alternative hypothesis for population restriction - rather than
 
 \begin{algorithm}[htb]
 	\SetKwProg{Def}{def}{:}{}
-	\Def{truncation(population)}{		
+	\Def{Truncation(population)}{		
 		Order all elements in $population$ by $fitness$\;
 		$population_{new}\leftarrow$Top  $N_{population} $ elements by $fitness$\;
 		\Return $population_{new}$\;
 	} 
-	\caption{Function for fitness-based population size upper bound}
+	\caption{Algorithm for a fitness-based $Truncation$ function}
 \end{algorithm}
 
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
@@ -2167,7 +2172,13 @@ This leads to an alternative hypothesis for population restriction - rather than
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
-The low start case tests if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
+Hypothesis 2 makes two predictions under fixed conditions: 
+\begin{inparaenum}[(i)]
+	\item Average inheritance will tend towards perfect inheritance
+	\item Population variance for inheritance will decrease more than chance
+\end{inparaenum}
+
+The first test is if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity remains the same over a run, for all factor values, or
@@ -2175,32 +2186,21 @@ $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
 \item H$_1$: fidelity changes over a run, given some factor values, or $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-Check shape of data:
+A simple visual inspection of the results in \cref{fig:lowstart} demonstrates that the fidelity measures are strongly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity.
 
-Correlation measures (both response\_cor and final\_ave\_cor) are strongly bimodal
-(densityplot(\textasciitilde{}df\_low\(response_cor) and densityplot(~df_low\)final\_ave\_cor))
-
-%% begin.rcode lowstartrc, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Low start results'
+%% begin.rcode lowstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end} - \\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
-% plot(df_low$response_cor, xlab='Experiment run', ylab='Fidelity')
+% plot(df_low$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
+% plot(df_low$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
+% densityplot(~df_low$final_ave_cor, xlab='Final average fidelity')
+% densityplot(~df_low$final_ave_fit, xlab='Final average fitness')
+% plot(df_low$response_cor, xlab='Experiment run', ylab='Final ave. fidelity - Initial ave. fidelity')
 %% end.rcode
 
-%% begin.rcode lowstartdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='Low start: density plots for fidelity and fitness'
-% densityplot(~df_low$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
-% densityplot(~df_low$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
-%% end.rcode
+By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}
 
-Fitness is non-normal, but less so than fidelity.
-
-How does the \gls{sd} change over time? By hypothesis, the gls{sd} should reduce over time.
-
-%% begin.rcode
-%# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
-%% end.rcode
-
-By inspection
-\textbf{Correlate Fidelity} == 1 for all runs where final\_ave\_cor
+By inspection \textbf{Correlate Fidelity} == 1 for all runs where final\_ave\_cor
 \textgreater{} 0.8, and \textbf{Correlate Fidelity} == -1 for all others
 
 %% begin.rcode lowstartanova, echo=FALSE
@@ -2210,14 +2210,17 @@ By inspection
 % x <- anova(m0)
 %% end.rcode
 
-By inspection, all runs resulted in increased correlation (measured by
-$response\_cor$) \cref{fig:lowstartrc}
-
 How significant? Fit linear model following earlier procedure 
 
 Result is significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
+
+The second test is to examine the \gls{sd} of $fidelity$ changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
+
+%% begin.rcode
+%# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
+%% end.rcode
 
 \subsection{High start case}\label{high-start-case-analysis}
 
@@ -2226,23 +2229,16 @@ In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases 
 \item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-%% begin.rcode highstartrc, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='High start: Response Correlation'
+%% begin.rcode highstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The bottom line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$)'
 % df_high <- load_dfa("results/results_highstart.data")
 % df_high <- df_high[df_high$truncate==1,]
-% plot(df_high$response_cor, xlab='Experiment run', ylab='Fidelity')
+% plot(df_high$final_ave_cor, xlab='Experiment run', ylab='Fidelity')
+% plot(df_high$final_ave_fit, xlab='Experiment run', ylab='Fitness')
+% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
+% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
 
-%% begin.rcode highstartdensity, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='High start: density plots for fidelity and fitness'
-% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity')
-% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') 
-%% end.rcode
-
-%% begin.rcode highstartsummary
-% #summary(df_high[df_high$final_ave_cor>0.8,]) # correlation_correlation == 1
-% #summary(df_high[df_high$final_ave_cor<=0.8,]) # correlation_correlation == -1
-%% end.rcode
-
-By inspection \cref{fig:highstartdensity}, strongly bimodal where
+By inspection \cref{fig:highstart}, strongly bimodal where
 one cluster around +0.3, and the other between -0.1 and -0.5, approximately.
 
 Once again, clusters driven by value of \textbf{Correlate Fidelity}. Correlation decreased in this High Start case when \textbf{Correlate Fidelity} was true, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} true in the Low Start case .
@@ -2339,23 +2335,6 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 \caption{Algorithm for the Changing Environment Model}\label{changingmodelalgorithm}
 \end{algorithm}
 
-\section{Predictions}\label{predictions-2}
-
-Under changing environmental conditions, where the fitness of an unchanging entity with respect to the environment changes in response to environmental changes, we expect that the model will behave as follows:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \gls{sd} of final fidelity under changing conditions \textgreater{} that
-  under fixed conditions (test \#1).
-\item
-  The higher the variability in the environment, the higher the \gls{sd} of $fidelity$.
-\item
- $fidelity$ at the end of a run under changing conditions \textless{} that under fixed conditions
-\item
-  The final $fitness$ will be in the the range described by the distribution applied in the $tweakFitness$ function.
-\end{enumerate}
 
 \section{Experimental test}\label{experimental-test}
 
@@ -2396,14 +2375,6 @@ for repeat in range(0,10):
 \end{verbatim}
 
 \section{Results}\label{results-1}
-
-%% begin.rcode loaddfb, echo=FALSE
-% load_dfb <- function(t){
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df
-% }
-%% end.rcode
 
 %% begin.rcode changingenvironmentsummary, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.cap='Fitness over time (generations) for four different frequencies of environmental change'
 % df<-load_dfb("results/results-229445f.data")
@@ -4505,7 +4476,7 @@ Variation under evolutionary control
   Prediction: V changes over time. In more detailed models, form of V
   may change over time (not possible without an EvoEvo mechanism)
 \item
-  Prediction: correlation between parent and offspring traits is highest
+  Prediction: correlation between parent and offspring properties is highest
   in unchanging (stable) environments, and lowest in varying ones. In
   systems without variation under evolutionary control, correlation is
   unchanging. (in previous section, correlation modelled as under

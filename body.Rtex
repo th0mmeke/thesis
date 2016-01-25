@@ -1409,8 +1409,8 @@ Too special-purpose
 
 \section{Previous publications}\label{previous-publications}
 
-A version of Reactant and Product Strategies \ref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
-and material from \ref{model-validation} in \cite{Young2013}.
+A version of Reactant and Product Strategies \cref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
+and material from \cref{model-validation} in \cite{Young2013}.
 
 ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
@@ -1820,14 +1820,14 @@ To restate Hypothesis 2, Variation and Selection are sufficient for Inheritance.
 
 We use an exogenous model where the factors and variables, such as fitness, are explicit for ease of understanding. Such a model allows us to directly specify the relationship between fitness and fidelity for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
 
-The base model \ref{base-model-algorithm} defines a population of entities, each with two properties - 
+The base model \cref{base-model-algorithm} defines a population of entities, each with two properties - 
 \begin{inparaenum}[(i)]
 	\item $fitness$, where $fitness \in [0,1]$ 
 	\item $fidelity$, also $\in [0,1]$
 \end{inparaenum}
 - and a set of population-transforming functions.
 
-The initial model only includes functions for the two core elements from the Hypothesis, Selection and Variation \ref{base-model-functions}, although later in this discussion we add others to examine the sensitivity of the model to various influences.
+The initial model only includes functions for the two core elements from the Hypothesis, Selection and Variation \cref{base-model-functions}, although later in this discussion we add others to examine the sensitivity of the model to various influences.
 
 A run of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
 
@@ -2004,7 +2004,9 @@ At the beginning of each run we construct an initial population, according to so
 
 \paragraph{Low start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity, for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities be eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world to the world of Darwinian reproducers.
+Entities begin with a low initial fidelity and fitness (see \cref{tbl:low_start_ic}.)
+
+This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 \begin{center}
@@ -2024,7 +2026,7 @@ Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
 
 \paragraph{High start case}\label{high-start-case}
 
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses. This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances (TODO : ref) but as our model omits drift (TODO: true?) we can eliminate it as an acceptable explanation for any downwards trend.
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:high_start_ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances (TODO : ref) but as our model omits drift (TODO: true?) we can eliminate it as an acceptable explanation for any downwards trend.
 
 \begin{table}[t]
 \begin{center}
@@ -2043,6 +2045,8 @@ Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
 \end{table}
 
 \section{Analysis}\label{analysis}
+
+This analysis is divided conceptually into two - first, a sanity check on the model and experiment design in \cref{check-effect-of-truncation} and then the analysis of the factors of interest from both Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
 
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
@@ -2080,7 +2084,7 @@ generations.
 % densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start case', xlab='Final generation')
 %% end.rcode
 
-Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \ref{low-start-case}.
+Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \cref{low-start-case}.
 
 \begin{algorithm}[h]
 	\For{generation $\in 1\dots$number of generations}{
@@ -2100,7 +2104,7 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \ref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
+The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
 \begin{algorithm}[tbh]
 	\SetKwProg{Def}{def}{:}{}
@@ -2121,7 +2125,7 @@ The first mechanism uses a fitness-independent sampling of $N_{population}$ elem
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
 %% end.rcode
 
-From the plots in \ref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
+From the plots in \cref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
 %independent continuous random samples where the underlying distributions
@@ -2134,7 +2138,7 @@ From the plots in \ref{fig:fitnessindependentplots} it is clear that the results
 
 Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \ref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
 This leads to an alternative hypothesis for population restriction - rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
 
@@ -2163,12 +2167,12 @@ This leads to an alternative hypothesis for population restriction - rather than
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
-The low start case tests if inheritance can emerge from low-fidelity copying.
+The low start case tests if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity remains the same over a run, for all factor values, or
-$\vert fidelity_{end} - fidelity_{start} \vert = 0$
-\item H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+$\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
 Check shape of data:
@@ -2207,21 +2211,19 @@ By inspection
 %% end.rcode
 
 By inspection, all runs resulted in increased correlation (measured by
-response\_cor) \ref{fig:lowstartrc}
+$response\_cor$) \cref{fig:lowstartrc}
 
 How significant? Fit linear model following earlier procedure 
 
-Result is significant with p-value \textless{} rinline{round(x['p.value'],2)}.
+Result is significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
-In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases
-regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
+In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
 
 \subsection{High start case}\label{high-start-case-analysis}
 
 \begin{itemize}[label={}]
-\item H$_0$: fidelity remains the same over a run, for all factor values, or
-$\vert fidelity_{end} - fidelity_{start} \vert = 0$
-\item H$_1$: fidelity changes over a run, given some factor values, or $\vert fidelity_{end} - fidelity_{start} \vert > 0$
+\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
 %% begin.rcode highstartrc, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold',  fig.cap='High start: Response Correlation'
@@ -2240,15 +2242,10 @@ $\vert fidelity_{end} - fidelity_{start} \vert = 0$
 % #summary(df_high[df_high$final_ave_cor<=0.8,]) # correlation_correlation == -1
 %% end.rcode
 
-By inspection \ref{fig:highstartdensity}, strongly bimodal where
-one cluster around +0.3, and the other between -0.1 and -0.5
-approximately
+By inspection \cref{fig:highstartdensity}, strongly bimodal where
+one cluster around +0.3, and the other between -0.1 and -0.5, approximately.
 
-Once again, clusters driven by value of \textbf{Correlate Fidelity}
-
-Correlation decreased when starting high and \textbf{Correlate Fidelity} ==
--1 - tended to converge on correlation values seen in low start with
-same \textbf{Correlate Fidelity} == -1
+Once again, clusters driven by value of \textbf{Correlate Fidelity}. Correlation decreased in this High Start case when \textbf{Correlate Fidelity} was true, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} true in the Low Start case .
 
 %% begin.rcode highstartanova,echo=FALSE
 % df_test <- df_high[df_high$correlation_correlation == -1,]
@@ -2257,7 +2254,7 @@ same \textbf{Correlate Fidelity} == -1
 % x <- anova(m0)
 %% end.rcode
 
-Again, H$_0$ can be rejected (p-value \textless{} rinline{round(x['p.value'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
+Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
 \subsection{Is the choice of distribution function significant?}\label{is-the-choice-of-distribution-function-significant}
 
@@ -2304,7 +2301,7 @@ Significance
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same initial conditions (low \ref{low-start-case} and high start \ref{high-start-case} cases) with the addition to the Bounded Model \ref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \cref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}[h]
 \DontPrintSemicolon
@@ -2727,7 +2724,7 @@ principles. Because of the complexities of real-world chemistry this
 later method appears to be quite difficult, and the goal of a realistic,
 computationally practical, artificial chemistry remains open. However,
 the more limited objective of a less realistic, but still fully
-constructive chemistry, has been achieved (see Table \ref{classification-of-artificial-chemistries} for
+constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for
 examples.). A constructive chemistry (\autocite{Fontana1994}) is one
 where new components may be generated through the action of other
 components, and where those new components may themselves take part in
@@ -3509,10 +3506,10 @@ internal and potential.
   absolutely determined by the atomic number of the two Atoms at either
   end of the bond, and the type of bond itself -- single, double or
   triple. ToyWorld provides a table of standard values in
-  \ref{default_bond_energies}, based upon real-world chemistry.
+  \cref{default_bond_energies}, based upon real-world chemistry.
   Unspecified bonds are given the average energy of specified bonds of
   the same bond type. Examples of molecules with associated potential
-  energies are given in \ref{example_potential_energies}.
+  energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
 Our energy model enforces conservation of mass so reactions can be
@@ -3692,10 +3689,10 @@ while bond destruction results in an increase. A change in bond type is
 equivalent to a creation and then a destruction. The magnitude of the
 change in potential energy, measured in arbitrary energy units, is taken
 from a table of bond energies for each combination of atoms and bond
-type (\ref{default_bond_energies}. The standard table is based upon
+type (\cref{default_bond_energies}. The standard table is based upon
 a simplification of real-world chemical bond energies. For example, the
 creation of a H-H bond releases 104.2 units; the breaking of a C=O
-double bond takes 185 energy units. \ref{example_potential_energies}
+double bond takes 185 energy units. \cref{example_potential_energies}
 shows the potential energy for a sample of molecules.
 
 How should we choose between alternative sets of possible products for
@@ -3716,7 +3713,7 @@ choosing with uniform probability from a distribution of reaction
 alternatives weighted by the total of the energy changes associated with
 the bond changes. This biases selection towards the Least Energy
 alternative; the strength of the bias is determined by the degree of the
-weighting. Figure\ref{fig1} shows an example of the shift in products
+weighting. Figure\cref{fig1} shows an example of the shift in products
 that occurs as a result of this weighting as the overall quantity of
 energy in the system is changed.
 
@@ -3727,7 +3724,7 @@ energy required for the option versus the energy available.
 
 We select a reaction to fire from the possible alternatives for the
 reactants by probabilistic selection from the alternatives biased
-towards options that release rather than consume energy. Fig. \ref{fig1}
+towards options that release rather than consume energy. Fig. \cref{fig1}
 shows an example of the shift in products that occurs as a result of
 this weighting as the overall quantity of energy in the system is
 changed.
@@ -3747,7 +3744,7 @@ e_i=
 
 Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
 
-As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \ref{fig:reaction_selection_weights}.
+As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \cref{fig:reaction_selection_weights}.
 
 \begin{figure}[t]
 \begin{center}
@@ -3800,7 +3797,7 @@ energies.
 The Reactor Algorithm selects one of the reaction alternatives by
 choosing from a distribution of reaction alternatives weighted by
 associated energy changes (as discussed in
-\ref{product-selection-strategies}.)
+\cref{product-selection-strategies}.)
 
 \subsection{Setting product velocities and internal energies}\label{setting-product-velocities-and-internal-energies}
 
@@ -3818,8 +3815,8 @@ of the reacting system, the vector sum of the momentum of the products
 must equal zero. Therefore one possible solution to the product
 velocities is to arrange their vector momentums according to simple
 geometry: for two products, we arrange their momentums in a line (line
-\ref{alg:2products} in \ref{alg:post_collision_adjustments}); for three
-products, an equilateral triangle (line \ref{alg:3products}), and by
+\cref{alg:2products} in \cref{alg:post_collision_adjustments}); for three
+products, an equilateral triangle (line \cref{alg:3products}), and by
 extension, for four products, a square and so on.
 
 \begin{algorithm}[h]
@@ -3874,16 +3871,16 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 Following a standard method, we first transfer the molecules from the
 frame of reference of the reaction vessel into the centre of mass (CoM)
 reference frame by subtracting the velocity of the CoM from each
-particle (line \ref{alg:lab_to_CoM_frame}). Correspondingly, we also
+particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also
 adjust the energy of the collision by subtracting the KE of the CoM. We
 recognize that in the CoM frame the vector sum of the momentums will be
 zero; working in this frame reduces the number of vectors we must sum by
 one (the momentum of the CoM itself.)
 
-We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
+We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \cref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
 
 Finally, we convert from the CoM reference frame to the initial frame by
-adding back the velocity of the CoM (line \ref{alg:CoM_to_lab_frame}).
+adding back the velocity of the CoM (line \cref{alg:CoM_to_lab_frame}).
 
 This method satisfies our requirements of conservation of momentum and
 energy for arbitrary numbers of reactants and products while being
@@ -3893,7 +3890,7 @@ configurations. An improvement would be to perturb the geometry of the
 vectors in the CoM frame to remove the regularity.
 
 The outcomes for each reaction alternative from an example collision are
-shown in \ref{fig:collision_diagrams}.
+shown in \cref{fig:collision_diagrams}.
 
 \tdplotsetmaincoords{60}{110}
 
@@ -4048,7 +4045,7 @@ shown in \ref{fig:collision_diagrams}.
 \section{Introduction}\label{introduction-4}
 
 The design outlined in Section
-\ref{toyworld} leads to the following expectations, to be tested
+\cref{toyworld} leads to the following expectations, to be tested
 experimentally.
 
 \begin{enumerate}
@@ -4076,7 +4073,7 @@ simulation for 10,000 iterations at four successive initial average
 kinetic energy levels---0, 67, 133, and 200 units per molecule---with
 each molecule initially at quantity 100. The experiment was run first
 with a reactant set containing N\textsubscript{2}O\textsubscript{4} and
-2NO\textsubscript{2} (results in Fig.\ref{fig1}), and then with a
+2NO\textsubscript{2} (results in Fig.\cref{fig1}), and then with a
 reactant set of H\textsubscript{2}, O\textsubscript{2} and H\textsubscript{2}O.
 
 \begin{figure}
@@ -4182,8 +4179,8 @@ extended period without running out of possible reactions (from lack of energy f
 Factor & +1 value & -1 value & Description\\
 \hline
 \noalign{\smallskip}
-$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \ref{reactant-selection-strategies}\\
-$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \ref{product-selection-strategies}\\
+$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \cref{reactant-selection-strategies}\\
+$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \cref{product-selection-strategies}\\
 $E_\mathrm{Vessel}$&		300&							100&		Initial kinetic energy of each molecule in the reaction vessel\\
 $E_\mathrm{Bonds}$&		Single=50, Double=100, Triple=200& Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3&	Energy required to break a bond of the given type\\
 \hline
@@ -4196,7 +4193,7 @@ We concentrate on three related response, or dependent, variables---Number of cy
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
 \section{Experiment Design}
-The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \ref{tbl:factors}.
+The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \cref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
@@ -4254,7 +4251,7 @@ Max. 		&199.00    &12.00	&216.00\\
 \label{tbl:results}
 \end{table}%
 
-A view of the results is given in Table \ref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
+A view of the results is given in Table \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
 %% begin.rcode loaddfc, echo=FALSE
 %	load_dfc <- function(f){
@@ -4290,7 +4287,7 @@ A view of the results is given in Table \ref{tbl:results}: reaction networks bui
 \end{figure}
 
 \subsection{Analysis and Discussion}
-Figure \ref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \ref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
+Figure \cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
 %% begin.rcode reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '
 %	df <- subset(df,df$Partition.Start != "4750")
@@ -4322,9 +4319,9 @@ Figure \ref{fig:cyclesbypartition} suggests that the first partition, representi
 %\end{figure}
 
 \subsection{RQ1: Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of Figure \ref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \ref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
+From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
-We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \ref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
+We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
 %% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
 %	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
@@ -4342,13 +4339,13 @@ We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\m
 
 \subsection{RQ2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
-From Figure \ref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
+From Figure \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
 \subsection{RQ3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
 
-We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \ref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
+We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
 The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
@@ -4547,7 +4544,7 @@ We have shown that:
 
 And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
-TODO: link OEE to selection and variation from work in \ref{the-search-for-creativity}
+TODO: link OEE to selection and variation from work in \cref{the-search-for-creativity}
 
 Requires a series of steps - akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,

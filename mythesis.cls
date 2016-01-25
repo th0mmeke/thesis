@@ -45,6 +45,13 @@
 \RequirePackage{textcase} % provides \MakeTextUppercase and \MakeTextLowercase
 \RequirePackage{letterspace} % Set up letterspacing (using microtype package) -- requires pdfTeX v1.40+
 
+\ifmyhyperref
+\RequirePackage[pageanchor,hyperindex]{hyperref}
+\RequirePackage{bookmark}
+\fi
+\RequirePackage{cleveref}
+
+
  \newcommand{\allcapsspacing}[1]{\textls[200]{#1}}
  \newcommand{\smallcapsspacing}[1]{\textls[50]{#1}}
  \newcommand{\allcaps}[1]{\textls[200]{\MakeTextUppercase{#1}}}
@@ -224,11 +231,6 @@ Copyright \copyright \the\year\ \theAuthor\\
 \theAppendices
 }\fi
 }
-
-\ifmyhyperref
-\RequirePackage[pageanchor,hyperindex]{hyperref}
-\RequirePackage{bookmark}
-\fi
 
 \ifthenelse{\boolean{myglossary}}
 {\RequirePackage[toc,nonumberlist]{glossaries}\makeglossaries%

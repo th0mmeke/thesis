@@ -1835,6 +1835,7 @@ Test: show example of S and not I
 %   df <- read.csv(t, colClasses=colClasses)
 %   df
 % }
+% library(lattice) # needed for bwplot etc
 %% end.rcode
 
 Our goal in this section is to
@@ -1964,14 +1965,14 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for $fidelity
 \begin{table}
 \begin{center}
 \tiny
-\begin{tabular}{@{}llllp{10cm}@{}}
+\begin{tabular}{@{}llllp{5cm}@{}}
 \toprule
-& Parameter&  Low value&  High value& Description\\
+& Parameter&  Low value ('-1')&  High value ('+1')& Description\\
 \midrule
 0&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)& Probability of reproduction for an entity\\
 1&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)&   Probability of selection for an entity\\
 2&  $n_{children}$&           2&                5&                      Maximum number of children per parent\\
-3&  $Limit population size$&  false&            true&                   Use initial population size as upper limit on size\\
+3&  Limit population size&  false&            true&                   Use initial population size as upper limit on size\\
 4&  $f$&                      Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$&          Function for generating a sample value from a particular distribution\\
 5&  Correlate Fitness&        false&            true&                   Child's fitness is related to parent's fitness (by $f$)\\
 6&  Correlate Fidelity&       false&            true&                   Child's fidelity is related to parent's fidelity (by $f$)\\
@@ -2009,55 +2010,51 @@ We conclude that the power with on \rinline{x_power['groups']} groups and \rinli
 
 At the beginning of each run we construct an initial population, according to some repeatable rules. Although a randomly chosen population is useful for generality, so as not to introduce any bias that may result from a consistent starting point, our interest is also in testing two core attributes for any evolutionary model. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low Start and High Start cases respectively, and they are described in the sections below.
 
-\paragraph{Low start case}\label{low-start-case}
+\paragraph{Low Start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity and fitness (see \cref{tbl:low_start_ic}.) This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
-
-\begin{table}[t]
-\begin{center}
-\tiny
-\begin{tabular}{@{}ll@{}}
-\toprule
-Property&  Initial range\\
-\midrule
-Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
-Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
-\bottomrule
-\end{tabular}
-\end{center}
-\caption{Initial conditions for Low Start case}
-\label{tbl:low_start_ic}
-\end{table}
-
-\paragraph{High start case}\label{high-start-case}
-
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:high_start_ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances (TODO : ref) but as our model omits drift (TODO: true?) we can eliminate it as an acceptable explanation for any downwards trend.
+Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 \begin{center}
 \tiny
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lll@{}}
 \toprule
-Property&  Initial range\\
+Case&	Property&  Initial range\\
 \midrule
-Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
-Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
+\multirow{2}{*}{Low Start}&			Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
+&													Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
+\midrule
+\multirow{2}{*}{High Start}&		Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
+&													Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Initial conditions for High Start case}
-\label{tbl:high_start_ic}
+\caption{Initial conditions for Low Start and High Start cases}
+\label{tbl:ic}
 \end{table}
+
+\paragraph{High Start case}\label{high-start-case}
+
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances (TODO : ref) but as our model omits drift (TODO: true?) we can eliminate it as an acceptable explanation for any downwards trend.
 
 \section{Analysis}\label{analysis}
 
-This analysis is divided conceptually in two - first, a sanity check on the model and experiment design in \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
+This analysis is divided conceptually in two - first, a sanity check on the model and experiment design in \cref{distribution-function-1} and \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
+
+\subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
+
+%% begin.rcode df1, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
+% df_low <- load_dfa("results/results_lowstart.data")
+% df_low <- df_low[df_low$truncate==1,]
+% bwplot(df_low$final_ave_cor~df_low$distribution, names=c('-1','+1'), ylab='Final average fidelity')
+% bwplot(df_low$final_ave_fit~df_low$distribution, names=c('-1','+1'), ylab='Final average fitness')
+%% end.rcode
 
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
-There is nothing to prevent a population growing beyond the capacity of the simulation system in the absence of any restrictions on population size. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
+In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
 
-The size of the population is determined by how population elements are introduced and removed. In standard Evolutionary Computation (\eg autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
+The size of the population is driven by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the standard Evolutionary algorithm, a population limit is enforced through the selection mechanism where the selection returns a set number of elements from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to determine the effects of limits independent of any bias or direction imparted by selection.
 
@@ -2106,7 +2103,6 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a $truncation$ function}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-
 \subsubsection{Fitness-independent sampling}
 
 The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
@@ -2119,15 +2115,14 @@ The first mechanism uses a fitness-independent sampling of $N_{population}$ elem
 	\caption{Algorithm for a fitness-independent bound $Truncation$ function}
 \end{algorithm}
 
-%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling'
+%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling where in all plots factor +1 means there is an upper bound on population size, while -1 represents that the results are unbounded. The top line contains density plots for fidelity and fitness; the middle line boxplots showing ranges, and the bottom line Q-Q plots contrasting bounded and unbounded results.'
 % df <- load_dfa("results/results_untruncated.data")
-% library(lattice)
-% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
-% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
-% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
+% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity', xlab='Final average fidelity') 
+% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness', xlab='Final average fitness')
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity', names=c("-1","+1"), ylab='Final average fidelity')
+% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness', names=c("-1","+1"), ylab='Final average fitness')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity', xlab='+1', ylab='-1')
+% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness', xlab='+1', ylab='-1')
 %% end.rcode
 
 From the plots in \cref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
@@ -2162,33 +2157,34 @@ This leads to an alternative hypothesis for population restriction - rather than
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
-% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity by truncation',) # strongly non-normal
-% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness by truncation',) # strongly non-normal
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity by truncation')
-% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity by truncation')
-% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness by truncation')
+% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity',) # strongly non-normal
+% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness',) # strongly non-normal
+% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity')
+% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness')
+% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity')
+% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness')
 %% end.rcode
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
 Hypothesis 2 makes two predictions under fixed conditions: 
 \begin{inparaenum}[(i)]
-	\item Average inheritance will tend towards perfect inheritance
-	\item Population variance for inheritance will decrease more than chance
+	\item Average inheritance will tend towards perfect inheritance, and
+	\item Population variance for inheritance will decrease more than chance.
 \end{inparaenum}
 
-The first test is if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
+The first test therefore is to examine if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
 
 \begin{itemize}[label={}]
-\item H$_0$: fidelity remains the same over a run, for all factor values, or
-$\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
-\item H$_1$: fidelity changes over a run, given some factor values, or $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
+\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline
+	$\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
+\item H$_1$: fidelity changes over a run, for some factor values, or \newline
+	$\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-A simple visual inspection of the results in \cref{fig:lowstart} demonstrates that the fidelity measures are strongly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity.
+A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is strongly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity.
 
-%% begin.rcode lowstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end} - \\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero'
+%% begin.rcode lowstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end} - \\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero.'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
 % plot(df_low$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
@@ -2200,8 +2196,7 @@ A simple visual inspection of the results in \cref{fig:lowstart} demonstrates th
 
 By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}
 
-By inspection \textbf{Correlate Fidelity} == 1 for all runs where final\_ave\_cor
-\textgreater{} 0.8, and \textbf{Correlate Fidelity} == -1 for all others
+By inspection the factor \textbf{Correlate Fidelity} is +1 for all runs where  $\overline{fidelity}_{end} > 0.8$, and \textbf{Correlate Fidelity} is -1 for all others.
 
 %% begin.rcode lowstartanova, echo=FALSE
 % df_test <- df_low[df_low$correlation_correlation == -1,]
@@ -2209,8 +2204,6 @@ By inspection \textbf{Correlate Fidelity} == 1 for all runs where final\_ave\_co
 % #summary(m0)
 % x <- anova(m0)
 %% end.rcode
-
-How significant? Fit linear model following earlier procedure 
 
 Result is significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
@@ -2238,10 +2231,9 @@ The second test is to examine the \gls{sd} of $fidelity$ changes over time -- by
 % densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
 
-By inspection \cref{fig:highstart}, strongly bimodal where
-one cluster around +0.3, and the other between -0.1 and -0.5, approximately.
+By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
 
-Once again, clusters driven by value of \textbf{Correlate Fidelity}. Correlation decreased in this High Start case when \textbf{Correlate Fidelity} was true, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} true in the Low Start case .
+As in the Low Start case, the clusters are driven by the value of the factor \textbf{Correlate Fidelity}. Fidelity decreased in this High Start case when \textbf{Correlate Fidelity} was +1, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} = +1 in the Low Start case .
 
 %% begin.rcode highstartanova,echo=FALSE
 % df_test <- df_high[df_high$correlation_correlation == -1,]
@@ -2251,28 +2243,6 @@ Once again, clusters driven by value of \textbf{Correlate Fidelity}. Correlation
 %% end.rcode
 
 Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
-
-\subsection{Is the choice of distribution function significant?}\label{is-the-choice-of-distribution-function-significant}
-
-Results appear very similar for uniform and gaussian.
-
-%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Gaussian distribution function f()'
-% df<-load_dfb("results/results-229445f.data")
-% df1<-split(df,df$gen)
-% df2<-df1$`500` # last gen
-% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
-% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
-% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
-%% end.rcode
-
-%% begin.rcode uniform, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Uniform distribution function f()'
-% df<-load_dfb("results/results-b67ce0e.data")
-% df1<-split(df,df$gen)
-% df2<-df1$`500` # last gen
-% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
-% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
-% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
-%% end.rcode
 
 \chapter[Test of Hypothesis 2 under changing conditions]{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
@@ -2428,6 +2398,28 @@ Our initial analysis was with the the \gls{sd} of the environmental change set t
 Are the results specific to this distribution? Or can we extend our claim across a broader range of cases?
 
 We initially tested this by making a single change, setting $sd$ to 0.70.
+
+\subsection{Is the choice of distribution function significant?}\label{is-the-choice-of-distribution-function-significant}
+
+From a visual inspection, we conclude that the results appear very similar for uniform and gaussian.
+
+%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Gaussian distribution function $f()$'
+% df<-load_dfb("results/results-229445f.data")
+% df1<-split(df,df$gen)
+% df2<-df1$`500` # last gen
+% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
+% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
+% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
+%% end.rcode
+
+%% begin.rcode uniform, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Uniform distribution function $f()$'
+% df<-load_dfb("results/results-b67ce0e.data")
+% df1<-split(df,df$gen)
+% df2<-df1$`500` # last gen
+% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
+% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
+% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
+%% end.rcode
 
 \chapter{Conclusions}
 

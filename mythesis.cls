@@ -58,6 +58,7 @@
  \newcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
  \newcommand{\vin}{\hspace{1.5em}}
+ \def\labelenumi{\arabic{enumi}.}
 
 \providecommand\newthought[1]{%
    \addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%

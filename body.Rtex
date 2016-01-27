@@ -1884,7 +1884,9 @@ break\;
 	$population_{new}\leftarrow \{\}$\;
 	\For{each $entity$ in $population$} {
 		$p_{selection}\leftarrow $parent's fitness\;
-		Add $entity$ to $population_{new}$ with probability $p_{selection}$\; %TODO: new block type?
+		\Prob($p_{selection}$:){
+			Add $entity$ to $population_{new}$\; % with probability $p_{selection}$\; %TODO: new block type?
+		}
 	}
 	\Return $population_{new}$\;
 }       
@@ -1898,14 +1900,14 @@ break\;
 	\For{each $entity$ in $population$}{
 		$p_{reproduce}\leftarrow $parent's fitness\;
 		\BlankLine
-		$\text{With probability }p_{reproduce}$\; %TODO: new block type?
-		\Indp
-		$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
-		\BlankLine
-		\For{each of the $n$ children}{
-			Child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
-			Child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
-			Add new child with these values for fitness and fidelity to $children$\;
+		\Prob($p_{reproduce}$:){
+			$n\leftarrow \text{some random integer between 0 and }n_{children}\text{, inclusive}$\;
+			\BlankLine
+			\For{each of the $n$ children}{
+				Child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
+				Child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+				Add new child with these values for fitness and fidelity to $children$\;
+			}
 		}
 	}
 	\Return $children$\;
@@ -2064,7 +2066,7 @@ The size of the population is driven by how population elements are introduced a
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the standard Evolutionary algorithm, a population limit is enforced through the selection mechanism where the selection returns a set number of elements from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to determine the effects of limits independent of any bias or direction imparted by selection.
 
-This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $N_{population}$ elements from the population, without regard for fitness. The second recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
+This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $n_{entities}$ elements from the population, without regard for fitness. The second recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
 
 Given this difference between mechanisms, it is appropriate that population mean fitness is introduced as a proxy for bias; population mean fidelity is also examined as it is the response variable for the overall hypothesis, Hypothesis 2.
 
@@ -2114,12 +2116,12 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
+The first mechanism uses a fitness-independent sampling of $n_{entities}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $n_{entities}$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{
-		\Return $\text{Random sample of }N_{population}\text{ elements from }population$\;
+		\Return $\text{Random sample of }n_{entities}\text{ elements from }population$\;
 	}
 	
 \caption{Fitness-Independent Truncation()}
@@ -2158,7 +2160,7 @@ This leads to an alternative hypothesis for population restriction--rather than 
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{		
 		Order all elements in $population$ by \emph{Fitness}\;
-		$population_{new}\leftarrow$Top  $N_{population} $ elements by \emph{Fitness}\;
+		$population_{new}\leftarrow$Top  $n_{entities} $ elements by \emph{Fitness}\;
 		\Return $population_{new}$\;
 	} 	
 \caption{Fitness-Based Truncation() function}

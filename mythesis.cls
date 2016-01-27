@@ -49,7 +49,7 @@
 \RequirePackage[pageanchor,hyperindex]{hyperref}
 \RequirePackage{bookmark}
 \fi
-\RequirePackage{cleveref}
+\RequirePackage[capitalise]{cleveref}
 
 
  \newcommand{\allcapsspacing}[1]{\textls[200]{#1}}

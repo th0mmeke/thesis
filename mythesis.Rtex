@@ -1,7 +1,7 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
 \usepackage{paralist,array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
-\usepackage[lined,linesnumbered,commentsnumbered, figure]{algorithm2e}
+\usepackage[boxed, noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
 \usepackage[font=scriptsize]{subcaption}
@@ -27,8 +27,9 @@
 \setlength\extrarowheight{3pt}
 
 % Options for algorithm2e
-\SetAlCapSkip{1ex}
-\SetKwProg{Def}{def}{:}{}
+\SetAlCapSkip{2em}
+\SetKwProg{Def}{Function}{:}{}
+\DontPrintSemicolon
 
 \newcommand{\eg}{e.g.,}
 \newcommand{\ie}{i.e.,}
@@ -50,6 +51,7 @@ This research explores the emergence of behaviour in a parameterised Artificial 
 \biblatexstyle{authoryear}
 
 \begin{document}
+\listofalgorithms
 \include{glossary}
 \include{body}
 \part{Appendices}

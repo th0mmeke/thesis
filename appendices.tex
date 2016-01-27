@@ -67,11 +67,8 @@ PyMunk is used extensively for 2D Physics calculations, for example:
 \end{enumerate}
 
 \begin{algorithm}[ht]
-\DontPrintSemicolon
-\KwData{Population of Molecules}
-\KwResult{Updated population}
-
 $\text{collision list}=\{\}$\;
+\BlankLine
 \While{not finished}{
     \BlankLine
     \tcp{Selection of reactants}
@@ -84,6 +81,7 @@ $\text{collision list}=\{\}$\;
     \tcp{Construction of reaction}
     Discover all possible reactions that could occur between reactants\;
     Determine the available energy to drive the reaction\;
+    \BlankLine
     \uIf{$\exists$ a reaction option that is possible with the available energy}{
         Determine chemical products of the reaction\;
         Transform chemical products into physical molecules with kinetic and internal energy\;

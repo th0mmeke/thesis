@@ -1856,7 +1856,7 @@ The base model (\cref{base-model-algorithm}) defines a population of entities, e
 
 The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1]x[0,1]\leftarrow [0,1]$. 
 
-The only functions in the base model described here are for the two core elements from the Hypothesis, \emph{Selection} and \emph{Variation} (defined in \cref{base-model-functions}), although in later sections we will add others to examine the sensitivity of the model to various influences.
+The only functions in the base model described here are for the two core elements from the Hypothesis, \emph{Selection} (\cref{function-selection})and \emph{Variation} (\cref{function-variation}), although in later sections we will add others to examine the sensitivity of the model to various influences.
 
 A run of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
 
@@ -1871,7 +1871,7 @@ A run of the model consists of a fixed number of time steps, or generations, whe
 $population\leftarrow Selection(population)$\;
 $population\leftarrow population \cup Variation(population)$\;
 \BlankLine
-\tcp{Check if population size is no longer sustainable}
+\tcp{Sustainable?}
 \uIf{population size is too small}{
 break\;
 }
@@ -1879,36 +1879,39 @@ break\;
 \caption{Algorithm for the base Model}\label{base-model-algorithm}
 \end{algorithm}
 
-\begin{algorithm}
-	\SetKwFunction{f}{f}
-	\Def{Selection(population)}{
-		$population_{new}\leftarrow \{\}$\;
-		\For{each $entity$ in $population$} {
-			$p_{selection}\leftarrow $parent's fitness\;
-			Add $entity$ to $population_{new}$ with probability $p_{selection}$\; %TODO: new block type?
-		}
-		\Return $population_{new}$\;
-	}       
-	\BlankLine
-	\Def{Variation(population)}{
-		$children\leftarrow \{\}$\;
-		\For{each $entity$ in $population$}{
-			$p_{reproduce}\leftarrow $parent's fitness\;
-			\BlankLine
-			$\text{With probability }p_{reproduce}$\; %TODO: new block type?
-			\Indp
-			$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
-			\BlankLine
-			\For{each of the $n$ children}{
-				Child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
-				Child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
-				Add new child with these values for fitness and fidelity to $children$\;
-			}
-		}
-		\Return $children$\;
+\begin{function}
+\Def{Selection(population)}{
+	$population_{new}\leftarrow \{\}$\;
+	\For{each $entity$ in $population$} {
+		$p_{selection}\leftarrow $parent's fitness\;
+		Add $entity$ to $population_{new}$ with probability $p_{selection}$\; %TODO: new block type?
 	}
-\caption{Algorithms for the Model functions \emph{Selection} and \emph{Variation}}\label{base-model-functions}
-\end{algorithm}
+	\Return $population_{new}$\;
+}       
+\caption{Selection()}\label{function-selection}
+\end{function}
+
+\begin{function}
+\SetKwFunction{f}{f}
+\Def{Variation(population)}{
+	$children\leftarrow \{\}$\;
+	\For{each $entity$ in $population$}{
+		$p_{reproduce}\leftarrow $parent's fitness\;
+		\BlankLine
+		$\text{With probability }p_{reproduce}$\; %TODO: new block type?
+		\Indp
+		$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
+		\BlankLine
+		\For{each of the $n$ children}{
+			Child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
+			Child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+			Add new child with these values for fitness and fidelity to $children$\;
+		}
+	}
+	\Return $children$\;
+}
+\caption{Variation()}\label{function-variation}
+\end{function}
 
 \begin{figure}[ht]
 \centering
@@ -1941,6 +1944,7 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 \begin{table}
 \begin{center}
 \tiny
+\caption{Factor definitions}\label{tbl:factor_definitions}
 \begin{tabular}{@{}lllp{7cm}@{}}
 \toprule
 & Factor&  Values& Description\\
@@ -1955,13 +1959,12 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Factor definitions}
-\label{tbl:factor_definitions}
 \end{table}
 
 \begin{table}
 \begin{center}
 \tiny
+\caption{Factor levels used in the Fractional Factorial experiment design}\label{tbl:factor_levels}
 \begin{tabular}{@{}lllp{6cm}@{}}
 \toprule
 & Parameter&  Low value ('-1')&  High value ('+1')\\
@@ -1976,8 +1979,6 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Factor levels used in the Fractional Factorial experiment design}
-\label{tbl:factor_levels}
 \end{table}
 
 We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. 
@@ -1996,6 +1997,7 @@ Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This
 \begin{table}[t]
 \begin{center}
 \tiny
+\caption{Initial conditions for Low Start and High Start cases}\label{tbl:ic}
 \begin{tabular}{@{}lll@{}}
 \toprule
 Case&	Property&  Initial range\\
@@ -2008,8 +2010,6 @@ Case&	Property&  Initial range\\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Initial conditions for Low Start and High Start cases}
-\label{tbl:ic}
 \end{table}
 
 \paragraph{High Start case}\label{high-start-case}
@@ -2116,14 +2116,14 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
-\begin{algorithm}
+\begin{function}
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{
 		\Return $\text{Random sample of }N_{population}\text{ elements from }population$\;
 	}
 	
-\caption{Algorithm for a fitness-independent bound \emph{Truncation} function}
-\end{algorithm}
+\caption{Fitness-Independent Truncation()}
+\end{function}
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling where in all plots factor +1 means there is an upper bound on population size, while -1 represents that the results are unbounded. The top line contains density plots for fidelity and fitness; the middle line boxplots showing ranges, and the bottom line Q-Q plots contrasting bounded and unbounded results.'
 % df <- load_dfa("results/results_untruncated.data")
@@ -2154,15 +2154,15 @@ This leads to an alternative hypothesis for population restriction--rather than 
 
 \subsubsection{Fitness-based sampling}
 
-\begin{algorithm}
+\begin{function}
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{		
 		Order all elements in $population$ by \emph{Fitness}\;
 		$population_{new}\leftarrow$Top  $N_{population} $ elements by \emph{Fitness}\;
 		\Return $population_{new}$\;
 	} 	
-\caption{Algorithm for a fitness-based \emph{Truncation} function}
-\end{algorithm}
+\caption{Fitness-Based Truncation() function}
+\end{function}
 
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
@@ -2215,8 +2215,6 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 
 By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0.
 
-\textbf{TODO: Correlate Fidelity required--should be part of hypothesis}
-
 %% begin.rcode
 %# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
 %% end.rcode
@@ -2226,8 +2224,8 @@ TODO: update--In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inherita
 The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\sigma{fidelity_{end}}--\sigma{fidelity_{start}} >= 0$, for all factor values.
-	\item H$_1$: $\sigma{fidelity_{end}}--\sigma{fidelity_{start}} < 0$, for some factor values.
+	\item H$_0$: $\sigma_{fidelity_{end}}--\sigma_{fidelity_{start}} >= 0$, for all factor values.
+	\item H$_1$: $\sigma_{fidelity_{end}}--\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
 TODO: complete analysis
@@ -2302,20 +2300,6 @@ Significance
 Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \cref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}
-\SetKwFunction{f}{f}
-\Def{tweakFitness(population, sd, meanOffset)}{
-	$population_{new}\leftarrow \{\}$\;
-	\For{each $element$ in $population$}{
-		$fitness\leftarrow \text{ fitness of }element$\;
-		$mean\leftarrow fitness--meanOffset$\;
-		$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
-	}
-	\Return $population_{new}$\;
-}
-\caption{TweakFitness Function to simulate effects of a changing environment by directly adjusting entity fitness}
-\end{algorithm}
-
-\begin{algorithm}
 	\SetKwFunction{f}{f}
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
@@ -2331,9 +2315,22 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 			$population\leftarrow tweakFitness(population)$\;
 		}
 	}
-\caption{Algorithm for the Changing Environment Model used in \cref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
+	\caption{Algorithm for the Changing Environment Model used in \cref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
 \end{algorithm}
 
+\begin{function}
+\SetKwFunction{f}{f}
+\Def{tweakFitness(population, sd, meanOffset)}{
+	$population_{new}\leftarrow \{\}$\;
+	\For{each $element$ in $population$}{
+		$fitness\leftarrow \text{ fitness of }element$\;
+		$mean\leftarrow fitness--meanOffset$\;
+		$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
+	}
+	\Return $population_{new}$\;
+}
+\caption{TweakFitness()}
+\end{function}
 
 \section{Experimental test}\label{experimental-test}
 
@@ -2350,6 +2347,7 @@ Four different runs, with changes to the environment at four different frequenci
 \begin{table}
 	\begin{center}
 		\tiny
+		\caption{Factor levels for all Changing Environment experiments}\label{tbl:factor_levels_changing}
 		\begin{tabular}{@{}llllp{5cm}@{}}
 			\toprule
 			& Factor&  Value&  Description\\
@@ -2364,8 +2362,7 @@ Four different runs, with changes to the environment at four different frequenci
 			\bottomrule
 		\end{tabular}
 	\end{center}
-	\caption{Factor levels for all Changing Environment experiments}
-	\label{tbl:factor_levels_changing}
+
 \end{table}
 
 Control--unchanging, but the other three runs with the change in environment, and so a call to $TweakFitness$, every 1,5 or 10 generations.
@@ -3513,6 +3510,7 @@ of changes to graph edges, or bonds, only.
 
 \begin{table}[t]
 \begin{center}
+\caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies in kcal per mole -- source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}\label{default_bond_energies}
 \begin{tabular}{@{}lp{2cm}p{2cm}p{2cm}@{}}
 \toprule
 Bond Type & Atom 1 & Atom 2 & Energy of both break and formation(simulation units)\\
@@ -3541,12 +3539,11 @@ Quadruple & C & C & 200\\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies in kcal per mole -- source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}
-\label{default_bond_energies}
 \end{table}
 
 \begin{table}[t]
 \begin{center}
+\caption{Example potential energies calculated by the DefaultChemistry module using simplified bond energies}\label{example_potential_energies}
 \begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
 \toprule
 Molecule & SMILES & Potential Energy\\
@@ -3559,8 +3556,6 @@ NO$_2$			& N(=O)[O] 							& -198.0 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Example potential energies calculated by the DefaultChemistry module using simplified bond energies}
-\label{example_potential_energies}
 \end{table}%
 
 \subsection{Energy transformations}\label{energy-transformations}
@@ -4161,11 +4156,9 @@ $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a 
 used in initial exploratory experiments; in each case they allowed the simulation to run for an
 extended period without running out of possible reactions (from lack of energy for example.)
 
-\begin{savenotes}
 \begin{table}
 \scriptsize
-\caption{Factors, or independent variables}
-\label{tbl:factors}
+\caption{Factors, or independent variables}\label{tbl:factors}
 \begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
 \hline\noalign{\smallskip}
 Factor & +1 value & -1 value & Description\\
@@ -4178,7 +4171,6 @@ $E_\mathrm{Bonds}$&		Single=50, Double=100, Triple=200& Simplified real-world ch
 \hline
 \end{tabular}
 \end{table}
-\end{savenotes}
 
 We concentrate on three related response, or dependent, variables---Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
 
@@ -4196,6 +4188,7 @@ All replicates completed a set of 20,000 reactions; given the initial population
 
 \begin{table}[htbp]
 \scriptsize
+\caption{Summary of results}\label{tbl:results}
 \begin{center}
 \begin{tabular}{lrrr}
 \hline\noalign{\smallskip}
@@ -4239,8 +4232,6 @@ Max. 		&199.00    &12.00	&216.00\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Summary of results}
-\label{tbl:results}
 \end{table}%
 
 A view of the results is given in Table \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.

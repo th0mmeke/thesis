@@ -1,7 +1,7 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
 \usepackage{paralist,array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
-\usepackage[lined,boxed,linesnumbered,commentsnumbered,figure]{algorithm2e}
+\usepackage[lined,linesnumbered,commentsnumbered, figure]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
 \usepackage[font=scriptsize]{subcaption}
@@ -25,6 +25,10 @@
 \setlength\FrameRule{0.1pt}
 \setlength{\epigraphrule}{0pt}
 \setlength\extrarowheight{3pt}
+
+% Options for algorithm2e
+\SetAlCapSkip{1ex}
+\SetKwProg{Def}{def}{:}{}
 
 \newcommand{\eg}{e.g.,}
 \newcommand{\ie}{i.e.,}

@@ -14,7 +14,7 @@ Life (see later) provides the canonical example of ``interesting'';
 approaching life's creativity in an artificial system would be quite
 something
 
-Starting point: evolution of particular solution - certain properties
+Starting point: evolution of particular solution--certain properties
 needed (e.g., cumulative, directed)
 
 Alternatives to ``evolution''? Broad definition\ldots{}:
@@ -22,9 +22,9 @@ Alternatives to ``evolution''? Broad definition\ldots{}:
 \begin{itemize}
 \tightlist
 \item
-  Lower bound of random search - not good enough
+  Lower bound of random search--not good enough
 \item
-  No upper bound in practice - but ENS is the gold standard
+  No upper bound in practice--but ENS is the gold standard
 \item
   Good result would be `interesting' forms
 \end{itemize}
@@ -32,7 +32,7 @@ Alternatives to ``evolution''? Broad definition\ldots{}:
 Natural selection as mechanism for adaptation (in biological sense).
 Must show that adaptation in this sense is useful concept for CS
 
-Isn't this just EA? No - EAs have exogenous fitness, not open-ended
+Isn't this just EA? No--EAs have exogenous fitness, not open-ended
 (search through a fixed space, cannot surprise (e.g.,
 \autocite{Nellis2014})
 
@@ -48,12 +48,12 @@ OEE is not the same as creative or interesting evolution
 \end{itemize}
 
 Start with minimal requirements for evolution (without need for
-interesting) - assume that interesting can be added to this - that it
+interesting)--assume that interesting can be added to this--that it
 isn't incompatible with evolution
 
 \begin{itemize}
 \item
-  Not same as ENS - that explains natural processes; our goal is to
+  Not same as ENS--that explains natural processes; our goal is to
   achieve something that is as interesting in a different domain
 \item
   Not same as approach where take ideas from biology and evaluate for
@@ -63,15 +63,15 @@ isn't incompatible with evolution
   seem to follow model of currently we use these tools, biology has
   something we don't have, let's try it\ldots{}
 \item
-  Or properties - robustness and evolvability (redundancy and degeneracy
-  - \autocite{Whitacre:2010qy}), novelty (novelty-search -
+  Or properties--robustness and evolvability (redundancy and degeneracy
+ --\autocite{Whitacre:2010qy}), novelty (novelty-search -
   \autocite{Lehman:2008cr})
 \end{itemize}
 
 Given that, show that under further conditions interesting is possible,
 perhaps inevitable
 
-Previous work coming to consensus on conditions - e.g., rich generative
+Previous work coming to consensus on conditions--e.g., rich generative
 mechanism, unlimited heredity, inexhaustible fitness landscape,
 emergence \autocite{Vasas2015}, and good genetic representation,
 ``sufficiently large world for every individual to be evaluated'', and a
@@ -82,22 +82,22 @@ seed or starting point, (plus four specific conditions
 
 \begin{itemize}
 \item
-  Application to engineering - alternative to EC approaches
+  Application to engineering--alternative to EC approaches
 \item
-  In itself - one of grand challenges of Alife \autocite{Bedau:2000mi}
+  In itself--one of grand challenges of Alife \autocite{Bedau:2000mi}
 \end{itemize}
 
 \subsection{Linkage to other fields}\label{linkage-to-other-fields}
 
 \begin{itemize}
 \item
-  Artificial General Intelligence - one approach to AGI posits that
+  Artificial General Intelligence--one approach to AGI posits that
   intelligence is an evolutionary adaptation, and therefore that most
   promising approach is to follow an evolutionary process
 \item
-  OOL - similar problem - from chemistry to biology. Analogous to origin
+  OOL--similar problem--from chemistry to biology. Analogous to origin
   of life, but despite parallels, must resist temptation to extend
-  claims to this - the evolution of life was contingent, and because of
+  claims to this--the evolution of life was contingent, and because of
   lack of evidence from early stages, no way anyway to test or confirm
 \item
   Evolution in technology occurs by using earlier technologies as
@@ -153,7 +153,7 @@ Ongoing generation of novel forms
 
 ENS is an example of OEE
 
-http://www.protevi.com/john/Morality/evolution4dimensions.pdf - outline
+http://www.protevi.com/john/Morality/evolution4dimensions.pdf--outline
 of Jablonka, summary of evolutionary ``theory'' as of 2005
 
 \begin{itemize}
@@ -211,7 +211,7 @@ LGT complicates this
 Exaptations more common than thought, meaning that evolutionary driver
 shifting towards neutrality from pure selection \autocite{Barve2013}
 \item
-Junk DNA/Neutral theory - not a highly selective environment
+Junk DNA/Neutral theory--not a highly selective environment
 (http://sandwalk.blogspot.co.nz/2008/02/theme-genomes-junk-dna.html)
 \item
 Random genetic drift
@@ -222,9 +222,9 @@ Previous work in application of ENS to levels of biological hierarchy
 (Griesemer2005)
 \item
 issue in identifying ``individuals'' or ``entities'' in ENS
-formulations - part of the ``unit of selection'' problem
+formulations--part of the ``unit of selection'' problem
 \item
-issue in meaning of heredity without genotypes - needs a causal
+issue in meaning of heredity without genotypes--needs a causal
 formulation for pre-cellular evolution akin to that in
 \autocite{Bourrat2015} or presented in \autocite{Griesemer2005} for
 Weismannian causal relationship between genes and organisms
@@ -232,7 +232,7 @@ Weismannian causal relationship between genes and organisms
 
 \paragraph{Lamarck}\label{lamarck}
 
-Inheritance of acquired characteristics - e.g., epigenetics, but
+Inheritance of acquired characteristics--e.g., epigenetics, but
 probably not significant as evolutionary mechanism in biology. But
 alternative
 
@@ -243,13 +243,13 @@ property in another domain
 
 \begin{itemize}
 \item
-Random search - Random search/walk will explore possibilities, but
+Random search--Random search/walk will explore possibilities, but
 without meaning\ldots{}
 \item
-Compositional - \autocite{Watson2002} discusses compositional evolution and
+Compositional--\autocite{Watson2002} discusses compositional evolution and
 building blocks
 \item
-Technology evolution - by components (Arthur2009)
+Technology evolution--by components (Arthur2009)
 
 \begin{itemize}
 \item
@@ -305,7 +305,7 @@ phenomena\ldots{}
 \item
 HGT e.g., \autocite{Ochman2000}
 \item
-\autocite{Pross2011} - Dynamic Kinetic Stability
+\autocite{Pross2011}--Dynamic Kinetic Stability
 \end{itemize}
 
 \paragraph{Evolutionary Computation/Evolutionary
@@ -337,25 +337,25 @@ more)
 \item
 Search through a fixed space, cannot surprise \eg \autocite{Nellis2014}
 \item
-Fitness mechanism - implicit vs explicit
+Fitness mechanism--implicit vs explicit
 \item
-top-down for EAs - specific constructs without endogenous evolution
+top-down for EAs--specific constructs without endogenous evolution
 (processes used not subject to evolution)
 \end{itemize}
 \item
-Thought experiments - models
+Thought experiments--models
 \item
-DaisyWorld (Gaia Hypothesis) - \autocite{Saunders1994} - regulation as
+DaisyWorld (Gaia Hypothesis)--\autocite{Saunders1994}--regulation as
 model for evolution (selection a hindrance)
 \item
-MWUA - meta-model?
+MWUA--meta-model?
 \item
 \autocite{Chastain2014}
 \item
 \autocite{Barton2014}
 \end{itemize}
 
-Seems tightly linked to life - requirements for OEE (hypothesised) look
+Seems tightly linked to life--requirements for OEE (hypothesised) look
 a lot like requirements for Life (which is only known OEE system, so
 perhaps not so surprising)
 
@@ -364,7 +364,7 @@ What elements of life are required for OEE, and which are not?
 \begin{itemize}
 \tightlist
 \item
-Exact elements (same thing) - e.g., evolution?
+Exact elements (same thing)--e.g., evolution?
 \item
 Equivalent elements (same concept/function/purpose, different detail)
 e.g., compartments/membranes?
@@ -374,7 +374,7 @@ Not required at all e.g., specific metabolic cycles
 
 
 
-\section{TODO - Previous work}\label{todo---previous-work}
+\section{TODO--Previous work}\label{todo---previous-work}
 
 Experimental tests
 
@@ -406,7 +406,7 @@ Experimental tests
 
 Untangle the biological from the general in previous theory
 
-Much previous work aimed at understanding biology - assumes that domain
+Much previous work aimed at understanding biology--assumes that domain
 
 \begin{figure}
 \begin{center}
@@ -443,7 +443,7 @@ questions, and inappropriate for others. Is the use of simulation
 justified for our proposed investigation?
 
 Simulations are becoming central to some disciplines in natural history.
-Ecology - \glspl{abm} or \glspl{ibm} (reviewed in
+Ecology--\glspl{abm} or \glspl{ibm} (reviewed in
 \autocite{DeAngelis2005}; also see
 \autocite{Grimm:2006fk,Grimm:2005wd,Grimm:1999kf,Hogeweg:1990jz}).
 \glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}.
@@ -474,12 +474,12 @@ Models can be ``useful stop-gaps'' towards a theory, by providing a
 testable body of data for experiments and predictions
 \autocite{Krakauer2011}, and may be constructed either bottom-up (such
 as in ABM) or top-down, by the application of constraints
-\autocite{Krakauer2011}. Many types in \eg ecology - eleven according to
-\autocite{Jorgensen2008} - of which fall into two main groups
+\autocite{Krakauer2011}. Many types in \eg ecology--eleven according to
+\autocite{Jorgensen2008}--of which fall into two main groups
 
 Mathematical models: complexity, need for abstraction/assumptions
 (\eg Fisher's famous equation describing the changes in allele
-distribution under selection assumes independent genes - extending this
+distribution under selection assumes independent genes--extending this
 to realistic cases remains an open problem \autocite{Schuster2011}),
 difficulty in handling dynamism/emergence. Cheap, fast. Non-empirical.
 
@@ -505,7 +505,7 @@ interconnection of levels of analysis, \eg behaviour can influence gene
 expression, and genes can affect behaviour \autocite{Krakauer2011}. As
 summarized by \autocite{Krakauer2011}, when asking how much of biology
 can be predicted bottom-up from the application of basic physical and
-chemical laws - ``This question is simple to answer: effectively zero.''
+chemical laws--``This question is simple to answer: effectively zero.''
 
 Unique method of enquiry, that is, properties that improve on existing
 techniques, e.g., by relaxing assumptions
@@ -515,9 +515,9 @@ techniques, e.g., by relaxing assumptions
 Simulations seem to fall somewhere in between thought experiments or
 abstract models, and experiments. They are also relatively novel; common
 use has only come with increased access to digital computers.
-Consequently the nature of simulation - what can be claimed as a result
+Consequently the nature of simulation--what can be claimed as a result
 of simulation, and what role may be played legitimately by simulation in
-scientific discovery - is a hot topic for philosophers of science. As
+scientific discovery--is a hot topic for philosophers of science. As
 might not be unexpected, there are two opposing positions taken, plus a
 synthesis that claims the middle ground.
 
@@ -531,7 +531,7 @@ of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
 only a high-speed generator of the consequences that some theory assigns
 various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192} 
 
-If a model, then might take many forms - analogy, model, pure exploration \autocite{Webb2009}.
+If a model, then might take many forms--analogy, model, pure exploration \autocite{Webb2009}.
 
 Models are \quote{a purposeful representation. A model needs to have a
 purpose because otherwise there would be no way to decide what to
@@ -561,7 +561,7 @@ real-world systems do, that goes beyond plain number-crunching. They use
 a variety of methods beyond calculation (such as graphics) to draw
 inferences from data. They also incorporate approximations and creative
 choices to make the problem tractable, which introduces need for
-justification. Simulations need interpretation and justification - they
+justification. Simulations need interpretation and justification--they
 are not self-contained, their own justifications
 \autocite[31]{Winsberg2010}
 
@@ -570,7 +570,7 @@ thing}\label{simulations-are-themselves-an-instance-of-the-thing}
 
 That is, the thing is not a shadow but the object. The Animats are
 actually alive, and therefore instances of biology.
-\footnote{And this way leads us to the claims of Strong Alife - the simulation is actually alive.}
+\footnote{And this way leads us to the claims of Strong Alife--the simulation is actually alive.}
 The simulation is a stand-in for the real world, and you can perform
 experiments on it as would any other system
 \autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
@@ -603,7 +603,7 @@ argument. Validity solely depends on validation.
 simulation is like theory as about ``manipulating equations'' and
 ``developing ideas'' but like experiments as ``fiddling with machines'',
 ``trying ideas out'', ``watching to see what happens.'' Simulation is a
-form of Kuhn's theory articulation or ``model building'' - making
+form of Kuhn's theory articulation or ``model building''--making
 principles apply to local, concrete systems in the real world. In this
 view, \quote{Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
 
@@ -629,7 +629,7 @@ is an accurate model of a theory. That is, where does attribution lie?
 Is the result a result of the underlying theory or a quirk of the
 implementation? There may be no way of resolving this absolutely as it
 may not even be possible to distinguish between the two
-\autocite{DiPaolo2000} - we cannot prove correctness through testing.
+\autocite{DiPaolo2000}--we cannot prove correctness through testing.
 
 TODO On the other hand, Taylor (1989) in \autocite{Webb2009}, argues for
 ``pure exploration'' or ``exploratory tools'' that do not need
@@ -657,7 +657,7 @@ From Origins-of-Life (OOL)
 
 \begin{itemize}
 \item
-Theory - an artificial chemistry capable of Evolution
+Theory--an artificial chemistry capable of Evolution
 \item
 Guided by earlier work, stripped of biological assumptions
 \item
@@ -666,15 +666,15 @@ hypercycles \autocite{Eigen1971}
 autocatalysis
 \begin{itemize}
 \item
-present in all three elements (\autocite{Ganti:2003hl} - or
+present in all three elements (\autocite{Ganti:2003hl}--or
 earlier?) of life
 \item
 DNA replicates with enzymatic help
 \item
 some metabolites, such as ATP, exclusively autocatalytic
 \item
-lipids in a membrane enhance addition of other lipids - Formation of
-autocatalytic cycles/sets (\autocite{Hordijk2004}) - percolation increases
+lipids in a membrane enhance addition of other lipids--Formation of
+autocatalytic cycles/sets (\autocite{Hordijk2004})--percolation increases
 likelihood
 \item
 \autocite{Sousa2015} for detection of RAF sets in e coli metabolic
@@ -682,7 +682,7 @@ networks
 \item
 Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \autocite{Fernando:2005ly})
 \item
-\autocite{Fernando:2007pf} - selection/liposomes/chemical avalanches
+\autocite{Fernando:2007pf}--selection/liposomes/chemical avalanches
 based on Wachtershauser
 \item
 autocatalytic cores (\autocite{Vasas2012})
@@ -698,15 +698,15 @@ lack heredity of variation (mutations overwhelm heredity) \autocite{Vasas2010}
 \item
 Bimolecular rearrangements (\autocite{Fernando:2008xy,Fernando:2007pf})?
 \item
-template replicators - highly unlikely without intermediate steps
+template replicators--highly unlikely without intermediate steps
 \item
 Must be driven far-from-equilibrium (many references e.g.,
-\autocite{Pascal2015} - continuous supply of energy required (explicit
+\autocite{Pascal2015}--continuous supply of energy required (explicit
 modelling unlike say \autocite{Fontana1994} where energy only
-implicitly modelled) - and maintained there (by metabolism - e.g., how
+implicitly modelled)--and maintained there (by metabolism--e.g., how
 \quote{living matter evades the decay to equilibrium}{\autocite{Schrodinger1944}})
 \item
-Eigen threshold for replicators - high mutation rates overwhelm
+Eigen threshold for replicators--high mutation rates overwhelm
 heredity
 \item
 Biological evolutionary theory
@@ -715,7 +715,7 @@ Extension beyond biology
 
 \begin{itemize}
 \item
-Previous work on extending evolution - \autocite{Bourrat2015} etc
+Previous work on extending evolution--\autocite{Bourrat2015} etc
 \item
 Evolution of culture, language, technology
 \end{itemize}
@@ -731,13 +731,13 @@ Must lead to end-point consistent with earliest known life
 In a reasonable time period
 \item
 single-step astronomically unlikely (single RNA strand probability
-about 10E-60, based on 100 monomers - \autocite{Pascal2013})
+about 10E-60, based on 100 monomers--\autocite{Pascal2013})
 \item
-Requires a series of steps - akin to OOL where single-step
+Requires a series of steps--akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,
-based on 100 monomers - \autocite{Pascal2013})
+based on 100 monomers--\autocite{Pascal2013})
 \item
-Contingent and specific - constraints
+Contingent and specific--constraints
 \item
 starting point compatible with what is known of prebiotic conditions
 (either on earth or extraterrestrially)
@@ -749,7 +749,7 @@ Must be simplified and abstracted
 Choosing an artificial chemistry similar to natural chemistry enables
 an argument by analogy
 \item
-Meets known constraints for OEE - and we have OOL as an example of OEE
+Meets known constraints for OEE--and we have OOL as an example of OEE
 from natural chemistry
 \item
 Catalysis/autocatalysis possible through emergence in some AChems
@@ -767,7 +767,7 @@ and chemical laws, implicitly constraining each and every action and
 interaction
 \end{itemize}
 
-\section{TODO - Related work}\label{todo---related-work}
+\section{TODO--Related work}\label{todo---related-work}
 
 \subsection{Artificial Life}\label{artificial-life}
 
@@ -809,26 +809,26 @@ Purposes
 \item
 Insights into life
 \item
-Swimming - \autocite{Terzopoulos1994}
+Swimming--\autocite{Terzopoulos1994}
 \item
 Foundations for other fields e.g., AI
 \item
-In own right - life ``de novo''
+In own right--life ``de novo''
 \item
-Philosophy - what is living?
+Philosophy--what is living?
 \end{itemize}
 
 Themes \autocite{Aguilar2014}
 
 \begin{itemize}
 \item
-Properties of living systems - Origins of life, autonomy,
+Properties of living systems--Origins of life, autonomy,
 self-organization, adaptation (evolution, development, and learning)
 \item
-Life at different scales - Ecology, artificial societies, behaviour,
+Life at different scales--Ecology, artificial societies, behaviour,
 computational biology, artificial chemistries
 \item
-Understanding, uses and descriptions of the living - information,
+Understanding, uses and descriptions of the living--information,
 living technology, art and philosophy
 \end{itemize}
 
@@ -848,11 +848,11 @@ Uptick in mentions of ``Artificial Life'' as quoted in \autocite{Aguilar2014}
 \item
 Modern field
 \item
-1951 Von Neumann - first formal model
+1951 Von Neumann--first formal model
 \item
 1984 Christopher Langton
 \item
-1987 ``Official'' birth of field - first ``Workshop on the Synthesis
+1987 ``Official'' birth of field--first ``Workshop on the Synthesis
 and Simulation of Living Systems'' in Sante Fe, NM, by Langton
 \item
 Conway Game of Life
@@ -872,7 +872,7 @@ Overlap with Brooks's robotics, AI, etc
 
 \settowidth{\epigraphwidth}{Wonderful life : the Burgess Shale and the nature of history}
 \epigraph{%
-Without hesitation or ambiguity, and fully mindful of such paleontological wonders as large dinosaurs andAfrican ape-men, I state that the invertebrates of the Burgess Shale, found high in the Canadian Rockies in YohoNational Park, on the eastern border of British Columbia, are the world's most important animal fossils. Modern multicellular animals make their first uncontested appearance in the fossil record some 570 million years ago - and with a bang, not a protracted crescendo.}% 
+Without hesitation or ambiguity, and fully mindful of such paleontological wonders as large dinosaurs andAfrican ape-men, I state that the invertebrates of the Burgess Shale, found high in the Canadian Rockies in YohoNational Park, on the eastern border of British Columbia, are the world's most important animal fossils. Modern multicellular animals make their first uncontested appearance in the fossil record some 570 million years ago--and with a bang, not a protracted crescendo.}% 
 {\textit{\\Wonderful life : the Burgess Shale and the nature of history}\\\textsc{Stephen Jay Gould}}
 
 Our primary example of life and evolution
@@ -912,7 +912,7 @@ minimal unit of life (Ganti, 2003a, b); or an autopoetic unit
 Explored in \autocite{Miconi:2008cy}:
 \begin{itemize}
 \item Passive (inevitable result of non-repeating evolution from simple seed)
-\item Active - some drive towards increasing complexity
+\item Active--some drive towards increasing complexity
 \end{itemize}
 
 \subsubsection{Living organisms are supremely well suited to their
@@ -990,8 +990,8 @@ However, generally DNA remains the primary source.)
 
 How then does natural selection unfold in practice? Although an organism
 is defined by its genotype, its survival is based not on the raw
-genotype, but on the expression of the genotype - called the
-\gls{phenotype} - that participates in the interaction with the
+genotype, but on the expression of the genotype--called the
+\gls{phenotype}--that participates in the interaction with the
 environment. There is not necessarily a direct one-to-one mapping
 between genotype and phenotype; for example, environmental triggers
 during development can switch the phenotype in different directions (a
@@ -1000,7 +1000,7 @@ phenomenon called \gls{polyphenism}.)
 This indirect mapping enables a number of important mechanisms
 significant to the operation of natural selection: first, changes in the
 genotype (caused by mutations for example) may build up independent of
-phenotype changes - the idea of \emph{neutral mutations}
+phenotype changes--the idea of \emph{neutral mutations}
 \autocite{Ohta:1996vn,Ohta:2002ys,Ohta:1973kx}. Examples from studies
 of RNA secondary structures (the physical folding of RNA molecules) show
 that many closely-related RNA sequences can produce the same RNA folding
@@ -1036,8 +1036,8 @@ same proteins and so all cells should be identical.
 
 Unfortunately for this model, cells are not identical. The missing
 element from our understanding is a mechanism to turn selected genes on
-or off - in the language of biology, to activate or repress gene
-expression - so that different groups of proteins can be produced from
+or off--in the language of biology, to activate or repress gene
+expression--so that different groups of proteins can be produced from
 the same overall DNA. This is known as gene regulation, and is the
 source of all diversity within an organism. Different cell types are in
 fact distinguished by specific, partially overlapping, groups of
@@ -1060,13 +1060,13 @@ protein from mRNA). As a result of RNA regulation many alternative
 proteins from one transcript can be produced, triggered by environmental
 or other factors.
 
-\subsubsection{\texorpdfstring{The \textit{lac} Operon - an example of how
+\subsubsection{\texorpdfstring{The \textit{lac} Operon--an example of how
 regulation can enable a cell to respond appropriately to environmental
-triggers}{The  Operon - an example of how regulation can enable a cell to respond appropriately to environmental triggers}}\label{the-operon---an-example-of-how-regulation-can-enable-a-cell-to-respond-appropriately-to-environmental-triggers}
+triggers}{The  Operon--an example of how regulation can enable a cell to respond appropriately to environmental triggers}}\label{the-operon---an-example-of-how-regulation-can-enable-a-cell-to-respond-appropriately-to-environmental-triggers}
 
 In the bacterium \textit{Escherichia coli}, and other
 \glspl{prokaryote}, the choice between two alternative energy sources -
-glucose, the preferred source, and lactose, the alternative - is under
+glucose, the preferred source, and lactose, the alternative--is under
 regulatory control. The details of the mechanism, known as the
 \textit{lac} operon
 \footnote{An operon is a set of genes in prokaryotes that share promotor and regulatory regions and hence are transcribed and regulated as a unit},
@@ -1078,7 +1078,7 @@ here is based on the later summary, using current terminology, from
 
 The processing pathway for lactose is provided by three proteins -
 \(\beta\)-galactosidase, the lactose permease, and thiogalactoside
-transacetylase, for completeness - encoded by three contiguous genes
+transacetylase, for completeness--encoded by three contiguous genes
 (\textit{lacZ}, \textit{lacY} and \textit{lacA} on the chromosome. Two
 further regulatory proteins are involved: an activator called CAP and a
 repressor protein, the Lac repressor.
@@ -1096,8 +1096,8 @@ from binding, and thus preventing the start of transcription. This
 repressor protein is produced \gls{constitutively} or continuously, by
 the cell.
 
-How then do these proteins - glucose, lactose, two regulatory proteins,
-and the three proteins in the lactose processing pathway - interact to
+How then do these proteins--glucose, lactose, two regulatory proteins,
+and the three proteins in the lactose processing pathway--interact to
 activate or repress the lactose processing pathway, and so switch
 between energy sources?
 
@@ -1204,7 +1204,7 @@ Minimal cell created either by removing elements from simple cell to
 produce functioning minimal cell or alternatively by synthesising cell
 from bottom-up from a set of hypothesised necessary elements.
 \item
-``chemical reaction networks coupled to containers'' - protocell
+``chemical reaction networks coupled to containers''--protocell
 definition, from Protocells:Back to the Future workshop materials
 (http://www.unamur.be/en/sci/naxys/pb2f).
 \item
@@ -1216,10 +1216,10 @@ metabolic subsystem, a heritable control system, and a boundary system
 to contain (in \autocite{Szathmary:2006ty}).
 \end{itemize}
 
-\subsubsection{Modelling - understanding biological
+\subsubsection{Modelling--understanding biological
 processes}\label{modelling---understanding-biological-processes}
 
-Regulation Network modelling - perhaps just one or two examples only
+Regulation Network modelling--perhaps just one or two examples only
 
 \paragraph{Aevol}\label{aevol}
 
@@ -1321,7 +1321,7 @@ associated SF adjusts the sensitivity of the binding
 
 \subsubsection{Systems Chemistry}\label{systems-chemistry}
 
-Transition to biology - Origins of life
+Transition to biology--Origins of life
 
 Natural selection in pre-biology
 
@@ -1332,7 +1332,7 @@ ADD IN NOTES
 Early review of AL approach to AI in
 http://www.mitpressjournals.org/doi/pdf/10.1162/artl.1993.1.1\_2.75
 
-Rodney Brooks/Maes - actionist approach to robotics
+Rodney Brooks/Maes--actionist approach to robotics
 
 Intelligence needs environment
 
@@ -1341,7 +1341,7 @@ look like it'll result in emergent intelligence
 
 Intelligence arose from interactions with the world
 
-Understanding of intelligence based on humans - replicating this
+Understanding of intelligence based on humans--replicating this
 difficult. And yet, hard to generalize from this one sample. So rather
 than trying to recreate human intelligence, let intelligence emerge from
 interactions with world
@@ -1359,10 +1359,10 @@ Similar problems to Alife
 \item
 ``Life'' and ``Intelligence'' are both hard to define and measure
 \item
-Both appear emergent - that is, hard to measure progress - either yes
+Both appear emergent--that is, hard to measure progress--either yes
 or no
 \item
-Best measures for both may be Turing-like - if it quacks like a
+Best measures for both may be Turing-like--if it quacks like a
 duck\ldots{}comparison to existing life or human intelligence
 \end{itemize}
 
@@ -1374,7 +1374,7 @@ In the Spencerian sense of progressive improvement, rather than
 necessarily any particular mechanism (e.g., evolution by natural
 selection)
 
-Simply a change of population distribution over time - but if just
+Simply a change of population distribution over time--but if just
 purely distributive (sensu \autocite{Bourrat2015}), rather than transformative, not
 very interesting
 
@@ -1417,13 +1417,12 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 \section{Contributions}\label{contributions}
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
 A grounding for Artificial OEE in evolutionary theory
 \item
 Continue work towards a non-biological perspective on evolution
 \item
-Progress towards OEE in artificial system - evolution compatible with
+Progress towards OEE in artificial system--evolution compatible with
 OEE without necessarily showing OEE (which is hard to measure and
 prove)
 \end{enumerate}
@@ -1454,7 +1453,7 @@ not necessarily interesting behaviour)
 \begin{itemize}
 \tightlist
 \item
-  Elements that allow for ongoing evolution - necessary, and starting
+  Elements that allow for ongoing evolution--necessary, and starting
   point for novelty
 \item
   Open-ended evolution can be seen as evolution in an open-ended system
@@ -1482,15 +1481,15 @@ the universal physico-chemical laws.}
 
 \begin{itemize}
 \item
-  Open-ended from \autocite{MaynardSmith1999} definition - TODO: size of search space vs population
+  Open-ended from \autocite{MaynardSmith1999} definition--TODO: size of search space vs population
 \item
-  Heritability a challenge - biological organisms employ digital
+  Heritability a challenge--biological organisms employ digital
   heredity; sophisticated mechanism with controlled error rates, but
   exceedingly unlikely to arise spontaneously
 \item
   Multiplication/heredity for maintenance of population
 \item
-  Analog methods possible - \eg:
+  Analog methods possible--\eg:
 
   \begin{itemize}
   \tightlist
@@ -1519,7 +1518,7 @@ General difficulties:
 \begin{itemize}
 \item Somewhat arbitrary choices of elements of description
 \item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
-\item Lack causality - so hard to use as mechanism
+\item Lack causality--so hard to use as mechanism
 \item Leave options and alternatives for implementer
 \item Sheer number of EA algorithms
 \end{itemize}
@@ -1538,31 +1537,31 @@ Proofs of effectiveness:
 \item Identify the major elements in biology
 \end{itemize}
 
-\autocite{Bourrat2015} - Not all of these elements are essential
+\autocite{Bourrat2015}--Not all of these elements are essential
 
 Other attempts at general models:
 \begin{itemize}
 \tightlist
 \item \autocite{VonNeumann1966} as reviewed in \autocite{Taylor:1999sc} (Lack of environmental emphasis)
-\item \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc} - Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
-\item \autocite{Paixao2015} - reconciliation of EA models with PG models - A synthesis rather than a reformulation - way of describing both A and B using generalizations of each. Not a causal explanation
+\item \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
+\item \autocite{Paixao2015}--reconciliation of EA models with PG models--A synthesis rather than a reformulation--way of describing both A and B using generalizations of each. Not a causal explanation
 \end{itemize}
 
 \section{Method}\label{method}
 
-Goal is a minimal description of necessary factors - enough to build a
+Goal is a minimal description of necessary factors--enough to build a
 mechanism
 
 Strategy is to make as many factors as possible endogenous rather than
-needing specification by the modeller - more general and hence more
+needing specification by the modeller--more general and hence more
 powerful claim
 
 Therefore separate out descriptive and causal descriptions of process
 
-Descriptive - outcome or goal - based on Evolution. Not useful for
+Descriptive--outcome or goal--based on Evolution. Not useful for
 construction, but rather for testing
 
-Causal - mechanism
+Causal--mechanism
 
 \begin{itemize}
 \tightlist
@@ -1578,7 +1577,7 @@ Causal - mechanism
 \item
   Broadest claim
 \item
-  Worth reflected in proportion of population - core principle of method
+  Worth reflected in proportion of population--core principle of method
 \end{itemize}
 
 \section{Mechanism is cumulative adaptive evolution}\label{mechanism-is-cumulative-adaptive-evolution}
@@ -1587,9 +1586,9 @@ From earlier work, attempt a synthesis based on common factors
 
 \section{Assumptions}\label{assumptions}
 
-No learning mechanisms - changes during lifetime
+No learning mechanisms--changes during lifetime
 
-Corollary - addition and removal of elements
+Corollary--addition and removal of elements
 
 \begin{itemize}
 \tightlist
@@ -1629,10 +1628,10 @@ Variation is in some element from parent to offspring
 \item
   Degree of relationship interesting
 \item
-  No relationship (no covariance) is as before - no learning
+  No relationship (no covariance) is as before--no learning
 \item
-  If not related, then effectively random search - process is not
-  `learning' - no information inheritance
+  If not related, then effectively random search--process is not
+  `learning'--no information inheritance
 \item
   Duplication is effectively the same as just extending the lifespan -
   not interesting
@@ -1649,7 +1648,7 @@ Variation is in some element from parent to offspring
 
 External calculation used directly to adjust population
 
-Or guided evolution - external agency adjusts population directly
+Or guided evolution--external agency adjusts population directly
 
 But as external element shared across population not evolvable
 
@@ -1672,7 +1671,7 @@ additional value
 Affected by element and by everything else, so conceivably could be
 guided by modifying the environment in a calculated way
 
-\section{Issues - still parameters and choices}\label{issues---still-parameters-and-choices}
+\section{Issues--still parameters and choices}\label{issues---still-parameters-and-choices}
 
 When do additions happen?
 
@@ -1682,13 +1681,13 @@ When do additions happen?
   Degree of correlation between addition events and selection events
 \end{itemize}
 
-\autocite{Bourrat2015} introduces a check-for-overcrowding step - is
+\autocite{Bourrat2015} introduces a check-for-overcrowding step--is
 this necessary? Under endogenous selection shouldn't overcrowding also
 be endogenous?
 
 \section{Can a causal reading further simplify the model?}\label{can-a-causal-reading-further-simplify-the-model}
 
-Reproduction follows from replication - no need to choose degree of
+Reproduction follows from replication--no need to choose degree of
 similarity, emergent from lower level rules
 
 \chapter{Synthesis from a general evolutionary model}\label{synthesis-from-a-general-evolutionary-model}
@@ -1700,24 +1699,23 @@ Reformulate as causal reading
 
 TODO
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-Fitness independent of inheritance potential - as explored in
-\autocite{Bourrat2015} - bias applied only to bias value of offspring, not fitness
+Fitness independent of inheritance potential--as explored in
+\autocite{Bourrat2015}--bias applied only to bias value of offspring, not fitness
 \item
-fitness dependent on inheritance - more likely. A mechanism that
+fitness dependent on inheritance--more likely. A mechanism that
 doesn't copy well unlikely to preserve information leading to high
-fitness\ldots{} - the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
+fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
 \end{enumerate}
 
 \begin{itemize}
 \tightlist
 \item
-  Model 4 - proportion of high fitness entities rapidly increases to
+  Model 4--proportion of high fitness entities rapidly increases to
   near 1.0
 \item
-  Model 5 - both the proportion of offspring that are procreators
+  Model 5--both the proportion of offspring that are procreators
   (rather than persistors) and the heritability of ability to procreate
   increases over time to 1.0
 \end{itemize}
@@ -1733,10 +1731,10 @@ For some forms of V, S, I, E\ldots{}what are requirements?
 \begin{itemize}
 \tightlist
 \item
-  For I, reasonable to define by degree - \autocite{Bourrat2015} = bias
+  For I, reasonable to define by degree--\autocite{Bourrat2015} = bias
   or degree of correlation between parent and offspring
 \item
-  For S, compatible with resource competition - endogenous fitness
+  For S, compatible with resource competition--endogenous fitness
 \item
   For V, compatible with copy mutation
 \end{itemize}
@@ -1753,28 +1751,25 @@ Can we construct a causal diagram from variation and selection that:
   foundation for creativity?
 \end{itemize}
 
-\section{Hypothesis 2: Variation and Selection are sufficient for Inheritance}\label{h2}
+\section{Hypothesis 2: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
 
 Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
 be varied by interaction with the environment.
 
-Full or complete inheritance implies that the correlation (or fidelity) between parent and offspring
-trait approaches 1.0. 
+Full or complete inheritance implies that the correlation (or fidelity) between parent and offspring trait approaches 1.0. 
 
-\textit{Hypothesis 2}: Variation and Selection are sufficient for Inheritance, or V+S-\textgreater{}E
+\textit{Hypothesis 2}: Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, or $V'+S\rightarrow E$
 
-\textbf{TODO: IFF a mechanism linking child to parent fidelity}
+TODO: I iff V'
+TODO: mechanism vs measure for fidelity
 
 Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
-
-Or to broaden the scope of the claim to other forms of V and S?
 
 \section{Predictions}\label{predictions}
 
 In an unchanging environment, where the relative fitness of an entity, with respect to the environment, does not change over time, our expectations are:
 
 \begin{enumerate}
-	\def\labelenumi{\arabic{enumi}.}
 	\item Average inheritance will tend towards perfect inheritance.
 		Higher fitness entities will survive longer and reproduce more; higher fidelity reduces variation in fitness and so results in higher fitness being preferred.
 	\item Population variance for inheritance will decrease more than chance.		
@@ -1783,11 +1778,10 @@ In an unchanging environment, where the relative fitness of an entity, with resp
 Under changing environmental conditions, where the fitness of an unchanging entity with respect to the environment changes in response to environmental changes, we expect:
 
 \begin{enumerate}
-	\def\labelenumi{\arabic{enumi}.}
 	\item The \gls{sd} of final fidelity under changing conditions \textgreater{} that under fixed conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of $fidelity$.
-	\item $fidelity$ at the end of a run under changing conditions \textless{} that under fixed conditions.
-	\item The final $fitness$ will be in the the range described by the distribution applied in the $tweakFitness$ function.
+	\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
+	\item \emph{Fidelity} at the end of a run under changing conditions \textless{} that under fixed conditions.
+	\item The final \emph{Fitness} will be in the the range described by the distribution applied in the $tweakFitness$ function.
 \end{enumerate}
 
 \section{Theory}\label{theory}
@@ -1812,30 +1806,13 @@ Selection strengthens degree of inheritance
 
 \section{Alternative explanations}\label{alternative-explanations-1}
 
-\subsection{Variation alone sufficient for Inheritance - V-\textgreater{}I}\label{variation-alone-sufficient-for-inheritance---v-i}
+The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
 
-As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
-
-Models where p\_selection (factors{[}1{]}) == 1.0 effectively have no
-selection (Pr(selected)=1.0), and under changing environment where
-fitness changes each generation {[}Element(factors{[}4{]}(x.fitness-0.2,
-0.95), x.correlation) for x in population{]}, fitness can and does drop
-to zero without entities being removed from population
-
-How to reproduce:
-
-\begin{verbatim}
-factor_values = [0, 1, 0, 1, 1, 0, 1] # factor_defns[for selection] = 1.0, meaning no selection! So zero fitness entities persist...
-factors = [defn[value] for defn, value in zip(factor_defns, factor_values)]
-(initial, final) = model.run(factors, population=init_population(5000, low_start=True), generations=250, population_limit=10, changing_environment=True)
-self.assertEqual(5000, final.pop)
-\end{verbatim}
-
-Appears to get stuck in local maxima - when correlation goes to 1.0 then no scope for change of fitness \ldots{}
-
-\subsection{Selection alone sufficient for Inheritance, S-\textgreater{}I}\label{selection-alone-sufficient-for-inheritance-s-i}
-
-Test: show example of S and not I
+\begin{enumerate}
+	\item Variation alone is sufficient for Inheritance, or $V\rightarrow I$.
+	\item Selection alone is sufficient for Inheritance, $S\rightarrow I$.
+	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
+\end{enumerate}
 
 \chapter[Test of Hypothesis 2 under fixed conditions]{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
@@ -1857,23 +1834,29 @@ Test: show example of S and not I
 % library(lattice) # needed for bwplot etc
 %% end.rcode
 
-Our goal for this analysis is to \begin{inparaenum}[(i)]
-	\item experimentally test the predictions of Hypothesis 2 under a fixed environment (where the fitness of an entity does not change), and 
-	\item identify the strength of support for the Hypothesis across a variety of possible influences or factors.
-\end{inparaenum}
+Our goal for this analysis is to:
+ \begin{enumerate}
+	\item Experimentally test the predictions of Hypothesis 2 under a fixed environment (where the fitness of an entity does not change), and 
+	\item Identify the strength of support for the Hypothesis across a variety of possible influences or factors.
+\end{enumerate}
 
-We make use of an exogenous model where the key elements of the hypothesis, such as inheritance fidelity, are explicit for ease of understanding. Such a model allows us to directly specify the relationship between fitness and fidelity for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+\section{Base model}
 
-The base model (\cref{base-model-algorithm}) defines a population of entities, each with two properties -- $fitness$ and $fidelity$ -- and a set of population-transforming functions.
+We make use of an exogenous model where the key elements of the hypothesis, such as inheritance fidelity, are explicit for ease of understanding. Such a model allows us to directly specify 
+TODO: not the important thing about exogenous (the relationship between fitness and fidelity)
+
+for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+
+The base model (\cref{base-model-algorithm}) defines a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions.
 
 \begin{itemize}
-	\item $Fitness$ represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item $Fidelity$ is a measure of the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high $fidelity$ values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's.
+	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
+	\item \emph{Fidelity} is a measure of the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{Fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's.
 \end{itemize}
 
-The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f()$. 
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1]x[0,1]\leftarrow [0,1]$. 
 
-The only functions in the base model described here are for the two core elements from the Hypothesis, $Selection$ and $Variation$ (defined in \cref{base-model-functions}), although in later sections we will add others to examine the sensitivity of the model to various influences.
+The only functions in the base model described here are for the two core elements from the Hypothesis, \emph{Selection} and \emph{Variation} (defined in \cref{base-model-functions}), although in later sections we will add others to examine the sensitivity of the model to various influences.
 
 A run of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
 
@@ -1882,13 +1865,11 @@ A run of the model consists of a fixed number of time steps, or generations, whe
 \includegraphics[width=0.95\linewidth]{figures/model}
 \end{figure}
 
-\begin{algorithm}[htb]
-\DontPrintSemicolon
-\SetKwFunction{f}{f}
+\begin{algorithm}
 \For{generation $\in 1\dots$number of generations}{
 \tcp{Core algorithm}
 $population\leftarrow Selection(population)$\;
-$population\leftarrow population + Variation(population)$\;
+$population\leftarrow population \cup Variation(population)$\;
 \BlankLine
 \tcp{Check if population size is no longer sustainable}
 \uIf{population size is too small}{
@@ -1898,14 +1879,13 @@ break\;
 \caption{Algorithm for the base Model}\label{base-model-algorithm}
 \end{algorithm}
 
-\begin{algorithm}[htb]
-	\SetKwProg{Def}{def}{:}{}
+\begin{algorithm}
 	\SetKwFunction{f}{f}
 	\Def{Selection(population)}{
 		$population_{new}\leftarrow \{\}$\;
 		\For{each $entity$ in $population$} {
 			$p_{selection}\leftarrow $parent's fitness\;
-			Add $entity$ to $population_{new}$ with probability $p_{selection}$\;
+			Add $entity$ to $population_{new}$ with probability $p_{selection}$\; %TODO: new block type?
 		}
 		\Return $population_{new}$\;
 	}       
@@ -1915,7 +1895,7 @@ break\;
 		\For{each $entity$ in $population$}{
 			$p_{reproduce}\leftarrow $parent's fitness\;
 			\BlankLine
-			$\text{With probability }p_{reproduce}\text{:}$\;
+			$\text{With probability }p_{reproduce}$\; %TODO: new block type?
 			\Indp
 			$n\leftarrow \text{some random integer between 0 and }N_{children}\text{, inclusive}$\;
 			\BlankLine
@@ -1927,7 +1907,7 @@ break\;
 		}
 		\Return $children$\;
 	}
-	\caption{Algorithms for the Model functions $Selection$ and $Variation$}\label{base-model-functions}
+\caption{Algorithms for the Model functions \emph{Selection} and \emph{Variation}}\label{base-model-functions}
 \end{algorithm}
 
 \begin{figure}[ht]
@@ -1943,20 +1923,18 @@ The model as described is general, under the assumptions given below. It is also
 
 The model incorporates several assumptions which are worth making explicit:
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item $Fidelity$ and $fitness$ are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd} .
-\item $Fitness$ and $fidelity$ are independent, implying that $fidelity$ changes have no direct effect on $fitness$ (and vice versa.)
-\item A parent cannot directly influence the fitness of children - selection is an unseeing hand.
-\item $Fitness$ and $fidelity$ are both bounded to $[0,1]$ with the corollary that sampling at low and high ends will be biased towards the middle of the range.
+\item \emph{Fidelity} and \emph{Fitness} are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd}. \emph{Fitness} and \emph{Fidelity} are both TODO: implications on shape of distribution.
+\item \emph{Fitness} and \emph{Fidelity} are independent, implying that \emph{Fidelity} changes have no \emph{direct} effect on \emph{Fitness} (and vice versa.)
+\item A parent cannot directly influence the fitness of children--selection is an unseeing hand.
 \end{enumerate}
 
 \section{Experimental design}\label{experimental-design}
 
 \subsection{Response variables}\label{response-variables}
 
-From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is $fidelity$, or the correlation between parent and child property values. $Fidelity$ therefore is our response variable. 
+From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
 
-Specifically we use $\overline{fidelity}_{end}$, or the mean value for $fidelity$ (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. In addition, as we predict that $fidelity$ will increase, we expect $\overline{fidelity}_{end} - \overline{fidelity}_{start} > 0$.
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. TODO: need this? In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
@@ -1967,8 +1945,8 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for $fidelity
 \toprule
 & Factor&  Values& Description\\
 \midrule
-0&  $p_{reproduction}$&       $[0,1]$&                            Probability of reproduction for an entity\\
-1&  $p_{selection}$&          $[0,1]$&                            Probability of selection for an entity\\
+0&  $p_{reproduction}$&       $[0,1]$&                            Probability of reproduction for an entity TODO: 0=parent, 0+ to 1.0 fixed probability\\
+1&  $p_{selection}$&          $[0,1]$&                            Probability of selection for an entity TODO: 0=parent, 0+ to 1.0 fixed probability\\\
 2&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 3&  Limit population size&    $\{\mathrm{true}, \mathrm{false}\}$&  Use initial population size as upper limit on size\\
 4&  $f$&                      $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
@@ -2040,11 +2018,11 @@ In this case, entities start with a higher initial fidelity and a greater range 
 
 \subsection{Number of replicates}\label{number-of-replicates}
 
-TODO: this should be done as follows - initial estimate of 10 replicates here, based some preliminary estimate. Then, check in each hypothesis test analysis.
+TODO: this should be done as follows--initial estimate of 10 replicates here, based some preliminary estimate. Then, check in each hypothesis test analysis.
 
 The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
-Beginning with an initial estimate of 10 replicates for each run, we check the statistical power of the proposed ANOVA test for  population size-restricted results:
+Beginning with an initial estimate of 10 replicates for each run, we check the statistical power of the proposed ANOVA test for population size-restricted results:
 
 %% begin.rcode power, echo=FALSE
 % df_high <- load_dfa("results/results_highstart.data")
@@ -2056,17 +2034,18 @@ Beginning with an initial estimate of 10 replicates for each run, we check the s
 % x_power <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
 %% end.rcode
 
-We conclude that the power with on \rinline{x_power['groups']} groups and \rinline{x_power['n']} observations per group appears adequate, and therefore that 10 replicates for each experiment is reasonable.
+We conclude that the power TODO: add power 
+with on \rinline{x_power['groups']} groups and \rinline{x_power['n']} observations per group appears adequate, and therefore that 10 replicates for each experiment is reasonable.
 
 \section{Analysis}\label{analysis}
 
-This analysis is divided conceptually in two - first, a sanity check on the model and experiment design in \cref{distribution-function-1} and \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
+This analysis is divided conceptually in two--first, a sanity check on the model and experiment design in \cref{distribution-function-1} and \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
 
 \subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
 
-gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations - connection to other fields -> gaussian. But uniform would be worst case - good to know conclusions hold even under these conditions.
+gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
 
-TODO: complete analysis - H0 is that they are the same, H1 different. Test. Discuss.
+TODO: complete analysis--H0 is that they are the same, H1 different. Test. Discuss.
 
 %% begin.rcode df1, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
 % df_low <- load_dfa("results/results_lowstart.data")
@@ -2076,6 +2055,8 @@ TODO: complete analysis - H0 is that they are the same, H1 different. Test. Disc
 %% end.rcode
 
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
+
+TODO: truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...
 
 In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
 
@@ -2098,10 +2079,12 @@ One consideration is that the number of generations at the conclusion of each ru
 This is as expected, as the purpose of a population restriction is to allow the model to complete more
 generations by avoiding a terminal population explosion.
 
-Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50
-times original population size ($=50\times 5000$) for fair(er) comparison.
+Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50 times original population size ($=50\times 5000$) for fair(er) comparison.
 still introduces bias as a small proportion of truncated number of
 generations.
+
+TODO: but 15 is too little - still in startup
+TODO: also rest of parameters
 
 %% begin.rcode truncationdensity, echo=FALSE, out.width='0.7\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
 % library(lattice)
@@ -2113,7 +2096,7 @@ generations.
 
 Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \cref{low-start-case}.
 
-\begin{algorithm}[h]
+\begin{algorithm}
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
 		$population\leftarrow Selection(population)$\;
@@ -2125,19 +2108,21 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 			break\;
 		}
 	}
-	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a $truncation$ function}\label{upper-bound-model-algorithm}
+	
+\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a \emph{Truncation} function}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
 \subsubsection{Fitness-independent sampling}
 
 The first mechanism uses a fitness-independent sampling of $N_{population}$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $N_{population}$.
 
-\begin{algorithm}[tbh]
+\begin{algorithm}
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{
 		\Return $\text{Random sample of }N_{population}\text{ elements from }population$\;
 	}
-	\caption{Algorithm for a fitness-independent bound $Truncation$ function}
+	
+\caption{Algorithm for a fitness-independent bound \emph{Truncation} function}
 \end{algorithm}
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling where in all plots factor +1 means there is an upper bound on population size, while -1 represents that the results are unbounded. The top line contains density plots for fidelity and fitness; the middle line boxplots showing ranges, and the bottom line Q-Q plots contrasting bounded and unbounded results.'
@@ -2165,18 +2150,18 @@ Applying a \rinline{x_cor['method']} to determine if the truncated and untruncat
 
 We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
-This leads to an alternative hypothesis for population restriction - rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
+This leads to an alternative hypothesis for population restriction--rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
 
 \subsubsection{Fitness-based sampling}
 
-\begin{algorithm}[htb]
+\begin{algorithm}
 	\SetKwProg{Def}{def}{:}{}
 	\Def{Truncation(population)}{		
-		Order all elements in $population$ by $fitness$\;
-		$population_{new}\leftarrow$Top  $N_{population} $ elements by $fitness$\;
+		Order all elements in $population$ by \emph{Fitness}\;
+		$population_{new}\leftarrow$Top  $N_{population} $ elements by \emph{Fitness}\;
 		\Return $population_{new}$\;
-	} 
-	\caption{Algorithm for a fitness-based $Truncation$ function}
+	} 	
+\caption{Algorithm for a fitness-based \emph{Truncation} function}
 \end{algorithm}
 
 %% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
@@ -2208,41 +2193,41 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity does not approach 1.0 over a run, irrespective of factor values, or \newline
-		$\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
+		$\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert = 0$
 \item H$_1$: fidelity increases to near 1.0 over a run, for some factor values, or \newline
-		$\overline{fidelity}_{end} - \overline{fidelity}_{start} > 0$ and $1.0 - \overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
+		$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$ and $1.0--\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
 %\item H$_1$: fidelity increases over a run, for some factor values, or \newline
-%$\overline{fidelity}_{end} - \overline{fidelity}_{start} > 0$
+%$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$
 
-%% begin.rcode lowstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end} - \\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero.'
+%% begin.rcode lowstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero.'
 % df_low <- load_dfa("results/results_lowstart.data")
 % df_low <- df_low[df_low$truncate==1,]
 % plot(df_low$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
 % plot(df_low$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
 % densityplot(~df_low$final_ave_cor, xlab='Final average fidelity')
 % densityplot(~df_low$final_ave_fit, xlab='Final average fitness')
-% plot(df_low$response_cor, xlab='Experiment run', ylab='Final ave. fidelity - Initial ave. fidelity')
+% plot(df_low$response_cor, xlab='Experiment run', ylab='Final ave. fidelity--Initial ave. fidelity')
 %% end.rcode
 
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
 By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0.
 
-\textbf{TODO: Correlate Fidelity required - should be part of hypothesis}
+\textbf{TODO: Correlate Fidelity required--should be part of hypothesis}
 
 %% begin.rcode
 %# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
 %% end.rcode
 
-TODO: update - In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
+TODO: update--In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
 
-The second test is to examine the \gls{sd} of $fidelity$ changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
+The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\sigma{fidelity_{end}} - \sigma{fidelity_{start}} >= 0$, for all factor values.
-	\item H$_1$: $\sigma{fidelity_{end}} - \sigma{fidelity_{start}} < 0$, for some factor values.
+	\item H$_0$: $\sigma{fidelity_{end}}--\sigma{fidelity_{start}} >= 0$, for all factor values.
+	\item H$_1$: $\sigma{fidelity_{end}}--\sigma{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
 TODO: complete analysis
@@ -2265,8 +2250,8 @@ Result is significant with F = \rinline{round(x['F value'],2)} and p-value \text
 TODO: follow general Low Start analysis template 
 
 \begin{itemize}[label={}]
-\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert = 0$
-\item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end} - \overline{fidelity}_{start} \vert > 0$
+\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert = 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
 %% begin.rcode highstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The bottom line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$)'
@@ -2274,7 +2259,7 @@ TODO: follow general Low Start analysis template
 % df_high <- df_high[df_high$truncate==1,]
 % plot(df_high$final_ave_cor, xlab='Experiment run', ylab='Fidelity')
 % plot(df_high$final_ave_fit, xlab='Experiment run', ylab='Fitness')
-% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data - bimodal, with cluster
+% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data--bimodal, with cluster
 % densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
 %% end.rcode
 
@@ -2305,7 +2290,7 @@ Significance
 \item
   Support for overall hypothesis that variability derived from
   copying/inheritance mechanism, and that EvoEvo can tune this mechanism
-  to suit conditions - no preselected parameters required
+  to suit conditions--no preselected parameters required
 \item
   \gls{sd} of correlation should be greater than in a fixed environment
   (benefit to preserving variation)
@@ -2316,15 +2301,13 @@ Significance
 
 Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \cref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
-\begin{algorithm}[h]
-\DontPrintSemicolon
-\SetKwProg{Def}{def}{:}{}
+\begin{algorithm}
 \SetKwFunction{f}{f}
 \Def{tweakFitness(population, sd, meanOffset)}{
 	$population_{new}\leftarrow \{\}$\;
 	\For{each $element$ in $population$}{
 		$fitness\leftarrow \text{ fitness of }element$\;
-		$mean\leftarrow fitness - meanOffset$\;
+		$mean\leftarrow fitness--meanOffset$\;
 		$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
 	}
 	\Return $population_{new}$\;
@@ -2332,8 +2315,7 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 \caption{TweakFitness Function to simulate effects of a changing environment by directly adjusting entity fitness}
 \end{algorithm}
 
-\begin{algorithm}[h]
-	\DontPrintSemicolon
+\begin{algorithm}
 	\SetKwFunction{f}{f}
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
@@ -2355,7 +2337,7 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 
 \section{Experimental test}\label{experimental-test}
 
-Fluctuating environment with no trend or direction - modelled by applying the distribution function from parameters (i.e., either gaussian or
+Fluctuating environment with no trend or direction--modelled by applying the distribution function from parameters (i.e., either gaussian or
 uniform) with a possible change to the mean fitness each generation. In this model, an individual's fitness may increase or
 decrease.
 
@@ -2386,7 +2368,7 @@ Four different runs, with changes to the environment at four different frequenci
 	\label{tbl:factor_levels_changing}
 \end{table}
 
-Control - unchanging, but the other three runs with the change in environment, and so a call to $TweakFitness$, every 1,5 or 10 generations.
+Control--unchanging, but the other three runs with the change in environment, and so a call to $TweakFitness$, every 1,5 or 10 generations.
 
 The \gls{sd} of the environmental change was set to 0.90 (parameter $sd$ to $TweakFitness$ equal to 0.90), and $meanOffset$, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.  
 
@@ -2439,6 +2421,37 @@ From a visual inspection, we conclude that the results appear very similar for u
 % bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
 %% end.rcode
 
+\chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
+
+\section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance---v-i}
+	
+	As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
+	
+	Models where p\_selection (factors{[}1{]}) == 1.0 effectively have no
+	selection (Pr(selected)=1.0), and under changing environment where
+	fitness changes each generation {[}Element(factors{[}4{]}(x.fitness-0.2,
+	0.95), x.correlation) for x in population{]}, fitness can and does drop
+	to zero without entities being removed from population
+	
+	How to reproduce:
+	
+	\begin{verbatim}
+	factor_values = [0, 1, 0, 1, 1, 0, 1] # factor_defns[for selection] = 1.0, meaning no selection! So zero fitness entities persist...
+	factors = [defn[value] for defn, value in zip(factor_defns, factor_values)]
+	(initial, final) = model.run(factors, population=init_population(5000, low_start=True), generations=250, population_limit=10, changing_environment=True)
+	self.assertEqual(5000, final.pop)
+	\end{verbatim}
+	
+	Appears to get stuck in local maxima--when correlation goes to 1.0 then no scope for change of fitness \ldots{}
+	
+\section{Selection alone is sufficient for Inheritance}\label{selection-alone-sufficient-for-inheritance-s-i}
+	
+	Test: show example of S and not I
+	
+\section{Variation and Selection, without property correlation, is sufficient for Inheritance}
+
+Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \cref{low-start-case-analysis} and \cref{high-start-case-analysis}.
+	
 \chapter{Conclusions}
 
 Given:\newline
@@ -2457,7 +2470,7 @@ Possible extensions
 \item
   Experimental test: demonstrate Evolution given Variation and Selection
 \item
-  Consistency and sufficiency - classification of existing systems
+  Consistency and sufficiency--classification of existing systems
 \end{itemize}
 
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
@@ -2495,13 +2508,12 @@ proteins etc
 \section{Contributions}
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
 	Open-sourced Artificial Chemistry model
 \item
 	Progress towards useful heredity in an artificial system
 \item
-	Progress towards OEE in artificial system - evolution compatible with
+	Progress towards OEE in artificial system--evolution compatible with
   OEE without necessarily showing OEE (which is hard to measure and
   prove)
 \item
@@ -2514,7 +2526,7 @@ proteins etc
 Because an Artificial Chemistry
 \begin{itemize}
 \item
-  Meets known constraints for OEE - and we have OOL as an example of OEE
+  Meets known constraints for OEE--and we have OOL as an example of OEE
   from natural chemistry
 \item
   Choosing an artificial chemistry similar to natural chemistry enables
@@ -2565,7 +2577,7 @@ for the higher level chemistry, where that justification is based on
 fundamental supportable processes, rather than unique to particular
 problem.
 
-All four areas rely on a connection to real chemistries - Molecular
+All four areas rely on a connection to real chemistries--Molecular
 synthesis and Molecular Programming require results to be transferrable
 to In Vitro; other two expect results to shed light on In Vivo
 processes.
@@ -2573,7 +2585,7 @@ processes.
 Therefore expect that a grounded AChem for these should have a basis in
 real Chemistry.
 
-\subsection{BOX - Physical or Real-world Chemistry}\label{box---physical-or-real-world-chemistry}
+\subsection{BOX--Physical or Real-world Chemistry}\label{box---physical-or-real-world-chemistry}
 
 The richness of the real world is built on a substantial foundation of
 chemical and physical complexity.
@@ -2676,14 +2688,14 @@ equation -
 \[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where
 \(n\) is the order of the reaction \autocite{Plasson2010}. Example
 (indirect network autocatalysis) of glycolysis where pattern is ATP
-\(\rightarrow\) n.ATP - ATP initially consumed, but overall created.
+\(\rightarrow\) n.ATP--ATP initially consumed, but overall created.
 
 Autocatalysis may be realised by 1) either a single reaction (\eg A + X
 + Y \(\rightarrow\) 2A + Z) or a linear chain of reactions through
 intermediate products, called template autocatalysis, or 2) by a
 reaction network. Networks may be indirect through a series of
 intermediary products, or collective where there is no connection
-between the component cycles other than through catalysis - as seen for
+between the component cycles other than through catalysis--as seen for
 example in the replication of viroids where each RNA strand can catalyse
 the production of the other. However, in all cases, the reactions reduce
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's
@@ -2736,9 +2748,9 @@ In \autocite{Dittrich:2001zr}, Achems divided into major types:
   Abstract Automata and Artificial Molecular Machines (seem similar)
   e.g., Turing
 \item
-  Assembler Automata - Avida, Tierra
+  Assembler Automata--Avida, Tierra
 \item
-  Lattice Molecular Systems - \autocite{Ono2000},Madina2003,lattice
+  Lattice Molecular Systems--\autocite{Ono2000},Madina2003,lattice
   molecular automaton (LMA), Autopoietic System
 \end{itemize}
 
@@ -2773,7 +2785,7 @@ reactions in published work (1) Which ones to adopt? Which reactions
 direct evolution to more interesting places?
 
 Reactions may be pre-defined (if S represents real-world molecules) or
-dynamically-determined using molecular properties - the problem of how
+dynamically-determined using molecular properties--the problem of how
 to select a reaction is addressed by the Reactor Algorithm (below.)
 
 \autocite{Tominaga2007} showed for a particular artificial chemistry,
@@ -2815,7 +2827,7 @@ molecules; this can be termed a ``mixing space''.
 
 Scaling can be an issue: as new products are generated, the space of
 reactions and reactants can expand exponentially, and therefore
-performance dives. The general problem is model reduction - see
+performance dives. The general problem is model reduction--see
 \autocite{Radulescu2012} for a recent review; \autocite{Faulon2001} has
 a well-received method.
 
@@ -2823,10 +2835,10 @@ Alternative classification in \autocite{Faulconbridge2011}:
 
 \begin{itemize}
 \item
-  Symbolic - each molecular species labelled by a unique symbol; only
+  Symbolic--each molecular species labelled by a unique symbol; only
   explicit meanings
 \item
-  Structured Symbolic \eg \autocite{Hutton2002} - standard, hard to achieve
+  Structured Symbolic \eg \autocite{Hutton2002}--standard, hard to achieve
   emergence or support novel molecules
 \item
   Sub-symbolic \eg RBN-World, NAC, ToyChem \autocite{Benko2005}
@@ -2882,7 +2894,7 @@ A strongly constructive system is one which maintains closure, and in
 which there is self-consistency and some form of logical structure
 (implications.)
 
-A mechanism for exploration in the EA sense - new products can be
+A mechanism for exploration in the EA sense--new products can be
 generated, and new products can participate in reactions. One approach
 is to pre-specify all possible reactions; another is to generate
 reactions `on-the-fly' from the structures of the interacting molecules.
@@ -2890,7 +2902,7 @@ The first approach is well suited to simulating real chemistry as it
 allows properties of reactions observed in chemical experiments to be
 attached to their simulated equivalents. However, it does not allow for
 arbitrary reactions, and it requires reaction properties to be
-pre-specified - difficult for novel or artificial reactions. It could be
+pre-specified--difficult for novel or artificial reactions. It could be
 argued that the first approach is not in fact strongly constructive (in
 the sense of \autocite{Fontana1994,Dittrich:2001zr}) as it is not completely
 open-ended. However, \autocite{Hartenfeller2011} suggests that it is in fact
@@ -2953,7 +2965,7 @@ independently.
 Rather than from symbol manipulation, Chemical properties emerge from
 fundamental laws. This gives a richness and depth that cannot easily be
 equalled in a simulation. For example, the three-dimensional structure
-of a molecule - the arrangement of the elements in space - drives even
+of a molecule--the arrangement of the elements in space--drives even
 the simplest chemical reactions. Any (base- or acid) reaction results
 from the shift of charge from one region of a molecule to another,
 revealing one region while shielding another from activity. Some of the
@@ -2999,7 +3011,7 @@ Reaction network discovery and Drug discovery
 \item
   Examples
 \item
-  \autocite{Hogerl2010} etc - Diels-Alder and Formose reaction networks
+  \autocite{Hogerl2010} etc--Diels-Alder and Formose reaction networks
 \end{itemize}
 
 \subsection{Origins of Life}\label{origins-of-life}
@@ -3041,8 +3053,8 @@ specifically a ``set of molecules and reactions which is collectively
 autocatalytic in the sense that all molecules help in producing each
 other (through mutual catalysis, and supported by a food set).'')
 generally considered essential \autocite{Pross2013}, but not sufficient
-\autocite{Hordijk2011}. Both competing models - replication first and
-metabolism first - build on that. Autocatalysis expressed by
+\autocite{Hordijk2011}. Both competing models--replication first and
+metabolism first--build on that. Autocatalysis expressed by
 self-replication of oligomeric compounds in replication first; by cycles
 and network in metabolism first. In the broadest sense, life can be seen
 as an autocatalytic process where an entity catalyses the production of
@@ -3058,7 +3070,7 @@ lack template-based replication, replication is compositional (composome
 Common functions required in both protocells and minimal cells, but
 approaches quite different. Protocells must build up from abiotic
 conditions to point where known processes can take over, and to point
-where we have historical evidence - bridge gap between abiotic
+where we have historical evidence--bridge gap between abiotic
 conditions and first hypothetical cells in record
 
 Main issues with replicator-first model: big step from abiotic compounds
@@ -3094,7 +3106,7 @@ on properties of autocatalytic sets, is broader in applicability.
 Genetic and catalytic properties of RNA make well suited to creation of
 Alife \autocite{Cheng2010}
 
-Autocatalysis is a source of dynamical behaviour - leads to
+Autocatalysis is a source of dynamical behaviour--leads to
 bifurcations, multistability, oscillators, attractors
 \autocite{Plasson2010}
 
@@ -3119,7 +3131,7 @@ of metabolic networks in the earliest protocells
 In many cases though the specific focus is less on the bottoms-up model
 from the most elementary elements, and more on task-based models of
 processes where the particular starting point is predetermined by the
-researcher - in the former, Kauffman's autocatalytic protein sets, and
+researcher--in the former, Kauffman's autocatalytic protein sets, and
 Kaneko's protocell toy model; in the later, Ganti's chemoton.
 
 Examples
@@ -3143,7 +3155,7 @@ Examples
   movement of the particles in the matrix (for example, bonded Link
   particles cannot cross each other.)
 \item
-  \autocite{Flamm2010, Ullrich2010} - the evolution of metabolic networks in early
+  \autocite{Flamm2010, Ullrich2010}--the evolution of metabolic networks in early
   organisms using a simple model of RNA coding for catalysts
 \item
   NAC
@@ -3157,8 +3169,8 @@ Examples
   \autocite{Gardiner2007}
 \item
   string based chemistry to investigate protein metabolism evolution
-  under genetic control. Three types of molecule - protein, gene and
-  service molecule - react in particular ways associated with the types
+  under genetic control. Three types of molecule--protein, gene and
+  service molecule--react in particular ways associated with the types
   of interacting molecules. Type and pattern of molecules defines type
   of interaction.
 \item
@@ -3182,7 +3194,7 @@ the exploration of open-ended or creative evolution. Squirm3
 and pre-defined reactions for replication and gene-sequence
 transcription, and so although capable of interesting behaviour is not
 capable of unlimited extension. Stringmol \autocite{Hickinbotham2011} -
-a bacterial inspired microprogram chemistry - though does demonstrate a
+a bacterial inspired microprogram chemistry--though does demonstrate a
 rich heredity for open-ended evolution using string-matching to model
 binding between sequences, and RBN-World \autocite{Faulconbridge2011}
 shows that a form of Random Boolean Network, with the addition of a
@@ -3243,7 +3255,7 @@ energy.}
   random process.
 \end{itemize}
 
-\autocite{Tominaga2007} - computationally universal with only uni- and
+\autocite{Tominaga2007}--computationally universal with only uni- and
 bi-molecular reactions
 
 Desirable properties from \autocite{Faulconbridge2011}:
@@ -3286,7 +3298,7 @@ Additional properties from \autocite{Hickinbotham2010}:
 
 \begin{itemize}
 \item
-  Assembler Automata - Avida, Tierra
+  Assembler Automata--Avida, Tierra
 \item
   Geb \autocite{Channon:2001ly}
 \item
@@ -3294,7 +3306,7 @@ Additional properties from \autocite{Hickinbotham2010}:
   developmental process from a bit-string genotype.
 \item
   Individuals interact with the world through five predefined types of
-  interaction generated by the neural network - reproduce (crossover and
+  interaction generated by the neural network--reproduce (crossover and
   mutation of production rules), fight, turn anti-clockwise or
   clockwise, move forward.
 \item
@@ -3341,7 +3353,7 @@ but at the cost of additional modelling complexity.
 \item
   Stringmol
 \item
-  a bacterial inspired microprogram chemistry - though does demonstrate
+  a bacterial inspired microprogram chemistry--though does demonstrate
   a rich heredity for open-ended evolution using string-matching to
   model binding between sequences
 \item
@@ -3371,14 +3383,14 @@ but at the cost of additional modelling complexity.
 
 ToyWorld, our Artificial Chemistry for the exploration of emergent
 behaviours, was first introduced in \autocite{Young2013}. The elements
-of the model - Atoms, Molecules, Reactions, a Reaction Vessel - are
+of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are
 recognisable from real-world chemistry, but in highly simplified forms.
 
 Although there is no need for ToyWorld to be faithful to standard
 Chemistry, a degree of familiarity helps, but only in so far as the
 analogy is consistent. Therefore we endeavour to maintain a basic
 correspondence wherever possible. However, there is no requirement to
-provide chemically-realistic results - our model cannot be used to
+provide chemically-realistic results--our model cannot be used to
 investigate real-world chemical behaviours.
 
 There is also another reason. The model has many degrees-of-freedom, and
@@ -3719,7 +3731,7 @@ e_i=
    \begin{cases}
      \lvert E_i\rvert,  &(1) \text{  if $E_i < 0$;}\\
      0,                 &(2) \text{  if $E_{avail} < E_i$;}\\
-     E_{avail} - E_i,       &(3) \text{  otherwise.}
+     E_{avail}--E_i,       &(3) \text{  otherwise.}
    \end{cases}
 \end{displaymath}
 
@@ -3800,8 +3812,7 @@ geometry: for two products, we arrange their momentums in a line (line
 products, an equilateral triangle (line \cref{alg:3products}), and by
 extension, for four products, a square and so on.
 
-\begin{algorithm}[h]
-\DontPrintSemicolon
+\begin{algorithm}
 \KwData{Reactant molecules fully specified with energies and velocities, Product molecules without energies or velocities}
 \KwResult{Velocities for each Product molecule and total Internal Energy for all Product molecules $\ni$ total energy and momentum conserved}
 %$\text{sum of reactant kinetic energies}\leftarrow \sum\limits_{i=1}^n \text{kinetic energy}_i$\;
@@ -3819,7 +3830,7 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 }
 \uElse{
     $\text{ke}\leftarrow \text{random}([0,1])$\;
-    $\text{Internal energy of Products}\leftarrow \text{collision energy} - \text{ke}$\;
+    $\text{Internal energy of Products}\leftarrow \text{collision energy}--\text{ke}$\;
 }
 \BlankLine
 \Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){Number of products}{
@@ -3848,6 +3859,7 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 }
 \caption{Algorithm to set post-collision velocities and internal energies}\label{alg:post_collision_adjustments}
 \end{algorithm}
+
 
 Following a standard method, we first transfer the molecules from the
 frame of reference of the reaction vessel into the centre of mass (CoM)
@@ -4030,7 +4042,6 @@ The design outlined in Section
 experimentally.
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   Given two reactants, changing the reaction energy should result in
   different sets of reaction products.
@@ -4339,26 +4350,26 @@ The most significant limitation of our analysis overall is that the values chose
 
 \chapter{Introduction}
 
-The parameters themselves become endogenized, in the case of $fitness$ into an implicit relative fitness and for $fidelity$ into the outcome of the copying/variation mechanism.
+The parameters themselves become endogenized, in the case of \emph{Fitness} into an implicit relative fitness and for \emph{Fidelity} into the outcome of the copying/variation mechanism.
 
-``Fitness determines context'' - in contrast to Part 2, the entity affects its environment
+``Fitness determines context''--in contrast to Part 2, the entity affects its environment
 
 Fitness is relative to a context or niche. Creativity is where the
-entity changes niche or context - either by moving to a new niche, or
+entity changes niche or context--either by moving to a new niche, or
 creating or modifying one
 
-Creativity requires a feedback loop between entity and environment - a
+Creativity requires a feedback loop between entity and environment--a
 common representation for both so that they can interact (and entities
 can interact with other entities, and elements within the enviroment
 with other elements\ldots{})
 
-Other open areas - workings of selection
+Other open areas--workings of selection
 
-  Hints - e.g., Taylor, Van Valen\ldots{} - regarding resource
+  Hints--e.g., Taylor, Van Valen\ldots{}--regarding resource
   competition, when individuals are embedded (required for single set of
   omnipotent rules)
 
-Hypothesis - Resource competition as the mechanism of selection
+Hypothesis--Resource competition as the mechanism of selection
 
 \begin{itemize}
 \item
@@ -4411,7 +4422,7 @@ Evolutionary mechanism must be itself capable of improvement
 \item
   Levels of selection requires changes in mechanism
 \item
-  And levels are correlated with surprise - major transitions in
+  And levels are correlated with surprise--major transitions in
   evolution (Maynard-Smith:1995lw) (although specifics here are
   biologically derived)
 \item
@@ -4419,7 +4430,7 @@ Evolutionary mechanism must be itself capable of improvement
   environment interact to give new ways of producing new individuals.
   Dynamics required for novelty-generation (Nellis2014)
 \item
-  Evolvable mechanism; implies embodied, or endogenous - mechanism must
+  Evolvable mechanism; implies embodied, or endogenous--mechanism must
   be capable of evolvable under same conditions as shown earlier for
   evolutionary potential
 \item
@@ -4430,14 +4441,14 @@ Evolutionary mechanism must be itself capable of improvement
   \item
     If intrinsic selection, then mechanism for
     inheritance/variation/selection should be expressed in same language
-    as other evolvable elements - a common rule set or chemistry. If
+    as other evolvable elements--a common rule set or chemistry. If
     different, then cannot have interactions between other elements and
-    evolutionary mechanism - limited EvoEvo
+    evolutionary mechanism--limited EvoEvo
   \end{itemize}
 \end{itemize}
 
 Show that given 1) OEE evolutionary system from above 2) capable of
-self-modification - process evolution, capable of ``interesting''
+self-modification--process evolution, capable of ``interesting''
 
 Sufficient condition
 
@@ -4475,13 +4486,13 @@ Variation under evolutionary control
 \item
   Needs to be novel and open-ended itself!
 \item
-  EvoEvo simplest - same mechanism
+  EvoEvo simplest--same mechanism
 \item
-  Shared mechanism for I and V - capable of introducing some V during I
+  Shared mechanism for I and V--capable of introducing some V during I
 \item
   V must be exposed to S
 \item
-  Feedback loop - V refined by S
+  Feedback loop--V refined by S
 \item
   Prediction: V changes over time. In more detailed models, form of V
   may change over time (not possible without an EvoEvo mechanism)
@@ -4496,9 +4507,9 @@ Variation under evolutionary control
 
 \subsection{Tests for evolutionary activity}\label{tests-for-evolutionary-activity-1}
 
-Sustainability may be undecidable - Wiedermann:2005ys
+Sustainability may be undecidable--Wiedermann:2005ys
 
-Alife community - Channon, etc
+Alife community--Channon, etc
 
 Population measures e.g., Vasas2015
 
@@ -4506,7 +4517,7 @@ Artificial selection
 
 Moran's test
 
-Search mechanism - thermodynamic or ergodic search vs evolutionary
+Search mechanism--thermodynamic or ergodic search vs evolutionary
 search (implied by Rasmussen2004)
 
 Local entropy (implied by Adami2015)
@@ -4527,24 +4538,24 @@ And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
 TODO: link OEE to selection and variation from work in \cref{the-search-for-creativity}
 
-Requires a series of steps - akin to OOL where single-step
+Requires a series of steps--akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,
-based on 100 monomers - \autocite{Pascal2013})
+based on 100 monomers--\autocite{Pascal2013})
 
-\section{Step 1 - demonstration of Autocatalytic activity}\label{step-1---demonstration-of-autocatalytic-activity}
+\section{Step 1--demonstration of Autocatalytic activity}\label{step-1---demonstration-of-autocatalytic-activity}
 
 Previous work
 
 \begin{itemize}
 \item
-\autocite{Gordon-Smith2013} - Quite complex systems for replication demonstrated
+\autocite{Gordon-Smith2013}--Quite complex systems for replication demonstrated
 in SimSoup-2, handcrafted molecules
 \item
 \autocite{Bagley1990}
 \item
-GARD - \autocite{Segre1998}
+GARD--\autocite{Segre1998}
 \item
-\autocite{Ono2002} - Boid-like rules in Lattice Artificial Chemistry leads to
+\autocite{Ono2002}--Boid-like rules in Lattice Artificial Chemistry leads to
 membrane formation. Fixed types of particles with associated
 hydrophobic/hydrophilic/neutral class (with orientation). Fixed
 reaction paths to form an autocatalytic set of reactions
@@ -4552,12 +4563,12 @@ reaction paths to form an autocatalytic set of reactions
 \autocite{Huning2000}
 \end{itemize}
 
-\section{Step 2 - demonstration of selection between ACS}\label{step-2---demonstration-of-selection-between-acs}
+\section{Step 2--demonstration of selection between ACS}\label{step-2---demonstration-of-selection-between-acs}
 
 Test of evolution under selection versus drift- artificial selection -
 show response to selective pressure
 
-\section{Step 3 - Evolution in an artificial chemistry}\label{step-3---evolution-in-an-artificial-chemistry}
+\section{Step 3--Evolution in an artificial chemistry}\label{step-3---evolution-in-an-artificial-chemistry}
 
 \section{Alternative explanations}\label{alternative-explanations}
 
@@ -4575,9 +4586,9 @@ model)
 \begin{itemize}
 \tightlist
 \item
-Sustainability may be undecidable - \autocite{Wiedermann:2005ys}
+Sustainability may be undecidable--\autocite{Wiedermann:2005ys}
 \item
-Alife community - \autocite{Channon:2006st}, etc
+Alife community--\autocite{Channon:2006st}, etc
 \item
 Population measures e.g., \autocite{Vasas2015}
 \item
@@ -4585,12 +4596,12 @@ Artificial selection
 \item
 Moran's test
 \item
-Search mechanism - thermodynamic or ergodic search vs evolutionary
+Search mechanism--thermodynamic or ergodic search vs evolutionary
 search (implied by \autocite{Rasmussen2004})
 \item
 Local entropy (implied by \autocite{Adami2015})
 \item
-Measure of OEE - \autocite{Markovitch2012}
+Measure of OEE--\autocite{Markovitch2012}
 \end{itemize}
 
 \section{Tests for sufficient conditions}\label{tests-for-sufficient-conditions}

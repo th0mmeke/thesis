@@ -1836,7 +1836,7 @@ The base model (\cref{base-model-algorithm}) defines a population of entities, e
 	\item \emph{Fidelity} is a measure of the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{Fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's.
 \end{itemize}
 
-The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1]x[0,1]\leftarrow [0,1]$. 
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1] \times [0,1]\leftarrow [0,1]$. 
 
 The only functions in the base model described here are for the two core elements from the Hypothesis, \emph{Selection} (\cref{function-selection})and \emph{Variation} (\cref{function-variation}), although in later sections we will add others to examine the sensitivity of the model to various influences.
 
@@ -2135,9 +2135,10 @@ This leads to an alternative hypothesis for population restriction--rather than 
 \caption{Fitness-Based Truncation() function}
 \end{function}
 
-%% begin.rcode fitnessbasedplots, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-based sampling'
+%% begin.rcode fitnessbasedplots, echo=FALSE, fig.keep='last', fig.cap='Summary plots for fitness-based sampling'
 % df <- load_dfa("results/results_untruncated.data")
 % library(lattice)
+% layout(matrix(1:6,3,2,byrow=TRUE))
 % densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity',) # strongly non-normal
 % densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness',) # strongly non-normal
 % bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity')
@@ -2202,12 +2203,14 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
-%% begin.rcode lowstartcorrelation, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$) and final average fitness ($\\overline{fitness}_{end}$), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
-% library(ggplot2)
-% qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, ylab="Final average fidelity", xlab=expression(paste("Factor ", bold("Correlate Fidelity"))))
-% qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, ylab="Final average fitness", xlab=expression(paste("Factor ", bold("Correlate Fidelity"))))
-% qplot(fitness_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, ylab="Final average fidelity", xlab=expression(paste("Factor ", bold("Correlate Fitness"))))
-% qplot(fitness_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, ylab="Final average fitness", xlab=expression(paste("Factor ", bold("Correlate Fitness"))))
+%% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$) and final average fitness ($\\overline{fitness}_{end}$), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
+% library(cowplot)
+% library(gridExtra)
+% ap <- qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% bp <- qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% cp <- qplot(fitness_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% dp <- qplot(fitness_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
 By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0.

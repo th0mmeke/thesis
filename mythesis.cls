@@ -66,7 +66,7 @@
  \newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
  \newcommand{\hairsp}{\hspace{1pt}}% hair space
  \newcommand{\hquad}{\hskip0.5em\relax}% half quad space
- \newcommand{\TODO}{\textcolor{red}{\bf TODO!}\xspace}
+ \newcommand{\TODO}[1]{\textcolor{red}{\bf TODO #1}\xspace}
  \newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace}
  \newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace}
  \newcommand{\na}{\quad--}% used in tables for N/A cells

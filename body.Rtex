@@ -20,7 +20,6 @@ needed (e.g., cumulative, directed)
 Alternatives to ``evolution''? Broad definition\ldots{}:
 
 \begin{itemize}
-\tightlist
 \item
   Lower bound of random search--not good enough
 \item
@@ -39,7 +38,6 @@ Isn't this just EA? No--EAs have exogenous fitness, not open-ended
 OEE is not the same as creative or interesting evolution
 
 \begin{itemize}
-\tightlist
 \item
   Previous work\ldots{}
 \item
@@ -133,7 +131,6 @@ Separate outcome or result from process or mechanism (e.g., adaptation)
 Blurring in use of OEE
 
 \begin{itemize}
-\tightlist
 \item
   Either in sense of quote{an indefinitely large number of structures are
   each capable of replication.}{\autocite{MaynardSmith1999}}, or
@@ -330,7 +327,6 @@ probability distribution is similar to the Wright--Fisher model.}{\autocite{Paix
 Major points of difference
 
 \begin{itemize}
-\tightlist
 \item
 Mutation combines copying errors with genetic drift (and probably
 more)
@@ -362,7 +358,6 @@ perhaps not so surprising)
 What elements of life are required for OEE, and which are not?
 
 \begin{itemize}
-\tightlist
 \item
 Exact elements (same thing)--e.g., evolution?
 \item
@@ -379,7 +374,6 @@ Not required at all e.g., specific metabolic cycles
 Experimental tests
 
 \begin{itemize}
-\tightlist
 \item
 \autocite{Taylor:1999sc}
 \item
@@ -432,7 +426,7 @@ applying EvoEvo to ICT problems
 
 \subsection{The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
 
-TODO: rewrite, properly mark quotations + references!
+\TODO{ rewrite, properly mark quotations + references!}
 
 The field of artificial life is synonymous with simulation
 \autocite[chap.2]{Aicardi2010}. In other forms of science however
@@ -1451,7 +1445,6 @@ Minimal conditions for evolutionary system capable of open-ended (but
 not necessarily interesting behaviour)
 
 \begin{itemize}
-\tightlist
 \item
   Elements that allow for ongoing evolution--necessary, and starting
   point for novelty
@@ -1481,7 +1474,7 @@ the universal physico-chemical laws.}
 
 \begin{itemize}
 \item
-  Open-ended from \autocite{MaynardSmith1999} definition--TODO: size of search space vs population
+  Open-ended from \autocite{MaynardSmith1999} definition--\TODO{ size of search space vs population}
 \item
   Heritability a challenge--biological organisms employ digital
   heredity; sophisticated mechanism with controlled error rates, but
@@ -1492,7 +1485,6 @@ the universal physico-chemical laws.}
   Analog methods possible--\eg:
 
   \begin{itemize}
-  \tightlist
   \item
     compositional (where new entity contains some elements of original)
     (as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
@@ -1541,7 +1533,6 @@ Proofs of effectiveness:
 
 Other attempts at general models:
 \begin{itemize}
-\tightlist
 \item \autocite{VonNeumann1966} as reviewed in \autocite{Taylor:1999sc} (Lack of environmental emphasis)
 \item \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
 \item \autocite{Paixao2015}--reconciliation of EA models with PG models--A synthesis rather than a reformulation--way of describing both A and B using generalizations of each. Not a causal explanation
@@ -1564,7 +1555,6 @@ construction, but rather for testing
 Causal--mechanism
 
 \begin{itemize}
-\tightlist
 \item
   Want to remove extraneous factors
 \item
@@ -1591,7 +1581,6 @@ No learning mechanisms--changes during lifetime
 Corollary--addition and removal of elements
 
 \begin{itemize}
-\tightlist
 \item
   If have no removals then population is either static (contradiction)
   or indefinitely expanding (practical problem)
@@ -1614,7 +1603,6 @@ Corollary--addition and removal of elements
 Assume that variation occurs only on addition
 
 \begin{itemize}
-\tightlist
 \item
   If during life then, by definition, a learning mechanism
 \end{itemize}
@@ -1624,7 +1612,6 @@ Corollary: no Lamarckian inheritance
 Variation is in some element from parent to offspring
 
 \begin{itemize}
-\tightlist
 \item
   Degree of relationship interesting
 \item
@@ -1676,7 +1663,6 @@ guided by modifying the environment in a calculated way
 When do additions happen?
 
 \begin{itemize}
-\tightlist
 \item
   Degree of correlation between addition events and selection events
 \end{itemize}
@@ -1699,7 +1685,6 @@ Reformulate as causal reading
 
 TODO
 \begin{enumerate}
-\tightlist
 \item
 Fitness independent of inheritance potential--as explored in
 \autocite{Bourrat2015}--bias applied only to bias value of offspring, not fitness
@@ -1710,7 +1695,6 @@ fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and 
 \end{enumerate}
 
 \begin{itemize}
-\tightlist
 \item
   Model 4--proportion of high fitness entities rapidly increases to
   near 1.0
@@ -1729,7 +1713,6 @@ From previous work\ldots{}
 For some forms of V, S, I, E\ldots{}what are requirements?
 
 \begin{itemize}
-\tightlist
 \item
   For I, reasonable to define by degree--\autocite{Bourrat2015} = bias
   or degree of correlation between parent and offspring
@@ -1742,7 +1725,6 @@ For some forms of V, S, I, E\ldots{}what are requirements?
 Can we construct a causal diagram from variation and selection that:
 
 \begin{itemize}
-\tightlist
 \item
   complies with requirement (optimizer, population dominated by best)
 \item
@@ -1760,8 +1742,8 @@ Full or complete inheritance implies that the correlation (or fidelity) between 
 
 \textit{Hypothesis 2}: Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, or $V'+S\rightarrow E$
 
-TODO: I iff V'
-TODO: mechanism vs measure for fidelity
+\TODO{ I iff V'}
+\TODO{ mechanism vs measure for fidelity}
 
 Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
 
@@ -1843,7 +1825,7 @@ Our goal for this analysis is to:
 \section{Base model}
 
 We make use of an exogenous model where the key elements of the hypothesis, such as inheritance fidelity, are explicit for ease of understanding. Such a model allows us to directly specify 
-TODO: not the important thing about exogenous (the relationship between fitness and fidelity)
+\TODO{ not the important thing about exogenous (the relationship between fitness and fidelity)}
 
 for example without any consideration of, dependency on, or restrictions from specific mechanisms. With this difference, the base model described in this section will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
 
@@ -1885,7 +1867,7 @@ break\;
 	\For{each $entity$ in $population$} {
 		$p_{selection}\leftarrow $parent's fitness\;
 		\Prob($p_{selection}$:){
-			Add $entity$ to $population_{new}$\; % with probability $p_{selection}$\; %TODO: new block type?
+			Add $entity$ to $population_{new}$\; % with probability $p_{selection}$\;
 		}
 	}
 	\Return $population_{new}$\;
@@ -1928,7 +1910,7 @@ The model as described is general, under the assumptions given below. It is also
 
 The model incorporates several assumptions which are worth making explicit:
 \begin{enumerate}
-\item \emph{Fidelity} and \emph{Fitness} are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd}. \emph{Fitness} and \emph{Fidelity} are both TODO: implications on shape of distribution.
+\item \emph{Fidelity} and \emph{Fitness} are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd}. \emph{Fitness} and \emph{Fidelity} are both \TODO{ implications on shape of distribution.}
 \item \emph{Fitness} and \emph{Fidelity} are independent, implying that \emph{Fidelity} changes have no \emph{direct} effect on \emph{Fitness} (and vice versa.)
 \item A parent cannot directly influence the fitness of children--selection is an unseeing hand.
 \end{enumerate}
@@ -1939,7 +1921,7 @@ The model incorporates several assumptions which are worth making explicit:
 
 From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
 
-Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. TODO: need this? In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
 
 \subsection{Factors and levels}\label{factors-and-levels}
 
@@ -1951,8 +1933,8 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 \toprule
 & Factor&  Values& Description\\
 \midrule
-0&  $p_{reproduction}$&       $[0,1]$&                            Probability of reproduction for an entity TODO: 0=parent, 0+ to 1.0 fixed probability\\
-1&  $p_{selection}$&          $[0,1]$&                            Probability of selection for an entity TODO: 0=parent, 0+ to 1.0 fixed probability\\\
+0&  $p_{reproduction}$&       $[0,1]$&                            Probability of reproduction for an entity \TODO{ 0=parent, 0+ to 1.0 fixed probability}\\
+1&  $p_{selection}$&          $[0,1]$&                            Probability of selection for an entity \TODO{ 0=parent, 0+ to 1.0 fixed probability}\\\
 2&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 3&  Limit population size&    $\{\mathrm{true}, \mathrm{false}\}$&  Use initial population size as upper limit on size\\
 4&  $f$&                      $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
@@ -2016,11 +1998,11 @@ Case&	Property&  Initial range\\
 
 \paragraph{High Start case}\label{high-start-case}
 
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances (TODO : ref) but as our model omits drift (TODO: true?) we can eliminate it as an acceptable explanation for any downwards trend.
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
 \subsection{Number of replicates}\label{number-of-replicates}
 
-TODO: this should be done as follows--initial estimate of 10 replicates here, based some preliminary estimate. Then, check in each hypothesis test analysis.
+\TODO{ this should be done as follows--initial estimate of 10 replicates here, based some preliminary estimate. Then, check in each hypothesis test analysis.}
 
 The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
@@ -2036,29 +2018,16 @@ Beginning with an initial estimate of 10 replicates for each run, we check the s
 % x_power <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
 %% end.rcode
 
-We conclude that the power TODO: add power 
+We conclude that the power \TODO{ add power }
 with on \rinline{x_power['groups']} groups and \rinline{x_power['n']} observations per group appears adequate, and therefore that 10 replicates for each experiment is reasonable.
 
 \section{Analysis}\label{analysis}
 
 This analysis is divided conceptually in two--first, a sanity check on the model and experiment design in \cref{distribution-function-1} and \cref{check-effect-of-truncation} and then hypothesis tests under Low Start and High Start initial conditions in \cref{low-start-case-analysis} and \cref{high-start-case-analysis} respectively.
 
-\subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
-
-gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
-
-TODO: complete analysis--H0 is that they are the same, H1 different. Test. Discuss.
-
-%% begin.rcode df1, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
-% df_low <- load_dfa("results/results_lowstart.data")
-% df_low <- df_low[df_low$truncate==1,]
-% bwplot(df_low$final_ave_cor~df_low$distribution, names=c('-1','+1'), ylab='Final average fidelity')
-% bwplot(df_low$final_ave_fit~df_low$distribution, names=c('-1','+1'), ylab='Final average fitness')
-%% end.rcode
-
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
-TODO: truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...
+\TODO{ truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...}
 
 In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
 
@@ -2085,8 +2054,8 @@ Therefore when testing H$_0$ we modify the model to complete after 15 generation
 still introduces bias as a small proportion of truncated number of
 generations.
 
-TODO: but 15 is too little - still in startup
-TODO: also rest of parameters
+\TODO{ but 15 is too little - still in startup}
+\TODO{ also rest of parameters}
 
 %% begin.rcode truncationdensity, echo=FALSE, out.width='0.7\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
 % library(lattice)
@@ -2177,6 +2146,24 @@ This leads to an alternative hypothesis for population restriction--rather than 
 % qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness')
 %% end.rcode
 
+\subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
+
+gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
+
+\TODO{ complete analysis--H0 is that they are the same, H1 different. Test. Discuss.}
+
+\begin{itemize}[label={}]
+	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
+	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
+\end{itemize}
+
+%% begin.rcode df1, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
+% df <- load_dfa("results/results_lowstart.data")
+% df <- df[df$truncate==1,]
+% bwplot(df$final_ave_cor~df$distribution, names=c('Gaussian','Uniform'), ylab='Final average fidelity')
+% bwplot(df$final_ave_fit~df$distribution, names=c('Gaussian','Uniform'), ylab='Final average fitness')
+%% end.rcode
+
 \subsection{Low start case}\label{low-start-case-analysis}
 
 As mentioned earlier, this analysis has two goals: \begin{inparaenum}[(i)]
@@ -2215,13 +2202,21 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
+%% begin.rcode lowstartcorrelation, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$) and final average fitness ($\\overline{fitness}_{end}$), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
+% library(ggplot2)
+% qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, ylab="Final average fidelity", xlab=expression(paste("Factor ", bold("Correlate Fidelity"))))
+% qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, ylab="Final average fitness", xlab=expression(paste("Factor ", bold("Correlate Fidelity"))))
+% qplot(fitness_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, ylab="Final average fidelity", xlab=expression(paste("Factor ", bold("Correlate Fitness"))))
+% qplot(fitness_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, ylab="Final average fitness", xlab=expression(paste("Factor ", bold("Correlate Fitness"))))
+%% end.rcode
+
 By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0.
 
 %% begin.rcode
 %# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
 %% end.rcode
 
-TODO: update--In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
+\TODO{ update--In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.}
 
 The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 
@@ -2230,7 +2225,7 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 	\item H$_1$: $\sigma_{fidelity_{end}}--\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
-TODO: complete analysis
+\TODO{ complete analysis}
 
 \subsubsection{Implications of factor values}
 
@@ -2247,7 +2242,7 @@ Result is significant with F = \rinline{round(x['F value'],2)} and p-value \text
 
 \subsection{High start case}\label{high-start-case-analysis}
 
-TODO: follow general Low Start analysis template 
+\TODO{ follow general Low Start analysis template }
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert = 0$
@@ -2286,7 +2281,6 @@ correlation).
 Significance
 
 \begin{itemize}
-\tightlist
 \item
   Support for overall hypothesis that variability derived from
   copying/inheritance mechanism, and that EvoEvo can tune this mechanism
@@ -2463,7 +2457,6 @@ we suggest that:
 Possible extensions
 
 \begin{itemize}
-\tightlist
 \item
   Trend to environmental change
 \item
@@ -2485,7 +2478,7 @@ interact gives rise to emergent forms---molecules. At a higher level,
 these molecules, under the same interaction rules, also interact in
 patterns---reactions.
 
-TODO: link emergent levels to copy mechanism
+\TODO{ link emergent levels to copy mechanism}
 
 Still higher emergent levels emerge under favourable conditions.
 Reactions may form cycles, where a sequence eventually returns to an
@@ -2499,10 +2492,10 @@ believe like others (e.g., \autocite{Steel2013}) that cycles, of some
 form, are a necessary building-block for more complicated structures
 again in Artificial Chemistries.
 
-TODO: argue that ToyWorld capable of a tunable copying mechanism, similar to that in biology,
+\TODO{ argue that ToyWorld capable of a tunable copying mechanism, similar to that in biology,
 but that such a mechanism will be difficult to evolve de novo. Previous work on 
 evolution of a DNA/RNA copy mechanism in biology: Eigen's paradox, fidelity requires error-correction,
-proteins etc
+proteins etc}
 
 \section{Contributions}
 
@@ -2758,7 +2751,6 @@ A \gls{achem} can be represented by
 \autocite{Dittrich:2001zr}:
 
 \begin{itemize}
-\tightlist
 \item
   Set of Molecules (\textless{}\emph{S}\textgreater{})
 \end{itemize}
@@ -2769,7 +2761,6 @@ Properties of molecules e.g., energy calculation by Extended Huckel
 Theory (EHT); salvation energies; reaction rates.
 
 \begin{itemize}
-\tightlist
 \item
   Reaction rules (\textless{}\emph{R}\textgreater{}) (Chemistry)
 \end{itemize}
@@ -2792,7 +2783,6 @@ that it is computationally universal with only unimolecular and
 bimolecular reactions.
 
 \begin{itemize}
-\tightlist
 \item
   Reactor Algorithm (\textless{}\emph{A}\textgreater{}) (Physics)
 \end{itemize}
@@ -4399,7 +4389,6 @@ of higher levels of selection due to spatial self-organization.}
 {\autocite{Hogeweg1998}}
 
 \begin{itemize}
-\tightlist
 \item
   although somewhat quantified by scope (spatial structures e.g.,
   waves/spirals) and lack of fourth of element of Maynard-Smith:1995lw -
@@ -4430,7 +4419,6 @@ Evolutionary mechanism must be itself capable of improvement
   Inheritable variation under selection
 
   \begin{itemize}
-  \tightlist
   \item
     If intrinsic selection, then mechanism for
     inheritance/variation/selection should be expressed in same language
@@ -4529,7 +4517,7 @@ We have shown that:
 
 And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
-TODO: link OEE to selection and variation from work in \cref{the-search-for-creativity}
+\TODO{ link OEE to selection and variation from work in \cref{the-search-for-creativity}}
 
 Requires a series of steps--akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,
@@ -4566,7 +4554,6 @@ show response to selective pressure
 \section{Alternative explanations}\label{alternative-explanations}
 
 \begin{itemize}
-\tightlist
 \item
 Thermodynamics
 \item
@@ -4577,7 +4564,6 @@ model)
 \section{Tests for evolutionary activity}\label{tests-for-evolutionary-activity}
 
 \begin{itemize}
-\tightlist
 \item
 Sustainability may be undecidable--\autocite{Wiedermann:2005ys}
 \item
@@ -4600,7 +4586,6 @@ Measure of OEE--\autocite{Markovitch2012}
 \section{Tests for sufficient conditions}\label{tests-for-sufficient-conditions}
 
 \begin{itemize}
-\tightlist
 \item
 Remove a condition (e.g., \autocite{Soros2014})
 \end{itemize}

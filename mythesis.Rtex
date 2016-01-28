@@ -1,6 +1,6 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
-\usepackage{paralist,array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
+\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
 \usepackage[boxed, noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
@@ -32,12 +32,6 @@
 \SetKwBlock{Prob}{with probability }{end}
 \DontPrintSemicolon
 
-\newcommand{\eg}{e.g.,}
-\newcommand{\ie}{i.e.,}
-\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{\Large\guillemotleft}#1{\Large\guillemotright}\footnote{#2}}}
-\newcommand\Small{\fontsize{9}{9.2}\selectfont}
-\newcommand*\LSTfont{\Small\ttfamily\lsstyle}
-\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \author{Thom Young}
 \title{Feature Emergence in an Artificial Chemistry}

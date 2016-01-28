@@ -22,11 +22,10 @@
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage{sectsty}
 \RequirePackage{vmargin}
-%\RequirePackage{MinionPro}
+\RequirePackage{paralist} % for tighter lists
+ 
+\RequirePackage{units}
 \RequirePackage[font=small,labelfont=bf]{caption}
-%\RequirePackage[protrusion=true,expansion=true]{microtype}
-%\RequirePackage{amsfonts} %- replaced by MirionPro
-%\RequirePackage{amsmath} %- replaced by MirionPro
 
 \newboolean{mylistoftables} \setboolean{mylistoftables}{true}
 \newboolean{mylistoffigures} \setboolean{mylistoffigures}{true}
@@ -51,7 +50,6 @@
 \fi
 \RequirePackage[capitalise]{cleveref}
 
-
  \newcommand{\allcapsspacing}[1]{\textls[200]{#1}}
  \newcommand{\smallcapsspacing}[1]{\textls[50]{#1}}
  \newcommand{\allcaps}[1]{\textls[200]{\MakeTextUppercase{#1}}}
@@ -60,13 +58,30 @@
  \newcommand{\vin}{\hspace{1.5em}}
  \def\labelenumi{\arabic{enumi}.}
 
+ % Definitions from Tufte book class
+ % Typesets the font size, leading, and measure in the form of 10/12x26 pc.
+ \newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}}
+ % Macros for typesetting the documentation
+ \newcommand{\hlred}[1]{\textcolor{Maroon}{#1}}% prints in red
+ \newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}}
+ \newcommand{\hairsp}{\hspace{1pt}}% hair space
+ \newcommand{\hquad}{\hskip0.5em\relax}% half quad space
+ \newcommand{\TODO}{\textcolor{red}{\bf TODO!}\xspace}
+ \newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace}
+ \newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace}
+ \newcommand{\na}{\quad--}% used in tables for N/A cells
+
 \providecommand\newthought[1]{%
    \addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%
    \noindent\textsc{#1}%
 }
 
+\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{\Large\guillemotleft}#1{\Large\guillemotright}\footnote{#2}}}
+\newcommand\Small{\fontsize{9}{9.2}\selectfont}
+\newcommand*\LSTfont{\Small\ttfamily\lsstyle}
+
 \partfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
-\chapterfont{\color{darkgray}\sffamily\uppercase}
+\chapterfont{\color{darkgray}\sffamily\selectfont\uppercase}
 \sectionfont{\color{darkgray}\sffamily\normalsize\bfseries\selectfont\uppercase}
 \subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize\uppercase}
 \subsubsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}

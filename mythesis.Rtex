@@ -29,7 +29,7 @@
 % Options for algorithm2e
 \SetAlCapSkip{2em}
 \SetKwProg{Def}{Function}{:}{}
-\SetKwBlock{Prob}{W\with probability }{end}
+\SetKwBlock{Prob}{with probability }{end}
 \DontPrintSemicolon
 
 \newcommand{\eg}{e.g.,}

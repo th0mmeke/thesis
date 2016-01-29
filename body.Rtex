@@ -2034,18 +2034,17 @@ The first mechanism uses a fitness-independent sampling of $n$ elements from the
 	\Def{Truncation(population)}{
 		\Return $\text{Random sample of }n\text{ elements from }population$\;
 	}
-	
 	\caption{Fitness-Independent Truncation()}
 \end{function}
 
-%% begin.rcode fitnessindependentplots, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary plots for fitness-independent sampling where in all plots factor +1 means there is an upper bound on population size, while -1 represents that the results are unbounded. The top line contains density plots for fidelity and fitness; the middle line boxplots showing ranges, and the bottom line Q-Q plots contrasting bounded and unbounded results.'
-% df <- load_dfa("results/results_untruncated.data")
-% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity', xlab='Final average fidelity') 
-% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness', xlab='Final average fitness')
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity', names=c("-1","+1"), ylab='Final average fidelity')
-% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness', names=c("-1","+1"), ylab='Final average fitness')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity', xlab='+1', ylab='-1')
-% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness', xlab='+1', ylab='-1')
+%% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling, where the top line contains density plots for fidelity and fitness, and the middle line boxplots showing ranges.'
+% df <- load_dfa('results/results_lowstart.data')
+% df$truncate <- factor(df$truncate, labels=c("Unbounded","Bounded"))
+% ap <- qplot( final_ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
+% bp <- qplot( final_ave_fit, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
+% cp <- qplot(truncate, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="")
+% dp <- qplot(truncate, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
 %% end.rcode
 
 From the plots in \cref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
@@ -2055,13 +2054,14 @@ From the plots in \cref{fig:fitnessindependentplots} it is clear that the result
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
 %% begin.rcode kstest, echo=FALSE
-% x_cor <- ks.test(df[df$truncate==-1,]$final_ave_cor,df[df$truncate==1,]$final_ave_cor)
-% x_fit <- ks.test(df[df$truncate==-1,]$final_ave_fit,df[df$truncate==1,]$final_ave_fit)
+% df <- load_dfa('results/results_lowstart.data')
+% x_cor <- ks.test(df[df$truncate=='Unbounded',]$final_ave_cor,df[df$truncate=='Bounded',]$final_ave_cor)
+% x_fit <- ks.test(df[df$truncate=='Unbounded',]$final_ave_fit,df[df$truncate=='Bounded',]$final_ave_fit)
 %% end.rcode
 
-Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
+% Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude, somewhat surprisingly, from the formal tests that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
 This leads to an alternative hypothesis for population restriction--rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
 
@@ -2077,18 +2077,6 @@ This leads to an alternative hypothesis for population restriction--rather than 
 	\caption{Fitness-Based Truncation() function}
 \end{function}
 
-%% begin.rcode fitnessbasedplots, echo=FALSE, fig.keep='last', fig.cap='Summary plots for fitness-based sampling'
-% df <- load_dfa("results/results_untruncated.data")
-% library(lattice)
-% layout(matrix(1:6,3,2,byrow=TRUE))
-% densityplot(~df$final_ave_cor|df$truncate, data=df, main='Final average fidelity',) # strongly non-normal
-% densityplot(~df$final_ave_fit|df$truncate, data=df, main='Final average fitness',) # strongly non-normal
-% bwplot(df$final_ave_cor~df$truncate, main='Final average fidelity')
-% bwplot(df$final_ave_fit~df$truncate, main='Final average fitness')
-% qqplot(df[df$truncate==1,]$final_ave_cor, df[df$truncate==-1,]$final_ave_cor, main='Final average fidelity')
-% qqplot(df[df$truncate==1,]$final_ave_fit, df[df$truncate==-1,]$final_ave_fit, main='Final average fitness')
-%% end.rcode
-
 \subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
 
 gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
@@ -2100,11 +2088,13 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
 \end{itemize}
 
-%% begin.rcode df1, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
+%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
 % df <- load_dfa("results/results_lowstart.data")
 % df <- df[df$truncate==1,]
-% bwplot(df$final_ave_cor~df$distribution, names=c('Gaussian','Uniform'), ylab='Final average fidelity')
-% bwplot(df$final_ave_fit~df$distribution, names=c('Gaussian','Uniform'), ylab='Final average fitness')
+% df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+% ap <- qplot(distribution, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
+% bp <- qplot(distribution, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
+% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
 \subsection{Initial conditions and settings}\label{initial-conditions}
@@ -2197,13 +2187,9 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0.
+By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0. Those that did were uniformly associated with \textbf{Correlate Fidelity} == 1 (see top-left plot in \cref{fig:lowstartcorrelation})
 
-%% begin.rcode
-%# summary(df_low[df_low$final_ave_cor<=0.8,]$final_ave_cor)
-%% end.rcode
-
-\TODO{ update--In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.}
+In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
 
 The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 

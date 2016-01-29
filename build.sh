@@ -6,6 +6,7 @@ latexmk -pdf mythesis
 makeglossaries mythesis
 latexmk -pdf mythesis
 latexmk -c mythesis
+rm -rf ./generated_figures/*
 
 # Latex -> Pandoc markdown citations
 #sed -e 's%\\cite{\([^}]*\)}%@\1%g' # in text citation \cite(key) -> @key

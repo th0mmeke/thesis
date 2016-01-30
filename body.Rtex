@@ -1801,18 +1801,29 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 
 \chapter[Test of Hypothesis 2 under fixed conditions]{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-%% begin.rcode loaddfa, echo=FALSE
-% load_dfa <- function(t){
+%% begin.rcode functions, echo=FALSE
+% load_dfa <- function(t) {
 %   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
 %   df <- read.csv(t, colClasses=colClasses)
 %   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
 %   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
 %   df
 % }
-% load_dfb <- function(t){
+% load_dfb <- function(t) {
 %   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
 %   df <- read.csv(t, colClasses=colClasses)
 %   df
+% }
+% myqqplot <- function(x,y,...) {
+%    sx <- sort(x)
+%    sy <- sort(y)
+%    lenx <- length(sx)
+%    leny <- length(sy)
+%    if (leny < lenx) 
+%	    sx <- approx(1L:lenx, sx, n = leny)$y
+%    if (leny > lenx) 
+%	    sy <- approx(1L:leny, sy, n = lenx)$y
+%	qplot(x,y,...)
 % }
 %% end.rcode
 
@@ -1977,7 +1988,7 @@ The size of the population is driven by how population elements are introduced a
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the standard Evolutionary algorithm, a population limit is enforced through the selection mechanism where the selection returns a set number of elements from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to determine the effects of limits independent of any bias or direction imparted by selection.
 
-This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness. The second recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
+This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness. 
 
 Given this difference between mechanisms, it is appropriate that population mean fitness is introduced as a proxy for bias; population mean fidelity is also examined as it is the response variable for the overall hypothesis, Hypothesis 2.
 
@@ -2027,7 +2038,7 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 
 \subsubsection{Fitness-independent sampling}
 
-The first mechanism uses a fitness-independent sampling of $n$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $n$.
+The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $n$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2047,6 +2058,15 @@ The first mechanism uses a fitness-independent sampling of $n$ elements from the
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
 %% end.rcode
 
+%% begin.rcode fitnessindependentqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Q-Q plots for fitness-independent sampling, comparing Unbounded and Bounded results for fidelity (left) and fitness (right).'
+% df <- load_dfa('results/results_lowstart.data')
+% dfa <- df[df$truncate==-1,]
+% dfb <- df[df$truncate==1,]
+% ap <- myqqplot(sort(dfa$final_ave_cor), sort(dfb$final_ave_cor), main="Final average fidelity", xlab="Unbounded",ylab="Bounded")
+% bp <- myqqplot(sort(dfa$final_ave_fit), sort(dfb$final_ave_fit), main="Final average fitness", xlab="Unbounded",ylab="Bounded")
+% grid.arrange(ap,bp,nrow=1,ncol=2)
+%% end.rcode
+
 From the plots in \cref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
@@ -2063,19 +2083,7 @@ From the plots in \cref{fig:fitnessindependentplots} it is clear that the result
 
 We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
-This leads to an alternative hypothesis for population restriction--rather than neutral sampling, seek to restore the effect of the removed portion of the population. This is the behaviour expected from the second mechanism, Fitness-based sampling.
-
-\subsubsection{Fitness-based sampling}
-
-\begin{function}
-	\SetKwProg{Def}{def}{:}{}
-	\Def{Truncation(population)}{		
-		Order all elements in $population$ by \emph{Fitness}\;
-		$population_{new}\leftarrow$Top  $n $ elements by \emph{Fitness}\;
-		\Return $population_{new}$\;
-	} 	
-	\caption{Fitness-Based Truncation() function}
-\end{function}
+This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
 
 \subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
 
@@ -2088,7 +2096,7 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
 \end{itemize}
 
-%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian (\'-1\') and Uniform (\'+1\') distributions for function $f()$.'
+%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
 % df <- load_dfa("results/results_lowstart.data")
 % df <- df[df$truncate==1,]
 % df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))

@@ -1827,18 +1827,23 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 % }
 %% end.rcode
 
+To test our hypothesis we turn to an experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis has support. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
+
+Experimental tests are the strongest method we have to examine the claims made in Hypothesis 2. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+
+Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to examine the variation or range exposed in the response.
+
 Our goal for this first set of experiments is to:
  \begin{enumerate}
 	\item Experimentally test the predictions of Hypothesis 2 under a fixed environment (where the fitness of an entity does not change), and 
 	\item Identify the strength of support for the Hypothesis across a variety of possible influences or factors.
 \end{enumerate}
 
-
 \section{Base model}
 
-All experiments in this set make use of the same endogenous Base Model where the key elements of the hypothesis, such as inheritance fidelity, are explicit parameters in the model. This model will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+All experiments in this section \cref{experimental-test-of-h2-under-fixed-conditions} make use of the same base model where the key elements of the hypothesis, such as inheritance fidelity, are explicit (or endogenous, to use the language adopted by \cite{Bourrat2015}) parameters in the model. This model will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
 
-The base model (\cref{base-model-algorithm}) defines a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions.
+We define a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions (\cref{base-model-algorithm}) .
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
@@ -1946,6 +1951,7 @@ The model incorporates several assumptions which are worth making explicit:
 
 \section{Experimental design}\label{experimental-design}
 
+
 \subsection{Response variables}\label{response-variables}
 
 From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
@@ -1982,11 +1988,11 @@ A full factorial design with seven 2-level factors would require testing $2^{7}$
 
 \TODO{ truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...}
 
-In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a core element of the model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results as a consequence of limiting the population size. 
+In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a property of the theoretical model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
 
 The size of the population is driven by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the standard Evolutionary algorithm, a population limit is enforced through the selection mechanism where the selection returns a set number of elements from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to determine the effects of limits independent of any bias or direction imparted by selection.
+Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
 This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness. 
 
@@ -2010,12 +2016,9 @@ generations.
 \TODO{ but 15 is too little - still in startup}
 \TODO{ also rest of parameters}
 
-%% begin.rcode truncationdensity, echo=FALSE, out.width='0.7\\linewidth',fig.show='hold', fig.cap='Generations completed under either no population restriction or fitness-independent sampling'
-% library(lattice)
-% df_low <- load_dfa('results/results_lowstart.data')
-% df_high <- load_dfa('results/results_highstart.data')
-% densityplot(~df_low$final_gen|df_low$truncate, data=df_low, main='Low start case', xlab='Final generation')
-% densityplot(~df_high$final_gen|df_high$truncate, data=df_high, main='High start case', xlab='Final generation')
+%% begin.rcode truncationdensity, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Generations completed without upper-bound size restriction (left) or fitness-independent sampling restriction (right).'
+% df <- load_dfa('results/results_lowstart.data')
+% ggplot(df, aes(final_gen)) + geom_histogram(bins=50) + facet_grid(.~truncate)
 %% end.rcode
 
 Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \cref{low-start-case}.
@@ -2195,7 +2198,7 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0. Those that did were uniformly associated with \textbf{Correlate Fidelity} == 1 (see top-left plot in \cref{fig:lowstartcorrelation})
+By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0. Those that did were uniformly associated with \textbf{Correlate Fidelity} == 1 (see top-left plot in \cref{fig:lowstartcorrelation}). Child and parent fidelities are related by \emph{f()} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
 
@@ -2208,18 +2211,27 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 
 \TODO{ complete analysis}
 
-\subsubsection{Implications of factor values}
-
-Child and parent fidelities are related by f() (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others.
+\subsubsection{Factor significance and interactions}
 
 %% begin.rcode lowstartanova, echo=FALSE
-% df_test <- df_low[df_low$correlation_correlation == -1,]
+% df_test <- df_low[df_low$correlation_correlation == 1,]
 % m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
 % #summary(m0)
 % x <- anova(m0)
 %% end.rcode
+% significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
-Result is significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
+Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $f()$.
+
+Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1:
+
+%% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
+% ap <- qplot(p_reproduce, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
+% bp <- qplot(p_selection, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
+% cp <- qplot(n_offspring, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
+% dp <- qplot(distribution, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+%% end.rcode
 
 \subsection{High start case}\label{high-start-case-analysis}
 
@@ -2263,8 +2275,6 @@ As in the Low Start case, the clusters are driven by the value of the factor \te
 The statistical power of the design is \rinline{x_power['power']} with \rinline{x_power['groups']} groups and \rinline{x_power['n']} observations per group.
 
 Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
-
-
 
 \chapter[Test of Hypothesis 2 under changing conditions]{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 

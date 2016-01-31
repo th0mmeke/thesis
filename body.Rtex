@@ -1984,6 +1984,12 @@ A full factorial design with seven 2-level factors would require testing $2^{7}$
 \end{center}
 \end{table}
 
+\paragraph{Other settings}\label{other-settings}
+
+The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
+
+Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
+
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
 \TODO{ truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...}
@@ -1994,9 +2000,7 @@ The size of the population is driven by how population elements are introduced a
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
-This section describes two possible mechanisms to implement an upper bound, and tests if either introduces a source of bias into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness. 
-
-Given this difference between mechanisms, it is appropriate that population mean fitness is introduced as a proxy for bias; population mean fidelity is also examined as it is the response variable for the overall hypothesis, Hypothesis 2.
+This section describes two possible mechanisms to implement an upper bound, and attempts to understand the form of the bias each introduces into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness, while the other is to adopt the \emph{truncation} mechanism (described in \autocite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism.
 
 In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity):
 
@@ -2006,12 +2010,9 @@ In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are
 \end{itemize}
 
 One consideration is that the number of generations at the conclusion of each run will not necessarily be comparable. 
-This is as expected, as the purpose of a population restriction is to allow the model to complete more
-generations by avoiding a terminal population explosion.
+This is as expected, as the purpose of a population restriction here (other rationale may apply in general though, such as increasing selection bias) is to avoid a terminal population explosion.
 
-Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50 times original population size ($=50\times 5000$) for fair(er) comparison.
-still introduces bias as a small proportion of truncated number of
-generations.
+Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50 times original population size ($=50\times 5000$) for fair(er) comparison
 
 \TODO{ but 15 is too little - still in startup}
 \TODO{ also rest of parameters}
@@ -2021,14 +2022,14 @@ generations.
 % ggplot(df, aes(final_gen)) + geom_histogram(bins=50) + facet_grid(.~truncate)
 %% end.rcode
 
-Finally, the environment was fixed (environment change frequency = 0) and the initial population followed the low-start case \cref{low-start-case}.
+Finally, the environment was fixed (that is, each element's fitness value does not change) and the initial population followed the low-start case \cref{low-start-case} with other parameters unchanged from \cref{other-settings}.
 
 \begin{algorithm}
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
 		$population\leftarrow Selection(population)$\;
 		$population\leftarrow population + Reproduction(population)$\;
-		$population\leftarrow Truncation(population)$\;
+		$population\leftarrow Restriction(population)$\;
 		\BlankLine
 		\tcp{Check if population size is no longer sustainable}
 		\uIf{population size is too small}{
@@ -2036,19 +2037,19 @@ Finally, the environment was fixed (environment change frequency = 0) and the in
 		}
 	}
 	
-	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a \emph{Truncation} function}\label{upper-bound-model-algorithm}
+	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a \emph{Restriction} function}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-\subsubsection{Fitness-independent sampling}
+\subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
 The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $n$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
-	\Def{Truncation(population)}{
+	\Def{Restriction(population)}{
 		\Return $\text{Random sample of }n\text{ elements from }population$\;
 	}
-	\caption{Fitness-Independent Truncation()}
+	\caption{Fitness-Independent Restriction()}
 \end{function}
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling, where the top line contains density plots for fidelity and fitness, and the middle line boxplots showing ranges.'
@@ -2086,6 +2087,20 @@ From the plots in \cref{fig:fitnessindependentplots} it is clear that the result
 
 We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
+\subsubsection{Fitness-based selection}
+
+The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+
+\begin{function}
+	\SetKwProg{Def}{def}{:}{}
+	\Def{Restriction(population)}{
+		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
+		\Return $\text{First }n\text{ elements from }sortedPopulation$\;
+	}
+	\caption{Fitness-based Restriction()}
+\end{function}
+
+\subsubsection{Discussion}
 This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
 
 \subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
@@ -2137,12 +2152,6 @@ Case&	Property&  Initial range\\
 \paragraph{High Start case}\label{high-start-case}
 
 In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
-
-\paragraph{Other settings}
-
-The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
-
-Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
 
 \section{Analysis}\label{analysis}
 
@@ -2304,9 +2313,9 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 	\SetKwFunction{f}{f}
 	\For{generation $\in 1\dots$number of generations}{
 		\tcp{Core algorithm}
-		$population\leftarrow selection(population)$\;
-		$population\leftarrow population + reproduction(population)$\;
-		$population\leftarrow truncation(population)$\;
+		$population\leftarrow Selection(population)$\;
+		$population\leftarrow population + Reproduction(population)$\;
+		$population\leftarrow Restriction(population)$\;
 		\BlankLine
 		\tcp{Check if population size is no longer sustainable}
 		\uIf{population size is too small}{

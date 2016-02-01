@@ -1406,8 +1406,8 @@ Too special-purpose
 
 \section{Previous publications}\label{previous-publications}
 
-A version of Reactant and Product Strategies \cref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
-and material from \cref{model-validation} in \cite{Young2013}.
+A version of Reactant and Product Strategies \autoref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
+and material from \autoref{model-validation} in \cite{Young2013}.
 
 ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
@@ -1707,9 +1707,11 @@ fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and 
   increases over time to 1.0
 \end{itemize}
 
-\section{Hypothesis 1: Variation and Inheritance and Selection are sufficient for Evolution}\label{h1}
+\section{Hypothesis: Variation and Inheritance and Selection are sufficient for Evolution}\label{h1}
 
-\textit{Hypothesis 1}: Variation and Inheritance and Selection are sufficient for Evolution, or V+S+I-\textgreater{}E
+\begin{hypothesis}
+Variation and Inheritance and Selection are sufficient for Evolution, or V+S+I-\textgreater{}E
+\end{hypothesis}\label{hypothesis-1}
 
 From previous work\ldots{}
 
@@ -1736,19 +1738,25 @@ Can we construct a causal diagram from variation and selection that:
   foundation for creativity?
 \end{itemize}
 
-\section{Hypothesis 2: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
 
 Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
 be varied by interaction with the environment.
 
-Full or complete inheritance implies that the correlation (or fidelity) between parent and offspring trait approaches 1.0. 
+Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
 
-\textit{Hypothesis 2}: Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, or $V'+S\rightarrow E$
+For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
 
-\TODO{ I iff V'}
-\TODO{ mechanism vs measure for fidelity}
+\begin{hypothesis}
+Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance, or $V'+S\rightarrow I$
+\end{hypothesis}\label{hypothesis-2}
 
-Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
+\TODO{we mean inheritance increases to some optimal level}
+Inheritance is defined as any correlation better than 0.5, or in other words, as better than chance. Fidelity is defined as the degree of correlation between parent and offspring values for the same trait.
+
+\TODO{I iff V' (that is, with initial correlation)}
+\TODO{Mechanism vs measure for fidelity}
+\TODO{Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?}
 
 \section{Predictions}\label{predictions}
 
@@ -1760,7 +1768,7 @@ In an unchanging environment, where the relative fitness of an entity, with resp
 	\item Population variance for inheritance will decrease more than chance.		
 \end{enumerate}
 
-Under changing environmental conditions, where the fitness of an unchanging entity with respect to the environment changes in response to environmental changes, we expect:
+Under changing environmental conditions, where the fitness of an unchanging entity changes in response to environmental changes, we expect:
 
 \begin{enumerate}
 	\item The \gls{sd} of final fidelity under changing conditions \textgreater{} that under fixed conditions.
@@ -1791,7 +1799,7 @@ Selection strengthens degree of inheritance
 
 \section{Alternative explanations}\label{alternative-explanations-1}
 
-The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
+The three main alternatives, examined later in \autoref{elimination-of-alternative-explanations} are:
 
 \begin{enumerate}
 	\item Variation alone is sufficient for Inheritance, or $V\rightarrow I$.
@@ -1799,7 +1807,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter[Test of Hypothesis 2 under fixed conditions]{Experimental test of Hypothesis 2 under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
+\chapter[Test of Hypothesis under fixed conditions]{Experimental test of Hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 %% begin.rcode functions, echo=FALSE
 % load_dfa <- function(t) {
@@ -1829,32 +1837,32 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 
 To test our hypothesis we turn to an experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis has support. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
-Experimental tests are the strongest method we have to examine the claims made in Hypothesis 2. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \autoref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to examine the variation or range exposed in the response.
 
 Our goal for this first set of experiments is to:
  \begin{enumerate}
-	\item Experimentally test the predictions of Hypothesis 2 under a fixed environment (where the fitness of an entity does not change), and 
-	\item Identify the strength of support for the Hypothesis across a variety of possible influences or factors.
+	\item Experimentally test the predictions of hypothesis \autoref{hypothesis-2} under a fixed environment (where the fitness of an entity does not change), and 
+	\item Identify the strength of support for the hypothesis across a variety of possible influences or factors.
 \end{enumerate}
 
 \section{Base model}
 
-All experiments in this section \cref{experimental-test-of-h2-under-fixed-conditions} make use of the same base model where the key elements of the hypothesis, such as inheritance fidelity, are explicit (or endogenous, to use the language adopted by \cite{Bourrat2015}) parameters in the model. This model will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology.
+All experiments in this section make use of the same base model where the key elements of the hypothesis, such as inheritance fidelity, are explicit (or endogenous, to use the language adopted by \autocite{Bourrat2015}) parameters in the model. This model in outline will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of \emph{fidelity} is novel and important to the overall thesis.
 
-We define a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions (\cref{base-model-algorithm}) .
+We define a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions (\autoref{base-model-algorithm}) .
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item \emph{Fidelity} is a measure of the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{Fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's.
+	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{Fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
 \end{itemize}
 
 The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1] \times [0,1]\leftarrow [0,1]$. 
 
-The only functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} (\cref{function-selection})and \emph{Variation} (\cref{function-variation}), although in later sections we will add others to examine the sensitivity of the model to various influences.
+The only functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} (\autoref{function-selection})and \emph{Variation} (\autoref{function-variation}), although in later sections we will add others to examine the sensitivity of the model to various influences.
 
-A \gls{run} of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population, starting from some defined initial population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
+Each \gls{run} of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population, starting from some defined initial population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
 
 \begin{figure}[htb]
 \centering
@@ -1918,7 +1926,6 @@ break\;
 
 \begin{table}
 	\begin{center}
-		\tiny
 		\caption{Model parameters}\label{tbl:factor_definitions}
 		\begin{tabular}{@{}lllp{7cm}@{}}
 			\toprule
@@ -1929,8 +1936,8 @@ break\;
 			2&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 			3&  Limit population size&    $\{\mathrm{true}, \mathrm{false}\}$&  Use initial population size as upper limit on size\\
 			4&  $f$&                      $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
-			5&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  Child's fitness is related to parent's fitness (by $f$)\\
-			6&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$)\\
+			5&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness (by $f$), and if false, child's fitness is given a random value $x\in [0,1]$ \\
+			6&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$), or if false, a random value $x\in [0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1951,22 +1958,20 @@ The model incorporates several assumptions which are worth making explicit:
 
 \section{Experimental design}\label{experimental-design}
 
+We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis. 
 
 \subsection{Response variables}\label{response-variables}
 
-From the predictions of Hypothesis 2 (\cref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
+From the predictions of hypothesis \autoref{hypothesis-2} (\autoref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
 
-Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under Hypothesis 2 we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under hypothesis \autoref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
 
 \subsection{Factors and levels}\label{factors-and-levels}
-
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. 
 
 A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
 
 \begin{table}
 \begin{center}
-\tiny
 \caption{Factor levels used in the Fractional Factorial experiment design}\label{tbl:factor_levels}
 \begin{tabular}{@{}lllp{6cm}@{}}
 \toprule
@@ -1984,6 +1989,35 @@ A full factorial design with seven 2-level factors would require testing $2^{7}$
 \end{center}
 \end{table}
 
+\subsection{Initial conditions and settings}\label{initial-conditions}
+
+At the beginning of each run we construct a initial population to some design. Although a randomly chosen population is useful for generality, so as not to introduce any bias that may result from a consistent starting point, our interest is also in testing two core attributes for any evolutionary model. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low Start and High Start cases respectively, and they are described in the sections below.
+
+\paragraph{Low Start case}\label{low-start-case}
+
+Entities begin with a low initial fidelity and fitness (see \autoref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \autoref{alternative-approaches}.)
+
+\begin{table}[t]
+	\begin{center}
+		\caption{Initial conditions for Low Start and High Start cases}\label{tbl:ic}
+		\begin{tabular}{@{}lll@{}}
+			\toprule
+			Case&	Property&  Initial range\\
+			\midrule
+			\multirow{2}{*}{Low Start}&			Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
+			&													Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
+			\midrule
+			\multirow{2}{*}{High Start}&		Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
+			&													Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\paragraph{High Start case}\label{high-start-case}
+
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \autoref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
+
 \paragraph{Other settings}\label{other-settings}
 
 The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
@@ -1991,8 +2025,6 @@ The number of replicates required for a particular statistical power is related 
 Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
 
 \subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
-
-\TODO{ truncation has a major effect on conclusions, so good to know either that results are not dependent on truncation...}
 
 In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a property of the theoretical model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
 
@@ -2012,17 +2044,16 @@ In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are
 One consideration is that the number of generations at the conclusion of each run will not necessarily be comparable. 
 This is as expected, as the purpose of a population restriction here (other rationale may apply in general though, such as increasing selection bias) is to avoid a terminal population explosion.
 
-Therefore when testing H$_0$ we modify the model to complete after 15 generations with a parallel population size limit of 50 times original population size ($=50\times 5000$) for fair(er) comparison
-
-\TODO{ but 15 is too little - still in startup}
-\TODO{ also rest of parameters}
-
-%% begin.rcode truncationdensity, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Generations completed without upper-bound size restriction (left) or fitness-independent sampling restriction (right).'
+%% begin.rcode truncationdensity, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Generations completed without any upper-bound size restriction (left) and with a fitness-independent sampling restriction (right).'
 % df <- load_dfa('results/results_lowstart.data')
-% ggplot(df, aes(final_gen)) + geom_histogram(bins=50) + facet_grid(.~truncate)
+% df$truncate <- factor(df$truncate, labels=c("Unbounded","Bounded"))
+% ggplot(df, aes(final_gen)) + geom_histogram(bins=50) + facet_grid(.~truncate) + labs(x="Final generation", y="Count of Runs")
 %% end.rcode
 
-Finally, the environment was fixed (that is, each element's fitness value does not change) and the initial population followed the low-start case \cref{low-start-case} with other parameters unchanged from \cref{other-settings}.
+\TODO{update to use dataset below with 5000 generations}
+
+\subsubsection{Settings}
+The environment was considered ``fixed'' (that is, each element's fitness value does not change) and the initial population followed the low-start case \autoref{low-start-case}. There were 5000 generations, with other parameters taken from \autoref{tbl:factor-levels-limits}.
 
 \begin{algorithm}
 	\For{generation $\in 1\dots$number of generations}{
@@ -2036,13 +2067,31 @@ Finally, the environment was fixed (that is, each element's fitness value does n
 			break\;
 		}
 	}
-	
-	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the earlier base Model is a call to a \emph{Restriction} function}\label{upper-bound-model-algorithm}
+	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the base model is a call to a \emph{Restriction} function}\label{upper-bound-model-algorithm}
 \end{algorithm}
+
+\begin{table}
+	\begin{center}
+		\caption{Factor levels used in the Population Limits experiment design}\label{tbl:factor-levels-limits}
+		\begin{tabular}{@{}lllp{6cm}@{}}
+			\toprule
+			& Parameter&  Value\\
+			\midrule
+			0&  $p_{reproduction}$&       Parent's fitness\\
+			1&  $p_{selection}$&          Parent's fitness\\
+			2&  $n_{children}$&           2\\
+			3&  Limit population size&  Varied - see text\\
+			4&  $f$&                      Gaussian dist., $\mathcal{N}$\\
+			5&  Correlate Fitness&        true\\
+			6&  Correlate Fidelity&       true\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
 
 \subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
-The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $truncation()$ function in \cref{upper-bound-model-algorithm}), iff the pre-sampling population size is greater than $n$.
+The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction()$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2071,7 +2120,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 % grid.arrange(ap,bp,nrow=1,ncol=2)
 %% end.rcode
 
-From the plots in \cref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
+From the plots in \autoref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
 %independent continuous random samples where the underlying distributions
@@ -2085,11 +2134,11 @@ From the plots in \cref{fig:fitnessindependentplots} it is clear that the result
 
 % Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \cref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \autoref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
 \subsubsection{Fitness-based selection}
 
-The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \autoref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2123,51 +2172,21 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
-\subsection{Initial conditions and settings}\label{initial-conditions}
-
-At the beginning of each run we construct a initial population to some design. Although a randomly chosen population is useful for generality, so as not to introduce any bias that may result from a consistent starting point, our interest is also in testing two core attributes for any evolutionary model. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low Start and High Start cases respectively, and they are described in the sections below.
-
-\paragraph{Low Start case}\label{low-start-case}
-
-Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from Hypothesis 2, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
-
-\begin{table}[t]
-\begin{center}
-\tiny
-\caption{Initial conditions for Low Start and High Start cases}\label{tbl:ic}
-\begin{tabular}{@{}lll@{}}
-\toprule
-Case&	Property&  Initial range\\
-\midrule
-\multirow{2}{*}{Low Start}&			Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
-&													Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
-\midrule
-\multirow{2}{*}{High Start}&		Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
-&													Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-
-\paragraph{High Start case}\label{high-start-case}
-
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
-
 \section{Analysis}\label{analysis}
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
 As mentioned earlier, this analysis has two goals: \begin{inparaenum}[(i)]
-	\item experimentally test the predictions of Hypothesis 2, and 
+	\item experimentally test the predictions of hypothesis \autoref{hypothesis-2}, and 
 	\item examine the impact of the factors on the results.
 \end{inparaenum}
 
 \subsubsection{Hypothesis tests}
-Hypothesis 2 makes two predictions under fixed conditions: 
-\begin{inparaenum}[(i)]
+Hypothesis \autoref{hypothesis-2} makes two predictions under fixed conditions: 
+\begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, and
 	\item Population variance for inheritance will decrease more than chance.
-\end{inparaenum}
+\end{enumerate}
 
 The first test therefore is to examine if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
 
@@ -2181,25 +2200,27 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 %\item H$_1$: fidelity increases over a run, for some factor values, or \newline
 %$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$
 
-%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by Hypothesis 2, should always be greater than zero.'
-% df_low <- load_dfa("results/results_lowstart.data")
-% df_low <- df_low[df_low$truncate==1,]
+%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+% df <- load_dfa("results/results_lowstart.data")
+% df <- df[df$truncate==1,]
 % ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % bp <- qplot(row.names(df),final_ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % cp <- qplot(final_ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
 % dp <- qplot(final_ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 % ep <- qplot(row.names(df),response_cor, geom="point", data=df, xlab='Experiment run', ylab='Final--initial ave. fidelity')+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % grid.arrange(arrangeGrob(ap,bp, ncol=2), arrangeGrob(cp,dp, ncol=2), ep, ncol=1)
-%# plot(df_low$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
-%# plot(df_low$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
-%# densityplot(~df_low$final_ave_cor, xlab='Final average fidelity')
-%# densityplot(~df_low$final_ave_fit, xlab='Final average fitness')
-%# plot(df_low$response_cor, xlab='Experiment run', ylab='Final--initial ave. fidelity')
+%# plot(df$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
+%# plot(df$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
+%# densityplot(~df$final_ave_cor, xlab='Final average fidelity')
+%# densityplot(~df$final_ave_fit, xlab='Final average fitness')
+%# plot(df$response_cor, xlab='Experiment run', ylab='Final--initial ave. fidelity')
 %% end.rcode
 
-A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
+A simple visual inspection of the results in \autoref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
+% df <- load_dfa("results/results_lowstart.data")
+% df <- df[df$truncate==1,]
 % ap <- qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % bp <- qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % cp <- qplot(fitness_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2207,9 +2228,9 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity \cref{fig:lowstart}, but only some showed an increase towards 1.0. Those that did were uniformly associated with \textbf{Correlate Fidelity} == 1 (see top-left plot in \cref{fig:lowstartcorrelation}). Child and parent fidelities are related by \emph{f()} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
+By inspection, all runs resulted in increased fidelity (\autoref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \autoref{fig:lowstartcorrelation}). Child and parent fidelities are related by \emph{f()} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
 
-In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} == 1.
+In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, correlated.
 
 The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 
@@ -2222,25 +2243,23 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 
 \subsubsection{Factor significance and interactions}
 
-%% begin.rcode lowstartanova, echo=FALSE
-% df_test <- df_low[df_low$correlation_correlation == 1,]
-% m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
-% #summary(m0)
-% x <- anova(m0)
-%% end.rcode
-% significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
-
-Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $f()$.
-
-Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1:
-
 %% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
+% df <- load_dfa("results/results_lowstart.data")
+% df <- df[df$truncate==1,]
+% df_test <- df[df$correlation_correlation == 1,]
+% m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
+% x <- anova(m0)
 % ap <- qplot(p_reproduce, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
 % bp <- qplot(p_selection, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
 % cp <- qplot(n_offspring, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
 % dp <- qplot(distribution, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
+% significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
+
+Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $f()$.
+
+Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \autoref{fig:lowstartfactorinfluence} \TODO{complete}.
 
 \subsection{High start case}\label{high-start-case-analysis}
 
@@ -2251,25 +2270,25 @@ Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +
 \item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-%% begin.rcode highstart, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.keep='all', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The bottom line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$)'
-% df_high <- load_dfa("results/results_highstart.data")
-% df_high <- df_high[df_high$truncate==1,]
-% plot(df_high$final_ave_cor, xlab='Experiment run', ylab='Fidelity')
-% plot(df_high$final_ave_fit, xlab='Experiment run', ylab='Fitness')
-% densityplot(~df_high$final_ave_cor, xlab='Final average fidelity') # Strongly non-normal data--bimodal, with cluster
-% densityplot(~df_high$final_ave_fit, xlab='Final average fitness') # less bimodal, although non-normal
+%% begin.rcode highstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+% df <- load_dfa("results/results_highstart.data")
+% df <- df[df$truncate==1,]
+% ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+% bp <- qplot(row.names(df),final_ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+% cp <- qplot(final_ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
+% dp <- qplot(final_ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
+% ep <- qplot(row.names(df),response_cor, geom="point", data=df, xlab='Experiment run', ylab='Final--initial ave. fidelity')+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+% grid.arrange(arrangeGrob(ap,bp, ncol=2), arrangeGrob(cp,dp, ncol=2), ep, ncol=1)
+%# plot(df$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
+%# plot(df$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
+%# densityplot(~df$final_ave_cor, xlab='Final average fidelity')
+%# densityplot(~df$final_ave_fit, xlab='Final average fitness')
+%# plot(df$response_cor, xlab='Experiment run', ylab='Final--initial ave. fidelity')
 %% end.rcode
 
-By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
+By inspection of \autoref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
 
 As in the Low Start case, the clusters are driven by the value of the factor \textbf{Correlate Fidelity}. Fidelity decreased in this High Start case when \textbf{Correlate Fidelity} was +1, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} = +1 in the Low Start case .
-
-%% begin.rcode highstartanova,echo=FALSE
-% df_test <- df_high[df_high$correlation_correlation == -1,]
-% m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
-% #summary(m0)
-% x <- anova(m0)
-%% end.rcode
 
 %% begin.rcode power, echo=FALSE
 % df_high <- load_dfa("results/results_highstart.data")
@@ -2278,14 +2297,14 @@ As in the Low Start case, the clusters are driven by the value of the factor \te
 % df_low <- df_low[df_low$truncate==1,]
 % between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
 % within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
-% x_power <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
+% x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
 %% end.rcode
 
-The statistical power of the design is \rinline{x_power['power']} with \rinline{x_power['groups']} groups and \rinline{x_power['n']} observations per group.
+The statistical power of the design is \rinline{x['power']} with \rinline{x['groups']} groups and \rinline{x['n']} observations per group.
 
-Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
+% Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
-\chapter[Test of Hypothesis 2 under changing conditions]{Experimental test of Hypothesis 2 under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+\chapter[Test of hypothesis under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2307,7 +2326,7 @@ Significance
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \cref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+Same initial conditions (low \autoref{low-start-case} and high start \autoref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}
 	\SetKwFunction{f}{f}
@@ -2325,7 +2344,7 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 			$population\leftarrow tweakFitness(population)$\;
 		}
 	}
-	\caption{Algorithm for the Changing Environment Model used in \cref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
+	\caption{Algorithm for the Changing Environment Model used in \autoref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
 \end{algorithm}
 
 \begin{function}
@@ -2356,7 +2375,6 @@ Four different runs, with changes to the environment at four different frequenci
 
 \begin{table}
 	\begin{center}
-		\tiny
 		\caption{Factor levels for all Changing Environment experiments}\label{tbl:factor_levels_changing}
 		\begin{tabular}{@{}llllp{5cm}@{}}
 			\toprule
@@ -2388,6 +2406,13 @@ As before, each run has 10 replicates of 500 generations each, with an initial p
 % ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10))
 % bwplot(df$ave_cor~ecf, xlab="Generation",ylab="Average fidelity")
 % bwplot(df$ave_fit~ecf, xlab="Generation",ylab="Average fitness")
+%% end.rcode
+
+%% begin.rcode changingenvironmentsummary, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Fidelity (left) and fitness (right) over time for four different frequencies (0, or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'
+% df<-read.csv("results/results-229445f.data")
+% ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10))
+% ggplot(df, aes(x=ecf,y=ave_cor)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fidelity")
+% ggplot(df, aes(x=ecf,y=ave_fit)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fitness")
 %% end.rcode
 
 \section{Analysis}\label{analysis-1}
@@ -2457,13 +2482,13 @@ From a visual inspection, we conclude that the results appear very similar for u
 	
 \section{Variation and Selection, without property correlation, is sufficient for Inheritance}
 
-Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \cref{low-start-case-analysis} and \cref{high-start-case-analysis}.
+Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \autoref{low-start-case-analysis} and \autoref{high-start-case-analysis}.
 	
 \chapter{Conclusions}
 
 Given:\newline
 Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
-Hypothesis 2 (that Variation and Selection are sufficient for Inheritance),\newline
+hypothesis \autoref{hypothesis-2} (that Variation and Selection are sufficient for Inheritance),\newline
 we suggest that:
 
 \textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
@@ -2723,7 +2748,7 @@ principles. Because of the complexities of real-world chemistry this
 later method appears to be quite difficult, and the goal of a realistic,
 computationally practical, artificial chemistry remains open. However,
 the more limited objective of a less realistic, but still fully
-constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for
+constructive chemistry, has been achieved (see Table \autoref{classification-of-artificial-chemistries} for
 examples.). A constructive chemistry (\autocite{Fontana1994}) is one
 where new components may be generated through the action of other
 components, and where those new components may themselves take part in
@@ -3502,10 +3527,10 @@ internal and potential.
   absolutely determined by the atomic number of the two Atoms at either
   end of the bond, and the type of bond itself -- single, double or
   triple. ToyWorld provides a table of standard values in
-  \cref{default_bond_energies}, based upon real-world chemistry.
+  \autoref{default_bond_energies}, based upon real-world chemistry.
   Unspecified bonds are given the average energy of specified bonds of
   the same bond type. Examples of molecules with associated potential
-  energies are given in \cref{example_potential_energies}.
+  energies are given in \autoref{example_potential_energies}.
 \end{itemize}
 
 Our energy model enforces conservation of mass so reactions can be
@@ -3683,10 +3708,10 @@ while bond destruction results in an increase. A change in bond type is
 equivalent to a creation and then a destruction. The magnitude of the
 change in potential energy, measured in arbitrary energy units, is taken
 from a table of bond energies for each combination of atoms and bond
-type (\cref{default_bond_energies}. The standard table is based upon
+type (\autoref{default_bond_energies}. The standard table is based upon
 a simplification of real-world chemical bond energies. For example, the
 creation of a H-H bond releases 104.2 units; the breaking of a C=O
-double bond takes 185 energy units. \cref{example_potential_energies}
+double bond takes 185 energy units. \autoref{example_potential_energies}
 shows the potential energy for a sample of molecules.
 
 How should we choose between alternative sets of possible products for
@@ -3707,19 +3732,7 @@ choosing with uniform probability from a distribution of reaction
 alternatives weighted by the total of the energy changes associated with
 the bond changes. This biases selection towards the Least Energy
 alternative; the strength of the bias is determined by the degree of the
-weighting. Figure\cref{fig1} shows an example of the shift in products
-that occurs as a result of this weighting as the overall quantity of
-energy in the system is changed.
-
-The reaction to fire is selected from the alternatives by generating a
-cumulative probability distribution over the list of reaction options
-where each option has a probability based on the relationship of the
-energy required for the option versus the energy available.
-
-We select a reaction to fire from the possible alternatives for the
-reactants by probabilistic selection from the alternatives biased
-towards options that release rather than consume energy. Fig. \cref{fig1}
-shows an example of the shift in products that occurs as a result of
+weighting. \autoref{fig1} shows an example of the shift in products that occurs as a result of
 this weighting as the overall quantity of energy in the system is
 changed.
 
@@ -3734,11 +3747,11 @@ e_i=
      0,                 &(2) \text{  if $E_{avail} < E_i$;}\\
      E_{avail}--E_i,       &(3) \text{  otherwise.}
    \end{cases}
-\end{displaymath}
+\end{displaymath}\label{weighting-calculation}
 
 Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
 
-As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \cref{fig:reaction_selection_weights}.
+As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \autoref{fig:reaction_selection_weights}.
 
 \begin{figure}[t]
 \begin{center}
@@ -3749,7 +3762,7 @@ As a result, for exothermic reactions, highly exothermic reactions are preferred
 \node[enode] at (7,4) {2};
 \node[enode] at (8,3.2) {3};
 \end{tikzpicture}
-\caption{Energy transformations in ToyWorld}\label{fig:reaction_selection_weights}
+\caption{Weighting calculation for reaction selection under a Least Energy Strategy. Numerical labels refer to cases in \autoref{weighting-calculation}.}\label{fig:reaction_selection_weights}
 \end{center}
 \end{figure}
 
@@ -3791,7 +3804,7 @@ energies.
 The Reactor Algorithm selects one of the reaction alternatives by
 choosing from a distribution of reaction alternatives weighted by
 associated energy changes (as discussed in
-\cref{product-selection-strategies}.)
+\autoref{product-selection-strategies}.)
 
 \subsection{Setting product velocities and internal energies}\label{setting-product-velocities-and-internal-energies}
 
@@ -3809,8 +3822,8 @@ of the reacting system, the vector sum of the momentum of the products
 must equal zero. Therefore one possible solution to the product
 velocities is to arrange their vector momentums according to simple
 geometry: for two products, we arrange their momentums in a line (line
-\cref{alg:2products} in \cref{alg:post_collision_adjustments}); for three
-products, an equilateral triangle (line \cref{alg:3products}), and by
+\autoref{alg:2products} in \autoref{alg:post_collision_adjustments}); for three
+products, an equilateral triangle (line \autoref{alg:3products}), and by
 extension, for four products, a square and so on.
 
 \begin{algorithm}
@@ -3865,16 +3878,16 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 Following a standard method, we first transfer the molecules from the
 frame of reference of the reaction vessel into the centre of mass (CoM)
 reference frame by subtracting the velocity of the CoM from each
-particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also
+particle (line \autoref{alg:lab_to_CoM_frame}). Correspondingly, we also
 adjust the energy of the collision by subtracting the KE of the CoM. We
 recognize that in the CoM frame the vector sum of the momentums will be
 zero; working in this frame reduces the number of vectors we must sum by
 one (the momentum of the CoM itself.)
 
-We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \cref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
+We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \autoref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
 
 Finally, we convert from the CoM reference frame to the initial frame by
-adding back the velocity of the CoM (line \cref{alg:CoM_to_lab_frame}).
+adding back the velocity of the CoM (line \autoref{alg:CoM_to_lab_frame}).
 
 This method satisfies our requirements of conservation of momentum and
 energy for arbitrary numbers of reactants and products while being
@@ -3884,7 +3897,7 @@ configurations. An improvement would be to perturb the geometry of the
 vectors in the CoM frame to remove the regularity.
 
 The outcomes for each reaction alternative from an example collision are
-shown in \cref{fig:collision_diagrams}.
+shown in \autoref{fig:collision_diagrams}.
 
 \tdplotsetmaincoords{60}{110}
 
@@ -4039,7 +4052,7 @@ shown in \cref{fig:collision_diagrams}.
 \section{Introduction}\label{introduction-4}
 
 The design outlined in Section
-\cref{toyworld} leads to the following expectations, to be tested
+\autoref{toyworld} leads to the following expectations, to be tested
 experimentally.
 
 \begin{enumerate}
@@ -4066,7 +4079,7 @@ simulation for 10,000 iterations at four successive initial average
 kinetic energy levels---0, 67, 133, and 200 units per molecule---with
 each molecule initially at quantity 100. The experiment was run first
 with a reactant set containing N\textsubscript{2}O\textsubscript{4} and
-2NO\textsubscript{2} (results in Fig.\cref{fig1}), and then with a
+2NO\textsubscript{2} (results in Fig.\autoref{fig1}), and then with a
 reactant set of H\textsubscript{2}, O\textsubscript{2} and H\textsubscript{2}O.
 
 \begin{figure}
@@ -4170,8 +4183,8 @@ extended period without running out of possible reactions (from lack of energy f
 Factor & +1 value & -1 value & Description\\
 \hline
 \noalign{\smallskip}
-$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \cref{reactant-selection-strategies}\\
-$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \cref{product-selection-strategies}\\
+$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \autoref{reactant-selection-strategies}\\
+$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \autoref{product-selection-strategies}\\
 $E_\mathrm{Vessel}$&		300&							100&		Initial kinetic energy of each molecule in the reaction vessel\\
 $E_\mathrm{Bonds}$&		Single=50, Double=100, Triple=200& Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3&	Energy required to break a bond of the given type\\
 \hline
@@ -4183,7 +4196,7 @@ We concentrate on three related response, or dependent, variables---Number of cy
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
 \section{Experiment Design}
-The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \cref{tbl:factors}.
+The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \autoref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
@@ -4240,8 +4253,9 @@ Max. 		&199.00    &12.00	&216.00\\
 \end{center}
 \end{table}%
 
-A view of the results is given in Table \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
+A view of the results is given in Table \autoref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
+\TODO{convert to ggplot2}
 %% begin.rcode loaddfc, echo=FALSE
 %	load_dfc <- function(f){
 %		colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
@@ -4250,7 +4264,7 @@ A view of the results is given in Table \cref{tbl:results}: reaction networks bu
 %		df
 %	}
 %% end.rcode
-
+\TODO{convert to ggplot2}
 %% begin.rcode cyclesbypartition, echo=FALSE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
 %	df<-load_dfc("results/EvaluatorActualCycles.out") 
 %	par(mfrow=c(1,3),cex=0.5)
@@ -4276,8 +4290,9 @@ A view of the results is given in Table \cref{tbl:results}: reaction networks bu
 \end{figure}
 
 \subsection{Analysis and Discussion}
-Figure \cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
+Figure \autoref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \autoref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
+\TODO{convert to ggplot2}
 %% begin.rcode reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '
 %	df <- subset(df,df$Partition.Start != "4750")
 %	par(mfrow=c(1,3),cex=0.5)
@@ -4293,6 +4308,7 @@ Figure \cref{fig:cyclesbypartition} suggests that the first partition, represent
 %\label{fig:reactant_strategy}
 %\end{figure}
 
+\TODO{convert to ggplot2}
 %% begin.rcode productstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Product Strategy '
 %	par(mfrow=c(1,3),cex=0.5)
 %	boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
@@ -4308,10 +4324,11 @@ Figure \cref{fig:cyclesbypartition} suggests that the first partition, represent
 %\end{figure}
 
 \subsection{RQ1: Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
+From visual inspection of Figure \autoref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \autoref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
-We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
+We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \autoref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
+\TODO{convert to ggplot2}
 %% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
 %	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 %	boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
@@ -4328,13 +4345,13 @@ We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\m
 
 \subsection{RQ2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
-From Figure \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
+From Figure \autoref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
 \subsection{RQ3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
 
-We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
+We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \autoref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
 The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
@@ -4342,6 +4359,8 @@ The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent 
 The most significant limitation of our analysis overall is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in RQ3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
 \chapter{Discussion}
+
+\TODO{Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...}
 
 \part{The Search for Creativity}\label{the-search-for-creativity}
 
@@ -4531,7 +4550,7 @@ We have shown that:
 
 And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
-\TODO{ link OEE to selection and variation from work in \cref{the-search-for-creativity}}
+\TODO{ link OEE to selection and variation from work in \autoref{the-search-for-creativity}}
 
 Requires a series of steps--akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,

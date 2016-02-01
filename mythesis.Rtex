@@ -1,6 +1,6 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
-\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow}
+\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow, amsthm}
 \usepackage[boxed, noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
@@ -32,6 +32,8 @@
 \SetKwBlock{Prob}{with probability }{end}
 \DontPrintSemicolon
 
+% Options for amsthm
+\newtheorem{hypothesis}{Hypothesis}[chapter]
 
 \author{Thom Young}
 \title{Feature Emergence in an Artificial Chemistry}

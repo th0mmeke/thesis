@@ -81,8 +81,12 @@ def run(factors, population, generations, population_limit, environment_change_f
         parent_population = selection(factors, population)
         offspring_population = reproduction(factors, population)
         population = parent_population + offspring_population
-        if factors[3] and len(population) > original_population_size: # if fixed population size
-            population = random.sample(population, original_population_size)
+        if len(population) > original_population_size: # if fixed population size
+            if factors[3]:
+                sorted_population = sorted(population, key=lambda element: element.fitness)
+                population = sorted_population[0:original_population_size]
+            else:
+                population = random.sample(population, original_population_size)
 
         if len(population) < 3 or len(population) > population_limit:
             break

@@ -96,5 +96,5 @@ def run(factors, population, generations, population_limit, environment_change_f
         if environment_change_frequency > 0 and i % environment_change_frequency == 0:
             population = tweak_fitness(factors, population, 0.70)
 
-    print(tabulate([x.values() for x in results], headers=results[0].keys()))
+    #print(tabulate([x.values() for x in results], headers=results[0].keys()))
     return results

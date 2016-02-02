@@ -1841,28 +1841,34 @@ Experimental tests are the strongest method we have to examine the claims made i
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to examine the variation or range exposed in the response.
 
-Our goal for this first set of experiments is to:
- \begin{enumerate}
-	\item Experimentally test the predictions of hypothesis \autoref{hypothesis-2} under a fixed environment (where the fitness of an entity does not change), and 
-	\item Identify the strength of support for the hypothesis across a variety of possible influences or factors.
+Our goal for this first set of experiments is to test the predictions of hypothesis \autoref{hypothesis-2} in a fixed environment (where the fitness of an entity does not change). To do so, we follow a four-step process:
+
+\begin{enumerate}
+	\item Develop a model of the hypothesis \autoref{base-model}.
+	\item Determine initial conditions \autoref{initial-conditions}.
+	\item Clarify any optional parameters \autoref{check-effect-of-truncation}.
+	\item Design an appropriate experiment \autoref{experimental-design}.
+	\item Conduct the experiment, and analyse the results \autoref{analysis}.
 \end{enumerate}
 
-\section{Base model}
+\section{Base model}\label{base-model}
 
-All experiments in this section make use of the same base model where the key elements of the hypothesis, such as inheritance fidelity, are explicit (or endogenous, to use the language adopted by \autocite{Bourrat2015}) parameters in the model. This model in outline will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of \emph{fidelity} is novel and important to the overall thesis.
+All experiments in this section make use of the same base model (see \autoref{base-model-algorithm})where the key elements of the hypothesis, such as inheritance fidelity, are explicit parameters in the model. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of \emph{fidelity} is novel and important to the overall thesis.
 
-We define a population of entities, each with two properties -- \emph{Fitness} and \emph{Fidelity} -- and a set of population-transforming functions (\autoref{base-model-algorithm}) .
+We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions (\autoref{base-model-algorithm}) .
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{Fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
+	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
 \end{itemize}
 
-The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm below by the function $f:[0,1] \times [0,1]\leftarrow [0,1]$. 
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $derive:[0,1] \times [0,1]\leftarrow [0,1]$. 
 
-The only functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} (\autoref{function-selection})and \emph{Variation} (\autoref{function-variation}), although in later sections we will add others to examine the sensitivity of the model to various influences.
+The only transformation functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} and \emph{Variation}, although in later sections we will add others to examine the sensitivity of the model to various influences.
 
-Each \gls{run} of the model consists of a fixed number of time steps, or generations, where at each step the functions are applied in a defined order to the current population to form a replacement population, starting from some defined initial population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus children derived in some way from the parents. 
+Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus their children. 
+
+The model is parameterized (see \autoref{tbl:factor_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
 
 \begin{figure}[htb]
 \centering
@@ -1870,6 +1876,7 @@ Each \gls{run} of the model consists of a fixed number of time steps, or generat
 \end{figure}
 
 \begin{algorithm}
+\SetKwFunction{derive}{derive}
 \For{generation $\in 1\dots$number of generations}{
 \tcp{Core algorithm}
 $population\leftarrow Selection(population)$\;
@@ -1880,10 +1887,7 @@ $population\leftarrow population \cup Variation(population)$\;
 break\;
 }
 }
-\caption{Algorithm for the base Model}\label{base-model-algorithm}
-\end{algorithm}
-
-\begin{function}
+\BlankLine
 \Def{Selection(population)}{
 	$population_{new}\leftarrow \{\}$\;
 	\For{each $entity$ in $population$} {
@@ -1893,12 +1897,8 @@ break\;
 		}
 	}
 	\Return $population_{new}$\;
-}       
-\caption{Selection()}\label{function-selection}
-\end{function}
-
-\begin{function}
-\SetKwFunction{f}{f}
+} 
+\BlankLine
 \Def{Variation(population)}{
 	$children\leftarrow \{\}$\;
 	\For{each $entity$ in $population$}{
@@ -1908,16 +1908,16 @@ break\;
 			$n\leftarrow \text{some random integer between 0 and }n_{children}\text{, inclusive}$\;
 			\BlankLine
 			\For{each of the $n$ children}{
-				Child's fitness $\leftarrow $\f{parent's fitness, parent's fidelity value}\;
-				Child's fidelity $\leftarrow$ \f{parent's fidelity value, parent's fidelity value}\;
+				Child's fitness $\leftarrow $\derive{parent's fitness, parent's fidelity value}\;
+				Child's fidelity $\leftarrow$ \derive{parent's fidelity value, parent's fidelity value}\;
 				Add new child with these values for fitness and fidelity to $children$\;
 			}
 		}
 	}
 	\Return $children$\;
 }
-\caption{Variation()}\label{function-variation}
-\end{function}
+\caption{Algorithm for the base Mmodel}\label{base-model-algorithm}
+\end{algorithm}
 
 \begin{figure}[ht]
 \centering
@@ -1931,13 +1931,13 @@ break\;
 			\toprule
 			& Factor&  Values& Description\\
 			\midrule
-			0&  $p_{reproduction}$&       $[0,1]$&       Default probability of reproduction. The probability of reproduction for a particular entity is $p_{reproduction}$ unless $p_{reproduction}=0$ in which case it is the parent's $fitness$\\
-			1&  $p_{selection}$&          $[0,1]$&           Default probability of selection, where again if $p_{selection}=0$, use the parent's $fitness$ instead\\
-			2&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
-			3&  Limit population size&    $\{\mathrm{true}, \mathrm{false}\}$&  Use initial population size as upper limit on size\\
-			4&  $f$&                      $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
-			5&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness (by $f$), and if false, child's fitness is given a random value $x\in [0,1]$ \\
-			6&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$), or if false, a random value $x\in [0,1]$\\
+			1&  $p_{reproduction}$&       $[0,1]$&       Default probability of reproduction. The probability of reproduction for a particular entity is $p_{reproduction}$ unless $p_{reproduction}=0$ in which case it is the parent's $fitness$\\
+			2&  $p_{selection}$&          $[0,1]$&           Default probability of selection, where again if $p_{selection}=0$, use the parent's $fitness$ instead\\
+			3&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
+			4&	Restriction&	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
+			5&  Distribution&                $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
+			6&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness (by $f$), and if false, child's fitness is given a random value $x\in [0,1]$ \\
+			7&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$), or if false, a random value $x\in [0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1949,51 +1949,19 @@ The model as described is general, under the assumptions given below. It is also
 
 \subsection{Assumptions}\label{assumptions-1}
 
-The model incorporates several assumptions which are worth making explicit:
+The model incorporates several assumptions that are worth making explicit:
+
 \begin{enumerate}
-\item \emph{Fidelity} and \emph{Fitness} are taken from a distribution $f$ in the range $[0,1]$, around a mean $\mu$ and with some \gls{sd}. \emph{Fitness} and \emph{Fidelity} are both \TODO{ implications on shape of distribution.}
-\item \emph{Fitness} and \emph{Fidelity} are independent, implying that \emph{Fidelity} changes have no \emph{direct} effect on \emph{Fitness} (and vice versa.)
+\item \emph{Fidelity} and \emph{fitness} are taken from a distribution described by the value of the parameter \textbf{Distribution} with range $[0,1]$, around a mean $\mu$ and with some \gls{sd} $\sigma$. \emph{Fitness} and \emph{fidelity} are both \TODO{ implications on shape of distribution.}
+\item \emph{Fitness} and \emph{fidelity} are independent, implying that \emph{fidelity} changes have no \emph{direct} effect on \emph{fitness} (and vice versa.)
 \item A parent cannot directly influence the fitness of children--selection is an unseeing hand.
 \end{enumerate}
 
-\section{Experimental design}\label{experimental-design}
+\section{Initial conditions and settings}\label{initial-conditions}
 
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis. 
+At the beginning of each run we construct an initial population to some design. Although a randomly chosen population is useful so as not to introduce any bias that may result from a consistent starting point, our interest is also in two other factors. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low Start and High Start cases respectively, and they are described in the sections below.
 
-\subsection{Response variables}\label{response-variables}
-
-From the predictions of hypothesis \autoref{hypothesis-2} (\autoref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
-
-Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under hypothesis \autoref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
-
-\subsection{Factors and levels}\label{factors-and-levels}
-
-A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
-
-\begin{table}
-\begin{center}
-\caption{Factor levels used in the Fractional Factorial experiment design}\label{tbl:factor_levels}
-\begin{tabular}{@{}lllp{6cm}@{}}
-\toprule
-& Parameter&  Low value ('-1')&  High value ('+1')\\
-\midrule
-0&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)\\
-1&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)\\
-2&  $n_{children}$&           2&                5\\
-3&  Limit population size&  false&            true\\
-4&  $f$&                      Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$\\
-5&  Correlate Fitness&        false&            true\\
-6&  Correlate Fidelity&       false&            true\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-
-\subsection{Initial conditions and settings}\label{initial-conditions}
-
-At the beginning of each run we construct a initial population to some design. Although a randomly chosen population is useful for generality, so as not to introduce any bias that may result from a consistent starting point, our interest is also in testing two core attributes for any evolutionary model. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low Start and High Start cases respectively, and they are described in the sections below.
-
-\paragraph{Low Start case}\label{low-start-case}
+\subsection{Low Start case}\label{low-start-case}
 
 Entities begin with a low initial fidelity and fitness (see \autoref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \autoref{alternative-approaches}.)
 
@@ -2014,17 +1982,11 @@ Entities begin with a low initial fidelity and fitness (see \autoref{tbl:ic}.) T
 	\end{center}
 \end{table}
 
-\paragraph{High Start case}\label{high-start-case}
+\subsection{High Start case}\label{high-start-case}
 
 In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \autoref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
-\paragraph{Other settings}\label{other-settings}
-
-The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
-
-Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
-
-\subsection{Effect of an upper bound on population size}\label{check-effect-of-truncation}
+\section{Effect of an upper bound on population size}\label{check-effect-of-truncation}
 
 In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a property of the theoretical model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
 
@@ -2046,14 +2008,20 @@ This is as expected, as the purpose of a population restriction here (other rati
 
 %% begin.rcode truncationdensity, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Generations completed without any upper-bound size restriction (left) and with a fitness-independent sampling restriction (right).'
 % df <- load_dfa('results/results_lowstart.data')
-% df$truncate <- factor(df$truncate, labels=c("Unbounded","Bounded"))
-% ggplot(df, aes(final_gen)) + geom_histogram(bins=50) + facet_grid(.~truncate) + labs(x="Final generation", y="Count of Runs")
+% ap <- ggplot(df[df$truncate=='-1',], aes(gen))+geom_histogram(bins=50) + labs(x="Final generation", y="Count of Runs")
+% bp <- ggplot(df[df$truncate=='1',], aes(gen))+geom_histogram(bins=50) + labs(x="Final generation", y="Count of Runs")
+% grid.arrange(ap,bp,nrow=1,ncol=2)
 %% end.rcode
 
 \TODO{update to use dataset below with 5000 generations}
 
-\subsubsection{Settings}
-The environment was considered ``fixed'' (that is, each element's fitness value does not change) and the initial population followed the low-start case \autoref{low-start-case}. There were 5000 generations, with other parameters taken from \autoref{tbl:factor-levels-limits}.
+\subsection{Initial conditions}
+
+%% begin.rcode bounded, echo=FALSE
+% df <- load_dfa('results/ABC.data')
+%% end.rcode
+
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df[1,]$pop} elements constructed according to the Low Start case (\autoref{low-start-case}); a maximum of \rinline{max(df$gen)} generations, and other parameters taken from \autoref{tbl:factor-levels-limits}.
 
 \begin{algorithm}
 	\For{generation $\in 1\dots$number of generations}{
@@ -2067,12 +2035,12 @@ The environment was considered ``fixed'' (that is, each element's fitness value 
 			break\;
 		}
 	}
-	\caption{Algorithm for the Model with an upper bound on population size. The only difference to the base model is a call to a \emph{Restriction} function}\label{upper-bound-model-algorithm}
+	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
 \begin{table}
 	\begin{center}
-		\caption{Factor levels used in the Population Limits experiment design}\label{tbl:factor-levels-limits}
+		\caption{Parameter settings for the upper bounds experiment design}\label{tbl:factor-levels-limits}
 		\begin{tabular}{@{}lllp{6cm}@{}}
 			\toprule
 			& Parameter&  Value\\
@@ -2080,8 +2048,8 @@ The environment was considered ``fixed'' (that is, each element's fitness value 
 			0&  $p_{reproduction}$&       Parent's fitness\\
 			1&  $p_{selection}$&          Parent's fitness\\
 			2&  $n_{children}$&           2\\
-			3&  Limit population size&  Varied - see text\\
-			4&  $f$&                      Gaussian dist., $\mathcal{N}$\\
+			3&  Restriction&  Varied - see text\\
+			4&  Distribution&                 Gaussian dist., $\mathcal{N}$\\
 			5&  Correlate Fitness&        true\\
 			6&  Correlate Fidelity&       true\\
 			\bottomrule
@@ -2089,17 +2057,31 @@ The environment was considered ``fixed'' (that is, each element's fitness value 
 	\end{center}
 \end{table}
 
-\subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
+\subsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
-The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction()$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
+The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
-	\Def{Restriction(population)}{
-		\Return $\text{Random sample of }n\text{ elements from }population$\;
+	\Def{Restriction(population,n)}{
+		\Return $\text{random sample of }n\text{ elements from }population$\;
 	}
 	\caption{Fitness-Independent Restriction()}
 \end{function}
+
+\subsection{Fitness-based selection}
+
+The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \autoref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+
+\begin{function}
+	\SetKwProg{Def}{def}{:}{}
+	\Def{Restriction(population,n)}{
+		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
+		\Return $\text{first }n\text{ elements from }sortedPopulation$\;
+	}
+	\caption{Fitness-based Restriction()}
+\end{function}
+
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling, where the top line contains density plots for fidelity and fitness, and the middle line boxplots showing ranges.'
 % df <- load_dfa('results/results_lowstart.data')
@@ -2117,7 +2099,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 % dfb <- df[df$truncate==1,]
 % ap <- myqqplot(sort(dfa$final_ave_cor), sort(dfb$final_ave_cor), main="Final average fidelity", xlab="Unbounded",ylab="Bounded")
 % bp <- myqqplot(sort(dfa$final_ave_fit), sort(dfb$final_ave_fit), main="Final average fitness", xlab="Unbounded",ylab="Bounded")
-% grid.arrange(ap,bp,nrow=1,ncol=2)
+% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
 From the plots in \autoref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
@@ -2134,55 +2116,68 @@ From the plots in \autoref{fig:fitnessindependentplots} it is clear that the res
 
 % Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \autoref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
-\subsubsection{Fitness-based selection}
-
-The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \autoref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
-
-\begin{function}
-	\SetKwProg{Def}{def}{:}{}
-	\Def{Restriction(population)}{
-		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
-		\Return $\text{First }n\text{ elements from }sortedPopulation$\;
-	}
-	\caption{Fitness-based Restriction()}
-\end{function}
 
 \subsubsection{Discussion}
-This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection.
 
-\subsection{Is the choice of distribution function significant?}\label{distribution-function-1}
+We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \autoref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
-gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
+This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection. \TODO{finish this discussion}
 
-\TODO{ complete analysis--H0 is that they are the same, H1 different. Test. Discuss.}
+\section{Experimental design}\label{experimental-design}
 
-\begin{itemize}[label={}]
-	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
-	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
-\end{itemize}
+We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis. 
 
-%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
-% df <- load_dfa("results/results_lowstart.data")
-% df <- df[df$truncate==1,]
-% df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-% ap <- qplot(distribution, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
-% bp <- qplot(distribution, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
-% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
-%% end.rcode
+\subsection{Response variables}\label{response-variables}
 
-\section{Analysis}\label{analysis}
+From the predictions of hypothesis \autoref{hypothesis-2} (\autoref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
+
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under hypothesis \autoref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
+
+\subsection{Factors and levels}\label{factors-and-levels}
+
+A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
+
+\begin{table}
+\begin{center}
+\caption{Factor levels used in the Fractional Factorial experiment design}\label{tbl:factor_levels}
+\begin{tabular}{@{}lllp{6cm}@{}}
+\toprule
+& Parameter&  Low value (-1)&  High value (+1)\\
+\midrule
+1&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)\\
+2&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)\\
+3&  $n_{children}$&           2&                5\\
+4&  Population Restriction&  false&            true\\
+5&  Distribution&               Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$\\
+6&  Correlate Fitness&        false&            true\\
+7&  Correlate Fidelity&       false&            true\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Other settings}\label{other-settings}
+
+The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
+
+Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
+
+\section{Results and analysis}\label{analysis}
+
+This analysis has two goals: 
+
+\begin{enumerate}
+	\item Experimentally test the predictions of hypothesis \autoref{hypothesis-2}, and 
+	\item Examine the impact of the factors on the results.
+\end{enumerate}
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
-As mentioned earlier, this analysis has two goals: \begin{inparaenum}[(i)]
-	\item experimentally test the predictions of hypothesis \autoref{hypothesis-2}, and 
-	\item examine the impact of the factors on the results.
-\end{inparaenum}
+The Low Start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the primary goal of this thesis.
 
-\subsubsection{Hypothesis tests}
-Hypothesis \autoref{hypothesis-2} makes two predictions under fixed conditions: 
+Hypothesis \autoref{hypothesis-2} makes two predictions when there is a fixed environment: 
+
 \begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, and
 	\item Population variance for inheritance will decrease more than chance.
@@ -2192,15 +2187,15 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 
 \begin{itemize}[label={}]
 \item H$_0$: fidelity does not approach 1.0 over a run, irrespective of factor values, or \newline
-		$\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert = 0$
+		$\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
 \item H$_1$: fidelity increases to near 1.0 over a run, for some factor values, or \newline
-		$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$ and $1.0--\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
+		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
 %\item H$_1$: fidelity increases over a run, for some factor values, or \newline
 %$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$
 
-%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
 % df <- load_dfa("results/results_lowstart.data")
 % df <- df[df$truncate==1,]
 % ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
@@ -2228,15 +2223,15 @@ A simple visual inspection of the results in \autoref{fig:lowstart} reveals that
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity (\autoref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \autoref{fig:lowstartcorrelation}). Child and parent fidelities are related by \emph{f()} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
+By inspection, all runs resulted in increased fidelity (\autoref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \autoref{fig:lowstartcorrelation}). Child and parent fidelities are related by \textbf{Distribution} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, correlated.
 
 The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\sigma_{fidelity_{end}}--\sigma_{fidelity_{start}} >= 0$, for all factor values.
-	\item H$_1$: $\sigma_{fidelity_{end}}--\sigma_{fidelity_{start}} < 0$, for some factor values.
+	\item H$_0$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} >= 0$, for all factor values.
+	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
 \TODO{ complete analysis}
@@ -2261,16 +2256,37 @@ Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final avera
 
 Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \autoref{fig:lowstartfactorinfluence} \TODO{complete}.
 
+\paragraph{Is the choice of distribution function significant?}\label{distribution-function-1}
+
+gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
+
+\TODO{ complete analysis--H0 is that they are the same, H1 different. Test. Discuss.}
+
+\begin{itemize}[label={}]
+	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
+	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
+\end{itemize}
+
+%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
+% df <- load_dfa("results/results_lowstart.data")
+% df <- df[df$truncate==1,]
+% df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+% ap <- qplot(distribution, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
+% bp <- qplot(distribution, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
+% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
+%% end.rcode
+
+
 \subsection{High start case}\label{high-start-case-analysis}
 
 \TODO{ follow general Low Start analysis template }
 
 \begin{itemize}[label={}]
-\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert = 0$
-\item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}--\overline{fidelity}_{start} \vert > 0$
+\item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
+\item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-%% begin.rcode highstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}--\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+%% begin.rcode highstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
 % df <- load_dfa("results/results_highstart.data")
 % df <- df[df$truncate==1,]
 % ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
@@ -2353,7 +2369,7 @@ Same initial conditions (low \autoref{low-start-case} and high start \autoref{hi
 	$population_{new}\leftarrow \{\}$\;
 	\For{each $element$ in $population$}{
 		$fitness\leftarrow \text{ fitness of }element$\;
-		$mean\leftarrow fitness--meanOffset$\;
+		$mean\leftarrow fitness-meanOffset$\;
 		$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
 	}
 	\Return $population_{new}$\;
@@ -2400,13 +2416,6 @@ The \gls{sd} of the environmental change was set to 0.90 (parameter $sd$ to $Twe
 As before, each run has 10 replicates of 500 generations each, with an initial population size of 5000 entities, and a population limit of 250,000 entities.
 
 \section{Results}\label{results-1}
-
-%% begin.rcode changingenvironmentsummary, echo=FALSE, out.width='0.45\\linewidth', fig.show='hold', fig.cap='Fidelity and fitness over time for four different frequencies of environmental change'
-% df<-read.csv("results/results-229445f.data")
-% ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10))
-% bwplot(df$ave_cor~ecf, xlab="Generation",ylab="Average fidelity")
-% bwplot(df$ave_fit~ecf, xlab="Generation",ylab="Average fitness")
-%% end.rcode
 
 %% begin.rcode changingenvironmentsummary, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Fidelity (left) and fitness (right) over time for four different frequencies (0, or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'
 % df<-read.csv("results/results-229445f.data")
@@ -3844,7 +3853,7 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 }
 \uElse{
     $\text{ke}\leftarrow \text{random}([0,1])$\;
-    $\text{Internal energy of Products}\leftarrow \text{collision energy}--\text{ke}$\;
+    $\text{Internal energy of Products}\leftarrow \text{collision energy}-\text{ke}$\;
 }
 \BlankLine
 \Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){Number of products}{

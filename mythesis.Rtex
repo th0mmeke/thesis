@@ -36,11 +36,11 @@
 \newtheorem{hypothesis}{Hypothesis}[chapter]
 
 \author{Thom Young}
-\title{Feature Emergence in an Artificial Chemistry}
+\title{The Origins of Evolution in an Artificial Chemistry}
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{
-This research explores the emergence of behaviour in a parameterised Artificial Chemistry. The molecules within an Artificial Chemistry form an evolutionary system, capable under certain conditions of displaying interesting emergent behaviours.}
+This research explores the emergence of evolution in an Artificial Chemistry.}
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
 
 \usereferences

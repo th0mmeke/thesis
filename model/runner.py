@@ -26,10 +26,18 @@ experiments = [
     [1,  0,  0,  0,  1,  0,  1],
     [0,  1,  0,  0,  1,  1,  0],
     [1,  1,  0,  0,  0,  1,  1],
+    [0,  0,  1,  0,  1,  1,  1],
+    [1,  0,  1,  0,  0,  1,  0],
+    [0,  1,  1,  0,  0,  0,  1],
+    [1,  1,  1,  0,  1,  0,  0],
     [0,  0,  0,  1,  0,  1,  1],
     [1,  0,  0,  1,  1,  1,  0],
     [0,  1,  0,  1,  1,  0,  1],
     [1,  1,  0,  1,  0,  0,  0],
+    [0,  0,  1,  1,  1,  0,  0],
+    [1,  0,  1,  1,  0,  0,  1],
+    [0,  1,  1,  1,  0,  1,  0],
+    [1,  1,  1,  1,  1,  1,  1]
 ]
 
 # experiments = itertools.product(range(2), repeat=7)
@@ -53,7 +61,7 @@ def init_population(n, low_start):
 
 def main():
 
-    low_start = True
+    low_start = False
     f = open("results.data", "w")
 
     # Write initial header line to file

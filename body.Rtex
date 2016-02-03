@@ -4,6 +4,35 @@
 % library(gridExtra) # grid layouts for ggplot2
 % library(lattice) # needed for bwplot etc
 % opts_chunk$set(fig.path='generated_figures/')
+% load_dfa <- function(t) {
+%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
+%   df <- read.csv(t, colClasses=colClasses)
+%   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
+%   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
+%   df
+% }
+% load_dfb <- function(t) {
+%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
+%   df <- read.csv(t, colClasses=colClasses)
+%   df
+% }
+%	load_toyworld <- function(f){
+%		colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
+%		df <- read.csv(f,colClasses=colClasses)
+%		df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
+%		df
+%	}
+% myqqplot <- function(x,y,...) {
+%    sx <- sort(x)
+%    sy <- sort(y)
+%    lenx <- length(sx)
+%    leny <- length(sy)
+%    if (leny < lenx) 
+%	    sx <- approx(1L:lenx, sx, n = leny)$y
+%    if (leny > lenx) 
+%	    sy <- approx(1L:leny, sy, n = lenx)$y
+%	qplot(x,y,...)
+% }
 %% end.rcode
 
 \chapter{Introduction}\label{introduction}
@@ -1807,33 +1836,7 @@ The three main alternatives, examined later in \autoref{elimination-of-alternati
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter[Test of Hypothesis under fixed conditions]{Experimental test of Hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
-
-%% begin.rcode functions, echo=FALSE
-% load_dfa <- function(t) {
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
-%   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
-%   df
-% }
-% load_dfb <- function(t) {
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df
-% }
-% myqqplot <- function(x,y,...) {
-%    sx <- sort(x)
-%    sy <- sort(y)
-%    lenx <- length(sx)
-%    leny <- length(sy)
-%    if (leny < lenx) 
-%	    sx <- approx(1L:lenx, sx, n = leny)$y
-%    if (leny > lenx) 
-%	    sy <- approx(1L:leny, sy, n = lenx)$y
-%	qplot(x,y,...)
-% }
-%% end.rcode
+\chapter[Test of hypothesis under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 To test our hypothesis we turn to an experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis has support. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
@@ -2018,7 +2021,7 @@ This is as expected, as the purpose of a population restriction here (other rati
 \subsection{Initial conditions}
 
 %% begin.rcode bounded, echo=FALSE
-% df <- load_dfa('results/ABC.data')
+% df <- load_dfb('results/results-54e9131.data') # for use with rinline below
 %% end.rcode
 
 The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df[1,]$pop} elements constructed according to the Low Start case (\autoref{low-start-case}); a maximum of \rinline{max(df$gen)} generations, and other parameters taken from \autoref{tbl:factor-levels-limits}.
@@ -2084,7 +2087,7 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 
 
 %% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling, where the top line contains density plots for fidelity and fitness, and the middle line boxplots showing ranges.'
-% df <- load_dfa('results/results_lowstart.data')
+% df <- load_dfb('results/results-54e9131.data')
 % df$truncate <- factor(df$truncate, labels=c("Unbounded","Bounded"))
 % ap <- qplot( final_ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
 % bp <- qplot( final_ave_fit, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
@@ -2094,7 +2097,7 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 %% end.rcode
 
 %% begin.rcode fitnessindependentqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Q-Q plots for fitness-independent sampling, comparing Unbounded and Bounded results for fidelity (left) and fitness (right).'
-% df <- load_dfa('results/results_lowstart.data')
+% df <- load_dfb('results/results-54e9131.data')
 % dfa <- df[df$truncate==-1,]
 % dfb <- df[df$truncate==1,]
 % ap <- myqqplot(sort(dfa$final_ave_cor), sort(dfb$final_ave_cor), main="Final average fidelity", xlab="Unbounded",ylab="Bounded")
@@ -2116,9 +2119,7 @@ From the plots in \autoref{fig:fitnessindependentplots} it is clear that the res
 
 % Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-
-
-\subsubsection{Discussion}
+\subsection{Discussion}
 
 We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \autoref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
@@ -2192,11 +2193,8 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-%\item H$_1$: fidelity increases over a run, for some factor values, or \newline
-%$\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$
-
 %% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
-% df <- load_dfa("results/results_lowstart.data")
+% df <- load_dfb("results/results_54e9131.data")
 % df <- df[df$truncate==1,]
 % ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % bp <- qplot(row.names(df),final_ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
@@ -2204,17 +2202,12 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 % dp <- qplot(final_ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 % ep <- qplot(row.names(df),response_cor, geom="point", data=df, xlab='Experiment run', ylab='Final--initial ave. fidelity')+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % grid.arrange(arrangeGrob(ap,bp, ncol=2), arrangeGrob(cp,dp, ncol=2), ep, ncol=1)
-%# plot(df$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
-%# plot(df$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
-%# densityplot(~df$final_ave_cor, xlab='Final average fidelity')
-%# densityplot(~df$final_ave_fit, xlab='Final average fitness')
-%# plot(df$response_cor, xlab='Experiment run', ylab='Final--initial ave. fidelity')
 %% end.rcode
 
 A simple visual inspection of the results in \autoref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
-% df <- load_dfa("results/results_lowstart.data")
+% df <- load_dfb("results/results_54e9131.data")
 % df <- df[df$truncate==1,]
 % ap <- qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % bp <- qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2239,7 +2232,7 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 \subsubsection{Factor significance and interactions}
 
 %% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
-% df <- load_dfa("results/results_lowstart.data")
+% df <- load_dfb("results/results_54e9131.data")
 % df <- df[df$truncate==1,]
 % df_test <- df[df$correlation_correlation == 1,]
 % m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
@@ -2268,7 +2261,7 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \end{itemize}
 
 %% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
-% df <- load_dfa("results/results_lowstart.data")
+% df <- load_dfa("results/results_54e9131.data")
 % df <- df[df$truncate==1,]
 % df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
 % ap <- qplot(distribution, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
@@ -3507,6 +3500,17 @@ of molecules may be generated by reactions, and where the new molecules
 may in turn take part in further reactions: the chemistry emerges from
 the lower level atomic properties.
 
+Some examples of molecules created by ToyWorld are shown in \autoref{fig:toyworld-example-molecules}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.45\linewidth]{figures/strategies-2-03-molecule.png}
+	\includegraphics[width=0.45\linewidth]{figures/strategies-6-02-molecule.png}
+	\includegraphics[width=0.45\linewidth]{figures/strategies-13-01-molecule.png}
+	\includegraphics[width=0.45\linewidth]{figures/strategies-15-01-molecule.png}
+	\caption{Example molecules generated by ToyWorld, rendered as 2-D objects from the original SMILES notation - [H][C]N(O[N])OOC([H])(O[H])ON([O])[N][N]N(O[O])OOO[H] (top left), [H]OON(O[N+]([O-])[N+]([O])[O-])N([H])O[O] (top right), [H]OOON([H])ON([H])O[H] (bottom left) and [O]C(=O)OOOON=[C]N([O])[O]  (bottom right)}\label{fig:toyworld-example-molecules}
+\end{figure}
+
 \section{Energy Model}\label{energy-model}
 
 Energy within ToyWorld is found in only three standard forms -- kinetic,
@@ -4265,17 +4269,10 @@ Max. 		&199.00    &12.00	&216.00\\
 A view of the results is given in Table \autoref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
 \TODO{convert to ggplot2}
-%% begin.rcode loaddfc, echo=FALSE
-%	load_dfc <- function(f){
-%		colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
-%		df <- read.csv(f,colClasses=colClasses)
-%		df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
-%		df
-%	}
-%% end.rcode
+
 \TODO{convert to ggplot2}
 %% begin.rcode cyclesbypartition, echo=FALSE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
-%	df<-load_dfc("results/EvaluatorActualCycles.out") 
+%	df<-load_toyworld("results/EvaluatorActualCycles.out") 
 %	par(mfrow=c(1,3),cex=0.5)
 %	plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
 %	plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle")

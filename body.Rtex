@@ -1886,24 +1886,21 @@ The model is parameterized (see \cref{tbl:factor_definitions}) so that different
 \end{figure}
 
 \begin{algorithm}
-\SetKwFunction{derive}{derive}
-\For{generation $\in 1\dots$number of generations}{
-\tcp{Core algorithm}
-$population\leftarrow Selection(population)$\;
-$population\leftarrow population \cup Variation(population)$\;
+\For{each generation $\in [1\dots$number of generations]}{
+	$population\leftarrow Selection(population)$\;
+	$population\leftarrow population \cup Variation(population)$\;
+	\BlankLine
+	\lIf{$population$ size is too small}{break}
+}
 \BlankLine
-\tcp{Sustainable?}
-\uIf{population size is too small}{
-break\;
-}
-}
 \BlankLine
 \Def{Selection(population)}{
 	$population_{new}\leftarrow \{\}$\;
-	\For{each $entity$ in $population$} {
-		$p_{selection}\leftarrow $parent's fitness\;
-		\Prob($p_{selection}$:){
-			Add $entity$ to $population_{new}$\; % with probability $p_{selection}$\;
+	\For{each $entity \in population$} {
+		\lIf{$p_{selection} = 0$}{$p\leftarrow $parent's fitness}
+		\lElse{$p\leftarrow p_{selection}$}
+		\Prob($p$:){
+			Add $entity$ to $population_{new}$\;
 		}
 	}
 	\Return $population_{new}$\;
@@ -1912,15 +1909,27 @@ break\;
 \Def{Variation(population)}{
 	$children\leftarrow \{\}$\;
 	\For{each $entity$ in $population$}{
-		$p_{reproduce}\leftarrow $parent's fitness\;
+		\lIf{$p_{reproduce} = 0$} {$p\leftarrow $parent's fitness}
+		\lElse{$p\leftarrow p_{reproduce}$}
 		\BlankLine
-		\Prob($p_{reproduce}$:){
-			$n\leftarrow \text{some random integer between 0 and }n_{children}\text{, inclusive}$\;
-			\BlankLine
-			\For{each of the $n$ children}{
-				Child's fitness $\leftarrow $\derive{parent's fitness, parent's fidelity value}\;
-				Child's fidelity $\leftarrow$ \derive{parent's fidelity value, parent's fidelity value}\;
-				Add new child with these values for fitness and fidelity to $children$\;
+		\Prob($p$:){
+			\For{some random number of children between 0 and $n_{children}$} {
+				\uIf{Correlate Fitness} {
+					$fitness\leftarrow$ derive(parent's $fitness$, parent's $fidelity$)\;
+				}
+				\uElse{
+					$range\leftarrow$ some random $x$, where $x\in [0,1]$\;					
+					$fitness\leftarrow$ derive(parent's $fitness$, $range$)\;
+				}
+				\uIf{Correlate Fidelity} {
+					$fidelity\leftarrow$ derive(parent's $fidelity$, parent's $fidelity$)\;
+				}
+				\uElse{
+					$range\leftarrow$ some random $x$, where $x\in [0,1]$\;
+					$fidelity\leftarrow$ derive(parent's $fidelity$, $range$)\;
+				}
+				Create new $child$ with $fitness$ and $fidelity$\;
+				Add $child$ to $children$\;
 			}
 		}
 	}
@@ -1937,17 +1946,19 @@ break\;
 \begin{table}
 	\begin{center}
 		\caption{Model parameters}\label{tbl:factor_definitions}
-		\begin{tabular}{@{}lllp{7cm}@{}}
+		\begin{tabular}{@{}llp{8cm}@{}}
 			\toprule
-			& Factor&  Values& Description\\
+			Parameter&  Value& 	Description\\
 			\midrule
-			1&  $p_{reproduction}$&       $[0,1]$&       Default probability of reproduction. The probability of reproduction for a particular entity is $p_{reproduction}$ unless $p_{reproduction}=0$ in which case it is the parent's $fitness$\\
-			2&  $p_{selection}$&          $[0,1]$&           Default probability of selection, where again if $p_{selection}=0$, use the parent's $fitness$ instead\\
-			3&  $n_{children}$&           $n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
-			4&	Restriction&	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
-			5&  Distribution&                $(\mu,\sigma)\mapsto x$&    Function for generating a sample value $x$ from a particular distribution specified by mean $\mu$ and standard deviation $\sigma$\\
-			6&  Correlate Fitness&        $\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness (by $f$), and if false, child's fitness is given a random value $x\in [0,1]$ \\
-			7&  Correlate Fidelity&       $\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity (by $f$), or if false, a random value $x\in [0,1]$\\
+			$p_{reproduction}$& 		$0$&       Probability of reproduction is given by the parent's $fitness$\\
+			&								$(0,1]$&    Fixed probability of reproduction. The probability of reproduction for any entity is given by $p_{reproduction}$\\
+			$p_{selection}$&    		$0$&        Probability of selection is given by the parent's $fitness$\\
+			&          					$(0,1]$&    Probability of selection is unrelated to parent's $fitness$ and given instead by $p_{selection}$ for all entities\\
+			$n_{children}$&           	$n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
+			%Restriction&			  	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
+			Derive&             		(expected value, range)$\mapsto x$&    Function for generating a sample value $x$ from a particular distribution described by some measure of expected value and range\\
+			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in [0,1]$\\
+			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in [0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1956,15 +1967,6 @@ break\;
 \subsection{Claim of generality}
 
 The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
-
-\subsection{Assumptions}\label{assumptions-1}
-
-The model incorporates several assumptions that are worth making explicit:
-
-\begin{enumerate}
-\item \emph{Fidelity} and \emph{fitness} are taken from a distribution described by the value of the parameter \textbf{Distribution} with range $[0,1]$, around a mean $\mu$ and with some \gls{sd} $\sigma$. \emph{Fitness} and \emph{fidelity} are both \TODO{ implications on shape of distribution.}
-\item A parent cannot directly influence the fitness of children -- selection is an unseeing hand.
-\end{enumerate}
 
 \section{Initial conditions and settings}\label{initial-conditions}
 

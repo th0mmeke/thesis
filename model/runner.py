@@ -3,29 +3,22 @@ import random
 import itertools
 import model
 
-# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
-# experiments = [
-# #   X1  X2  X3  X4  X5  X6
-# #   ----------------------
-# [0,  0,  0,  1,  1,  1],
-# [0,  0,  0,  1,  1,  1],
-# [1,  0,  0,  0,  0,  1],
-# [0,  1,  0,  0,  1,  0],
-# [1,  1,  0,  1,  0,  0],
-# [0,  0,  1,  1,  0,  0],
-# [1,  0,  1,  0,  1,  0],
-# [0,  1,  1,  0,  0,  1],
-# [1,  1,  1,  1,  1,  1]
-# ]
-
 # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
 experiments = [
 #   X1  X2  X3  X4  X5  X6  X7
 #   --------------------------
+    [0,  0,  0,  0,  0,  0,  0],
+    [1,  0,  0,  0,  1,  0,  1],
+    [0,  1,  0,  0,  1,  1,  0],
+    [1,  1,  0,  0,  0,  1,  1],
     [0,  0,  1,  0,  1,  1,  1],
     [1,  0,  1,  0,  0,  1,  0],
     [0,  1,  1,  0,  0,  0,  1],
     [1,  1,  1,  0,  1,  0,  0],
+    [0,  0,  0,  1,  0,  1,  1],
+    [1,  0,  0,  1,  1,  1,  0],
+    [0,  1,  0,  1,  1,  0,  1],
+    [1,  1,  0,  1,  0,  0,  0],
     [0,  0,  1,  1,  1,  0,  0],
     [1,  0,  1,  1,  0,  0,  1],
     [0,  1,  1,  1,  0,  1,  0],
@@ -53,7 +46,7 @@ def init_population(n, low_start):
 
 def main():
 
-    low_start = False
+    low_start = True
     f = open("results.data", "w")
 
     # Write initial header line to file

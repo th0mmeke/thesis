@@ -1,12 +1,17 @@
 #!/bin/bash
 
+rm -rf ./generated_figures/*
 Rscript -e "library(knitr); knit('mythesis.Rtex')" # simply to add in the knitr latex environments and commands for later tex includes
 Rscript -e "library(knitr); knit('body.Rtex')" # doesn't add in knitr environments as only a document fragment (no documentclass)
+
+for FILE in ./generated_figures/*.pdf; do
+  pdfcrop "${FILE}" "${FILE}"
+done
+
 latexmk -pdf mythesis
 makeglossaries mythesis
 latexmk -pdf mythesis
 latexmk -c mythesis
-rm -rf ./generated_figures/*
 
 # Latex -> Pandoc markdown citations
 #sed -e 's%\\cite{\([^}]*\)}%@\1%g' # in text citation \cite(key) -> @key

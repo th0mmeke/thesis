@@ -1,4 +1,4 @@
-%% begin.rcode setup, include=FALSE
+	%% begin.rcode setup, include=FALSE
 % library(knitr)
 % library(cowplot) # styling of plots, extension of ggplot2
 % library(gridExtra) # grid layouts for ggplot2
@@ -16,12 +16,12 @@
 %   df <- read.csv(t, colClasses=colClasses)
 %   df
 % }
-%	load_toyworld <- function(f){
-%		colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
-%		df <- read.csv(f,colClasses=colClasses)
-%		df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
-%		df
-%	}
+% load_toyworld <- function(f){
+%	colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
+%	df <- read.csv(f,colClasses=colClasses)
+%	df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
+%	df
+% }
 % myqqplot <- function(x,y,...) {
 %    sx <- sort(x)
 %    sy <- sort(y)
@@ -33,6 +33,13 @@
 %	    sy <- approx(1L:leny, sy, n = lenx)$y
 %	qplot(x,y,...)
 % }
+% df_4915024 <- load_dfb('results/results-4915024.data')
+% df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
+% df_4915024_final <- df_4915024[df_4915024$gen==500,]
+% df_d9f18e2_final <- df_d9f18e2[df_d9f18e2$gen==500,]
+% df_4915024_fixed <- df_4915024[df_4915024$environment_change_frequency==0,]
+% df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
+% df_4915024_fixed_final <- df_4915024_fixed[df_4915024_fixed$gen==500,]
 %% end.rcode
 
 \chapter{Introduction}\label{introduction}
@@ -401,7 +408,7 @@ Not required at all e.g., specific metabolic cycles
 
 
 
-\section{TODO--Previous work}\label{todo---previous-work}
+\section{TODO--Previous work}\label{todo -- previous-work}
 
 Experimental tests
 
@@ -793,7 +800,7 @@ and chemical laws, implicitly constraining each and every action and
 interaction
 \end{itemize}
 
-\section{TODO--Related work}\label{todo---related-work}
+\section{TODO--Related work}\label{todo -- related-work}
 
 \subsection{Artificial Life}\label{artificial-life}
 
@@ -1088,7 +1095,7 @@ or other factors.
 
 \subsubsection{\texorpdfstring{The \textit{lac} Operon--an example of how
 regulation can enable a cell to respond appropriately to environmental
-triggers}{The  Operon--an example of how regulation can enable a cell to respond appropriately to environmental triggers}}\label{the-operon---an-example-of-how-regulation-can-enable-a-cell-to-respond-appropriately-to-environmental-triggers}
+triggers}{The  Operon--an example of how regulation can enable a cell to respond appropriately to environmental triggers}}\label{the-operon -- an-example-of-how-regulation-can-enable-a-cell-to-respond-appropriately-to-environmental-triggers}
 
 In the bacterium \textit{Escherichia coli}, and other
 \glspl{prokaryote}, the choice between two alternative energy sources -
@@ -1243,7 +1250,7 @@ to contain (in \autocite{Szathmary:2006ty}).
 \end{itemize}
 
 \subsubsection{Modelling--understanding biological
-processes}\label{modelling---understanding-biological-processes}
+processes}\label{modelling -- understanding-biological-processes}
 
 Regulation Network modelling--perhaps just one or two examples only
 
@@ -1435,8 +1442,8 @@ Too special-purpose
 
 \section{Previous publications}\label{previous-publications}
 
-A version of Reactant and Product Strategies \autoref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
-and material from \autoref{model-validation} in \cite{Young2013}.
+A version of Reactant and Product Strategies \cref{reactant-and-product-selection-strategies} was published as \cite{Young2015},
+and material from \cref{model-validation} in \cite{Young2013}.
 
 ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
@@ -1690,7 +1697,7 @@ additional value
 Affected by element and by everything else, so conceivably could be
 guided by modifying the environment in a calculated way
 
-\section{Issues--still parameters and choices}\label{issues---still-parameters-and-choices}
+\section{Issues--still parameters and choices}\label{issues -- still-parameters-and-choices}
 
 When do additions happen?
 
@@ -1828,7 +1835,7 @@ Selection strengthens degree of inheritance
 
 \section{Alternative explanations}\label{alternative-explanations-1}
 
-The three main alternatives, examined later in \autoref{elimination-of-alternative-explanations} are:
+The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
 
 \begin{enumerate}
 	\item Variation alone is sufficient for Inheritance, or $V\rightarrow I$.
@@ -1836,42 +1843,42 @@ The three main alternatives, examined later in \autoref{elimination-of-alternati
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter[Test of hypothesis under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
+\chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-To test our hypothesis we turn to an experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis has support. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
+To test our hypothesis we turn to an experiment: if a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
-Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \autoref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
-Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to examine the variation or range exposed in the response.
+Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
-Our goal for this first set of experiments is to test the predictions of hypothesis \autoref{hypothesis-2} in a fixed environment (where the fitness of an entity does not change). To do so, we follow a four-step process:
+Our goal for this first set of experiments is to test the predictions of hypothesis \autoref{hypothesis-2} in a fixed environment (where the fitness of an entity does not change). To do so, we follow a five-step process:
 
 \begin{enumerate}
-	\item Develop a model of the hypothesis \autoref{base-model}.
-	\item Determine initial conditions \autoref{initial-conditions}.
-	\item Clarify any optional parameters \autoref{check-effect-of-truncation}.
-	\item Design an appropriate experiment \autoref{experimental-design}.
-	\item Conduct the experiment, and analyse the results \autoref{analysis}.
+	\item Develop a model of the hypothesis (\cref{base-model}.)
+	\item Determine initial conditions (\cref{initial-conditions}.)
+	\item Clarify any optional parameters (\cref{check-effect-of-truncation}.)
+	\item Design an appropriate experiment (\cref{experimental-design}.)
+	\item Conduct the experiment, and analyse the results (\cref{analysis}.)
 \end{enumerate}
 
 \section{Base model}\label{base-model}
 
-All experiments in this section make use of the same base model (see \autoref{base-model-algorithm})where the key elements of the hypothesis, such as inheritance fidelity, are explicit parameters in the model. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of \emph{fidelity} is novel and important to the overall thesis.
+All experiments in this section make use of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are explicit parameters in the model. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
 We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions (\autoref{base-model-algorithm}) .
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property is has no correlation with its parent's value for that property, while high \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is the identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
+	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property has no correlation with its parent's value for that property, while high \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
 \end{itemize}
 
-The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $derive:[0,1] \times [0,1]\leftarrow [0,1]$. 
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $derive$. 
 
 The only transformation functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} and \emph{Variation}, although in later sections we will add others to examine the sensitivity of the model to various influences.
 
-Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. In familiar terms, the replacement population is formed by a some combination of parents from the current population, plus their children. 
+Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. Colloquially, the replacement population is formed by a combination of parents from the current population, plus their children.
 
-The model is parameterized (see \autoref{tbl:factor_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
+The model is parameterized (see \cref{tbl:factor_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
 
 \begin{figure}[htb]
 \centering
@@ -1919,7 +1926,7 @@ break\;
 	}
 	\Return $children$\;
 }
-\caption{Algorithm for the base Mmodel}\label{base-model-algorithm}
+\caption{Algorithm for the base model}\label{base-model-algorithm}
 \end{algorithm}
 
 \begin{figure}[ht]
@@ -1956,8 +1963,7 @@ The model incorporates several assumptions that are worth making explicit:
 
 \begin{enumerate}
 \item \emph{Fidelity} and \emph{fitness} are taken from a distribution described by the value of the parameter \textbf{Distribution} with range $[0,1]$, around a mean $\mu$ and with some \gls{sd} $\sigma$. \emph{Fitness} and \emph{fidelity} are both \TODO{ implications on shape of distribution.}
-\item \emph{Fitness} and \emph{fidelity} are independent, implying that \emph{fidelity} changes have no \emph{direct} effect on \emph{fitness} (and vice versa.)
-\item A parent cannot directly influence the fitness of children--selection is an unseeing hand.
+\item A parent cannot directly influence the fitness of children -- selection is an unseeing hand.
 \end{enumerate}
 
 \section{Initial conditions and settings}\label{initial-conditions}
@@ -1966,7 +1972,7 @@ At the beginning of each run we construct an initial population to some design. 
 
 \subsection{Low Start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity and fitness (see \autoref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \autoref{alternative-approaches}.)
+Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 	\begin{center}
@@ -1987,44 +1993,61 @@ Entities begin with a low initial fidelity and fitness (see \autoref{tbl:ic}.) T
 
 \subsection{High Start case}\label{high-start-case}
 
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \autoref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. 
 
-\section{Effect of an upper bound on population size}\label{check-effect-of-truncation}
+In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
+
+\section[Upper size bounds]{Investigation of effect of upper bound on population size}\label{check-effect-of-truncation}
 
 In the absence of any restrictions on population size, there is nothing to prevent a population growing beyond the capacity of the simulation system. This is a practical problem rather than a property of the theoretical model, and so to have faith in the simulation and model it's important we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
 
 The size of the population is driven by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \autocite[sect. 4.3.1]{DeJong2006} and \autocite[sect. 4.2]{Vose:1999di}.). Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
+Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \cite[sect. 4.3.1]{DeJong2006} and \cite[sect. 4.2]{Vose:1999di}.) Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
-This section describes two possible mechanisms to implement an upper bound, and attempts to understand the form of the bias each introduces into the experimental results. The first is to conduct a random sample of $n$ elements from the population, without regard for fitness, while the other is to adopt the \emph{truncation} mechanism (described in \autocite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism.
+The goal of this section is therefore to:
 
-In both cases the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity):
+\begin{enumerate}
+	\item Confirm that an upper bound on population size is required,
+	\item Decide if the choice of method for maintaining the bound might significantly affect any conclusions from the hypothesis tests, and if it might,
+	\item Determine which method to use for the remaining experiments.
+\end{enumerate}
+
+If there is an affect on the hypothesis tests attributable to the bound mechanism, then the conclusions from the test become contingent on the method. This reduces the scope somewhat, but without a change of experimental approach seems unavoidable.
+
+
+\subsection{Initial conditions for upper bound investigation}
+
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df_4915024_fixed_final[1,]$pop} elements constructed according to the Low Start case (\cref{low-start-case}) and the maximum number of generations equals \rinline{max(df_4915024_fixed_final$gen)} generations.
+
+\subsection{Unbounded populations}
+
+%% begin.rcode unboundedplot, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'
+% attach(df_d9f18e2_fixed)
+% df_max <- aggregate(df_d9f18e2_fixed$gen,list(p_reproduce, p_selection,n_offspring,truncate,distribution,fitness_correlation, correlation_correlation, environment_change_frequency),max)
+% detach(df_d9f18e2_fixed)
+% ap <- ggplot(df_max, aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_discrete(limits=c(0,1,2))
+% bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
+% grid.arrange(ap,bp,nrow=1,ncol=2)
+%% end.rcode
+
+Under these initial conditions, no experiment without an upper population bound continued for more than a handful of generations before the population size reached more than ten times the initial size. It is clear from \cref{fig:unboundedplot} that some form of upper bound is necessary.
+
+\subsection{Is the choice of mechanism significant?}
+
+Given then that an upper bound is needed for practicality, this section describes two possible approaches and attempts to understand the form of the bias each introduces into the experimental results. 
+
+The first approach is to take a random sample of $n$ elements from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \cite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
+
+It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
+
+Returning then to our examination of fitness-independent and fitness-based upper bounds, the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity):
 
 \begin{itemize}[label={}]
 	\item H$_0$: $\mu_{truncated} = \mu_{untruncated}$
 	\item H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
 \end{itemize}
 
-One consideration is that the number of generations at the conclusion of each run will not necessarily be comparable. 
-This is as expected, as the purpose of a population restriction here (other rationale may apply in general though, such as increasing selection bias) is to avoid a terminal population explosion.
-
-%% begin.rcode truncationdensity, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Generations completed without any upper-bound size restriction (left) and with a fitness-independent sampling restriction (right).'
-% df <- load_dfa('results/results_lowstart.data')
-% ap <- ggplot(df[df$truncate=='-1',], aes(gen))+geom_histogram(bins=50) + labs(x="Final generation", y="Count of Runs")
-% bp <- ggplot(df[df$truncate=='1',], aes(gen))+geom_histogram(bins=50) + labs(x="Final generation", y="Count of Runs")
-% grid.arrange(ap,bp,nrow=1,ncol=2)
-%% end.rcode
-
-\TODO{update to use dataset below with 5000 generations}
-
-\subsection{Initial conditions}
-
-%% begin.rcode bounded, echo=FALSE
-% df <- load_dfb('results/results-54e9131.data') # for use with rinline below
-%% end.rcode
-
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df[1,]$pop} elements constructed according to the Low Start case (\autoref{low-start-case}); a maximum of \rinline{max(df$gen)} generations, and other parameters taken from \autoref{tbl:factor-levels-limits}.
 
 \begin{algorithm}
 	\For{generation $\in 1\dots$number of generations}{
@@ -2041,24 +2064,6 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-\begin{table}
-	\begin{center}
-		\caption{Parameter settings for the upper bounds experiment design}\label{tbl:factor-levels-limits}
-		\begin{tabular}{@{}lllp{6cm}@{}}
-			\toprule
-			& Parameter&  Value\\
-			\midrule
-			0&  $p_{reproduction}$&       Parent's fitness\\
-			1&  $p_{selection}$&          Parent's fitness\\
-			2&  $n_{children}$&           2\\
-			3&  Restriction&  Varied - see text\\
-			4&  Distribution&                 Gaussian dist., $\mathcal{N}$\\
-			5&  Correlate Fitness&        true\\
-			6&  Correlate Fidelity&       true\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
 
 \subsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
@@ -2072,9 +2077,10 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 	\caption{Fitness-Independent Restriction()}
 \end{function}
 
+
 \subsection{Fitness-based selection}
 
-The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \autoref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2086,42 +2092,38 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 \end{function}
 
 
-%% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling, where the top line contains density plots for fidelity and fitness, and the middle line boxplots showing ranges.'
-% df <- load_dfb('results/results-54e9131.data')
-% df$truncate <- factor(df$truncate, labels=c("Unbounded","Bounded"))
-% ap <- qplot( final_ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
-% bp <- qplot( final_ave_fit, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
-% cp <- qplot(truncate, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="")
-% dp <- qplot(truncate, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="")
+%% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling (left) and fitness-based or dependent (right), where the top line contains density plots for fidelity and fitness, and the bottom line boxplots showing ranges.'
+% df <- df_4915024_fixed_final
+% df$truncate <- factor(df$distribution, labels=c("Independent","Dependent"))
+% ap <- qplot(ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
+% bp <- qplot(ave_fit, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
+% cp <- qplot(truncate, ave_cor, geom="boxplot", data=df, xlab="",ylab="")
+% dp <- qplot(truncate, ave_fit, geom="boxplot", data=df, xlab="",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
 %% end.rcode
 
-%% begin.rcode fitnessindependentqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Q-Q plots for fitness-independent sampling, comparing Unbounded and Bounded results for fidelity (left) and fitness (right).'
-% df <- load_dfb('results/results-54e9131.data')
-% dfa <- df[df$truncate==-1,]
-% dfb <- df[df$truncate==1,]
-% ap <- myqqplot(sort(dfa$final_ave_cor), sort(dfb$final_ave_cor), main="Final average fidelity", xlab="Unbounded",ylab="Bounded")
-% bp <- myqqplot(sort(dfa$final_ave_fit), sort(dfb$final_ave_fit), main="Final average fitness", xlab="Unbounded",ylab="Bounded")
-% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
-%% end.rcode
 
-From the plots in \autoref{fig:fitnessindependentplots} it is clear that the results are strongly non-normal, so a non-parametric test is appropriate to use to check if the truncated and untruncated results are similar (from the same distribution) and hence bias-free.
+\subsection{Results and discussion}
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
 %independent continuous random samples where the underlying distributions
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-%% begin.rcode kstest, echo=FALSE
-% df <- load_dfa('results/results_lowstart.data')
-% x_cor <- ks.test(df[df$truncate=='Unbounded',]$final_ave_cor,df[df$truncate=='Bounded',]$final_ave_cor)
-% x_fit <- ks.test(df[df$truncate=='Unbounded',]$final_ave_fit,df[df$truncate=='Bounded',]$final_ave_fit)
+\newthought{When no bound is compared to bounded populations}
+
+\newthought{Now, comparing fitness-independent to fitness-based bounding}
+
+%%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
+% df_1 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
+% df_2 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==1,]
+% ap <- myqqplot(sort(df_1$ave_cor), sort(df_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
+% bp <- myqqplot(sort(df_1$ave_fit), sort(df_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
 % Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
-\subsection{Discussion}
-
-We conclude, somewhat surprisingly, that Fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and Q-Q plots \autoref{fig:fitnessindependentplots}. Surprisingly as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+We conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{fig:limitqqplots}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
 This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection. \TODO{finish this discussion}
 
@@ -2131,7 +2133,7 @@ We use a fractional factorial design to reduce the number of experimental runs r
 
 \subsection{Response variables}\label{response-variables}
 
-From the predictions of hypothesis \autoref{hypothesis-2} (\autoref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
+From the predictions of hypothesis \autoref{hypothesis-2} (\cref{predictions}) the main property of interest is \emph{Fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. 
 
 Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fidelity} (across all replicates) at the end of a run, as under hypothesis \autoref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment. \TODO{ need this?} In addition, as we predict that \emph{Fidelity} will increase, we expect $\overline{fidelity}_{end}--\overline{fidelity}_{start} > 0$.
 
@@ -2164,7 +2166,7 @@ The number of replicates required for a particular statistical power is related 
 
 Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
 
-\section{Results and analysis}\label{analysis}
+\section{Results and discussion}\label{analysis}
 
 This analysis has two goals: 
 
@@ -2175,7 +2177,7 @@ This analysis has two goals:
 
 \subsection{Low start case}\label{low-start-case-analysis}
 
-The Low Start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the primary goal of this thesis.
+The Low Start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the main subject of this thesis.
 
 Hypothesis \autoref{hypothesis-2} makes two predictions when there is a fixed environment: 
 
@@ -2187,36 +2189,33 @@ Hypothesis \autoref{hypothesis-2} makes two predictions when there is a fixed en
 The first test therefore is to examine if inheritance emerges from low-fidelity/low-fitness initial conditions, with the following null and alternative hypotheses:
 
 \begin{itemize}[label={}]
-\item H$_0$: fidelity does not approach 1.0 over a run, irrespective of factor values, or \newline
+\item H$_0$: fidelity does not approach 1.0 during a run, irrespective of factor values, or \newline
 		$\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
-\item H$_1$: fidelity increases to near 1.0 over a run, for some factor values, or \newline
+\item H$_1$: fidelity increases to near 1.0 during a run, for some factor values, or \newline
 		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
 %% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
-% df <- load_dfb("results/results_54e9131.data")
-% df <- df[df$truncate==1,]
-% ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% bp <- qplot(row.names(df),final_ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% cp <- qplot(final_ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
-% dp <- qplot(final_ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
-% ep <- qplot(row.names(df),response_cor, geom="point", data=df, xlab='Experiment run', ylab='Final--initial ave. fidelity')+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% grid.arrange(arrangeGrob(ap,bp, ncol=2), arrangeGrob(cp,dp, ncol=2), ep, ncol=1)
+% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
+% ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+% bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+% cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
+% dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
-A simple visual inspection of the results in \autoref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
+A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
-% df <- load_dfb("results/results_54e9131.data")
-% df <- df[df$truncate==1,]
-% ap <- qplot(correlation_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% bp <- qplot(correlation_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% cp <- qplot(fitness_correlation, final_ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% dp <- qplot(fitness_correlation, final_ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
+% ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+% dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity (\autoref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \autoref{fig:lowstartcorrelation}). Child and parent fidelities are related by \textbf{Distribution} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
+By inspection, all runs resulted in increased fidelity (\cref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}). Child and parent fidelities are related by \textbf{Distribution} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, correlated.
 
@@ -2232,22 +2231,21 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 \subsubsection{Factor significance and interactions}
 
 %% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
-% df <- load_dfb("results/results_54e9131.data")
-% df <- df[df$truncate==1,]
+% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % df_test <- df[df$correlation_correlation == 1,]
-% m0 <- lm(response_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
+% m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
 % x <- anova(m0)
-% ap <- qplot(p_reproduce, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
-% bp <- qplot(p_selection, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
-% cp <- qplot(n_offspring, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
-% dp <- qplot(distribution, final_ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
+% ap <- qplot(p_reproduce, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
+% bp <- qplot(p_selection, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
+% cp <- qplot(n_offspring, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
+% dp <- qplot(distribution, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 % significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
 Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $f()$.
 
-Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \autoref{fig:lowstartfactorinfluence} \TODO{complete}.
+Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \cref{fig:lowstartfactorinfluence} \TODO{complete}.
 
 \paragraph{Is the choice of distribution function significant?}\label{distribution-function-1}
 
@@ -2261,11 +2259,10 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \end{itemize}
 
 %% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
-% df <- load_dfa("results/results_54e9131.data")
-% df <- df[df$truncate==1,]
+% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-% ap <- qplot(distribution, final_ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
-% bp <- qplot(distribution, final_ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
+% ap <- qplot(distribution, ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
+% bp <- qplot(distribution, ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
@@ -2279,23 +2276,8 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
 
-%% begin.rcode highstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for High Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
-% df <- load_dfa("results/results_highstart.data")
-% df <- df[df$truncate==1,]
-% ap <- qplot(row.names(df),final_ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% bp <- qplot(row.names(df),final_ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% cp <- qplot(final_ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
-% dp <- qplot(final_ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
-% ep <- qplot(row.names(df),response_cor, geom="point", data=df, xlab='Experiment run', ylab='Final--initial ave. fidelity')+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% grid.arrange(arrangeGrob(ap,bp, ncol=2), arrangeGrob(cp,dp, ncol=2), ep, ncol=1)
-%# plot(df$final_ave_cor, xlab='Experiment run', ylab='Final average fidelity')
-%# plot(df$final_ave_fit, xlab='Experiment run', ylab='Final average fitness')
-%# densityplot(~df$final_ave_cor, xlab='Final average fidelity')
-%# densityplot(~df$final_ave_fit, xlab='Final average fitness')
-%# plot(df$response_cor, xlab='Experiment run', ylab='Final--initial ave. fidelity')
-%% end.rcode
 
-By inspection of \autoref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
+By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
 
 As in the Low Start case, the clusters are driven by the value of the factor \textbf{Correlate Fidelity}. Fidelity decreased in this High Start case when \textbf{Correlate Fidelity} was +1, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} = +1 in the Low Start case .
 
@@ -2313,7 +2295,7 @@ The statistical power of the design is \rinline{x['power']} with \rinline{x['gro
 
 % Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
-\chapter[Test of hypothesis under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+\chapter[Test under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2335,7 +2317,7 @@ Significance
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same initial conditions (low \autoref{low-start-case} and high start \autoref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}
 	\SetKwFunction{f}{f}
@@ -2353,7 +2335,7 @@ Same initial conditions (low \autoref{low-start-case} and high start \autoref{hi
 			$population\leftarrow tweakFitness(population)$\;
 		}
 	}
-	\caption{Algorithm for the Changing Environment Model used in \autoref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
+	\caption{Algorithm for the Changing Environment Model used in \cref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
 \end{algorithm}
 
 \begin{function}
@@ -2377,8 +2359,6 @@ uniform) with a possible change to the mean fitness each generation. In this mod
 decrease.
 
 \section{Experimental design}\label{experimental-design-1}
-
-% git commit reference 229445f
 
 Four different runs, with changes to the environment at four different frequencies, but all with the same factor settings:
 
@@ -2411,10 +2391,9 @@ As before, each run has 10 replicates of 500 generations each, with an initial p
 \section{Results}\label{results-1}
 
 %% begin.rcode changingenvironmentsummary, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Fidelity (left) and fitness (right) over time for four different frequencies (0, or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'
-% df<-read.csv("results/results-229445f.data")
-% ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10))
-% ggplot(df, aes(x=ecf,y=ave_cor)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fidelity")
-% ggplot(df, aes(x=ecf,y=ave_fit)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fitness")
+% ecf <- factor(df_4915024_final$environment_change_frequency,levels=c(0,1,5,10))
+% ggplot(df_4915024_final, aes(x=ecf,y=ave_cor)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fidelity")
+% ggplot(df_4915024_final, aes(x=ecf,y=ave_fit)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fitness")
 %% end.rcode
 
 \section{Analysis}\label{analysis-1}
@@ -2437,27 +2416,14 @@ We initially tested this by making a single change, setting $sd$ to 0.70.
 
 From a visual inspection, we conclude that the results appear very similar for uniform and gaussian.
 
-%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Gaussian distribution function $f()$'
-% df<-load_dfb("results/results-229445f.data")
-% df1<-split(df,df$gen)
-% df2<-df1$`500` # last gen
-% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
-% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
-% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
-%% end.rcode
-
-%% begin.rcode uniform, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold', fig.cap='Results for Uniform distribution function $f()$'
-% df<-load_dfb("results/results-b67ce0e.data")
-% df1<-split(df,df$gen)
-% df2<-df1$`500` # last gen
-% ecf<-factor(df2$environment_change_frequency,c(0,1,5,10))
-% bwplot(df2$ave_cor~ecf,xlab="Changeability of environment (see text)",ylab="Average parent-child correlation")
-% bwplot(df2$ave_fit~ecf,xlab="Changeability of environment (see text)",ylab="Average fitness")
+%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold'
+% ggplot(df_4915024_final, aes(x=distribution,y=ave_cor)) + geom_boxplot() + labs(x="Distribution", y="Final average fidelity")
+% ggplot(df_4915024_final, aes(x=distribution,y=ave_fit)) + geom_boxplot() + labs(x="Distribution", y="Final average fitness")
 %% end.rcode
 
 \chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
-\section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance---v-i}
+\section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}
 	
 	As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
 	
@@ -2484,7 +2450,7 @@ From a visual inspection, we conclude that the results appear very similar for u
 	
 \section{Variation and Selection, without property correlation, is sufficient for Inheritance}
 
-Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \autoref{low-start-case-analysis} and \autoref{high-start-case-analysis}.
+Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \cref{low-start-case-analysis} and \cref{high-start-case-analysis}.
 	
 \chapter{Conclusions}
 
@@ -2515,9 +2481,9 @@ for investigating various evolutionary phenomena. Fundamentally, they
 provide a tuneable evolutionary system, capable of highly complex
 behaviour, built around familiar metaphors (real-world Chemistry, and
 potentially Biology). A set of interaction rules describing how atoms
-interact gives rise to emergent forms---molecules. At a higher level,
+interact gives rise to emergent forms -- molecules. At a higher level,
 these molecules, under the same interaction rules, also interact in
-patterns---reactions.
+patterns -- reactions.
 
 \TODO{ link emergent levels to copy mechanism}
 
@@ -2618,7 +2584,7 @@ processes.
 Therefore expect that a grounded AChem for these should have a basis in
 real Chemistry.
 
-\subsection{BOX--Physical or Real-world Chemistry}\label{box---physical-or-real-world-chemistry}
+\subsection{BOX--Physical or Real-world Chemistry}\label{box -- physical-or-real-world-chemistry}
 
 The richness of the real world is built on a substantial foundation of
 chemical and physical complexity.
@@ -2750,7 +2716,7 @@ principles. Because of the complexities of real-world chemistry this
 later method appears to be quite difficult, and the goal of a realistic,
 computationally practical, artificial chemistry remains open. However,
 the more limited objective of a less realistic, but still fully
-constructive chemistry, has been achieved (see Table \autoref{classification-of-artificial-chemistries} for
+constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for
 examples.). A constructive chemistry (\autocite{Fontana1994}) is one
 where new components may be generated through the action of other
 components, and where those new components may themselves take part in
@@ -3500,7 +3466,7 @@ of molecules may be generated by reactions, and where the new molecules
 may in turn take part in further reactions: the chemistry emerges from
 the lower level atomic properties.
 
-Some examples of molecules created by ToyWorld are shown in \autoref{fig:toyworld-example-molecules}.
+Some examples of molecules created by ToyWorld are shown in \cref{fig:toyworld-example-molecules}.
 
 \begin{figure}[htb]
 	\centering
@@ -3540,10 +3506,10 @@ internal and potential.
   absolutely determined by the atomic number of the two Atoms at either
   end of the bond, and the type of bond itself -- single, double or
   triple. ToyWorld provides a table of standard values in
-  \autoref{default_bond_energies}, based upon real-world chemistry.
+  \cref{default_bond_energies}, based upon real-world chemistry.
   Unspecified bonds are given the average energy of specified bonds of
   the same bond type. Examples of molecules with associated potential
-  energies are given in \autoref{example_potential_energies}.
+  energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
 Our energy model enforces conservation of mass so reactions can be
@@ -3663,7 +3629,7 @@ A reaction may be seen as two stages in sequence: first, the choice of reactants
 \section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies}
 
 \autocite{Faulconbridge2011} describes two generic strategies for the
-selection of reactants---spatial and aspatial---where the primary
+selection of reactants -- spatial and aspatial -- where the primary
 difference is whether molecular position is a factor in reactant
 selection. It is possible to further generalise this scheme by
 considering other differentiating factors. Analogous with real-world
@@ -3685,7 +3651,7 @@ In a uniform selection strategy ($S_\mathrm{Reactant} = \mathrm{Uniform}$), reac
 
 \subsection{Kinetic selection.}\label{kinetic-selection.}
 
-By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position---molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula.
+By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position -- molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula.
 
 \subsection{Intra-molecular selection and external force selection}\label{intra-molecular-selection-and-external-force-selection}
 
@@ -3721,10 +3687,10 @@ while bond destruction results in an increase. A change in bond type is
 equivalent to a creation and then a destruction. The magnitude of the
 change in potential energy, measured in arbitrary energy units, is taken
 from a table of bond energies for each combination of atoms and bond
-type (\autoref{default_bond_energies}. The standard table is based upon
+type (\cref{default_bond_energies}. The standard table is based upon
 a simplification of real-world chemical bond energies. For example, the
 creation of a H-H bond releases 104.2 units; the breaking of a C=O
-double bond takes 185 energy units. \autoref{example_potential_energies}
+double bond takes 185 energy units. \cref{example_potential_energies}
 shows the potential energy for a sample of molecules.
 
 How should we choose between alternative sets of possible products for
@@ -3745,7 +3711,7 @@ choosing with uniform probability from a distribution of reaction
 alternatives weighted by the total of the energy changes associated with
 the bond changes. This biases selection towards the Least Energy
 alternative; the strength of the bias is determined by the degree of the
-weighting. \autoref{fig1} shows an example of the shift in products that occurs as a result of
+weighting. \cref{fig1} shows an example of the shift in products that occurs as a result of
 this weighting as the overall quantity of energy in the system is
 changed.
 
@@ -3764,7 +3730,7 @@ e_i=
 
 Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
 
-As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \autoref{fig:reaction_selection_weights}.
+As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \cref{fig:reaction_selection_weights}.
 
 \begin{figure}[t]
 \begin{center}
@@ -3775,7 +3741,7 @@ As a result, for exothermic reactions, highly exothermic reactions are preferred
 \node[enode] at (7,4) {2};
 \node[enode] at (8,3.2) {3};
 \end{tikzpicture}
-\caption{Weighting calculation for reaction selection under a Least Energy Strategy. Numerical labels refer to cases in \autoref{weighting-calculation}.}\label{fig:reaction_selection_weights}
+\caption{Weighting calculation for reaction selection under a Least Energy Strategy. Numerical labels refer to cases in \cref{weighting-calculation}.}\label{fig:reaction_selection_weights}
 \end{center}
 \end{figure}
 
@@ -3817,7 +3783,7 @@ energies.
 The Reactor Algorithm selects one of the reaction alternatives by
 choosing from a distribution of reaction alternatives weighted by
 associated energy changes (as discussed in
-\autoref{product-selection-strategies}.)
+\cref{product-selection-strategies}.)
 
 \subsection{Setting product velocities and internal energies}\label{setting-product-velocities-and-internal-energies}
 
@@ -3835,8 +3801,8 @@ of the reacting system, the vector sum of the momentum of the products
 must equal zero. Therefore one possible solution to the product
 velocities is to arrange their vector momentums according to simple
 geometry: for two products, we arrange their momentums in a line (line
-\autoref{alg:2products} in \autoref{alg:post_collision_adjustments}); for three
-products, an equilateral triangle (line \autoref{alg:3products}), and by
+\cref{alg:2products} in \cref{alg:post_collision_adjustments}); for three
+products, an equilateral triangle (line \cref{alg:3products}), and by
 extension, for four products, a square and so on.
 
 \begin{algorithm}
@@ -3891,16 +3857,16 @@ $\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text
 Following a standard method, we first transfer the molecules from the
 frame of reference of the reaction vessel into the centre of mass (CoM)
 reference frame by subtracting the velocity of the CoM from each
-particle (line \autoref{alg:lab_to_CoM_frame}). Correspondingly, we also
+particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also
 adjust the energy of the collision by subtracting the KE of the CoM. We
 recognize that in the CoM frame the vector sum of the momentums will be
 zero; working in this frame reduces the number of vectors we must sum by
 one (the momentum of the CoM itself.)
 
-We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \autoref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
+We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \cref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
 
 Finally, we convert from the CoM reference frame to the initial frame by
-adding back the velocity of the CoM (line \autoref{alg:CoM_to_lab_frame}).
+adding back the velocity of the CoM (line \cref{alg:CoM_to_lab_frame}).
 
 This method satisfies our requirements of conservation of momentum and
 energy for arbitrary numbers of reactants and products while being
@@ -3910,7 +3876,7 @@ configurations. An improvement would be to perturb the geometry of the
 vectors in the CoM frame to remove the regularity.
 
 The outcomes for each reaction alternative from an example collision are
-shown in \autoref{fig:collision_diagrams}.
+shown in \cref{fig:collision_diagrams}.
 
 \tdplotsetmaincoords{60}{110}
 
@@ -4065,7 +4031,7 @@ shown in \autoref{fig:collision_diagrams}.
 \section{Introduction}\label{introduction-4}
 
 The design outlined in Section
-\autoref{toyworld} leads to the following expectations, to be tested
+\cref{toyworld} leads to the following expectations, to be tested
 experimentally.
 
 \begin{enumerate}
@@ -4073,7 +4039,7 @@ experimentally.
   Given two reactants, changing the reaction energy should result in
   different sets of reaction products.
 \item
-  Molecular quantities reach equilibrium---that is, the set of
+  Molecular quantities reach equilibrium -- that is, the set of
   interacting molecules is constant, with fluctuations expected in
   quantities. We expect molecular concentrations to stabilize at
   non-extreme values (equilibrium rather than driven to an extreme)
@@ -4089,10 +4055,10 @@ These predictions were tested by two experiments: first, we examined the
 reaction products produced at a range of reaction energies for four sets
 of reactants. Second, for a given set of reactants, we ran the
 simulation for 10,000 iterations at four successive initial average
-kinetic energy levels---0, 67, 133, and 200 units per molecule---with
+kinetic energy levels -- 0, 67, 133, and 200 units per molecule -- with
 each molecule initially at quantity 100. The experiment was run first
 with a reactant set containing N\textsubscript{2}O\textsubscript{4} and
-2NO\textsubscript{2} (results in Fig.\autoref{fig1}), and then with a
+2NO\textsubscript{2} (results in Fig.\cref{fig1}), and then with a
 reactant set of H\textsubscript{2}, O\textsubscript{2} and H\textsubscript{2}O.
 
 \begin{figure}
@@ -4120,8 +4086,8 @@ With both reactant sets the model produced a significant number of
 molecules which would be considered unstable in real-world chemistry
 (such as O\textsuperscript{-} and O.) This is likely an artifact of the method
 we use to generate reaction options, where a bond-break plus
-bond-formation reaction---moving through an intermediate unstable
-ion---occurs in our model as two separate reactions. As all molecules
+bond-formation reaction -- moving through an intermediate unstable
+ion -- occurs in our model as two separate reactions. As all molecules
 currently react with equal likelihood, significant time can elapse
 before the intermediate product reacts to form a stable product.
 
@@ -4196,20 +4162,20 @@ extended period without running out of possible reactions (from lack of energy f
 Factor & +1 value & -1 value & Description\\
 \hline
 \noalign{\smallskip}
-$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \autoref{reactant-selection-strategies}\\
-$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \autoref{product-selection-strategies}\\
+$S_\mathrm{Reactant}$&		Kinetic&						Uniform&	See Section \cref{reactant-selection-strategies}\\
+$S_\mathrm{Product}$&		LeastEnergy&					Uniform&	See Section \cref{product-selection-strategies}\\
 $E_\mathrm{Vessel}$&		300&							100&		Initial kinetic energy of each molecule in the reaction vessel\\
 $E_\mathrm{Bonds}$&		Single=50, Double=100, Triple=200& Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3&	Energy required to break a bond of the given type\\
 \hline
 \end{tabular}
 \end{table}
 
-We concentrate on three related response, or dependent, variables---Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
+We concentrate on three related response, or dependent, variables -- Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
 
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
 \section{Experiment Design}
-The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \autoref{tbl:factors}.
+The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \cref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
@@ -4266,7 +4232,7 @@ Max. 		&199.00    &12.00	&216.00\\
 \end{center}
 \end{table}%
 
-A view of the results is given in Table \autoref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
+A view of the results is given in Table \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
 \TODO{convert to ggplot2}
 
@@ -4296,7 +4262,7 @@ A view of the results is given in Table \autoref{tbl:results}: reaction networks
 \end{figure}
 
 \subsection{Analysis and Discussion}
-Figure \autoref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \autoref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
+Figure \cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
 \TODO{convert to ggplot2}
 %% begin.rcode reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '
@@ -4330,9 +4296,9 @@ Figure \autoref{fig:cyclesbypartition} suggests that the first partition, repres
 %\end{figure}
 
 \subsection{RQ1: Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of Figure \autoref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \autoref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
+From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
-We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \autoref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
+We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
 \TODO{convert to ggplot2}
 %% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
@@ -4351,13 +4317,13 @@ We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\m
 
 \subsection{RQ2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
-From Figure \autoref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
+From Figure \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
 \subsection{RQ3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
 
-We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \autoref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
+We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
 The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
@@ -4556,13 +4522,13 @@ We have shown that:
 
 And therefore that open-ended evolution is possible in an Artificial Chemistry.
 
-\TODO{ link OEE to selection and variation from work in \autoref{the-search-for-creativity}}
+\TODO{ link OEE to selection and variation from work in \cref{the-search-for-creativity}}
 
 Requires a series of steps--akin to OOL where single-step
 astronomically unlikely (single RNA strand probability about 10E-60,
 based on 100 monomers--\autocite{Pascal2013})
 
-\section{Step 1--demonstration of Autocatalytic activity}\label{step-1---demonstration-of-autocatalytic-activity}
+\section{Step 1--demonstration of Autocatalytic activity}\label{step-1 -- demonstration-of-autocatalytic-activity}
 
 Previous work
 
@@ -4583,12 +4549,12 @@ reaction paths to form an autocatalytic set of reactions
 \autocite{Huning2000}
 \end{itemize}
 
-\section{Step 2--demonstration of selection between ACS}\label{step-2---demonstration-of-selection-between-acs}
+\section{Step 2--demonstration of selection between ACS}\label{step-2 -- demonstration-of-selection-between-acs}
 
 Test of evolution under selection versus drift- artificial selection -
 show response to selective pressure
 
-\section{Step 3--Evolution in an artificial chemistry}\label{step-3---evolution-in-an-artificial-chemistry}
+\section{Step 3--Evolution in an artificial chemistry}\label{step-3 -- evolution-in-an-artificial-chemistry}
 
 \section{Alternative explanations}\label{alternative-explanations}
 

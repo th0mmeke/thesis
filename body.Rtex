@@ -4,13 +4,6 @@
 % library(gridExtra) # grid layouts for ggplot2
 % library(lattice) # needed for bwplot etc
 % opts_chunk$set(fig.path='generated_figures/')
-% load_dfa <- function(t) {
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df$response_cor <- df$final_ave_cor-df$initial_ave_cor
-%   df$response_fit <- df$final_ave_fit-df$initial_ave_fit
-%   df
-% }
 % load_dfb <- function(t) {
 %   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
 %   df <- read.csv(t, colClasses=colClasses)
@@ -33,6 +26,27 @@
 %	    sy <- approx(1L:leny, sy, n = lenx)$y
 %	qplot(x,y,...)
 % }
+
+% DATASETS
+% 6852f455 - High start = True, P_REPRODUCE+P_SELECTION changes, X3 only 1 (fitness-based sampling)
+% 81c7c59 - High start = True, 
+% d0fa13939 - High start = True
+
+% e124ce423 - 4915024467 with P_REPRODUCE+P_SELECTION changes
+% d9f18e2f5e  Low start, no truncation code/only runs are with factor[3] = 0
+% 4915024467 - Low start
+
+% Always truncating in commits from 
+% Experiment 1 - No truncation/limit vs limits - d9f18e2
+% Experiment 2 - Fitness-independent vs fitness-dependent, ecf=0, 491502446 onwards
+% Experiment 3 - Truncation, Low start, ecf=0, all factors (p 0.33/0.66) - 491502446 + e124ce423
+
+% Experiment 4 - same as 3
+% Experiment 5 - same as 3
+
+% Highstart experiments - need equivalent of 4915024467 (d0fa13939?) and e124ce423
+
+
 % df_4915024 <- load_dfb('results/results-4915024.data')
 % df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
 % df_4915024_final <- df_4915024[df_4915024$gen==500,]
@@ -49,7 +63,7 @@
 Motivation is to establish the conditions for interesting forms of
 directed evolution
 
-Life (see later) provides the canonical example of ``interesting'';
+Life (:qsee later) provides the canonical example of ``interesting'';
 approaching life's creativity in an artificial system would be quite
 something
 
@@ -1845,7 +1859,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 
 \chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-To test our hypothesis we turn to an experiment: if a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
+To test our hypothesis, we turn to experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
 Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
@@ -1865,11 +1879,11 @@ Our goal for this first set of experiments is to test the predictions of hypothe
 
 All experiments in this section make use of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are explicit parameters in the model. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
-We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions (\autoref{base-model-algorithm}) .
+We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions.
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where $0$ means that the value for a child's property has no correlation with its parent's value for that property, while high \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
+	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. \TODO{fidelity vs inheritance - subtle difference? Inheritance is the goal, fidelity is the degree of correlation between two generations, also the mechanism by which variation is introduced\ldots}
 \end{itemize}
 
 The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $derive$. 
@@ -1878,7 +1892,7 @@ The only transformation functions in the base model are for the two core element
 
 Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. Colloquially, the replacement population is formed by a combination of parents from the current population, plus their children.
 
-The model is parameterized (see \cref{tbl:factor_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
+The model is parameterized (see \cref{tbl:parameter_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
 
 \begin{figure}[htb]
 \centering
@@ -1913,19 +1927,19 @@ The model is parameterized (see \cref{tbl:factor_definitions}) so that different
 		\lElse{$p\leftarrow p_{reproduce}$}
 		\BlankLine
 		\Prob($p$:){
-			\For{some random number of children between 0 and $n_{children}$} {
+			\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
 				\uIf{Correlate Fitness} {
 					$fitness\leftarrow$ derive(parent's $fitness$, parent's $fidelity$)\;
 				}
 				\uElse{
-					$range\leftarrow$ some random $x$, where $x\in [0,1]$\;					
+					$range\leftarrow$ some $x \in \mathcal{U}[0,1]$\;					
 					$fitness\leftarrow$ derive(parent's $fitness$, $range$)\;
 				}
 				\uIf{Correlate Fidelity} {
 					$fidelity\leftarrow$ derive(parent's $fidelity$, parent's $fidelity$)\;
 				}
 				\uElse{
-					$range\leftarrow$ some random $x$, where $x\in [0,1]$\;
+					$range\leftarrow$ some $x \in \mathcal{U}[0,1]$\;
 					$fidelity\leftarrow$ derive(parent's $fidelity$, $range$)\;
 				}
 				Create new $child$ with $fitness$ and $fidelity$\;
@@ -1945,7 +1959,7 @@ The model is parameterized (see \cref{tbl:factor_definitions}) so that different
 
 \begin{table}
 	\begin{center}
-		\caption{Model parameters}\label{tbl:factor_definitions}
+		\caption{Model parameters}\label{tbl:parameter_definitions}
 		\begin{tabular}{@{}llp{8cm}@{}}
 			\toprule
 			Parameter&  Value& 	Description\\
@@ -1956,9 +1970,9 @@ The model is parameterized (see \cref{tbl:factor_definitions}) so that different
 			&          					$(0,1]$&    Probability of selection is unrelated to parent's $fitness$ and given instead by $p_{selection}$ for all entities\\
 			$n_{children}$&           	$n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 			%Restriction&			  	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
-			Derive&             		(expected value, range)$\mapsto x$&    Function for generating a sample value $x$ from a particular distribution described by some measure of expected value and range\\
-			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in [0,1]$\\
-			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in [0,1]$\\
+			Derive&             		expected value, range$\mapsto x$&    Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
+			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
+			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1974,7 +1988,7 @@ At the beginning of each run we construct an initial population to some design. 
 
 \subsection{Low Start case}\label{low-start-case}
 
-Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
+Entities in the Low Start case begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 	\begin{center}
@@ -1983,11 +1997,11 @@ Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This
 			\toprule
 			Case&	Property&  Initial range\\
 			\midrule
-			\multirow{2}{*}{Low Start}&			Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.3]$\\
-			&													Fidelity&	$\mathcal{U}\in [0, 0.3]$\\
+			\multirow{2}{*}{Low Start}&			Fitness&	$\mathcal{U}[0, 0.3]$\\
+			&													Fidelity&	$\mathcal{U}[0, 0.3]$\\
 			\midrule
-			\multirow{2}{*}{High Start}&		Fitness&	From a uniform distribution $\mathcal{U}$ with range $[0, 0.9]$\\
-			&													Fidelity&	$\mathcal{U}\in [0.5, 0.9]$\\
+			\multirow{2}{*}{High Start}&		Fitness&	$\mathcal{U}[0, 0.9]$\\
+			&													Fidelity&	$\mathcal{U}[0.5, 0.9]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -1995,7 +2009,7 @@ Entities begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This
 
 \subsection{High Start case}\label{high-start-case}
 
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form. 
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
 
 In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
@@ -2005,9 +2019,9 @@ In the absence of any restrictions on population size, there is nothing to preve
 
 The size of the population is driven by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs, some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \cite[sect. 4.3.1]{DeJong2006} and \cite[sect. 4.2]{Vose:1999di}.) Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
+Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs (e.g., righthand of \cref{fig:unboundedplot}), some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \cite[sect. 4.3.1]{DeJong2006} and \cite[sect. 4.2]{Vose:1999di}.) Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
-The goal of this section is therefore to:
+To summarize then, the goal of this section is to:
 
 \begin{enumerate}
 	\item Confirm that an upper bound on population size is required,
@@ -2015,8 +2029,7 @@ The goal of this section is therefore to:
 	\item Determine which method to use for the remaining experiments.
 \end{enumerate}
 
-If there is an affect on the hypothesis tests attributable to the bound mechanism, then the conclusions from the test become contingent on the method. This reduces the scope somewhat, but without a change of experimental approach seems unavoidable.
-
+If there is an affect on the hypothesis tests attributable to the bound mechanism, then the conclusions from the test become contingent on the method. This reduces the scope somewhat, but without a change of investigative approach seems unavoidable.
 
 \subsection{Initial conditions for upper bound investigation}
 
@@ -2028,7 +2041,7 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 % attach(df_d9f18e2_fixed)
 % df_max <- aggregate(df_d9f18e2_fixed$gen,list(p_reproduce, p_selection,n_offspring,truncate,distribution,fitness_correlation, correlation_correlation, environment_change_frequency),max)
 % detach(df_d9f18e2_fixed)
-% ap <- ggplot(df_max, aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_discrete(limits=c(0,1,2))
+% ap <- ggplot(df_max, aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 % bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
 % grid.arrange(ap,bp,nrow=1,ncol=2)
 %% end.rcode
@@ -2043,31 +2056,26 @@ The first approach is to take a random sample of $n$ elements from the populatio
 
 It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
 
-Returning then to our examination of fitness-independent and fitness-based upper bounds, the null hypothesis, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity):
+Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity) :
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\mu_{truncated} = \mu_{untruncated}$
-	\item H$_1$: $\mu_{truncated} \ne \mu_{untruncated}$
+	\item H$_0$: $\mu_{limited} = \mu_{unlimited}$
+	\item H$_1$: $\mu_{limited} \ne \mu_{unlimited}$
 \end{itemize}
 
 
 \begin{algorithm}
-	\For{generation $\in 1\dots$number of generations}{
-		\tcp{Core algorithm}
+	\For{each generation $\in [1\dots$number of generations]}{
 		$population\leftarrow Selection(population)$\;
-		$population\leftarrow population + Reproduction(population)$\;
+		$population\leftarrow population \cup Variation(population)$\;
 		$population\leftarrow Restriction(population)$\;
 		\BlankLine
-		\tcp{Check if population size is no longer sustainable}
-		\uIf{population size is too small}{
-			break\;
-		}
+		\lIf{$population$ size is too small}{break}
 	}
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-
-\subsection{Fitness-independent sampling}\label{fitness-independent-sampling}
+\subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
 The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
@@ -2079,8 +2087,9 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 	\caption{Fitness-Independent Restriction()}
 \end{function}
 
+If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
-\subsection{Fitness-based selection}
+\subsubsection{Fitness-based selection}
 
 The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
 
@@ -2093,8 +2102,7 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 	\caption{Fitness-based Restriction()}
 \end{function}
 
-
-%% begin.rcode fitnessindependentplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling (left) and fitness-based or dependent (right), where the top line contains density plots for fidelity and fitness, and the bottom line boxplots showing ranges.'
+%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling (left) and fitness-based or dependent (right), where the top line contains density plots for fidelity and fitness, and the bottom line boxplots showing ranges.'
 % df <- df_4915024_fixed_final
 % df$truncate <- factor(df$distribution, labels=c("Independent","Dependent"))
 % ap <- qplot(ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
@@ -2104,17 +2112,6 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
 %% end.rcode
 
-
-\subsection{Results and discussion}
-
-%Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
-%independent continuous random samples where the underlying distributions
-%are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
-
-\newthought{When no bound is compared to bounded populations}
-
-\newthought{Now, comparing fitness-independent to fitness-based bounding}
-
 %%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
 % df_1 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % df_2 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==1,]
@@ -2123,9 +2120,11 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
-% Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
+%Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
+%independent continuous random samples where the underlying distributions
+%are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-We conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{fig:limitqqplots}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+% Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
 
 This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection. \TODO{finish this discussion}
 

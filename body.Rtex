@@ -1,4 +1,4 @@
-	%% begin.rcode setup, include=FALSE
+%% begin.rcode setup, include=FALSE
 % library(knitr)
 % library(cowplot) # styling of plots, extension of ggplot2
 % library(gridExtra) # grid layouts for ggplot2
@@ -26,6 +26,14 @@
 %	    sy <- approx(1L:leny, sy, n = lenx)$y
 %	qplot(x,y,...)
 % }
+% df_4915024 <- load_dfb('results/results-4915024.data')
+% df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
+% df_4915024_final <- df_4915024[df_4915024$gen==500,]
+% df_d9f18e2_final <- df_d9f18e2[df_d9f18e2$gen==500,]
+% df_4915024_fixed <- df_4915024[df_4915024$environment_change_frequency==0,]
+% df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
+% df_4915024_fixed_final <- df_4915024_fixed[df_4915024_fixed$gen==500,]
+%% end.rcode
 
 % DATASETS
 % 6852f455 - High start = True, P_REPRODUCE+P_SELECTION changes, X3 only 1 (fitness-based sampling)
@@ -36,25 +44,13 @@
 % d9f18e2f5e  Low start, no truncation code/only runs are with factor[3] = 0
 % 4915024467 - Low start
 
-% Always truncating in commits from 
 % Experiment 1 - No truncation/limit vs limits - d9f18e2
 % Experiment 2 - Fitness-independent vs fitness-dependent, ecf=0, 491502446 onwards
 % Experiment 3 - Truncation, Low start, ecf=0, all factors (p 0.33/0.66) - 491502446 + e124ce423
-
 % Experiment 4 - same as 3
 % Experiment 5 - same as 3
-
 % Highstart experiments - need equivalent of 4915024467 (d0fa13939?) and e124ce423
 
-
-% df_4915024 <- load_dfb('results/results-4915024.data')
-% df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
-% df_4915024_final <- df_4915024[df_4915024$gen==500,]
-% df_d9f18e2_final <- df_d9f18e2[df_d9f18e2$gen==500,]
-% df_4915024_fixed <- df_4915024[df_4915024$environment_change_frequency==0,]
-% df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
-% df_4915024_fixed_final <- df_4915024_fixed[df_4915024_fixed$gen==500,]
-%% end.rcode
 
 \chapter{Introduction}\label{introduction}
 
@@ -1929,18 +1925,18 @@ The model is parameterized (see \cref{tbl:parameter_definitions}) so that differ
 		\Prob($p$:){
 			\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
 				\uIf{Correlate Fitness} {
-					$fitness\leftarrow$ derive(parent's $fitness$, parent's $fidelity$)\;
+					$fitness\leftarrow$ Derive(parent's $fitness$, parent's $fidelity$)\;
 				}
 				\uElse{
 					$range\leftarrow$ some $x \in \mathcal{U}[0,1]$\;					
-					$fitness\leftarrow$ derive(parent's $fitness$, $range$)\;
+					$fitness\leftarrow$ Derive(parent's $fitness$, $range$)\;
 				}
 				\uIf{Correlate Fidelity} {
-					$fidelity\leftarrow$ derive(parent's $fidelity$, parent's $fidelity$)\;
+					$fidelity\leftarrow$ Derive(parent's $fidelity$, parent's $fidelity$)\;
 				}
 				\uElse{
 					$range\leftarrow$ some $x \in \mathcal{U}[0,1]$\;
-					$fidelity\leftarrow$ derive(parent's $fidelity$, $range$)\;
+					$fidelity\leftarrow$ Derive(parent's $fidelity$, $range$)\;
 				}
 				Create new $child$ with $fitness$ and $fidelity$\;
 				Add $child$ to $children$\;
@@ -1970,7 +1966,7 @@ The model is parameterized (see \cref{tbl:parameter_definitions}) so that differ
 			&          					$(0,1]$&    Probability of selection is unrelated to parent's $fitness$ and given instead by $p_{selection}$ for all entities\\
 			$n_{children}$&           	$n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 			%Restriction&			  	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
-			Derive&             		expected value, range$\mapsto x$&    Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
+			Derive&             		$[0,1]\times[0,1]\mapsto[0,1]$&    Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
 			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			\bottomrule
@@ -2019,7 +2015,7 @@ In the absence of any restrictions on population size, there is nothing to preve
 
 The size of the population is driven by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \autocite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs (e.g., righthand of \cref{fig:unboundedplot}), some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \cite[sect. 4.3.1]{DeJong2006} and \cite[sect. 4.2]{Vose:1999di}.) Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
+Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs (e.g., righthand side of \cref{fig:unboundedplot}), some upper bound on population size is needed. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \cite[sect. 4.3.1]{DeJong2006} and \cite[sect. 4.2]{Vose:1999di}.) Here though we break the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
 To summarize then, the goal of this section is to:
 
@@ -2153,7 +2149,7 @@ A full factorial design with seven 2-level factors would require testing $2^{7}$
 2&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)\\
 3&  $n_{children}$&           2&                5\\
 4&  Population Restriction&  false&            true\\
-5&  Distribution&               Gaussian dist., $\mathcal{N}$&   Uniform dist., $\mathcal{U}$\\
+5&  Distribution&               Gaussian dist., $\mathbb{N}$&   Uniform dist., $\mathcal{U}$\\
 6&  Correlate Fitness&        false&            true\\
 7&  Correlate Fidelity&       false&            true\\
 \bottomrule
@@ -2283,16 +2279,16 @@ By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bi
 As in the Low Start case, the clusters are driven by the value of the factor \textbf{Correlate Fidelity}. Fidelity decreased in this High Start case when \textbf{Correlate Fidelity} was +1, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} = +1 in the Low Start case .
 
 %% begin.rcode power, echo=FALSE
-% df_high <- load_dfa("results/results_highstart.data")
-% df_high <- df_high[df_high$truncate==1,]
-% df_low <- load_dfa("results/results_lowstart.data")
-% df_low <- df_low[df_low$truncate==1,]
-% between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
-% within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
-% x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
+%% df_high <- load_dfa("results/results_highstart.data")
+%% df_high <- df_high[df_high$truncate==1,]
+%% df_low <- load_dfa("results/results_lowstart.data")
+%% df_low <- df_low[df_low$truncate==1,]
+%% between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
+%% within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
+%% x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
 %% end.rcode
 
-The statistical power of the design is \rinline{x['power']} with \rinline{x['groups']} groups and \rinline{x['n']} observations per group.
+% The statistical power of the design is \rinline{x['power']} with \rinline{x['groups']} groups and \rinline{x['n']} observations per group.
 
 % Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
@@ -2374,7 +2370,7 @@ Four different runs, with changes to the environment at four different frequenci
 			1&  $p_{selection}$&          	-1&	Parent's fitness&   Probability of selection for an entity\\
 			2&  $n_{children}$&           	-1&	2&                Maximum number of children per parent\\
 			3&  Limit population size&  	1&	true&                   Use initial population size as upper limit on size\\
-			4&  $f$&                      			-1&	Gaussian dist., $\mathcal{N}$&          Function for generating a sample value from a particular distribution\\
+			4&  $f$&                      			-1&	Gaussian dist., $\mathbb{N}$&          Function for generating a sample value from a particular distribution\\
 			5&  Correlate Fitness&        	1&            true&                   Child's fitness is related to parent's fitness (by $f$)\\
 			6&  Correlate Fidelity&       	1&            true&                   Child's fidelity is related to parent's fidelity (by $f$)\\
 			\bottomrule

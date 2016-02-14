@@ -31,7 +31,8 @@ experiments = [
 
 factor_defns = [
     [0.33,     0.66],    # 0 = P_REPRODUCE - 0 = fitness
-    [0.33,     0.66],    # 1 = P_SELECTION - 0 = fitness
+    [0,     	1.0],    # 1 = P_SELECTION - 0 = fitness
+    #[0.33,     0.66],    # 1 = P_SELECTION - 0 = fitness
     [2,        5],      # 2 = N_OFFSPRING
     [False,    True],   # 3 = RESTRICTION - False = sample, True = truncate
     # gauss is described by mean=source, sd=1-correlation, then clipped to [0,1]

@@ -2115,13 +2115,13 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 	\caption{Fitness-based Restriction()}
 \end{function}
 
-%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'
+%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final a verage fitness (on the right).'
 % df$temp <- factor(df$truncate, labels=c("Independent","Dependent"))
-% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
-% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
-% cp <- qplot(temp, ave_cor, geom="boxplot", data=df, xlab="",ylab="")
-% dp <- qplot(temp, ave_fit, geom="boxplot", data=df, xlab="",ylab="")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
+% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df, xlab="Fidelity", ylab="Density")
+% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df, xlab="Fitness", ylab="Density")
+% cp <- qplot(temp, ave_cor, geom="boxplot", data=df, xlab="",ylab="Fidelity")
+% dp <- qplot(temp, ave_fit, geom="boxplot", data=df, xlab="",ylab="Fitness")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
 %%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'

@@ -30,9 +30,10 @@ experiments = [
 # experiments = [[0,0,0,1,1,1,1]]
 
 factor_defns = [
-    [0.33,     0.66],    # 0 = P_REPRODUCE - 0 = fitness
-    [0,     	1.0],    # 1 = P_SELECTION - 0 = fitness
-    #[0.33,     0.66],    # 1 = P_SELECTION - 0 = fitness
+    #[0.33,     0.66],    # 0 = P_REPRODUCE - 0 = fitness
+    [0,     	1.0],    # 0 = P_REPRODUCE - 0 = fitness
+    #[0,     	1.0],    # 1 = P_SELECTION - 0 = fitness
+    [0.33,     0.66],    # 1 = P_SELECTION - 0 = fitness
     [2,        5],      # 2 = N_OFFSPRING
     [False,    True],   # 3 = RESTRICTION - False = sample, True = truncate
     # gauss is described by mean=source, sd=1-correlation, then clipped to [0,1]
@@ -60,7 +61,7 @@ def main():
 
         factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
 
-        for environment_change_frequency in [0,1,5,10]:
+        for environment_change_frequency in [0]:#,1,5,10]:
             experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
                 print(repeat, factors)

@@ -24,32 +24,49 @@
 %	    sx <- approx(1L:lenx, sx, n = leny)$y
 %    if (leny > lenx) 
 %	    sy <- approx(1L:leny, sy, n = lenx)$y
-%	qplot(x,y,...)
+%	qplot(sx,sy,...)
 % }
-% df_4915024 <- load_dfb('results/results-4915024.data')
 % df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
-% df_4915024_final <- df_4915024[df_4915024$gen==500,]
-% df_d9f18e2_final <- df_d9f18e2[df_d9f18e2$gen==500,]
-% df_4915024_fixed <- df_4915024[df_4915024$environment_change_frequency==0,]
 % df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
-% df_4915024_fixed_final <- df_4915024_fixed[df_4915024_fixed$gen==500,]
+% df_low <- readRDS('results/low.rds')
+% df <- subset(df_low, environment_change_frequency==0 & gen==500)
+%% df_4915024 <- load_dfb('results/results-4915024.data')
+%% df_041b62df <- load_dfb('results/results-041b62df.data')
+%% df_e22448db3 <- load_dfb('results/results-e22448db3.data')
+%% df_e124ce423 <- load_dfb('results/results-e124ce423.data')
+%% levels(df_041b62df$p_reproduce) <- c(0,1) 
+%% levels(df_041b62df$p_selection) <- c(0.33,0.66)
+%% levels(df_e22448db3$p_reproduce) <- c(0.33,0.66)
+%% levels(df_e22448db3$p_selection) <- c(0,1)
+%% levels(df_e124ce423$p_reproduce) <- c(0.33,0.66)
+%% levels(df_e124ce423$p_selection) <- c(0.33,0.66)
+%% levels(df_4915024$p_reproduce) <- c(0,1)
+%% levels(df_4915024$p_selection) <- c(0,1)
+%% saveRDS(rbind(df_4915024,df_e124ce423, df_e22448db3, df_041b62df),'low.rds')
 %% end.rcode
 
 % DATASETS
+% HIGHTSTART
 % 6852f455 - High start = True, P_REPRODUCE+P_SELECTION changes, X3 only 1 (fitness-based sampling)
 % 81c7c59 - High start = True, 
 % d0fa13939 - High start = True
-
-% e124ce423 - 4915024467 with P_REPRODUCE+P_SELECTION changes
+% LOWSTART
+% 041b62df - 4915024467 with P_SELECTOIN changes (to 0.33, 0.66) (but ecf only 0=fixed)
+% e22448db3 - 4915024467 with P_REPRODUCE changes (to 0.33, 0.66)
+% e124ce423 - 4915024467 with P_REPRODUCE+P_SELECTION changes (both to 0.33,0.66)
 % d9f18e2f5e  Low start, no truncation code/only runs are with factor[3] = 0
 % 4915024467 - Low start
 
+% change factor p_reproduce and p_selection to four way factors - with levels from runner.py
+% e.g., currently levels(df_e124ce423$p_reproduce) = -1, 1 => 0.33, 0.66 and df_4915024467 => 0, 1
+% Must change the encoding of the levels rather than simply labels
+
 % Experiment 1 - No truncation/limit vs limits - d9f18e2
 % Experiment 2 - Fitness-independent vs fitness-dependent, ecf=0, 491502446 onwards
-% Experiment 3 - Truncation, Low start, ecf=0, all factors (p 0.33/0.66) - 491502446 + e124ce423
+% Experiment 3 - With truncation, Low start, ecf=0, all factors (p 0.33/0.66) - df_lowstart
 % Experiment 4 - same as 3
 % Experiment 5 - same as 3
-% Highstart experiments - need equivalent of 4915024467 (d0fa13939?) and e124ce423
+% Highstart experiments - need equivalent of df_lowstart
 
 
 \chapter{Introduction}\label{introduction}
@@ -2029,7 +2046,7 @@ If there is an affect on the hypothesis tests attributable to the bound mechanis
 
 \subsection{Initial conditions for upper bound investigation}
 
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df_4915024_fixed_final[1,]$pop} elements constructed according to the Low Start case (\cref{low-start-case}) and the maximum number of generations equals \rinline{max(df_4915024_fixed_final$gen)} generations.
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \rinline{df_d9f18e2[1,]$pop} elements constructed according to the Low Start case (\cref{low-start-case}) and the maximum number of generations equals \rinline{max(df_d9f18e2$gen)} generations.
 
 \subsection{Unbounded populations}
 
@@ -2098,19 +2115,18 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 	\caption{Fitness-based Restriction()}
 \end{function}
 
-%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling (left) and fitness-based or dependent (right), where the top line contains density plots for fidelity and fitness, and the bottom line boxplots showing ranges.'
-% df <- df_4915024_fixed_final
-% df$truncate <- factor(df$distribution, labels=c("Independent","Dependent"))
-% ap <- qplot(ave_cor, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
-% bp <- qplot(ave_fit, facets=truncate ~ ., geom="density", data=df, xlab="",ylab="")
-% cp <- qplot(truncate, ave_cor, geom="boxplot", data=df, xlab="",ylab="")
-% dp <- qplot(truncate, ave_fit, geom="boxplot", data=df, xlab="",ylab="")
+%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'
+% df$temp <- factor(df$truncate, labels=c("Independent","Dependent"))
+% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
+% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
+% cp <- qplot(temp, ave_cor, geom="boxplot", data=df, xlab="",ylab="")
+% dp <- qplot(temp, ave_fit, geom="boxplot", data=df, xlab="",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
 %% end.rcode
 
 %%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_1 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
-% df_2 <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==1,]
+% df_1 <- subset(df,truncate==-1)
+% df_2 <- subset(df,truncate==1)
 % ap <- myqqplot(sort(df_1$ave_cor), sort(df_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
 % bp <- myqqplot(sort(df_1$ave_fit), sort(df_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
@@ -2138,20 +2154,22 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 
 A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
 
+\TODO{Now using two four-level factors => four two-level so strictly a nine factor design. But run as a hybrid, where did runs for all combinations of the four-level factors.}
+
 \begin{table}
 \begin{center}
 \caption{Factor levels used in the Fractional Factorial experiment design}\label{tbl:factor_levels}
-\begin{tabular}{@{}lllp{6cm}@{}}
+\begin{tabular}{@{}llp{6cm}@{}}
 \toprule
-& Parameter&  Low value (-1)&  High value (+1)\\
+Parameter&  Number of Levels & Levels\\
 \midrule
-1&  $p_{reproduction}$&       Parent's fitness& 1.0 (always reproduce)\\
-2&  $p_{selection}$&          Parent's fitness& 1.0 (always survive)\\
-3&  $n_{children}$&           2&                5\\
-4&  Population Restriction&  false&            true\\
-5&  Distribution&               Gaussian dist., $\mathbb{N}$&   Uniform dist., $\mathcal{U}$\\
-6&  Correlate Fitness&        false&            true\\
-7&  Correlate Fidelity&       false&            true\\
+$p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
+$p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
+$n_{children}$&           	2&	2 or 5\\
+Population Restriction&  	2&	false or true\\
+Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
+Correlate Fitness&        	2&	false or true\\
+Correlate Fidelity&       	2&	false or true\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2159,11 +2177,15 @@ A full factorial design with seven 2-level factors would require testing $2^{7}$
 
 \paragraph{Other settings}\label{other-settings}
 
-The number of replicates required for a particular statistical power is related to the \gls{sd} of the response variable. 
+The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
 Based on preliminary runs, we begin with an initial estimate of 10 replicates for each of the 16 sets of factor values given in the design, resulting in 160 runs in total; we confirm that this is sufficient through power calculations for specific tests in the later analysis sections.
 
 \section{Results and discussion}\label{analysis}
+
+%% begin.rcode
+% summary(df)
+%% end.rcode
 
 This analysis has two goals: 
 
@@ -2193,7 +2215,6 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 \end{itemize}
 
 %% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
-% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2204,7 +2225,6 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
-% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2228,7 +2248,6 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 \subsubsection{Factor significance and interactions}
 
 %% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
-% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % df_test <- df[df$correlation_correlation == 1,]
 % m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
 % x <- anova(m0)
@@ -2256,7 +2275,6 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \end{itemize}
 
 %% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
-% df <- df_4915024_fixed_final[df_4915024_fixed_final$truncate==-1,]
 % df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
 % ap <- qplot(distribution, ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
 % bp <- qplot(distribution, ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")

@@ -2129,6 +2129,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 \subsubsection{Fitness-based selection}
 
 The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+It also recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and fitness determines the selection.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2148,9 +2149,9 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
-%%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_completed_1 <- subset(df_completed,truncate==-1)
-% df_completed_2 <- subset(df_completed,truncate==1)
+%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
+% df_completed_1 <- subset(df_completed,temp=="Independent")
+% df_completed_2 <- subset(df_completed,temp=="Dependent")
 % ap <- myqqplot(sort(df_completed_1$ave_cor), sort(df_completed_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
 % bp <- myqqplot(sort(df_completed_1$ave_fit), sort(df_completed_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
@@ -2160,13 +2161,26 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 %independent continuous random samples where the underlying distributions
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-% Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
+%% begin.rcode
+x_cor <- ks.test(df_completed_1$ave_cor, df_completed_2$ave_cor)
+x_fit <- ks.test(df_completed_1$ave_fit, df_completed_2$ave_fit)
+%% end.rcode
 
-This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection. \TODO{finish this discussion}
+Applying a \rinline{x_cor['method']} to determine if the results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, approx. p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis. That is, the distributions produced by the two methods are different for both average fidelity and average fitness.
+
+From these tests it is clear that the two methods do not have statistically similar effects for both fidelity and fitness, and hence we cannot find support for the contention that our conclusions in the hypothesis tests can be made without extensive consideration of limit method. Method is important, and our conclusions are dependent on the method chosen. 
+
+This conclusion of course is based on a comparison of two particular methods; a third, fitness-based, method may produce distributions that are statistically similar to those of, say, sampling. In which case we might conclude that any conclusions drawn on the basis of sampling would also extend to this third method. This extension however is left for future work.
+
+Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we use fitness-independent sampling rather than fitness based restriction in all later experiments.
 
 \section{Experimental design}\label{experimental-design}
 
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis. 
+Our experimental goals are to assess the hypothesis and to examine the influence of factors - essentially, we're conducting a form of exploration, and so would like a design that allows for a little open-ended questioning of the model. Although several parameters are discrete, at this stage the main ones can be reduced to a set of A/B alternatives, or in the language of experimental design, two-level factors. Our design should allow us to examine the effects of the factors, and also ideally their interactions, and so a form of factorial design is appropriate.
+
+In fact we use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
+
+The design is complicated a little by the suspicion that two factors - p_reproduce and p_selection - require more than two levels. Fortunately a $2^n$ fractional design can be relatively simply extended to include 4-level factors (\autoref[]{Montgomery2009}) by \TODO{replacement?} where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by simply just running each combination of the four-level factors in a hybrid full-fractional design.
 
 \subsection{Response variables}\label{response-variables}
 

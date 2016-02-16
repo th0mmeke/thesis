@@ -1,7 +1,7 @@
 import random
 import math
 import statistics
-from tabulate import tabulate
+#from tabulate import tabulate
 from collections import OrderedDict
 
 # Endogenise fitness (make relative) and population (restriction from resource constraints)

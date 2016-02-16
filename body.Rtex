@@ -2085,12 +2085,14 @@ The first approach is to take a random sample of $n$ elements from the populatio
 
 It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
 
-Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity) :
+Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (examined for both population mean fitness and fidelity) :
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\mu_{limited} = \mu_{unlimited}$
-	\item H$_1$: $\mu_{limited} \ne \mu_{unlimited}$
+	\item H$_0$: the two samples are drawn from the same continuous distribution
+	\item H$_1$: the two samples are not drawn from the same continuous distribution
 \end{itemize}
+
+We use a standard two-sample Kolmogorov-Smirnov test to test the similarity between the distributions.
 
 
 \begin{algorithm}
@@ -2104,10 +2106,11 @@ Returning then to our examination of fitness-independent and fitness-based upper
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-%% begin.rcode
+%% begin.rcode echo=FALSE
 % df_fixed <- subset(df_low, environment_change_frequency == 0)
 % df_completed <- subset(df_fixed, gen==500)
 %% end.rcode
+
 Data is taken from the Low Start dataset, made up of \rinline{nrow(na.omit(df_fixed))} runs under fixed conditions, of which we are exclusively concerned with the subset of \rinline{nrow(na.omit(df_completed))} runs that reached completion at \rinline{max(df_d9f18e2$gen)} generations.
 
 The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\rinline{nrow(df_completed[df_completed$truncate==-1,])} runs) and fitness-based (\rinline{nrow(df_completed[df_completed$truncate==1,])}), indicating that the two methods at least appear comparable with respect to their affect on population size.
@@ -2161,12 +2164,12 @@ It also recognizes that in both Evolutionary Computation and natural populations
 %independent continuous random samples where the underlying distributions
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-%% begin.rcode
+%% begin.rcode kstest, warning=FALSE, echo=FALSE 
 x_cor <- ks.test(df_completed_1$ave_cor, df_completed_2$ave_cor)
 x_fit <- ks.test(df_completed_1$ave_fit, df_completed_2$ave_fit)
 %% end.rcode
 
-Applying a \rinline{x_cor['method']} to determine if the results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, approx. p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis. That is, the distributions produced by the two methods are different for both average fidelity and average fitness.
+Applying a two-sample Kolmogorov-Smirnov test to determine if the results for each method are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{round(x_cor$p.value,2)} and for pop. mean fitness, approx. p-value=\rinline{round(x_fit$p.value,2)}) to reject the null hypothesis, confirmed by visual inspection of \cref{fig:limitcomparisonplots} and \cref{fig:limitqqplots}. The distributions produced by the two methods are different for both average fidelity and average fitness.
 
 From these tests it is clear that the two methods do not have statistically similar effects for both fidelity and fitness, and hence we cannot find support for the contention that our conclusions in the hypothesis tests can be made without extensive consideration of limit method. Method is important, and our conclusions are dependent on the method chosen. 
 
@@ -2180,7 +2183,6 @@ Our experimental goals are to assess the hypothesis and to examine the influence
 
 In fact we use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
-The design is complicated a little by the suspicion that two factors - p_reproduce and p_selection - require more than two levels. Fortunately a $2^n$ fractional design can be relatively simply extended to include 4-level factors (\autoref[]{Montgomery2009}) by \TODO{replacement?} where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by simply just running each combination of the four-level factors in a hybrid full-fractional design.
 
 \subsection{Response variables}\label{response-variables}
 
@@ -2192,7 +2194,7 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 
 A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
 
-\TODO{Now using two four-level factors => four two-level so strictly a nine factor design. But run as a hybrid, where did runs for all combinations of the four-level factors.}
+The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be simply extended to include 4-level factors (\cite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by simply running each combination of the four-level factors against a fractional-factorial design for the remaining factors in a hybrid full-fractional design.
 
 \begin{table}
 \begin{center}
@@ -2212,6 +2214,7 @@ Correlate Fidelity&       	2&	false or true\\
 \end{tabular}
 \end{center}
 \end{table}
+
 
 \paragraph{Other settings}\label{other-settings}
 
@@ -2328,7 +2331,6 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
 \item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
-
 
 By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
 

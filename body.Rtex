@@ -28,22 +28,36 @@
 % }
 % df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
 % df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
-% df_low <- readRDS('results/low.rds')
+% df_low <- readRDS('results/results-dbb85db63.rds')
 % df <- subset(df_low, environment_change_frequency==0 & gen==500)
-%% df_4915024 <- load_dfb('results/results-4915024.data')
-%% df_041b62df <- load_dfb('results/results-041b62df.data')
-%% df_e22448db3 <- load_dfb('results/results-e22448db3.data')
-%% df_e124ce423 <- load_dfb('results/results-e124ce423.data')
-%% levels(df_041b62df$p_reproduce) <- c(0,1) 
-%% levels(df_041b62df$p_selection) <- c(0.33,0.66)
-%% levels(df_e22448db3$p_reproduce) <- c(0.33,0.66)
-%% levels(df_e22448db3$p_selection) <- c(0,1)
-%% levels(df_e124ce423$p_reproduce) <- c(0.33,0.66)
-%% levels(df_e124ce423$p_selection) <- c(0.33,0.66)
-%% levels(df_4915024$p_reproduce) <- c(0,1)
-%% levels(df_4915024$p_selection) <- c(0,1)
-%% saveRDS(rbind(df_4915024,df_e124ce423, df_e22448db3, df_041b62df),'low.rds')
 %% end.rcode
+
+% df_4915024 <- load_dfb('results/results-4915024.data')
+% df_041b62df <- load_dfb('results/results-041b62df.data')
+% df_e22448db3 <- load_dfb('results/results-e22448db3.data')
+% df_e124ce423 <- load_dfb('results/results-e124ce423.data')
+% levels(df_041b62df$p_reproduce) <- c(0,1) 
+% levels(df_041b62df$p_selection) <- c(0.33,0.66)
+% levels(df_e22448db3$p_reproduce) <- c(0.33,0.66)
+% levels(df_e22448db3$p_selection) <- c(0,1)
+% levels(df_e124ce423$p_reproduce) <- c(0.33,0.66)
+% levels(df_e124ce423$p_selection) <- c(0.33,0.66)
+% levels(df_4915024$p_reproduce) <- c(0,1)
+% levels(df_4915024$p_selection) <- c(0,1)
+% saveRDS(rbind(df_4915024,df_e124ce423, df_e22448db3, df_041b62df),'results/low.rds')
+% df_0101 <- load_dfb('results/results-0101.data')
+% df_013366 <- load_dfb('results/results-013366.data')
+% df_336601 <- load_dfb('results/results-336601.data')
+% df_33663366 <- load_dfb('results/results-33663366.data')
+% levels(df_013366$p_reproduce) <- c(0,1) 
+% levels(df_013366$p_selection) <- c(0.33,0.66)
+% levels(df_336601$p_reproduce) <- c(0.33,0.66)
+% levels(df_336601$p_selection) <- c(0,1)
+% levels(df_33663366$p_reproduce) <- c(0.33,0.66)
+% levels(df_33663366$p_selection) <- c(0.33,0.66)
+% levels(df_0101$p_reproduce) <- c(0,1)
+% levels(df_0101$p_selection) <- c(0,1)
+% saveRDS(rbind(df_0101,df_013366, df_336601, df_33663366),'results/dbb85db63.rds')
 
 % DATASETS
 % HIGHTSTART
@@ -51,7 +65,9 @@
 % 81c7c59 - High start = True, 
 % d0fa13939 - High start = True
 % LOWSTART
-% 041b62df - 4915024467 with P_SELECTOIN changes (to 0.33, 0.66) (but ecf only 0=fixed)
+% dbb85db63.rds - see derivation below - from commit dbb85db63
+% Datasets with wrong sort order for implementation of Truncation function:
+% 041b62df - 4915024467 with P_SELECTION changes (to 0.33, 0.66) (but ecf only 0=fixed)
 % e22448db3 - 4915024467 with P_REPRODUCE changes (to 0.33, 0.66)
 % e124ce423 - 4915024467 with P_REPRODUCE+P_SELECTION changes (both to 0.33,0.66)
 % d9f18e2f5e  Low start, no truncation code/only runs are with factor[3] = 0
@@ -71,7 +87,7 @@
 
 \chapter{Introduction}\label{introduction}
 
-\section{Motivation}\label{motivation}
+\section{TODO-Motivation}\label{motivation}
 
 Motivation is to establish the conditions for interesting forms of
 directed evolution
@@ -462,7 +478,7 @@ Experimental tests
 \autocite{Faulconbridge2010}
 \end{itemize}
 
-\section{Approach}\label{approach}
+\section{TODO-Approach}\label{approach}
 
 Untangle the biological from the general in previous theory
 
@@ -490,9 +506,9 @@ Later work to remove biological specificity to provide framework for
 applying EvoEvo to ICT problems
 \end{itemize}
 
-\subsection{The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
+\subsection{TODO-The legitimate role of Simulations}\label{the-legitimate-role-of-simulations}
 
-\TODO{ rewrite, properly mark quotations + references!}
+\TODO{rewrite, properly mark quotations + references!}
 
 The field of artificial life is synonymous with simulation
 \autocite[chap.2]{Aicardi2010}. In other forms of science however
@@ -711,7 +727,7 @@ matches the real X; for example, demonstrating successful behaviour in
 the same physical situation as the animal.}{\autocite[278]{Webb2009}}
 The strength of our belief depends on the degree of similarity.
 
-\subsection{Alternative approaches}\label{alternative-approaches}
+\subsection{TODO-Alternative approaches}\label{alternative-approaches}
 
 From Origins-of-Life (OOL)
 
@@ -1426,9 +1442,9 @@ Best measures for both may be Turing-like--if it quacks like a
 duck\ldots{}comparison to existing life or human intelligence
 \end{itemize}
 
-\section{Guide to this work}\label{guide-to-this-work}
+\section{TODO-Guide to this work}\label{guide-to-this-work}
 
-\subsection{Start with evolution}\label{start-with-evolution}
+\subsection{TODO-Start with evolution}\label{start-with-evolution}
 
 In the Spencerian sense of progressive improvement, rather than
 necessarily any particular mechanism (e.g., evolution by natural
@@ -1445,7 +1461,7 @@ that it refers to organisms.'' \autocite{Griesemer2005}
 
 ENS as ``a theory of descent with modification''
 
-\subsection{Preliminary Investigation}\label{preliminary-investigation}
+\subsection{TODO-Preliminary Investigation}\label{preliminary-investigation}
 
 ToyWorld
 
@@ -1463,9 +1479,9 @@ Too biological
 Too special-purpose
 \end{itemize}
 
-\subsection{Evolutionary Potential}\label{evolutionary-potential}
+\subsection{TODO-Evolutionary Potential}\label{evolutionary-potential}
 
-\subsection{Search for Creativity}\label{search-for-creativity}
+\subsection{TODO-Search for Creativity}\label{search-for-creativity}
 
 \section{Previous publications}\label{previous-publications}
 
@@ -1474,7 +1490,7 @@ and material from \cref{model-validation} in \cite{Young2013}.
 
 ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
-\section{Contributions}\label{contributions}
+\section{TODO-Contributions}\label{contributions}
 
 \begin{enumerate}
 \item
@@ -1487,9 +1503,9 @@ OEE without necessarily showing OEE (which is hard to measure and
 prove)
 \end{enumerate}
 
-\part{Evolutionary Potential}
+\part{TODO-Evolutionary Potential}
 
-\chapter{Introduction}
+\chapter{TODO-Introduction}
 
 In this section we explore the following research questions:
 
@@ -1662,7 +1678,7 @@ Corollary--addition and removal of elements
 \item Experimental support for ability of a copy mechanism with adjustable fidelity to auto-adjust to changing environmental conditions
 \end{itemize}
 
-\chapter{Synthesis based on first principles}\label{synthesis-based-on-first-principles}
+\chapter{TODO-Synthesis based on first principles}\label{synthesis-based-on-first-principles}
 
 \section{Variation (and Inheritance)}\label{variation-and-inheritance}
 
@@ -1742,9 +1758,9 @@ be endogenous?
 Reproduction follows from replication--no need to choose degree of
 similarity, emergent from lower level rules
 
-\chapter{Synthesis from a general evolutionary model}\label{synthesis-from-a-general-evolutionary-model}
+\chapter{TODO-Synthesis from a general evolutionary model}\label{synthesis-from-a-general-evolutionary-model}
 
-Reformulate as causal reading
+\TODO{Reformulate as causal reading}
 
 \autocite{Bourrat2015} showed that inheritance bias (correlation in trait between parent and offspring) increases over time
 
@@ -1870,7 +1886,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
+\chapter[TODO-Test under fixed conditions]{TODO-Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 To test our hypothesis, we turn to experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
@@ -2088,6 +2104,14 @@ Returning then to our examination of fitness-independent and fitness-based upper
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
+%% begin.rcode
+% df_fixed <- subset(df_low, environment_change_frequency == 0)
+% df_completed <- subset(df_fixed, gen==500)
+%% end.rcode
+Data is taken from the Low Start dataset, made up of \rinline{nrow(na.omit(df_fixed))} runs under fixed conditions, of which we are exclusively concerned with the subset of \rinline{nrow(na.omit(df_completed))} runs that reached completion at \rinline{max(df_d9f18e2$gen)} generations.
+
+The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\rinline{nrow(df_completed[df_completed$truncate==-1,])} runs) and fitness-based (\rinline{nrow(df_completed[df_completed$truncate==1,])}), indicating that the two methods at least appear comparable with respect to their affect on population size.
+
 \subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
 The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
@@ -2100,7 +2124,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 	\caption{Fitness-Independent Restriction()}
 \end{function}
 
-If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
+%If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
 
 \subsubsection{Fitness-based selection}
 
@@ -2116,19 +2140,19 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 \end{function}
 
 %% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'
-% df$temp <- factor(df$truncate, labels=c("Independent","Dependent"))
-% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
-% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df, xlab="",ylab="")
-% cp <- qplot(temp, ave_cor, geom="boxplot", data=df, xlab="",ylab="")
-% dp <- qplot(temp, ave_fit, geom="boxplot", data=df, xlab="",ylab="")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity")
+% df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
+% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df_completed, xlab="Fidelity", ylab="Density")
+% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df_completed, xlab="Fitness", ylab="Density")
+% cp <- qplot(temp, ave_cor, geom="boxplot", data=df_completed, xlab="",ylab="Fidelity")
+% dp <- qplot(temp, ave_fit, geom="boxplot", data=df_completed, xlab="",ylab="Fitness")
+% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
 %%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_1 <- subset(df,truncate==-1)
-% df_2 <- subset(df,truncate==1)
-% ap <- myqqplot(sort(df_1$ave_cor), sort(df_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
-% bp <- myqqplot(sort(df_1$ave_fit), sort(df_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+% df_completed_1 <- subset(df_completed,truncate==-1)
+% df_completed_2 <- subset(df_completed,truncate==1)
+% ap <- myqqplot(sort(df_completed_1$ave_cor), sort(df_completed_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
+% bp <- myqqplot(sort(df_completed_1$ave_fit), sort(df_completed_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
@@ -2310,7 +2334,7 @@ As in the Low Start case, the clusters are driven by the value of the factor \te
 
 % Again, H$_0$ can be rejected (F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}) and H$_1$, that fidelity increases even under high-start conditions, can be accepted.
 
-\chapter[Test under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+\chapter[TODO-Test under changing conditions]{TODO-Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2436,7 +2460,7 @@ From a visual inspection, we conclude that the results appear very similar for u
 % ggplot(df_4915024_final, aes(x=distribution,y=ave_fit)) + geom_boxplot() + labs(x="Distribution", y="Final average fitness")
 %% end.rcode
 
-\chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
+\chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}
 	
@@ -2467,7 +2491,7 @@ From a visual inspection, we conclude that the results appear very similar for u
 
 Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("-1"), for example in \cref{low-start-case-analysis} and \cref{high-start-case-analysis}.
 	
-\chapter{Conclusions}
+\chapter{TODO-Conclusions}
 
 Given:\newline
 Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
@@ -4349,9 +4373,9 @@ The most significant limitation of our analysis overall is that the values chose
 
 \TODO{Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...}
 
-\part{The Search for Creativity}\label{the-search-for-creativity}
+\part{TODO-The Search for Creativity}\label{the-search-for-creativity}
 
-\chapter{Introduction}
+\chapter{TODO-Introduction}
 
 The parameters themselves become endogenized, in the case of \emph{Fitness} into an implicit relative fitness and for \emph{Fidelity} into the outcome of the copying/variation mechanism.
 
@@ -4526,7 +4550,7 @@ Local entropy (implied by Adami2015)
 Measure of OEE -
 http://link.springer.com/article/10.1007\%2Fs11084-012-9309-y
 
-\chapter{Discussion and Conclusions}\label{discussion-and-conclusions}
+\chapter{TODO-Discussion and Conclusions}\label{discussion-and-conclusions}
 
 We have shown that:
 \begin{itemize}

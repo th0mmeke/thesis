@@ -2153,10 +2153,10 @@ It also recognizes that in both Evolutionary Computation and natural populations
 %% end.rcode
 
 %% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_completed_1 <- subset(df_completed,temp=="Independent")
-% df_completed_2 <- subset(df_completed,temp=="Dependent")
-% ap <- myqqplot(sort(df_completed_1$ave_cor), sort(df_completed_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
-% bp <- myqqplot(sort(df_completed_1$ave_fit), sort(df_completed_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+% df_independent <- subset(df_completed,temp=="Independent")
+% df_dependent <- subset(df_completed,temp=="Dependent")
+% ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
+% bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
@@ -2165,8 +2165,8 @@ It also recognizes that in both Evolutionary Computation and natural populations
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
 %% begin.rcode kstest, warning=FALSE, echo=FALSE 
-x_cor <- ks.test(df_completed_1$ave_cor, df_completed_2$ave_cor)
-x_fit <- ks.test(df_completed_1$ave_fit, df_completed_2$ave_fit)
+x_cor <- ks.test(df_independent$ave_cor, df_dependent$ave_cor)
+x_fit <- ks.test(df_independent$ave_fit, df_dependent$ave_fit)
 %% end.rcode
 
 Applying a two-sample Kolmogorov-Smirnov test to determine if the results for each method are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{round(x_cor$p.value,2)} and for pop. mean fitness, approx. p-value=\rinline{round(x_fit$p.value,2)}) to reject the null hypothesis, confirmed by visual inspection of \cref{fig:limitcomparisonplots} and \cref{fig:limitqqplots}. The distributions produced by the two methods are different for both average fidelity and average fitness.
@@ -2225,6 +2225,7 @@ Based on preliminary runs, we begin with an initial estimate of 10 replicates fo
 \section{Results and discussion}\label{analysis}
 
 %% begin.rcode
+% df <- df_independent
 % summary(df)
 %% end.rcode
 
@@ -2255,7 +2256,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing on the left-hand side an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final average fitness ($\\overline{fitness}_{end}$)'
 % ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2263,7 +2264,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
-A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
+A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
 % ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2273,11 +2274,11 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity (\cref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}). Child and parent fidelities are related by \textbf{Distribution} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
+By inspection, all runs appear to have resulted in an increase in fidelity from the initial range of $[0, 0.3]$ (\cref{fig:lowstart}) but only some approach or reach 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}), and those that did not had a \textbf{Correlate Fidelity} value of -1. 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, correlated.
 
-The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
+The second test examines the change in the \gls{sd} of \emph{Fidelity} -- by hypothesis, in an unchanging environment, $\sigma{fidelity}$ should decrease over time.
 
 \begin{itemize}[label={}]
 	\item H$_0$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} >= 0$, for all factor values.
@@ -2285,6 +2286,7 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 \end{itemize}
 
 \TODO{ complete analysis}
+
 
 \subsubsection{Factor significance and interactions}
 

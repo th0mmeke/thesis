@@ -2085,12 +2085,14 @@ The first approach is to take a random sample of $n$ elements from the populatio
 
 It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
 
-Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (where $\mu$ is examined for both population mean fitness and fidelity) :
+Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (examined for both population mean fitness and fidelity) :
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\mu_{limited} = \mu_{unlimited}$
-	\item H$_1$: $\mu_{limited} \ne \mu_{unlimited}$
+	\item H$_0$: the two samples are drawn from the same continuous distribution
+	\item H$_1$: the two samples are not drawn from the same continuous distribution
 \end{itemize}
+
+We use a standard two-sample Kolmogorov-Smirnov test to test the similarity between the distributions.
 
 
 \begin{algorithm}
@@ -2104,10 +2106,11 @@ Returning then to our examination of fitness-independent and fitness-based upper
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-%% begin.rcode
+%% begin.rcode echo=FALSE
 % df_fixed <- subset(df_low, environment_change_frequency == 0)
 % df_completed <- subset(df_fixed, gen==500)
 %% end.rcode
+
 Data is taken from the Low Start dataset, made up of \rinline{nrow(na.omit(df_fixed))} runs under fixed conditions, of which we are exclusively concerned with the subset of \rinline{nrow(na.omit(df_completed))} runs that reached completion at \rinline{max(df_d9f18e2$gen)} generations.
 
 The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\rinline{nrow(df_completed[df_completed$truncate==-1,])} runs) and fitness-based (\rinline{nrow(df_completed[df_completed$truncate==1,])}), indicating that the two methods at least appear comparable with respect to their affect on population size.
@@ -2129,6 +2132,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 \subsubsection{Fitness-based selection}
 
 The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+It also recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and fitness determines the selection.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -2148,11 +2152,11 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
-%%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_completed_1 <- subset(df_completed,truncate==-1)
-% df_completed_2 <- subset(df_completed,truncate==1)
-% ap <- myqqplot(sort(df_completed_1$ave_cor), sort(df_completed_2$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
-% bp <- myqqplot(sort(df_completed_1$ave_fit), sort(df_completed_2$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
+% df_independent <- subset(df_completed,temp=="Independent")
+% df_dependent <- subset(df_completed,temp=="Dependent")
+% ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
+% bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
 % grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %% end.rcode
 
@@ -2160,13 +2164,25 @@ The fitness-based population limit is based on \emph{truncation} from \cite[124]
 %independent continuous random samples where the underlying distributions
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-% Applying a \rinline{x_cor['method']} to determine if the truncated and untruncated results for population mean fidelity are taken from the same distribution provides strong evidence (for population mean fidelity, p-value=\rinline{x_cor['p.value']} and for pop. mean fitness, p-value=\rinline{x_fit['p.value']}) to reject the null hypothesis that $\mu_{truncated} = \mu_{untruncated}$.
+%% begin.rcode kstest, warning=FALSE, echo=FALSE 
+x_cor <- ks.test(df_independent$ave_cor, df_dependent$ave_cor)
+x_fit <- ks.test(df_independent$ave_fit, df_dependent$ave_fit)
+%% end.rcode
 
-This however recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and therefore fitness is fundamental to the selection. \TODO{finish this discussion}
+Applying a two-sample Kolmogorov-Smirnov test to determine if the results for each method are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{round(x_cor$p.value,2)} and for pop. mean fitness, approx. p-value=\rinline{round(x_fit$p.value,2)}) to reject the null hypothesis, confirmed by visual inspection of \cref{fig:limitcomparisonplots} and \cref{fig:limitqqplots}. The distributions produced by the two methods are different for both average fidelity and average fitness.
+
+From these tests it is clear that the two methods do not have statistically similar effects for both fidelity and fitness, and hence we cannot find support for the contention that our conclusions in the hypothesis tests can be made without extensive consideration of limit method. Method is important, and our conclusions are dependent on the method chosen. 
+
+This conclusion of course is based on a comparison of two particular methods; a third, fitness-based, method may produce distributions that are statistically similar to those of, say, sampling. In which case we might conclude that any conclusions drawn on the basis of sampling would also extend to this third method. This extension however is left for future work.
+
+Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we use fitness-independent sampling rather than fitness based restriction in all later experiments.
 
 \section{Experimental design}\label{experimental-design}
 
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis. 
+Our experimental goals are to assess the hypothesis and to examine the influence of factors - essentially, we're conducting a form of exploration, and so would like a design that allows for a little open-ended questioning of the model. Although several parameters are discrete, at this stage the main ones can be reduced to a set of A/B alternatives, or in the language of experimental design, two-level factors. Our design should allow us to examine the effects of the factors, and also ideally their interactions, and so a form of factorial design is appropriate.
+
+In fact we use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
+
 
 \subsection{Response variables}\label{response-variables}
 
@@ -2178,7 +2194,7 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{Fid
 
 A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ Fractional Factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and total number of runs required, given our goals.
 
-\TODO{Now using two four-level factors => four two-level so strictly a nine factor design. But run as a hybrid, where did runs for all combinations of the four-level factors.}
+The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be simply extended to include 4-level factors (\cite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by simply running each combination of the four-level factors against a fractional-factorial design for the remaining factors in a hybrid full-fractional design.
 
 \begin{table}
 \begin{center}
@@ -2199,6 +2215,7 @@ Correlate Fidelity&       	2&	false or true\\
 \end{center}
 \end{table}
 
+
 \paragraph{Other settings}\label{other-settings}
 
 The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
@@ -2208,6 +2225,7 @@ Based on preliminary runs, we begin with an initial estimate of 10 replicates fo
 \section{Results and discussion}\label{analysis}
 
 %% begin.rcode
+% df <- df_independent
 % summary(df)
 %% end.rcode
 
@@ -2238,7 +2256,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing in the top line an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The middle line shows equivalent plots for final average fitness ($\\overline{fitness}_{end}$.) The final line shows the difference $\\overline{fidelity}_{end}-\\overline{fidelity}_{start}$, which by hypothesis \\autoref{hypothesis-2}, should always be greater than zero.'
+%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing on the left-hand side an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final average fitness ($\\overline{fitness}_{end}$)'
 % ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 % cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2246,7 +2264,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 %% end.rcode
 
-A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also non-normal, but less so than fidelity. This restricts the analysis to tests that do not require assumptions of normality.
+A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
 %% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
 % ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2256,11 +2274,11 @@ A simple visual inspection of the results in \cref{fig:lowstart} reveals that th
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
 
-By inspection, all runs resulted in increased fidelity (\cref{fig:lowstart}), but only some showed an increase towards 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}). Child and parent fidelities are related by \textbf{Distribution} (\ie the factor \textbf{Correlate Fidelity} is +1) for all runs where  $\overline{fidelity}_{end} > 0.8$, and effectively unrelated (\textbf{Correlate Fidelity} is -1) for all others. 
+By inspection, all runs appear to have resulted in an increase in fidelity from the initial range of $[0, 0.3]$ (\cref{fig:lowstart}) but only some approach or reach 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}), and those that did not had a \textbf{Correlate Fidelity} value of -1. 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, correlated.
 
-The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time -- by hypothesis, $\sigma{fidelity}$ should decrease.
+The second test examines the change in the \gls{sd} of \emph{Fidelity} -- by hypothesis, in an unchanging environment, $\sigma{fidelity}$ should decrease over time.
 
 \begin{itemize}[label={}]
 	\item H$_0$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} >= 0$, for all factor values.
@@ -2268,6 +2286,7 @@ The second test is to examine the \gls{sd} of \emph{Fidelity} changes over time 
 \end{itemize}
 
 \TODO{ complete analysis}
+
 
 \subsubsection{Factor significance and interactions}
 
@@ -2314,7 +2333,6 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 \item H$_0$: fidelity remains the same over a run, for all factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
 \item H$_1$: fidelity changes over a run, given some factor values, or \newline $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert > 0$
 \end{itemize}
-
 
 By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bimodal with a cluster around +0.3, and another between -0.1 and -0.5, approximately.
 

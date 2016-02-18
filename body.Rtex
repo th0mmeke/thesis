@@ -29,7 +29,9 @@
 % df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
 % df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
 % df_low <- readRDS('results/results-dbb85db63.rds')
-% df <- subset(df_low, environment_change_frequency==0 & gen==500)
+% df <- subset(df_low, environment_change_frequency==0 & gen==500) # all low-start, fixed environment runs that completed, and only the last generation
+% completing_factors <- unique(interaction(Filter(is.factor,df_low[df_low$gen==500,]))) # the factor levels that resulted in 500 generations
+% df_complete <- df_low[interaction(Filter(is.factor,df_low)) %in% completing_factors,] # raw data in long format - all low-start, fixed environment runs that completed
 %% end.rcode
 
 % df_4915024 <- load_dfb('results/results-4915024.data')
@@ -58,6 +60,10 @@
 % levels(df_0101$p_reproduce) <- c(0,1)
 % levels(df_0101$p_selection) <- c(0,1)
 % saveRDS(rbind(df_0101,df_013366, df_336601, df_33663366),'results/dbb85db63.rds')
+
+% # Filter(Negate(is.factor),z[[gen]]) # quantile values for each combination of factor levels at gen
+% # levels <- unique(interaction(Filter(is.factor,y))) # all unique combinations of factor levels in y
+
 
 % DATASETS
 % HIGHTSTART
@@ -2266,13 +2272,14 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-%% begin.rcode lowstartcorrelation, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
+%% begin.rcode lowstartfactors, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
 % ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 % grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 %% end.rcode
+
 
 By inspection, all runs appear to have resulted in an increase in fidelity from the initial range of $[0, 0.3]$ (\cref{fig:lowstart}) but only some approach or reach 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}), and those that did not had a \textbf{Correlate Fidelity} value of -1. 
 
@@ -2285,8 +2292,36 @@ The second test examines the change in the \gls{sd} of \emph{Fidelity} -- by hyp
 	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
-\TODO{ complete analysis}
+\TODO{make sure ranges are correct in figure lowstartsdmean}
+%% begin.rcode lowstartsdmean, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for both levels of \\textbf{Correlate Fidelity}. The bottom row shows the same for the mean rather than the standard deviation.'
+%ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+%bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+%cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
+%dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
+%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
+%% end.rcode
 
+%% begin.rcode lowstartranges, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for all levels of all factors. The bottom row shows the same for the mean rather than the standard deviation.'
+%ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+%bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+%cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
+%dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
+%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
+%% end.rcode
+
+
+
+%% begin.rcode lowstartranges2, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Range of 25% to 75% quartiles for \\gls{sd} for +1 setting for factor \\textbf{Correlate Fidelity}'
+% y <- df_complete
+% #z <- by(y,y$gen,function(x) {aggregate(x$sd_cor, Filter(is.factor,x), quantile)}) # for each generation, get quantiles for sd_cor for each factor combination
+% z<-by(y,y$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # same, but just aggregated by correlation_correlation
+% z1<-apply(z,1,function(x){c(x[[1]][[2]][[2,2]],x[[1]][[2]][[2,3]],x[[1]][[2]][[2,4]])}) # correlation_correlation == -1
+% z1<-apply(z,1,function(x){c(x[[1]][[2]][[1,2]],x[[1]][[2]][[1,3]],x[[1]][[2]][[1,4]])}) # correlation_correlation == 1
+% z2<-z1[1:3,1:501]
+% z3<-cbind(1:501,z2[1,],z2[2,],z2[3,])
+%z4 <- as.data.frame(z3)
+% ggplot(z4,aes(V1,V2,V3)) + geom_ribbon(data=z4,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
+%% end.rcode
 
 \subsubsection{Factor significance and interactions}
 

@@ -91,7 +91,7 @@ def init_population(n, low_start):
 
 def main():
 
-    low_start = False
+    low_start = True
     f = open("results.data", "w")
 
     # Write initial header line to file

@@ -1,38 +1,38 @@
-%% begin.rcode setup, include=FALSE
-% library(knitr)
-% library(cowplot) # styling of plots, extension of ggplot2
-% library(gridExtra) # grid layouts for ggplot2
-% library(lattice) # needed for bwplot etc
-% opts_chunk$set(fig.path='generated_figures/')
-% load_dfb <- function(t) {
-%   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
-%   df <- read.csv(t, colClasses=colClasses)
-%   df
-% }
-% load_toyworld <- function(f){
-%	colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
-%	df <- read.csv(f,colClasses=colClasses)
-%	df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
-%	df
-% }
-% myqqplot <- function(x,y,...) {
-%    sx <- sort(x)
-%    sy <- sort(y)
-%    lenx <- length(sx)
-%    leny <- length(sy)
-%    if (leny < lenx) 
-%	    sx <- approx(1L:lenx, sx, n = leny)$y
-%    if (leny > lenx) 
-%	    sy <- approx(1L:leny, sy, n = lenx)$y
-%	qplot(sx,sy,...)
-% }
-% df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
-% df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
-% df_low <- readRDS('results/results-dbb85db63.rds')
-% df <- subset(df_low, environment_change_frequency==0 & gen==500) # all low-start, fixed environment runs that completed, and only the last generation
-% completing_factors <- unique(interaction(Filter(is.factor,df_low[df_low$gen==500,]))) # the factor levels that resulted in 500 generations
-% df_complete <- df_low[interaction(Filter(is.factor,df_low)) %in% completing_factors,] # raw data in long format - all low-start, fixed environment runs that completed
-%% end.rcode
+<<setup, include=FALSE>>=
+ library(knitr)
+ library(cowplot) # styling of plots, extension of ggplot2
+ library(gridExtra) # grid layouts for ggplot2
+ library(lattice) # needed for bwplot etc
+ opts_chunk$set(fig.path='generated_figures/')
+ load_dfb <- function(t) {
+   colClasses <- c("numeric","numeric","integer","integer","numeric","numeric","factor","factor","factor","factor","factor","factor","factor","factor")
+   df <- read.csv(t, colClasses=colClasses)
+   df
+ }
+ load_toyworld <- function(f){
+	colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
+	df <- read.csv(f,colClasses=colClasses)
+	df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
+	df
+ }
+ myqqplot <- function(x,y,...) {
+    sx <- sort(x)
+    sy <- sort(y)
+    lenx <- length(sx)
+    leny <- length(sy)
+    if (leny < lenx) 
+	    sx <- approx(1L:lenx, sx, n = leny)$y
+    if (leny > lenx) 
+	    sy <- approx(1L:leny, sy, n = lenx)$y
+	qplot(sx,sy,...)
+ }
+ df_d9f18e2 <- load_dfb('results/results-d9f18e2.data') # unbounded dataset
+ df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
+ df_low <- readRDS('results/results-dbb85db63.rds')
+ df <- subset(df_low, environment_change_frequency==0 & gen==500) # all low-start, fixed environment runs that completed, and only the last generation
+ completing_factors <- unique(interaction(Filter(is.factor,df_low[df_low$gen==500,]))) # the factor levels that resulted in 500 generations
+ df_complete <- df_low[interaction(Filter(is.factor,df_low)) %in% completing_factors,] # raw data in long format - all low-start, fixed environment runs that completed
+@
 
 % df_4915024 <- load_dfb('results/results-4915024.data')
 % df_041b62df <- load_dfb('results/results-041b62df.data')
@@ -2072,14 +2072,16 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 
 \subsection{Unbounded populations}
 
-%% begin.rcode unboundedplot, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'
-% attach(df_d9f18e2_fixed)
-% df_max <- aggregate(df_d9f18e2_fixed$gen,list(p_reproduce, p_selection,n_offspring,truncate,distribution,fitness_correlation, correlation_correlation, environment_change_frequency),max)
-% detach(df_d9f18e2_fixed)
-% ap <- ggplot(df_max, aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
-% bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
-% grid.arrange(ap,bp,nrow=1,ncol=2)
-%% end.rcode
+% EXPERIMENT 1 - UNBOUNDED POPULATIONS
+
+<<unboundedplot, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
+ attach(df_d9f18e2_fixed)
+ df_max <- aggregate(df_d9f18e2_fixed$gen,list(p_reproduce, p_selection,n_offspring,truncate,distribution,fitness_correlation, correlation_correlation, environment_change_frequency),max)
+ detach(df_d9f18e2_fixed)
+ ap <- ggplot(df_max, aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
+ bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
+ grid.arrange(ap,bp,nrow=1,ncol=2)
+@
 
 Under these initial conditions, no experiment without an upper population bound continued for more than a handful of generations before the population size reached more than ten times the initial size. It is clear from \cref{fig:unboundedplot} that some form of upper bound is necessary.
 
@@ -2112,10 +2114,10 @@ We use a standard two-sample Kolmogorov-Smirnov test to test the similarity betw
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-%% begin.rcode echo=FALSE
-% df_fixed <- subset(df_low, environment_change_frequency == 0)
-% df_completed <- subset(df_fixed, gen==500)
-%% end.rcode
+<<echo=FALSE>>=
+ df_fixed <- subset(df_low, environment_change_frequency == 0)
+ df_completed <- subset(df_fixed, gen==500)
+@
 
 Data is taken from the Low Start dataset, made up of \rinline{nrow(na.omit(df_fixed))} runs under fixed conditions, of which we are exclusively concerned with the subset of \rinline{nrow(na.omit(df_completed))} runs that reached completion at \rinline{max(df_d9f18e2$gen)} generations.
 
@@ -2149,31 +2151,31 @@ It also recognizes that in both Evolutionary Computation and natural populations
 	\caption{Fitness-based Restriction()}
 \end{function}
 
-%% begin.rcode limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'
-% df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
-% ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df_completed, xlab="Fidelity", ylab="Density")
-% bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df_completed, xlab="Fitness", ylab="Density")
-% cp <- qplot(temp, ave_cor, geom="boxplot", data=df_completed, xlab="",ylab="Fidelity")
-% dp <- qplot(temp, ave_fit, geom="boxplot", data=df_completed, xlab="",ylab="Fitness")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-%% end.rcode
+<<limitcomparisonplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'>>=
+ df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
+ ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df_completed, xlab="Fidelity", ylab="Density")
+ bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df_completed, xlab="Fitness", ylab="Density")
+ cp <- qplot(temp, ave_cor, geom="boxplot", data=df_completed, xlab="",ylab="Fidelity")
+ dp <- qplot(temp, ave_fit, geom="boxplot", data=df_completed, xlab="",ylab="Fitness")
+ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
 
-%% begin.rcode limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'
-% df_independent <- subset(df_completed,temp=="Independent")
-% df_dependent <- subset(df_completed,temp=="Dependent")
-% ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
-% bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
-% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
-%% end.rcode
+<<limitqqplots, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'>>=
+ df_independent <- subset(df_completed,temp=="Independent")
+ df_dependent <- subset(df_completed,temp=="Dependent")
+ ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
+ bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+ grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
+@
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two
 %independent continuous random samples where the underlying distributions
 %are known to have essentially the same shape, or a Friedman test where the samples might be related (\eg in block %experiment designs) and the objective is to distinguish differences between treatments.
 
-%% begin.rcode kstest, warning=FALSE, echo=FALSE 
+<<kstest, warning=FALSE, echo=FALSE >>=
 x_cor <- ks.test(df_independent$ave_cor, df_dependent$ave_cor)
 x_fit <- ks.test(df_independent$ave_fit, df_dependent$ave_fit)
-%% end.rcode
+@
 
 Applying a two-sample Kolmogorov-Smirnov test to determine if the results for each method are taken from the same distribution provides strong evidence (for population mean fidelity, approx. p-value=\rinline{round(x_cor$p.value,2)} and for pop. mean fitness, approx. p-value=\rinline{round(x_fit$p.value,2)}) to reject the null hypothesis, confirmed by visual inspection of \cref{fig:limitcomparisonplots} and \cref{fig:limitqqplots}. The distributions produced by the two methods are different for both average fidelity and average fitness.
 
@@ -2233,7 +2235,7 @@ Based on preliminary runs, we begin with an initial estimate of 10 replicates fo
 %% begin.rcode
 % df <- df_independent
 % summary(df)
-%% end.rcode
+@
 
 This analysis has two goals: 
 
@@ -2262,23 +2264,23 @@ The first test therefore is to examine if inheritance emerges from low-fidelity/
 		$\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-%% begin.rcode lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing on the left-hand side an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final average fitness ($\\overline{fitness}_{end}$)'
-% ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-% cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
-% dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-%% end.rcode
+<<lowstart, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Summary results for Low Start case, showing on the left-hand side an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final average fitness ($\\overline{fitness}_{end}$)'>>=
+ ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+ bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness")+theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+ cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
+ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
+ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
 
 A simple visual inspection of the results in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-%% begin.rcode lowstartfactors, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'
-% ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
-%% end.rcode
+<<lowstartfactors, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
+ ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
+@
 
 
 By inspection, all runs appear to have resulted in an increase in fidelity from the initial range of $[0, 0.3]$ (\cref{fig:lowstart}) but only some approach or reach 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartcorrelation}), and those that did not had a \textbf{Correlate Fidelity} value of -1. 
@@ -2293,48 +2295,48 @@ The second test examines the change in the \gls{sd} of \emph{Fidelity} -- by hyp
 \end{itemize}
 
 \TODO{make sure ranges are correct in figure lowstartsdmean}
-%% begin.rcode lowstartsdmean, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for both levels of \\textbf{Correlate Fidelity}. The bottom row shows the same for the mean rather than the standard deviation.'
-%ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
-%bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
-%cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
-%dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
-%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
-%% end.rcode
+<<lowstartsdmean, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for both levels of \\textbf{Correlate Fidelity}. The bottom row shows the same for the mean rather than the standard deviation.'>>=
+ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
+dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(correlation_correlation))) + stat_smooth() + labs(x="Generation", y="Mean")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
+@
 
-%% begin.rcode lowstartranges, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for all levels of all factors. The bottom row shows the same for the mean rather than the standard deviation.'
-%ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
-%bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
-%cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
-%dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
-%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
-%% end.rcode
+<<lowstartranges, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for all levels of all factors. The bottom row shows the same for the mean rather than the standard deviation.'>>=
+ap <- ggplot(dfa,aes(x=gen,y=sd_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+bp <- ggplot(dfa,aes(x=gen,y=sd_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Standard Deviation")
+cp <- ggplot(dfa,aes(x=gen,y=ave_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
+dp <- ggplot(dfa,aes(x=gen,y=ave_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + stat_smooth() + labs(x="Generation", y="Mean")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
+@
 
 
 
-%% begin.rcode lowstartranges2, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Range of 25% to 75% quartiles for \\gls{sd} for +1 setting for factor \\textbf{Correlate Fidelity}'
-% y <- df_complete
-% #z <- by(y,y$gen,function(x) {aggregate(x$sd_cor, Filter(is.factor,x), quantile)}) # for each generation, get quantiles for sd_cor for each factor combination
-% z<-by(y,y$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # same, but just aggregated by correlation_correlation
-% z1<-apply(z,1,function(x){c(x[[1]][[2]][[2,2]],x[[1]][[2]][[2,3]],x[[1]][[2]][[2,4]])}) # correlation_correlation == -1
-% z1<-apply(z,1,function(x){c(x[[1]][[2]][[1,2]],x[[1]][[2]][[1,3]],x[[1]][[2]][[1,4]])}) # correlation_correlation == 1
-% z2<-z1[1:3,1:501]
-% z3<-cbind(1:501,z2[1,],z2[2,],z2[3,])
-%z4 <- as.data.frame(z3)
-% ggplot(z4,aes(V1,V2,V3)) + geom_ribbon(data=z4,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
-%% end.rcode
+<<lowstartranges2, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Range of 25% to 75% quartiles for \\gls{sd} for +1 setting for factor \\textbf{Correlate Fidelity}'>>=
+ y <- df_complete
+ #z <- by(y,y$gen,function(x) {aggregate(x$sd_cor, Filter(is.factor,x), quantile)}) # for each generation, get quantiles for sd_cor for each factor combination
+ z<-by(y,y$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # same, but just aggregated by correlation_correlation
+ z1<-apply(z,1,function(x){c(x[[1]][[2]][[2,2]],x[[1]][[2]][[2,3]],x[[1]][[2]][[2,4]])}) # correlation_correlation == -1
+ z1<-apply(z,1,function(x){c(x[[1]][[2]][[1,2]],x[[1]][[2]][[1,3]],x[[1]][[2]][[1,4]])}) # correlation_correlation == 1
+ z2<-z1[1:3,1:501]
+ z3<-cbind(1:501,z2[1,],z2[2,],z2[3,])
+z4 <- as.data.frame(z3)
+ ggplot(z4,aes(V1,V2,V3)) + geom_ribbon(data=z4,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
+@
 
 \subsubsection{Factor significance and interactions}
 
-%% begin.rcode lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'
-% df_test <- df[df$correlation_correlation == 1,]
-% m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
-% x <- anova(m0)
-% ap <- qplot(p_reproduce, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
-% bp <- qplot(p_selection, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
-% cp <- qplot(n_offspring, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
-% dp <- qplot(distribution, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
-% grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-%% end.rcode
+<<lowstartfactorinfluence, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='.'>>=
+ df_test <- df[df$correlation_correlation == 1,]
+ m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df_test)
+ x <- anova(m0)
+ ap <- qplot(p_reproduce, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Reproduction",ylab="")
+ bp <- qplot(p_selection, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Selection",ylab="")
+ cp <- qplot(n_offspring, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Offspring",ylab="")
+ dp <- qplot(distribution, ave_cor, geom=c("boxplot","jitter"), data=df_test, xlab="Distribution",ylab="")
+ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
 % significant with F = \rinline{round(x['F value'],2)} and p-value \textless{} \rinline{round(x['Pr(>F)'],2)}.
 
 Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $f()$.
@@ -2352,12 +2354,12 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
 \end{itemize}
 
-%% begin.rcode distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'
-% df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-% ap <- qplot(distribution, ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
-% bp <- qplot(distribution, ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
-% grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
-%% end.rcode
+<<distributionfunction, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Comparison of Gaussian and Uniform distributions for function $f()$.'>>=
+ df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+ ap <- qplot(distribution, ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
+ bp <- qplot(distribution, ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
+ grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
+@
 
 
 \subsection{High start case}\label{high-start-case-analysis}
@@ -2373,15 +2375,15 @@ By inspection of \cref{fig:highstart}, the fidelity measure is again strongly bi
 
 As in the Low Start case, the clusters are driven by the value of the factor \textbf{Correlate Fidelity}. Fidelity decreased in this High Start case when \textbf{Correlate Fidelity} was +1, and the resulting correlation values were similar to those with \textbf{Correlate Fidelity} = +1 in the Low Start case .
 
-%% begin.rcode power, echo=FALSE
-%% df_high <- load_dfa("results/results_highstart.data")
-%% df_high <- df_high[df_high$truncate==1,]
-%% df_low <- load_dfa("results/results_lowstart.data")
-%% df_low <- df_low[df_low$truncate==1,]
-%% between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
-%% within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
-%% x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
-%% end.rcode
+<<power, echo=FALSE>>=
+#df_high <- load_dfa("results/results_highstart.data")
+#df_high <- df_high[df_high$truncate==1,]
+#df_low <- load_dfa("results/results_lowstart.data")
+#df_low <- df_low[df_low$truncate==1,]
+#between <- var(c(mean(df_high$response_cor),mean(df_low$response_cor)))
+#within <- mean(c(var(df_high$response_cor),var(df_low$response_cor)))
+#x <- power.anova.test(groups=2,n=dim(df_high)[1],between.var=between,within.var=within)
+@
 
 % The statistical power of the design is \rinline{x['power']} with \rinline{x['groups']} groups and \rinline{x['n']} observations per group.
 
@@ -2482,11 +2484,11 @@ As before, each run has 10 replicates of 500 generations each, with an initial p
 
 \section{Results}\label{results-1}
 
-%% begin.rcode changingenvironmentsummary, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Fidelity (left) and fitness (right) over time for four different frequencies (0, or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'
-% ecf <- factor(df_4915024_final$environment_change_frequency,levels=c(0,1,5,10))
-% ggplot(df_4915024_final, aes(x=ecf,y=ave_cor)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fidelity")
-% ggplot(df_4915024_final, aes(x=ecf,y=ave_fit)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fitness")
-%% end.rcode
+<<changingenvironmentsummary, echo=FALSE, fig.show='hold', fig.keep='last', fig.cap='Fidelity (left) and fitness (right) over time for four different frequencies (0, or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+ ecf <- factor(df_4915024_final$environment_change_frequency,levels=c(0,1,5,10))
+ ggplot(df_4915024_final, aes(x=ecf,y=ave_cor)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fidelity")
+ ggplot(df_4915024_final, aes(x=ecf,y=ave_fit)) + geom_boxplot() + labs(x="Change Frequency", y="Final average fitness")
+@
 
 \section{Analysis}\label{analysis-1}
 
@@ -2508,10 +2510,10 @@ We initially tested this by making a single change, setting $sd$ to 0.70.
 
 From a visual inspection, we conclude that the results appear very similar for uniform and gaussian.
 
-%% begin.rcode gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold'
-% ggplot(df_4915024_final, aes(x=distribution,y=ave_cor)) + geom_boxplot() + labs(x="Distribution", y="Final average fidelity")
-% ggplot(df_4915024_final, aes(x=distribution,y=ave_fit)) + geom_boxplot() + labs(x="Distribution", y="Final average fitness")
-%% end.rcode
+<<gaussian, echo=FALSE, out.width='0.45\\linewidth',fig.show='hold'>>=
+ ggplot(df_4915024_final, aes(x=distribution,y=ave_cor)) + geom_boxplot() + labs(x="Distribution", y="Final average fidelity")
+ ggplot(df_4915024_final, aes(x=distribution,y=ave_fit)) + geom_boxplot() + labs(x="Distribution", y="Final average fitness")
+@
 
 \chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
@@ -4329,13 +4331,13 @@ A view of the results is given in Table \cref{tbl:results}: reaction networks bu
 \TODO{convert to ggplot2}
 
 \TODO{convert to ggplot2}
-%% begin.rcode cyclesbypartition, echo=FALSE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'
-%	df<-load_toyworld("results/EvaluatorActualCycles.out") 
-%	par(mfrow=c(1,3),cex=0.5)
-%	plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
-%	plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle")
-%	plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Partition", ylab="Count of most common cycle")
-%% end.rcode
+<<cyclesbypartition, echo=FALSE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'>>=
+	df<-load_toyworld("results/EvaluatorActualCycles.out") 
+	par(mfrow=c(1,3),cex=0.5)
+	plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
+	plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle")
+	plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Partition", ylab="Count of most common cycle")
+@
 \label{fig:partitions}
 
 %\begin{figure}[h]
@@ -4357,13 +4359,13 @@ A view of the results is given in Table \cref{tbl:results}: reaction networks bu
 Figure \cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
 \TODO{convert to ggplot2}
-%% begin.rcode reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '
-%	df <- subset(df,df$Partition.Start != "4750")
-%	par(mfrow=c(1,3),cex=0.5)
-%	boxplot(Number.of.cycles~Product.Strategy, data=df, main="Cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
-%	boxplot(Length.of.longest.cycle~Product.Strategy, data=df, main="Cycle length by Product Strategy", names=c("Uniform","Energy"), ylab="Length of longest cycle")
-%	boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
-%% end.rcode
+<<reactantstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Reactant Strategy '>>=
+	df <- subset(df,df$Partition.Start != "4750")
+	par(mfrow=c(1,3),cex=0.5)
+	boxplot(Number.of.cycles~Product.Strategy, data=df, main="Cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
+	boxplot(Length.of.longest.cycle~Product.Strategy, data=df, main="Cycle length by Product Strategy", names=c("Uniform","Energy"), ylab="Length of longest cycle")
+	boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
+@
 
 %\begin{figure}[t]
 %\centering
@@ -4373,12 +4375,12 @@ Figure \cref{fig:cyclesbypartition} suggests that the first partition, represent
 %\end{figure}
 
 \TODO{convert to ggplot2}
-%% begin.rcode productstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Product Strategy '
-%	par(mfrow=c(1,3),cex=0.5)
-%	boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
-%	boxplot(Length.of.longest.cycle~Reactant.Strategy, data=df, main="Cycle length by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Length of longest cycle")
-%	boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
-%% end.rcode
+<<productstrategy, echo=FALSE, fig.show='hold', fig.cap='Response by Product Strategy '>>=
+	par(mfrow=c(1,3),cex=0.5)
+	boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
+	boxplot(Length.of.longest.cycle~Reactant.Strategy, data=df, main="Cycle length by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Length of longest cycle")
+	boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
+@
 
 %\begin{figure}[t]
 %\centering
@@ -4393,11 +4395,11 @@ From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to b
 We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
 \TODO{convert to ggplot2}
-%% begin.rcode reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '
-%	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
-%	boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
-%	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
-%% end.rcode
+<<reactantproductcombination, echo=FALSE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '>>=
+	boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+	boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+	boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df, log="y", ylim=c(1,6000), names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
+@
 
 %\begin{figure}[t]
 %\centering

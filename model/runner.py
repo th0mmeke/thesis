@@ -105,7 +105,7 @@ def main():
 
         factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
 
-        for environment_change_frequency in [1,5,10]:
+        for environment_change_frequency in [0]:
             experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
                 print("{0}/{1} {2} {3} {4}".format(expCount, len(experiment), environment_change_frequency, repeat, factors))

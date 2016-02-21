@@ -78,7 +78,7 @@ experiments = [
 
 factor_defns = [
     [0,	0.33, 0.66, 1.0],    # 0 = P_REPRODUCE
-    [0,	0.33, 0.66, 1.0],    # 0 = P_SELECTION
+    [0,	0.33, 0.66, 1.0],    # 1 = P_SELECTION
     [2,        5],      # 2 = N_OFFSPRING
     [False,    True],   # 3 = RESTRICTION
     [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source-(1.0-correlation), source+(1.0-correlation))))],
@@ -105,10 +105,10 @@ def main():
 
         factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
 
-        for environment_change_frequency in [0]:
-            experiment_factors = ",".join(["1" if x==1 else "-1" for x in experiment]) + "," + str(environment_change_frequency)
+        for environment_change_frequency in [0,1,5,10]:
+            experiment_factors = ",".join([str(x) for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
-                print("{0}/{1} {2} {3} {4}".format(expCount, len(experiment), environment_change_frequency, repeat, factors))
+                print("{0}:{1} {2} {3} {4}".format(expCount+1, len(experiments), environment_change_frequency, repeat, factors))
                 results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=10, environment_change_frequency=environment_change_frequency)
                 f.write("\n".join([",".join([str(x) for x in generation.values()]) + "," + experiment_factors for generation in results]))
                 f.write("\n")

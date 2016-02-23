@@ -1,12 +1,7 @@
 #!/bin/bash
 
-rm -rf ./generated_figures/*
 Rscript -e "library(knitr); knit('mythesis.Rnw')" # simply to add in the knitr latex environments and commands for later tex includes
 Rscript -e "library(knitr); knit('body.Rnw')" # doesn't add in knitr environments as only a document fragment (no documentclass)
-
-for FILE in ./generated_figures/*.pdf; do
-  pdfcrop "${FILE}" "${FILE}"
-done
 
 latexmk -pdf mythesis
 makeglossaries mythesis

@@ -81,7 +81,7 @@
 \newcommand*\LSTfont{\Small\ttfamily\lsstyle}
 
 \partfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
-\chapterfont{\color{darkgray}\sffamily\selectfont}
+\chapterfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
 \sectionfont{\color{darkgray}\sffamily\normalsize\bfseries\selectfont\uppercase}
 \subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize\uppercase}
 \subsubsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}

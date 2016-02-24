@@ -1864,7 +1864,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter{TODO-Model and initial factor screening}
+\chapter{Model and initial factor screening}
 
 To test our hypothesis, we turn to simulation and experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
@@ -1874,7 +1874,7 @@ Note that for those familiar with the design of experiments in the physical worl
 
 \section{Base model}\label{base-model}
 
-All experiments in this part of the work make use of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are made explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
+All experiments in this part of the work make use of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
 We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions.
 
@@ -1883,7 +1883,7 @@ We define a population of entities, each with two properties -- \emph{fitness} a
 	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.  There is a subtle difference between fidelity and inheritance: inheritance is the goal, while fidelity is the mechanism, expressed as the degree of correlation between two generations.
 \end{itemize}
 
-The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $derive$. 
+The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $Derive$. 
 
 The only transformation functions in the base model are for the two core elements from the Hypothesis, \emph{Selection} and \emph{Variation}, although in later sections we will add others to examine the sensitivity of the model to various influences.
 
@@ -1985,7 +1985,7 @@ At the beginning of each run we construct an initial population to some design. 
 
 \subsection{Low-start case}\label{Low-start-case}
 
-Entities in the Low-start case begin with a low initial fidelity and fitness (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
+Entities in the Low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 	\begin{center}
@@ -2006,7 +2006,7 @@ Entities in the Low-start case begin with a low initial fidelity and fitness (se
 
 \subsection{High-start case}\label{high-start-case}
 
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
+In this case, entities start with a higher initial fidelity and a greater range of fitnesses (again, for specifics see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
 
 %In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
@@ -2038,9 +2038,29 @@ df_d9f18e2 <- load_df('results/results-d9f18e2.data') # unbounded dataset
 df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
 @
 
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df_d9f18e2[1,]['pop']} elements constructed according to the Low-start case (\cref{Low-start-case}) and the maximum number of generations equals \Sexpr{max(df_d9f18e2['gen'])} generations.
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df_d9f18e2[1,]['pop']} elements constructed according to the Low-start case (\cref{Low-start-case}), and the model run with a maximum of \Sexpr{max(df_d9f18e2['gen'])} generations with 
 
-<<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
+\begin{table}
+	\begin{center}
+		\caption{Settings for upper-bound investigation}\label{tbl:factor_levels_ub}
+		\begin{tabular}{@{}llp{6cm}@{}}
+			\toprule
+			Parameter&  Number of Levels & Levels\\
+			\midrule
+			$p_{reproduction}$&       	2&	0 or 1.0\\
+			$p_{selection}$&          	2&	0 or 1.0\\
+			$n_{children}$&           	2&	2 or 5\\
+			Population Restriction&  	2&	No upper-bound, or Fitness-independent sampling\\
+			Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
+			Correlate Fitness&        	2&	false or true\\
+			Correlate Fidelity&       	2&	false or true\\
+			Starting population&		1&	Low-start settings\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+<<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
 ap <- ggplot(aggregate(df_d9f18e2_fixed$gen,Filter(is.factor,df_d9f18e2_fixed),max), aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
 grid.arrange(ap,bp,nrow=1,ncol=2)
@@ -2051,25 +2071,13 @@ Under these initial conditions, no experiment without an upper population bound 
 \subsection[Choice of limit mechanism]{Is the choice of limit mechanism significant?}
 
 % EXPERIMENT 2 - CHOICE OF LIMIT MECHANISM
-% Dataset: dbb85db63
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_low <- load_df('results/results-2860d6fe.data')
 df_completed <- subset(df_low, gen==500)
 @
 
-Given then that an upper bound is needed for practicality, this section describes two possible approaches and attempts to understand the form of the bias each introduces into the experimental results. 
-
-The first approach is to take a random sample of $n$ elements from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \cite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
-
-It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
-
-Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (examined for both population mean fitness and fidelity) :
-
-\begin{itemize}[label={}]
-	\item H$_0$: the two samples are drawn from the same continuous distribution
-	\item H$_1$: the two samples are not drawn from the same continuous distribution
-\end{itemize}
+Given then that an upper bound is needed for practicality, this section describes two possible approaches to the implementation of the \emph{Restriction} function in \ref{upper-bound-model-algorithm} and attempts to understand the form of the bias each introduces into the experimental results. 
 
 \begin{algorithm}
 	\For{each generation $\in [1\dots$number of generations]}{
@@ -2082,9 +2090,16 @@ Returning then to our examination of fitness-independent and fitness-based upper
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-Data is from a Low-start dataset, made up of \Sexpr{nrow(subset(df_low,gen==0))} runs under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
+The first approach is to take a random sample of $n$ elements from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \cite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
 
-The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\Sexpr{nrow(df_completed[df_completed['truncate']==0,])} runs) and fitness-based (\Sexpr{nrow(df_completed[df_completed['truncate']==1,])} runs), indicating that the two methods at least appear comparable with respect to their affect on population size.
+It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
+
+Returning then to our examination of fitness-independent and fitness-based upper bounds against the unlimited control case, the null, H$_0$, and alternative hypothesis, H$_1$, are as follows (examined for both population mean fitness and fidelity) :
+
+\begin{itemize}[label={}]
+	\item H$_0$: the two samples are drawn from the same continuous distribution
+	\item H$_1$: the two samples are not drawn from the same continuous distribution
+\end{itemize}
 
 \subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
@@ -2095,7 +2110,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 	\Def{Restriction(population,n)}{
 		\Return $\text{random sample of }n\text{ elements from }population$\;
 	}
-	\caption{Fitness-Independent Restriction()}
+	\caption{Restriction (Fitness-independent sampling)()}
 \end{function}
 
 %If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism. 
@@ -2103,6 +2118,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 \subsubsection{Fitness-based selection}
 
 The fitness-based population limit is based on \emph{truncation} from \cite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
+
 It also recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and fitness determines the selection.
 
 \begin{function}
@@ -2111,10 +2127,39 @@ It also recognizes that in both Evolutionary Computation and natural populations
 		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
 		\Return $\text{first }n\text{ elements from }sortedPopulation$\;
 	}
-	\caption{Fitness-based Restriction()}
+	\caption{Restriction (Fitness-based selection)()}
 \end{function}
 
-<<limitcomparisonplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final average fidelity (on the left-hand side) and final average fitness (on the right).'>>=
+\subsection{Experimental design}
+
+\begin{table}
+	\begin{center}
+		\caption{Settings for the investigation into an upper-bound mechanism}\label{tbl:factor_levels_ubmech}
+		\begin{tabular}{@{}llp{6cm}@{}}
+			\toprule
+			Parameter&  Number of Levels & Levels\\
+			\midrule
+			$p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
+			$p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
+			$n_{children}$&           	2&	2 or 5\\
+			Population Restriction&  	2&	Fitness-independent sampling, or Fitness-based selection\\
+			Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
+			Correlate Fitness&        	2&	false or true\\
+			Correlate Fidelity&       	2&	false or true\\
+			Starting population&		1&	Low-start settings, 5000 elements\\
+			Environment&				1&	Fixed\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+Data is from \Sexpr{nrow(subset(df_low,gen==0))} runs with settings given in \ref{tbl:factor_levels_ubmech} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
+
+\subsection{Results and discussion}
+
+The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\Sexpr{nrow(df_completed[df_completed['truncate']==0,])} runs) and fitness-based (\Sexpr{nrow(df_completed[df_completed['truncate']==1,])} runs), indicating that the two methods at least appear comparable with respect to their affect on population size.
+
+<<limitcomparisonplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both Final mean fidelity (on the left-hand side) and Final mean fitness (on the right).'>>=
  df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
  ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df_completed, xlab="Fidelity", ylab="Density")
  bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df_completed, xlab="Fitness", ylab="Density")
@@ -2123,11 +2168,11 @@ It also recognizes that in both Evolutionary Computation and natural populations
  grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<limitqqplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'>>=
+<<limitqqplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'>>=
  df_independent <- subset(df_completed,temp=="Independent")
  df_dependent <- subset(df_completed,temp=="Dependent")
- ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final average fidelity", xlab="Independent",ylab="Dependent")
- bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final average fitness", xlab="Independent",ylab="Dependent")
+ ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final mean fidelity", xlab="Independent",ylab="Dependent")
+ bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final mean fitness", xlab="Independent",ylab="Dependent")
  grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 @
 
@@ -2158,13 +2203,13 @@ temp <- load_df('results/results-2860d6fe.data')
 df <- subset(temp, environment_change_frequency == 0 & truncate==0)
 @
 
-We now turn to the other extreme - the effect of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from the other, sustainable, runs in the analysis. This situation does arise in our experiments: not all experiment runs completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:populationtrends}), and not all of those that did, did so with a sustainable population size.
+We now turn to the other bound - the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \ref{check-effect-of-truncation} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:populationtrends}), and of those that did, not all completed with a sustainable population size.
 
-<<populationtrends, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time.'>>=
+<<populationtrends, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left.'>>=
 ggplot(df) + geom_jitter(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
 @
 
-Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} failed to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} did so with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs ($\geq$ \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.) All other runs reached completion with a sustainable population size (in fact, with a population size at the upper bound of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.)
+Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} fail to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} complete with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs ($\geq$ \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.) All other runs reach completion with a sustainable population size (in fact, with a population size at the upper bound of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.)
 
 Inspecting the results by factor:
 \begin{enumerate}
@@ -2172,64 +2217,15 @@ Inspecting the results by factor:
 	\item Runs that complete, but with an unsustainably small population, also include $p_{selection}=0.66$. 
 \end{enumerate}
 
-From this we conclude:
+These results provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (in which case, the choice of duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
 
-\begin{enumerate}
-	\item These results provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (in which case, the choice of duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
-	\item Runs with factors associated with population extinction ($p_{reproduction}=0.33$, $n_{children}=2$ and $p_{selection}=0.66$) should be omitted from further analysis.
-\end{enumerate}
+To conclude this brief examination of lower-bounds, runs with factors associated with population extinction ($p_{reproduction}=0.33$, $n_{children}=2$ and $p_{selection}=0.66$) will be omitted from further analysis.
 
 %\TODO{results-2860d6fe.data dataset doesn't appear to have distribution==0 for these factors...unbalanced?}
 
-\section{Factor interactions}
-% EXPERIMENT 7 - Factor significance
-% Dataset: 2860d6fe
+\chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-temp <- load_df('results/results-2860d6fe.data')
-temp <- subset(temp, environment_change_frequency == 0 & truncate==0 & correlation_correlation==1)
-completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500,]))) # the factor levels that resulted in 500 generations
-df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,] # raw data in long format - all Low-start, fixed 
-@
-
-<<lowstartfactorinfluence, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Influence of factors'>>=
-#m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df)
-#x <- anova(m0)
-df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
-df$p_selection <- factor(df$p_selection,labels=c(0,0.33,0.66,1.0))
-df$n_offspring <- factor(df$n_offspring,labels=c(2,5))
-df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-ap <- ggplot(df) + geom_violin(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="")
-bp <- ggplot(df) + geom_violin(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="")
-cp <- ggplot(df) + geom_violin(aes(x=n_offspring,y=ave_cor)) + labs(x="Offspring",y="")
-dp <- ggplot(df) + geom_violin(aes(x=distribution,y=ave_cor)) + labs(x="Distribution",y="")
-grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-@
-% significant with F = \Sexpr{round(x['F value'],2)} and p-value \textless{} \Sexpr{round(x['Pr(>F)'],2)}.
-
-Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final average fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $Distribution$.
-
-Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \cref{fig:lowstartfactorinfluence} \TODO{complete}.
-
-\paragraph{Is the choice of distribution function significant?}\label{distribution-function-1}
-
-gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
-
-\begin{itemize}[label={}]
-	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
-	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
-\end{itemize}
-
-<<distributionfunction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Comparison of Gaussian and Uniform distributions for Factor Distribution.'>>=
-df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-ap <- qplot(distribution, ave_cor, geom="boxplot", data=df, xlab="",ylab="Final average fidelity")
-bp <- qplot(distribution, ave_fit, geom="boxplot", data=df, xlab="",ylab="Final average fitness")
-grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
-@
-
-\chapter[TODO-Test under fixed conditions]{TODO-Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
-
-Our experimental goals are to:
+Returning to the overall goals for these experiments, to recap we wish to:
 
 \begin{enumerate}
 	\item Test the predictions of hypothesis \autoref{hypothesis-2}, and to 
@@ -2238,7 +2234,7 @@ Our experimental goals are to:
 
 Taking these two together, we're conducting a form of exploration, and so would like a design that allows for a little open-ended questioning of the model. 
 
-Although several parameters are discrete, at this stage the main ones can be reduced to a set of A/B alternatives, or in the language of experimental design, two-level factors. Our design should allow us to examine the effects of the factors, and also ideally their interactions, and so a form of factorial design is appropriate.
+Although several parameters in the model are discrete, at this stage the main ones can be reduced to a set of A/B alternatives, or in the language of experimental design, two-level factors. Our design should allow us to examine the effects of the factors, and also ideally their interactions, and so a form of factorial design is appropriate.
 
 In fact we use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
@@ -2251,7 +2247,7 @@ Hypothesis \autoref{hypothesis-2} makes two predictions for fixed environments:
 
 The Low-start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the main subject of this thesis.
 
-The first test therefore is to examine if inheritance emerges from low-fidelity/low-fitness initial conditions.
+The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions.
 
 \section{Emergence of inheritance from Low-start initial conditions}
 
@@ -2313,7 +2309,7 @@ Based on preliminary runs, we begin with an initial estimate of 10 replicates fo
 Our interest is in the final values for fidelity under fixed-environment, Low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the Low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
 
-<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Summary results for Low-start case, showing on the left-hand side an overview for the final average fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final average fitness ($\\overline{fitness}_{end}$)'>>=
+<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for Low-start case, showing on the left-hand side an overview for the Final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for Final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2321,14 +2317,14 @@ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final average fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
+A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around Final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final average fidelity ($\\overline{fidelity}_{end}$, on the left) and final average fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
+<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for Final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and Final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
 ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final average fitness", left="Final average fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final mean fitness", left="Final mean fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 @
 
 By inspection, all runs appear to have resulted in an increase in fidelity from the initial range of $[0, 0.3]$ (\cref{fig:lowstart}) but only some approach or reach 1.0. Those that did were uniformly associated with the \textbf{Correlate Fidelity} factor value of +1 (see top-left plot in \cref{fig:lowstartfactors}), and those that did not had a \textbf{Correlate Fidelity} value of -1. 
@@ -2395,27 +2391,19 @@ df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,]
 
 Data is from all generations of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the Low-start dataset; a total of \Sexpr{nrow(subset(df,gen==0))} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
-%<<lowstartsdmean, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Ranges over time of the standard deviation (top row) of fidelity (left-hand side) and fitness (right-hand side) for both levels of \\textbf{Correlate Fidelity}. The bottom row shows the same for the mean rather than the standard deviation.'>>=
-%ap <- ggplot(df,aes(x=gen,y=sd_cor,group=interaction(correlation_correlation), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate Fidelity", values=c("grey10", "grey80")) + stat_smooth() + labs(x="Generation", y="Standard Deviation") + theme(legend.key=element_rect(fill="white"))
-%bp <- ggplot(df,aes(x=gen,y=sd_fit,group=interaction(correlation_correlation),colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate Fidelity", values=c("grey10", "grey80")) + stat_smooth() + labs(x="Generation", y="Standard Deviation") + theme(legend.key=element_rect(fill="white"))
-%cp <- ggplot(df,aes(x=gen,y=ave_cor,group=interaction(correlation_correlation), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate Fidelity", values=c("grey10", "grey80")) + stat_smooth() + labs(x="Generation", y="Mean") + theme(legend.key=element_rect(fill="white"))
-%dp <- ggplot(df,aes(x=gen,y=ave_fit,group=interaction(correlation_correlation), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate Fidelity", values=c("grey10", "grey80")) + stat_smooth() + labs(x="Generation", y="Mean") + theme(legend.key=element_rect(fill="white"))
-%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Fitness", left="Fidelity", top="Standard Deviation", bottom="Mean")
-%@
-
-<<lowstartranges1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Ranges over time of the standard deviation of fidelity (top) and fitness (bottom) for all levels of all factors.'>>=
+<<lowstartranges1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Ranges over time of the standard deviation of fidelity (top) and fitness (bottom) for all levels of all factors, broken out by level of \\emph{Correlate Fidelity}.'>>=
 ap <- ggplot(df,aes(x=gen,y=sd_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("-1","+1")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))
 bp <- ggplot(df,aes(x=gen,y=sd_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution),colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("-1","+1")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fitness") + theme(legend.key=element_rect(fill="white"))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='The same for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below.'>>=
+<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Ranges for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below - again by \\emph{Correlate Fidelity}.'>>=
 cp <- ggplot(df,aes(x=gen,y=ave_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("-1","+1")) + stat_smooth() + labs(x="Generation", y="Mean Fidelity") + theme(legend.key=element_rect(fill="white"))
 dp <- ggplot(df,aes(x=gen,y=ave_fit,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("-1","+1")) + stat_smooth() + labs(x="Generation", y="Mean Fitness") + theme(legend.key=element_rect(fill="white"))
 grid.arrange(cp,dp,nrow=2,ncol=1)
 @
 
-%<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Range of 25\\% to 75\\% quartiles for \\gls{sd} for +1 setting for factor \\textbf{Correlate Fidelity}'>>=
+%<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Range of 25\\% to 75\\% quartiles for \\gls{sd} for +1 setting for factor \\textbf{Correlate Fidelity}'>>=
 %z<-by(df,df$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # quantiles aggregated by correlation_correlation
 %z1<-apply(z,1,function(x){c(x[[1]][[2]][[2,2]],x[[1]][[2]][[2,3]],x[[1]][[2]][[2,4]])}) # correlation_correlation == -1
 %z1<-apply(z,1,function(x){c(x[[1]][[2]][[1,2]],x[[1]][[2]][[1,3]],x[[1]][[2]][[1,4]])}) # correlation_correlation == 1
@@ -2436,8 +2424,53 @@ All settings are the same as in \cref{tbl:factor_levels_4}.
 
 \subsection{Results and discussion}
 
+\section{Factor interactions}
+% EXPERIMENT 7 - Factor significance
+% Dataset: 2860d6fe
 
-\chapter[TODO-Test under changing conditions]{TODO-Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+temp <- load_df('results/results-2860d6fe.data')
+temp <- subset(temp, environment_change_frequency == 0 & truncate==0 & correlation_correlation==1)
+completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500,]))) # the factor levels that resulted in 500 generations
+df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,] # raw data in long format - all Low-start, fixed 
+@
+
+<<lowstartfactorinfluence, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Box-plots for the effect of each individual major factor on Final mean fidelity.'>>=
+#m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df)
+#x <- anova(m0)
+df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
+df$p_selection <- factor(df$p_selection,labels=c(0,0.33,0.66,1.0))
+df$n_offspring <- factor(df$n_offspring,labels=c(2,5))
+df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+ap <- ggplot(df) + geom_box(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="Final mean fidelity")
+bp <- ggplot(df) + geom_box(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="Final mean fidelity")
+cp <- ggplot(df) + geom_box(aes(x=n_offspring,y=ave_cor)) + labs(x="Offspring",y="Final mean fidelity")
+dp <- ggplot(df) + geom_box(aes(x=distribution,y=ave_cor)) + labs(x="Distribution",y="Final mean fidelity")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
+% significant with F = \Sexpr{round(x['F value'],2)} and p-value \textless{} \Sexpr{round(x['Pr(>F)'],2)}.
+
+Taking only runs where the factor \textbf{Correlate Fidelity} is +1, Final mean fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $Distribution$.
+
+Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \cref{fig:lowstartfactorinfluence} \TODO{complete}.
+
+\paragraph{Is the choice of distribution function significant?}\label{distribution-function-1}
+
+gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
+
+\begin{itemize}[label={}]
+	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
+	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
+\end{itemize}
+
+<<distributionfunction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison of Gaussian and Uniform distributions for Factor Distribution.'>>=
+df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+ap <- ggplot(df) + geom_box(aes(x=distribution, y=ave_cor)) + labs(x="",y="Final mean fidelity")
+bp <- ggplot(df) + geom_box(aes(x=distribution, y=ave_fit)) + labs(x="",y="Final mean fitness")
+grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
+@
+
+\chapter[Test under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 
 Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
 that under changing conditions correlation will tend to some lower value
@@ -2477,7 +2510,7 @@ Same initial conditions (low \cref{Low-start-case} and high start \cref{high-sta
 			$population\leftarrow tweakFitness(population)$\;
 		}
 	}
-	\caption{Algorithm for the Changing Environment Model used in \cref{experimental-test-of-h2-under-changing-conditions}}\label{changingmodelalgorithm}
+	\caption{Algorithm for the Changing Environment Model}\label{changingmodelalgorithm}
 \end{algorithm}
 
 \begin{function}
@@ -2543,21 +2576,32 @@ Data is from the final generation of runs that reached completion at generation 
 
 \section{Results and discussion}\label{results-8}
 
-<<changingenvironmentsummary, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='Final average fidelity (left) and fitness (right) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+<<changingenvironmentsummary, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Final mean fidelity for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
 df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
-ggplot(df) + geom_violin(aes(x=ecf,y=ave_cor)) + labs(x="Change Frequency", y="Final average fidelity")
-ggplot(df) + geom_violin(aes(x=ecf,y=ave_fit)) + labs(x="Change Frequency", y="Final average fitness")
+ap <- ggplot(df) + geom_violin(aes(x=ecf,y=sd_cor)) + labs(x="Change Frequency", y="Final SD fidelity")
+bp <- ggplot(df) + geom_violin(aes(x=ecf,y=sd_fit)) + labs(x="Change Frequency", y="Final SD fitness")
+cp <- ggplot(df) + geom_violin(aes(x=ecf,y=ave_cor)) + labs(x="Change Frequency", y="Final mean fidelity")
+dp <- ggplot(df) + geom_violin(aes(x=ecf,y=ave_fit)) + labs(x="Change Frequency", y="Final mean fitness")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<changingenvironmentmeans, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='The same for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below.'>>=
+<<changingenvironmentsd, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Final mean fidelity (left) and fitness (right) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
 df <- subset(temp, truncate==0 & correlation_correlation==1)
 df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
-cp <- ggplot(df) + stat_smooth(aes(x=gen,y=ave_cor,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fidelity") + theme(legend.key=element_rect(fill="white"))
-dp <- ggplot(df) + stat_smooth(aes(x=gen,y=ave_fit,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fitness") + theme(legend.key=element_rect(fill="white"))
-grid.arrange(cp,dp,nrow=2,ncol=1)
+ap <- ggplot(df) + stat_smooth(aes(x=gen,y=std_cor,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fidelity") + theme(legend.key=element_rect(fill="white"))
+bp <- ggplot(df) + stat_smooth(aes(x=gen,y=std_fit,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fitness") + theme(legend.key=element_rect(fill="white"))
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<changingenvironmentpop, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='h', fig.cap='However, note that only some runs maintain their population size.'>>=
+<<changingenvironmentmeans, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='The same for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below.'>>=
+df <- subset(temp, truncate==0 & correlation_correlation==1)
+df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
+ap <- ggplot(df) + stat_smooth(aes(x=gen,y=ave_cor,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fidelity") + theme(legend.key=element_rect(fill="white"))
+bp <- ggplot(df) + stat_smooth(aes(x=gen,y=ave_fit,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fitness") + theme(legend.key=element_rect(fill="white"))
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+<<changingenvironmentpop, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Issues with maintaining population size.'>>=
 ggplot(df) + geom_jitter(aes(x=gen,y=pop, group=interaction(ecf),color=factor(ecf)))
 @
 
@@ -2580,8 +2624,8 @@ We initially tested this by making a single change, setting $sd$ to 0.70.
 From a visual inspection, we conclude that the results appear very similar for Uniform and Gaussian distributions.
 
 <<gaussian, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final average fidelity")
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final average fitness")
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
 @
 
 \chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}

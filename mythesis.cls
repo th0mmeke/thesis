@@ -83,7 +83,7 @@
 \partfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
 \chapterfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
 \sectionfont{\color{darkgray}\sffamily\normalsize\bfseries\selectfont\uppercase}
-\subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize\uppercase}
+\subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
 \subsubsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
 
 \renewcommand{\cleardoublepage}{%
@@ -130,11 +130,18 @@
 	\insertreferences
 	\insertindex
 }
+
+% The running heads/feet don't have rules
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
 \fancyhead{} % Clear all header fields
-\fancyhead[LE,RO]{\scriptsize \slshape \rightmark}
-\fancyhead[LO,RE]{\scriptsize \slshape \leftmark}
+\fancyhead[RO,LE]{\footnotesize \rightmark}
+%\fancyhead[LE]{\footnotesize \}
 \fancyfoot{} % Clear all footer fields
 \fancyfoot[C]{\thepage}
+
+
 
 \global\def\theDegree{}
 \global\def\theAbstract{}

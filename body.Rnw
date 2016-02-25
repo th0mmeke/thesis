@@ -2254,9 +2254,18 @@ The first test therefore is to examine if inheritance emerges from low-fidelity 
 % EXPERIMENT 3 - Fidelity approaches 1.0
 % Dataset: 2860d6fe, environment_change_frequency == 0, gen==500 (final results only), truncate==-1 (fitness-independent)
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load_df('results/results-2860d6fe.data'), environment_change_frequency == 0 & gen==500 & truncate==0)
+<<ExperimentInheritanceFromLowStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+df <- subset(load_df('results/results-2860d6fe.data'), environment_change_frequency == 0 & truncate==0)
 df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
+
+df$interaction <- with(df,interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution))
+s <- data.frame(interaction =unique(with(df,interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution))))
+s0 <- data.frame(gen='Initial', aggregate(sd_cor~interaction,subset(df,gen==0),mean),aggregate(sd_fit~interaction,subset(df,gen==0),mean), aggregate(ave_cor~interaction,subset(df,gen==0),mean), aggregate(ave_fit~interaction,subset(df,gen==0),mean) )
+s500 <- data.frame(gen='Final', aggregate(sd_cor~interaction,subset(df,gen==500),mean),aggregate(sd_fit~interaction,subset(df,gen==500),mean), aggregate(ave_cor~interaction,subset(df,gen==500),mean), aggregate(ave_fit~interaction,subset(df,gen==500),mean) )
+s<- rbind(s0,s500)
+s$gen <- as.factor(s$gen)
+
+df <- subset(df, gen==500) # final results
 @
 
 We start with the following null and alternative hypotheses:
@@ -2316,13 +2325,21 @@ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
+<<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+ap <- ggplot() + geom_point(data=s, aes(x=interaction,y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank()) 
+bp <- ggplot() + geom_point(data=s, aes(x=interaction,y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+cp <- ggplot() + geom_point(data=s, aes(x=interaction,y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank()) 
+dp <- ggplot() + geom_point(data=s, aes(x=interaction,y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())  
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
+
 A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
 <<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
-ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='')
+cp <- ggplot(df) + geom_boxplot(aes(x=fitness_correlation,y=ave_cor)) + labs(x='',y='')
+dp <- ggplot(df) + geom_boxplot(aes(x=fitness_correlation,y=ave_fit)) + labs(x='',y='')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final mean fitness", left="Final mean fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 @
 
@@ -2335,9 +2352,26 @@ In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases 
 % EXPERIMENT 4 - Inheritance under high-start conditions
 % Dataset: 53f6b74
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load_df('results/results-53f6b74.data'), environment_change_frequency == 0 & gen==500 & truncate==0)
+<<ExperimentInheritanceFromHighStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+df <- subset(load_df('results/results-53f6b74.data'), environment_change_frequency == 0 & truncate==0)
 df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
+
+df$interaction <- with(df,interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution))
+s <- data.frame(interaction =unique(with(df,interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution))))
+s0 <- data.frame(gen='Initial', aggregate(sd_cor~interaction,subset(df,gen==0),mean),aggregate(sd_fit~interaction,subset(df,gen==0),mean), aggregate(ave_cor~interaction,subset(df,gen==0),mean), aggregate(ave_fit~interaction,subset(df,gen==0),mean) )
+s500 <- data.frame(gen='Final', aggregate(sd_cor~interaction,subset(df,gen==500),mean),aggregate(sd_fit~interaction,subset(df,gen==500),mean), aggregate(ave_cor~interaction,subset(df,gen==500),mean), aggregate(ave_fit~interaction,subset(df,gen==500),mean) )
+s<- rbind(s0,s500)
+s$gen <- as.factor(s$gen)
+
+df <- subset(df, gen==500) # final results
+
+#s <- merge(s, data.frame(aggregate(sd_cor~interaction,subset(df,gen==500),mean)), by='interaction', suffixes=c('.initial','.final'))
+#s <- merge(s, data.frame(aggregate(sd_fit~interaction,subset(df,gen==0),mean)), by='interaction')
+#s <- merge(s, data.frame(aggregate(sd_fit~interaction,subset(df,gen==500),mean)), by='interaction', suffixes=c('.initial','.final'))
+#s <- merge(s, data.frame(aggregate(ave_cor~interaction,subset(df,gen==0),mean)), by='interaction')
+#s <- merge(s, data.frame(aggregate(ave_cor~interaction,subset(df,gen==500),mean)), by='interaction', suffixes=c('.initial','.final'))
+#s <- merge(s, data.frame(aggregate(ave_fit~interaction,subset(df,gen==0),mean)), by='interaction')
+#s <- merge(s, data.frame(aggregate(ave_fit~interaction,subset(df,gen==500),mean)), by='interaction', suffixes=c('.initial','.final'))
 @
 
 \begin{table}
@@ -2359,6 +2393,8 @@ df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion o
 	\end{center}
 \end{table}
 
+
+
 <<highstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for high-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
@@ -2367,11 +2403,19 @@ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
+<<highstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+ap <- ggplot() + geom_point(data=s, aes(x=interaction,y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank()) 
+bp <- ggplot() + geom_point(data=s, aes(x=interaction,y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+cp <- ggplot() + geom_point(data=s, aes(x=interaction,y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank()) 
+dp <- ggplot() + geom_point(data=s, aes(x=interaction,y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="Generation", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())  
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
+
 <<highstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
-ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
-dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='')
+cp <- ggplot(df) + geom_boxplot(aes(x=fitness_correlation,y=ave_cor)) + labs(x='',y='')
+dp <- ggplot(df) + geom_boxplot(aes(x=fitness_correlation,y=ave_fit)) + labs(x='',y='')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final mean fitness", left="Final mean fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
 @
 
@@ -2395,7 +2439,7 @@ All settings are the same as for Experiment 3 (\cref{tbl:factor_levels_3}.)
 
 \subsection{Results and discussion}
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+<<ExperimentVarianceUnderLowStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 temp <- load_df('results/results-2860d6fe.data')
 df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
 full_factors <- unique(interaction(Filter(is.factor,temp)))
@@ -2432,6 +2476,9 @@ grid.arrange(cp,dp,nrow=2,ncol=1)
 % EXPERIMENT 6 - SD of Fidelity approaches 0
 % Dataset: 
 
+<<ExperimentVarianceUnderHighStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+@
+
 \subsection{Response variables}
 
 \subsection{Initial conditions}
@@ -2443,7 +2490,7 @@ All settings are the same as in \cref{tbl:factor_levels_4}.
 % EXPERIMENT 7 - Factor significance
 % Dataset: 2860d6fe
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+<<ExperimentFactorInteractions, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 temp <- load_df('results/results-2860d6fe.data')
 temp <- subset(temp, environment_change_frequency == 0 & truncate==0 & correlation_correlation==1)
 completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500,]))) # the factor levels that resulted in 500 generations
@@ -2457,10 +2504,10 @@ df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
 df$p_selection <- factor(df$p_selection,labels=c(0,0.33,0.66,1.0))
 df$n_offspring <- factor(df$n_offspring,labels=c(2,5))
 df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-ap <- ggplot(df) + geom_box(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="Final mean fidelity")
-bp <- ggplot(df) + geom_box(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="Final mean fidelity")
-cp <- ggplot(df) + geom_box(aes(x=n_offspring,y=ave_cor)) + labs(x="Offspring",y="Final mean fidelity")
-dp <- ggplot(df) + geom_box(aes(x=distribution,y=ave_cor)) + labs(x="Distribution",y="Final mean fidelity")
+ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="Final mean fidelity")
+bp <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="Final mean fidelity")
+cp <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_cor)) + labs(x="Offspring",y="Final mean fidelity")
+dp <- ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution",y="Final mean fidelity")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 % significant with F = \Sexpr{round(x['F value'],2)} and p-value \textless{} \Sexpr{round(x['Pr(>F)'],2)}.
@@ -2480,8 +2527,8 @@ gaussian implies a stronger relationship, uniform a broader range and less corre
 
 <<distributionfunction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison of Gaussian and Uniform distributions for Factor Distribution.'>>=
 df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
-ap <- ggplot(df) + geom_box(aes(x=distribution, y=ave_cor)) + labs(x="",y="Final mean fidelity")
-bp <- ggplot(df) + geom_box(aes(x=distribution, y=ave_fit)) + labs(x="",y="Final mean fitness")
+ap <- ggplot(df) + geom_boxplot(aes(x=distribution, y=ave_cor)) + labs(x="",y="Final mean fidelity")
+bp <- ggplot(df) + geom_boxplot(aes(x=distribution, y=ave_fit)) + labs(x="",y="Final mean fitness")
 grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 @
 

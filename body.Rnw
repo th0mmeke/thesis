@@ -1981,15 +1981,15 @@ The model as described is general, under the assumptions given below. It is also
 
 \section{Initial conditions and settings}\label{initial-conditions}
 
-At the beginning of each run we construct an initial population to some design. Although a randomly chosen population is useful so as not to introduce any bias that may result from a consistent starting point, our interest is also in two other factors. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the Low-start and High Start cases respectively, and they are described in the sections below.
+At the beginning of each run we construct an initial population to some design. Although a randomly chosen population is useful so as not to introduce any bias that may result from a consistent starting point, our interest is also in two other factors. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the low-start and High Start cases respectively, and they are described in the sections below.
 
-\subsection{Low-start case}\label{Low-start-case}
+\subsection{Low-start case}\label{low-start-case}
 
-Entities in the Low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
+Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
 
 \begin{table}[t]
 	\begin{center}
-		\caption{Initial conditions for Low-start and High Start cases}\label{tbl:ic}
+		\caption{Initial conditions for low-start and High Start cases}\label{tbl:ic}
 		\begin{tabular}{@{}lll@{}}
 			\toprule
 			Case&	Property&  Initial range\\
@@ -2038,7 +2038,7 @@ df_d9f18e2 <- load_df('results/results-d9f18e2.data') # unbounded dataset
 df_d9f18e2_fixed <- df_d9f18e2[df_d9f18e2$environment_change_frequency==0,]
 @
 
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df_d9f18e2[1,]['pop']} elements constructed according to the Low-start case (\cref{Low-start-case}), and the model run with a maximum of \Sexpr{max(df_d9f18e2['gen'])} generations with 
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df_d9f18e2[1,]['pop']} elements constructed according to the low-start case (\cref{low-start-case}), and the model run with a maximum of \Sexpr{max(df_d9f18e2['gen'])} generations with 
 
 \begin{table}
 	\begin{center}
@@ -2153,13 +2153,13 @@ It also recognizes that in both Evolutionary Computation and natural populations
 	\end{center}
 \end{table}
 
-Data is from \Sexpr{nrow(subset(df_low,gen==0))} runs with settings given in \ref{tbl:factor_levels_ubmech} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
+Data is from \Sexpr{nrow(subset(df_low,gen==0))} runs with settings given in \cref{tbl:factor_levels_ubmech} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
 
 \subsection{Results and discussion}
 
 The runs that reached completion are approximately evenly distributed between the two methods, fitness-independent (\Sexpr{nrow(df_completed[df_completed['truncate']==0,])} runs) and fitness-based (\Sexpr{nrow(df_completed[df_completed['truncate']==1,])} runs), indicating that the two methods at least appear comparable with respect to their affect on population size.
 
-<<limitcomparisonplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both Final mean fidelity (on the left-hand side) and Final mean fitness (on the right).'>>=
+<<limitcomparisonplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary plots for fitness-independent sampling ("Independent") and fitness-based or dependent selection ("Dependent"), where the top line contains density plots and the bottom line boxplots showing ranges for both final mean fidelity (on the left-hand side) and final mean fitness (on the right).'>>=
  df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
  ap <- qplot(ave_cor, facets=temp ~ ., geom="density", data=df_completed, xlab="Fidelity", ylab="Density")
  bp <- qplot(ave_fit, facets=temp ~ ., geom="density", data=df_completed, xlab="Fitness", ylab="Density")
@@ -2245,18 +2245,18 @@ Hypothesis \autoref{hypothesis-2} makes two predictions for fixed environments:
 	\item Population variance for inheritance will decrease more than chance.
 \end{enumerate}
 
-The Low-start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the main subject of this thesis.
+The low-start case is the most significant of the two cases as it describes the core of the thesis - that good quality inheritance can develop from very imperfect beginnings, such as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of evolution itself, the main subject of this thesis.
 
 The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions.
 
-\section{Emergence of inheritance from Low-start initial conditions}
+\section{Emergence of inheritance from low-start initial conditions}
 
 % EXPERIMENT 3 - Fidelity approaches 1.0
 % Dataset: 2860d6fe, environment_change_frequency == 0, gen==500 (final results only), truncate==-1 (fitness-independent)
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-temp <- load_df('results/results-2860d6fe.data')
-df <- subset(temp, environment_change_frequency == 0 & gen==500 & truncate==0)
+df <- subset(load_df('results/results-2860d6fe.data'), environment_change_frequency == 0 & gen==500 & truncate==0)
+df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
 @
 
 We start with the following null and alternative hypotheses:
@@ -2282,10 +2282,10 @@ The design is complicated a little by the suspicion that two factors - $p_{repro
 
 \begin{table}
 \begin{center}
-\caption{Factor levels for experiment no.3}\label{tbl:factor_levels_3}
+\caption{Factors and levels for inheritance under low-start conditions}\label{tbl:factor_levels_3}
 \begin{tabular}{@{}llp{6cm}@{}}
 \toprule
-Parameter&  Number of Levels & Levels\\
+Factor&  Number of Levels & Levels\\
 \midrule
 $p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
 $p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
@@ -2294,7 +2294,6 @@ Population Restriction&  	1&	Fitness-independent sampling\\
 Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
 Correlate Fitness&        	2&	false or true\\
 Correlate Fidelity&       	2&	false or true\\
-Starting population&		1&	Low-start settings\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2306,10 +2305,10 @@ Based on preliminary runs, we begin with an initial estimate of 10 replicates fo
 
 \subsection{Results and discussion}
 
-Our interest is in the final values for fidelity under fixed-environment, Low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the Low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
+Our interest is in the final values for fidelity under fixed-environment, low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
 
-<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for Low-start case, showing on the left-hand side an overview for the Final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for Final mean fitness ($\\overline{fitness}_{end}$)'>>=
+<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for low-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2317,9 +2316,9 @@ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around Final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
+A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for Final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and Final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
+<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
 ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
 cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
@@ -2331,22 +2330,22 @@ By inspection, all runs appear to have resulted in an increase in fidelity from 
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is +1, that is, when the child's fidelity is correlated with that of its parent.
 
-\section{Confirmation of inheritance under High-start conditions}
+\section{Confirmation of inheritance under high-start conditions}
 
-% EXPERIMENT 4 - Inheritance under High-start conditions
+% EXPERIMENT 4 - Inheritance under high-start conditions
 % Dataset: 53f6b74
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- load_df('results/results-53f6b74.data')
-df <- subset(df, truncate==0)
+df <- subset(load_df('results/results-53f6b74.data'), environment_change_frequency == 0 & gen==500 & truncate==0)
+df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
 @
 
 \begin{table}
 	\begin{center}
-		\caption{Factor levels for experiment no.4}\label{tbl:factor_levels_4}
+		\caption{Factors and levels for inheritance under high-start conditions}\label{tbl:factor_levels_4}
 		\begin{tabular}{@{}llp{6cm}@{}}
 			\toprule
-			Parameter&  Number of Levels & Levels\\
+			Factor&  Number of Levels & Levels\\
 			\midrule
 			$p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
 			$p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
@@ -2355,13 +2354,28 @@ df <- subset(df, truncate==0)
 			Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
 			Correlate Fitness&        	2&	false or true\\
 			Correlate Fidelity&       	2&	false or true\\
-			Starting population&		1&	High-start settings\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
-\section{Variance of Fidelity reduces under Low-start conditions}
+<<highstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for high-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
+ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
+dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+@
+
+<<highstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
+ap <- qplot(correlation_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+bp <- qplot(correlation_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+cp <- qplot(fitness_correlation, ave_cor, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+dp <- qplot(fitness_correlation, ave_fit, geom=c("boxplot","jitter"), data=df, xlab="",ylab="")
+grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2, right="Final mean fitness", left="Final mean fidelity", top="Factor Correlate Fidelity", bottom="Factor Correlate Fitness")
+@
+
+\section{Variance of Fidelity reduces under low-start conditions}
 
 % EXPERIMENT 5 - SD of Fidelity approaches 0
 % Dataset: 2860d6fe, environment_change_frequency == 0, gen==500, truncate==0 (fitness-independent), runs that completed (that is, all replicates with same factors as a replicate which reached gen==500)
@@ -2383,13 +2397,14 @@ All settings are the same as for Experiment 3 (\cref{tbl:factor_levels_3}.)
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 temp <- load_df('results/results-2860d6fe.data')
+df <- subset(df, pop > 1000) # only "sustainable" populations - see discussion on lower-bounds
 full_factors <- unique(interaction(Filter(is.factor,temp)))
 temp <- subset(temp, environment_change_frequency == 0 & truncate==0)
-completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500,]))) # the factor levels that resulted in 500 generations
+completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500 & temp$pop>1000,]))) # the factor levels that resulted in 500 generations with 'sustainable' population
 df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,]
 @
 
-Data is from all generations of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the Low-start dataset; a total of \Sexpr{nrow(subset(df,gen==0))} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
+Data is all generations for those fixed-environment runs that reached completion with a 'sustainable' population (see \cref{lower-size-limit}) at generation \Sexpr{max(df['gen'])}; a total of \Sexpr{nrow(subset(df,gen==0))} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
 <<lowstartranges1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Ranges over time of the standard deviation of fidelity (top) and fitness (bottom) for all levels of all factors, broken out by level of \\emph{Correlate Fidelity}.'>>=
 ap <- ggplot(df,aes(x=gen,y=sd_cor,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,distribution), colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("-1","+1")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))
@@ -2412,7 +2427,7 @@ grid.arrange(cp,dp,nrow=2,ncol=1)
 %ggplot(z3,aes(V1,V2,V3)) + geom_ribbon(data=z3,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
 %@
 
-\section{Confirmation that variance decreases under High-start conditions}
+\section{Confirmation that variance decreases under high-start conditions}
 
 % EXPERIMENT 6 - SD of Fidelity approaches 0
 % Dataset: 
@@ -2432,10 +2447,10 @@ All settings are the same as in \cref{tbl:factor_levels_4}.
 temp <- load_df('results/results-2860d6fe.data')
 temp <- subset(temp, environment_change_frequency == 0 & truncate==0 & correlation_correlation==1)
 completing_factors <- unique(interaction(Filter(is.factor,temp[temp$gen==500,]))) # the factor levels that resulted in 500 generations
-df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,] # raw data in long format - all Low-start, fixed 
+df <- temp[interaction(Filter(is.factor,temp)) %in% completing_factors,] # raw data in long format - all low-start, fixed 
 @
 
-<<lowstartfactorinfluence, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Box-plots for the effect of each individual major factor on Final mean fidelity.'>>=
+<<lowstartfactorinfluence, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Box-plots for the effect of each individual major factor on final mean fidelity.'>>=
 #m0 <- lm(ave_cor~(p_reproduce+p_selection+n_offspring+distribution+fitness_correlation)^2, data=df)
 #x <- anova(m0)
 df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
@@ -2450,7 +2465,7 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 % significant with F = \Sexpr{round(x['F value'],2)} and p-value \textless{} \Sexpr{round(x['Pr(>F)'],2)}.
 
-Taking only runs where the factor \textbf{Correlate Fidelity} is +1, Final mean fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $Distribution$.
+Taking only runs where the factor \textbf{Correlate Fidelity} is +1, final mean fidelity is significantly influenced by all factors and by the first-level interactions between $p_{reproduction}$ and $n_{children}$, and $p_{reproduction}$ and $Distribution$.
 
 Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is +1, from \cref{fig:lowstartfactorinfluence} \TODO{complete}.
 
@@ -2492,7 +2507,7 @@ Significance
   Other elements in the entity initially unaffected
 \end{itemize}
 
-Same initial conditions (low \cref{Low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
+Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
 
 \begin{algorithm}
 	\SetKwFunction{f}{f}
@@ -2572,7 +2587,7 @@ The \gls{sd} of the environmental change was set to 0.90 (parameter $sd$ to $Twe
 
 As before, each run has 10 replicates of \Sexpr{max(df['gen'])} generations each, with an initial population size of \Sexpr{df[1,]['pop']} entities.
 
-Data is from the final generation of runs that reached completion at generation \Sexpr{max(df['gen'])} from the Low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
+Data is from the final generation of runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
 \section{Results and discussion}\label{results-8}
 

@@ -76,6 +76,7 @@ experiments = [
     [3,  3,  1,  1,  1,  1,  1]
 ]
 
+experiments =[[0,0,0,0,0,1,1],[0,0,1,0,0,1,1]]
 factor_defns = [
     [0,	0.33, 0.66, 1.0],    # 0 = P_REPRODUCE
     [0,	0.33, 0.66, 1.0],    # 1 = P_SELECTION

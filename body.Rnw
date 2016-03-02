@@ -1858,13 +1858,13 @@ Note that for those familiar with the design of experiments in the physical worl
 
 \section{Base model}\label{base-model}
 
-All experiments in this part of the work make use of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
+All experiments in this part of the work make use of some variant of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
 We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions.
 
 \begin{itemize}
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$. 
-	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same trait's value in the parent. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.  There is a subtle difference between fidelity and inheritance: inheritance is the goal, while fidelity is the mechanism, expressed as the degree of correlation between two generations.
+	\item \emph{Fidelity} measures the correlation between the child's value for a property and the same property's value in the parent. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.  There is a subtle difference between fidelity and inheritance: inheritance is the result, while fidelity is the mechanism, expressed as the degree of correlation between two generations. Inheritance can be thought of as emerging or resulting from fidelity.
 \end{itemize}
 
 The specific relationship between parent and child property values is given by a single mapping, represented in the algorithm by the function $Derive$. 
@@ -2044,7 +2044,7 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 \end{table}
 
 <<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
-ap <- ggplot(aggregate(df_d9f18e2_fixed$gen,Filter(is.factor,df_d9f18e2_fixed),max), aes(x))+geom_histogram(binwidth=1,origin = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
+ap <- ggplot(aggregate(df_d9f18e2_fixed$gen,Filter(is.factor,df_d9f18e2_fixed),max), aes(x))+geom_histogram(binwidth=1,origin = .5, fill='gray70') + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 bp <- ggplot(df_d9f18e2_fixed,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
@@ -2136,7 +2136,13 @@ It also recognizes that in both Evolutionary Computation and natural populations
 	\end{center}
 \end{table}
 
-Data is from \Sexpr{nrow(subset(df_low,gen==0))} runs with settings given in \cref{tbl:factor_levels_ubmech} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
+<<echo=FALSE, cache=TRUE>>=
+runs <- nrow(subset(df_low,gen==0))
+factors <- nrow(unique(Filter(is.factor,df_low)))
+replicates <- runs / factors
+@
+
+Data is from \Sexpr{runs} runs -- \Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} -- with settings given in \cref{tbl:factor_levels_ubmech} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df_completed['gen'])} generations.
 
 \subsection{Results and discussion}
 
@@ -2185,23 +2191,44 @@ temp <- load_df('results/results-53f6b74.data')
 df <- subset(temp, environment_change_frequency == 0 & truncate==0)
 @
 
-We now turn to the other bound - the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \ref{upper-size-bound} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:populationtrends}), and of those that did, not all completed with a sustainable population size.
+We now turn to the other bound - the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \ref{upper-size-bound} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:popoverall}), and of those that did, not all completed with a sustainable population size.
 
-<<populationtrends, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left.'>>=
-ggplot(df) + geom_jitter(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
+<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left.'>>=
+ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
 @
 
 Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} fail to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} complete with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs. In fact, all other runs reach completion with a population  size at the upper bound limit of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.
 
-Inspecting the results by factor:
-\begin{enumerate}
-	\item All runs with $p_{reproduction}=0.33$ and $n_{children}=2$ fail to complete.
-	\item All runs that complete, but with an unsustainably small population, also include $p_{selection}=0.66$.
-\end{enumerate}
+%Inspecting the results by factor:
+%\begin{enumerate}
+%	\item All runs with $p_{reproduction}=0.33$ and $n_{children}=2$ fail to complete.
+%	\item All runs that complete, but with an unsustainably small population, also include $p_{selection}=0.66$.
+%\end{enumerate}
+%
+%To conclude this brief examination of lower-bounds, runs with factors associated with population extinction ($p_{reproduction}=0.33$, $n_{children}=2$ and $p_{selection}=0.66$) will be omitted from further analysis. 
 
-To conclude this brief examination of lower-bounds, runs with factors associated with population extinction ($p_{reproduction}=0.33$, $n_{children}=2$ and $p_{selection}=0.66$) will be omitted from further analysis. These results also provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (and so the duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
+These results also provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (and so the duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
 
-%\TODO{results-2860d6fe.data dataset doesn't appear to have distribution==0 for these factors...unbalanced?}
+\section{Number of offspring}
+
+<<popoffspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of parameter $n_{children}$ - 2 (on the left) and 5 (on the right) .'>>=
+ggplot(df) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation", y="Population size") + facet_wrap(~n_offspring)
+temp <- subset(df,n_offspring==1 & pop < 5000)
+@
+
+The vertical line on the extreme left of the right-hand side facet of \cref{fig:popoffspring} (for $n_{offspring} = 5$) consists of \Sexpr{nrow(subset(temp,gen==1))} runs from a total of nrow(subset(df,gen==0)) where the population dropped in the first generation to a mean size of \Sexpr{mean(subset(temp,gen==2)$pop)}, before recovering to the population upper limit by generation \Sexpr{max(temp['gen'])+1}. This is a characteristic of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value,  the initial values are defined by the low-start case and $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
+
+A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
+
+\section{Other parameters}
+
+\TODO{Distribution - there is a difference, so either keep both, or just pick gaussian as uniform not very realistic}
+
+\TODO{p_selection and p_reproduction - 1 not very interesting - but discuss; standard would be 0; other fixed values like 1, but wonder why...}
+
+\TODO{*_correlation - no correlation only interesting as a control}
+
+\TODO{offspring - main effect is on population size, worth looking at both?}
 
 \chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
@@ -2628,9 +2655,9 @@ Control--unchanging, but the other three runs with the change in environment, an
 
 The \gls{sd} of the environmental change was set to 0.90 (parameter $sd$ to $TweakFitness$ equal to 0.70), and $meanOffset$, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.
 
-As before, each run has 10 replicates of \Sexpr{max(df['gen'])} generations each, with an initial population size of \Sexpr{df[1,]['pop']} entities.
+As before, each run has 10 replicates of \Sexpr{max(df['gen'])} generations, with an initial population size of \Sexpr{df[1,]['pop']} entities.
 
-Data is from the final generation of runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
+Data is from those runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
 
 \section{Results and discussion}\label{results-8}
 
@@ -2657,12 +2684,13 @@ Data is from the final generation of runs that reached completion at generation 
 %@
 
 <<changingenvironmentsd, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity (top) and mean fitness (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-ggplot(df) + stat_smooth(aes(x=gen,y=ave_fit)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness")
-ggplot(df) + stat_smooth(aes(x=gen,y=sd_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="SD Fidelity")
+df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
+ggplot(df) + stat_smooth(aes(x=gen,y=ave_fit)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
+ggplot(df) + stat_smooth(aes(x=gen,y=sd_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,1.1))
 @
 
 <<changingenvironmentpop, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Issues with maintaining population size.'>>=
-ggplot(df) + geom_jitter(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size") +  facet_wrap(~ecf, ncol=2)
+ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size") +  facet_wrap(~ecf, ncol=2)
 @
 
 Rapid change (every generation) leads to population extinction as individuals in the population are unable to maintain a viable level of fitness.

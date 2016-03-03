@@ -2,6 +2,7 @@
 
 % 2860d6fe - DATASET FOR HIGHSTART
 % 53f6b74 - DATASET FOR LOWSTART
+% d9f18e2 - DATASET FOR UNBOUNDED
 
 <<setup, include=FALSE>>=
 library(knitr)
@@ -1856,6 +1857,7 @@ Experimental tests are the strongest method we have to examine the claims made i
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
+
 \section{Base model}\label{base-model}
 
 All experiments in this part of the work make use of some variant of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
@@ -1874,6 +1876,24 @@ The only transformation functions in the base model are for the two core element
 Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. Colloquially, the replacement population is formed by a combination of parents from the current population, plus their children.
 
 The model is parameterized (see \cref{tbl:parameter_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
+
+\paragraph{Probability of selection and probability of reproduction}
+
+We take these together as they interact. Where one or both parameters equal zero (use the parent's fitness as the probability of selection or probability of reproduction), the model is similar to a standard EA; any other value means selection or reproduction occurs with a fixed probability irrespective of fitness. 
+
+Why would we be interested in runs under these conditions? Imagine a run where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness.
+
+The combination where both $p_{selection}$ and $p_{reproduction}$ are non-zero does however lead to uninteresting behaviour as the major source of variation has been removed from the model.
+
+\paragraph{Fitness and fidelity correlation}
+
+\emph{Fidelity correlation} is parameterized in order to test the hypothesis that correlation is required for inheritance; the alternative hypothesis that inheritance can arise without correlation corresponds to \emph{Fidelity correlation} being false.
+
+\TODO{Remove fitness correlation?}
+
+\paragraph{Distribution}
+
+\TODO{Distribution - there is a difference, so either keep both, or just pick gaussian as uniform not very realistic}
 
 \begin{figure}[htb]
 \centering
@@ -1952,12 +1972,13 @@ The model is parameterized (see \cref{tbl:parameter_definitions}) so that differ
 			$n_{children}$&           	$n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 			%Restriction&			  	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
 			Derive&             		$[0,1]\times[0,1]\mapsto[0,1]$&    Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
-			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
+%			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
+
 
 \subsection{Claim of generality}
 
@@ -2219,16 +2240,6 @@ temp <- subset(df,n_offspring==1 & pop < 5000)
 The vertical line on the extreme left of the right-hand side facet of \cref{fig:popoffspring} (for $n_{offspring} = 5$) consists of \Sexpr{nrow(subset(temp,gen==1))} runs from a total of nrow(subset(df,gen==0)) where the population dropped in the first generation to a mean size of \Sexpr{mean(subset(temp,gen==2)$pop)}, before recovering to the population upper limit by generation \Sexpr{max(temp['gen'])+1}. This is a characteristic of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value,  the initial values are defined by the low-start case and $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
-
-\section{Other parameters}
-
-\TODO{Distribution - there is a difference, so either keep both, or just pick gaussian as uniform not very realistic}
-
-\TODO{p_selection and p_reproduction - 1 not very interesting - but discuss; standard would be 0; other fixed values like 1, but wonder why...}
-
-\TODO{*_correlation - no correlation only interesting as a control}
-
-\TODO{offspring - main effect is on population size, worth looking at both?}
 
 \chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 

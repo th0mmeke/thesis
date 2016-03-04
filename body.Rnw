@@ -1849,14 +1849,13 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 	\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter{Model and initial factor screening}
+\chapter{Simulation model}
 
 To test our hypothesis, we turn to simulation and experiment. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected. 
 
 Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
-
 
 \section{Base model}\label{base-model}
 
@@ -1876,24 +1875,6 @@ The only transformation functions in the base model are for the two core element
 Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step the functions are applied in a defined order to the current population to form a replacement population. Colloquially, the replacement population is formed by a combination of parents from the current population, plus their children.
 
 The model is parameterized (see \cref{tbl:parameter_definitions}) so that different combinations of factors can be investigated for their influence on the model's behaviour.
-
-\paragraph{Probability of selection and probability of reproduction}
-
-We take these together as they interact. Where one or both parameters equal zero (use the parent's fitness as the probability of selection or probability of reproduction), the model is similar to a standard EA; any other value means selection or reproduction occurs with a fixed probability irrespective of fitness. 
-
-Why would we be interested in runs under these conditions? Imagine a run where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness.
-
-The combination where both $p_{selection}$ and $p_{reproduction}$ are non-zero does however lead to uninteresting behaviour as the major source of variation has been removed from the model.
-
-\paragraph{Fitness and fidelity correlation}
-
-\emph{Fidelity correlation} is parameterized in order to test the hypothesis that correlation is required for inheritance; the alternative hypothesis that inheritance can arise without correlation corresponds to \emph{Fidelity correlation} being false.
-
-\TODO{Remove fitness correlation?}
-
-\paragraph{Distribution}
-
-\TODO{Distribution - there is a difference, so either keep both, or just pick gaussian as uniform not very realistic}
 
 \begin{figure}[htb]
 \centering
@@ -1972,17 +1953,18 @@ The combination where both $p_{selection}$ and $p_{reproduction}$ are non-zero d
 			$n_{children}$&           	$n_{children}\in \mathbb{Z}_{\ge 0}$& Maximum number of children per parent\\
 			%Restriction&			  	$(population, n)\mapsto population$&	Function to take $n$ elements from $population$\\
 			Derive&             		$[0,1]\times[0,1]\mapsto[0,1]$&    Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
-%			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
+			Correlate Fitness&        	$\{\mathrm{true}, \mathrm{false}\}$&  If true, child's fitness is related to parent's fitness by parent's fidelity, and if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			Correlate Fidelity&       	$\{\mathrm{true}, \mathrm{false}\}$&  Child's fidelity is related to parent's fidelity by parent's fidelity, or if false, by a random value $x\in \mathcal{U}[0,1]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
-
 \subsection{Claim of generality}
 
 The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
+
+\TODO{Map to standard EA models - mutation only etc}
 
 \section{Initial conditions and settings}\label{initial-conditions}
 
@@ -2014,6 +1996,73 @@ Entities in the low-start case begin with a low initial fidelity and fitness cho
 In this case, entities start with a higher initial fidelity and a greater range of fitnesses (again, for specifics see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
 
 %In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
+
+\chapter{Initial screening experiment}
+
+Translating model parameters into factors in the experiment design results in the factors in the first column of \ref{tbl:factor_levels_3}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
+
+There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
+
+The usual alternative is some variant of a factorial design, where each parameter of interest is represented by a factor taking some small number of values, or levels (two levels being most common) and the analysis model constructed from runs that systematically work through a series of combinations of factors at different levels. The emphasis here is on the response given particular factor, and hence parameter, values.
+
+\section{Experimental design}
+
+As our interest is in the behaviour of the model both overall, and under specific conditions (such as the low-start case, or to the \emph{Correlate Fidelity} parameter), a factorial design is preferred. 
+
+Now, a full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our exploratory goals.
+
+The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\cite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where use combinations of our four-level factors,  $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
+
+We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
+
+The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
+
+\TODO{Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design; we confirm that this is sufficient through power calculations for specific tests where required in the later sections.}
+
+\section{Factors and levels}\label{factors-and-levels}
+
+Although several parameters in the model are continuous, at this stage the main ones can be reduced to a set of A/B alternatives, or two-level factors. 
+
+Of the others, $p_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter; the value $0$ for the corresponding model parameter in each case means ``use parent's value'', and so is a special case. And as discussed in \ref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling.
+
+The factors and levels used are given in \ref{tbl:factor_levels_3}.
+
+\begin{table}
+	\begin{center}
+		\caption{Factors and levels for inheritance under low-start conditions}\label{tbl:factor_levels_3}
+		\begin{tabular}{@{}llp{6cm}@{}}
+			\toprule
+			Factor&  Number of Levels & Levels\\
+			\midrule
+			$p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
+			$p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
+			$n_{children}$&           	2&	2 or 5\\
+			Population Restriction&  	1&	Fitness-independent sampling\\
+			Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
+			Correlate Fitness&        	2&	false or true\\
+			Correlate Fidelity&       	2&	false or true\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\section{Probability of selection and probability of reproduction}
+
+We take these together as they interact. Where one or both parameters equal zero (use the parent's fitness as the probability of selection or probability of reproduction), the model is similar to a standard EA; any other value means selection or reproduction occurs with a fixed probability irrespective of fitness. 
+
+Why would we be interested in runs under these conditions? Imagine a run where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness.
+
+The combination where both $p_{selection}$ and $p_{reproduction}$ are non-zero leads to uninteresting behaviour as the major source of variation has been removed from the model.
+
+\section{Fitness and fidelity correlation}
+
+\emph{Fidelity correlation} is parameterized in order to test the hypothesis that correlation is required for inheritance; the alternative hypothesis that inheritance can arise without correlation corresponds to \emph{Fidelity correlation} being false.
+
+\TODO{Remove fitness correlation?}
+
+\section{Distribution}
+
+\TODO{Distribution - there is a difference, so either keep both, or just pick gaussian as uniform not very realistic}
 
 \section[Upper size bound]{Effect of upper bound on population size}\label{upper-size-bound}
 
@@ -2201,7 +2250,7 @@ From these tests it is clear that the two methods do not have statistically simi
 
 This conclusion of course is based on a comparison of two particular methods; a third, fitness-based, method may produce distributions that are statistically similar to those of, say, sampling. In which case we might conclude that any conclusions drawn on the basis of sampling would also extend to this third method. This extension however is left for future work.
 
-Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we use fitness-independent sampling rather than fitness-based restriction in all later experiments.
+Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we adopt fitness-independent sampling rather than fitness-based restriction.
 
 \section[Lower size bound]{Lower limit on population size}\label{lower-size-limit}
 
@@ -2214,11 +2263,13 @@ df <- subset(temp, environment_change_frequency == 0 & truncate==0)
 
 We now turn to the other bound - the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \ref{upper-size-bound} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:popoverall}), and of those that did, not all completed with a sustainable population size.
 
-<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left.'>>=
+<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left, discussed in the text.'>>=
 ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
 @
 
-Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} fail to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} complete with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs. In fact, all other runs reach completion with a population  size at the upper bound limit of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.
+Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} fail to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} complete with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs. In fact, all other runs reach completion with a population size at the upper bound limit of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.
+
+From the clustering evident in \ref{fig:popoverall} we assert that the experiment runs can be separated into two disjoint sets - those that reach completion with a population size at or very near the upper-size limit, and those whose population is tending towards zero. Our interest lies only in sustainable populations and therefore from here on we exclude all runs where the population does not reach completion at or near the upper-size limit, without loss of generality.
 
 %Inspecting the results by factor:
 %\begin{enumerate}
@@ -2228,7 +2279,9 @@ Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,ge
 %
 %To conclude this brief examination of lower-bounds, runs with factors associated with population extinction ($p_{reproduction}=0.33$, $n_{children}=2$ and $p_{selection}=0.66$) will be omitted from further analysis. 
 
-These results also provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (and so the duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
+\TODO{explanation for extreme left case}
+
+Note that these results also provide support for an experiment duration of \Sexpr{max(df['gen'])} generations - either a run maintains a stable population (and so the duration is unrelated to population size considerations), or if a population is to go extinct it does so by \Sexpr{max(df['gen'])} generations or soon after and so can easily be identified for special treatment.
 
 \section{Number of offspring}
 
@@ -2241,16 +2294,22 @@ The vertical line on the extreme left of the right-hand side facet of \cref{fig:
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
 
+\section{Conclusions}
+
+Fidelity correlation - main factor from hypothesis
+
+Upper-size bound - sampling
+Lower-size bound - sustainable populations
+
+Probabilities - at least one of $p_{reproduction}$ and $p_{selection}$ non-zero.
+
+Sensitivity to Distribution
+Sensitivity to Number of offspring
+Sensitivity to Correlate Fitness
+
 \chapter[Test under fixed conditions]{Experimental test of hypothesis under fixed conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-Returning to the overall goals for these experiments, to recap we wish to:
-
-\begin{enumerate}
-	\item Test the predictions of hypothesis \autoref{hypothesis-2}, and to 
-	\item Examine the impact of the factors on the results.
-\end{enumerate}
-
-Hypothesis \autoref{hypothesis-2} makes two predictions for fixed environments: 
+Returning to the overall goals for these experiments (to test the predictions of hypothesis \autoref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \autoref{hypothesis-2} makes two predictions for fixed environments: 
 
 \begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, and
@@ -2263,7 +2322,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity 
 
 \section{Emergence of inheritance from low-start initial conditions}\label{inheritance-low-start}
 
-As discussed earlier in section \cref{}, we treat inheritance as the relationship between parent and child traits, represented by our measure, fidelity.
+As discussed earlier in section \cref{}, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
 
 % EXPERIMENT 3 - Fidelity approaches 1.0
 % Dataset: 2860d6fe, environment_change_frequency == 0, gen==500 (final results only), truncate==-1 (fitness-independent)
@@ -2299,50 +2358,7 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fid
 
 \subsection{Design}\label{design}
 
-Translating model parameters into factors in the experiment design results in the factors in the first column of \ref{tbl:factor_levels_3}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
-There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
-
-The usual alternative is some variant of a factorial design, where each parameter of interest is represented by a factor taking some small number of values, or levels (two levels being most common) and the analysis model constructed from runs that systematically work through a series of combinations of factors at different levels. The emphasis here is on the response given particular factor, and hence parameter, values.
-
-As our interest is in the behaviour of the model both overall, and under specific conditions (such as the low-start case, or to the \emph{Correlate Fidelity} parameter), a factorial design is preferred. 
-
-Now, a full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our exploratory goals.
-
-The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\cite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where use combinations of our four-level factors,  $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
-
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
-
-The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
-
-\TODO{Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design; we confirm that this is sufficient through power calculations for specific tests where required in the later sections.}
-
-\subsection{Factors and levels}\label{factors-and-levels}
-
-Although several parameters in the model are continuous, at this stage the main ones can be reduced to a set of A/B alternatives, or two-level factors. 
-
-Of the others, $p_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter; the value $0$ for the corresponding model parameter in each case means ``use parent's value'', and so is a special case. And as discussed in \ref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling.
-
-The factors and levels used are given in \ref{tbl:factor_levels_3}.
-
-\begin{table}
-\begin{center}
-\caption{Factors and levels for inheritance under low-start conditions}\label{tbl:factor_levels_3}
-\begin{tabular}{@{}llp{6cm}@{}}
-\toprule
-Factor&  Number of Levels & Levels\\
-\midrule
-$p_{reproduction}$&       	4&	0 or 0.33 or 0.66 or 1.0\\
-$p_{selection}$&          	4&	0 or 0.33 or 0.66 or 1.0\\
-$n_{children}$&           	2&	2 or 5\\
-Population Restriction&  	1&	Fitness-independent sampling\\
-Distribution&               2&	Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
-Correlate Fitness&        	2&	false or true\\
-Correlate Fidelity&       	2&	false or true\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
 
 \subsection{Results and discussion}
 

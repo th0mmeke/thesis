@@ -109,13 +109,17 @@ def main():
         for environment_change_frequency in [0,1,5,10]:
             experiment_factors = ",".join([str(x) for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
-                print("{0}:{1} {2} {3} {4}".format(expCount+1, len(experiments), environment_change_frequency, repeat, factors))
-                results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=10, environment_change_frequency=environment_change_frequency)
-                f.write("\n".join([",".join([str(x) for x in generation.values()]) + "," + experiment_factors for generation in results]))
+                print("{0}/{1} {3} {2} {4}".format(expCount+1, len(experiments)*4, environment_change_frequency, repeat, factors))
+                results = model.run(factors, population=init_population(5000, low_start), generations=5, population_limit=10, environment_change_frequency=environment_change_frequency)
+                array_results = []
+                for generation in results:
+                    str_generation = ",".join([str(x) for x in generation.values()])
+                    array_results.append( ",".join([str(expCount*10+repeat), str_generation, experiment_factors]))
+                f.write("\n".join(array_results))
                 f.write("\n")
 
             print("\n")
-        expCount+=1
+            expCount+=1
 
     f.close()
 

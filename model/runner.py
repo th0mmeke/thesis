@@ -99,7 +99,7 @@ def main():
     str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation,environment_change_frequency"
     _summary = model.get_population_summary(init_population(2,low_start),0)
     str_header = ",".join([x for x in _summary.keys()])
-    f.write(str_header + "," + str_factors + "\n")
+    f.write('run' + str_header + "," + str_factors + "\n")
 
     expCount = 0
     for experiment in experiments:
@@ -110,7 +110,7 @@ def main():
             experiment_factors = ",".join([str(x) for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
                 print("{0}/{1} {3} {2} {4}".format(expCount+1, len(experiments)*4, environment_change_frequency, repeat, factors))
-                results = model.run(factors, population=init_population(5000, low_start), generations=5, population_limit=10, environment_change_frequency=environment_change_frequency)
+                results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=10, environment_change_frequency=environment_change_frequency)
                 array_results = []
                 for generation in results:
                     str_generation = ",".join([str(x) for x in generation.values()])

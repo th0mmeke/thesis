@@ -76,13 +76,23 @@ experiments = [
     [3,  3,  1,  1,  1,  1,  1]
 ]
 
-experiments =[[0,0,0,0,0,1,1],[0,0,1,0,0,1,1]]
+experiments =[[0,0,0,0,0,1,1],[0,0,0,1,0,1,1],[0,0,0,0,1,1,1],[0,0,0,1,1,1,1]]
+
+def dist_a(source, correlation):
+    return max(0.0,min(1.0, random.gauss(source, 1.0-correlation)))
+
+def dist_b(source, correlation):
+    x = random.gauss(source, 1.0-correlation)
+    while x < 0.0 and x > 1.0:
+        x = random.gauss(source, 1.0-correlation)
+    return x
+
 factor_defns = [
     [0,	0.33, 0.66, 1.0],    # 0 = P_REPRODUCE
     [0,	0.33, 0.66, 1.0],    # 1 = P_SELECTION
     [2,        5],      # 2 = N_OFFSPRING
     [False,    True],   # 3 = RESTRICTION
-    [lambda source, correlation: max(0.0,min(1.0, random.gauss(source, 1.0-correlation))), lambda source, correlation: max(0.0,min(1.0, random.uniform(source-(1.0-correlation), source+(1.0-correlation))))],
+    [dist_a, dist_b],
     [False,    True],   # 5 = FITNESS_CORRELATION
     [False,    True],   # 6 = CORRELATION_CORRELATION
 ]
@@ -99,7 +109,7 @@ def main():
     str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation,environment_change_frequency"
     _summary = model.get_population_summary(init_population(2,low_start),0)
     str_header = ",".join([x for x in _summary.keys()])
-    f.write('run' + str_header + "," + str_factors + "\n")
+    f.write('run,' + str_header + "," + str_factors + "\n")
 
     expCount = 0
     for experiment in experiments:
@@ -110,7 +120,7 @@ def main():
             experiment_factors = ",".join([str(x) for x in experiment]) + "," + str(environment_change_frequency)
             for repeat in range(0,10):
                 print("{0}/{1} {3} {2} {4}".format(expCount+1, len(experiments)*4, environment_change_frequency, repeat, factors))
-                results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=10, environment_change_frequency=environment_change_frequency)
+                results = model.run(factors, population=init_population(5000, low_start), generations=5, population_limit=10, environment_change_frequency=environment_change_frequency)
                 array_results = []
                 for generation in results:
                     str_generation = ",".join([str(x) for x in generation.values()])

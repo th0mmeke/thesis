@@ -2744,7 +2744,7 @@ df <- subset(temp, truncate==0 & correlation_correlation==1)
 df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
 @
 
-\subsection{Shape of Distribution produced by Derive parameter}
+\subsection{Shape of Distribution produced by Derive parameter}\label{alternative-distribution}
 
 \emph{Derive}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
 
@@ -2773,10 +2773,35 @@ This produces a distribution with fat tails (middle of \ref{fig:example_distribu
 	
 To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \ref{fig:example_distributions}.
 
-<<>>==
+<<>>=
 t <- load_dfr('results/results-333345153.data')
+# test is if distribution affects sd_cor
 ggplot(t) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~distribution)
+ggplot(t) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency) # clear that horizontal lines where ecf=0
+ggplot(subset(t,truncate==1 & distribution==0)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency) # and only where ecf=0
 @
+<<>>=
+ap <- ggplot(subset(t,distribution==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~environment_change_frequency)
+bp <- ggplot(subset(t,distribution==1)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency)
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+From the figure, runs in which algorithm X is used result in the standard deviation of fidelity tending towards $0$, while runs with algorithm Y show a more nuanced result. Incidentally from ... it's clear that the unchanging line for the standard deviation of fidelity under algorithm X is exclusively associated with an unchanging environment, as expected.
+
+Fitness ranges as expected, with a higher mean fitness under less changeable conditions. The range of fidelities follows a similar pattern, however mean fidelity approaches $1.0$ under all frequencies other than when the environment changes every generation. 
+
+From this it is clear that although distribution is important, it is not a sufficient explanation for the discrepancy.
+
+\subsection{Effect of shape of environment change}
+
+Previous experiments used an abrupt change in fitness at a specified frequency. This alternative instead uses a constant, smaller, change to simulate a constant selective pressure. \TODO{Is this what the hypothesis means though? Does it mean uncertainty/unpredictable change, or predictable - this model?}
+
+<<>>=
+t <- load_dfr('results/results-constant-change.data')
+ggplot(t) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~environment_change_frequency)
+@
+
+Appears to be a difference in response to different frequencies from previous mechanism. Faceting by distribution, as in \ref{alternative-distribution}, confirms that the results under this form of environmental change remain sensitive to distribution.
 
 \section{Sensitivity to parameter choices}
 

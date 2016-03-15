@@ -1,8 +1,11 @@
 % DATASETS
 
+% d9f18e2 - DATASET FOR UNBOUNDED
 % 2860d6fe - DATASET FOR HIGHSTART
 % 53f6b74 - DATASET FOR LOWSTART
-% d9f18e2 - DATASET FOR UNBOUNDED
+
+% 333345153 - folded vs non-folded distribution, with run tagging
+% results-constant-change - same but steady selection pressure, with run tagging
 
 <<setup, include=FALSE>>=
 library(knitr)
@@ -2651,9 +2654,7 @@ Same initial conditions (low \cref{low-start-case} and high start \cref{high-sta
 % Dataset: 2860d6fe, truncate==0 (fitness-independent), and correlation_correlation == 1
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-temp <- load_df('results/results-53f6b74.data')
-df <- subset(temp, truncate==0 & correlation_correlation==1)
-df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
+df <- load_df('results/results-53f6b74.data')
 @
 
 Fluctuating environment with no trend or direction--modelled by applying the distribution function from parameters (i.e., either gaussian or uniform) with a possible change to the mean fitness each generation. In this model, an individual's fitness may increase or
@@ -2716,21 +2717,24 @@ Data is from those runs that reached completion at generation \Sexpr{max(df['gen
 %grid.arrange(ap,bp,nrow=2,ncol=1)
 %@
 
-<<changingenvironmentsd, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity (top) and mean fitness (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+<<changingenvironmentsd, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
 df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
-ggplot(df) + stat_smooth(aes(x=gen,y=ave_fit)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
-ggplot(df) + stat_smooth(aes(x=gen,y=sd_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,1.1))
+#df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
+df <- subset(df, truncate==0 & p_reproduce==0 & p_selection==0 & correlation_correlation==1 & fitness_correlation==1)
+ggplot(df) + geom_point(aes(x=gen,y=sd_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,1.1))
 @
 
-<<changingenvironmentpop, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Issues with maintaining population size.'>>=
-ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size") +  facet_wrap(~ecf, ncol=2)
+<<changingenvironmentmean, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean fitness (top) and mean fidelity (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+ap <- ggplot(df) + geom_point(aes(x=gen,y=ave_fit)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
+bp <- ggplot(df) + geom_point(aes(x=gen,y=ave_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fidelity") + coord_cartesian(ylim=c(0,1.1))
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-We expect the variance of fidelity to remain at some non-zero level in changing environments, with greater change reflected in greater variance. This is not seen in the results. Instead we see a similar pattern to the variance in fixed environments where the variation approaches zero.
+We expect the variance of fidelity to remain at some non-zero level in changing environments, with greater change reflected in greater variance. This is partially seen in the results with a clear result for the most rapid change (every generation) and less clear for less frequent change.
 
 Does this represent a genuine difficulty with the hypothesis, or is there an alternative explanation?
 
-Of the possible alternatives, four appear worth further investigation:
+Of the conceivable alternatives, there are three that appear worthy of further investigation:
 
 \begin{enumerate}
 	\item The type of environmental change presented by the current $TweakFitness$ algorithm does not meet the precondition of a changing environment; there are however other forms of change that will show the hypothesised behaviour.
@@ -2738,11 +2742,30 @@ Of the possible alternatives, four appear worth further investigation:
 	\item The shape of the distribution function is biasing results towards the outer limits of the range.
 \end{enumerate}
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-temp <- load_df('results/results-333345153.data')
-df <- subset(temp, truncate==0 & correlation_correlation==1)
+
+\subsection{Effect of shape of environment change}
+
+Previous experiments used an abrupt change in fitness at a specified frequency. This alternative instead uses a constant, smaller, change to simulate a constant selective pressure. \TODO{Is this what the hypothesis means though? Does it mean uncertainty/unpredictable change, or predictable - this model?} In \ref{fig:summary-abrupt-change} we see the mean and standard deviations for fidelity for the original abrupt form of environmental change; in \ref{fig:summary-constant-change} the same for a steady selective pressure.
+
+<<summary-abrupt-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+df <- load_dfr('results/results-333345153.data')
 df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
+df <- subset(df, truncate==0 & p_reproduce==0 & p_selection==0 & correlation_correlation==1 & fitness_correlation==1)
+ap<-ggplot(df) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
+bp<-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
+
+<<summary-constant-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+df <- load_dfr('results/results-constant-change.data')
+df$ecf <- factor(df$environment_change_frequency,levels=c(0,1,5,10)) # to put into a natural order...
+df <- subset(df, truncate==0 & p_reproduce==0 & p_selection==0 & correlation_correlation==1 & fitness_correlation==1)
+ap<-ggplot(df) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
+bp<-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+Appears to be a difference in response between the two different forms of environmental change. 
 
 \subsection{Shape of Distribution produced by Derive parameter}\label{alternative-distribution}
 
@@ -2754,8 +2777,8 @@ max(0,min(1,gaussian(mean,variance)))
 
 <<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range [0,1] of gaussian distribution with mean=0.5, standard deviation = 0.5'>>=
 x <- rnorm(n=10000, mean=0.5, sd=0.5)
-ap <- qplot(x,geom='density')
-bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density')
+ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Normal distribution")
+bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Folded normal")
 
 x1 <- replicate(10000, {
   repeat {
@@ -2765,7 +2788,7 @@ x1 <- replicate(10000, {
   }
   x
 })
-cp <- qplot(x1,geom='density')
+cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Sampled normal")
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
@@ -2773,14 +2796,15 @@ This produces a distribution with fat tails (middle of \ref{fig:example_distribu
 	
 To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \ref{fig:example_distributions}.
 
-<<>>=
+<<distributiontest, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 t <- load_dfr('results/results-333345153.data')
 # test is if distribution affects sd_cor
 ggplot(t) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~distribution)
 ggplot(t) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency) # clear that horizontal lines where ecf=0
 ggplot(subset(t,truncate==1 & distribution==0)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency) # and only where ecf=0
 @
-<<>>=
+
+<<distributiontest2, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 ap <- ggplot(subset(t,distribution==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~environment_change_frequency)
 bp <- ggplot(subset(t,distribution==1)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~environment_change_frequency)
 grid.arrange(ap,bp,nrow=2,ncol=1)
@@ -2791,17 +2815,6 @@ From the figure, runs in which algorithm X is used result in the standard deviat
 Fitness ranges as expected, with a higher mean fitness under less changeable conditions. The range of fidelities follows a similar pattern, however mean fidelity approaches $1.0$ under all frequencies other than when the environment changes every generation. 
 
 From this it is clear that although distribution is important, it is not a sufficient explanation for the discrepancy.
-
-\subsection{Effect of shape of environment change}
-
-Previous experiments used an abrupt change in fitness at a specified frequency. This alternative instead uses a constant, smaller, change to simulate a constant selective pressure. \TODO{Is this what the hypothesis means though? Does it mean uncertainty/unpredictable change, or predictable - this model?}
-
-<<>>=
-t <- load_dfr('results/results-constant-change.data')
-ggplot(t) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~environment_change_frequency)
-@
-
-Appears to be a difference in response to different frequencies from previous mechanism. Faceting by distribution, as in \ref{alternative-distribution}, confirms that the results under this form of environmental change remain sensitive to distribution.
 
 \section{Sensitivity to parameter choices}
 

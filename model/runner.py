@@ -15,7 +15,9 @@ experiments = [
    [0,  1,  1,  0,  0,  1],
    [1,  1,  1,  1,  1,  1]
 ]
-  
+
+#experiments = [[1,  1,  1,  1,  1,  1]]
+
 def dist_a(source, correlation):
     return max(0.0,min(1.0, random.gauss(source, 1.0-correlation)))
 
@@ -44,10 +46,10 @@ def main():
     f = open("results.data", "w")
 
     # Write initial header line to file
-    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,fitness_correlation,correlation_correlation,environment_change_frequency"
+    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,correlation_correlation,ecf"
     _summary = model.get_population_summary(init_population(2,low_start),0)
     str_header = ",".join([x for x in _summary.keys()])
-    f.write('run,' + str_header + "," + str_factors + "\n")
+    f.write('exp,run,' + str_header + "," + str_factors + "\n")
 
     expCount = 0
     for experiment in experiments:
@@ -62,7 +64,7 @@ def main():
                 array_results = []
                 for generation in results:
                     str_generation = ",".join([str(x) for x in generation.values()])
-                    array_results.append( ",".join([str(expCount*10+repeat), str_generation, experiment_factors]))
+                    array_results.append( ",".join([str(expCount),str(expCount*10+repeat), str_generation, experiment_factors]))
                 f.write("\n".join(array_results))
                 f.write("\n")
 

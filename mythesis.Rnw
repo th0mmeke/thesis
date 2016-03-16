@@ -8,7 +8,7 @@
 \usepackage{upgreek}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{subscript} % provides \textsubscript
+%\usepackage{subscript} % provides \textsubscript
 
 \usepackage{fancyvrb}
 \VerbatimFootnotes % allows verbatim text in footnotes

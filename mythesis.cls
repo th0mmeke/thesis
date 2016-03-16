@@ -306,6 +306,7 @@ Copyright \copyright \the\year\ \theAuthor\\
 \newcommand{\addtoreferences}[1]{%
 \ifx\empty\listofbibfiles\edef\listofbibfiles{#1}\else\edef\listofbibfiles{#1,\listofbibfiles}\fi
 }
+\newcommand{\ifprefchar}{\ifpunctmark{'}} % Fix for #365 - problems with names such as "van den..."
 \newcommand{\biblatexstyle}[1]{%
 \usepackage[style=#1,backend=bibtex]{biblatex}
 \bibliography{\listofbibfiles}

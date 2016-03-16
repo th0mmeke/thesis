@@ -30,8 +30,8 @@ def reproduction(factors, population):
         if not get_random_boolean(p_reproduce):
             return []
 
-        fitness_correlation = parent.correlation if factors[5] else random.random()
-        correlation_correlation = parent.correlation if factors[6] else random.random()
+        fitness_correlation = parent.correlation
+        correlation_correlation = parent.correlation if factors[5] else random.random()
         offspring = []
 
         for i in range(random.randint(0,factors[2])):

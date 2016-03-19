@@ -15,6 +15,27 @@ experiments = [
    [0,  1,  1,  0,  0,  1],
    [1,  1,  1,  1,  1,  1]
 ]
+# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
+experiments = [
+# #   X1  X2  X3  X4  X5  X6  X7
+# #   --------------------------
+    [0,  0,  0,  0,  0,  0,  0],
+    [1,  0,  0,  0,  1,  0,  1],
+    [0,  1,  0,  0,  1,  1,  0],
+    [1,  1,  0,  0,  0,  1,  1],
+    [0,  0,  1,  0,  1,  1,  1],
+    [1,  0,  1,  0,  0,  1,  0],
+    [0,  1,  1,  0,  0,  0,  1],
+    [1,  1,  1,  0,  1,  0,  0],
+    [0,  0,  0,  1,  0,  1,  1],
+    [1,  0,  0,  1,  1,  1,  0],
+    [0,  1,  0,  1,  1,  0,  1],
+    [1,  1,  0,  1,  0,  0,  0],
+    [0,  0,  1,  1,  1,  0,  0],
+    [1,  0,  1,  1,  0,  0,  1],
+    [0,  1,  1,  1,  0,  1,  0],
+    [1,  1,  1,  1,  1,  1,  1]
+]
 
 #experiments = [[1,  1,  1,  1,  1,  1]]
 
@@ -28,6 +49,19 @@ def dist_b(source, correlation):
     assert x >= 0.0 and x <= 1.0
     return x
 
+def change_a(factors, population, gen, ecf):
+    if ecf > 0 & gen % ecf == 0:
+        return [Element(factors[4](x.fitness-0.2, 0.70), x.correlation) for x in population]
+    else:
+        return population
+
+
+def change_b(factors, population, gen, ecf):
+    if ecf > 0:
+        return [Element(factors[4](x.fitness-(0.2/ecf), 0.70), x.correlation) for x in population]
+    else:
+        return population
+
 factor_defns = [
     [0, 0.66],          # 0 = P_REPRODUCE
     [0,	0.66],          # 1 = P_SELECTION
@@ -35,6 +69,7 @@ factor_defns = [
     [False, True],      # 3 = RESTRICTION
     [dist_a, dist_b],   # 4 - shape of distribution
     [False, True],      # 6 = CORRELATION_CORRELATION
+    [change_a, change_b] # 7 = Shape of environmental change
 ]
 
 def init_population(n, low_start):
@@ -46,7 +81,7 @@ def main():
     f = open("results.data", "w")
 
     # Write initial header line to file
-    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,correlation_correlation,ecf"
+    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,correlation_correlation,shape,ecf"
     _summary = model.get_population_summary(init_population(2,low_start),0)
     str_header = ",".join([x for x in _summary.keys()])
     f.write('exp,run,' + str_header + "," + str_factors + "\n")

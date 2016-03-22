@@ -1,7 +1,7 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
 \usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,framed,dcolumn,footnote,multirow, amsthm}
-\usepackage[boxed, noline, linesnumbered]{algorithm2e}
+\usepackage[noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
 \usepackage[font=scriptsize]{subcaption}

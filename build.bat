@@ -1,5 +1,5 @@
-C:/PROGRA~1/R/R-32~1.3/bin/Rscript.exe -e "library(knitr); knit('mythesis.Rnw')"
-C:/PROGRA~1/R/R-32~1.3/bin/Rscript.exe -e "library(knitr); knit('body.Rnw')"
+"C:\Program Files\R\R-3.2.4revised/bin/Rscript.exe" -e "library(knitr); knit('mythesis.Rnw')"
+"C:\Program Files\R\R-3.2.4revised/bin/Rscript.exe" -e "library(knitr); knit('body.Rnw')"
 
 latexmk -pdf mythesis
 REM makeglossaries mythesis

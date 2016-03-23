@@ -2744,7 +2744,7 @@ Four different runs, with changes to the environment at four different frequenci
 % EXPERIMENT 8 - SD of Fidelity approaches 0
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-819350e.data')
-df <- subset(df_full, truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df <- subset(df_full, correlation_correlation == 1 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2776,28 +2776,27 @@ Data is as before from those runs that reached completion at generation \Sexpr{m
 
 \section{Results and discussion}\label{results-8}
 
-<<changing-sd-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of final mean fidelity (top) and fitness (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-ap <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_cor, group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fidelity") + theme(legend.key=element_rect(fill="white"))
-bp <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_fit, group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fitness") + theme(legend.key=element_rect(fill="white"))
-grid.arrange(ap,bp,nrow=2,ncol=1)
+<<changing-sd-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of final mean fidelity (top) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_cor, group=ecf, colour=factor(ecf)), size=0.25) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fidelity") + theme(legend.key=element_rect(fill="white"))
+#ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_fit, group=ecf, colour=factor(ecf)), size=0.25) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fitness") + theme(legend.key=element_rect(fill="white"))
+#grid.arrange(ap,bp,nrow=2,ncol=1)
 @
-%
+
 <<changing-means-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='The same for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below.'>>=
 ap <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=ave_cor,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fidelity") + theme(legend.key=element_rect(fill="white"))
 bp <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=ave_fit,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fitness") + theme(legend.key=element_rect(fill="white"))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<changing-sd-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-#df_completed$temp <- factor(df_completed$truncate, labels=c("Independent","Dependent"))
-ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=sd_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,1.1))
+<<changing-sd-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity over time by run for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+ggplot(subset(df,correlation_correlation==1)) + geom_line(aes(x=gen,y=sd_cor, group=run)) +facet_wrap(~ecf) + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,1.1))
 @
-
-<<changing-means-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean fitness (top) and mean fidelity (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-ap <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_fit)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
-bp <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_cor)) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fidelity") + coord_cartesian(ylim=c(0,1.1))
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
+%
+%<<changing-means-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean fitness (top) and mean fidelity (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
+%ap <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_fit), size=0.25) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
+%bp <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_cor), size=0.25) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fidelity") + coord_cartesian(ylim=c(0,1.1))
+%grid.arrange(ap,bp,nrow=2,ncol=1)
+%@
 
 We expect the variance of fidelity to remain at some non-zero level in changing environments, with greater change reflected in greater variance. This is partially seen in the results with a clear result for the most rapid change (every generation) and less clear for less frequent change.
 
@@ -2823,7 +2822,7 @@ Previous experiments used an abrupt change in fitness at a specified frequency. 
 
 % EXPERIMENT 8 - SD of Fidelity approaches 0
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'),truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df <- subset(load.results('results/results-819350e.data'),correlation_correlation == 1 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2846,15 +2845,15 @@ df <- subset(load.results('results/results-819350e.data'),truncate == 0 & (p_rep
 \end{table}
 
 
-<<summary-abrupt-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-ap<-ggplot(df) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
-bp<-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+<<summary-abrupt-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean average fidelity (upper) and standard deviation of fidelity (lower) for scenario of abrupt environmental change.'>>=
+ap<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
+bp<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<summary-constant-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-ap<-ggplot(df) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
-bp<-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+<<summary-constant-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Constant environmental change.'>>=
+ap<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
+bp<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
@@ -2868,7 +2867,7 @@ Specifically, in the experiments described above, one version (level) of the dis
 
 max(0,min(1,gaussian(mean,variance)))
 
-<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range [0,1] of gaussian distribution with mean=0.5, standard deviation = 0.5'>>=
+<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of gaussian distribution with mean = 0.5, standard deviation = 0.5'>>=
 x <- rnorm(n=10000, mean=0.5, sd=0.5)
 ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Normal distribution")
 bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Folded normal")
@@ -2913,13 +2912,13 @@ df <- subset(load.results('results/results-819350e.data'), (p_reproduce==0 || p_
 \end{table}
 
 
-<<distributiontest, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
+<<distributiontest1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of Correlate Fidelity and Truncate parameters upon standard deviation of fidelity.'>>=
 # test is if distribution affects sd_cor
 df$truncate=factor(df$truncate,labels=c("Fitness-independent","Fitness-based"))
 df$correlation_correlation=factor(df$correlation_correlation,labels=c("Uncorrelated","Correlated"))
 ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~correlation_correlation+truncate) 
-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf) # clear that horizontal lines where ecf=0
 @
+
 %
 %<<distributiontest2, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 %ap <- ggplot(subset(df,distribution==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)

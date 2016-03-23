@@ -1996,7 +1996,7 @@ In this case, entities start with a higher initial fidelity and a greater range 
 
 %In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
-\chapter{Initial screening experiment}
+\chapter{Initial screening}
 
 Translating model parameters into factors in the experiment design results in the factors in the first column of \ref{tbl:factor_levels_3}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
@@ -2417,7 +2417,8 @@ Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fid
 \subsection{Design}\label{design}
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df_full <- load.results('results/results-819350e.data')
+df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2440,7 +2441,6 @@ df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 
 \end{table}
 
 <<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for low-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2449,16 +2449,18 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
 <<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary for low-start, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
-ap <- ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=run,y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-bp <- ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=run,y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <- ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=run,y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-dp <- ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=run,y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+ap <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+bp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+cp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+dp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<highstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for high-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
+<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+@
+
+<<highstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for high-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -2467,24 +2469,23 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
 <<highstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary for high-start, averaged across all replicates for each combination of factors, as seen earlier in the low-start case. Light-coloured points for initial state and dark-coloured ones for final values.Missing points are from replicates that did not complete.'>>=
-df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
-ap <-  ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=interaction,y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-bp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=interaction,y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=interaction,y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-dp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_point(aes(x=interaction,y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+ap <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+bp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+cp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+dp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
 \subsection{Results and discussion}
 
-Our interest is in the final values for fidelity under fixed-environment, low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(df)} runs out of the full dataset of \Sexpr{nrow(subset(df,gen==0))} runs.
+Our interest is in the final values for fidelity under fixed-environment, low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
 A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors for the low-start case. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line the same for the factor \\textbf{Correlate Fitness}.'>>=
+<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated factors in the low-start case for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('false','true'))
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='')
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='Final mean fidelity',y='')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='Final mean fitness',y='')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
@@ -2520,10 +2521,10 @@ df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 
 	\end{center}
 \end{table}
 
-<<highstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between results for correlated and uncorrelated factors. Top line shows results for the factor \\textbf{Correlate Fidelity} for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right), while the bottom line has the same for the factor \\textbf{Correlate Fitness}.'>>=
+<<highstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated factors in the high-start case for the factor \\textbf{Correlate Fidelity}. As before, results for final mean fidelity ($\\overline{fidelity}_{end}$) are on the left, and for final mean fitness ($\\overline{fitness}_{end}$) on the right.'>>=
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('false','true'))
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='')
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='Final mean fidelity',y='')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='Final mean fitness',y='')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
@@ -2541,7 +2542,8 @@ The second prediction of the hypothesis is that population variance for inherita
 We use the same experimental setup and data as for the first hypothesis test in \cref{tbl:factor_levels_3}.
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df_full <- load.results('results/results-819350e.data')
+df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2577,7 +2579,7 @@ dp <- ggplot(df,aes(x=gen,y=ave_fit,group=run, colour=factor(correlation_correla
 grid.arrange(cp,dp,nrow=2,ncol=1)
 @
 
-Data is all generations for those fixed-environment runs that reached completion with a 'sustainable' population (see \cref{lower-size-limit}) at generation \Sexpr{max(df['gen'])}; a total of \Sexpr{nrow(subset(df,gen==0))} runs out of the full dataset of \Sexpr{nrow(subset(temp,gen==0))} runs.
+Data is all generations for those fixed-environment runs that reached completion with a 'sustainable' population (see \cref{lower-size-limit}) at generation \Sexpr{max(df['gen'])}; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
 %<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Range of 25\\% to 75\\% quartiles for \\gls{sd} for \\emph{true} setting for factor \\textbf{Correlate Fidelity}'>>=
 %z<-by(df,df$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # quantiles aggregated by correlation_correlation
@@ -2741,7 +2743,8 @@ Four different runs, with changes to the environment at four different frequenci
 
 % EXPERIMENT 8 - SD of Fidelity approaches 0
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df_full <- load.results('results/results-819350e.data')
+df <- subset(df_full, truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2769,18 +2772,10 @@ The \gls{sd} of the environmental change was set to 0.90 (parameter \emph{sd} to
 
 As before, each run has 10 replicates of \Sexpr{max(df['gen'])} generations, with an initial population size of \Sexpr{df[1,]['pop']} entities.
 
-Data is as before from those runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(subset(df,gen==max(df['gen'])))} runs out of the full dataset of \Sexpr{nrow(subset(df,gen==0))} runs.
+Data is as before from those runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
 \section{Results and discussion}\label{results-8}
 
-%<<changingenvironmentsummary, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Final mean fidelity for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-%ap <- ggplot(df) + geom_violin(aes(x=ecf,y=sd_cor)) + labs(x="Change Frequency", y="Final SD fidelity")
-%bp <- ggplot(df) + geom_violin(aes(x=ecf,y=sd_fit)) + labs(x="Change Frequency", y="Final SD fitness")
-%cp <- ggplot(df) + geom_violin(aes(x=ecf,y=ave_cor)) + labs(x="Change Frequency", y="Final mean fidelity")
-%dp <- ggplot(df) + geom_violin(aes(x=ecf,y=ave_fit)) + labs(x="Change Frequency", y="Final mean fitness")
-%grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-%@
-%
 <<changing-sd-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of final mean fidelity (top) and fitness (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
 ap <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_cor, group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fidelity") + theme(legend.key=element_rect(fill="white"))
 bp <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_fit, group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fitness") + theme(legend.key=element_rect(fill="white"))
@@ -2818,8 +2813,6 @@ Of the conceivable alternatives, three that appear worthy of further investigati
 
 \subsection{Effect of shape of environment change}
 
-\TODO{Experimental settings}
-
 Our initial analysis was with the the \gls{sd} of the environmental change set to 0.90 (parameter $sd$ to $TweakFitness$ set to 0.90), and $meanOffset$, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.
 
 Are the results specific to this distribution? Or can we extend our claim across a broader range of cases?
@@ -2830,7 +2823,7 @@ Previous experiments used an abrupt change in fitness at a specified frequency. 
 
 % EXPERIMENT 8 - SD of Fidelity approaches 0
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df <- subset(load.results('results/results-819350e.data'),truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
 \begin{table} % 5e33a27 and 819350e
@@ -2892,9 +2885,9 @@ cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + la
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-This produces a distribution with fat tails (middle of \ref{fig:example_distributions}), like a 'W', rather than the expected elongated 'U' of the standard gaussian (on the left-hand side of the same figure), and as \emph{Derive} is used in \ref{base-model-algorithm} describes the relationship between the properties of an entity and its offspring, it seems plausible that this distortion towards the extremes of the range may have a significant effect on the experimental result.
+This produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected elongated 'U' of the standard gaussian (on the left-hand side of the same figure), and as \emph{Derive} is used in \ref{base-model-algorithm} describes the relationship between the properties of an entity and its offspring, it seems plausible that this distortion towards the extremes of the range may have a significant effect on the experimental result.
 	
-To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \ref{fig:example_distributions}.
+To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \cref{fig:example_distributions}.
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results('results/results-819350e.data'), (p_reproduce==0 || p_selection == 0))

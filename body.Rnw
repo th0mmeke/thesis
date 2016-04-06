@@ -61,30 +61,13 @@ Motivation is to understand the onset of evolution; how robust, interesting, ada
 
 Our belief is that the evolution of evolution can and will emerge under certain conditions, and that a bottoms-up approach emergent approach will be more successful than the predominant design-driven top-down approach today.
 
-In the Spencerian sense of progressive improvement, rather than
-necessarily any particular mechanism (e.g., evolution by natural
-selection)
+Evolution in the Spencerian sense of progressive improvement, rather than necessarily any particular mechanism (e.g., evolution by natural selection). A change of population distribution over time--but if just purely distributive (sensu \autocite{Bourrat2015}), rather than transformative, not very interesting
 
-Simply a change of population distribution over time--but if just
-purely distributive (sensu \autocite{Bourrat2015}), rather than transformative, not
-very interesting
-
-Abstract idea, different from mechanisms such as ENS (grounded perhaps
-inseparably in biology) e.g., ``Darwin's theory of evolution by natural
-selection is restricted in scope. One sense in which it is restricted is
-that it refers to organisms.'' \autocite{Griesemer2005}
+Abstract idea, different from mechanisms such as ENS (grounded perhaps inseparably in biology) e.g., ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' \autocite{Griesemer2005}
 
 ENS as ``a theory of descent with modification''
 
 Life (see later) provides the canonical example of ``interesting''; approaching life's creativity in an artificial system would be quite something.  Hope to see robustnes,  evolvability, novelty.
-
-Alternatives to ``evolution''? Broad definition\ldots{}:
-
-\begin{itemize}
-\item Lower bound of random search--not good enough
-\item No upper bound in practice--but ENS is the gold standard
-\item Good result would be `interesting' forms
-\end{itemize}
 
 Natural selection as mechanism for adaptation (in biological sense). Assume that adaptation in this sense is useful concept for CS
 
@@ -103,15 +86,23 @@ We show that under further conditions interesting is possible, perhaps inevitabl
 	Not the same as most type of Alife, where evolution is not the subject of the research but rather a tool or mechanism towards some other goal (canonically, creating artificial life.)
 \end{itemize}
 
+Alternatives to ``evolution''?
+
+\begin{itemize}
+	\item Lower bound is random search--not good enough
+	\item Upper bound is unknown--but ENS is the current gold standard for self-improving complex systems
+	\item A good result would be `interesting' forms
+\end{itemize}
+
 \subsection{Why important?}\label{why-important}
 
 \begin{itemize}
 \item Application to engineering -- alternative to EC approaches -- self-optimizing mechanism -- EvoEvo for EAs
 \item In itself--one of grand challenges of Alife \autocite{Bedau:2000mi}
-\item Possibly some application to other related fields
+\item Possibly some application to other related fields (see \cref{relationships-with-other-fields})
 \end{itemize}
 
-\subsection{Life, the Gold Standard}
+\subsection{Life, the gold standard}
 
 \subsubsection{Living organisms are supremely well suited to their environments, and can adapt to environmental changes}
 \label{living-organisms-are-supremely-well-suited-to-their-environments-and-can-adapt-to-environmental-changes}
@@ -231,7 +222,7 @@ pre-existing elements, rather than being constructed `\emph{de novo}',
 and that production of novelties may be relatively rapid. Connection
 changes may happen quickly; by comparison, new genes may take many generations.
 
-\section{Relationships with other fields}\label{connections-to-other-fields}
+\section{Relationships with other fields}\label{relationships-with-other-fields}
 
 \subsection{Origins of life}
 Similar problem--from chemistry to biology. Transition to biology.
@@ -465,7 +456,7 @@ Non-domain specific
 	\item MWUA--meta-model? \autocite{Chastain2014} and \autocite{Barton2014}
 \end{itemize}
 
-\subsubsection{Biological Evolution}\label{evolution}
+\subsection{Biological Evolution}\label{evolution}
 
 \quote{Evolution is a process that results in heritable changes in a population spread over many generations.}{
 ``Sandwalk: strolling with a skeptical biochemist'',
@@ -574,7 +565,7 @@ Weismannian causal relationship between genes and organisms
 
 Inheritance of acquired characteristics--e.g., epigenetics, but probably not significant as evolutionary mechanism in biology. But a viable non-biological mechanism
 
-\subsubsection{Evolution without life}\label{evolution-without-life}
+\subsection{Evolution without life}\label{evolution-without-life}
 
 Not attempting to understand life, but instead as a guide to achieving similar property in another domain, or in understanding similar processes in another domain (e.g., Arthur)
 
@@ -662,9 +653,7 @@ EAs originally abstracted/inspired by biological ENS
 \item
 Since specialized, radiated into new areas
 \item
-Re-unification attempted in works such as \autocite{Paixao2015} but hence not
-concerned with extension beyond \quote{models in theoretical population
-genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
+Re-unification attempted in works such as \autocite{Paixao2015} but hence not concerned with extension beyond \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
 \item
 \quote{Some EDAs can be regarded abstractions of evolutionary processes:
 instead of generating new solutions through variation and then
@@ -677,15 +666,13 @@ Major points of difference:
 
 \begin{itemize}
 \item
-Mutation combines copying errors with genetic drift (and probably
-more)
+Mutation combines copying errors with genetic drift (and probably more)
 \item
 Search through a fixed space, cannot surprise \eg \autocite{Nellis2014}
 \item
 Fitness mechanism--implicit vs explicit
 \item
-top-down for EAs--specific constructs without endogenous evolution
-(processes used not subject to evolution)
+top-down for EAs--specific constructs without endogenous evolution (processes used not subject to evolution)
 \end{itemize}
 
 Similar interests in desirable properties:
@@ -695,9 +682,7 @@ Similar interests in desirable properties:
 	\item novelty (novelty-search - \autocite{Lehman:2008cr})
 \end{itemize}
  
-Seems tightly linked to life--requirements for OEE (hypothesised) look
-a lot like requirements for Life (which is only known OEE system, so
-perhaps not so surprising)
+Seems tightly linked to life--requirements for OEE (hypothesised) look a lot like requirements for Life (which is only known OEE system, so perhaps not so surprising)
 
 What elements of life are required for OEE, and which are not?
 
@@ -705,20 +690,14 @@ What elements of life are required for OEE, and which are not?
 \item
 Exact elements (same thing)--e.g., evolution?
 \item
-Equivalent elements (same concept/function/purpose, different detail)
-e.g., compartments/membranes?
+Equivalent elements (same concept/function/purpose, different detail) e.g., compartments/membranes?
 \item
 Not required at all e.g., specific metabolic cycles
 \end{itemize}
 
 \subsubsection{Artificial Life}\label{artificial-life}
 
-``Synthesis and simulation of living systems'' or contemporary
-artificial life as \quote{an interdisciplinary study of life and life-like
-	processes, whose two most important qualities are that it focuses on the
-	essential rather than the contingent features of living systems and that
-	it attempts to understand living systems by artificially synthesizing
-	simple forms of them.}{\autocite{Bedau:2007ga}}
+``Synthesis and simulation of living systems'' or contemporary artificial life as \quote{an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesizing simple forms of them.}{\autocite{Bedau:2007ga}}
 
 ``life-as-it-could-be'' rather than ``life-as-we-know-it'' \autocite{Langton1989}
 
@@ -737,7 +716,7 @@ Implicit rather than explicit fitness
 
 Life a subset of Alife
 
-Life is the only provided example that we have
+Life is the only \emph{provided} example that we have
 
 Life has non-trivial emergence
 
@@ -764,14 +743,11 @@ Themes \autocite{Aguilar2014}
 
 \begin{itemize}
 	\item
-	Properties of living systems--Origins of life, autonomy,
-	self-organization, adaptation (evolution, development, and learning)
+	Properties of living systems--Origins of life, autonomy, self-organization, adaptation (evolution, development, and learning)
 	\item
-	Life at different scales--Ecology, artificial societies, behaviour,
-	computational biology, artificial chemistries
+	Life at different scales--Ecology, artificial societies, behaviour, computational biology, artificial chemistries
 	\item
-	Understanding, uses and descriptions of the living--information,
-	living technology, art and philosophy
+	Understanding, uses and descriptions of the living--information, living technology, art and philosophy
 \end{itemize}
 
 History
@@ -813,7 +789,7 @@ Some systems claim capable of OEE (e.g., Channon, Avida) but not necessarily cre
 
 \section{TODO-Approach and methods}\label{approach}
 
-Untangle the biological from the general in previous theory. Emergent, self-improving, actionist (similar to Brooks in AI)
+Untangle the general from the biological in previous work. Emergent, self-improving, actionist (similar to Brooks in AI)
 
 Much previous work aimed at understanding biology--assumes that domain.
 
@@ -1074,8 +1050,8 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 		\item Variation a result of the variability in copying
 		\item Copying mechanism robust and self-tuning
 	\end{itemize}
-	\item Continue work towards a non-biological perspective on evolution
-	\item Progress towards OEE in artificial system--evolution compatible with OEE without necessarily showing OEE (which is hard to measure and prove)
+	\item Continued work towards a non-biological perspective on evolution
+	\item Progress towards Bedau's goal of OEE in artificial system--evolution compatible with OEE without necessarily showing OEE (which is hard to measure and prove)
 \end{enumerate}
 
 \part{TODO-Evolutionary Potential}

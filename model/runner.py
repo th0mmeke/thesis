@@ -1,24 +1,29 @@
-import os
 import random
-import itertools
 import model
 
-# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
+GENERATIONS = 500
+POPULATION_SIZE = 5000
+N_ENVIRONMENTS = 10
+N_REPEATS = 3
+N_BUCKETS = 100
+LOW_START = True
 
-experiments = [
-   [0,  0,  0,  1,  1,  1],
-   [1,  0,  0,  0,  0,  1],
-   [0,  1,  0,  0,  1,  0],
-   [1,  1,  0,  1,  0,  0],
-   [0,  0,  1,  1,  0,  0],
-   [1,  0,  1,  0,  1,  0],
-   [0,  1,  1,  0,  0,  1],
-   [1,  1,  1,  1,  1,  1]
-]
+# # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
+# experiments = [
+#    [0,  0,  0,  1,  1,  1],
+#    [1,  0,  0,  0,  0,  1],
+#    [0,  1,  0,  0,  1,  0],
+#    [1,  1,  0,  1,  0,  0],
+#    [0,  0,  1,  1,  0,  0],
+#    [1,  0,  1,  0,  1,  0],
+#    [0,  1,  1,  0,  0,  1],
+#    [1,  1,  1,  1,  1,  1]
+# ]
+
 # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
 experiments = [
-# #   X1  X2  X3  X4  X5  X6  X7
-# #   --------------------------
+    # X1  X2  X3  X4  X5  X6  X7
+    #--------------------------
     [0,  0,  0,  0,  0,  0,  0],
     [1,  0,  0,  0,  1,  0,  1],
     [0,  1,  0,  0,  1,  1,  0],
@@ -37,74 +42,99 @@ experiments = [
     [1,  1,  1,  1,  1,  1,  1]
 ]
 
-#experiments = [[1,  1,  1,  1,  1,  1]]
-
-def dist_a(source, correlation):
-    return max(0.0,min(1.0, random.gauss(source, 1.0-correlation)))
-
-def dist_b(source, correlation):
-    x = random.gauss(source, 1.0-correlation)
-    while x < 0.0 or x > 1.0:
-        x = random.gauss(source, 1.0-correlation)
-    assert x >= 0.0 and x <= 1.0
-    return x
-
-def change_a(factors, population, gen, ecf):
-    if ecf > 0 & gen % ecf == 0:
-        return [Element(factors[4](x.fitness-0.2, 0.70), x.correlation) for x in population]
-    else:
-        return population
-
-
-def change_b(factors, population, gen, ecf):
-    if ecf > 0:
-        return [Element(factors[4](x.fitness-(0.2/ecf), 0.70), x.correlation) for x in population]
-    else:
-        return population
-
-factor_defns = [
-    [0, 0.66],          # 0 = P_REPRODUCE
-    [0,	0.66],          # 1 = P_SELECTION
-    [2, 5],             # 2 = N_OFFSPRING
-    [False, True],      # 3 = RESTRICTION
-    [dist_a, dist_b],   # 4 - shape of distribution
-    [False, True],      # 6 = CORRELATION_CORRELATION
-    [change_a, change_b] # 7 = Shape of environmental change
+# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to5m2.txt
+experiments = [  # factors ordered by sorted order of factor_defns keys
+    [0, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 1],
+    [1, 1, 0, 1, 0],
+    [0, 0, 1, 1, 0],
+    [1, 0, 1, 0, 1],
+    [0, 1, 1, 0, 0],
+    [1, 1, 1, 1, 1],
 ]
 
+
 def init_population(n, low_start):
-    return [model.Element(low_start = low_start) for x in range(0,n)]
+    return [model.Element(low_start=low_start) for x in range(0, n)]
+
+
+def generate_environments(n, generations):
+    environments = []
+    for i in range(0, n):
+        # Environment is an array 1..period of list 1..N_BUCKETS of real
+        environment = []
+        for t in range(1, random.randint(5, generations)):
+            environment.append([random.random() for bucket in range(0, N_BUCKETS)])
+        environments.append(environment)
+    return environments
+
+
+factor_defns = {
+    'P_REPRODUCE': [0, 0.66],
+    'P_SELECTION': [0,	0.66],
+    'N_OFFSPRING': [2, 5],
+    'RESTRICTION': [False, True],
+    'CORRELATED': [False, True],
+}
+
+
+def construct_line(run_number, experiment_number, result, factors):
+    line = {
+        'experiment': experiment_number,
+        'run': run_number,
+    }
+    line.update(result)
+    line.update({k: factor_defns[k].index(v) for k, v in factors.items()})  # convert back from values to factor levels
+    return line
+
+
+def format_results_line(line):
+    return ",".join([str(line[x]) for x in sorted(line.keys())])
+
+
+def format_results_header(line):
+    return ",".join([str(x) for x in sorted(line.keys())])
+
 
 def main():
 
-    low_start = True
+    assert len(factor_defns) == len(experiments[0])  # Same order - must use appropriate design
+
     f = open("results.data", "w")
 
-    # Write initial header line to file
-    str_factors = "p_reproduce,p_selection,n_offspring,truncate,distribution,correlation_correlation,shape,ecf"
-    _summary = model.get_population_summary(init_population(2,low_start),0)
-    str_header = ",".join([x for x in _summary.keys()])
-    f.write('exp,run,' + str_header + "," + str_factors + "\n")
+    environments = generate_environments(N_ENVIRONMENTS, GENERATIONS)
+    experiment_number = 0
+    run_number = 0
 
-    expCount = 0
     for experiment in experiments:
 
-        factors = [factor_defn[factor_value] for factor_value, factor_defn in zip(experiment, factor_defns)]
+        factors = {k: factor_defns[k][v] for k, v in zip(factor_defns.keys(), experiment)}
 
-        for environment_change_frequency in [0,1,5,10]:
-            experiment_factors = ",".join([str(x) for x in experiment]) + "," + str(environment_change_frequency)
-            for repeat in range(0,10):
-                print("{0}/{1} {3} {2} {4}".format(expCount+1, len(experiments)*4, environment_change_frequency, repeat, factors))
-                results = model.run(factors, population=init_population(5000, low_start), generations=500, population_limit=10, environment_change_frequency=environment_change_frequency)
-                array_results = []
-                for generation in results:
-                    str_generation = ",".join([str(x) for x in generation.values()])
-                    array_results.append( ",".join([str(expCount),str(expCount*10+repeat), str_generation, experiment_factors]))
-                f.write("\n".join(array_results))
+        for environment in environments:
+
+            for repeat in range(0, N_REPEATS):
+
+                print("{0}/{1}".format(run_number + 1, N_REPEATS * len(environments) * len(experiments)))
+                results = model.run(factors=factors,
+                                    population=init_population(POPULATION_SIZE, LOW_START),
+                                    generations=GENERATIONS,
+                                    population_limit=10,
+                                    environment=environment)
+
+                if run_number == 0:
+                    f.write(
+                        format_results_header(construct_line(run_number, experiment_number, results[0], factors)) + "\n"
+                    )
+
+                f.write("\n".join([format_results_line(
+                    construct_line(run_number, experiment_number, result, factors)
+                ) for result in results]))
                 f.write("\n")
 
-            print("\n")
-            expCount+=1
+                run_number += 1
+
+        experiment_number += 1
 
     f.close()
 

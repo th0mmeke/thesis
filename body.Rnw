@@ -81,6 +81,8 @@ Simple ongoing evolution is not the same as creative or interesting evolution; c
 
 We show that under further conditions interesting is possible, perhaps inevitable.
 
+\emph{A copy mechanism with adjustable fidelity can auto-adjust for example to changing environmental conditions.}
+
 \begin{itemize}
 \item
 	Not same as ENS--that explains natural processes; our goal is to achieve something that is as interesting in a different domain
@@ -229,6 +231,22 @@ and that production of novelties may be relatively rapid. Connection
 changes may happen quickly; by comparison, new genes may take many generations.
 
 \section{Problem}
+
+\begin{itemize}
+	\item
+	Want to remove extraneous factors
+	\item
+	More factors introduce complications
+	\item
+	Complicate identification of necessary conditions vs contingent
+	factors
+	\item
+	Ideally minimal choices to be made or parameters to be chosen
+	\item
+	Broadest claim
+	\item
+	Worth reflected in proportion of population--core principle of method
+\end{itemize}
 
 \section{Approach and methods}\label{approach}
 
@@ -487,6 +505,7 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 \section{Contributions}\label{contributions}
 
 \begin{enumerate}
+	\item Ability of a copy mechanism with adjustable fidelity to auto-adjust to changing environmental conditions
 	\item A grounding for Artificial Evolution in EvoEvo. Shown:
 	\begin{itemize}
 		\item Inheritance is inevitable given some form of variable copying mechanism
@@ -721,7 +740,126 @@ Similar problems to Alife
 	duck\ldots{}comparison to existing life or human intelligence
 \end{itemize}
 
-\section{Previous work}\label{epistemology}
+\section{Previous work}
+Minimal conditions for evolutionary system capable of open-ended (but
+not necessarily interesting behaviour)
+
+\begin{itemize}
+	\item
+	Elements that allow for ongoing evolution--necessary, and starting
+	point for novelty
+	\item
+	Open-ended evolution can be seen as evolution in an open-ended system
+	(\eg Chemistry), where an open-ended system has effectively
+	unrestricted representation: the number of possible types must be much
+	larger than the number of individuals (ideally without any
+	restriction). Without this property all possible types can be
+	generated in a finite time, and the system will either reach stasis or
+	begin to repeat. Not all open-ended systems necessarily support
+	evolution, but in those that do, our intuition suggests that
+	open-ended evolution produces increasing complexity, increasing
+	diversity, accumulation of novelty and continual adaptation
+	\autocite{Lehman2012}.
+\end{itemize}
+
+\quote{
+	by open-ended evolutionary capacity we understand the potential of a
+	system to reproduce its basic functional-constitutive dynamics, bringing
+	about an un-limited variety of equivalent systems, of ways of expressing
+	that dynamics, which are not subject to any predetermined upper bound of
+	organizational complexity (even if they are, indeed, to the
+	energetic-material restrictions imposed by a finite environment and by
+	the universal physico-chemical laws.}
+{\autocite{Ruiz-Mirazo2004}}
+
+\begin{itemize}
+	\item
+	Open-ended from \autocite{MaynardSmith1999} definition--\TODO{ size of search space vs population}
+	\item
+	Heritability a challenge--biological organisms employ digital
+	heredity; sophisticated mechanism with controlled error rates, but
+	exceedingly unlikely to arise spontaneously
+	\item
+	Multiplication/heredity for maintenance of population
+	\item
+	Analog methods possible--\eg:
+	
+	\begin{itemize}
+		\item
+		compositional (where new entity contains some elements of original)
+		(as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
+		\item
+		\quote{migrant pools}{\autocite{Watson2015}}
+		\item
+		Group fissioning \autocite{Watson2015}
+		\item
+		Attractor based \autocite{Szathmary2000}
+	\end{itemize}
+	\item
+	Heredity seen as method to maintain low entropy over much longer time
+	than possible with non-''biological'' systems \autocite{Adami2015}
+	\item
+	Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
+	\item
+	\autocite{Kauffman:1993kk} argued that self-organization (RAPN) can replace the genome
+\end{itemize}
+
+\autocite{Bourrat2015} showed that inheritance bias (correlation in trait between parent and offspring) increases over time
+
+\begin{itemize}
+	\item
+	Model 4--proportion of high fitness entities rapidly increases to
+	near 1.0
+	\item
+	Model 5--both the proportion of offspring that are procreators
+	(rather than persistors) and the heritability of ability to procreate
+	increases over time to 1.0
+\end{itemize}
+
+\begin{enumerate}
+	\item
+	Fitness independent of inheritance potential--as explored in
+	\autocite{Bourrat2015}--bias applied only to bias value of offspring, not fitness
+	\item
+	fitness dependent on inheritance--more likely. A mechanism that doesn't copy well unlikely to preserve information leading to high
+	fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
+\end{enumerate}
+
+\autocite{Bourrat2015} introduces a check-for-overcrowding step--is
+this necessary? Under endogenous selection shouldn't overcrowding also
+be endogenous?
+
+General difficulties:
+\begin{itemize}
+	\item Somewhat arbitrary choices of elements of description
+	\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
+	\item Lack causality--so hard to use as mechanism
+	\item Leave options and alternatives for implementer
+	\item Sheer number of EA algorithms
+\end{itemize}
+
+Proofs of effectiveness:
+\begin{itemize}
+	\item Base equations from Malthus and population genetics
+	\item \autocite{Vose:1999di} for EAs
+	\item Underlying assumptions should be maintained in our models
+\end{itemize}
+
+\autocite{Godfrey-Smith2007}
+\begin{itemize}
+	\item Biological summaries
+	\item Purpose of summaries as opposed to Formal models
+	\item Identify the major elements in biology
+\end{itemize}
+
+\autocite{Bourrat2015}--Not all of these elements are essential
+
+Other attempts at general models:
+\begin{itemize}
+	\item \autocite{VonNeumann1966} as reviewed in \autocite{Taylor:1999sc} (Lack of environmental emphasis)
+	\item \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
+	\item \autocite{Paixao2015}--reconciliation of EA models with PG models--A synthesis rather than a reformulation--way of describing both A and B using generalizations of each. Not a causal explanation
+\end{itemize}
 
 Previous work coming to consensus on conditions--e.g., rich generative mechanism, unlimited heredity, inexhaustible fitness landscape, emergence \autocite{Vasas2015}, and good genetic representation, ``sufficiently large world for every individual to be evaluated'', and a seed or starting point, (plus four specific conditions
 \autocite{Soros2014})
@@ -1084,144 +1222,29 @@ V+S-\textgreater{}I
 ``Context determines fitness'', where the environment is stable and
 affects the development of the entities
 
-Minimal conditions for evolutionary system capable of open-ended (but
-not necessarily interesting behaviour)
+Degree of variation between generations important (no correlation means
+effectively unguided search, complete correlation means no source of
+novelties)
 
-\begin{itemize}
-\item
-  Elements that allow for ongoing evolution--necessary, and starting
-  point for novelty
-\item
-  Open-ended evolution can be seen as evolution in an open-ended system
-  (\eg Chemistry), where an open-ended system has effectively
-  unrestricted representation: the number of possible types must be much
-  larger than the number of individuals (ideally without any
-  restriction). Without this property all possible types can be
-  generated in a finite time, and the system will either reach stasis or
-  begin to repeat. Not all open-ended systems necessarily support
-  evolution, but in those that do, our intuition suggests that
-  open-ended evolution produces increasing complexity, increasing
-  diversity, accumulation of novelty and continual adaptation
-  \autocite{Lehman2012}.
-\end{itemize}
+Problem is how can the optimal degree of variation (that is,
+inheritance) be established endogenously rather than as a model
+parameter?
 
-\quote{
-by open-ended evolutionary capacity we understand the potential of a
-system to reproduce its basic functional-constitutive dynamics, bringing
-about an un-limited variety of equivalent systems, of ways of expressing
-that dynamics, which are not subject to any predetermined upper bound of
-organizational complexity (even if they are, indeed, to the
-energetic-material restrictions imposed by a finite environment and by
-the universal physico-chemical laws.}
-{\autocite{Ruiz-Mirazo2004}}
+Inheritance related to variation (between generations). Low variation
+implies high inheritance
 
-\begin{itemize}
-\item
-  Open-ended from \autocite{MaynardSmith1999} definition--\TODO{ size of search space vs population}
-\item
-  Heritability a challenge--biological organisms employ digital
-  heredity; sophisticated mechanism with controlled error rates, but
-  exceedingly unlikely to arise spontaneously
-\item
-  Multiplication/heredity for maintenance of population
-\item
-  Analog methods possible--\eg:
+Selection strengthens degree of inheritance
 
-  \begin{itemize}
-  \item
-    compositional (where new entity contains some elements of original)
-    (as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
-  \item
-    \quote{migrant pools}{\autocite{Watson2015}}
-  \item
-    Group fissioning \autocite{Watson2015}
-  \item
-    Attractor based \autocite{Szathmary2000}
-  \end{itemize}
-\item
-  Heredity seen as method to maintain low entropy over much longer time
-  than possible with non-''biological'' systems \autocite{Adami2015}
-\item
-  Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-\item
-  \autocite{Kauffman:1993kk} argued that self-organization (RAPN) can replace the genome
-\end{itemize}
-
-\section{Previous work}
-
-General difficulties:
-\begin{itemize}
-\item Somewhat arbitrary choices of elements of description
-\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
-\item Lack causality--so hard to use as mechanism
-\item Leave options and alternatives for implementer
-\item Sheer number of EA algorithms
-\end{itemize}
-
-Proofs of effectiveness:
-\begin{itemize}
-\item Base equations from Malthus and population genetics
-\item \autocite{Vose:1999di} for EAs
-\item Underlying assumptions should be maintained in our models
-\end{itemize}
-
-\autocite{Godfrey-Smith2007}
-\begin{itemize}
-\item Biological summaries
-\item Purpose of summaries as opposed to Formal models
-\item Identify the major elements in biology
-\end{itemize}
-
-\autocite{Bourrat2015}--Not all of these elements are essential
-
-Other attempts at general models:
-\begin{itemize}
-\item \autocite{VonNeumann1966} as reviewed in \autocite{Taylor:1999sc} (Lack of environmental emphasis)
-\item \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
-\item \autocite{Paixao2015}--reconciliation of EA models with PG models--A synthesis rather than a reformulation--way of describing both A and B using generalizations of each. Not a causal explanation
-\end{itemize}
-
-\section{Method}\label{method}
-
-Goal is a minimal description of necessary factors--enough to build a
-mechanism
-
-Strategy is to make as many factors as possible endogenous rather than
-needing specification by the modeller--more general and hence more
-powerful claim
-
-Therefore separate out descriptive and causal descriptions of process
-
-Descriptive--outcome or goal--based on Evolution. Not useful for
-construction, but rather for testing
-
-Causal--mechanism
-
-\begin{itemize}
-\item
-  Want to remove extraneous factors
-\item
-  More factors introduce complications
-\item
-  Complicate identification of necessary conditions vs contingent
-  factors
-\item
-  Ideally minimal choices to be made or parameters to be chosen
-\item
-  Broadest claim
-\item
-  Worth reflected in proportion of population--core principle of method
-\end{itemize}
-
-\section{Mechanism is cumulative adaptive evolution}\label{mechanism-is-cumulative-adaptive-evolution}
-
-From earlier work, attempt a synthesis based on common factors
+high fitness lineages more successful. Inheritance increases
+correlation along lineage, so high fitness more likely to be passed
+down. (Also low fitness, but they will suffer). On average then high
+inheritance increases average fitness over time
 
 \section{Assumptions}\label{assumptions}
 
 No learning mechanisms--changes during lifetime
 
-Corollary--addition and removal of elements
+Corollary--if elements cannot change, then for population level change need to add or remove elements
 
 \begin{itemize}
 \item
@@ -1230,16 +1253,6 @@ Corollary--addition and removal of elements
 \item
   If have no additions, then cannot adjust population proportions
 \end{itemize}
-
-\section{Contributions}
-
-\begin{itemize}
-\item General model for evolutionary processes
-\item Experimental support for hypothesis that selection and variation sufficient for evolution
-\item Experimental support for ability of a copy mechanism with adjustable fidelity to auto-adjust to changing environmental conditions
-\end{itemize}
-
-\chapter{Synthesis based on first principles}\label{synthesis-based-on-first-principles}
 
 \section{Variation (and Inheritance)}\label{variation-and-inheritance}
 
@@ -1301,50 +1314,7 @@ additional value
 Affected by element and by everything else, so conceivably could be
 guided by modifying the environment in a calculated way
 
-\section{Issues--still parameters and choices}\label{issues -- still-parameters-and-choices}
-
-When do additions happen?
-
-\begin{itemize}
-\item
-  Degree of correlation between addition events and selection events
-\end{itemize}
-
-\autocite{Bourrat2015} introduces a check-for-overcrowding step--is
-this necessary? Under endogenous selection shouldn't overcrowding also
-be endogenous?
-
-\section{Can a causal reading further simplify the model?}\label{can-a-causal-reading-further-simplify-the-model}
-
-Reproduction follows from replication--no need to choose degree of
-similarity, emergent from lower level rules
-
-\chapter{Synthesis from a general evolutionary model}\label{synthesis-from-a-general-evolutionary-model}
-
-\TODO{Reformulate as causal reading}
-
-\autocite{Bourrat2015} showed that inheritance bias (correlation in trait between parent and offspring) increases over time
-
-
-TODO
-\begin{enumerate}
-\item
-Fitness independent of inheritance potential--as explored in
-\autocite{Bourrat2015}--bias applied only to bias value of offspring, not fitness
-\item
-fitness dependent on inheritance--more likely. A mechanism that doesn't copy well unlikely to preserve information leading to high
-fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
-\end{enumerate}
-
-\begin{itemize}
-\item
-  Model 4--proportion of high fitness entities rapidly increases to
-  near 1.0
-\item
-  Model 5--both the proportion of offspring that are procreators
-  (rather than persistors) and the heritability of ability to procreate
-  increases over time to 1.0
-\end{itemize}
+Reproduction follows from replication--no need to choose degree of similarity, emergent from lower level rules
 
 \section{Hypothesis: Variation and Inheritance and Selection are sufficient for Evolution}\label{h1}
 
@@ -1415,26 +1385,6 @@ Under changing environmental conditions, where the fitness of an unchanging enti
 	\item \emph{Fidelity} at the end of a run under changing conditions \textless{} that under fixed conditions.
 	\item The final \emph{Fitness} will be in the the range described by the distribution applied in the $tweakFitness$ function.
 \end{enumerate}
-
-\section{Theory}\label{theory}
-
-Degree of variation between generations important (no correlation means
-effectively unguided search, complete correlation means no source of
-novelties)
-
-  Problem is how can the optimal degree of variation (that is,
-  inheritance) be established endogenously rather than as a model
-  parameter?
-
-Inheritance related to variation (between generations). Low variation
-implies high inheritance
-
-Selection strengthens degree of inheritance
-
-  high fitness lineages more successful. Inheritance increases
-  correlation along lineage, so high fitness more likely to be passed
-  down. (Also low fitness, but they will suffer). On average then high
-  inheritance increases average fitness over time
 
 \section{Alternative explanations}\label{alternative-explanations-1}
 

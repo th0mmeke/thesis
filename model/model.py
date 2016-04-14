@@ -81,7 +81,7 @@ def apply_environment_change(environment, population):
     return new_population
 
 
-def get_population_summary(population, generation):
+def get_results_summary(change, population, generation):
     fitness = [x.fitness for x in population]
     fidelity = [x.fidelity for x in population]
 
@@ -92,8 +92,8 @@ def get_population_summary(population, generation):
         sd_fitness = sd_fidelity = "NaN"
 
     if len(population) > 0:
-        ave_fitness = math.fsum(fitness)/len(population)
-        ave_fidelity = math.fsum(fidelity)/len(population)
+        ave_fitness = math.fsum(fitness) / len(population)
+        ave_fidelity = math.fsum(fidelity) / len(population)
     else:
         ave_fitness = ave_fidelity = "NaN"
 
@@ -102,9 +102,11 @@ def get_population_summary(population, generation):
                'ave_fit': ave_fitness,
                'sd_fit': sd_fitness,
                'ave_cor': ave_fidelity,
-               'sd_cor': sd_fidelity}
+               'sd_cor': sd_fidelity,
+               'environment_mean': change[0],
+               'environment_sd': change[1]}
 
-    return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))  # to guarantee ordering if we extract values later
+    return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))
 
 
 def run(factors, population, generations, population_limit, environment):
@@ -113,8 +115,7 @@ def run(factors, population, generations, population_limit, environment):
     population_limit *= original_population_size  # stop when population size reaches a multiple of original population
 
     # starting summary
-    initial_summary = get_population_summary(population, 0)
-    results = [initial_summary]  # headers and starting conditions
+    results = [get_results_summary([0, 0], population, 0)]
 
     for t in range(1, generations+1):
 
@@ -127,9 +128,11 @@ def run(factors, population, generations, population_limit, environment):
         if len(population) < 3 or len(population) > population_limit:
             break
 
-        results.append(get_population_summary(population, t))
+        change = environment[t % len(environment)]
+        population = apply_environment_change(change, population)
 
-        population = apply_environment_change(environment[t % len(environment)], population)
+        # Results AFTER environment change, with consistent ordering
+        results.append(get_results_summary(change, population, t))
 
     lineages = [e.lineage for e in population]
     from collections import Counter

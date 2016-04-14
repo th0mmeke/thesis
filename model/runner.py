@@ -1,10 +1,10 @@
 import random
 import model
 
-GENERATIONS = 100
-POPULATION_SIZE = 500
+GENERATIONS = 10
+POPULATION_SIZE = 50
 N_ENVIRONMENTS = 100
-N_REPEATS = 3
+N_REPEATS = 1
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -111,12 +111,10 @@ factor_defns = {
 }
 
 
-def construct_line(run_number, experiment_number, environment, result, factors):
+def construct_line(run_number, experiment_number, result, factors):
     line = {
         'experiment': experiment_number,
         'run': run_number,
-        'environment_mean': environment[0],
-        'environment_sd': environment[1],
     }
     line.update(result)
     line.update({k: factor_defns[k].index(v) for k, v in factors.items()})  # convert back from values to factor levels
@@ -160,12 +158,11 @@ def main():
                 if run_number == 0:
                     f.write(format_results_header(construct_line(run_number,
                                                                  experiment_number,
-                                                                 environment,
                                                                  results[0],
                                                                  factors)) + "\n")
 
                 f.write("\n".join([format_results_line(
-                    construct_line(run_number, experiment_number, environment, result, factors)
+                    construct_line(run_number, experiment_number, result, factors)
                 ) for result in results]))
                 f.write("\n")
 

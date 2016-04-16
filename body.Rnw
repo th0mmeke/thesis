@@ -1164,7 +1164,6 @@ History
 \end{itemize}
 
 Some systems claim capable of OEE (e.g., Channon, Avida) but not necessarily creative
-\TODO{complete list of relevant previous work in Alife - not so long a list...}
 
 EvoEvo project taking a similar approach, but from a higher level biological starting point (genotype-phenotype mappings)
 http://evoevo.liris.cnrs.fr/about-evoevo-project/
@@ -1174,6 +1173,299 @@ http://evoevo.liris.cnrs.fr/about-evoevo-project/
 	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
 	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
 \end{itemize}
+
+Finally, in Artificial Life, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2002,Hutton2009,Lucht2012} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011} - a bacterial inspired microprogram chemistry - though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+
+Open-ended evolution can be seen as evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals (ideally without any restriction). Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \cite{Lehman2012}.
+
+\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws)}{\cite{Ruiz-Mirazo2004}}
+
+\begin{itemize}
+	\item An open-ended evolutionary system must demonstrate unbounded diversity during its growth phase.
+	\item An open-ended evolutionary system must embody selection.
+	\item An open-ended evolutionary system must exhibit continuing (``positive'') new adaptive activity.
+	\item An open-ended evolutionary system must have an endogenous implementation of niches.
+\end{itemize} \cite{Maley:1999bs} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
+
+\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:\begin{enumerate}[label=\roman*] \item Be fully embedded in their arena of competition \item Have rich, unlimited interactions between each other and with their environment \item Initially replicate implicitly, rather than using some encoding of the replication process, and \item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
+\end{enumerate}
+
+Bottom-up models for open-ended evolution leverage richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon.
+
+Top-down models assume a knowledge of the necessary elements.
+
+Limited heredity replicators vs unlimited - the first where the number of possible types is less than the number of individuals; the second where it far exceeds\cite{Szathmary:2006ty}
+
+\begin{table}
+	\scriptsize
+	\caption{A sample of Artificial Chemistries for open-ended evolution}
+	\label{tab1}
+	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
+		\hline\noalign{\smallskip}
+		Chemistry & Energy Model? & Constructive?\\ 
+		\\ \noalign{\smallskip}
+		\hline
+		\noalign{\smallskip}
+		\cite{Ducharme2012}											&Yes					&Yes\\
+		StringMol \parencite{Hickinbotham2012}								&No, global energy only, conservation of mass as proposed extension&Yes\\
+		Squirm3 \parencite{Hutton2002,Lucht2012}							&No					&No\\
+		RBN-World \parencite{Faulconbridge2011}								&Unknown			&Yes	\\
+		\cite{Lenaerts2009}											&No					&Yes - molecular interactions\\
+		ZChem \parencite{Tominaga2009}									&Conservation of mass	&No - reactions are atomic with wildcards\\
+		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008}	&No		&Unknown\\
+		\cite{Fernando:2008xy,Fernando:2007pf}							&Yes, and thermodynamics govern reactions&No - atomic reactions\\
+		\cite{Gardiner2007}											&No					&No - atomic reactions\\
+		NAC \parencite{Suzuki2006}										&Unknown			&Yes	\\						
+		GGL/ToyChem \parencite{Benko2005}								&Mass conservation only	&Yes\\
+		Lattice Artificial Chemistry \parencite{Ono2000,Madina2003}				&No					&No\\
+		GGL/ToyChem \parencite{Benko2003}								&Mass conservation only	&No - pre-defined reactions only\\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+
+%Geb \cite{Channon:iw,Channon:2001ly} artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward.
+
+%RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants  as measured by non-catalysed loops (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (\cite[§8]{Faulconbridge2011}). 
+
+Ducharme et al \parencite{Ducharme2012}. The approach taken is to model the energy changes associated with reactions. The chemistry is spatial; atoms are arranged on a 2-dimensional grid and have velocity. When two atoms pass within a particular distance, they interact. The possible types of interactions are prespecified, with the type chosen being driven by the atomic composition and energies of the interacting atoms. Reactions are therefore between atoms rather than molecules; a molecule in this chemistry is a combination of atoms arranged in a particular structure, re-examined after each reaction to form a stable configuration based on expectations from real-world chemistry. Although computational costs are not reported, it seems plausible that the calculation of intersections on a 2-dimensional grid will be expensive for large molecular populations. Another cost comes from the re-arrangement of molecules into energy-efficient configurations. This spatial structuring enables the model to restrict atomic interactions to those atoms that are accessible on a molecule, but at the cost of additional modelling complexity. 
+
+%\cite{Tominaga2009,Tominaga2007,Tominaga2004} - string-based pattern matching applied to examination of the feasibility of biochemical pathways.
+%Lenaerts2009 - modelling the topological evolution of chemical networks
+
+\begin{center}
+	\scriptsize
+	\begin{longtable}{@{}
+			p{\dimexpr 0.15\textwidth-2\tabcolsep}
+			p{\dimexpr 0.2\textwidth-2\tabcolsep}
+			p{\dimexpr 0.25\textwidth-2\tabcolsep}
+			p{\dimexpr 0.25\textwidth-2\tabcolsep}
+			p{\dimexpr 0.15\textwidth-2\tabcolsep}
+			@{}}
+		\toprule
+		Reference & Goals & Theoretical argument & Description & Summary\\
+		\midrule\endhead
+		
+		\cite{Wrobel2012} & 
+		``\ldots steps towards realizing a biologically realistic system'', motivational autonomy in searching for food and water while needing to perform work &
+		Extension of previous work to three-resource problem; biological inspirations without explicit grounding;  appeal to theories of minimal cognition, ecological grounding and motivational autonomy &
+		GRN driven by inputs from environmental sensors and driving output motor actuators. 
+		Abstractions of food, water and work (called ``beauty'') - marked by scents that can be detected by animat sensors - food and water are required to generate motive energy (through a simulation of a microbial fuel cell). 
+		Isolated mobile animats, synchronous generational evolutionary model with fixed population size, explicit fitness function and binary tournament selection&
+		\\
+		
+		\cite{Prieto2010,Trueba2011,Trueba2012} &
+		Evolution guided by energy-regulation towards a fixed objective; objective of collective gathering of blocks requires coordinated behaviours from agents that develop specializations &
+		Situated and embodied (from ``living'' in environment), no biological significance claimed &
+		Agents are unchanging physical robots; active life-span determined by internal energy-analogue.
+		Static morphology; agent energy-analogue depleted by activity and increased by performing specific tasks.
+		Asynchronous generations, local interactions determine reproduction, no global competition, no fitness function; evolution (only of behaviour) happens in real-time rather than offline before deployment &
+		\\
+		
+		\cite{Lobo2010} & 
+		Emergence of novelty and diversity; artificial genome model similar to that in \textcite{Reil:1999rp}, development of organisms modelled by springs to path-follow; three cell-types; results classified by hand (exploratory method) &
+		``\ldots evolution of genetic regulation could be a sufficient condition for the emergence of novelty and diversity''. No previous study of regulation has succeeded in showing both novelty and diversity under evolution. &
+		Embedding purely through physics modelling.
+		No resource model - goal is path following.
+		Standard EA population model - individuals are assessed by the EA in isolation & 
+		Four behaviours considered evidence of "novelty" and "diversity"; no predefined measure (so concerns of seeing what wish to see); critical assumption without evidence that results will extend ad infinitum\\
+		
+		\cite{Taylor1999,Taylor:1999sc}&
+		Creation of \gls{alife}&
+		Extension of Tierra \cite{Ray1991} by cell regulation, parallel processes, energy modelling \cite[p.4]{Taylor:1999sc}.
+		Cells are explicitly modelled as bitstrings which run as programs&
+		Adhoc theoretical model (essentially Tierra plus some likely improvements)\\
+		
+		\cite{Hutton2007,Hutton2002} &
+		Artificial system capable of life-like \gls{oee} (creativity) &
+		Based on hypothesis (materiality, interactions, embedding) of \textcite{Taylor2001}, better expressed in \textcite[p.341]{Hutton2002}; membrane to allow individuals to benefit from innovations by protecting internal reactions from others&
+		\Gls{achem} from \textcite{Hutton2002} used to construct all elements in world - material and embedded.
+		Atoms in \gls{achem} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
+		Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division&
+		Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)\\
+		
+		%\cite{Stepney2011} & & & & \\
+		%\cite{Korb2009} & & & & \\
+		%\cite{Dorin2008} & & &  & \\
+		%\cite{Spector:2007qf} & & & & \\
+		%\cite{Channon:2006st,Channon:2001ys} & & & & \\
+		%\cite{Dorin:2006fk} & & & & \\
+		%\cite{Nowostawski2005} & & & & \\
+		%\cite{Channon:2001ys} & & & & \\
+		%\cite{Maley:1999bs} & & & & \\
+		%\cite{Jakobi1996} & & & & \\
+		%\cite{Chaumont2010} & & & & \\
+		%\cite{Faulconbridge2010} & & & & \\
+		%\cite{Hickinbotham2010} & & & & \\
+		%\cite{Hickinbotham2010a} & Details of evolutionary behaviour stemming from self-copying replicase molecule
+		% 
+		% \cite{Hickinbotham2010a}& Goal is not specifically about creativity or novelty instead being driven primarily by bacterial modelling (Plazzmid)
+		% No membrane model - just evolution; implication is that membranes are too computationally expensive for novelty investigation \cite[p.88]{Hickinbotham2010}\\
+		
+		% \cite{Fernando:2008xy,Fernando:2007pf} & 
+		% Driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems'') so attempt to establish a phylogeny that includes first autonomous system & 
+		% Simulation of laboratory experiment of lipid aggregates in a reactor. Strong theoretical justification. Hypothesis supported by inspection - single entities that are examples; Novelty is implicit in overall goals with sole quantitative measure (``fitness``) of integral of quantity and size - more and bigger is better&
+		% Molecules and food molecules share same representation and chemistry&
+		% Molecules, light-energy and thermodynamics&
+		% Hill-climbing algorithm replaces parent with first 10\% better-fitness child; explicit fitness calculation&
+		% Experiment reported in \textcite{Fernando:2008xy} generates phylogeny which is then examined and interpreted - danger of arguing from specific to general. Shows only possible, no more.\\
+		
+		%\cite{Suzuki2008} & Self-movement & & & & \\
+		
+		% \cite{Dorin:2006fk} &
+		% Demonstrate that \gls{achem} can support a simple ecology - autotrophs and heterotrophs, with interactions between organisms and between organisms and the abiotic environment&
+		% Loosely based on simplified model of generic terrestrial ecosystem &
+		% All elements emerge from \gls{achem}&
+		% Atoms and energy&
+		% No evolutionary model; proposed ecosystem made up of a number of component organisms&
+		% Description of model only - no results; adhoc theoretical justification and choice of ecosystem elements\\
+		
+		%\cite{Tominaga2005,Tominaga2009,Tominaga2007} & Not about novelty/creativity, but biological modelling including replication
+		% Ono, N., & Ikegami, T. (2000). Self-maintenance and self-reproduction in an abstract cell model. Journal of Theoretical Biology, 206, 243Ð253
+		% \\
+		
+		
+		\bottomrule
+		\caption{Previous Work on Open-Ended Evolution in Artificial Evolution\label{tbl:previousworkcreativity}}
+	\end{longtable}
+\end{center}
+
+\begin{center}
+	\scriptsize
+	\begin{longtable}{@{}
+			p{\dimexpr 0.15\textwidth-2\tabcolsep}
+			p{\dimexpr 0.2\textwidth-2\tabcolsep}
+			p{\dimexpr 0.25\textwidth-2\tabcolsep}
+			p{\dimexpr 0.25\textwidth-2\tabcolsep}
+			p{\dimexpr 0.15\textwidth-2\tabcolsep}
+			@{}}
+		\toprule
+		Reference & Goals & Theoretical argument & Description & Summary\\
+		\midrule\endhead
+		%Wrobel2012		&Motivational autonomy in searching for food and water while needing to perform work. GRN driven by inputs from environmental sensors and driving output motor actuators. Abstractions of food, water and work (called ``beauty'') - marked by scents that can be detected by animat sensors - food and water are required to generate motive energy (through a simulation of a microbial fuel cell).  Isolated mobile animats, synchronous generational evolutionary model with fixed population size, explicit fitness function and binary tournament selection\\
+		%Miconi:2007xh	& \\
+		%Taylor:1999sc	&Extension of Tierra (Ray1991) by cell regulation, parallel processes, energy modelling (Taylor:1999sc, p4).Cells are explicitly modelled as bitstrings which run as programs. Adhoc theoretical model (essentially Tierra+)\\
+		%Korb2009,Dorin2008,Dorin:2006fk& \\
+		%Spector:2007qf& \\
+		%Channon:2006st,Channon:2001ys& \\
+		%Nowostawski2005& \\
+		%Komosinski2000,Komosinski1999& \\
+		%Maley:1999bs& \\
+		%Jakobi1996& \\
+		\cite{Wrobel2012} & 
+		``\ldots steps towards realizing a biologically realistic system'', motivational autonomy in searching for food and water while needing to perform work &
+		Extension of previous work to three-resource problem; biological inspirations without explicit grounding;  appeal to theories of minimal cognition, ecological grounding and motivational autonomy &
+		GRN driven by inputs from environmental sensors and driving output motor actuators. 
+		Abstractions of food, water and work (called ``beauty'') - marked by scents that can be detected by animat sensors - food and water are required to generate motive energy (through a simulation of a microbial fuel cell). 
+		Isolated mobile animats, synchronous generational evolutionary model with fixed population size, explicit fitness function and binary tournament selection&
+		\\
+		
+		\cite{Prieto2010,Trueba2011,Trueba2012} &
+		Evolution guided by energy-regulation towards a fixed objective; objective of collective gathering of blocks requires coordinated behaviours from agents that develop specializations &
+		Situated and embodied (from ``living'' in environment), no biological significance claimed &
+		Agents are unchanging physical robots; active life-span determined by internal energy-analogue.
+		Static morphology; agent energy-analogue depleted by activity and increased by performing specific tasks.
+		Asynchronous generations, local interactions determine reproduction, no global competition, no fitness function; evolution (only of behaviour) happens in real-time rather than offline before deployment &
+		\\
+		
+		\cite{Lobo2010} & 
+		Emergence of novelty and diversity; artificial genome model similar to that in \textcite{Reil:1999rp}, development of organisms modelled by springs to path-follow; three cell-types; results classified by hand (exploratory method) &
+		``\ldots evolution of genetic regulation could be a sufficient condition for the emergence of novelty and diversity''. No previous study of regulation has succeeded in showing both novelty and diversity under evolution. &
+		Embedding purely through physics modelling.
+		No resource model - goal is path following.
+		Standard EA population model - individuals are assessed by the EA in isolation & 
+		Four behaviours considered evidence of "novelty" and "diversity"; no predefined measure (so concerns of seeing what wish to see); critical assumption without evidence that results will extend ad infinitum\\
+		
+		\cite{Taylor1999,Taylor:1999sc}&
+		Creation of \gls{alife}&
+		Extension of Tierra \cite{Ray1991} by cell regulation, parallel processes, energy modelling \cite[p.4]{Taylor:1999sc}.
+		Cells are explicitly modelled as bitstrings which run as programs&
+		Adhoc theoretical model (essentially Tierra plus some likely improvements)\\
+		
+		\cite{Hutton2007,Hutton2002} &
+		Artificial system capable of life-like \gls{oee} (creativity) &
+		Based on hypothesis (materiality, interactions, embedding) of \textcite{Taylor2001}, better expressed in \textcite[p.341]{Hutton2002}; membrane to allow individuals to benefit from innovations by protecting internal reactions from others&
+		\Gls{achem} from \textcite{Hutton2002} used to construct all elements in world - material and embedded.
+		Atoms in \gls{achem} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
+		Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division&
+		Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)\\
+		
+		\cite{Stepney2011} & & & & \\
+		\cite{Korb2009} & & & & \\
+		\cite{Dorin2008} & & &  & \\
+		\cite{Spector:2007qf} & & & & \\
+		\cite{Channon:2006st,Channon:2001ys} & & & & \\
+		\cite{Dorin:2006fk} & & & & \\
+		\cite{Nowostawski2005} & & & & \\
+		\cite{Channon:2001ys} & & & & \\
+		\cite{Maley:1999bs} & & & & \\
+		\cite{Jakobi1996} & & & & \\
+		\cite{Chaumont2010} & & & & \\
+		\cite{Faulconbridge2010} & & & & \\
+		\cite{Hickinbotham2010} & & & & \\
+		
+		% \cite{Conforth2009} & Not explicitly about creativity, but top-down model incorporating stoichiometry (material transformations), energy flow and evolution. Shows improvements in stability and diversity of agents. Goal is eventual embedding of agents into robots.
+		
+		% \cite{Komosinski2009,Komosinski2000} & 
+		% FramSticks - an experimental platform for investigating open-ended evolution; Genetic encoding (both direct and developmental) of Brain (neural network), Receptors (sensors), Effectors (muscles) and Body with multiple alternative physics simulators; channels for signals between actors&
+		%  & & & \\
+		
+		% \cite{Fernandez2012} &
+		% Evolution of ecological communities, particularly diversification (genotype and phenotype variation) &
+		% \Gls{ibm}, selection of biological inspirations (gene duplication and development as mechanism for enabling diversification), little justification for choices, little support for claims of biological relevance beyond similarity of two patterns
+		% Fitness based on light captured by each plant in competition with others.
+		% Effectively none.
+		% Generational model with fixed number of synchronous generations, variable population with complete replacement at each generation, explicit fitness determines reproduction rate&
+		% \\
+		
+		% \cite{Sayama2011} & Swarm Chemistry & & & & \\
+		%\cite{Sayama2011} explores ability of Swarm Chemistry - an integration of Artificial Chemistry with Swarm Robotics - to achieve Open-Ended Evolution. The models are rather non-biological, and interpretation as biology is difficult. One specific difficulty with the results as reported, noted by the author, is that all results were obtained by visual inspection, and that measures need to be developed based on some standard works.
+		
+		%\cite{Hickinbotham2011a} & Proposal for novelty - not a model yet
+		%\cite{Hickinbotham2010a} & Details of evolutionary behaviour stemming from self-copying replicase molecule
+		% 
+		% \cite{Hickinbotham2010a}& Goal is not specifically about creativity or novelty instead being driven primarily by bacterial modelling (Plazzmid)
+		% &
+		% &
+		% &
+		% &
+		% No membrane model - just evolution; implication is that membranes are too computationally expensive for novelty investigation \cite[p.88]{Hickinbotham2010}\\
+		
+		% \cite{Fernando:2008xy,Fernando:2007pf} & 
+		% Driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems'') so attempt to establish a phylogeny that includes first autonomous system & 
+		% Simulation of laboratory experiment of lipid aggregates in a reactor. Strong theoretical justification. Hypothesis supported by inspection - single entities that are examples; Novelty is implicit in overall goals with sole quantitative measure (``fitness``) of integral of quantity and size - more and bigger is better&
+		% Molecules and food molecules share same representation and chemistry&
+		% Molecules, light-energy and thermodynamics&
+		% Hill-climbing algorithm replaces parent with first 10\% better-fitness child; explicit fitness calculation&
+		% Experiment reported in \textcite{Fernando:2008xy} generates phylogeny which is then examined and interpreted - danger of arguing from specific to general. Shows only possible, no more.\\
+		
+		%\cite{Suzuki2008} & Self-movement & & & & \\
+		
+		
+		% \cite{Dorin:2006fk} &
+		% Demonstrate that \gls{achem} can support a simple ecology - autotrophs and heterotrophs, with interactions between organisms and between organisms and the abiotic environment&
+		% Loosely based on simplified model of generic terrestrial ecosystem &
+		% All elements emerge from \gls{achem}&
+		% Atoms and energy&
+		% No evolutionary model; proposed ecosystem made up of a number of component organisms&
+		% Description of model only - no results; adhoc theoretical justification and choice of ecosystem elements\\
+		
+		%\cite{Tominaga2005,Tominaga2009,Tominaga2007} & Not about novelty/creativity, but biological modelling including replication
+		% Ono, N., & Ikegami, T. (2000). Self-maintenance and self-reproduction in an abstract cell model. Journal of Theoretical Biology, 206, 243Ð253
+		% &
+		% &
+		% &
+		% &
+		% &
+		% \\
+		
+		
+		\bottomrule
+		\caption{Previous Work on Open-Ended Evolution in Artificial Evolution\label{tbl:previousworkcreativity}}
+	\end{longtable}
+\end{center}
+
 
 \part{Evolutionary Potential}
 
@@ -4379,7 +4671,7 @@ The most significant limitation of our analysis overall is that the values chose
 
 \TODO{Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...}
 
-\part{TODO-The Search for Creativity}\label{the-search-for-creativity}
+\part{Conclusions}\label{the-search-for-creativity}
 
 \chapter{TODO-Introduction}
 

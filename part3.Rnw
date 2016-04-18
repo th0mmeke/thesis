@@ -1,3 +1,20 @@
+<<setup, include=FALSE>>=
+library(knitr)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra) # grid layouts for ggplot2
+library(lattice) # needed for bwplot etc
+library(english) # convert numbers to words
+opts_chunk$set(fig.path='generated_figures/')
+knit_hooks$set(pdfcrop = hook_pdfcrop)
+
+load.toyworld <- function(f){
+colClasses <- c("NULL", "NULL", "factor","NULL","factor","factor", "factor","factor","integer","integer","integer")
+df <- read.csv(f,colClasses=colClasses)
+df$Partition.Start <- factor(df$Partition.Start, levels = c("4750", "9750", "14750", "19750"))
+df
+}
+@
+
 \chapter{Introduction}
 
 Artificial Chemistries of discrete atoms provide an interesting testbed

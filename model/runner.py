@@ -1,12 +1,10 @@
 import random
 import model
 
-GENERATIONS = 500
-POPULATION_SIZE = 5000
-N_ENVIRONMENTS = 10
-N_REPEATS = 3
-N_BUCKETS = 100
-LOW_START = True
+GENERATIONS = 10
+POPULATION_SIZE = 50
+N_ENVIRONMENTS = 100
+N_REPEATS = 1
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -21,54 +19,88 @@ LOW_START = True
 # ]
 
 # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
-experiments = [
-    # X1  X2  X3  X4  X5  X6  X7
-    #--------------------------
-    [0,  0,  0,  0,  0,  0,  0],
-    [1,  0,  0,  0,  1,  0,  1],
-    [0,  1,  0,  0,  1,  1,  0],
-    [1,  1,  0,  0,  0,  1,  1],
-    [0,  0,  1,  0,  1,  1,  1],
-    [1,  0,  1,  0,  0,  1,  0],
-    [0,  1,  1,  0,  0,  0,  1],
-    [1,  1,  1,  0,  1,  0,  0],
-    [0,  0,  0,  1,  0,  1,  1],
-    [1,  0,  0,  1,  1,  1,  0],
-    [0,  1,  0,  1,  1,  0,  1],
-    [1,  1,  0,  1,  0,  0,  0],
-    [0,  0,  1,  1,  1,  0,  0],
-    [1,  0,  1,  1,  0,  0,  1],
-    [0,  1,  1,  1,  0,  1,  0],
-    [1,  1,  1,  1,  1,  1,  1]
-]
+# experiments = [
+#     # X1  X2  X3  X4  X5  X6  X7
+#     #--------------------------
+#     [0,  0,  0,  0,  0,  0,  0],
+#     [1,  0,  0,  0,  1,  0,  1],
+#     [0,  1,  0,  0,  1,  1,  0],
+#     [1,  1,  0,  0,  0,  1,  1],
+#     [0,  0,  1,  0,  1,  1,  1],
+#     [1,  0,  1,  0,  0,  1,  0],
+#     [0,  1,  1,  0,  0,  0,  1],
+#     [1,  1,  1,  0,  1,  0,  0],
+#     [0,  0,  0,  1,  0,  1,  1],
+#     [1,  0,  0,  1,  1,  1,  0],
+#     [0,  1,  0,  1,  1,  0,  1],
+#     [1,  1,  0,  1,  0,  0,  0],
+#     [0,  0,  1,  1,  1,  0,  0],
+#     [1,  0,  1,  1,  0,  0,  1],
+#     [0,  1,  1,  1,  0,  1,  0],
+#     [1,  1,  1,  1,  1,  1,  1]
+# ]
 
 # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to5m2.txt
+# experiments = [  # factors ordered by sorted order of factor_defns keys
+#     [0, 0, 0, 1, 1],
+#     [1, 0, 0, 0, 0],
+#     [0, 1, 0, 0, 1],
+#     [1, 1, 0, 1, 0],
+#     [0, 0, 1, 1, 0],
+#     [1, 0, 1, 0, 1],
+#     [0, 1, 1, 0, 0],
+#     [1, 1, 1, 1, 1],
+# ]
+
 experiments = [  # factors ordered by sorted order of factor_defns keys
-    [0, 0, 0, 1, 1],
-    [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 1],
-    [1, 1, 0, 1, 0],
-    [0, 0, 1, 1, 0],
-    [1, 0, 1, 0, 1],
-    [0, 1, 1, 0, 0],
-    [1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1],
 ]
 
 
-def init_population(n, low_start):
-    return [model.Element(low_start=low_start) for x in range(0, n)]
+def init_population(n):
+    return [model.Element(x) for x in range(0, n)]  # assign sequential lineage IDs
 
 
-def generate_environments(n, generations):
+def generate_environments(n):
+    # Environment change is modelled as a change in the relationship between entity and environment.
+
+    # Entity is represented by a fitness and a fidelity (to parent)
+    # The difficulty is in how to connect fidelity and fitness (both composites) to environmental change.
+    # Without knowing the specifics of the change, and modelling the reaction of each entity to that change,
+    # we can only model abstracts.
+
+    # Parental relationships provide a lineage, where related entities should have a similar response to change
+    # In other words, environmental change is a change in fitness, but one where the change is conditioned
+    # by lineage.
+
+    # Modelling the change:
+
+    # Environmental change can be represented by magnitude and periodicity -
+    # or sample magnitudes from beta distribution described by two random numbers - easier than describing change
+    # in other ways...
+
+    # Modelling the EFFECT of change:
+
+    # a) is to model without lineage, where just modify fitness without consideration of entity relationships,
+    # and hence fidelity.
+    # b) model lineage but without considering effect of fidelity.
+    # All entities in a lineage have a related direction of change.
+    # This makes most sense when fidelity overall is low, as under those conditions there is likely to be
+    # significant overlap between lineages
+    # c) model lineage incorporating fidelity.
+    # The degree and direction of impact depends on the relationship between elements in a lineage. If a parent
+    # experiences some impact, then the range of impact experienced by the child is proportional to the fidelity -
+    # high fidelity means close correlation, low fidelity means a weak correlation.
+
+    # Each environment is described by mean and sd, parameters to a normal distribution
+    magnitude = 0.5
     environments = []
     for i in range(0, n):
-        # Environment is an array 1..period of list 1..N_BUCKETS of real
-        environment = []
-        for t in range(1, random.randint(5, generations)):
-            environment.append([random.random() for bucket in range(0, N_BUCKETS)])
-        environments.append(environment)
+        period = random.randint(1, GENERATIONS)
+        environments.append(
+            [(random.uniform(-magnitude, magnitude), random.uniform(0, magnitude)) for x in range(0, period)]
+        )
     return environments
-
 
 factor_defns = {
     'P_REPRODUCE': [0, 0.66],
@@ -103,7 +135,8 @@ def main():
 
     f = open("results.data", "w")
 
-    environments = generate_environments(N_ENVIRONMENTS, GENERATIONS)
+    environments = generate_environments(N_ENVIRONMENTS)
+
     experiment_number = 0
     run_number = 0
 
@@ -117,15 +150,16 @@ def main():
 
                 print("{0}/{1}".format(run_number + 1, N_REPEATS * len(environments) * len(experiments)))
                 results = model.run(factors=factors,
-                                    population=init_population(POPULATION_SIZE, LOW_START),
+                                    population=init_population(POPULATION_SIZE),
                                     generations=GENERATIONS,
                                     population_limit=10,
                                     environment=environment)
 
                 if run_number == 0:
-                    f.write(
-                        format_results_header(construct_line(run_number, experiment_number, results[0], factors)) + "\n"
-                    )
+                    f.write(format_results_header(construct_line(run_number,
+                                                                 experiment_number,
+                                                                 results[0],
+                                                                 factors)) + "\n")
 
                 f.write("\n".join([format_results_line(
                     construct_line(run_number, experiment_number, result, factors)

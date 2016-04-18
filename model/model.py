@@ -1,26 +1,23 @@
 import random
 import math
 import statistics
-#from tabulate import tabulate
 from collections import OrderedDict
-
-# Endogenise fitness (make relative) and population (restriction from resource constraints)
-# Show: from low fidelity to high fidelity (inheritance)
-# Show: from highest fidelity to high fidelity (inheritance)
 
 
 class Element:
-    def __init__(self, fitness=None, fidelity=None, low_start = True):
-        '''low_start only relevant if fitness or fidelity not provided'''
 
-        if fitness is not None:
-            self.fitness = fitness
-        else:
-            self.fitness = random.uniform(0.0, 0.3 if low_start else 0.9)
-        if fidelity is not None:
-            self.fidelity = fidelity
-        else:
-            self.fidelity = random.uniform(0.0 if low_start else 0.5, 0.3 if low_start else 0.9)
+    def __init__(self, lineage, fitness=None, fidelity=None):
+        if fitness is None:
+            fitness = random.uniform(0.0, 0.3)
+        if fidelity is None:
+            fidelity = random.uniform(0.0, 0.3)
+
+        assert 0 <= fitness <= 1.0
+        assert 0 <= fidelity <= 1.0
+
+        self.fitness = fitness
+        self.fidelity = fidelity
+        self.lineage = lineage
 
     def __str__(self):
         return str(self.fitness)
@@ -40,9 +37,9 @@ def reproduction(factors, population):
         return x
 
     def get_offspring(factors, parent):
-        '''
+        """
         Core of model - establishes relationship between parent and offspring
-        '''
+        """
 
         p_reproduce = parent.fitness if factors['P_REPRODUCE'] == 0 else factors['P_REPRODUCE']
         if not get_random_boolean(p_reproduce):
@@ -54,29 +51,37 @@ def reproduction(factors, population):
         for i in range(random.randint(0, factors['N_OFFSPRING'])):
             fitness = derive(parent.fitness, parent.fidelity)
             fidelity = derive(parent.fidelity, fidelity_fidelity)
-            offspring.append(Element(fitness, fidelity))
+            offspring.append(Element(parent.lineage, fitness, fidelity))
         return offspring
 
     return [x for y in population for x in get_offspring(factors, y)]
 
 
 def selection(factors, population):
-    return [x for x in population if get_random_boolean(x.fitness if factors['P_SELECTION'] == 0 else factors['P_SELECTION'])]
+    return [x for x in population if get_random_boolean(
+        x.fitness if factors['P_SELECTION'] == 0 else factors['P_SELECTION']
+    )]
 
 
-def apply_environment_change(t, environment, population):
+def apply_environment_change(environment, population):
 
-    def adjust_fitness(fitness, environment_change):
-        bucket = math.floor(fitness*len(environment_change)) - 1  # bucket number is floor(x/bucket_size)
-        if bucket < 0:  # adjust as fitness values of 0 and 1 are both possible, so either top or bottom bucket adjusted
-            bucket = 0
-        return environment_change[bucket]
+    lineages = {}
+    new_population = []
 
-    wrapped_t = t % len(environment)  # environment has a period, so must wrap t
-    return [Element(adjust_fitness(x.fitness, environment[wrapped_t]), x.fidelity) for x in population]
+    for e in population:
+        if e.lineage in lineages.keys():
+            delta_fitness = lineages[e.lineage]
+        else:
+            delta_fitness = random.gauss(environment[0], environment[1])
+            lineages[e.lineage] = delta_fitness  # first seen (i.e. random choice) element sets change for lineage
+
+        new_fitness = min(1.0, max(0.0, (e.fitness + delta_fitness)))  # bound to [0,1], don't worry about shape
+        new_population.append(Element(e.lineage, new_fitness, e.fidelity))
+
+    return new_population
 
 
-def get_population_summary(population, generation):
+def get_results_summary(change, population, generation):
     fitness = [x.fitness for x in population]
     fidelity = [x.fidelity for x in population]
 
@@ -87,8 +92,8 @@ def get_population_summary(population, generation):
         sd_fitness = sd_fidelity = "NaN"
 
     if len(population) > 0:
-        ave_fitness = math.fsum(fitness)/len(population)
-        ave_fidelity = math.fsum(fidelity)/len(population)
+        ave_fitness = math.fsum(fitness) / len(population)
+        ave_fidelity = math.fsum(fidelity) / len(population)
     else:
         ave_fitness = ave_fidelity = "NaN"
 
@@ -97,19 +102,20 @@ def get_population_summary(population, generation):
                'ave_fit': ave_fitness,
                'sd_fit': sd_fitness,
                'ave_cor': ave_fidelity,
-               'sd_cor': sd_fidelity}
+               'sd_cor': sd_fidelity,
+               'environment_mean': change[0],
+               'environment_sd': change[1]}
 
-    return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))  # to guarantee ordering if we extract values later
+    return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))
 
 
 def run(factors, population, generations, population_limit, environment):
 
     original_population_size = len(population)
-    population_limit *= original_population_size # stop when population size reaches a multiple of original population - generally some form of exponential growth
+    population_limit *= original_population_size  # stop when population size reaches a multiple of original population
 
     # starting summary
-    initial_summary = get_population_summary(population, 0)
-    results = [initial_summary] # headers and starting conditions
+    results = [get_results_summary([0, 0], population, 0)]
 
     for t in range(1, generations+1):
 
@@ -122,9 +128,14 @@ def run(factors, population, generations, population_limit, environment):
         if len(population) < 3 or len(population) > population_limit:
             break
 
-        results.append(get_population_summary(population, t))
+        change = environment[t % len(environment)]
+        population = apply_environment_change(change, population)
 
-        population = apply_environment_change(t, environment, population)
+        # Results AFTER environment change, with consistent ordering
+        results.append(get_results_summary(change, population, t))
 
-    #print(tabulate([x.values() for x in results], headers=results[0].keys()))
+    lineages = [e.lineage for e in population]
+    from collections import Counter
+    print("g={0} {1}".format(t, Counter(lineages)))
+
     return results

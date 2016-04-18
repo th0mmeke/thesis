@@ -40,28 +40,37 @@
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{
-	This work is motivated by the vision of achieving a self-improving, self-organizing, system.
-	There are a number of possible ways in which this might be achieved, but other than in very specific domains, it remains an open problem.
-	
-	One approach is inspired by Biology, and natural evolution.
-	Foundation for several related bodies of literature, in Evolutionary Algorithms, Optimizers, and Evolutionary Computing, as well of course of the study of evolution
-	in natural systems.
-	As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. As applied to technology, evolutionary systems are exogenous, problem-specific and designed.
-	
-	A convenient shorthand capturing these differences labels the biological original as bottom-up and the derived fields as top-down.
-	If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
-	
-	But as biology is contingent, what is the most useful starting point for a recapitulation? 
-	Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons.
-	Assume also then that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
-	
-	Our goal then is to determine the (or perhaps a) most parsimonious starting point that allows conceptual (not historical) biological evolution to begin.
-	Evolution generally thought to require three components - variation, selection and inheritance. Inheritance refers to the correlation between parent and child traits. Previous work has shown that inheritance, instead of being a prerequisite for evolution, is in fact a product of evolution under some conditions, emerging from the interaction of variation and selection.
-	
-	We strengthen the characterization of the conditions under which inheritance emerges by a systematic series of experiments.
-	We also extend the earlier result from a fixed relationship between entities and the environment to one in which the environment, and hence the relationship, changes. Changing environments in other fields bring benefits to robustness and to the overall quality of the solution.
-	Next we describe how a plausible mechanism based on an evolutionary copy-operator can meet the conditions for inheritance in a practical system.
-	Finally, we take the first steps towards the implementation of the mechanism in an Artificial Chemistry.
+This work is motivated by the vision of achieving a self-improving, self-organizing, system.
+There are a number of possible ways in which this could be achieved, but other than in very specific domains, it remains an open problem.
+
+One approach is inspired by Biology, and natural evolution.
+Natural evolution is the foundation for several related bodies of literature, in Evolutionary Algorithms, Optimizers, and Evolutionary Computing, as well of course of the study of evolution in natural systems.
+As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. As applied to technology, evolutionary systems are exogenous, problem-specific and designed.
+
+A convenient shorthand capturing these differences labels the biological original as bottom-up and the derived fields as top-down.
+If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
+
+But as biology is contingent, what is the most useful starting point for a recapitulation? 
+Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons.
+Assume also then that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
+
+Our goal then is to determine the (or perhaps a) most parsimonious starting point that allows conceptual (not historical) biological evolution to begin.
+Evolution generally thought to require three components - variation, selection and inheritance. Inheritance refers to the correlation between parent and child traits. Previous work has shown that inheritance, instead of being a prerequisite for evolution, can in fact be a product of evolution, emerging from the interaction of variation and selection.
+
+The main result of this thesis to show that not only can inheritance emerge, but that the degree or quality of inheritance is also an emergent property. In a similar fashion to Bourrat, we construct a minimally complex model of generalized evolution where each element in the population has only two properties - an explicit fitness, representing the quality of the relationship between entity and the (abstract) environment, and fidelity, which represents the degree of similarity between the entity and its parent. Although simple in description, the model over time shows complex and non-obvious emergent behaviour.
+
+Using this simple model we show that the degree of inheritance is tuned by evolution to balance fitness and robustness, maximizing fitness in unchanging environments where there is little penalty to reduced diversity, and maintaining a more diverse population in changing environments where diversity provides robustness to environmental change. This balance emerges unprogrammed from the underlying model.
+
+We strengthen the characterization of the conditions under which inheritance emerges by a systematic series of experiments. First, we examine the sensitivity of the model to the settings of the main model parameters by using a fractional-factorial screening experiment design.
+
+Using these reduced settings we then confirm earlier results showing the emergence of perfect inheritance under fixed or unchanging environments.
+
+We then extend the earlier result from a fixed relationship between entities and the environment to one in which the environment, and hence the relationship, changes. Here we show that the degree of inheritance is related to the degree of environmental change, demonstrating the balance between fitness and robustness we earlier hypothesised.
+
+Next we make the connection between the properties of this evolutionary inheritance and a plausible example mechanism  - a replication and variation operator under evolutionary control.
+
+Finally, we describe the first steps towards a system compatible with this example copy mechanism, and speculate that this direction might lead more directly to transformative evolution that alternative methods based either directly on biology, or on rather arbitrary top-down design decisions.
+
 }
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
 

@@ -19,9 +19,9 @@ df$ecf <- factor(df$ecf,levels=c(0,1,5,10)) # place into natural order
 df
 }
 
-# CORRELATED,N_OFFSPRING,P_REPRODUCE,P_SELECTION,RESTRICTION,ave_cor,ave_fit,experiment,gen,pop,run,sd_cor,sd_fit
+# CORRELATED,N_OFFSPRING,P_REPRODUCE,P_SELECTION,RESTRICTION,ave_cor,ave_fit,environment_mean,environment_sd,experiment,gen,pop,run,sd_cor,sd_fit
 load.results.varying <- function(t) {
-colClasses <- c("factor","factor","factor","factor","factor","numeric","numeric","factor","factor","integer","factor","numeric","numeric")
+colClasses <- c("factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","factor","numeric","factor","numeric","numeric")
 read.csv(t, colClasses=colClasses)
 }
 
@@ -1123,30 +1123,26 @@ Four different runs, with changes to the environment at four different frequenci
 
 % EXPERIMENT 8 - SD of Fidelity approaches 0
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df_full <- load.results('results/results-819350e.data')
-df <- subset(df_full, correlation_correlation == 1 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df <- load.results.varying('results/results-668bdbc5.data')
 @
 
-\begin{table} % 5e33a27 and 819350e
+\begin{table}
 	\begin{center}
 		\caption{Factor levels for test of the hypothesis prediction that the maximum possible fidelity is inversely proportional to the degree of environmental change}
 		\begin{tabular}{@{}llp{6cm}@{}}
 			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
+			Parameter              & Number of Levels & Levels \\
 			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
+			$p_{reproduction}$     & 1                & 0 \\
+			$p_{selection}$        & 1                & 0 \\
+			$n_{children}$         & 1                & 2  \\
+			Population Restriction & 1                & Fitness-independent sampling \\
+			Distribution           & 1                & Gaussian dist., $\mathbb{N}$ \\ % no W shape
+			Correlate Fidelity     & 1                & true \\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
-
-Control--unchanging, but the other three runs with the change in environment, and so a call to $TweakFitness$, every 1, 5 or 10 generations.
 
 The \gls{sd} of the environmental change was set to 0.90 (parameter \emph{sd} to \emph{TweakFitness} equal to 0.70), and \emph{meanOffset}, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.
 
@@ -1201,11 +1197,6 @@ We initially tested this by making a single change, setting $sd$ to 0.70.
 
 Previous experiments used an abrupt change in fitness at a specified frequency. This alternative instead uses a constant, smaller, change to simulate a constant selective pressure. \TODO{Is this what the hypothesis means though? Does it mean uncertainty/unpredictable change, or predictable - this model?} In \ref{fig:summary-abrupt-change} we see the mean and standard deviations for fidelity for the original abrupt form of environmental change; in \ref{fig:summary-constant-change} the same for a steady selective pressure.
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'),correlation_correlation == 1 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
-df$ecf <- factor(df$ecf,labels=c('Unchanging','Every generation','Every 5 generations','Every 10 generations'))
-@
-
 \begin{table} % 5e33a27 and 819350e
 	\begin{center}
 		\caption{Factor levels for investigation into the effect of the form of environmental change}
@@ -1226,14 +1217,14 @@ df$ecf <- factor(df$ecf,labels=c('Unchanging','Every generation','Every 5 genera
 \end{table}
 
 <<summary-abrupt-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean average fidelity (upper) and standard deviation of fidelity (lower) for scenario of abrupt environmental change.'>>=
-ap<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
-bp<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+ap<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,ave_cor,group=run))
+bp<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,sd_cor,group=run))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 <<summary-constant-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Constant environmental change.'>>=
-ap<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
-bp<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
+ap<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,ave_cor,group=run))
+bp<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,sd_cor,group=run))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
@@ -1269,7 +1260,7 @@ This produces a distribution with fat tails (middle of \cref{fig:example_distrib
 To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \cref{fig:example_distributions}.
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e.data'), (p_reproduce==0 || p_selection == 0))
+df <- subset(load.results.varying('results/results-668bdbc5.data'), (p_reproduce==0 || p_selection == 0))
 df$ecf <- factor(df$ecf,labels=c('Unchanging','Every generation','Every 5 generations','Every 10 generations'))
 df$truncate=factor(df$truncate,labels=c("Fitness-independent","Fitness-based"))
 df$correlation_correlation=factor(df$correlation_correlation,labels=c("Uncorrelated","Correlated"))

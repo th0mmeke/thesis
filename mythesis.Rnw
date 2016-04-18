@@ -81,7 +81,13 @@ Finally, we describe the first steps towards a system compatible with this examp
 \begin{document}
 \listofalgorithms
 \include{glossary}
-\include{body}
+\include{introduction}
+\include{context}
+\include{previouswork}
+\part{Evolutionary Potential}
+\include{part2}
+\part{ToyWorld, a semi-realistic Artificial Chemistry}
+\include{part3}
 \part{Appendices}
 \appendix{
 \include{appendices}

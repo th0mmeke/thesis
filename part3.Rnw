@@ -551,8 +551,63 @@ Reaction network discovery and Drug discovery
  \autocite{Hogerl2010} etc--Diels-Alder and Formose reaction networks
 \end{itemize}
 
+		\autocite{Virgo2014}:
+		
+		\begin{itemize}
+			\item
+			
+			Thermodynamics at heart of far-from-equilibrium structures
+			
+			\item
+			
+			Achem (Virgo and Ikegami 2013) that is thermodynamically reasonable,
+			and that doesn't include catalysis, but catalysis emerged as property
+			of reaction network. Generated ``moderately large and complex
+			autocatalytic cycles''
+			
+			\item
+			
+			Direction of reactions chosen by thermodynamic principles, and that
+			enabled it to generate catalysis and autocatalytic cycles
+			
+			\item
+			
+			Question is under which conditions do these cycles emerge
+			
+			\item
+			
+			Basic cause is flow of energy from more to less constrained states, or
+			low to high entropy. Blocking simple direct pathways is needed for
+			autocatalysis to emerge
+			
+			\item
+			
+			Results are robust; only one parameter requires tuning and that only
+			for one result (oscillatory behaviour)
+			
+			\item
+			
+			Previous work, such as Fontana and Buss 1994 assumed reactions driven
+			by external energy source, not modelled. But dynamics quite different
+			from model where energetics modelled
+			
+			\item
+			
+			Energy modelled by reactions occurring with probability determined by
+			rate constant of the reaction.
+			
+		\end{itemize}
+		
 \subsection{Origins of Life}\label{origins-of-life}
 
+			Darwin ``warm little pond'' Life and letters vol3 1887
+			(``\emph{\textbf{But if (and Oh! What a big if!) we could conceive in
+					some warm little pond, with all sorts of ammonia and phosphoric salts,
+					light, heat, electricity etc, present, that a protein compound was
+					chemically formed ready to undergo still more complex
+					changes\ldots{}'')}} \autocite{Vasas2012}
+			
+			
 Of the historic and ahistoric aspects of the Origin-of-life problem,
 historic aspect may never be known \autocite{Pross2013}. Constrained by
 what we do know, but many different pathways, and unless some record

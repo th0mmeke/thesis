@@ -250,7 +250,7 @@ Simulation is a natural fit for the exploration of emergent systems where we exp
 
 If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
 
-Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulations}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulation-in-scientific-enquiry}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
@@ -362,7 +362,7 @@ At the beginning of each run we construct an initial population to some design. 
 
 \subsection{Low-start case}\label{low-start-case}
 
-Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying (see earlier discussion in \cref{alternative-approaches}.)
+Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
 
 \begin{table}[t]
 	\begin{center}
@@ -788,7 +788,7 @@ The first test therefore is to examine if inheritance emerges from low-fidelity 
 
 \section{Emergence of inheritance from low-start initial conditions}\label{inheritance-low-start}
 
-As discussed earlier in \cref{synthesis-from-a-general-evolutionary-model}, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
+As discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
 
 % EXPERIMENT 3 - Fidelity approaches 1.0
 

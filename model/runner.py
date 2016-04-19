@@ -1,10 +1,10 @@
 import random
 import model
 
-GENERATIONS = 10
-POPULATION_SIZE = 50
+GENERATIONS = 500
+POPULATION_SIZE = 5000
 N_ENVIRONMENTS = 100
-N_REPEATS = 1
+N_REPEATS = 3
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -93,12 +93,12 @@ def generate_environments(n):
     # high fidelity means close correlation, low fidelity means a weak correlation.
 
     # Each environment is described by mean and sd, parameters to a normal distribution
-    magnitude = 0.5
+    MAX_MAGNITUDE = 0.5
     environments = []
     for i in range(0, n):
-        period = random.randint(1, GENERATIONS)
+        magnitude = random.uniform(0, MAX_MAGNITUDE)  # scale of this environment
         environments.append(
-            [(random.uniform(-magnitude, magnitude), random.uniform(0, magnitude)) for x in range(0, period)]
+            [(random.gauss(-magnitude, magnitude), random.gauss(0, magnitude)) for x in range(0, GENERATIONS)]
         )
     return environments
 

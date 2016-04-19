@@ -5,6 +5,7 @@ GENERATIONS = 500
 POPULATION_SIZE = 5000
 N_ENVIRONMENTS = 100
 N_REPEATS = 3
+MAX_DELTA = 0.2  # the maximum fitness change possible at any generation
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -92,14 +93,35 @@ def generate_environments(n):
     # experiences some impact, then the range of impact experienced by the child is proportional to the fidelity -
     # high fidelity means close correlation, low fidelity means a weak correlation.
 
-    # Each environment is described by mean and sd, parameters to a normal distribution
-    MAX_MAGNITUDE = 0.5
+    # Each environment is modelled as a possible range for individual changes to fitness at each generation
+    # The range is given as a pair of upper and lower bounds for the fitness delta
+    # The degree of correlation between generations is given by a third value, to model the roughness
+    # or smoothness of change over time
+    # A further refinement might be to introduce a probability of abrupt change, where the three values - uppper,
+    # lower, and correlation - are all reset every so often. This though is not implemented at present.
+
+    # The model can apply the change either to all entities, or each entity, or to a lineage
+    # as these are the only ways we can distinguish and hence group entities.
+
+    def derive(source, correlation):
+        x = random.gauss(source, correlation)
+        while x < -MAX_DELTA or x > MAX_DELTA:
+            x = random.gauss(source, correlation)
+        return x
+
     environments = []
     for i in range(0, n):
-        magnitude = random.uniform(0, MAX_MAGNITUDE)  # scale of this environment
-        environments.append(
-            [(random.gauss(-magnitude, magnitude), random.gauss(0, magnitude)) for x in range(0, GENERATIONS)]
-        )
+        e = []
+        roughness = random.uniform(0, MAX_DELTA)  # no real reason for MAX_DELTA, just simpler
+        bounds = sorted((random.uniform(-MAX_DELTA, MAX_DELTA), random.uniform(-MAX_DELTA, MAX_DELTA)))
+        for j in range(0, GENERATIONS):
+            assert (-MAX_DELTA <= bounds[0] <= MAX_DELTA)
+            assert (-MAX_DELTA <= bounds[1] <= MAX_DELTA)
+            assert (bounds[0] <= bounds[1])
+            e.append(bounds)
+            bounds = sorted((derive(bounds[0], roughness), derive(bounds[1], roughness)))
+        environments.append(e)
+
     return environments
 
 factor_defns = {
@@ -133,7 +155,7 @@ def main():
 
     assert len(factor_defns) == len(experiments[0])  # Same order - must use appropriate design
 
-    f = open("results.data", "w")
+    f = open("results.csv", "w")
 
     environments = generate_environments(N_ENVIRONMENTS)
 

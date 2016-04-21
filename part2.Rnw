@@ -21,7 +21,7 @@ df
 
 # CORRELATED,N_OFFSPRING,P_REPRODUCE,P_SELECTION,RESTRICTION,ave_cor,ave_fit,environment_mean,environment_sd,experiment,gen,pop,run,sd_cor,sd_fit
 load.results.varying <- function(t) {
-colClasses <- c("factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","factor","numeric","factor","numeric","numeric")
+colClasses <- c("factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 read.csv(t, colClasses=colClasses)
 }
 
@@ -1337,6 +1337,10 @@ Fitness ranges as expected, with a higher mean fitness under less changeable con
 % Hypothesis is that truncation mechanism affects the degree of sd_cor by altering the ratio of high to low fitness individuals
 % By the main hypothesis, high fidelity associated with high fitness. High fidelity associated with low sd_cor? If true, then low sd_cor associated with high fitness. Then lower fitness would be associated with higher sd_cor. Therefore a truncation mechanism which increased the proportion of low fitness entities would have a higher sd_cor...
 
+\section{Future work}
+
+Introduction of abrupt change to the environmental change model. A simple model would introduce an abrupt change with probability $p$ at each generation, where the change would form a new `concept` (in machine learning terminology, appriately as evolution can be seen as a learning system). Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
+
 \chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}
@@ -1380,15 +1384,12 @@ we suggest that:
 Possible extensions
 
 \begin{itemize}
-	\item
- Trend to environmental change
-	\item
- Experimental test: demonstrate Evolution given Variation and Selection
-	\item
- Consistency and sufficiency--classification of existing systems
+	\item Trend to environmental change
+	\item Experimental test: demonstrate Evolution given Variation and Selection
+	\item Consistency and sufficiency--classification of existing systems
+	\item Fitness independent of inheritance potential--bias applied only to bias value of offspring, not fitness. However, fitness dependent on inheritance is more likely. A mechanism that doesn't copy well unlikely to preserve information leading to high fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
+	\item Both \autocite{Bourrat2015} and this work introduce a check-for-overcrowding step; although motivated by practical considerations, under endogenous selection shouldn't overcrowding also be endogenous?
 \end{itemize}
+	
 
-\begin{itemize}
-	\item
- Remove a condition (e.g., \autocite{Soros2014})
-\end{itemize}
+	

@@ -294,6 +294,18 @@ In \autocite{Dittrich:2001zr}, Achems divided into major types:
  molecular automaton (LMA), Autopoietic System
 \end{itemize}
 
+Three types of chemistries \cite{Faulconbridge2011}:
+\begin{itemize}
+	\item Symbolic - symbols/molecules have no inherent meaning, so no
+	``implicit reactions''	
+	\item Structured - one or more atoms arranged in a structure (string,
+	tree, graph..) with bonds within molecules - unlimited, but
+	consequently computationally expensive	
+	\item Sub-symbolic - emergence of properties from lower-levels (ala real
+	chemistry, also neural networks). Symbols (atoms) have internal
+	structure which gives properties.
+\end{itemize}
+
 A \gls{achem} can be represented by
 \textless{}\emph{S},\emph{R},\emph{A}\textgreater{}
 \autocite{Dittrich:2001zr}:
@@ -1976,7 +1988,7 @@ Hypothesis--Resource competition as the mechanism of selection
 the continual production of novelty.}
 {\autocite{Soros2014}}
 
-\section{\texorpdfstring{What is interesting? Require formal defn for ``proof''\ldots{}}{What is interesting? Require formal defn for proof\ldots{}}}\label{what-is-interesting-require-formal-defn-for-proof}
+\section{What is interesting?}
 
 Levels are interesting in biology (should defn encompass biology or
 focus on CS?)
@@ -2116,77 +2128,6 @@ We have shown that:
 	\item Such a system can be implemented in an Artificial Chemistry
 \end{itemize}
 
-And therefore that open-ended evolution is possible in an Artificial Chemistry.
+\section{Future work}
 
-\TODO{ link OEE to selection and variation from work in \cref{the-search-for-creativity}}
-
-Requires a series of steps--akin to OOL where single-step
-astronomically unlikely (single RNA strand probability about 10E-60,
-based on 100 monomers--\autocite{Pascal2013})
-
-\section{Step 1--demonstration of Autocatalytic activity}\label{step-1 -- demonstration-of-autocatalytic-activity}
-
-Previous work
-
-\begin{itemize}
-	\item
- \autocite{Gordon-Smith2013}--Quite complex systems for replication demonstrated
- in SimSoup-2, handcrafted molecules
-	\item
- \autocite{Bagley1990}
-	\item
- GARD--\autocite{Segre1998}
-	\item
- \autocite{Ono2002}--Boid-like rules in Lattice Artificial Chemistry leads to
- membrane formation. Fixed types of particles with associated
- hydrophobic/hydrophilic/neutral class (with orientation). Fixed
- reaction paths to form an autocatalytic set of reactions
-	\item
- \autocite{Huning2000}
-\end{itemize}
-
-\section{Step 2--demonstration of selection between ACS}\label{step-2 -- demonstration-of-selection-between-acs}
-
-Test of evolution under selection versus drift- artificial selection -
-show response to selective pressure
-
-\section{Step 3--Evolution in an artificial chemistry}\label{step-3 -- evolution-in-an-artificial-chemistry}
-
-\section{Alternative explanations}\label{alternative-explanations}
-
-\begin{itemize}
-	\item
- Thermodynamics
-	\item
- Experimental/Model bias (e.g., discovered bias of GARD inheritance
- model)
-\end{itemize}
-
-\section{Tests for evolutionary activity}\label{tests-for-evolutionary-activity}
-
-\begin{itemize}
-	\item
- Sustainability may be undecidable--\autocite{Wiedermann:2005ys}
-	\item
- Alife community--\autocite{Channon:2006st}, etc
-	\item
- Population measures e.g., \autocite{Vasas2015}
-	\item
- Artificial selection
-	\item
- Moran's test
-	\item
- Search mechanism--thermodynamic or ergodic search vs evolutionary
- search (implied by \autocite{Rasmussen2004})
-	\item
- Local entropy (implied by \autocite{Adami2015})
-	\item
- Measure of OEE--\autocite{Markovitch2012}
-\end{itemize}
-
-\section{Tests for sufficient conditions}\label{tests-for-sufficient-conditions}
-
-\begin{itemize}
-	\item
- Remove a condition (e.g., \autocite{Soros2014})
-\end{itemize}
+Extension from asexual reproduction in model, to two-parent model.

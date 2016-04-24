@@ -53,22 +53,24 @@ In this section we explore the following research questions:
 	\end{enumerate}
 \end{minipage}
 \vspace{0.3cm}
-	``One must clearly distinguish between heredity (a relation),
-	heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
 
-			Lewontin argued that can abstract form of individual to more
-			general entity (at any level) - ``any entities in nature that have
-			variation, reproduction and heritability may evolve'' Lewontin1970
-			as necessary and sufficient conditions (despite ``may''?) \autocite{Griesemer2005}
-			
-			
-					``An important ``Platonic'' conception is that abstraction is a
-					mental process by which properties are thought of as entities
-					distinct from the concrete objects in which they are instantiated.
-					On an alternative, Aristotelian conception, abstraction is the
-					mental process of subtracting certain accidental properties from
-					concrete objects so as to regard objects in a manner closer to their
-					essential natures.'' \autocite{Griesemer2005}
+
+``One must clearly distinguish between heredity (a relation),
+heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
+
+Lewontin argued that can abstract form of individual to more
+general entity (at any level) - ``any entities in nature that have
+variation, reproduction and heritability may evolve'' Lewontin1970
+as necessary and sufficient conditions (despite ``may''?) \autocite{Griesemer2005}
+
+
+``An important ``Platonic'' conception is that abstraction is a
+mental process by which properties are thought of as entities
+distinct from the concrete objects in which they are instantiated.
+On an alternative, Aristotelian conception, abstraction is the
+mental process of subtracting certain accidental properties from
+concrete objects so as to regard objects in a manner closer to their
+essential natures.'' \autocite{Griesemer2005}
 					
 V+S-\textgreater{}I
 Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}

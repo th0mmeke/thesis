@@ -9,29 +9,20 @@ This work is motivated by the vision of achieving a self-improving, self-organiz
 
 Our goal then is to return to the emergent inspiration of Biology and examine the (or perhaps, a) most parsimonious starting point that allows evolution to begin in an artificial system. Evolution is generally thought to require three components--variation, inheritance and selection, where variation and inheritance together relate to the correlation between parent and child, and selection to the relationship between entity and evolutionary success. Previous work has shown that inheritance, instead of being a prerequisite for evolution, can in fact be a product of evolution, emerging from the interaction of variation and selection.
 
-The main result of this thesis to show that not only can inheritance emerge, but that the degree or quality of inheritance is also emergent, influenced by the selection relationship. 
 
-Fidelity provides variation and inheritance. The fidelity property in the model represents a fidelity value that changes in response to evolution - it is a self-referential property of the model - and the model overall therefore models the evolution of evolution.
+In Part 1 we construct a minimally complex model of generalized evolution, as an extension of previous work, where each element in the population has two properties only--fitness, representing the quality of the relationship between entity and the (abstract) environment, and fidelity, which represents the degree of similarity between the entity and its parent. Although minimal in description, this model over time shows complex and non-obvious emergent behaviour.
 
-The corollary of this claim is that this model forms a sufficient condition for the evolution of evolution, and that a system that meets this condition will be capable of ongoing self-improvement. 
+We then examine the sensitivity of the parameterized model using a fractional-factorial screening experiment design; the original set of seven parameters-- --can be reduced to XXX as a result. Using this simplified model we then confirm results from other researchers showing the emergence of perfect inheritance under fixed or unchanging environments.
 
-Our fidelity property combines two separate concepts: first, it must be modifiable by evolution and so must be self-referential, accessible to evolution and therefore must be made of the same things as the everything else that is subject to evolution in the system - it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element, divorced from the world. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. In fact, these biological mechanisms are both sources of variation and subject to evolution, and this realization brings us, almost in a full circle, to a sufficient mechanism for ongoing self-improvement--an imperfect copy mechanism constructed out of raw elements in the world.
+We next extend the earlier result from a fixed relationship between entities and the environment to one in which the environment, and hence the relationship, changes. Here we show that the degree of inheritance is related to the degree of environmental change, demonstrating the balance between fitness and robustness we earlier hypothesised. We show by simulation that the degree of inheritance is tuned by evolution to balance fitness and robustness, maximizing fitness in unchanging environments where there is little penalty to reduced diversity, and maintaining a more diverse population in changing environments where diversity provides robustness to environmental change. This balance emerges unprogrammed from the underlying model.
 
-In Part 2 we construct a minimally complex model of generalized evolution where each element in the population has two properties only--fitness, representing the quality of the relationship between entity and the (abstract) environment, and fidelity, which represents the degree of similarity between the entity and its parent.
+The first contribution of this thesis is therefore to show that not only can inheritance emerge, but that the degree or quality of inheritance is also emergent, influenced by the predictability of the fitness-environment relationship. 
 
-Although minimal in description, this model over time shows complex and non-obvious emergent behaviour.
+Next, in Part 2, we make the connection between the properties of this evolutionary inheritance and a plausible example mechanism--a replication and variation operator under evolutionary control. Part 2 is organized around ToyWorld, an artificial chemistry that implements the type of emergent, constructive system needed to meet the sufficient conditions from Part 1. ToyWorld is the second major contribution of this thesis.
 
-First, we examine the sensitivity of the parameterized model to levels of the main parameters using a fractional-factorial screening experiment design.
+Specifically, we show that ToyWorld is capable of emergent behaviour and is familiar enough (although not realistic) to be understandable, and to allow for the importation of designs from real-world chemistry. We demonstrate in Part 2 that an artificial chemistry provides a good foundation upon which an open-ended evolutionary system may be constructed, although the implementation of a working copying mechanism at the level of ToyWorld remains for future work.
 
-Using these settings we then confirm earlier results showing the emergence of perfect inheritance under fixed or unchanging environments.
-
-We next extend the earlier result from a fixed relationship between entities and the environment to one in which the environment, and hence the relationship, changes. Here we show that the degree of inheritance is related to the degree of environmental change, demonstrating the balance between fitness and robustness we earlier hypothesised.
-
-We show by simulation that the degree of inheritance is tuned by evolution to balance fitness and robustness, maximizing fitness in unchanging environments where there is little penalty to reduced diversity, and maintaining a more diverse population in changing environments where diversity provides robustness to environmental change. This balance emerges unprogrammed from the underlying model.
-
-Next, in Part 3, we make the connection between the properties of this evolutionary inheritance and a plausible example mechanism--a replication and variation operator under evolutionary control. Part 3 is organized around ToyWorld, an artificial chemistry that implements the type of emergent, constructive system needed to meet the sufficient conditions from Part 2. We demonstrate in Part 2 that an artificial chemistry provides a good foundation upon which an open-ended evolutionary system may be constructed, although the implementation of a working variable copying mechanism at the level of ToyWorld remains for future work.
-
-Finally, in conclusion, we describe the first steps towards a system compatible with this example copy mechanism, and speculate that this direction might lead more directly to transformative evolution that alternative methods based either directly on biology, or on rather arbitrary top-down design decisions.
+Finally, in conclusion, we speculate that this direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on rather arbitrary top-down design decisions.
 
 \chapter{Introduction}
 
@@ -46,31 +37,62 @@ But as biology is contingent, what is the most useful starting point for a recap
 
 Then our belief is that the evolution of evolution itself can and will emerge under certain conditions, and that an emergent approach will be more successful than the predominant design-driven top-down approach today.
 
-\section{Problem}
-The specific problems we address are the following:
-\begin{itemize}
-	\item Is there a simple set of conditions that enable evolution to emerge in a non-living, artificial, system?
-	\item Can this also lead to the evolution of the evolutionary mechanism itself? Or in other words, can we see a pathway towards a self-improving, open-ended, evolutionary system?
-\end{itemize}
+\section{Goal}
+
+The overall problem we address is to \textit{determine the conditions under which ongoing evolution might emerge in a software system}. 
+
+Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that produces interesting, novel, and creative results, as does natural biological evolution. Emergent references the difference between a top-down designed mechanism imposed upon the system, and one that is a natural result of interactions between the system elements (the reason for this will become clear in later discussion concerning the importance of self-referentiality.) Finally, our domain is software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
+
+This is clearly a broad and ambitious goal, one more suited to a research programme than a single thesis, and a goal that is additionally the subject of a complex body of related and previous work. We shall return to a more specific and pragmatic problem description in the later section, \ref{research-questions}, after presenting a summary of the most relevant literature.
+
+\section{Previous work}
+The previous sections have established the context, and incidentally identified the primary areas of relevant literature. From biology, the main threads concern the origins of life, and the theory of evolution. Natural selection provides the primary mechanism for evolution in biology, although it is not the only process at work -- genetic drift and neutral theory provide a counterpoint. In artificial systems, researchers have used biological evolution as an inspiration, gradually over time diverging into a field with the beginnings of its own motivating theory, now only loosely connected with its origins in the natural world. These areas are discussed in more detail in \ref{context} to aid in understanding the context behind the remaining sections of the work.
+
+In artificial systems, some researchers have recently returned to a reappreciation of how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolution. This has led to a renewed interest in understanding the principles behind biological evolution so that artificial systems can capture some of these admirable properties; the difference now is that the transference is sought at the level of concepts and principles rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
+
+This chapter expands upon previous work that is directly relevant to our problem overall, the onset of evolution in software systems. 
+
+The review is organized roughly in alignment with the research goal: first an examination of work that abstracts evolutionary principles; next a summary of what it means for an artificial system to experience ongoing creative evolution; and finally how emergence is relevant to the goal.
+
+Some interesting open problems are summarized in the conclusion to this section, while previous work that relates to a particular section of the thesis is presented in that section, for clarity, and to make clear the distinction beween the work of others and our own contributions.
+
+\subsection{Evolutionary principles}
+\subsection{Ongoing evolution in artificial systems}
+\subsection{Emergence in artificial evolutionary systems}
+
+\subsection{Discussion}
+
+Two particular open problems are apparent from this review. First, the model of \cite{Bourrat2015} assumes that the problem that evolution is learning is perfectly understandable, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in many artificial domains of interest, the relationship between entity and environment is less certain. The environment itself may either change, or be uncertain. This is unexplored by Bourrat.
+
+The second open problem is the demonstration of a self-referential mechanism to provide the fidelity property of Bourrat, or the inheritance and variation properties assumed by other models, that is emergent and embedded in the simulation world. 
+
+Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be self-referential, accessible to evolution and therefore must be made of the same things as everything else that is subject to evolution in the system - it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
+
+\section{Problem and research questions}\label{research-questions}
+
+From this discussion, our overall goal of emergent ongoing evolution can be more pragmatically reduced to the following research questions:
+
+\begin{enumerate}
+	\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
+	\item Is there a plausible implementation for a fidelity mechanism in a software system?
+\end{enumerate}
+
+\section{Approach, and guide to this work}
+
+The overall structure of this thesis broadly follows the research questions. 
+
+In \ref{part-one} we first confirm the results of previous work regarding the relationship between fidelity and fitness in fixed environments. Then in a new contribution, we extend this relationship to changing environments, and explore the effect of a shifting fitness-enviroment relationship on the behaviour of fidelity. We conclude that fidelity acts to preserve variation in the population, which supports the hypothesis that fidelity can replace variation and inheritance in the description of an evolutionary system across a broad range of environments.
+
+Next, in \ref{part-two}, we move from models and theory to implementation. From a review of earlier work, and following arguments made by other researchers, we posit that an ongoing evolutionary system must be emergent and embedded. We then investigate what this might mean for the implementation of a fidelity mechanism in a software system, and conclude like others that it must be self-referential. From these two strands of argument, we suggest that there are good grounds to adopt an Artificial Chemistry for the implementation of an ongoing evolutionary system, and that biological replicase molecules provide a good model for an embedded, self-referential variable copying mechanism. Replicases are both sources of variation and subject to evolution, and this realization brings us, almost in a full circle, to a sufficient mechanism for ongoing self-improvement--an imperfect copy mechanism constructed out of raw elements in the world.
+
+We then introduce ToyWorld, a new semi-realistic Artificial Chemistry, that is compatible with these arguments. ToyWorld, like other atom/molecule based chemistries, has the significant benefit of being analogous to real-world chemistry with the result that not only is it interpretable in familiar terms, but that it might be simpler to take abstract models of replicases from biology and seed them in ToyWorld than it might be with other less related Artificial Chemistries. We show that ToyWorld is capable of emergent behaviour and suggest that it should be possible to build a replicase equivalent in ToyWorld to seed ongoing evolution.
 
 \chapter{Context}
 In this chapter we briefly review work in a variety of related fields for context and background to the main problem; the intention is that this material will by way of preamble ``set the stage'' for the entrance of the principal actors in later chapters.
 
 Our supporting characters come from Biology and Computational Intelligence: they will first attempt to draw a distinction between the living and non-living worlds before concluding unfortunately that the difference is clear where it is unneeded, and opaque where it is most required. Next comes a brief survey of some aspects in Biological Evolution, significant as so much of Artificial Evolution is grounded in Biology, and equally relevant as the explanations of Biological Evolution are so tightly linked to biological contingency and complexity that any parallels must be drawn carefully indeed. Finally, from Computation Intelligence, we first touch on the conceptual similarities between emergentist views of Biological Evolution and Artificial General Intelligence, before concluding with a brief review of the area of Computational Intelligence perhaps most overtly-inspired by natural evolution, Evolutionary Computation.
 
-\chapter{Previous work}
-The previous sections have established the context, and identified the primary areas of relevant literature. From biology, the main threads concern the origins of life, and the theory of evolution. Natural selection provides the primary mechanism for evolution in biology, although it is not the only process at work -- genetic drift and neutral theory provide a counterpoint. In artificial systems, researchers have used biological evolution as an inspiration, gradually over time diverging into a field with the beginnings of its own motivating theory, now only loosely connected with its origins in the natural world.
-
-The research emphasis in artificial systems has more recently returned to a reappreciation of how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolution. This has led to a renewed interest in understanding the principles behind biological evolution so that artificial systems can capture some of those admirable properties; the difference now is that the transference is sought at the level of concepts and principles rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
-
-This section now expands upon previous work that is directly relevant to our specific problem, the onset of evolution in artificial systems, in two areas:
-
-\begin{itemize}
-	\item General evolutionary models
-	\item Specific work in artificial systems
-\end{itemize}
-
-\chapter{Introduction}
+\chapter{Introduction}\label{part-one}
 \section{Assumptions}
 \section{Variation (and Inheritance)}
 \section{Selection}
@@ -111,7 +133,7 @@ This section now expands upon previous work that is directly relevant to our spe
 
 \chapter{Conclusions}
 
-\chapter{Introduction}
+\chapter{Introduction}\label{part-two}
 \section{Contributions}
 
 \chapter{Artificial Chemistries}

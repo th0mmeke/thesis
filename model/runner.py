@@ -3,9 +3,9 @@ import model
 
 GENERATIONS = 500
 POPULATION_SIZE = 5000
-N_ENVIRONMENTS = 100
 N_REPEATS = 3
-MAX_DELTA = 0.2  # the maximum fitness change possible at any generation
+N_ENVIRONMENTS = 100
+MAX_DELTA = 0.2
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -54,7 +54,8 @@ MAX_DELTA = 0.2  # the maximum fitness change possible at any generation
 # ]
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
-    [1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 1, 1]
 ]
 
 
@@ -62,7 +63,7 @@ def init_population(n):
     return [model.Element(x) for x in range(0, n)]  # assign sequential lineage IDs
 
 
-def generate_environments(n):
+def generate_environments():
     # Environment change is modelled as a change in the relationship between entity and environment.
 
     # Entity is represented by a fitness and a fidelity (to parent)
@@ -103,24 +104,38 @@ def generate_environments(n):
     # The model can apply the change either to all entities, or each entity, or to a lineage
     # as these are the only ways we can distinguish and hence group entities.
 
-    def derive(source, correlation):
-        x = random.gauss(source, correlation)
-        while x < -MAX_DELTA or x > MAX_DELTA:
-            x = random.gauss(source, correlation)
-        return x
+    # def derive(source, correlation):
+    #     x = random.gauss(source, correlation)
+    #     while x < -MAX_DELTA or x > MAX_DELTA:
+    #         x = random.gauss(source, correlation)
+    #     return x
+    #
+    # environments = []
+    # for i in range(0, n):
+    #     e = []
+    #     roughness = random.uniform(0, MAX_DELTA)  # no real reason for MAX_DELTA, just simpler
+    #     bounds = sorted((random.uniform(-MAX_DELTA, MAX_DELTA), random.uniform(-MAX_DELTA, MAX_DELTA)))
+    #     for j in range(0, GENERATIONS):
+    #         assert (-MAX_DELTA <= bounds[0] <= MAX_DELTA)
+    #         assert (-MAX_DELTA <= bounds[1] <= MAX_DELTA)
+    #         assert (bounds[0] <= bounds[1])
+    #         e.append(bounds)
+    #         bounds = sorted((derive(bounds[0], roughness), derive(bounds[1], roughness)))
+    #     environments.append(e)
 
+    return [(random.uniform(-MAX_DELTA, MAX_DELTA), random.uniform(0, MAX_DELTA)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
+
+
+def read_environments():
+    import csv
     environments = []
-    for i in range(0, n):
-        e = []
-        roughness = random.uniform(0, MAX_DELTA)  # no real reason for MAX_DELTA, just simpler
-        bounds = sorted((random.uniform(-MAX_DELTA, MAX_DELTA), random.uniform(-MAX_DELTA, MAX_DELTA)))
-        for j in range(0, GENERATIONS):
-            assert (-MAX_DELTA <= bounds[0] <= MAX_DELTA)
-            assert (-MAX_DELTA <= bounds[1] <= MAX_DELTA)
-            assert (bounds[0] <= bounds[1])
-            e.append(bounds)
-            bounds = sorted((derive(bounds[0], roughness), derive(bounds[1], roughness)))
-        environments.append(e)
+    with open('../results/environments.csv') as environments_file:
+        reader = csv.reader(environments_file)
+        for row in reader:
+            e = []
+            for mean in row:
+                e.append([float(mean)-MAX_DELTA, float(mean)+MAX_DELTA])
+            environments.append(e)
 
     return environments
 
@@ -130,13 +145,16 @@ factor_defns = {
     'N_OFFSPRING': [2, 5],
     'RESTRICTION': [False, True],
     'CORRELATED': [False, True],
+    'BYLINEAGE': [False, True]
 }
 
 
-def construct_line(run_number, experiment_number, result, factors):
+def construct_line(run_number, experiment_number, environment, result, factors):
     line = {
         'experiment': experiment_number,
         'run': run_number,
+        'ari_theta': environment[0],
+        'ari_sd': environment[1]
     }
     line.update(result)
     line.update({k: factor_defns[k].index(v) for k, v in factors.items()})  # convert back from values to factor levels
@@ -157,7 +175,8 @@ def main():
 
     f = open("results.csv", "w")
 
-    environments = generate_environments(N_ENVIRONMENTS)
+    environments = generate_environments()
+
 
     experiment_number = 0
     run_number = 0
@@ -180,11 +199,12 @@ def main():
                 if run_number == 0:
                     f.write(format_results_header(construct_line(run_number,
                                                                  experiment_number,
+                                                                 environment,
                                                                  results[0],
                                                                  factors)) + "\n")
 
                 f.write("\n".join([format_results_line(
-                    construct_line(run_number, experiment_number, result, factors)
+                    construct_line(run_number, experiment_number, environment, result, factors)
                 ) for result in results]))
                 f.write("\n")
 

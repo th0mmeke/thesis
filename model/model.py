@@ -2,7 +2,7 @@ import random
 import math
 import statistics
 from collections import OrderedDict
-
+from collections import Counter
 
 class Element:
 
@@ -63,25 +63,36 @@ def selection(factors, population):
     )]
 
 
-def apply_environment_change(environment, population):
+def get_ts_ari(theta, sd):
+    earlier = current = 0
+    t = random.randint(-100,0)
+    while True:
+        earliest = earlier
+        earlier = current
+        current = (1+theta)*earlier - theta*earliest + random.gauss(0, sd)
+        if t > 0:
+            yield current
+        else:
+            t += 1
 
-    lineages = {}
+
+def apply_environment_change(environments, population):
+
     new_population = []
 
-    for e in population:
-        if e.lineage in lineages.keys():
-            delta_fitness = lineages[e.lineage]
-        else:
-            delta_fitness = random.gauss(environment[0], environment[1])
-            lineages[e.lineage] = delta_fitness  # first seen (i.e. random choice) element sets change for lineage
+    if not isinstance(environments,dict):
+        delta = next(environments)
 
-        new_fitness = min(1.0, max(0.0, (e.fitness + delta_fitness)))  # bound to [0,1], don't worry about shape
+    for e in population:
+        if isinstance(environments, dict):
+            delta = next(environments[e.lineage])
+        new_fitness = min(1.0, max(0.0, (e.fitness + delta)))  # bound to [0,1], don't worry about shape
         new_population.append(Element(e.lineage, new_fitness, e.fidelity))
 
     return new_population
 
 
-def get_results_summary(change, population, generation):
+def get_results_summary(population, generation):
     fitness = [x.fitness for x in population]
     fidelity = [x.fidelity for x in population]
 
@@ -102,9 +113,7 @@ def get_results_summary(change, population, generation):
                'ave_fit': ave_fitness,
                'sd_fit': sd_fitness,
                'ave_cor': ave_fidelity,
-               'sd_cor': sd_fidelity,
-               'environment_mean': change[0],
-               'environment_sd': change[1]}
+               'sd_cor': sd_fidelity}
 
     return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))
 
@@ -115,7 +124,12 @@ def run(factors, population, generations, population_limit, environment):
     population_limit *= original_population_size  # stop when population size reaches a multiple of original population
 
     # starting summary
-    results = [get_results_summary([0, 0], population, 0)]
+    results = [get_results_summary(population, 0)]
+
+    if factors['BYLINEAGE']:
+        changes = {e.lineage: get_ts_ari(*environment) for e in population}
+    else:
+        changes= get_ts_ari(*environment)
 
     for t in range(1, generations+1):
 
@@ -128,14 +142,13 @@ def run(factors, population, generations, population_limit, environment):
         if len(population) < 3 or len(population) > population_limit:
             break
 
-        change = environment[t % len(environment)]
-        population = apply_environment_change(change, population)
+        population = apply_environment_change(changes, population)
 
         # Results AFTER environment change, with consistent ordering
-        results.append(get_results_summary(change, population, t))
+        results.append(get_results_summary(population, t))
 
     lineages = [e.lineage for e in population]
-    from collections import Counter
+
     print("g={0} {1}".format(t, Counter(lineages)))
 
     return results

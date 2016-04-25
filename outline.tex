@@ -1,10 +1,22 @@
 \documentclass[]{report}
 
-%opening
+\usepackage{titlesec,enumitem}
+
+\titleclass{\chapter}{straight}
+
+\titleformat{\section}[hang]
+{\normalfont\large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\chapter}[hang]
+{\normalfont\large\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{*4}{*1.5}
+
 \title{}
 \author{}
 
 \begin{document}
+	
+\abstract{
 This work is motivated by the vision of achieving an artificial system capable of non-trivial self-improvement. Despite a substantial body of previous work in Computational Intelligence, Biology remains the one domain in which it is uncontroversial to claim the existence of such a creative system. Our goal is to return to the inspiration, but not the specifics, of biology and search for a starting point that allows ongoing creative evolution to emerge in an artificial system. 
 
 Previous work has speculated that creative evolution is a consequence of a self-referential evolutionary mechanism, emergent from the same simulation as the elements it operates upon. We build upon this conjecture by extending previous work to demonstrate a plausible model for a self-referential, emergent, mechanism.
@@ -23,11 +35,11 @@ Part 2, the second body of work, describes progress towards an realisation of th
 
 Specifically, we show that ToyWorld is capable of emergent behaviour and is familiar enough (although not realistic) to be understandable and to allow for the importation of designs from real-world chemistry. We show in Part 2 that an artificial chemistry provides a good foundation upon which an open-ended evolutionary system may be constructed, although the demonstration of the full mechanism from Part 1 in ToyWorld remains for future work.
 
-Finally, in conclusion, we speculate that this overall direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on rather arbitrary top-down design decisions.
+Finally, in conclusion, we speculate that this overall direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on rather arbitrary top-down design decisions.}
 
+\clearpage
 \chapter{Introduction}
 
-\section{Motivation}
 The underlying motivation for this work is to understand the requirements for onset of artificial evolution; how robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world.
 
 Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. As applied to technology, evolutionary systems are exogenous, problem-specific and designed.
@@ -71,7 +83,7 @@ The second open problem is the demonstration of a self-referential mechanism to 
 
 From this discussion, our overall goal of emergent ongoing evolution can be more pragmatically reduced to the following research questions:
 
-\begin{enumerate}
+\begin{enumerate}[label=RQ\arabic*:]
 	\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
 	\item Is there a plausible implementation for a fidelity mechanism in a software system?
 \end{enumerate}
@@ -91,6 +103,7 @@ In this chapter we briefly review work in a variety of related fields for contex
 
 Our supporting characters come from Biology and Computational Intelligence: they will first attempt to draw a distinction between the living and non-living worlds before concluding unfortunately that the difference is clear where it is unneeded, and opaque where it is most required. Next comes a brief survey of some aspects in Biological Evolution, significant as so much of Artificial Evolution is grounded in Biology, and equally relevant as the explanations of Biological Evolution are so tightly linked to biological contingency and complexity that any parallels must be drawn carefully indeed. Finally, from Computation Intelligence, we first touch on the conceptual similarities between emergentist views of Biological Evolution and Artificial General Intelligence, before concluding with a brief review of the area of Computational Intelligence perhaps most overtly-inspired by natural evolution, Evolutionary Computation.
 
+\part{Evolutionary model}
 \chapter{Introduction}\label{part-one}
 \section{Assumptions}
 \section{Variation (and Inheritance)}
@@ -119,9 +132,48 @@ Our supporting characters come from Biology and Computational Intelligence: they
 \section{Variance of Fidelity reduces under low-start conditions}
 \section{Confirmation that variance decreases under high-start conditions}
 
-\chapter{Test under changing conditions}
-\section{Experimental test}
+\chapter{Adaptation to changing conditions}
+\section{Introduction}
+If we accept that evolution is a mechanism to learn from the environment, then a changing environment provides an interesting challenge. 
 \section{Experimental design}
+Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
+
+The model must describe two particular elements of this relationship: first,the scope of the change, and second, the shape of the change. In our evolutonary model we can only group entities in three non-trivial ways:
+\begin{enumerate}
+	\item The group of all entities
+	\item A group for each entity
+	\item A group for ``related'' entities, where the most natural and obvious relation is that between parent and child; unambiguous and straightforward in our model where each entity has only one parent.
+\end{enumerate}
+
+A group of entities related by the inheritance we refer to as a \emph{lineage}, and we can apply the scope of the change to each of these three groups.
+
+The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained parameter space. The range covered by the parameter space should both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+Our method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as a first-order ARI timeseries, with each timestep corresponding to one evolutionary generation. In an ARI model, the AR portion of the name indicates that it includes an autoregression component while the I represents differencing. Specifically, we can describe the evolutionary change at each timestep as a function of the previous two timesteps:
+
+$x_t = (1+\Theta)x_{t-1} - \Theta x_{t-2} + e_t$
+
+where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient for the first order, and $e_t$ is a random, normally distributed error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$
+
+This series allows us to represent a broad range of environmental changes:
+
+\begin{itemize}
+	\item the autoregression component describes a stationary timeseries, and can be interpreted as specifying stability or smoothness, allowing us to control the predictability of the change
+	\item the differencing element introduces non-stationarity, introducing directional environmental change
+	\item each timeseries is completely specified by only two parameters, $\Theta$ and $sigma_e$
+	\item the timeseries is composed of two independent elements, one predictable (driven by $\Theta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on a continuum of predictability
+\end{itemize}
+
+Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to the ratio of $\Theta$ to $\sigma_e$.
+
+From the hypothesis we can make these predictions:
+\begin{enumerate}
+	\item Fidelity will be at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$ and $\sigma_e>0$.
+	\item Fidelity is proportional to $\frac{\Theta}{\sigma_e}$.
+\end{enumerate}
+	
 \section{Results and discussion}
 \section{Future work}
 
@@ -132,15 +184,68 @@ Our supporting characters come from Biology and Computational Intelligence: they
 
 \chapter{Conclusions}
 
+\part{ToyWorld}
 \chapter{Introduction}\label{part-two}
+
+Artificial Chemistries of discrete atoms provide an interesting testbed
+for investigating various evolutionary phenomena. Fundamentally, they
+provide a tuneable evolutionary system, capable of highly complex
+behaviour, built around familiar metaphors (real-world Chemistry, and
+potentially Biology). A set of interaction rules describing how atoms
+interact gives rise to emergent forms -- molecules. At a higher level,
+these molecules, under the same interaction rules, also interact in
+patterns -- reactions.
+
+Still higher emergent levels emerge under favourable conditions.
+Reactions may form cycles, where a sequence eventually returns to an
+earlier product. Our interest is in identifying the factors that
+influence the emergence of these higher levels. Cycles in particular are
+interesting as many biological processes are cyclical. Replication,
+resulting in an exact copy of an entity, is a macro-example of a cycle;
+metabolism is another. Building on the apparent correspondence between
+higher emergent levels in Artificial Chemistry evolution and Biology, we
+believe like others (e.g., \cite{Steel2013}) that cycles, of some
+form, are a necessary building-block for more complicated structures
+again in Artificial Chemistries
+
 \section{Contributions}
 
 \chapter{Artificial Chemistries}
+One advantage of molecular Artificial Chemistries as pointed out by
+\cite[5]{Funes2001} is that it is easier to evaluate solutions in
+a domain close to the real-world as opposed to a purely symbolic or
+abstract domain such as a lambda-calculus, or a programmatic environment
+like Tierra. When contemplating difficult problems such as complexity
+our intuition can be helpful, but only in situations close enough to our
+normal experience for it to be relevant.
 \section{Introduction}
 \section{Classification of Artificial Chemistries}
 
 \chapter{ToyWorld}
+
 \section{Introduction}
+ToyWorld, our Artificial Chemistry for the exploration of emergent
+behaviours, was first introduced in \cite{Young2013}. The elements
+of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are
+recognisable from real-world chemistry, but in highly simplified forms.
+
+Although there is no need for ToyWorld to be faithful to standard
+Chemistry, a degree of familiarity helps, but only in so far as the
+analogy is consistent. Therefore we endeavour to maintain a basic
+correspondence wherever possible. However, there is no requirement to
+provide chemically-realistic results--our model cannot be used to
+investigate real-world chemical behaviours.
+
+There is also another reason. The model has many degrees-of-freedom, and
+these must be constrained by parameter choice before the model can be
+used in simulation. Some values are important to our thesis, and so are
+considered true independent variables in our investigation. These are
+examined fully. The remainder however are those to which the simulation
+is insensitive, but still must be specified. For these we prefer
+real-world values rather than arbitrary artificial values. In short,
+where we consider something important, we investigate. Where we think it
+less important, we use a consistent set of pre-existing values --
+real-world chemistry.
 \section{Atoms and molecules}
 \section{Energy Model}
 \section{Reactant and product selection strategies}

@@ -3,9 +3,9 @@ import model
 
 GENERATIONS = 500
 POPULATION_SIZE = 5000
-N_REPEATS = 3
-N_ENVIRONMENTS = 100
-MAX_DELTA = 0.2
+N_REPEATS = 1
+N_ENVIRONMENTS = 150
+MAX_SD = 0.5
 
 # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
 # experiments = [
@@ -123,7 +123,7 @@ def generate_environments():
     #         bounds = sorted((derive(bounds[0], roughness), derive(bounds[1], roughness)))
     #     environments.append(e)
 
-    return [(random.uniform(-MAX_DELTA, MAX_DELTA), random.uniform(0, MAX_DELTA)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
+    return [(random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
 
 
 def read_environments():
@@ -134,7 +134,7 @@ def read_environments():
         for row in reader:
             e = []
             for mean in row:
-                e.append([float(mean)-MAX_DELTA, float(mean)+MAX_DELTA])
+                e.append([float(mean) - MAX_SD, float(mean) + MAX_SD])
             environments.append(e)
 
     return environments

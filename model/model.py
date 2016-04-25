@@ -112,8 +112,8 @@ def get_results_summary(population, generation):
                'pop': len(population),
                'ave_fit': ave_fitness,
                'sd_fit': sd_fitness,
-               'ave_cor': ave_fidelity,
-               'sd_cor': sd_fidelity}
+               'ave_fid': ave_fidelity,
+               'sd_fid': sd_fidelity}
 
     return OrderedDict(sorted(summary.items(), key=lambda t: t[0]))
 
@@ -129,7 +129,7 @@ def run(factors, population, generations, population_limit, environment):
     if factors['BYLINEAGE']:
         changes = {e.lineage: get_ts_ari(*environment) for e in population}
     else:
-        changes= get_ts_ari(*environment)
+        changes = get_ts_ari(*environment)
 
     for t in range(1, generations+1):
 

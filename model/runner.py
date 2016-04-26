@@ -54,8 +54,9 @@ MAX_SD = 0.5
 # ]
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
-    [1, 0, 0, 0, 1, 0],
-    [1, 0, 0, 0, 1, 1]
+    # ['BYLINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']
+    [0, 1, 0, 0, 0, 1],
+    [1, 1, 0, 0, 0, 1]
 ]
 
 

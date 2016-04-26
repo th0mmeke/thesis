@@ -63,13 +63,12 @@ def selection(factors, population):
     )]
 
 
-def get_ts_ari(theta, sd):
-    earlier = current = 0
-    t = random.randint(-100,0)
+def get_ar(theta, sd):
+    current = 0
+    t = random.randint(-100, 0)  # initial burn-in period
     while True:
-        earliest = earlier
         earlier = current
-        current = (1+theta)*earlier - theta*earliest + random.gauss(0, sd)
+        current = theta*earlier + random.gauss(0, sd)
         if t > 0:
             yield current
         else:
@@ -127,9 +126,9 @@ def run(factors, population, generations, population_limit, environment):
     results = [get_results_summary(population, 0)]
 
     if factors['BYLINEAGE']:
-        changes = {e.lineage: get_ts_ari(*environment) for e in population}
+        changes = {e.lineage: get_ar(*environment) for e in population}
     else:
-        changes = get_ts_ari(*environment)
+        changes = get_ar(*environment)
 
     for t in range(1, generations+1):
 

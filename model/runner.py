@@ -31,8 +31,9 @@ def generate_environments():
     # In other words, environmental change is a change in fitness, but one where the change is conditioned
     # by lineage.
 
-    return [(0, random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
-    #return [(random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
+    e = [(0, random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
+    e += ([(random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)])
+    return e
 
 factor_defns = {
     'P_REPRODUCE': [0, 0.66],

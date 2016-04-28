@@ -68,7 +68,7 @@ def get_ar(theta, sd):
     t = random.randint(-100, 0)  # initial burn-in period
     while True:
         earlier = current
-        current = theta*earlier + random.gauss(0, sd)
+        current = theta*earlier + random.gauss(-sd, sd)
         if t > 0:
             yield current
         else:
@@ -79,7 +79,7 @@ def apply_environment_change(environments, population):
 
     new_population = []
 
-    if not isinstance(environments,dict):
+    if not isinstance(environments, dict):
         delta = next(environments)
 
     for e in population:
@@ -125,7 +125,7 @@ def run(factors, population, generations, population_limit, environment):
     # starting summary
     results = [get_results_summary(population, 0)]
 
-    if factors['BYLINEAGE']:
+    if factors['BY_LINEAGE']:
         changes = {e.lineage: get_ar(*environment) for e in population}
     else:
         changes = get_ar(*environment)

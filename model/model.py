@@ -63,28 +63,12 @@ def selection(factors, population):
     )]
 
 
-def get_ar(theta, sd):
-    current = 0
-    t = random.randint(-100, 0)  # initial burn-in period
-    while True:
-        earlier = current
-        current = theta*earlier + random.gauss(-sd, sd)
-        if t > 0:
-            yield current
-        else:
-            t += 1
-
-
-def apply_environment_change(environments, population):
+def apply_environment_change(environment_change, population):
 
     new_population = []
 
-    if not isinstance(environments, dict):
-        delta = next(environments)
-
     for e in population:
-        if isinstance(environments, dict):
-            delta = next(environments[e.lineage])
+        delta = environment_change[e.lineage] if (len(environment_change) > 1) else environment_change[0]
         new_fitness = min(1.0, max(0.0, (e.fitness + delta)))  # bound to [0,1], don't worry about shape
         new_population.append(Element(e.lineage, new_fitness, e.fidelity))
 
@@ -107,7 +91,7 @@ def get_results_summary(population, generation):
     else:
         ave_fitness = ave_fidelity = "NaN"
 
-    summary = {'gen': generation,
+    summary = {'gen': generation+1,  # base 1
                'pop': len(population),
                'ave_fit': ave_fitness,
                'sd_fit': sd_fitness,
@@ -125,12 +109,7 @@ def run(factors, population, generations, population_limit, environment):
     # starting summary
     results = [get_results_summary(population, 0)]
 
-    if factors['BY_LINEAGE']:
-        changes = {e.lineage: get_ar(*environment) for e in population}
-    else:
-        changes = get_ar(*environment)
-
-    for t in range(1, generations+1):
+    for t in range(0, generations):
 
         parent_population = selection(factors, population)
         offspring_population = reproduction(factors, population)
@@ -141,13 +120,15 @@ def run(factors, population, generations, population_limit, environment):
         if len(population) < 3 or len(population) > population_limit:
             break
 
-        population = apply_environment_change(changes, population)
+        # need a vertical slice through environment, [t] element of each
+        current_environment = [lineage_environment[t] for lineage_environment in environment]
+        population = apply_environment_change(current_environment, population)
 
         # Results AFTER environment change, with consistent ordering
         results.append(get_results_summary(population, t))
 
     lineages = [e.lineage for e in population]
 
-    print("g={0} {1}".format(t, Counter(lineages)))
+    print("g={0} {1}".format(t+1, Counter(lineages)))
 
     return results

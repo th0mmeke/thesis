@@ -3,10 +3,9 @@ import model
 
 GENERATIONS = 500
 POPULATION_SIZE = 5000
-N_REPEATS = 3
+N_REPEATS = 1
 N_ENVIRONMENTS = 100
-MAX_SD = 0.5
-
+MAX_SD = 0.3
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
     # ['BY_LINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']
@@ -15,11 +14,20 @@ experiments = [  # factors ordered by sorted order of factor_defns keys
 ]
 
 
+def get_ar_timeseries(theta, sd):
+    value = 0
+    t = random.randint(-100, 0)  # initial burn-in period
+    for i in range(t, GENERATIONS):
+        value = theta * value + random.gauss(0, sd)  # error term with mean = 0 and sd = sd
+        if i >= 0:
+            yield value
+
+
 def init_population(n):
     return [model.Element(x) for x in range(0, n)]  # assign sequential lineage IDs
 
 
-def generate_environments():
+def get_environment_specification():
     # Environment change is modelled as a change in the relationship between entity and environment.
 
     # Entity is represented by a fitness and a fidelity (to parent)
@@ -31,9 +39,22 @@ def generate_environments():
     # In other words, environmental change is a change in fitness, but one where the change is conditioned
     # by lineage.
 
-    e = [(0, random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)]  # (theta, sd)
-    e += ([(random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)) for i in range(0, N_ENVIRONMENTS)])
-    return e
+    for i in range(N_ENVIRONMENTS):
+        if i < N_ENVIRONMENTS / 5:
+            yield 0, random.uniform(0, MAX_SD)
+        else:
+            yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)
+
+
+def generate_environment(spec, by_lineage):
+    # deltas for lineages = [delta for t0, delta for t1, delta for t2..., delta for tn]
+    # [deltas for population at time 0,deltas at time 1...at final gen]
+
+    if by_lineage:
+        return [[x for x in get_ar_timeseries(*spec)]]
+    else:
+        return [[x for x in get_ar_timeseries(*spec)] for i in range(POPULATION_SIZE)]
+
 
 factor_defns = {
     'P_REPRODUCE': [0, 0.66],
@@ -44,6 +65,18 @@ factor_defns = {
     'BY_LINEAGE': [False, True]
 }
 
+
+def write_environment(run_number, environments):
+    with open("environments/environments{}.csv".format(str(run_number)), "w") as e:
+        for n in range(len(environments)):  # number of environments
+            # [[e0: delta for t0, delta for t1, delta for t2..., delta for tn], [en:] => run, lineage, t0, t1,,...tn
+            lineage_environment = [str(delta) for delta in environments[n]]
+            e.write(str(run_number) + "," +
+                    str(n) + "," +
+                    ",".join(lineage_environment) +
+                    "\n")
+    # e<-read.csv('model/environments1.csv', header=FALSE)
+    # sample_entropy(unlist(subset(e,V2==lineage)[,3:502],use.names=FALSE))
 
 def construct_line(run_number, experiment_number, environment, result, factors):
     line = {
@@ -66,94 +99,93 @@ def format_results_header(line):
 
 
 def main():
-
     assert len(factor_defns) == len(experiments[0])  # Same order - must use appropriate design
 
-    f = open("results.csv", "w")
-
-    environments = generate_environments()
     experiment_number = 0
     run_number = 0
 
-    for experiment in experiments:
+    with open("results.csv", "w") as f:
+        for experiment in experiments:
 
-        factors = {k: factor_defns[k][v] for k, v in zip(sorted(factor_defns.keys()), experiment)}
+            factors = {k: factor_defns[k][v] for k, v in zip(sorted(factor_defns.keys()), experiment)}
 
-        for environment in environments:
+            for environment_specification in get_environment_specification():
 
-            for repeat in range(0, N_REPEATS):
+                environments = generate_environment(environment_specification, factors['BY_LINEAGE'])
+                write_environment(run_number, environments)
 
-                print("{0}/{1}".format(run_number + 1, N_REPEATS * len(environments) * len(experiments)))
-                results = model.run(factors=factors,
-                                    population=init_population(POPULATION_SIZE),
-                                    generations=GENERATIONS,
-                                    population_limit=10,
-                                    environment=environment)
+                for repeat in range(0, N_REPEATS):
 
-                if run_number == 0:
-                    f.write(format_results_header(construct_line(run_number,
-                                                                 experiment_number,
-                                                                 environment,
-                                                                 results[0],
-                                                                 factors)) + "\n")
+                    print("{0}/{1}".format(run_number + 1, N_REPEATS * N_ENVIRONMENTS * len(experiments)))
+                    results = model.run(factors=factors,
+                                        population=init_population(POPULATION_SIZE),
+                                        generations=GENERATIONS,
+                                        population_limit=10,
+                                        environment=environments)
 
-                f.write("\n".join([format_results_line(
-                    construct_line(run_number, experiment_number, environment, result, factors)
-                ) for result in results]))
-                f.write("\n")
+                    if run_number == 0:
+                        f.write(format_results_header(construct_line(run_number,
+                                                                     experiment_number,
+                                                                     environment_specification,
+                                                                     results[0],
+                                                                     factors)) + "\n")
 
-                run_number += 1
+                    f.write("\n".join([format_results_line(
+                        construct_line(run_number, experiment_number, environment_specification, result, factors)
+                    ) for result in results]))
+                    f.write("\n")
 
-        experiment_number += 1
+                    run_number += 1
 
-    f.close()
+            experiment_number += 1
+
 
 if __name__ == "__main__":
     main()
 
 
-# # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
-# experiments = [
-#    [0,  0,  0,  1,  1,  1],
-#    [1,  0,  0,  0,  0,  1],
-#    [0,  1,  0,  0,  1,  0],
-#    [1,  1,  0,  1,  0,  0],
-#    [0,  0,  1,  1,  0,  0],
-#    [1,  0,  1,  0,  1,  0],
-#    [0,  1,  1,  0,  0,  1],
-#    [1,  1,  1,  1,  1,  1]
-# ]
+    # # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to6m3.txt
+    # experiments = [
+    #    [0,  0,  0,  1,  1,  1],
+    #    [1,  0,  0,  0,  0,  1],
+    #    [0,  1,  0,  0,  1,  0],
+    #    [1,  1,  0,  1,  0,  0],
+    #    [0,  0,  1,  1,  0,  0],
+    #    [1,  0,  1,  0,  1,  0],
+    #    [0,  1,  1,  0,  0,  1],
+    #    [1,  1,  1,  1,  1,  1]
+    # ]
 
-# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
-# experiments = [
-#     # X1  X2  X3  X4  X5  X6  X7
-#     #--------------------------
-#     [0,  0,  0,  0,  0,  0,  0],
-#     [1,  0,  0,  0,  1,  0,  1],
-#     [0,  1,  0,  0,  1,  1,  0],
-#     [1,  1,  0,  0,  0,  1,  1],
-#     [0,  0,  1,  0,  1,  1,  1],
-#     [1,  0,  1,  0,  0,  1,  0],
-#     [0,  1,  1,  0,  0,  0,  1],
-#     [1,  1,  1,  0,  1,  0,  0],
-#     [0,  0,  0,  1,  0,  1,  1],
-#     [1,  0,  0,  1,  1,  1,  0],
-#     [0,  1,  0,  1,  1,  0,  1],
-#     [1,  1,  0,  1,  0,  0,  0],
-#     [0,  0,  1,  1,  1,  0,  0],
-#     [1,  0,  1,  1,  0,  0,  1],
-#     [0,  1,  1,  1,  0,  1,  0],
-#     [1,  1,  1,  1,  1,  1,  1]
-# ]
+    # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt
+    # experiments = [
+    #     # X1  X2  X3  X4  X5  X6  X7
+    #     #--------------------------
+    #     [0,  0,  0,  0,  0,  0,  0],
+    #     [1,  0,  0,  0,  1,  0,  1],
+    #     [0,  1,  0,  0,  1,  1,  0],
+    #     [1,  1,  0,  0,  0,  1,  1],
+    #     [0,  0,  1,  0,  1,  1,  1],
+    #     [1,  0,  1,  0,  0,  1,  0],
+    #     [0,  1,  1,  0,  0,  0,  1],
+    #     [1,  1,  1,  0,  1,  0,  0],
+    #     [0,  0,  0,  1,  0,  1,  1],
+    #     [1,  0,  0,  1,  1,  1,  0],
+    #     [0,  1,  0,  1,  1,  0,  1],
+    #     [1,  1,  0,  1,  0,  0,  0],
+    #     [0,  0,  1,  1,  1,  0,  0],
+    #     [1,  0,  1,  1,  0,  0,  1],
+    #     [0,  1,  1,  1,  0,  1,  0],
+    #     [1,  1,  1,  1,  1,  1,  1]
+    # ]
 
-# http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to5m2.txt
-# experiments = [  # factors ordered by sorted order of factor_defns keys
-#     [0, 0, 0, 1, 1],
-#     [1, 0, 0, 0, 0],
-#     [0, 1, 0, 0, 1],
-#     [1, 1, 0, 1, 0],
-#     [0, 0, 1, 1, 0],
-#     [1, 0, 1, 0, 1],
-#     [0, 1, 1, 0, 0],
-#     [1, 1, 1, 1, 1],
-# ]
+    # http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to5m2.txt
+    # experiments = [  # factors ordered by sorted order of factor_defns keys
+    #     [0, 0, 0, 1, 1],
+    #     [1, 0, 0, 0, 0],
+    #     [0, 1, 0, 0, 1],
+    #     [1, 1, 0, 1, 0],
+    #     [0, 0, 1, 1, 0],
+    #     [1, 0, 1, 0, 1],
+    #     [0, 1, 1, 0, 0],
+    #     [1, 1, 1, 1, 1],
+    # ]

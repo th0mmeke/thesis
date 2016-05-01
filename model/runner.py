@@ -1,11 +1,12 @@
 import random
 import model
+import os
 
 GENERATIONS = 500
 POPULATION_SIZE = 5000
 N_REPEATS = 1
-N_ENVIRONMENTS = 100
-MAX_SD = 0.3
+N_ENVIRONMENTS = 200
+MAX_SD = 0.2
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
     # ['BY_LINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']
@@ -67,6 +68,10 @@ factor_defns = {
 
 
 def write_environment(run_number, environments):
+
+    if not os.path.exists("environments"):
+        os.makedirs("environments")
+
     with open("environments/environments{}.csv".format(str(run_number)), "w") as e:
         for n in range(len(environments)):  # number of environments
             # [[e0: delta for t0, delta for t1, delta for t2..., delta for tn], [en:] => run, lineage, t0, t1,,...tn
@@ -77,6 +82,7 @@ def write_environment(run_number, environments):
                     "\n")
     # e<-read.csv('model/environments1.csv', header=FALSE)
     # sample_entropy(unlist(subset(e,V2==lineage)[,3:502],use.names=FALSE))
+
 
 def construct_line(run_number, experiment_number, environment, result, factors):
     line = {

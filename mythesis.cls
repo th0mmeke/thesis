@@ -23,6 +23,7 @@
 \RequirePackage{sectsty}
 \RequirePackage{vmargin}
 \RequirePackage{paralist} % for tighter lists
+\RequirePackage{titlesec}
  
 \RequirePackage{units}
 \RequirePackage[font=small,labelfont=bf]{caption}
@@ -81,10 +82,12 @@
 \newcommand*\LSTfont{\Small\ttfamily\lsstyle}
 
 \partfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
-\chapterfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
-\sectionfont{\color{darkgray}\sffamily\normalsize\bfseries\selectfont\uppercase}
+\sectionfont{\color{darkgray}\bfseries\large\selectfont}
 \subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
 \subsubsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
+
+\titleformat{\chapter}[block]{\normalfont\Huge\bfseries}{\thechapter}{5pt}{\Large}
+\titlespacing*{\chapter}{0pt}{-19pt}{10em}
 
 \renewcommand{\cleardoublepage}{%
 	\newpage%

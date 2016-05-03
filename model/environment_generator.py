@@ -2,7 +2,7 @@ import random
 import runner
 import itertools
 
-MAX_SD = 1.0
+MAX_SD = 0.3
 with open("environments.csv", "w") as f:
     for i in range(20):
         theta, sd, bias = random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD/2), random.uniform(-MAX_SD/4, MAX_SD/4)

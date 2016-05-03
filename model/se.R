@@ -20,7 +20,7 @@ t1 <- read.csv('model/environments.csv', header=FALSE, colClasses=c("numeric","n
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sd", "bias")
 t2 <- melt(t1,id=c('run','theta','sd','bias'))
-ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~run)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~run) + labs(x="t", y="Fitness change")
 
 
 ### FACTORIAL OF THETA, SD AND BIAS
@@ -30,8 +30,11 @@ t1 <- read.csv('model/environments-factorial.csv', header=FALSE, colClasses=c("n
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sd", "bias")
 t2 <- melt(t1,id=c('run','theta','sd','bias'))
-ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd)
-ggplot(subset(t2,sd!=0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~bias)
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+ggplot(subset(t2,sd!=0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~bias, labeller='label_both') + labs(x="t", y="Fitness change")
 
 ### EFFECT ON FITNESS
 
@@ -39,14 +42,16 @@ for (r in unique(t2$run)) {
     t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
 
     fitness <- 0.5
-    for (t in 1:length(delta)) {
+    for (t in 1:50) {
         fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
         t2[t2$run==r & t2$t==t,'fitness'] = fitness
     }
 }
-ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~run)
-ggplot(t2) + geom_line(aes(x=t,y=value)) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~run)
 
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 8))
 
 #### SAMPLE AND APPROXIMATE ENTROPY FIT
 

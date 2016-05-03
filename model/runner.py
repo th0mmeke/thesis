@@ -6,7 +6,7 @@ GENERATIONS = 500
 POPULATION_SIZE = 5000
 N_REPEATS = 1
 N_ENVIRONMENTS = 200
-MAX_SD = 0.2
+MAX_SD = 0.4
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
     # ['BY_LINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']
@@ -15,11 +15,11 @@ experiments = [  # factors ordered by sorted order of factor_defns keys
 ]
 
 
-def get_ar_timeseries(theta, sd):
+def get_ar_timeseries(theta, sd, bias, generations):
     value = 0
-    t = random.randint(-100, 0)  # initial burn-in period
-    for i in range(t, GENERATIONS):
-        value = theta * value + random.gauss(0, sd)  # error term with mean = 0 and sd = sd
+    t = random.randint(-100, -50)  # initial burn-in period
+    for i in range(t, generations):
+        value = theta * value + random.gauss(0, sd) + bias  # error term with mean = 0 and sd = sd
         if i >= 0:
             yield value
 
@@ -42,9 +42,9 @@ def get_environment_specification():
 
     for i in range(N_ENVIRONMENTS):
         if i < N_ENVIRONMENTS / 5:
-            yield 0, random.uniform(0, MAX_SD)
+            yield 0, random.uniform(0, MAX_SD), random.uniform(-MAX_SD, MAX_SD)
         else:
-            yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)
+            yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD), random.uniform(-MAX_SD, MAX_SD)
 
 
 def generate_environment(spec, by_lineage):
@@ -52,9 +52,9 @@ def generate_environment(spec, by_lineage):
     # [deltas for population at time 0,deltas at time 1...at final gen]
 
     if by_lineage:
-        return [[x for x in get_ar_timeseries(*spec)]]
+        return [[x for x in get_ar_timeseries(*spec, GENERATIONS)]]
     else:
-        return [[x for x in get_ar_timeseries(*spec)] for i in range(POPULATION_SIZE)]
+        return [[x for x in get_ar_timeseries(*spec, GENERATIONS)] for i in range(POPULATION_SIZE)]
 
 
 factor_defns = {
@@ -89,7 +89,8 @@ def construct_line(run_number, experiment_number, environment, result, factors):
         'experiment': experiment_number,
         'run': run_number,
         'ar_theta': environment[0],
-        'ar_sd': environment[1]
+        'ar_sd': environment[1],
+        'ar_bias': environment[2]
     }
     line.update(result)
     line.update({k: factor_defns[k].index(v) for k, v in factors.items()})  # convert back from values to factor levels
@@ -118,7 +119,7 @@ def main():
             for environment_specification in get_environment_specification():
 
                 environments = generate_environment(environment_specification, factors['BY_LINEAGE'])
-                write_environment(run_number, environments)
+                #write_environment(run_number, environments)
 
                 for repeat in range(0, N_REPEATS):
 

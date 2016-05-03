@@ -73,7 +73,8 @@ Finally, we describe the first steps towards a system compatible with this examp
 \include{context}
 \include{previouswork}
 \part{Evolutionary Potential}
-\include{part2}
+\include{part2a}
+\include{part2b}
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 \include{part3}
 \part{Appendices}

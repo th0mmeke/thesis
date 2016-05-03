@@ -1,25 +1,19 @@
 import random
+import runner
+import itertools
 
-GENERATIONS = 500
-
-
-def get_ar_timeseries(theta, sd):
-    value = 0
-    t = random.randint(-100, 0)  # initial burn-in period
-    for i in range(t, GENERATIONS):
-        value = theta * value + random.gauss(0, sd)  # error term with mean = 0 and sd = sd
-        if i >= 0:
-            yield value
-
-MAX_SD = 0.2
+MAX_SD = 1.0
 with open("environments.csv", "w") as f:
-    for i in range(500):
-        theta, sd = random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD)
-        print(theta)
-        # ts = [x for x in get_ar_timeseries(theta, sd)]
-        # f.write(str(theta) + "," + str(sd) + "," + ",".join([str(x) for x in ts]) + "\n")
+    for i in range(20):
+        theta, sd, bias = random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD/2), random.uniform(-MAX_SD/4, MAX_SD/4)
+        ts = [x for x in runner.get_ar_timeseries(theta, sd, bias, 50)]
+        f.write(str(theta) + "," + str(sd) + "," + str(bias) + "," + ",".join([str(x) for x in ts]) + "\n")
 
 
+with open("environments-factorial.csv", "w") as f:
+    for theta, sd, bias in itertools.product([-MAX_SD, 0, MAX_SD],[0, MAX_SD],[-MAX_SD/4, 0, MAX_SD/4]):
+        ts = [x for x in runner.get_ar_timeseries(theta, sd, bias, 50)]
+        f.write(str(theta) + "," + str(sd) + "," + str(bias) + "," + ",".join([str(x) for x in ts]) + "\n")
 
 
 

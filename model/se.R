@@ -2,8 +2,9 @@
 
 library(ggplot2)
 
-colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
-results <- read.csv('run1/results.csv', colClasses=colClasses)
+# BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
+colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
+results <- read.csv('model/results.csv', colClasses=colClasses)
 
 ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
 ggplot(subset(results,gen==500),aes(ar_theta/ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')

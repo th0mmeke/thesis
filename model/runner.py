@@ -5,7 +5,7 @@ import os
 GENERATIONS = 500
 POPULATION_SIZE = 5000
 N_REPEATS = 1
-N_ENVIRONMENTS = 200
+N_ENVIRONMENTS = 500
 MAX_SD = 0.4
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
@@ -41,10 +41,7 @@ def get_environment_specification():
     # by lineage.
 
     for i in range(N_ENVIRONMENTS):
-        if i < N_ENVIRONMENTS / 5:
-            yield 0, random.uniform(0, MAX_SD), random.uniform(-MAX_SD, MAX_SD)
-        else:
-            yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD), random.uniform(-MAX_SD, MAX_SD)
+        yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD/2), random.uniform(-MAX_SD/4, MAX_SD/4)
 
 
 def generate_environment(spec, by_lineage):

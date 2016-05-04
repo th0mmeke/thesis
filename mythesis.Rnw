@@ -8,6 +8,7 @@
 \usepackage{upgreek}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{todonotes}
 %\usepackage{subscript} % provides \textsubscript
 
 \usepackage{fancyvrb}
@@ -44,9 +45,9 @@ This work is motivated by the vision of achieving an artificial system capable o
 
 Previous work has speculated that creative evolution is a consequence of a self-referential evolutionary mechanism, emergent from the same simulation as the elements it operates upon. We build upon this conjecture by extending previous work to demonstrate a plausible model for a self-referential, emergent, mechanism.
 
-Our approach divides the task into two parts. Part 1, through modeling and simulation, extends the mechanism of emergent evolutionary inheritance and variation beyond fixed environments to changing environments. Evolution is generally held to require three components: variation, inheritance and selection. Variation and inheritance together relate to the correlation between parent and child, and selection to the relationship between entity and evolutionary success. Previous work has shown that inheritance, instead of being a prerequisite for evolution, can in fact be a product of evolution, emerging from the interaction of variation and selection. \Todo{As inheritance, variation and selection are broadly accepted as sufficient for evolution, and as endogenous selection mechanisms have been described elsewhere in the literature, we assert that the demonstration in this work of endogenous inheritance that includes variation is sufficient for an endogenous evolutionary process.}
+Our approach divides the task into two parts. Part 1, through modeling and simulation, extends the mechanism of emergent evolutionary inheritance and variation beyond fixed environments to changing environments. Evolution is generally held to require three components: variation, inheritance and selection. Variation and inheritance together relate to the correlation between parent and child, and selection to the relationship between entity and evolutionary success. Previous work has shown that inheritance, instead of being a prerequisite for evolution, can in fact be a product of evolution, emerging from the interaction of variation and selection. \todo{As inheritance, variation and selection are broadly accepted as sufficient for evolution, and as endogenous selection mechanisms have been described elsewhere in the literature, we assert that the demonstration in this work of endogenous inheritance that includes variation is sufficient for an endogenous evolutionary process.}
 
-In Part 1 we construct a minimally complex model of generalized evolution, as an extension of previous work, where each element in the population has two properties only: fitness, representing the quality of the relationship between entity and the (abstract) environment, and \Todo{fidelity, which represents the degree of similarity between the entity and its parent - connected to variation and inheritance}. Although minimal in description, this model over time shows complex and non-obvious emergent behaviour.
+In Part 1 we construct a minimally complex model of generalized evolution, as an extension of previous work, where each element in the population has two properties only: fitness, representing the quality of the relationship between entity and the (abstract) environment, and \todo{fidelity, which represents the degree of similarity between the entity and its parent - connected to variation and inheritance}. Although minimal in description, this model over time shows complex and non-obvious emergent behaviour.
 
 We then examine the sensitivity of the parameterized model using a fractional-factorial screening experiment design; the original set of parameters can be reduced as a result. Using this simplified model we then confirm results from other researchers showing the emergence of perfect inheritance under fixed or unchanging environments.
 

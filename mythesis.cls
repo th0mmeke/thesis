@@ -24,6 +24,8 @@
 \RequirePackage{vmargin}
 \RequirePackage{paralist} % for tighter lists
 \RequirePackage{titlesec}
+\RequirePackage{mathpazo}
+\RequirePackage{anyfontsize}
  
 \RequirePackage{units}
 \RequirePackage[font=small,labelfont=bf]{caption}

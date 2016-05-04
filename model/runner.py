@@ -49,9 +49,9 @@ def generate_environment(spec, by_lineage):
     # [deltas for population at time 0,deltas at time 1...at final gen]
 
     if by_lineage:
-        return [[x for x in get_ar_timeseries(*spec, GENERATIONS)]]
+        return [[x for x in get_ar_timeseries(*spec, generations=GENERATIONS)]]
     else:
-        return [[x for x in get_ar_timeseries(*spec, GENERATIONS)] for i in range(POPULATION_SIZE)]
+        return [[x for x in get_ar_timeseries(*spec, generations=GENERATIONS)] for i in range(POPULATION_SIZE)]
 
 
 factor_defns = {

@@ -3,7 +3,7 @@
 library(ggplot2)
 
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
-results <- read.csv('model/run1/results.csv', colClasses=colClasses)
+results <- read.csv('run1/results.csv', colClasses=colClasses)
 
 ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
 ggplot(subset(results,gen==500),aes(ar_theta/ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
@@ -20,7 +20,10 @@ t1 <- read.csv('model/environments.csv', header=FALSE, colClasses=c("numeric","n
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sd", "bias")
 t2 <- melt(t1,id=c('run','theta','sd','bias'))
-ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~run) + labs(x="t", y="Fitness change")
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sd+bias, labeller='label_both') + labs(x="t", y="Fitness change")
 
 
 ### FACTORIAL OF THETA, SD AND BIAS

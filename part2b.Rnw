@@ -1,268 +1,46 @@
 \chapter[Test under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+\section{Experimental design}
+Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
 
-Where inheritance is using \textbf{Correlate Fidelity} mechanism, expect
-that under changing conditions correlation will tend to some lower value
-than 1.0, proportional to variance in change (more change, lower
-correlation).
-
-Significance
-
-\begin{itemize}
-	\item
- Support for overall hypothesis that variability derived from
- copying/inheritance mechanism, and that EvoEvo can tune this mechanism
- to suit conditions--no preselected parameters required
-	\item
- \gls{sd} of correlation should be greater than in a fixed environment
- (benefit to preserving variation)
-	\item
- An environment change results in a change in fitness for entities.
- Other elements in the entity initially unaffected
-\end{itemize}
-
-Same initial conditions (low \cref{low-start-case} and high start \cref{high-start-case} cases) with the addition to the Bounded Model \autoref{upper-bound-model-algorithm} as follows to introduce a changing environment by ``tweaking'' the fitness of every entity at some frequency, $frequency$.
-
-\begin{algorithm}
-	\SetKwFunction{f}{f}
-	\For{generation $\in 1\dots$number of generations}{
-		\tcp{Core algorithm}
-		$population\leftarrow Selection(population)$\;
-		$population\leftarrow population + Reproduction(population)$\;
-		$population\leftarrow Restriction(population)$\;
-		\BlankLine
-		\tcp{Check if population size is no longer sustainable}
-		\uIf{population size is too small}{
-			break\;
-		}
-		\uIf{time to change environment}{
-			$population\leftarrow tweakFitness(population)$\;
-		}
-	}
-	\caption{Algorithm for the Changing Environment Model}\label{changingmodelalgorithm}
-\end{algorithm}
-
-\begin{function}
-	\SetKwFunction{f}{f}
-	\Def{tweakFitness(population, sd, meanOffset)}{
-		$population_{new}\leftarrow \{\}$\;
-		\For{each $element$ in $population$}{
-			$fitness\leftarrow \text{ fitness of }element$\;
-			$mean\leftarrow fitness-meanOffset$\;
-			$population_{new}\leftarrow population_{new} + \text{ new Element with fitness } \f{mean, sd} \text{ and fidelity = fidelity of }element$\;
-		}
-		\Return $population_{new}$\;
-	}
-	\caption{TweakFitness()}
-\end{function}
-
-\section{Experimental test}\label{experimental-test}
-
-Fluctuating environment with no trend or direction--modelled by applying the distribution function from parameters (i.e., either gaussian or uniform) with a possible change to the mean fitness each generation. In this model, an individual's fitness may increase or decrease.
-
-\section{Experimental design}\label{experimental-design-8}
-
-Four different runs, with changes to the environment at four different frequencies, but all with the same factor settings:
-
-% EXPERIMENT 8 - SD of Fidelity approaches 0
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- load.results.varying('results/results-668bdbc5.data')
-@
-
-\begin{table}
-	\begin{center}
-		\caption{Factor levels for test of the hypothesis prediction that the maximum possible fidelity is inversely proportional to the degree of environmental change}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels \\
-			\midrule
-			$p_{reproduction}$     & 1                & 0 \\
-			$p_{selection}$        & 1                & 0 \\
-			$n_{children}$         & 1                & 2  \\
-			Population Restriction & 1                & Fitness-independent sampling \\
-			Distribution           & 1                & Gaussian dist., $\mathbb{N}$ \\ % no W shape
-			Correlate Fidelity     & 1                & true \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
-
-The \gls{sd} of the environmental change was set to 0.90 (parameter \emph{sd} to \emph{TweakFitness} equal to 0.70), and \emph{meanOffset}, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.
-
-As before, each run has 10 replicates of \Sexpr{max(df['gen'])} generations, with an initial population size of \Sexpr{df[1,]['pop']} entities.
-
-Data is as before from those runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
-
-\section{Results and discussion}\label{results-8}
-
-<<changing-sd-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of final mean fidelity over time for four different frequencies (0 or no change (bottom line), every generation (top line), every 5 generations (second from top), and every 10 generations (second from bottom)) of environmental change.'>>=
-df$ecf <- factor(df$ecf,labels=c('Unchanging','Every generation','Every 5 generations','Every 10 generations'))
-ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_cor, group=ecf, colour=factor(ecf)), size=0.25) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fidelity") + theme(legend.key=element_rect(fill="white"))
-#ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=sd_fit, group=ecf, colour=factor(ecf)), size=0.25) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="SD Fitness") + theme(legend.key=element_rect(fill="white"))
-#grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
-<<changing-means-1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='The same for the mean rather than the standard deviation - mean fidelity on the top row, mean fitness below.'>>=
-ap <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=ave_cor,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fidelity") + theme(legend.key=element_rect(fill="white"))
-bp <- ggplot(subset(df,correlation_correlation==1)) + stat_smooth(aes(x=gen,y=ave_fit,group=interaction(ecf), colour=factor(ecf))) + scale_color_manual(name="Change frequency", values=c("grey70", "grey50", "grey30", "grey10")) + labs(x="Generation", y="Mean Fitness") + theme(legend.key=element_rect(fill="white"))
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
-<<changing-sd-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Standard deviation of fidelity over time by run for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-ggplot(subset(df,correlation_correlation==1)) + geom_line(aes(x=gen,y=sd_cor, group=run)) + facet_wrap(~ecf) + labs(x="Generation", y="SD Fidelity") + coord_cartesian(ylim=c(0,0.5))
-@
-%
-%<<changing-means-2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean fitness (top) and mean fidelity (bottom) over time for four different frequencies (0 or no change, every generation, every 5 generations, and every 10 generations) of environmental change.'>>=
-%ap <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_fit), size=0.25) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fitness") + coord_cartesian(ylim=c(0,1.1))
-%bp <- ggplot(subset(df,correlation_correlation==1)) + geom_point(aes(x=gen,y=ave_cor), size=0.25) + facet_wrap(~ecf, ncol=2)  + labs(x="Generation", y="Mean Fidelity") + coord_cartesian(ylim=c(0,1.1))
-%grid.arrange(ap,bp,nrow=2,ncol=1)
-%@
-
-We expect the variance of fidelity to remain at some non-zero level in changing environments, with greater change reflected in greater variance. This is partially seen in the results with a clear result for the most rapid change (every generation) and less clear for less frequent change.
-
-Does this represent a genuine difficulty with the hypothesis, or is there an alternative explanation?
-
-Of the conceivable alternatives, three appear worthy of further investigation:
-
+The model must describe two particular elements of this relationship: first,the scope of the change, and second, the shape of the change. In our evolutonary model we can only group entities in three non-trivial ways:
 \begin{enumerate}
-	\item The type of environmental change presented by the current $TweakFitness$ algorithm does not meet the precondition of a changing environment; other forms of change though might show the hypothesised behaviour.
-	\item The shape of the distribution function (in Derive) is biasing results towards the outer limits of the range.
-	\item The fitness-independent sampling mechanism chosen to provide an upper bound on population size is preserving a number of low-fitness entities that materially alter the model.
+	\item The group of all entities.
+	\item A single-member group for each entity.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
 \end{enumerate}
 
-\subsection{Effect of form of environment change}
+We can apply the scope of the change to each of these three groups.
 
-Our initial analysis was with the the \gls{sd} of the environmental change set to 0.90 (parameter $sd$ to $TweakFitness$ set to 0.90), and $meanOffset$, or the mean change to an individual's fitness as a result of the environmental change, to $-0.2$.
+The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
-Are the results specific to this distribution? Or can we extend our claim across a broader range of cases?
+Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
-We initially tested this by making a single change, setting $sd$ to 0.70.
+Our chosen method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as an AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
 
-Previous experiments used an abrupt change in fitness at a specified frequency. This alternative instead uses a constant, smaller, change to simulate a constant selective pressure. \TODO{Is this what the hypothesis means though? Does it mean uncertainty/unpredictable change, or predictable - this model?} In \ref{fig:summary-abrupt-change} we see the mean and standard deviations for fidelity for the original abrupt form of environmental change; in \ref{fig:summary-constant-change} the same for a steady selective pressure.
+$x_t = \Theta x_{t-1} + e_t$
 
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for investigation into the effect of the form of environmental change}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
+where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, and $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$
 
-<<summary-abrupt-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Mean average fidelity (upper) and standard deviation of fidelity (lower) for scenario of abrupt environmental change.'>>=
-ap<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,ave_cor,group=run))
-bp<-ggplot(subset(df,shape==0)) + geom_line(aes(gen,sd_cor,group=run))
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
+This series allows us to represent a broad range of environmental changes:
 
-<<summary-constant-change, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Constant environmental change.'>>=
-ap<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,ave_cor,group=run))
-bp<-ggplot(subset(df,shape==1)) + geom_line(aes(gen,sd_cor,group=run))
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
-\TODO{Appears to be a difference in response between the two different forms of environmental change.}
-
-\subsection{Effect of the specific distribution produced by Derive parameter}\label{alternative-distribution}
-
-\emph{Derive}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
-
-Specifically, in the experiments described above, one version (level) of the distribution factor used the following method to map the raw gaussian distribution to the range $[0,1]$:
-
-max(0,min(1,gaussian(mean,variance)))
-
-<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of gaussian distribution with mean = 0.5, standard deviation = 0.5'>>=
-x <- rnorm(n=10000, mean=0.5, sd=0.5)
-ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Normal distribution")
-bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Folded normal")
-
-x1 <- replicate(10000, {
-	repeat {
-		x <- rnorm(n=1,mean=0.5, sd=0.5)
-		if (x >=0 & x<=1)
-		break
-	}
-	x
-})
-cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Sampled normal")
-grid.arrange(ap,bp,cp,nrow=1,ncol=3)
-@
-
-This produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected elongated 'U' of the standard gaussian (on the left-hand side of the same figure), and as \emph{Derive} is used in \ref{base-model-algorithm} describes the relationship between the properties of an entity and its offspring, it seems plausible that this distortion towards the extremes of the range may have a significant effect on the experimental result.
+\begin{itemize}
 	
-To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \cref{fig:example_distributions}.
+	\item Each timeseries is completely specified by only two parameters, $\Theta$ and $\sigma_e$.
+	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, allowing us to control the predictability of the change.
+	\item The timeseries is composed of two independent elements, one predictable (driven by $\Theta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on a continuum of predictability.
+	\item An AR timeseries has the property of stationarity, meaning that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, or in other words show a long term trend. This allows a simple non-differencing timeseries to describe a steady improvement or worsening in fitness, something we'd like to include in our sample environments.
+	\item As a corrollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
+\end{itemize}
 
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results.varying('results/results-668bdbc5.data'), (p_reproduce==0 || p_selection == 0))
-df$ecf <- factor(df$ecf,labels=c('Unchanging','Every generation','Every 5 generations','Every 10 generations'))
-df$truncate=factor(df$truncate,labels=c("Fitness-independent","Fitness-based"))
-df$correlation_correlation=factor(df$correlation_correlation,labels=c("Uncorrelated","Correlated"))
-@
+Introduction of abrupt change to the environmental change model. A simple model would introduce an abrupt change with probability $p$ at each generation, where the change would form a new `concept` (in machine learning terminology, appriately as evolution can be seen as a learning system). Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
 
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for investigation of the effect of the form of Derive}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
+Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to the ratio of $\Theta$ to $\sigma_e$.
 
-<<distributiontest1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of Correlate Fidelity and Truncate parameters upon standard deviation of fidelity.'>>=
-# test is if distribution affects sd_cor
-ggplot(df) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~correlation_correlation+truncate)
-@
-
-% All runs where sd_cor remains > 0.3 and ave_cor ~ 0.75 for ecf==0 and correlation_correlation==1:
-% ggplot(subset(df,correlation_correlation==1&ecf==0&distribution==0&shape==1&truncate==1)) + geom_line(aes(x=gen,sd_cor,group=run))
-% But why?
-
-%
-%<<distributiontest2, pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-%ap <- ggplot(subset(df,distribution==1)) + geom_line(aes(gen,ave_cor,group=run)) + facet_wrap(~ecf)
-%bp <- ggplot(subset(df,distribution==1)) + geom_line(aes(gen,sd_cor,group=run)) + facet_wrap(~ecf)
-%grid.arrange(ap,bp,nrow=2,ncol=1)
-%@
-
-From the figure, runs in which algorithm X is used result in the standard deviation of fidelity tending towards $0$, while runs with algorithm Y show a more nuanced result. Incidentally from ... it's clear that the unchanging line for the standard deviation of fidelity under algorithm X is exclusively associated with an unchanging environment, as expected.
-
-Fitness ranges as expected, with a higher mean fitness under less changeable conditions. The range of fidelities follows a similar pattern, however mean fidelity approaches $1.0$ under all frequencies other than when the environment changes every generation. 
-
-\subsection{Effect of population restriction mechanism}
-
-\TODO{complete this subsection}
-
-% To see difference between the two truncation mechanisms:
-%t <- subset(df,ecf=='Every 5 generations' | ecf=='Every 10 generations')
-%ggplot(subset(t,correlation_correlation=='Correlated')) + geom_line(aes(x=gen,y=sd_cor,group=run)) + facet_wrap(~ecf+truncate)
-% But the hypothesis is that low-fitness entities are being preserved (and how does this relate to fidelity)?
-% First, how do low-fitness entitites affect sd_cor?  Prediction is that will have some effect on sd_cor..
-% Second, are there more low-fitness entities under fitness-independent sampling?
-% Test is that if we see effect on sd_cor, then should see more low-fitness entities...do we? If we don't then some other mechanism. If we do, then possible explanation.
-
-
-% Hypothesis is that truncation mechanism affects the degree of sd_cor by altering the ratio of high to low fitness individuals
-% By the main hypothesis, high fidelity associated with high fitness. High fidelity associated with low sd_cor? If true, then low sd_cor associated with high fitness. Then lower fitness would be associated with higher sd_cor. Therefore a truncation mechanism which increased the proportion of low fitness entities would have a higher sd_cor...
-
+From the hypothesis we make these predictions:
+\begin{enumerate}
+	\item Fidelity will be at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$ and $\sigma_e>0$.
+	\item Fidelity is proportional to $\frac{\Theta}{\sigma_e}$.
+\end{enumerate}
 \chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}

@@ -83,10 +83,14 @@
 
 \partfont{\color{darkgray}\sffamily\bfseries\selectfont\uppercase}
 \sectionfont{\color{darkgray}\bfseries\large\selectfont}
-\subsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
-\subsubsectionfont{\color{darkgray}\sffamily\selectfont\normalsize}
+\subsectionfont{\color{darkgray}\selectfont\normalsize}
+\subsubsectionfont{\color{darkgray}\selectfont\normalsize}
 
-\titleformat{\chapter}[block]{\normalfont\Huge\bfseries}{\thechapter}{5pt}{\Large}
+\titleformat{\chapter}[block]
+{\bfseries\fontsize{60}{62}\selectfont}
+{\thechapter}
+{5pt}
+{\Large}
 \titlespacing*{\chapter}{0pt}{-19pt}{10em}
 
 \renewcommand{\cleardoublepage}{%

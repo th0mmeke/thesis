@@ -7,28 +7,15 @@
 Without hesitation or ambiguity, and fully mindful of such paleontological wonders as large dinosaurs andAfrican ape-men, I state that the invertebrates of the Burgess Shale, found high in the Canadian Rockies in YohoNational Park, on the eastern border of British Columbia, are the world's most important animal fossils. Modern multicellular animals make their first uncontested appearance in the fossil record some 570 million years ago--and with a bang, not a protracted crescendo.}%
 {\textit{\\Wonderful life : the Burgess Shale and the nature of history}\\\textsc{Stephen Jay Gould}}
 
-Motivation is to understand the onset of evolution; how robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world.
+The underlying motivation for this work is to understand the requirements for onset of artificial evolution; how robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world.
 
-Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems.
-As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. As applied to technology, evolutionary systems are exogenous, problem-specific and designed.
+Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. \\todo{By contrast, as a technology, artificial evolutionary systems are exogenous, problem-specific and designed.}
 
 A convenient shorthand capturing these differences labels the biological original as bottom-up and the derived fields as top-down. If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
 
-But as biology is contingent, what is the most useful starting point for a recapitulation? 
-Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons.
-Assume also then that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
+But as biology is contingent, what is the most useful starting point for a recapitulation? Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons. And also assume that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
 
-Our belief is that the evolution of evolution can and will emerge under certain conditions, and that a bottoms-up approach emergent approach will be more successful than the predominant design-driven top-down approach today.
-
-Evolution in the Spencerian sense of progressive improvement, rather than necessarily any particular mechanism (e.g., evolution by natural selection). A change of population distribution over time--but if just purely distributive (sensu \autocite{Bourrat2015}), rather than transformative, not very interesting
-
-Abstract idea, different from mechanisms such as ENS (grounded perhaps inseparably in biology) e.g., ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' \autocite{Griesemer2005}
-
-ENS as ``a theory of descent with modification''
-
-Life (see later) provides the canonical example of ``interesting''; approaching life's creativity in an artificial system would be quite something.  Hope to see robustnes,  evolvability, novelty.
-
-Natural selection as mechanism for adaptation (in biological sense). Assume that adaptation in this sense is useful concept for CS
+Then our belief is that the evolution of evolution itself can and will emerge under certain conditions, and that an emergent approach will be more successful than the predominant design-driven top-down approach today.
 
 Simple ongoing evolution is not the same as creative or interesting evolution; current state-of-the-art insufficient and unsatisfying. \autocite{Bourrat2015} makes a related distinction between distributive and transformative forms of evolution, where distributive evolution sees simply a change in population distribution without the generation of novelties or new elements characteristic of transformative evolution. The fundamental open problem is how to achieve transformative evolution in artificial systems.
 
@@ -51,14 +38,6 @@ Alternatives to ``evolution''?
 	\item Lower bound is random search--not good enough
 	\item Upper bound is unknown--but ENS is the current gold standard for self-improving complex systems
 	\item A good result would be `interesting' forms
-\end{itemize}
-
-\subsection{Why important?}\label{why-important}
-
-\begin{itemize}
-	\item Application to engineering -- alternative to EC approaches -- self-optimizing mechanism -- EvoEvo for EAs
-	\item In itself--one of grand challenges of Alife \autocite{Bedau:2000mi}
-	\item Possibly some application to other related fields (see \cref{context})
 \end{itemize}
 
 \subsection{Life, the gold standard}
@@ -181,15 +160,12 @@ pre-existing elements, rather than being constructed `\emph{de novo}',
 and that production of novelties may be relatively rapid. Connection
 changes may happen quickly; by comparison, new genes may take many generations.
 
-\section{Problem}
-\autocite{Bourrat2015}:
+section{Goal}
+The overall problem we address is to \textit{determine the conditions under which ongoing evolution might emerge in a software system}. 
 
-Evolution is change of population distribution over time. Two types - transformative, where new elements - from mutations, and
-distributive, where distribution changes - from selection or drift
-\begin{itemize}
-	\item distributive is not novelty. In fact will result in narrowing of distribution.
-	\item transformative broadens population, but without direction
-\end{itemize}
+Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that produces \\todo{self-tuning, improving etc} interesting, novel, and creative results, as does natural biological evolution. Emergent references the difference between a top-down designed mechanism imposed upon the system, and one that is a natural result of interactions between the system elements (the reason for this will become clear in later discussion concerning the importance of self-referentiality.) Finally, our domain is software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
+
+This is clearly a broad and ambitious goal, one more suited to a research programme than a single thesis, and a goal that is additionally the subject of a complex body of related and previous work. We shall return to a more specific and pragmatic problem description in the later section, \ref{research-questions}, after presenting a summary of the most relevant literature.
 
 \autocite{Taylor2001}:
 
@@ -223,251 +199,37 @@ distributive, where distribution changes - from selection or drift
 		world'''
 		
 	\end{itemize}
+\section{Previous work}
+The previous sections have established the context, and incidentally identified the primary areas of relevant literature. From biology, the main threads concern the origins of life, and the theory of evolution. Natural selection provides the primary mechanism for evolution in biology, although it is not the only process at work -- genetic drift \cite{XXX} and neutral theory \cite{Kimura} provide a counterpoint. In artificial systems \\todo{EC etc}, researchers have used biological evolution as an inspiration, gradually over time diverging into a field with the beginnings of its own motivating theory, now only loosely connected with its origins in the natural world. These areas are discussed in more detail in \ref{context} to aid in understanding the context behind the remaining sections of the work.
 
-\section{Approach and methods}\label{approach}
+In artificial systems, some researchers have recently returned to a reappreciation of how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolution. This has led to a renewed interest in understanding the principles behind biological evolution so that artificial systems can capture some of these admirable properties; the difference now is that the transference is sought at the level of concepts and principles rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
 
-\begin{itemize}
-	\item
-	      Want to remove extraneous factors as factors introduce complications
-	\item
-	      Identification of necessary conditions vs contingent factors
-	\item
-	      Ideally minimal choices to be made or parameters to be chosen
-\end{itemize}
+This chapter expands upon previous work that is directly relevant to our problem overall, the onset of evolution in software systems. 
 
-Untangle the general from the biological in previous work. Emergent, self-improving, actionist (similar to Brooks in AI)
+The review is organized roughly in alignment with the research goal: first an examination of work that abstracts evolutionary principles; next a summary of what it means for an artificial system to experience ongoing creative evolution; and finally how emergence is relevant to the goal. Some interesting open problems are summarized in the conclusion to this section.
 
-Much previous work aimed at understanding biology--assumes that domain.
+Previous work that relates to a particular section of the thesis is presented in that section, for clarity, and to make clear the distinction beween the work of others and our own contributions.
 
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=\linewidth]{figures/approach}
-	\end{center}
-\end{figure}
+\subsection{Evolutionary principles}
+\subsection{Ongoing evolution in artificial systems}
+\subsection{Emergence in artificial evolutionary systems}
 
-\TODO{rewrite, properly mark quotations + references!}
+\subsection{Discussion}
 
-The field of artificial life is synonymous with simulation
-\autocite[chap.2]{Aicardi2010}. In other forms of science however
-practitioners make use of a number of tools, including experiments,
-mathematical models, thought experiments, and simulations.
-Each method is well suited to some types of
-questions, and inappropriate for others. Is the use of simulation
-justified for our proposed investigation?
+Two particular open problems are apparent from this review. First, the model of \cite{Bourrat2015} assumes that the problem that evolution is learning is perfectly understandable, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. This is unexplored by Bourrat.
 
-Simulations are becoming central to some disciplines in natural history.
-Ecology--\glspl{abm} or \glspl{ibm} (reviewed in
-\autocite{DeAngelis2005}; also see
-\autocite{Grimm:2006fk,Grimm:2005wd,Grimm:1999kf,Hogeweg:1990jz}).
-\glspl{ibm} in Microbiolgy are seen as very close to Alife \autocite{Grimm:2009th}.
+The second open problem is the demonstration of a self-referential mechanism to provide the fidelity property of Bourrat, or the inheritance and variation properties assumed by other models, that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be self-referential, accessible to evolution and therefore must be made of the same things as everything else that is subject to evolution in the system - it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
 
-The value of simulation over experiments for
-\gls{ibm} study lies in a reduction in costs; the difficulties in
-cultivation of microbial populations (99\% of known species yet to be
-cultivated), and significantly, that they form \quote{complex systems only
-	poorly explained by reduction.}{\autocite{Ferrer:2008hv}} Emergence and
-dynamic behaviours are important, and yet they are hard to capture with
-mathematical models.
+\section{Problem and research questions}\label{research-questions}
 
-Types of investigation
+From this discussion, our overall goal of emergent ongoing evolution can be more pragmatically reduced to the following research questions:
 
-\subsection{Thought experiments}\label{thought-experiments}
+\begin{enumerate}[label=RQ\arabic*:]
+	\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
+	\item Is there a plausible implementation for a fidelity mechanism in a software system?
+\end{enumerate}
 
-non-empirical, clarification, contradictions/dissonance, fast, cheap.
-
-\subsection{Models}\label{models}
-
-\quote{
-	It is seldom the case in biology that a model is derived deductively
-	from a more fundamental quantitative theory, with the possible exception
-	of population genetics which has its foundations in evolutionary
-	theory.}{\autocite{Krakauer2011}}
-
-Models can be ``useful stop-gaps'' towards a theory, by providing a
-testable body of data for experiments and predictions
-\autocite{Krakauer2011}, and may be constructed either bottom-up (such
-as in ABM) or top-down, by the application of constraints
-\autocite{Krakauer2011}. Many types in \eg ecology--eleven according to
-\autocite{Jorgensen2008}--of which fall into two main groups
-
-Mathematical models: complexity, need for abstraction/assumptions
-(\eg Fisher's famous equation describing the changes in allele
-distribution under selection assumes independent genes--extending this
-to realistic cases remains an open problem \autocite{Schuster2011}),
-difficulty in handling dynamism/emergence. Cheap, fast. Non-empirical.
-
-Simulations: bottom-up approaches, holistic, variability so diversity
-closer to real systems, adaptive behaviour/changing
-\autocite{Ferrer:2008hv}. Non-empirical data.
-
-\subsection{Experiments}\label{experiments}
-
-reductionism, conflation (difficulty in removing other factors e.g.,
-Heinemann), expense, time (generations). Source of empirical data.
-
-\quote{
-	Although this may seem a paradox, all exact science is dominated by the
-	idea of approximation.}{The Scientific Outlook, Bertrand Russell}
-
-\subsection{Benefits}\label{benefits}
-
-Unique ability to explore subject = unique object of enquiry e.g., study
-of emergence, complex, self-organizing subjects. Biology stands alone in
-the importance of emergence \autocite{Bersini:2006ve}, and the
-interconnection of levels of analysis, \eg behaviour can influence gene
-expression, and genes can affect behaviour \autocite{Krakauer2011}. As
-summarized by \autocite{Krakauer2011}, when asking how much of biology
-can be predicted bottom-up from the application of basic physical and
-chemical laws--``This question is simple to answer: effectively zero.''
-
-Unique method of enquiry, that is, properties that improve on existing
-techniques, e.g., by relaxing assumptions
-
-\subsection{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
-
-Simulations seem to fall somewhere in between thought experiments or
-abstract models, and experiments. They are also relatively novel; common
-use has only come with increased access to digital computers.
-Consequently the nature of simulation--what can be claimed as a result
-of simulation, and what role may be played legitimately by simulation in
-scientific discovery--is a hot topic for philosophers of science. As
-might not be unexpected, there are two opposing positions taken, plus a
-synthesis that claims the middle ground.
-
-\newthought{Simulations are just calculators}\label{simulations-are-just-calculators}
-
-a computational means to solve analytically intractable equations
-\autocite[31]{Winsberg2010}, producing nothing new (just consequences
-of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
-
-\quote{A simulation is ultimately
-	only a high-speed generator of the consequences that some theory assigns
-	various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192}
-
-If a model, then might take many forms--analogy, model, pure exploration \autocite{Webb2009}.
-
-Models are \quote{a purposeful representation. A model needs to have a
-	purpose because otherwise there would be no way to decide what to
-	include in it. A model's purpose is a filter: the model should not
-	include anything not believed essential for explaining the phenomenon
-	of interest}{\autocite{Grimm:2009th}}
-
-\autocite{MaynardSmith1974} distinguishes between
-``practical'' descriptions of ecological systems, or ``simulations'', and
-theoretical ones: ``models''.
-
-Simulations are aimed at answering specific questions, or analysing
-particular scenarios. The more accurate the simulation however, and
-hence the more valuable the results, the harder it is to generalize to
-other cases. It is hard to understand the behaviour of complicated
-simulations, and the causes of particular behaviours of interest may be
-unclear if there are many variables in play.
-
-Instead, \autocite{MaynardSmith1974} prefers the use of simple models, designed
-to illuminate the ``causes of differences of behaviour between different
-species or systems'' rather than ``assertions which are true of all
-systems or of all species.''
-
-Hughes 1999 would argue that simulations have genuinely ``mimetic''
-character, particularly ones that present results graphically as
-real-world systems do, that goes beyond plain number-crunching. They use
-a variety of methods beyond calculation (such as graphics) to draw
-inferences from data. They also incorporate approximations and creative
-choices to make the problem tractable, which introduces need for
-justification. Simulations need interpretation and justification--they
-are not self-contained, their own justifications
-\autocite[31]{Winsberg2010}
-
-\newthought{Simulations are themselves an instance of the
-	thing}\label{simulations-are-themselves-an-instance-of-the-thing}
-
-That is, the thing is not a shadow but the object. The Animats are
-actually alive, and therefore instances of biology.
-\footnote{And this way leads us to the claims of Strong Alife--the simulation is actually alive.}
-The simulation is a stand-in for the real world, and you can perform
-experiments on it as would any other system
-\autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
-Avida,
-
-\quote{
-	These organisms, because they are defined by the sequence of
-	instructions that constitute their genome, are not simulated. They are
-	physically present in the computer's memory and live there. The world to
-	which these creatures adapt, on the other hand, is
-	simulated\ldots}{\autocite{Adami2002}}
-
-They certainly have elements of uncertainty and error, like experiments.
-
-TODO Paul Humphreys 1994 says Monte Carlo simulations are experiments; Von
-Neumann ``replace a computation from an unquestioned theory by direct
-measurement'' (quoted in TODO [28]{Winkler et al 1987}).
-
-Norton and Suppe 2001 argue that they are experiments, when proper conditions met:
-``Empirical
-data about real phenomena are produced under conditions of experimental
-control'', although ``lacking other data, we can never evaluate the
-information that these experiments provide'' Hughes 1999 p.142 so no inherent epistemological force to his
-argument. Validity solely depends on validation.
-
-\newthought{A third-way, neither experimental or theoretical}\label{a-third-way-neither-experimental-or-theoretical}
-
-\autocite[31]{Winsberg2010} or an Opaque Thought Experiment"
-\autocite{DiPaolo2000}. A common view, among others Dowling 1999, 264:
-simulation is like theory as about ``manipulating equations'' and
-``developing ideas'' but like experiments as ``fiddling with machines'',
-``trying ideas out'', ``watching to see what happens.'' Simulation is a
-form of Kuhn's theory articulation or ``model building''--making
-principles apply to local, concrete systems in the real world. In this
-view, \quote{Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
-
-\subsection{The legitimate role of simulation in scientific
-	enquiry}\label{the-legitimate-role-of-simulation-in-scientific-enquiry}
-
-Following this third way, simulations might be seen as a source of new
-hypotheses \autocite{Eldridge}. The fundamental question remains
-however: what is the exact relationship between world and simulation? If
-the simulation exhibits an analogous behaviour, under a set of
-assumptions, to the real world, then we can contend that there exist
-similar mechanisms in the real world to the assumptions in our model.
-TODO Noble 1997, quoted in \autocite{Eldridge}). The example given by
-\autocite{Eldridge} is Boids \autocite{Reynolds1987} where flocking behaviour in
-birds is very similar to that that results from a set of three simple
-rules in a simulation.
-
-However, \autocite{Eldridge} identifies three problems with this
-approach: first, logically, similarity does not require congruence
-\autocite{Weitzenfeld1984}, second, how is the degree of similarity to
-be assessed, and third, the impossibility of proving that a simulation
-is an accurate model of a theory. That is, where does attribution lie?
-Is the result a result of the underlying theory or a quirk of the
-implementation? There may be no way of resolving this absolutely as it
-may not even be possible to distinguish between the two
-\autocite{DiPaolo2000}--we cannot prove correctness through testing.
-
-TODO On the other hand, Taylor (1989) in \autocite{Webb2009}, argues for
-``pure exploration'' or ``exploratory tools'' that do not need
-justification, and that may be used to generate ``new questions to ask,
-new terms to employ, or different models to construct'' (Taylor 1989,
-p122). But in this case you might reasonably argue that any insights are
-``insights about a mathematical system'' not necessarily insights into
-the real-world (123–124 Taylor 1989).
-
-In practice then, any form of model claiming a significance beyond its
-own self must show a correspondence with the thing it claims to be
-modelling.
-
-\quote{However, existence proofs clearly do require comparisons
-	between model results and empirical data. One cannot evaluate the claim
-	that phenomenon X requires condition Y unless one can show that
-	phenomenon X is actually produced (with or without Y). And the claim or
-	proof will be stronger or weaker depending on how well the simulated X
-	matches the real X; for example, demonstrating successful behaviour in
-	the same physical situation as the animal.}{\autocite[278]{Webb2009}}
-The strength of our belief depends on the degree of similarity.
-
-\subsection{Alternative approaches}
-
-\section{Guide to this work}\label{guide-to-this-work}
+\section{Approach, and guide to this work}
 
 \section{Previous publications}\label{previous-publications}
 
@@ -477,15 +239,3 @@ and material from \cref{model-validation} in \cite{Young2013}.
 ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
 \section{Contributions}\label{contributions}
-
-\begin{enumerate}
-	\item Ability of a copy mechanism with adjustable fidelity to auto-adjust to changing environmental conditions
-	\item A grounding for Artificial Evolution in EvoEvo. Shown:
-	      \begin{itemize}
-	      	\item Inheritance is inevitable given some form of variable copying mechanism
-	      	\item Variation a result of the variability in copying
-	      	\item Copying mechanism robust and self-tuning
-	      \end{itemize}
-	\item Continued work towards a non-biological perspective on evolution
-	\item Progress towards Bedau's goal of OEE in artificial system--evolution compatible with OEE without necessarily showing OEE (which is hard to measure and prove)
-\end{enumerate}

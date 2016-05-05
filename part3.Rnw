@@ -1933,13 +1933,11 @@ but at the cost of additional modelling complexity.
 
 \chapter{ToyWorld}\label{toyworld}
 
-\section{Introduction}\label{introduction-3}
-
 ToyWorld, our Artificial Chemistry for the exploration of emergent behaviours, was first introduced in \cite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
 Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps, but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results--our model cannot be used to investigate real-world chemical behaviours. There is another reason why familiarity may be important: following our earlier proposal that a replicase-like mechanism would fulfil the requirements for a self-referential copying mechanism, it might be fruitful to base any implementation in ToyWorld on a simplified version of a real biological replicase. Clearly, a simple mapping from real-world chemistry to the rules in our Artificial Chemistry would improve the feasibility of this idea.s
 
-There is also yet sanother reason. The model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values -- real-world chemistry.
+There is also yet another reason. The model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values -- real-world chemistry.
 
 The name has been chosen as both an acknowledgement of ToyChem \autocite{Benko2003}, and as a hint at the simulation's purpose:
 creating an artificial world for exploration. That world, the ToyWorld model, consists of:

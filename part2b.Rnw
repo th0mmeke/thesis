@@ -1,4 +1,20 @@
-\chapter[Test under changing conditions]{Experimental test of hypothesis under changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
+<<setup, include=FALSE>>=
+library(knitr)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra) # grid layouts for ggplot2
+library(lattice) # needed for bwplot etc
+library(english) # convert numbers to words
+opts_chunk$set(fig.path='generated_figures/')
+knit_hooks$set(pdfcrop = hook_pdfcrop)
+
+sults.varying <- function(t) {
+colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","integer","integer","numeric","numeric")
+read.csv(t, colClasses=colClasses)
+}
+
+@
+
+\chapter{Changing conditions}\label{experimental-test-of-h2-under-changing-conditions}
 \section{Experimental design}
 Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
 
@@ -39,8 +55,78 @@ Our hypothesis, that fidelity is related to learnability, can now be refined in 
 From the hypothesis we make these predictions:
 \begin{enumerate}
 	\item Fidelity will be at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$ and $\sigma_e>0$.
-	\item Fidelity is proportional to $\frac{\Theta}{\sigma_e}$.
+	\item Fidelity is proportional to the predictability in the environment.
 \end{enumerate}
+
+\chapter{Environmental model}
+<<factorialenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+library(pracma)
+library(reshape2)
+library(ggplot2)
+
+t1 <- read.csv('model/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sd", "bias")
+t2 <- melt(t1,id=c('run','theta','sd','bias'))
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+ggplot(subset(t2,sd!=0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+@
+
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+library(pracma)
+library(reshape2)
+library(ggplot2)
+
+t1 <- read.csv('model/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sd", "bias")
+t2 <- melt(t1,id=c('run','theta','sd','bias'))
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sd+bias, labeller='label_both') + labs(x="t", y="Fitness change")
+@
+
+% Needs sampleenvironment
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+for (r in unique(t2$run)) {
+	t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+	
+	fitness <- 0.5
+	for (t in 1:50) {
+		fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+		t2[t2$run==r & t2$t==t,'fitness'] = fitness
+	}
+}
+
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 8))
+@
+
+% Needs sampleenvironment
+<<sampleentropy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Sample entropy of each example environment.'>>=
+t2 <- t1[,1:3]
+names(t2)[1]<-"theta"
+names(t2)[2]<-"sd"
+names(t2)[3]<-"bias"
+for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+
+summary(lm(sample_entropy~theta+sd,data=t2)) # F-statistic: 2.359 on 2 and 497 DF,  p-value: 0.09561 - no real linear model
+summary(lm(approx_entropy~theta + sd, data = t2)) # F-statistic:   1.9 on 2 and 497 DF,  p-value: 0.1506 - even less relationship...
+ggplot(t2, aes(sd,sample_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+@
+
+\chapter{Results and discussion}
+
+
+
 \chapter{TODO-Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}

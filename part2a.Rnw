@@ -19,13 +19,6 @@ df$ecf <- factor(df$ecf,levels=c(0,1,5,10)) # place into natural order
 df
 }
 
-# BYLINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_sd ar_theta ave_cor	ave_fit	experiment	gen	pop	run	sd_cor	sd_fit
-
-load.results.varying <- function(t) {
-colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","integer","integer","numeric","numeric")
-read.csv(t, colClasses=colClasses)
-}
-
 myqqplot <- function(x,y,...) {
 sx <- sort(x)
 sy <- sort(y)
@@ -37,13 +30,6 @@ if (leny > lenx)
 sy <- approx(1L:leny, sy, n = lenx)$y
 qplot(sx,sy,...)
 }
-
-# Generation of environments
-# ts <- replicate(300,arima.sim(list(order = c(1,1,0),  ar=runif(n=1,max=0.2), sd=0.1,n = 500))
-# ts <- ts/max(abs(min(ts)),abs(max(ts))) * 0.3
-# write.table(t(),'environments.csv',row.names=FALSE,col.names=FALSE, sep=',')
-# plot.ts(ts[,1:10])
-
 @
 
 % # Filter(Negate(is.factor),z[[gen]]) # quantile values for each combination of factor levels at gen

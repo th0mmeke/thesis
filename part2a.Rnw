@@ -604,7 +604,7 @@ df_independent <- subset(df_completed,truncate=="Independent")
 df_dependent <- subset(df_completed,truncate=="Dependent")
 ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final mean fidelity", xlab="Independent",ylab="Dependent")
 bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final mean fitness", xlab="Independent",ylab="Dependent")
-grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
+grid.arrange(ap,bp,nrow=2,ncol=1,heights=unit(0.5, "npc"))
 @
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two

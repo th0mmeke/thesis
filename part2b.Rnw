@@ -8,7 +8,9 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
-\chapter{The predictability of environmental change}
+\chapter{Model behaviour under varying conditions}
+
+\section{The predictability of environmental change}
 
 Creativity and complexity have a fundamental similarity - strongly ordered results and random results are both uninteresting; the peak is somewhere in between, perhaps on the ``Edge of Chaos'' described in many dynamical systems works (e.g., RBN dynamics). Intuitively, complexity is low for completely ordered things, such as crystals, or unchanging time series, and high for strongly patterned yet complicated things. Counterintuitively though complexity should also be low for completely disordered things, such as well-mixed gases in a container. Complexity relates to patterns and structure. Randomness is the absence of pattern, and so complexity should be low.
 
@@ -64,21 +66,22 @@ The shape of change is less constrained, and the space of all potential changes 
 
 Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
-Our chosen method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as an AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+Our chosen method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
 
-$x_t = \Theta x_{t-1} + e_t$
+$x_t = \Theta x_{t-1} + e_t + \delta$
 
-where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, and $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$
+where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
 
 This series allows us to represent a broad range of environmental changes:
 
 \begin{itemize}
 	
-	\item Each timeseries is completely specified by only two parameters, $\Theta$ and $\sigma_e$.
-	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, allowing us to control the predictability of the change.
-	\item The timeseries is composed of two independent elements, one predictable (driven by $\Theta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on a continuum of predictability.
+	\item Each timeseries is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
+	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment timeseries itself would show a trend.
+	\item 
+	\item The timeseries is composed of three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
 	\item An AR timeseries has the property of stationarity, meaning that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, or in other words show a long term trend. This allows a simple non-differencing timeseries to describe a steady improvement or worsening in fitness, something we'd like to include in our sample environments.
-	\item As a corrollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
+	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
 Introduction of abrupt change to the environmental change model. A simple model would introduce an abrupt change with probability $p$ at each generation, where the change would form a new `concept` (in machine learning terminology, appriately as evolution can be seen as a learning system). Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
@@ -155,11 +158,25 @@ summary(lm(approx_entropy~theta + sd, data = t2)) # F-statistic:   1.9 on 2 and 
 ggplot(t2, aes(sd,sample_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
 @
 
-\chapter{Results and discussion}
+\section{Experimental design}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\linewidth]{figures/hypercube}
+	\end{center}
+\end{figure}
+
+\section{Results and discussion}
 
 <<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
-colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","factor","integer","integer","integer","numeric","numeric")
-results <- read.csv('results/csv', colClasses=colClasses)
+# BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
+colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
+r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
+r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
+results = rbind(r1,r2)
+
+ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
+
 @
 
 \chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}

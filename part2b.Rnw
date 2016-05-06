@@ -1,14 +1,25 @@
 <<setup, include=FALSE>>=
 library(knitr)
-library(cowplot) # styling of plots, extension of ggplot2
-library(gridExtra) # grid layouts for ggplot2
-library(lattice) # needed for bwplot etc
-library(english) # convert numbers to words
 opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
 \chapter{Model behaviour under varying conditions}
+
+Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
+
+The model must describe two particular elements of this relationship: first,the scope of the change, and second, the shape of the change. In our evolutionary model we can only group entities in three non-trivial ways:
+\begin{enumerate}
+	\item The group of all entities.
+	\item A single-member group for each entity.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
+\end{enumerate}
+
+We can apply the scope of the change to each of these three groups.
+
+The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
 \section{The predictability of environmental change}
 
@@ -39,7 +50,7 @@ Another broad approach might be to modify the method to reduce its dependence on
 
 Now for some definitions:
 
-A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \cite{Brockwell:2002dq} where an observation $x_i \in some set \{X\}, assumed to be \mathbb{R}$.
+A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \cite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.
 
 \emph{Context} is any attribute whose values are largely independent but tend to be stable over contiguous intervals of another attribute known as the \emph{environmental attribute.} \cite{Sammut:2010cr} The environmental attribute is typically, but not always, time; other attributes such as location are also possible. A sequence with stationary distribution is a context \cite[p289]{Gama:2004ve}.
 
@@ -51,21 +62,6 @@ These attributes when combined produce three independent categories - sudden, gr
 
 \section{Environmental model}
 
-Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
-
-The model must describe two particular elements of this relationship: first,the scope of the change, and second, the shape of the change. In our evolutionary model we can only group entities in three non-trivial ways:
-\begin{enumerate}
-	\item The group of all entities.
-	\item A single-member group for each entity.
-	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
-\end{enumerate}
-
-We can apply the scope of the change to each of these three groups.
-
-The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
-
-Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
-
 Our chosen method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
 
 $x_t = \Theta x_{t-1} + e_t + \delta$
@@ -75,28 +71,38 @@ where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$
 This series allows us to represent a broad range of environmental changes:
 
 \begin{itemize}
-	
 	\item Each timeseries is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
 	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment timeseries itself would show a trend.
-	\item 
-	\item The timeseries is composed of three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item The timeseries is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
 	\item An AR timeseries has the property of stationarity, meaning that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, or in other words show a long term trend. This allows a simple non-differencing timeseries to describe a steady improvement or worsening in fitness, something we'd like to include in our sample environments.
 	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-Introduction of abrupt change to the environmental change model. A simple model would introduce an abrupt change with probability $p$ at each generation, where the change would form a new `concept` (in machine learning terminology, appriately as evolution can be seen as a learning system). Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
+Although the $\delta$ term makes the model non-stationary, any change is steady and gradual. A future improvement would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
 
-Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to the ratio of $\Theta$ to $\sigma_e$.
+
+\section{Experimental design}
+
+Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to some relation involving $\Theta$, $\sigma_e$ and $\delta$.
 
 From the hypothesis we make these predictions:
 \begin{enumerate}
-	\item Fidelity will be at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$ and $\sigma_e>0$.
+	\item Fidelity is at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$, $\delta=0$ and $\sigma_e>0$.
 	\item Fidelity is proportional to the predictability in the environment.
 \end{enumerate}
+
+As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables, our earlier factorial and fractional-factorial experiment designs are no longer optimal. Instead we adopt a response surface design where each experiment run has initial values of the independent variables taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \ref{fig:hypercube}.)
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\linewidth]{figures/hypercube}
+	\end{center}
+\end{figure}\label{fig:hypercube}
 
 <<factorialenvironment, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
 library(reshape2)
 library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
 
 t1 <- read.csv('model/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 
@@ -113,6 +119,7 @@ ggplot(subset(t2,sd!=0)) + geom_line(aes(x=as.numeric(variable),y=value)) + face
 <<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
 library(reshape2)
 library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
 
 t1 <- read.csv('model/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 t1$run <- 1:nrow(t1)
@@ -143,6 +150,7 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller
 <<sampleentropy, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Approximate entropy of each example environment.'>>=
 library(pracma)
 library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
 
 t2 <- t1[,1:3]
 names(t2)[1]<-"theta"
@@ -152,28 +160,57 @@ for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52]
 for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
 
 #summary(lm(sample_entropy~theta+sd,data=t2)) # can error as some sample_entropy values may be Inf
-summary(lm(approx_entropy~theta + sd, data = t2)) # F-statistic:   1.9 on 2 and 497 DF,  p-value: 0.1506 - even less relationship...
 ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+
+#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
 @
 
-\section{Experimental design}
+The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \ref{tbl:range-of-independent-variables}.
 
-\begin{figure}
+\begin{table}
 	\begin{center}
-		\includegraphics[width=\linewidth]{figures/hypercube}
+		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
+		\label{tbl:range-of-independent-variables}
+		\begin{tabular}{@{}lll@{}}
+			\toprule
+			Variable              & Dataset no.1 & Dataset no.2          \\
+			\midrule
+			$n$			& 1000 					& 400\\
+			$\Theta$    & $[-0.4, 0.4]$ 		& $[-0.2, 0.2]$\\
+			$\sigma_e$ 	& $[0, 0.2]$			& $[0, 0.1]$\\
+			$\delta$ 	& $[-0.1, 0.1]$		& $[-0.05, 0.05]$\\
+			\bottomrule
+		\end{tabular}
 	\end{center}
-\end{figure}
+\end{table}
 
 \section{Results and discussion}
 
-<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
-library(ggplot2)
-library(gridExtra)
+<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs are ordered by final generation reached.'>>=
 # BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
 r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
 results = rbind(r1,r2)
+
+t1 <- aggregate(r1$gen,by=list(r1$run),max)
+names(t1)[1]<-"run"
+names(t1)[2]<-"gen"
+ap <- ggplot(t1[order(t1$gen),],aes(1:nrow(t1),gen))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,nrow(t1))) + labs(x="", y="Final generation")
+t2 <- aggregate(r2$gen,by=list(r2$run),max)
+names(t2)[1]<-"run"
+names(t2)[2]<-"gen"
+bp <- ggplot(t2[order(t2$gen),],aes(1:nrow(t2),gen))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,nrow(t1))) + labs(x="", y="Final generation")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+Of the \Sexpr{max(r1$run)+1} runs in dataset no.1, \Sexpr{nrow(r1[r1$gen==500,])+1} reached completion;for dataset no.2 with \Sexpr{max(r2$run)+1} runs, \Sexpr{nrow(r2[r2$gen==500,])+1} completed. The difference reflects the difference in range of the independent variables (as seen in \ref{tbl:range-of-independent-variables}), shown graphically in \ref{fig:figure22}.
+
+
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
 
 ap <- ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
 bp <- ggplot(subset(results,gen==500)) + geom_point(aes(ar_bias,ave_fid)) # fid ~ -bias when bias <0, otherwise fid can reach max

@@ -5,8 +5,8 @@ import os
 GENERATIONS = 500
 POPULATION_SIZE = 5000
 N_REPEATS = 1
-N_ENVIRONMENTS = 500
-MAX_SD = 0.4
+N_ENVIRONMENTS = 1000
+MAX_SD = 0.2
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
     # ['BY_LINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']

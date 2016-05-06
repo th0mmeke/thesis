@@ -4,7 +4,7 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
-\chapter{Model behaviour under varying conditions}
+\chapter{Model behaviour in changing environments}
 
 Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
 
@@ -99,12 +99,12 @@ As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are cont
 	\end{center}
 \end{figure}\label{fig:hypercube}
 
-<<factorialenvironment, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+<<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
 library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
 
-t1 <- read.csv('model/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sd", "bias")
@@ -112,8 +112,25 @@ t2 <- melt(t1,id=c('run','theta','sd','bias'))
 t2$theta <- round(t2$theta,3)
 t2$sd <- round(t2$sd,3)
 t2$bias <- round(t2$bias,3)
-ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
-ggplot(subset(t2,sd!=0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+
+for (r in unique(t2$run)) {
+	t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+	
+	fitness <- 0.5
+	for (t in 1:50) {
+		fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+		t2[t2$run==r & t2$t==t,'fitness'] = fitness
+	}
+}
+ap <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+<<factorialsdbias, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 <<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
@@ -121,7 +138,7 @@ library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
 
-t1 <- read.csv('model/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sd", "bias")
 t2 <- melt(t1,id=c('run','theta','sd','bias'))
@@ -143,7 +160,7 @@ for (r in unique(t2$run)) {
 	}
 }
 
-ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 8))
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
 @
 
 % Needs sampleenvironment

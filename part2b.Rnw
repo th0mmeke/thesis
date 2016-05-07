@@ -225,7 +225,11 @@ The range of each variable (the length of each side of the hypercube) is set fro
 
 \section{Results and discussion}
 
-<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs are ordered by final generation reached.'>>=
+<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs are ordered by final generation reached.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
 # BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
@@ -246,7 +250,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 Of the \Sexpr{max(r1$run)+1} runs in dataset no.1, \Sexpr{nrow(r1[r1$gen==500,])+1} reached completion;for dataset no.2 with \Sexpr{max(r2$run)+1} runs, \Sexpr{nrow(r2[r2$gen==500,])+1} completed. The difference reflects the difference in range of the independent variables (as seen in \ref{tbl:range-of-independent-variables}), shown graphically in \ref{fig:figure22}.
 
 
-<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -259,12 +263,20 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 #anova(lm(ave_fid ~ ar_sd*ar_bias, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
 #anova(lm(sd_fid ~ ar_sd*ar_bias, data=subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001))) # Remove effect of bias, then ar_sd 0.001
 @
-<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
+<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
 ap <- ggplot(subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  # ave fid drops as sd increases
 bp <- ggplot(subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  # sd fid increases as sd increases
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
-<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='.'>>=
+<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
 ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') # and relationship between these two
 # Relationship between sd_fid and ave_fid!
 bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid))

@@ -18,18 +18,6 @@ df <- read.csv(t, colClasses=colClasses)
 df$ecf <- factor(df$ecf,levels=c(0,1,5,10)) # place into natural order
 df
 }
-
-myqqplot <- function(x,y,...) {
-sx <- sort(x)
-sy <- sort(y)
-lenx <- length(sx)
-leny <- length(sy)
-if (leny < lenx)
-sx <- approx(1L:lenx, sx, n = leny)$y
-if (leny > lenx)
-sy <- approx(1L:leny, sy, n = lenx)$y
-qplot(sx,sy,...)
-}
 @
 
 % # Filter(Negate(is.factor),z[[gen]]) # quantile values for each combination of factor levels at gen
@@ -601,11 +589,24 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
 <<limitqqplots, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='\\Gls{qq} plots comparing fitness-independent and fitness-based or dependent results for fidelity (left) and fitness (right).'>>=
+
+myqqplot <- function(x,y,...) {
+sx <- sort(x)
+sy <- sort(y)
+lenx <- length(sx)
+leny <- length(sy)
+if (leny < lenx)
+sx <- approx(1L:lenx, sx, n = leny)$y
+if (leny > lenx)
+sy <- approx(1L:leny, sy, n = lenx)$y
+qplot(sx,sy,...)
+}
+
 df_independent <- subset(df_completed,truncate=="Independent")
 df_dependent <- subset(df_completed,truncate=="Dependent")
 ap <- myqqplot(sort(df_independent$ave_cor), sort(df_dependent$ave_cor), main="Final mean fidelity", xlab="Independent",ylab="Dependent")
 bp <- myqqplot(sort(df_independent$ave_fit), sort(df_dependent$ave_fit), main="Final mean fitness", xlab="Independent",ylab="Dependent")
-grid.arrange(ap,bp,nrow=2,ncol=1,heights=unit(0.5, "npc"))
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 %Standard non-parametric tests include Wilcoxon and Mann-Whitney for comparing two

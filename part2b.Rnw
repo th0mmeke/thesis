@@ -210,14 +210,14 @@ The range of each variable (the length of each side of the hypercube) is set fro
 	\begin{center}
 		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
 		\label{tbl:range-of-independent-variables}
-		\begin{tabular}{@{}lll@{}}
+		\begin{tabular}{@{}llll@{}}
 			\toprule
-			Variable              & Dataset no.1 & Dataset no.2          \\
+			Dataset   	 	&  $\Theta$		& $\sigma_e$	& $\delta$\\
 			\midrule
-			$n$			& 1000 					& 400\\
-			$\Theta$    & $[-0.4, 0.4]$ 		& $[-0.2, 0.2]$\\
-			$\sigma_e$ 	& $[0, 0.2]$			& $[0, 0.1]$\\
-			$\delta$ 	& $[-0.1, 0.1]$		& $[-0.05, 0.05]$\\
+			Dataset no.1	& $[-0.4, 0.4]$	& $[0, 0.2]$ 	& $[-0.1, 0.1]$\\
+			Dataset no.2	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.3	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.4	& $[-0.4, 0.4]$	& $[0, 0.4]$	& $[-0.04, 0.04]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -234,21 +234,40 @@ library(cowplot) # styling of plots, extension of ggplot2
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
 r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
-results = rbind(r1,r2)
+r3 <- read.csv('results/results-cc648a0a9.csv', colClasses=colClasses)
+r4 <- read.csv('results/results-996060f.csv', colClasses=colClasses)
+results = rbind(r1,r2,r3,r4)
 
 t1 <- aggregate(r1$gen,by=list(r1$run),max)
-names(t1)[1]<-"run"
-names(t1)[2]<-"gen"
-ap <- ggplot(t1[order(t1$gen),],aes(1:nrow(t1),gen))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,nrow(t1))) + labs(x="", y="Final generation")
 t2 <- aggregate(r2$gen,by=list(r2$run),max)
-names(t2)[1]<-"run"
-names(t2)[2]<-"gen"
-bp <- ggplot(t2[order(t2$gen),],aes(1:nrow(t2),gen))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,nrow(t1))) + labs(x="", y="Final generation")
-grid.arrange(ap,bp,nrow=2,ncol=1)
+t3 <- aggregate(r3$gen,by=list(r3$run),max)
+t4 <- aggregate(r4$gen,by=list(r4$run),max)
+max_nrow <- max(nrow(t1),nrow(t2),nrow(t3),nrow(t4))
+ap <- ggplot(t1,aes(1:nrow(t1),t1[order(t1[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+bp <- ggplot(t2,aes(1:nrow(t2),t2[order(t2[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+cp <- ggplot(t3,aes(1:nrow(t3),t3[order(t3[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 @
 
-Of the \Sexpr{max(r1$run)+1} runs in dataset no.1, \Sexpr{nrow(r1[r1$gen==500,])+1} reached completion;for dataset no.2 with \Sexpr{max(r2$run)+1} runs, \Sexpr{nrow(r2[r2$gen==500,])+1} completed. The difference reflects the difference in range of the independent variables (as seen in \ref{tbl:range-of-independent-variables}), shown graphically in \ref{fig:figure22}.
+A summary of the results from each of the four datasets is given in \ref{tbl:summary-for-changing-datasets}. The difference in the proportion of  completed runs to total runs reflects the respective ranges of the independent variables (as seen in \ref{tbl:range-of-independent-variables}), as shown graphically in \ref{fig:figure22}.
 
+\begin{table}
+	\begin{center}
+		\caption{Summary of results for changing environments}
+		\label{tbl:summary-for-changing-datasets}
+		\begin{tabular}{@{}lll@{}}
+			\toprule
+			Dataset    		& $n$ (total runs) 				& Completed runs\\
+			\midrule
+			Dataset no.1	& \Sexpr{max(r1$run)+1}			& 	\Sexpr{nrow(r1[r1$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r2$run)+1}			& 	\Sexpr{nrow(r2[r2$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r3$run)+1}			& 	\Sexpr{nrow(r3[r3$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r4$run)+1}			& 	\Sexpr{nrow(r4[r4$gen==500,])+1}\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
 
 <<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='.'>>=
 library(ggplot2)
@@ -268,8 +287,8 @@ library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  # ave fid drops as sd increases
-bp <- ggplot(subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  # sd fid increases as sd increases
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  # ave fid drops as sd increases
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  # sd fid increases as sd increases
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 <<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
@@ -282,6 +301,16 @@ ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geo
 bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 #anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
+@
+
+<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Effect of lineage upon results.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 \chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}

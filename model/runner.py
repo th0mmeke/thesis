@@ -40,7 +40,7 @@ def get_environment_specification():
     # by lineage.
 
     for i in range(N_ENVIRONMENTS):
-        yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD/2), random.uniform(-MAX_SD/4, MAX_SD/4)
+        yield random.uniform(-MAX_SD, MAX_SD), random.uniform(0, MAX_SD), random.uniform(-MAX_SD/10, MAX_SD/10)
 
 
 def generate_environment(spec, by_lineage):

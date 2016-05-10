@@ -6,3 +6,17 @@ oldResults/
 Icon*
 tmp-*.tex
 pw.txt
+*.log
+*.aux
+*.bbl
+*.ist
+*.fls
+*.glo
+*.glsdefs
+*.pdf
+*.loa
+cache/
+R/
+generated_figures/
+*_latexmk
+.gitattributes

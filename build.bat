@@ -5,3 +5,5 @@
 
 latexmk -pdf mythesis
 latexmk -c mythesis
+
+del part*.tex mythesis.tex tmp*.tex

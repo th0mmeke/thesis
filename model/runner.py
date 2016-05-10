@@ -4,13 +4,12 @@ import os
 
 GENERATIONS = 500
 POPULATION_SIZE = 5000
-N_REPEATS = 1
-N_ENVIRONMENTS = 1000
-MAX_SD = 0.2
+N_REPEATS = 3
+N_ENVIRONMENTS = 50
+MAX_SD = 0.3
 
 experiments = [  # factors ordered by sorted order of factor_defns keys
     # ['BY_LINEAGE', 'CORRELATED', 'N_OFFSPRING', 'P_REPRODUCE', 'P_SELECTION', 'RESTRICTION']
-    [1, 1, 0, 0, 0, 1],
     [0, 1, 0, 0, 0, 1]
 ]
 
@@ -48,7 +47,7 @@ def generate_environment(spec, by_lineage):
     # deltas for lineages = [delta for t0, delta for t1, delta for t2..., delta for tn]
     # [deltas for population at time 0,deltas at time 1...at final gen]
 
-    if by_lineage:
+    if not by_lineage:
         return [[x for x in get_ar_timeseries(*spec, generations=GENERATIONS)]]
     else:
         return [[x for x in get_ar_timeseries(*spec, generations=GENERATIONS)] for i in range(POPULATION_SIZE)]
@@ -77,8 +76,6 @@ def write_environment(run_number, environments):
                     str(n) + "," +
                     ",".join(lineage_environment) +
                     "\n")
-    # e<-read.csv('model/environments1.csv', header=FALSE)
-    # sample_entropy(unlist(subset(e,V2==lineage)[,3:502],use.names=FALSE))
 
 
 def construct_line(run_number, experiment_number, environment, result, factors):
@@ -116,7 +113,7 @@ def main():
             for environment_specification in get_environment_specification():
 
                 environments = generate_environment(environment_specification, factors['BY_LINEAGE'])
-                #write_environment(run_number, environments)
+                write_environment(run_number, environments)
 
                 for repeat in range(0, N_REPEATS):
 

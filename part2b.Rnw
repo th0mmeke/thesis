@@ -6,7 +6,7 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \chapter{Model behaviour in changing environments}
 
-Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. Fitness is thus extended from purely a property of an entity to representing the relationship between entity and environment.
+Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. 
 
 Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and hence to complexity. 
 
@@ -20,7 +20,7 @@ In this chapter we further develop this hypothesis to a testable form; propose i
 	\end{center}
 \end{figure}\label{fig:conceptual-model-for-environmental-change}
 
-First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure. As we shall see, such a generator does exist.
+First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure. \todo{first a time series for both, and then a separate measure...}
 
 Now for some definitions:
 
@@ -36,20 +36,20 @@ These attributes when combined produce three independent categories - sudden, gr
 
 \section{Environmental model}
 
-The model must describe two particular elements of this relationship: first, the scope of the change, and second, the shape of the change. Our evolutionary model allows us to group entities at three different levels:
+The model must describe two particular elements of the environmental change: the scope of the change, and the shape of the change. First, we discuss the scope of change. Our evolutionary model allows us to group entities at three different levels:
 \begin{enumerate}
 	\item The group of all entities.
 	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
 	\item A single-member group for each entity.
 \end{enumerate}
 
-In this work we've chosen to scope changes to the first two of these three levels only; the first because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages.
+In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. \todo{explanation for not addressing third level}
 
 The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
-Instead, we need a way to parameterize the set of interesting enviromental changes so we can instead sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+Instead, we need a way to parameterize the set of interesting enviromental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
-Our chosen method is to represent environmental change as a parameterized timeseries of particular form, as follows. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+Our chosen method is to represent environmental change as a parameterized timeseries of particular form. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
 
 $x_t = \Theta x_{t-1} + e_t + \delta$
 
@@ -65,40 +65,11 @@ This series allows us to represent a broad range of environmental changes:
 	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-Although the $\delta$ term makes the model non-stationary, any change is steady and gradual. A future improvement would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
-
-\section{Measures of environmental change}
-
-There are two approaches to developing a measure our hypothesis:
-\begin{enumerate}
-	\item Identify a measure for predictability of the applied environmental change.
-	\item Directly describe the applied environmental change. 
-\end{enumerate}
+\section{Models of environmental change}
 
 Statistical techniques are commonplace for time-series predictions \cite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a series where \todo{Add definition}, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model \todo{reference}. If instead of mean value prediction we are interested in the mean variance (such as in financial markets) then ARCH and GARCH models are appropriate. ARMA or ARIMA combined with ARCH or GARCH can be used in iterative sequence to simultaneously predict both mean and variance for \todo{add defn - heteroscedastic} series. 
 
-Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \cite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
-
-In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity - the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterization.
-
-In a time-dependent way compression equals prediction - in the sense that we can produce an algorithm that improves our ability to predict the future output of a process. Prediction on one spatial dimension is called a time series. Most prediction requires consistent conditions or contexts - when these change our predictive ability is reduced, (in time-series this is called concept drift). 
-
-Compression, as mechanism to identify patterns, will identify items spatially if we can map items to patterns. The choice of compression method will privilege different ways of defining a pattern - if we are to use pattern discovery we need to determine what are interesting patterns - which is hardly domain agnostic. 
-
-\cite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \cite{Prokopenko2009}, \cite{Ladyman2011} and \cite{Lloyd2001}.
-
-Statistical Complexity, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \cite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \cite{Young2005}.
-
-The benefits of $C_{\mu}$ \cite{Crutchfield1989} are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \cite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's PhD thesis \cite{Shalizi2001a} provides further context. 
-
-$C_{\mu}$ has been applied to a number of domains including random boolean networks \cite{Gong2012}, spin \cite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \cite{Young2008}, autonomy of protocells \cite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \cite{Xiang2008}.
-The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \cite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \cite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \cite[p.119]{Shalizi2001}.
-
-Stationarity is inherently a problem for models based on constructive artificial chemistries, where almost by definition, the outcomes change over time. One approach might be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
-
-Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \cite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
-
-Following the second approach, time-series modeling provides techniques for describing time-series data in terms of an underlying model, summarizable in a few parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
+Time-series modeling provides techniques for describing time-series data in terms of an underlying model, summarizable in a few parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
 
 \section{Hypothesis}
 
@@ -327,6 +298,39 @@ for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52]
 
 ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
 @
+
+\section{Independent measure}
+
+Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \cite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
+
+In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity - the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterization.
+
+In a time-dependent way compression equals prediction - in the sense that we can produce an algorithm that improves our ability to predict the future output of a process. Prediction on one spatial dimension is called a time series. Most prediction requires consistent conditions or contexts - when these change our predictive ability is reduced, (in time-series this is called concept drift). 
+
+Compression, as mechanism to identify patterns, will identify items spatially if we can map items to patterns. The choice of compression method will privilege different ways of defining a pattern - if we are to use pattern discovery we need to determine what are interesting patterns - which is hardly domain agnostic. 
+
+\cite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \cite{Prokopenko2009}, \cite{Ladyman2011} and \cite{Lloyd2001}.
+
+Approximate entropy
+
+Sample entropy
+
+
+Statistical Complexity, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \cite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \cite{Young2005}.
+
+The benefits of $C_{\mu}$ \cite{Crutchfield1989} are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \cite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's PhD thesis \cite{Shalizi2001a} provides further context. 
+
+$C_{\mu}$ has been applied to a number of domains including random boolean networks \cite{Gong2012}, spin \cite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \cite{Young2008}, autonomy of protocells \cite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \cite{Xiang2008}.
+The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \cite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \cite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \cite[p.119]{Shalizi2001}.
+
+\section{Future work}
+
+Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
+
+Stationarity is inherently a constraint for applying statistical methods to the analysis of evolutionary models, where almost by definition, the outcomes change over time. One common approach is be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
+
+Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \cite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
+
 \chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}

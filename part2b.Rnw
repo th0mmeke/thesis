@@ -313,6 +313,20 @@ bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
+<<figure27, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Effect of lineage upon results.'>>=
+library(pracma)
+library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
+
+t2 <- t1[,1:3]
+names(t2)[1]<-"theta"
+names(t2)[2]<-"sd"
+names(t2)[3]<-"bias"
+for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+
+ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+@
 \chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 
 \section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}

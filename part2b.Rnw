@@ -299,6 +299,30 @@ for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52]
 ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
 @
 
+The unbiased sample variance with Bessel's correction is \todo{reference}:
+\[
+s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+\]
+
+Let us assume that the upper bound on fidelity of 1.0 has no effect on $s^2$.
+Then we can divide the fidelity values at time $t$ into those below the mean and those above; arrange the sample values so that the first $m$ fall below the mean and the remainder above. The sample variance can now be written as:  
+
+\[
+s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac {1}{n-1} \sum_{i=1}^m  \left( \left(x_i - \overline{x} \right)^ 2 + \sum_{i=m}^n  \left(x_i - \overline{x} \right)^ 2 \right)
+\]
+
+As $\overline{x}$ approaches 1.0 (the upper bound on fidelity) from below:
+
+\[
+s^2 = \frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right)
+\]
+
+But by our initial statement, $s^2$ remains unchanged, therefore...
+
+\[
+\frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right) = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+\]
+
 \section{Independent measure}
 
 Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \cite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 

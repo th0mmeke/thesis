@@ -17,205 +17,15 @@ df
 
 \chapter{Introduction}
 
+The second open problem is the demonstration of a self-referential mechanism to provide the fidelity property of Bourrat, or the inheritance and variation properties assumed by other models, that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be self-referential, accessible to evolution and therefore must be made of the same things as everything else that is subject to evolution in the system - it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
+
 Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tuneable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world Chemistry, and potentially Biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
 
 Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence eventually returns to an earlier product. Our interest is in identifying the factors that influence the emergence of these higher levels. Cycles in particular are interesting as many biological processes are cyclical. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in Artificial Chemistry evolution and Biology, we believe like others (e.g., \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in Artificial Chemistries.
 
 By demonstrating the formulation of cycles, we suggest that ToyWorld is capable of emergent behaviour.
 
-\section{Contributions}
-
-\begin{enumerate}
-	\item
- Open-sourced Artificial Chemistry model
-	\item
- Progress towards useful heredity in an artificial system
-	\item
- Progress towards OEE in artificial system--evolution compatible with
- OEE without necessarily showing OEE (which is hard to measure and
- prove)
-	\item
- Demonstration of formation of ACS in an artificial chemistry (previous
- work with ODEs e.g. \autocite{Hurndall2014} not re-usable in that form)
-\end{enumerate}
-
-\subsection{Hypothesis}\label{hypothesis}
-
-Because an Artificial Chemistry
-\begin{itemize}
-	\item
- Meets known constraints for OEE--and we have OOL as an example of OEE
- from natural chemistry
-	\item
- Choosing an artificial chemistry similar to natural chemistry enables
- an argument by analogy
-	\item
- Catalysis/autocatalysis possible through emergence in some AChems
- (e.g., \autocite{Virgo2013})
-	\item
- And TODO..
-\end{itemize}
-
-Hx: Compliant copy-mechanism possible in an AChem through analogy with DNA/RNA copying
-
-\chapter{Previous work}
-
-Minimal conditions for evolutionary system capable of open-ended (but not necessarily interesting behaviour)
-
-\begin{itemize}
-	\item
-	Elements that allow for ongoing evolution--necessary, and starting
-	point for novelty
-	\item
-	Open-ended evolution can be seen as evolution in an open-ended system
-	(\eg Chemistry), where an open-ended system has effectively
-	unrestricted representation: the number of possible types must be much
-	larger than the number of individuals (ideally without any
-	restriction). Without this property all possible types can be
-	generated in a finite time, and the system will either reach stasis or
-	begin to repeat. Not all open-ended systems necessarily support
-	evolution, but in those that do, our intuition suggests that
-	open-ended evolution produces increasing complexity, increasing
-	diversity, accumulation of novelty and continual adaptation
-	\autocite{Lehman2012}.
-\end{itemize}
-
-\autocite{Taylor2001}:
-Competition between individuals for resources - VanValen1973 Red Queen
-hypothesis - primary source of intrinsic selection pressure.
-Individuals and environment mutually affect each other
-
-Resources must be ``(a) a vital commodity to individuals in the
-population; (b) of limited availability; and (c) that individuals
-can compete for (at either a global or local level). This resource
-can usually be interpreted as energy, space, matter, or a
-combination of these.''
-
-``the potential for a large degree of intrinsic adaptation''
-
-Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 		
-
-
-Hypothesis - four necessary conditions for OEE (left open if these are also sufficient conditions) \autocite{Soros2014}:
-
-General prereqs: good genetic representation, ``sufficiently large world for every individual to be evaluated'', and a seed or starting point
-
-\begin{itemize}
-	\item
-	
-	A rule should be enforced that individuals must meet some minimal
-	criterion (MC) before they can reproduce, and that criterion must be
-	nontrivial.
-	
-	\item
-	
-	The evolution of new individuals should create novel opportunities
-	for satisfying the MC
-	
-	\item
-	
-	Decisions about how and where individuals interact with the world
-	should be made by the individuals themselves.
-	
-	\item
-	
-	The potential size and complexity of the individuals' phenotypes
-	should be (in principle) unbounded.
-	
-\end{itemize}
-
-``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \autocite{Soros2014}
-
-Minimal conditions for OEE \autocite{Vasas2015}:
-\begin{itemize}
-	\item
-	
-	very rich combinatorial generative mechanism e.g., organic
-	chemistry. Underlies the evolvability of niches (Dorin and Korb
-	2011)
-	
-	\item
-	
-	unlimited heredity - number of possible heritable types should
-	astronomically exceed individuals in population
-	(Maynard-Smith:1995lw)
-	
-	\item
-	
-	inexhaustible fitness landscape - implies rich, dynamical
-	environment
-	
-	\item
-	
-	Cannot state in advance possible preadaptations. (not clear why this
-	is a condition\ldots{}seems to be saying that evolution is
-	algorithmic but results are not - are emergent) Richness part of
-	real chemistry, not from representations of chemistry which are
-	limited - necessary requirement for OEE in material systems. (But
-	real chemistry is also limited...just not as much)
-	
-\end{itemize}
-
-\quote{
-	by open-ended evolutionary capacity we understand the potential of a
-	system to reproduce its basic functional-constitutive dynamics, bringing
-	about an un-limited variety of equivalent systems, of ways of expressing
-	that dynamics, which are not subject to any predetermined upper bound of
-	organizational complexity (even if they are, indeed, to the
-	energetic-material restrictions imposed by a finite environment and by
-	the universal physico-chemical laws.}
-{\autocite{Ruiz-Mirazo2004}}
-
-\begin{itemize}
-	\item
-	Open-ended from \autocite{MaynardSmith1999} definition--\TODO{ size of search space vs population}
-	\item
-	Heritability a challenge--biological organisms employ digital
-	heredity; sophisticated mechanism with controlled error rates, but
-	exceedingly unlikely to arise spontaneously
-	\item
-	Multiplication/heredity for maintenance of population
-	\item
-	Analog methods possible--\eg:
-	
-	\begin{itemize}
-		\item
-		compositional (where new entity contains some elements of original)
-		(as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
-		\item
-		\quote{migrant pools}{\autocite{Watson2015}}
-		\item
-		Group fissioning \autocite{Watson2015}
-		\item
-		Attractor based \autocite{Szathmary2000}
-	\end{itemize}
-	\item
-	Heredity seen as method to maintain low entropy over much longer time
-	than possible with non-''biological'' systems \autocite{Adami2015}
-	\item
-	Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-	\item
-	\autocite{Kauffman:1993kk} argued that self-organization (RAPN) can replace the genome
-\end{itemize}
-
-General difficulties with earlier work:
-\begin{itemize}
-	\item Somewhat arbitrary choices of elements of description
-	\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
-	\item Lack causality--so hard to use as mechanism
-	\item Leave options and alternatives for implementer
-	\item Sheer number of EA algorithms
-\end{itemize}
-
-\autocite{Godfrey-Smith2007}
-\begin{itemize}
-	\item Biological summaries
-	\item Purpose of summaries as opposed to Formal models
-	\item Identify the major elements in biology
-\end{itemize}
-
-Previous work coming to consensus on conditions--e.g., rich generative mechanism, unlimited heredity, inexhaustible fitness landscape, emergence \autocite{Vasas2015}, and good genetic representation, ``sufficiently large world for every individual to be evaluated'', and a seed or starting point, (plus four specific conditions \autocite{Soros2014})
-
+\section{Alife}
 
 ``Synthesis and simulation of living systems'' or contemporary artificial life as \quote{an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesizing simple forms of them.}{\autocite{Bedau:2007ga}}
 
@@ -245,7 +55,6 @@ Alife doesn't have to, but it is a guide
 Hard vs Soft vs Wet forms of Alife
 
 Swimming--\autocite{Terzopoulos1994}
-
 
 Themes \autocite{Aguilar2014}
 
@@ -292,757 +101,11 @@ History
 	Overlap with Brooks's robotics, AI, etc
 \end{itemize}
 
-Some systems claim capable of OEE (e.g., Channon, Avida) but not necessarily creative
-
-EvoEvo project taking a similar approach, but from a higher level biological starting point (genotype-phenotype mappings)
-http://evoevo.liris.cnrs.fr/about-evoevo-project/
-
-\begin{itemize}
-	\item Presupposes microbial evolution, ``at the level of genomes, biological networks and populations.''
-	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
-	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
-\end{itemize}
-
-Finally, in Artificial Life, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2002,Hutton2009,Lucht2012} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011} - a bacterial inspired microprogram chemistry - though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
-
-Open-ended evolution can be seen as evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals (ideally without any restriction). Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \cite{Lehman2012}.
-
-\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws)}{\cite{Ruiz-Mirazo2004}}
-
-\begin{itemize}
-	\item An open-ended evolutionary system must demonstrate unbounded diversity during its growth phase.
-	\item An open-ended evolutionary system must embody selection.
-	\item An open-ended evolutionary system must exhibit continuing (``positive'') new adaptive activity.
-	\item An open-ended evolutionary system must have an endogenous implementation of niches.
-\end{itemize} \cite{Maley1999} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
-
-\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
-
-\begin{enumerate}[label=\roman*] 
-	\item Be fully embedded in their arena of competition 
-	\item Have rich, unlimited interactions between each other and with their environment 
-	\item Initially replicate implicitly, rather than using some encoding of the replication process, and 
-	\item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
-\end{enumerate}
-
-Bottom-up models for open-ended evolution leverage richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon.
-
-Top-down models assume a knowledge of the necessary elements.
-
-Limited heredity replicators vs unlimited - the first where the number of possible types is less than the number of individuals; the second where it far exceeds\cite{Szathmary:2006ty}
-
-\begin{table}
-	\scriptsize
-	\caption{A sample of Artificial Chemistries for open-ended evolution}
-	\label{tab1}
-	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
-		\hline\noalign{\smallskip}
-		Chemistry                                                          & Energy Model?                                                      & Constructive?                            \\ 
-		\\ \noalign{\smallskip}
-		\hline
-		\noalign{\smallskip}
-		\cite{Ducharme2012}                                                & Yes                                                                & Yes                                      \\
-		StringMol \parencite{Hickinbotham2012}                             & No, global energy only, conservation of mass as proposed extension & Yes                                      \\
-		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                                                 & No                                       \\
-		RBN-World \parencite{Faulconbridge2011}                            & Unknown                                                            & Yes                                      \\
-		\cite{Lenaerts2009}                                                & No                                                                 & Yes - molecular interactions             \\
-		ZChem \parencite{Tominaga2009}                                     & Conservation of mass                                               & No - reactions are atomic with wildcards \\
-		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & No                                                                 & Unknown                                  \\
-		\cite{Fernando:2008xy,Fernando:2007pf}                             & Yes, and thermodynamics govern reactions                           & No - atomic reactions                    \\
-		\cite{Gardiner2007}                                                & No                                                                 & No - atomic reactions                    \\
-		NAC \parencite{Suzuki2006}                                         & Unknown                                                            & Yes                                      \\						
-		GGL/ToyChem \parencite{Benko2005}                                  & Mass conservation only                                             & Yes                                      \\
-		Lattice Artificial Chemistry \parencite{Ono2000,Madina2003}        & No                                                                 & No                                       \\
-		GGL/ToyChem \parencite{Benko2003}                                  & Mass conservation only                                             & No - pre-defined reactions only          \\
-		\hline
-	\end{tabular}
-\end{table}
-
-
-
-Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward.
-
-Ducharme et al \parencite{Ducharme2012}. The approach taken is to model the energy changes associated with reactions. The chemistry is spatial; atoms are arranged on a 2-dimensional grid and have velocity. When two atoms pass within a particular distance, they interact. The possible types of interactions are prespecified, with the type chosen being driven by the atomic composition and energies of the interacting atoms. Reactions are therefore between atoms rather than molecules; a molecule in this chemistry is a combination of atoms arranged in a particular structure, re-examined after each reaction to form a stable configuration based on expectations from real-world chemistry. Although computational costs are not reported, it seems plausible that the calculation of intersections on a 2-dimensional grid will be expensive for large molecular populations. Another cost comes from the re-arrangement of molecules into energy-efficient configurations. This spatial structuring enables the model to restrict atomic interactions to those atoms that are accessible on a molecule, but at the cost of additional modelling complexity. 
-
-
-\section{Tierra and Avida}
-
-\autocite{Ofria2004}
-
-Avida
-
-
-``An approach to studying evolution...''
-
-
-``According to Daniel Dennett, ``...evolution will occur whenever and
-wherever three conditions are met: replication, variation (mutation),
-and differential fitness (competition)''''
-
-
-``(However, as Barton and Zuidema {[}3{]} note, general acceptance
-will ultimately hinge on whether artificial life researchers embrace
-or ignore the large body of population genetics literature.)''
-
-
-Difference with GAs - natural organisms must replicate themselves to
-pass on genetic information - ``final arbiter of fitness'', and
-interaction with other organisms and with environment
-
-Steen Rasmussen inspired by computer game core war - competing
-segments of simplified assembly code in core memory. With change to
-copy command to introduce mutations and hence evolutionary potential,
-core world created. But system ``collapsed into a non-living state''
-{[}non-living?{]} One possible reason - copying over existing
-organisms
-
-Tierra next year (relationship not stated) organisms had to allocate
-memory first before using. Initial selective pressure only from rate
-of replication. Sequential execution of organism code
-
-
-Avida summer of 1993 - better metering and measuring, and parallel
-code execution
-
-
-\begin{itemize}
-	\item
-	
-	``In principle, the only assumption made about these
-	self-replicating automata in the core Avida software is that their
-	initial state can be described by a string of symbols (their genome)
-	and that they autonomously produce offspring organisms. However, in
-	practice our work has focused on automata with a simple von Neumann
-	architecture that operate on an assembly-like language inspired by
-	the Tierra system.''
-	
-	\item
-	
-	Instruction, read, write, and flow control heads for relative rather
-	than absolute addressing - bit like a Turing tape machine
-	
-	\item
-	
-	Many instructions grouped into instruction sets. Default set has 26
-	instructions
-	
-	\item
-	
-	Every program is valid
-	
-\end{itemize}
-
-
-Phenotypes - ``The primary mode of environmental interaction is by
-inputting numbers from the environment, performing computations on
-those numbers, and outputting the results. The organisms receive a
-benefit for performing specific computations associated with
-resources''
-
-All very configurable, and complicated, but why? What rationale behind
-choices? More of a testbed for experiments, e.g., `` in one experiment
-we wanted to study a population that could not adapt, but that would
-nevertheless accumulate deleterious or neutral mutations through
-drift''
-
-
-``The quest to halt adaptation is only one example of a special
-feature in Avida; many more have been explored, and are continuously
-being added to the source code. The most successful features are all
-fully described in the documentation that comes with the software.''
-
-
-\autocite{Lenski2003}
-
-
-Modelled in Avida
-
-
-``Our experiments demonstrate the validity of the hypothesis, first
-articulated by Darwin and supported today by comparative and
-experimental evidence, that complex features generally evolve by
-modifying existing structures and functions.''
-
-
-
-``Some simpler functions were accessible from the ancestor by
-relatively few mutations, and these served as a foundation on which
-more complex features were built. The foundational role of simpler
-functions in the origin of more complex ones was evident in the
-overlap of the genetic networks underlying their expression, and the
-frequent loss of simpler functions as side-effects of mutations
-yielding more complex function''
-
-
-\autocite{Taylor2001}:
-
-
-Derived from Thesis (Taylor:1999sc)
-
-Criticism of Tierra
-\begin{itemize}
-	\item
-	
-	Not built around any particular theory - ``This weakness is not
-	specific to Tierra, but is shared by most, if not all, of the other
-	Tierra-like systems which have emerged over the last
-	decade\ldots{}''
-	
-	\item
-	
-	In Ray's words, ``...this approach involves engineering over the
-	early history of life to design complex evolvable organisms, and
-	then attempting to create conditions that will set off a spontaneous
-	evolutionary process of increasing diversity and complexity of
-	organisms''
-	
-	
-	\begin{itemize}
-		\item
-		
-		Problem with `engineering over' is we don't understand the natural
-		examples well enough to engineer them
-		
-		\item
-		
-		Similar criticism by Pattee1988 - ``simulations that are dependent
-		on ad hoc and special-purpose rules and constraints for their
-		mimicry cannot be used to support theories of life''
-		
-	\end{itemize}
-\end{itemize}
-
-
-General points
-
-\begin{itemize}
-	
-	\item
-	
-	Phenotype fundamentally ``involves interaction with the environment
-	(and that this is the essential distinction between the notions of
-	phenotype and genotype - the latter being an informational
-	concept)''
-	
-	\item
-	
-	Seed (proto-DNA) must itself be an indefinite heredity replicator
-	{[}assumes that this is minimal starting point, rather than that
-	this itself may evolve{]}
-	
-	\item
-	
-	Assume that early stages see A+B implicitly encoded in the
-	environment {[}essentially because simpler than explicit mechanism,
-	but little justification{]} ``At the early stages of an evolutionary
-	process, however, we would not expect there to be mechanisms for
-	explicitly decoding the proto-DNA\ldots{}''
-	
-\end{itemize}
-
-
-Nils Barricelli: ````It may appear that the properties one would have
-to assign to a population of self-reproducing elements in order to
-obtain Darwinian evolution are of a spectacular simplicity. The
-elements would only have to: (1) Be self-reproducing and (2) Undergo
-hereditary changes (mutations) in order to permit evolution by a
-process based on the survival of the fittest'' (Barricelli, 1962,
-pp.70--71)
-
-
-Materiality - better than formal system as get some features `for
-free' {[}more generally, minimal constraint on interactions as only
-one class of elements rather than separate non-interacting ones{]}
-
-
-\section{Rewriting or String-based}
-
-\autocite{Antonakopoulos:2011th}
-
-
-One developmental mapping for several structures or species e.g., CAs,
-and boolean networks - sparsely connected networks
-
-
-Using L-systems - one for cells/nodes, and the other for connectivity
-rules
-
-
-Developmental process ``capable of expressing developmental actions
-e.g., growth and differentiation'' and ``able to express a large
-variety of topologies within each architecture\ldots{}''
-
-
-\autocite{Dittrich1998}:
-
-
-``study the phenomena of life, not by simulating life as it is (weak
-AL) but by instantiating life as it could be (strong AL)'' {[}Langton,
-C. G. (1989). Artificial life{]}
-
-
-
-``An important property of most strong AL systems is that they contain
-the ability for self-reference. For instance, Ray's Tierra organisms
-are able to read, copy, and modify their own code {[}27{]}. In
-Fontana's algorithmic chemistry every object is a character string
-able to process other objects by using the lambda-calculus that maps
-the character string into an (active) function {[}13{]}. The dualism
-inherent in those systems can be traced back to Godel {[}15{]} who
-defined a mapping of mathematical statements into natural numbers ``
-that allowed self-reference, to Turing's universal machine {[}31{]},
-and to von Neumann's stored program computer {[}7{]}.''
-
-
-``Here, we will concentrate on dynamic phenomena, especially on the
-emergence of prebiotic evolution''
-
-
-``The term self-evolution should refer to an evolutionary process
-within a population system where the components responsible for the
-evolutionary behavior are (only) the individuals of the population
-system itself. Every variation is carried out by the individuals.
-Selection pressure is generated implicitly through interaction among
-the individuals and not by external agents. The system must not
-contain a component that can be identified as a fitness function or
-global operators performing selection or variation (e.g.,
-crossover).''
-
-Introduces S,R,A classification scheme for artificial chemistry -
-here, S=`` binary strings with a constant length of 32 bits'',
-R=s1+s2-\textgreater{}s3, and A=''simulates a well-stirred tank
-reactor with mass-action kinetics, which assures that the probability
-of a collision is proportional to the product of the concentration of
-the colliding objects'' from earlier work (Fontana, Kauffman etc)
-
-
-A=``1. Select two objects s1,s2 from the soup randomly, without
-removing them. 2. If there exists a reaction s1 + s2 to s3 and the
-filter condition f (s1,s2,s3) holds, replace a randomly selected
-object of the soup by s3.'', s1 and s2 are not consumed, rather they
-act as catalysts. Chosen as this shown capable of hypercyclic
-organisation
-
-
-AND reaction and an automata reaction to generate s3 from s1, s2.
-Automata is a deterministic FSA, running s1 (4-bit fixed instructions)
-on s2.
-
-
-Measures (all macroscopic)
-
-
-\begin{itemize}
-	\item
-	
-	Diversity
-	
-	\item
-	
-	Distance Distribution Complexity (from Kim)
-	
-	\item
-	
-	Productivity
-	
-	\item
-	
-	Innovativity (innovation = new string)
-	
-\end{itemize}
-
-
-Experiments - initialised always with random (32-bit) strings
-
-
-Compared to ODE approach in Bagley1992 (AlifeV version)
-
-
-\autocite{Fenizio2000}:
-
-
-Original AlChemy reactions of form A+B-\textgreater{}C where C
-replaces an existing element (X)
-
-
-This system generates A+B-\textgreater{}C1+C2...CN where C is a
-multiset of size N. Done by modifying the original K rule to detach x2
-and eliminate both original elements (like reactants in chemistry)
-
-Uses combinators rather than lambdas
-
-To prevent from stopping (out of elements) added modification where
-randomly add/remove some elements
-
-Combinator first combines (appends) elements, each element other than
-first bracketed. Then each 1-term combinator applied to string, where
-it makes specific changes e.g., K x1x2s0-\textgreater{}x1s0 (s0 is
-remaining substring, may be null). Apply until no further reductions
-possible (that is, in normal form). Two combinators are equivalent if
-can be reduced to same combinator (and previously noted that order is
-not important - same results regardless of order).
-
-
-Free pool of atoms for conservation of ``mass''
-
-
-\autocite{Fenizio2001}:
-
-
-
-Focus on ``identity as an entity separated from its environment'',
-that is, membrane formation. Graph used to model spatial structures
-
-
-``an artificial chemistry (AC) is embedded in a graph, with each
-molecule being a vertex of the graph and possible interactions being
-allowed only along the edges of the graph''
-
-``Molecules are built from a substrate of elements called atoms. There
-are seven types of atoms (I, K, W, R, B, C, S), each with a different
-function. The total number of atoms in the reactor is kept constant
-during a run. Free atoms (not bounded in molecules) are separately
-stored and form a global pool.''
-
-
-Provides definition of autopoeisis in terms of graphs
-
-
-Experiment to show spontaneous formation of autopoietic cells
-
-
-Rules for combinations of two molecules are predetermined - reaction
-mechanisms are described in \autocite{Fenizio2000}
-
-\section{Boolean Networks and Graphs}
-
-
-\autocite{Nellis2012}
-
-
-``Our aim is to improve novelty-generation algorithms by making their
-biological models richer''
-
-
-Novelty-generation as goal/theme for meta-evolution
-
-
-No measure for novelty - not even sure is possible. But informal
-definition that says more novelty as result of more embodiment (this
-seems circular?) p87
-
-
-Embodiment as mechanism. Provides overview in 3.2
-
-AChems categorized as world/chemistry/constraints (p132), with
-constraints being energy model/binding model. RBN-World mentioned as a
-world where elements are RBN networks
-
-
-States that binding model needs to be rich - empirical evidence
-presented (StringMol) only
-
-
-Copying is a phenomenon, expressed through mechanisms at different
-levels of the AChem
-
-
-Explored through embodied copying mechanism built in GraphMol, with
-antecedent in StringMol (Hickingbotham2011)
-
-
-StringMol includes an embodied copying mechanism -
-start/at-end/char-copy/next. Some elements (at-end) use Smith-Waterman
-matching algorithm, which opens ability for evolution to modify the
-function of at-end (Nellis2012p143). But others, e.g., next, are not
-embodied. GraphMol makes next embodied
-
-
-Design is graph based (obviously..). ``The world defined by GraphMol
-contains chemicals (represented as graphs) that bind to each other via
-multiple binding sites, and then run simple computer programs (encoded
-in the graphs) that modify the binding of these chemicals.''. Why? No
-explicit rationale presented. Presumably StringMol starting point
-meant programs, copying, then graphs?
-
-
-Operates (like StringMol) at level of proteins/enzymes e.g.,
-replicases, DNA
-
-
-Runtimes in weeks to months
-
-
-\autocite{Nellis2014}
-
-Summary of PhD thesis - computational novelty through embodiment
-
-
-Comparing StringMol and GraphMol
-
-
-Emergent systems easy to code but produce surprising results. Cannot
-predict results from rules (or in fact easily predict rules from
-desired results. One-way function, akin to encryption)
-
-
-
-Standard GAs search through a fixed space - cannot surprise, limited
-range
-
-
-
-Need something emergent
-
-
-Mechanism of evolution must be itself evolvable; individuals and
-environment interact to give new ways of producing new individuals.
-Dynamics required for novelty-generation.
-
-Quick defined embodiment in terms of two dynamical systems mutually
-affecting each other - no need for a physical world. System modifies
-environment. Doesn't address if system is constructed from
-environment. Autopoiesis does say though that system built from
-environment. But autopoiesis talks about maintenance not evolution
-
-
-
-Functions such as template copying must be embodied mechanisms in the
-world - so can be affected and evolved
-
-
-Stringmol and Graphmol have embodied template copying, done in
-different ways. Different computational models result in different
-properties - ``Stringmol exhibits macro-mutation and two chemical
-copying; GraphMol exhibits two types of quasispecies, cooperative and
-parasitic. These two systems use the same domain (emergent evolution)
-and metamodel (machines copying strings), but different computational
-models.''
-
-
-\autocite{Faulconbridge2010, Faulconbridge2011}:
-
-RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (\cite[§8]{Faulconbridge2011}). 
-
-Entities are described as a form of Random Boolean Network, with the
-addition of a bonding mechanisms to allow for composition and
-decomposition of RBNs. A number of parameters affect the behaviour
-of the chemistry, and so a series of experiments sampled from the
-parameter-space, and then used a GA, to search for interesting
-variants as measured by non-catalysed loops (ideal measures of
-auto-catalytic sets and Hypercycles too rare for use as a measure)
-(chap 8)
-
-
-Gillespie-like" - random reaction, random time - not correlated in
-any way with reaction energies or rates (Faulconbridge2011§8.4.3.1)
-
-
-bRBNs used as atomic elements, properties determined by the network
-
-
-Larger structures are formed by ``bonding'' two independent bRBNs at
-each bRBNs bonding node. ``All reactions are between two reactants;
-it is assumed that more complicated reactions can be expressed as a
-series of two-reactant reactions with intermediate structures.``
-Record kept of composition so that decomposition can be easily done.
-
-
-Many design choices - bonding mechanism etc. Examination of
-alternatives done by searching with EA
-
-
-Each bRBN is a RBN, made up of a number of nodes, each with an
-initial state (true/false) assigned randomly and with a input/output
-matrix assigned randomly. Finally k(=2) inputs are established per
-node. Synchronous state update. All based on Kauffman1969
-(interestingly, although noted as ``original'' so later work known)
-
-
-bonding method uses ''cycle length as the bonding property and
-equality as the bonding criterion....bonds only exist between bRBNs
-that have the same cycle length.'' in initial examples at least n=5
-and b(k?)=2, and alternatives examined using EA. After initial bond
-formation recalculate cycle lengths, and check again for equality -
-might result in decomposition.
-
-Describes two generic strategies for the selection of reactants,
-spatial and aspatial, where the primary difference is whether
-molecular position is a factor in reactant selection
-
-Measures are Synthesis, Self-Synthesis, Decomposition, Substitution,
-and Catalysis (Faulconbridge2011§7), and non-catalysed `loops' (ideal
-measures of auto-catalytic sets and Hypercycles too rare for use as a
-measure) (Faulconbridge2011§8)
-
-Random sampling + EA (Fitness function (§8.4.3.2) is based on
-non-catalysed loops (§4.3.9.4))		
-
-"identifies three types of \textbackslash{}emph\{mixing method\} or
-reactor algorithm			
-
-Contains an interesting discussion mapping these desirable properties
-onto the emergent properties that are then required of an
-\textbackslash{}gls\{achem\}
-
-Some advantages claimed over Hutton (emergence and computational
-intractability p190)
-
-``As the choice to use RBNs as the sub- symbolic representation in
-RBN-World was based on limited information. As a discrete dynamical
-system that is computationally tractable yet also spans a wide range
-of behaviours, RBNs met the appropriate criteria. It is not expected
-that RBNs are the best representation however; others may be more
-suitable for particular emergent properties.``
-
-\section{Atoms/Molecules}
-
-\autocite{Lucht2012}
-
-Challenge to community - "to develop a system in which, starting with
-a soup of free atoms and a simple ``bootstrap'' chemistry, a cell-like
-creature similar to the one in H-41 evolves."
-
-Based on Hutton2007 Squirm3 chemistry, using Hutton's floods
-
-Squirm3 - fixed molecule types, and pre-defined reactions for
-replication and gene-sequence transcription, and so although capable
-of interesting behaviour is not capable of unlimited extension
-
-Added reaction types to address Squirm3's ``global-extinction problem
-and showing how quasi-universal enzymes can evolve
-
-\autocite{Hutton2007}
-
-Enzymes can act as catalysts so G affects P; but enzyme evolution too
-improbable for OEE
-
-2D grid of squares (lattice), spring force for membrane
-
-Enzymes can now affect all reactions except enzyme production; in
-practice too slow
-
-Production rules hardcoded into AChem
-
-
-Only with raw materials in environment, niche construction through
-adaptation to availability of raw materials
-
-
-
-AChem hand-built with reactions instead of enzymes
-
-
-Prespecified reactions - see Faulconbridge2011 p.49
-
-
-
-Artificial system capable of life-like \textbackslash{}gls\{oee\}
-(creativity)
-
-
-Based on hypothesis (materiality, interactions, embedding) of
-\textbackslash{}textcite\{Taylor2001\}, better expressed in
-\textbackslash{}textcite{[}p.341{]}\{Hutton2002\}; membrane to allow
-individuals to benefit from innovations by protecting internal
-reactions from others
-
-
-\textbackslash{}Gls\{achem\} from
-\textbackslash{}textcite\{Hutton2002\} used to construct all elements
-in world - material and embedded.
-
-
-Atoms in \textbackslash{}gls\{achem\} of different types and states;
-reaction rules; otherwise no energy modelling; only physics modelling
-is the concept of location (either integer-coordinates or real
-number-coordinates) and impossibility of colocation. Floods are used
-to recycle raw materials.
-
-
-Individuals (each bounded by a membrane) with the capability for
-division and mutation. Raw materials (atoms) are only required for
-division
-
-Interactions between individuals are limited to effects on shared
-environment (niche construction without direct interaction), so one
-element of hypothesis untested; restrictions on open-endedness:
-evolution of new enzymes unobserved as extremely unlikely, and
-genotype-phenotype mapping hard-coded (unevolvable)
-
-
-\section{Compositional}
-
-\autocite{Vasas2015, Vasas2012, Vasas2012a}
-
-If inheritance is statistical only then ok; but literature
-stresses digitally encoded although might just be cognitive bias
-
-Unit of selection very important to define now in abiogenesis
-
-Can evolution happen when information transfer is non-digital?
-Specifically where there is a parent-offspring correlation in
-molecular composition?
-
-Based on GARD \autocite{Segre1998}:
-
-\begin{itemize}
-	\item Compositional inheritance
-	
-	\item claim made that GARD is capable of darwinian evolution, but
-	population analysis showed not in response to directional selection
-	(Vasas2010)
-	
-	\item Eigen threshold applies - mutation rates (see issue of replication -
-	big differences between parent and child) overwhelm selection
-\end{itemize}
-
-Ganti and Eigen showed that distinct, organizationally different
-alternative autocatalytic networks in same environment might compete
-and fittest would prevail (e.g., autocatalytic networks as units of
-selection).	Check number of network components (=autocatalytic networks). In GARD, end up with just one big component
-
-GARD does not result in selectable replicating entities - there is no
-replication as certain highly catalytic molecules determine the
-properties of the compotype, and these are not inherited equally -
-instead a child may or may not inherit one of these molecules and so
-its properties may be similar to or very different from its parent
-
-Kauffman 1986 Reflexively Autocatalytic Polymer Networks (RAPN) however are
-evolvable. First, likelihood of such networks higher than expected
-(Hordijk and Steel) and second, in Vasas2012 putting these networks
-into compartments (so not well-stirred) then can do directional
-selection
-
-Differences between GARD and RAPN:
-
-\begin{itemize}
-	\item
-	
-	kinetics of growth - RAPN has ligation, GARD does not. Ligation
-	allows new components to be formed with new properties
-	
-	\item
-	
-	search for adaptations - GARD has fixed catalysis, Kauffman does not
-	- mutant polymers can arise, be incorporated into the set, and
-	influence its fitness
-	
-\end{itemize}
-
-\chapter{Artificial Chemistries}\label{artificial-chemistries}
-
-\section{Introduction}\label{introduction-2}
+\section{Artificial Chemistries}\label{artificial-chemistries}
 
 Full taxonomy in \autocite{Dittrich:2001zr}, also see \autocite{Faulconbridge2011}
 
-One advantage of \glspl{achem} as pointed out by
-\autocite[5]{Funes2001} is that it is easier to evaluate solutions in
-a domain close to the real-world as opposed to a purely symbolic or
-abstract domain such as a lambda-calculus, or a programmatic environment
-like Tierra. When contemplating difficult problems such as complexity
-our intuition can be helpful, but only in situations close enough to our
-normal experience for it to be relevant.
+One advantage of \glspl{achem} as pointed out by \autocite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real-world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant.
 
 All Artificial Chemistry based on this model:
 
@@ -1214,272 +277,50 @@ components, and where those new components may themselves take part in
 new types of reactions, and so on. This appears fundamental to an
 open-ended representation.
 
-A mathematical treatment of \gls{achem} can be found in
-\autocite{Benko2009}. \autocite{Dittrich:2001zr} and
-\autocite{Suzuki2008a} provide excellent reviews of the field.
+A mathematical treatment of \gls{achem} can be found in \autocite{Benko2009}. \autocite{Dittrich:2001zr} and \autocite{Suzuki2008a} provide excellent reviews of the field.
 
-\section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
-In \autocite{Dittrich:2001zr}, Achems divided into major types:
+\section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
-\begin{itemize}
-	\item
- Rewriting or Production Systems (symbols and rewriting rules) -
- Chemical Abstract Machine (CHAM), Chemical Rewriting System on
- Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus
- (AlChemy)
-	\item
- Arithmetic Operations (molecules are natural numbers, operations are
- arithmetic operators)
-	\item
- Autocatalytic Polymer Chemistries (polymers made from chains of
- monomer symbols, reactions are concatenation and cleavage)
-	\item
- Abstract Automata and Artificial Molecular Machines (seem similar)
- e.g., Turing
-	\item
- Assembler Automata--Avida, Tierra
-	\item
- Lattice Molecular Systems--\autocite{Ono2000},Madina2003,lattice
- molecular automaton (LMA), Autopoietic System
-\end{itemize}
-
-Three types of chemistries \cite{Faulconbridge2011}:
-\begin{itemize}
-	\item Symbolic - symbols/molecules have no inherent meaning, so no
-	``implicit reactions''	
-	\item Structured - one or more atoms arranged in a structure (string,
-	tree, graph..) with bonds within molecules - unlimited, but
-	consequently computationally expensive	
-	\item Sub-symbolic - emergence of properties from lower-levels (ala real
-	chemistry, also neural networks). Symbols (atoms) have internal
-	structure which gives properties.
-\end{itemize}
-
-A \gls{achem} can be represented by
-\textless{}\emph{S},\emph{R},\emph{A}\textgreater{}
-\autocite{Dittrich:2001zr}:
-
-\begin{itemize}
-	\item
- Set of Molecules (\textless{}\emph{S}\textgreater{})
-\end{itemize}
-
-Molecule representation e.g., labelled graphs
-
-Properties of molecules e.g., energy calculation by Extended Huckel
-Theory (EHT); salvation energies; reaction rates.
-
-\begin{itemize}
-	\item
- Reaction rules (\textless{}\emph{R}\textgreater{}) (Chemistry)
-\end{itemize}
-
-Transformation from lhs reactants to rhs products. Many (most) reactions
-are bidirectional; rates determined by concentrations. Conservation of
-energy ? atoms are neither created or destroyed so reactions can be
-represented solely by bond changes.
-
-Chemical Abstract Service (CAS) database references approx 34 million
-reactions in published work (1) Which ones to adopt? Which reactions
-direct evolution to more interesting places?
-
-Reactions may be pre-defined (if S represents real-world molecules) or
-dynamically-determined using molecular properties--the problem of how
-to select a reaction is addressed by the Reactor Algorithm (below.)
-
-\autocite{Tominaga2007} showed for a particular artificial chemistry,
-that it is computationally universal with only unimolecular and
-bimolecular reactions.
-
-\begin{itemize}
-	\item
- Reactor Algorithm (\textless{}\emph{A}\textgreater{}) (Physics)
-\end{itemize}
-
-Mechanism to select reactions, e.g., Through the introduction of a
-reaction generator (A) the artificial chemistry triplet (S, R, A) is
-completely defined \autocite{Lenaerts2009}. Or in
-\autocite[sect. 4.1.3]{Faulconbridge2011}, The mixing component of an
-Artificial Chemistry is an algorithm which describes the order of and
-intervals between reactions, starting from an initial collection of
-molecules; this can be termed a ``mixing space''.
-
-\autocite{Faulconbridge2011} identifies three types of
-\emph{mixing method} or reactor algorithm:
-
-\begin{itemize}
-	\item
- Well-mixed/aspatial: with either discrete time (uniform probability
- distribution for selecting reactions) or continuous time
- (Gillespie1976) assuming the reactions are known in advance (not
- possible for a strongly constructive AChem)
-	\item
- nDimensional: grid with reactions with adjacent cells, or continuous
- where molecules have position and velocity. Major advantage is ability
- to simulate spatial affects; disadvantage is performance
-	\item
- Mixed scale: hierarchical spaces, such as aspatial cells within bigger
- grid, mostly for simulating biology (e.g., \autocite{Jeschke2008}). One possible
- advantage is potential for parallelization
-\end{itemize}
-
-Scaling can be an issue: as new products are generated, the space of
-reactions and reactants can expand exponentially, and therefore
-performance dives. The general problem is model reduction--see
-\autocite{Radulescu2012} for a recent review; \autocite{Faulon2001} has
-a well-received method.
-
-Alternative classification in \autocite{Faulconbridge2011}:
-
-\begin{itemize}
-	\item
- Symbolic--each molecular species labelled by a unique symbol; only
- explicit meanings
-	\item
- Structured Symbolic \eg \autocite{Hutton2002}--standard, hard to achieve
- emergence or support novel molecules
-	\item
- Sub-symbolic \eg RBN-World, NAC, ToyChem \autocite{Benko2005}
-\end{itemize}
-
-\subsection{Constructive chemistries}\label{constructive-chemistries}
-
-Novel molecules can arise from artificial chemistry:
-
-\quote{
-	A distinguishing feature of chemistry is that the changes of molecules
-	upon interaction are not limited to quantitative physical properties
-	such as free energy, density, or concentrations, since molecular
-	interactions do not only produce more of what is already there --
-rather, novel molecules can be generated.}
-{\autocite{Benko2009}}
-
-A chemistry is \textit{constructive} \autocite{Fontana1994} if new components
-may be generated through the action of other components. Both implicit
-laws and implicit molecule definitions are required for constructive
-chemistries:
-
-\begin{itemize}
-	\item
- Explicit reaction laws = independent of molecular structure; implicit
- = laws must refer to structure. Often used for constructive
- chemistries
-	\item
- Explicit molecule definitions = from an fixed set of symbols; implicit
- = description for construction.
-\end{itemize}
-
-Constructive (weak and strong) initially defined in \autocite{Fontana1994}:
-
-\quote{
-	We refer to models in which new agents are constructed in an unspecific
-	(essentially stochastic) fashion as \emph{weakly constructive}. This is
-	to be contrasted with a situation in which the encounter of two agents
-	\emph{implies} a \emph{specific} third one\ldots{}Models of this kind
-	will be termed \emph{strongly constructive}. The prime example of a
-strongly constructive system is chemistry.}
-{\autocite{Fontana1994}}
-
-The commentary that immediately follows is also significant:
-
-\quote{
-	A strongly constructive system that contains agent \emph{A} must cope
-	with the network of its implications. But, then, it also must cope with
-the implications of the implications. And so on.}
-{\autocite[217]{Fontana1994}}
-
-A strongly constructive system is one which maintains closure, and in
-which there is self-consistency and some form of logical structure
-(implications.)
-
-A mechanism for exploration in the EA sense--new products can be
-generated, and new products can participate in reactions. One approach
-is to pre-specify all possible reactions; another is to generate
-reactions `on-the-fly' from the structures of the interacting molecules.
-The first approach is well suited to simulating real chemistry as it
-allows properties of reactions observed in chemical experiments to be
-attached to their simulated equivalents. However, it does not allow for
-arbitrary reactions, and it requires reaction properties to be
-pre-specified--difficult for novel or artificial reactions. It could be
-argued that the first approach is not in fact strongly constructive (in
-the sense of \autocite{Fontana1994,Dittrich:2001zr}) as it is not completely
-open-ended. However, \autocite{Hartenfeller2011} suggests that it is in fact
-adequate.
-
-\subsection{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
-
-Modeling chemical reactions (\eg \autocite{Gibson:2000kx}). Emulators
-are often used for backward chaining from a set of desired products to
-identify a set of currently-available initial molecules, for example in
-drug discovery (e.g., \autocite{Hartenfeller2011}). A second use is in
-reaction network discovery, where the goal is to describe a closed set
-of reactions and reactants from some initial reactants and reactions
-(e.g., \autocite{Faulon2001}). Both applications effectively produce
-static descriptions of dynamic processes, and are less useful for
+Modeling chemical reactions (\eg \autocite{Gibson:2000kx}). Emulators are often used for backward chaining from a set of desired products to
+identify a set of currently-available initial molecules, for example in drug discovery (e.g., \autocite{Hartenfeller2011}). A second use is in
+reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions
+(e.g., \autocite{Faulon2001}). Both applications effectively produce static descriptions of dynamic processes, and are less useful for
 exploring the changes in a network over time.
 
-\autocite{Hartenfeller2012} suggests that
-R=\{set of 58 reactions\} might meet requirements for de-novo drug
-discovery, but based on S=\{10k-50k building-block molecules\}. Given
-much smaller S, will this R still suffice?. Goal of identifying
-collection of synthesis reactions that can be used by tools to construct
-pathway from provided building blocks to desired compounds. Set of 58
-reactions, 29 of which are ring-forming, implemented in reaction-SMARTS
-and RDKit.Previous work deficient in its potential to generated
-innovative chemo-types, because of the small number of ring-forming
-reactions (only 3 ring-formations versus 29 in this work.) Why is a
-small set of reactions (50-60) adequate? Most reliable, so transferrable
-to bench-top; with reasonable collection of building-blocks (10k-50k)
-can fill combinatorial space beyond ability to enumerate. Even with this
-set need search mechanism to limit combinatorics.
+\autocite{Hartenfeller2012} suggests that R=\{set of 58 reactions\} might meet requirements for de-novo drug
+discovery, but based on S=\{10k-50k building-block molecules\}. Given much smaller S, will this R still suffice?. Goal of identifying
+collection of synthesis reactions that can be used by tools to construct pathway from provided building blocks to desired compounds. Set of 58
+reactions, 29 of which are ring-forming, implemented in reaction-SMARTS and RDKit.Previous work deficient in its potential to generated
+innovative chemo-types, because of the small number of ring-forming reactions (only 3 ring-formations versus 29 in this work.) Why is a
+small set of reactions (50-60) adequate? Most reliable, so transferrable to bench-top; with reasonable collection of building-blocks (10k-50k)
+can fill combinatorial space beyond ability to enumerate. Even with this set need search mechanism to limit combinatorics.
 
-The primary requirement is fidelity with real-world chemistry, which
-requires either a library of empirically derived reaction definitions
-and rates, or a model capable of accurately simulating
-quantum-mechanical processes. The latter approach has been taken by a
-family of Artificial Chemistries, beginning with
-\autocite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters
-taken directly from chemical experiments and later extended (for example
-in \autocite{Benko2005}) to a general purpose model with parameters
-derived from theoretical chemistry. The model was used in
-\autocite{Hogerl2010} for the study of the behaviour and topology of
-chemical reaction networks, specifically Diels-Alder and Formose
-reaction networks, and in a series of papers (e.g, \autocite{Flamm2010}
-and \autocite{Ullrich2010}) for the examination of the evolution of
-metabolic networks in early organisms using a simple model of RNA coding
+The primary requirement is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions
+and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a
+family of Artificial Chemistries, beginning with \autocite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters
+taken directly from chemical experiments and later extended (for example in \autocite{Benko2005}) to a general purpose model with parameters
+derived from theoretical chemistry. The model was used in \autocite{Hogerl2010} for the study of the behaviour and topology of
+chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (e.g, \autocite{Flamm2010}
+and \autocite{Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding
 for catalysts.
 
-An artificial chemistry with the ability to create reactions
-``on-the-fly'' given a set of possible reactants may discover more than
-one possible reaction pathway between the same reactants and products.
-The method used to choose one reaction pathway from the alternatives is
-an important component of the artificial chemistry, and the mechanism
-may be tuned or tailored to privilege or preferentially chose particular
-types of pathways independent to other factors such as temperature or
-concentration. In Chemistry the choice of reaction pathway is
-fundamentally linked to those other properties and cannot be treated
-independently.
+An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than
+one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is
+an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular
+types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is
+fundamentally linked to those other properties and cannot be treated independently.
 
-Rather than from symbol manipulation, Chemical properties emerge from
-fundamental laws. This gives a richness and depth that cannot easily be
-equalled in a simulation. For example, the three-dimensional structure
-of a molecule--the arrangement of the elements in space--drives even
-the simplest chemical reactions. Any (base- or acid) reaction results
-from the shift of charge from one region of a molecule to another,
-revealing one region while shielding another from activity. Some of the
-most complex reactions are shape-driven: the function of many enzymes
-(biological catalysts) derives from their shape, and furthermore this
-shape is often under regulatory control. A cell can in affect regulate
-the activity of an enzyme by either blocking or unblocking the enzymes
-active site with another protein. The prediction of the shape and hence
-the function of an enzyme from its RNA transcript is perhaps the most
-important problem in current molecular biology. In \gls{achem}, an
-interesting, but highly simplified, attempt at this can be found in the
-work of \autocite{Flamm2010} and \autocite{Ullrich2010}.
+Rather than from symbol manipulation, Chemical properties emerge from fundamental laws. This gives a richness and depth that cannot easily be
+equalled in a simulation. For example, the three-dimensional structure of a molecule--the arrangement of the elements in space--drives even
+the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another,
+revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes
+(biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. A cell can in affect regulate
+the activity of an enzyme by either blocking or unblocking the enzymes active site with another protein. The prediction of the shape and hence
+the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology. In \gls{achem}, an
+interesting, but highly simplified, attempt at this can be found in the work of \autocite{Flamm2010} and \autocite{Ullrich2010}.
 
-Investigating natural selection for chemical evolution
-(\eg \autocite{Fernando:2007pf})
+Investigating natural selection for chemical evolution (\eg \autocite{Fernando:2007pf})
 
 Reaction network discovery and Drug discovery
 
@@ -1560,135 +401,16 @@ Reaction network discovery and Drug discovery
 			
 		\end{itemize}
 		
-\subsection{Origins of Life}\label{origins-of-life}
+\section{Origins of life}
 
-			Darwin ``warm little pond'' Life and letters vol3 1887
-			(``\emph{\textbf{But if (and Oh! What a big if!) we could conceive in
-					some warm little pond, with all sorts of ammonia and phosphoric salts,
-					light, heat, electricity etc, present, that a protein compound was
-					chemically formed ready to undergo still more complex
-					changes\ldots{}'')}} \autocite{Vasas2012}
-			
-			
-Of the historic and ahistoric aspects of the Origin-of-life problem,
-historic aspect may never be known \autocite{Pross2013}. Constrained by
-what we do know, but many different pathways, and unless some record
-somewhere (either geological or phylogenetic), actual path essentially
-lost to history. So without evidence for historic aspect, not possible
-to test by falsification, and hence can only be speculative.
+Real-world chemical processes are also important to modelling scenarios for the origin of life or of other related areas such as the formation
+of metabolic networks in the earliest protocells.
 
-Consensus forming that early life formed by chemoautotrophs with energy
-from inorganic redox couples and biomass from CO\textsubscript{2}, and
-that innovations in carbon-fixation created main branches in
-tree-of-life \autocite{Braakman2012}. Initiation of selection marked by
-\gls{ida}, probably from RNA world, followed substantially later by Last
-Universal Common Ancestor (LUCA) \autocite{Yarus2011}, which, it is
-important to note for clarity, was almost certainly not a single cell or
-even species, but rather a construct of evolutionary genetics because of
-the likely predominance of Lateral Gene Transfer (LGT) in archaic
-biology (http://sandwalk.blogspot.ca/2007/03/web-of-life.html).
-Self-replicating RNA enzymes shown in \autocite{Lincoln2009}, forming
-basis of selective system (link to natural selection) (also see
-\autocite{Cheng2010}, \autocite{Powner2009} for formation of RNA in
-prebiotic conditions). Some elements of \gls{ida} thought still with us
-in lineages of informational (for protein synthesis and RNA
-transcription) and operational genes (for some standard cellular
-processes) \autocite{Ragan2009}, for example the ribosome and
-ribonuclease P (RNase P) \autocite{Wilson2009}. Next major transition to
-Protein world (although predominance of RNA transcripts leads to
-suggestions that should be called RNA-Protein world
-\autocite{Altman2013})
-
-Two alternative models for the step from abiotic to \gls{ida}: genetic
-or replicators or RNA-first, and metabolism or protein-first. Both
-metabolism and replication almost certainly required for \gls{ida}. A
-self-sustaining autocatalytic network (in terms of a RAF set
-specifically a ``set of molecules and reactions which is collectively
-autocatalytic in the sense that all molecules help in producing each
-other (through mutual catalysis, and supported by a food set).'')
-generally considered essential \autocite{Pross2013}, but not sufficient
-\autocite{Hordijk2011}. Both competing models--replication first and
-metabolism first--build on that. Autocatalysis expressed by
-self-replication of oligomeric compounds in replication first; by cycles
-and network in metabolism first. In the broadest sense, life can be seen
-as an autocatalytic process where an entity catalyses the production of
-one or more descendant entities.
-
-Metabolism-first privileges function, while replicator-first privileges
-descent.
-
-If life is metabolism plus information, then for metabolism-first where
-lack template-based replication, replication is compositional (composome
-- Vasas)
-
-Common functions required in both protocells and minimal cells, but
-approaches quite different. Protocells must build up from abiotic
-conditions to point where known processes can take over, and to point
-where we have historical evidence--bridge gap between abiotic
-conditions and first hypothetical cells in record
-
-Main issues with replicator-first model: big step from abiotic compounds
-to template-based replication (although ribonucleotides conceivably
-could form in pre-life conditions see \autocite{Powner2009}). Templates
-encode information in biology, so require a encode/decode mechanism as
-well as an information code to represent the product. This is a step
-more complex than simpler duplication.
-
-Main issue with metabolism-first model: shift from composome inheritance
-to template-based; ability of composomes to fulfill heredity requirement
-for natural selection.
-
-Autocatalytic sets are proposed for bootstrapping (from less
-differentiated systems to more complex ones), as a mechanism to increase
-order and so counteract entropy, for stability, and as a unit of
-competition. The catalytic properties of autocatalytic sets result in
-bootstrapping, where the reaction rates in the set are ratcheted-up as
-the product quantities increase. Autocatalytic sets form a complex or
-dynamical system, where the feedback loops and interactions can result
-in forms of temporal (waves and cycles) and spatial order (stable
-structures.) Similarly stability follows from the formation of
-attractors in the complex system that are resistant to pertubation.
-Finally, as the set forms a coherent unit expressing certain properties,
-such as the ability to maintain itself or to create copies of itself, it
-can be seen as a unit of competition where success is measured by
-life-time or by control of resources.
-
-Some abiogenesis results fundamentally assume real-world chemistry and
-conditions, a constraint that doesn't apply to Alife or artificial OEE,
-and so is more restrictive than required. Other abiogenesis work such as
-on properties of autocatalytic sets, is broader in applicability.
-Genetic and catalytic properties of RNA make well suited to creation of
-Alife \autocite{Cheng2010}
-
-Autocatalysis is a source of dynamical behaviour--leads to
-bifurcations, multistability, oscillators, attractors
-\autocite{Plasson2010}
-
-Some properties of RAF sets established by Hordijk and Steel have
-application beyond origin-of-life: linear growth rate in level of
-catalysis compared to size of molecules (n) is sufficient for RAF set to
-form. For a RAF set to appear with high probability (P\textgreater{}0.5)
-in even a model with n=20 (about 1 million molecular types) each
-molecule needs to catalyze 1-2 reactions on average. For the given
-model, need around 65,000 different molecule types (n=15-16) for RAF set
-if use more realistic probability of catalysis of 1:1 million of a
-molecule catalysing any particular reaction. \autocite{Hordijk2011}
-
-Lateral or Horizontal Gene Transfer thought so common in early life that
-no single common ancestor, but genes from multiple lineages combined
-into all lineages today.\autocite{Ragan2009}
-
-Real-world chemical processes are also important to modelling scenarios
-for the origin of life or of other related areas such as the formation
-of metabolic networks in the earliest protocells
-
-In many cases though the specific focus is less on the bottoms-up model
-from the most elementary elements, and more on task-based models of
-processes where the particular starting point is predetermined by the
-researcher--in the former, Kauffman's autocatalytic protein sets, and
+In many cases though the specific focus is less on the bottoms-up model from the most elementary elements, and more on task-based models of
+processes where the particular starting point is predetermined by the researcher--in the former, Kauffman's autocatalytic protein sets, and
 Kaneko's protocell toy model; in the later, Ganti's chemoton.
 
-Examples
+Some examples of artificial chemistries for the investigation of the origin of life include:
 
 \begin{itemize}
 	\item
@@ -1740,196 +462,604 @@ Examples
  \autocite{Dyson1999}
 \end{itemize}
 
-\subsection{Alife}\label{alife}
+\section{Alife}\label{alife}
 
-Finally, in Artificial Life, Artificial Chemistries have been used in
-the exploration of open-ended or creative evolution. Squirm3
-\autocite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types,
-and pre-defined reactions for replication and gene-sequence
-transcription, and so although capable of interesting behaviour is not
-capable of unlimited extension. Stringmol \autocite{Hickinbotham2011} -
-a bacterial inspired microprogram chemistry--though does demonstrate a
-rich heredity for open-ended evolution using string-matching to model
-binding between sequences, and RBN-World \autocite{Faulconbridge2011}
-shows that a form of Random Boolean Network, with the addition of a
-bonding mechanisms to allow for composition and decomposition of RBNs,
-can be used to build a chemistry capable of almost limitless extension
-out of non-traditional components.
+Finally, in Artificial Life, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \autocite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \autocite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model
+binding between sequences, and RBN-World \autocite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
-everything in our artificial world must be built from a common set of
-raw materials; a loop connects the targets of selection with the
-environment.
+\chapter{Previous work}
 
-Other work, although superficially similar in that it models objects of
-similar scale, uses different models for the objects and the world (see
-\autocite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+\epigraph{%
+	It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
+{\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
+
+\section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
+
+In \autocite{Dittrich:2001zr}, \glspl{achem} are divided into six major types, based on the implementation technology:
+
+\begin{enumerate}
+	\item
+	Rewriting or Production Systems (symbols and rewriting rules)--Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus (AlChemy)
+	\item
+	Arithmetic Operations (molecules are natural numbers, operations are arithmetic operators)
+	\item
+	Autocatalytic Polymer Chemistries (polymers made from chains of	monomer symbols, reactions are concatenation and cleavage)
+	\item
+	Abstract Automata and Artificial Molecular Machines (seem similar) e.g., Turing
+	\item
+	Assembler Automata--Avida, Tierra
+	\item
+	Lattice Molecular Systems--\autocite{Ono2000},Madina2003,lattice molecular automaton (LMA), Autopoietic System
+\end{enumerate}
+
+By contrast, \cite{Faulconbridge2011} describes three types of chemistries based on the capabilities of the chemistry:
+
+\begin{itemize}
+	\item Symbolic - symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
+	\item Structured - one or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
+	\item Sub-symbolic - emergence of properties from lower-levels (ala real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
+\end{itemize}
+
+A \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \autocite{Dittrich:2001zr}:
+
+\subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
+
+Molecule representation e.g., labelled graphs
+
+Properties of molecules e.g., energy calculation by Extended Huckel
+Theory (EHT); salvation energies; reaction rates.
+
+\subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
+
+Analogous to Chemistry--transformation from reactants to products. Many (most) reactions are bidirectional; rates determined by concentrations. In systems enforcing conservation of energy, elements are neither created or destroyed so reactions can be represented solely by rearrangments or bond changes.
+
+Chemical Abstract Service (CAS) database references approx 34 million
+reactions in published work (1) Which ones to adopt? Which reactions
+direct evolution to more interesting places?
+
+Reactions may be pre-defined (if S represents real-world molecules) or
+dynamically-determined using molecular properties--the problem of how
+to select a reaction is addressed by the Reactor Algorithm (below.)
+
+\autocite{Tominaga2007} showed for a particular artificial chemistry, that it is computationally universal with only unimolecular and bimolecular reactions.
+
+\subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
+
+Mechanism to select reactions, e.g., Through the introduction of a
+reaction generator (A) the artificial chemistry triplet (S, R, A) is
+completely defined \autocite{Lenaerts2009}. Or in
+\autocite[sect. 4.1.3]{Faulconbridge2011}, The mixing component of an
+Artificial Chemistry is an algorithm which describes the order of and
+intervals between reactions, starting from an initial collection of
+molecules; this can be termed a ``mixing space''.
+
+Analogous to physics - the way that molecules move and collide determines which reactions are possible.
+
+\autocite{Faulconbridge2011} identifies three types of \emph{mixing method} or reactor algorithm:
+
+\begin{itemize}
+	\item
+	Well-mixed/aspatial: with either discrete time (uniform probability
+	distribution for selecting reactions) or continuous time
+	(Gillespie1976) assuming the reactions are known in advance (not
+	possible for a strongly constructive AChem)
+	\item
+	nDimensional: grid with reactions with adjacent cells, or continuous
+	where molecules have position and velocity. Major advantage is ability
+	to simulate spatial affects; disadvantage is performance
+	\item
+	Mixed scale: hierarchical spaces, such as aspatial cells within bigger
+	grid, mostly for simulating biology (e.g., \autocite{Jeschke2008}). One possible
+	advantage is potential for parallelization
+\end{itemize}
+
+Scaling can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance dives. The general problem is model reduction--see \autocite{Radulescu2012} for a recent review; \autocite{Faulon2001} has a well-received method.
+
+Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2002,Hutton2009,Lucht2012} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011} - a bacterial inspired microprogram chemistry - though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+
+\begin{table}
+	\scriptsize
+	\caption{A sample of Artificial Chemistries for open-ended evolution}
+	\label{tab1}
+	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
+		\hline\noalign{\smallskip}
+		Chemistry                                                          & Energy Model?                                                      & Constructive?                            \\ 
+		\\ \noalign{\smallskip}
+		\hline
+		\noalign{\smallskip}
+		\cite{Ducharme2012}                                                & Yes                                                                & Yes                                      \\
+		StringMol \parencite{Hickinbotham2012}                             & No, global energy only, conservation of mass as proposed extension & Yes                                      \\
+		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                                                 & No                                       \\
+		RBN-World \parencite{Faulconbridge2011}                            & Unknown                                                            & Yes                                      \\
+		\cite{Lenaerts2009}                                                & No                                                                 & Yes - molecular interactions             \\
+		ZChem \parencite{Tominaga2009}                                     & Conservation of mass                                               & No - reactions are atomic with wildcards \\
+		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & No                                                                 & Unknown                                  \\
+		\cite{Fernando:2008xy,Fernando:2007pf}                             & Yes, and thermodynamics govern reactions                           & No - atomic reactions                    \\
+		\cite{Gardiner2007}                                                & No                                                                 & No - atomic reactions                    \\
+		NAC \parencite{Suzuki2006}                                         & Unknown                                                            & Yes                                      \\						
+		GGL/ToyChem \parencite{Benko2005}                                  & Mass conservation only                                             & Yes                                      \\
+		Lattice Artificial Chemistry \parencite{Ono2000,Madina2003}        & No                                                                 & No                                       \\
+		GGL/ToyChem \parencite{Benko2003}                                  & Mass conservation only                                             & No - pre-defined reactions only          \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward.
+
+Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \autocite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+
+\quote{Erasing the distinction in simulation between organism and environment allows a model to explore the exchange and transformation of matter and energy.} {\autocite{Dorin:2006fk}}
+
+\section{Constructive chemistries}\label{constructive-chemistries}
+
+Novel molecules can arise from artificial chemistry:
 
 \quote{
-	Erasing the distinction in simulation between organism and environment
-	allows a model to explore the exchange and transformation of matter and
-energy.}
-{\autocite{Dorin:2006fk}}
+	A distinguishing feature of chemistry is that the changes of molecules
+	upon interaction are not limited to quantitative physical properties
+	such as free energy, density, or concentrations, since molecular
+	interactions do not only produce more of what is already there --
+	rather, novel molecules can be generated.}
+{\autocite{Benko2009}}
 
-\paragraph{Desirable properties}\label{desirable-properties}
-
-\autocite{Suzuki2003}:
-
-\begin{itemize}
-	\item
- The symbols or symbol ingredients be conserved (or quasi-conserved) in
- each elementary reaction, at least with the aid of a higher-level man-
- ager.
-	\item
- An unlimited amount of information be coded in a symbol or a sequence
- of symbols.
-	\item
- Particular symbols that specify and activate reactions be present.
-	\item
- The translation relation from genotypes to phenotypes be specified as
- a phenotypic function.
-	\item
- The information space be able to be partitioned by semi-permeable
- membranes, creating cellular compartments in the space.
-	\item
- The number of symbols in a cell can be freely changed by symbol trans-
- portation, or at least can be changed by a modification in the
- breeding operation.
-	\item
- Cellular compartments mingle with each other by some random pro- cess.
-	\item
- In-cell or between-cell signals be transmitted in the manner of symbol
- transportation.
-	\item
- Symbols be selectively transferred to specific target positions by
- particular activator symbols (strongly selective), or at least
- selectively transferred by symbol interaction rules (weakly
- selective).
-	\item
- There be a possibility of symbols being changed or rearranged by some
- random process.
-\end{itemize}
-
-\autocite{Tominaga2007}--computationally universal with only uni- and
-bi-molecular reactions
-
-Desirable properties from \autocite{Faulconbridge2011}:
+A chemistry is \textit{constructive} \autocite{Fontana1994} if new components
+may be generated through the action of other components. Both implicit
+laws and implicit molecule definitions are required for constructive
+chemistries:
 
 \begin{itemize}
 	\item
- Functional groups.
+	Explicit reaction laws = independent of molecular structure; implicit
+	= laws must refer to structure. Often used for constructive
+	chemistries
 	\item
- Conservation of energy.
-	\item
- \autocite[sec.4.4]{Faulconbridge2011} contains an interesting
- discussion mapping these desirable properties onto the emergent
- properties that are then required of an \gls{achem}.
+	Explicit molecule definitions = from an fixed set of symbols; implicit
+	= description for construction.
 \end{itemize}
 
-Additional properties from \autocite{Hickinbotham2010}:
+Constructive (weak and strong) initially defined in \autocite{Fontana1994}:
+
+\quote{
+	We refer to models in which new agents are constructed in an unspecific
+	(essentially stochastic) fashion as \emph{weakly constructive}. This is
+	to be contrasted with a situation in which the encounter of two agents
+	\emph{implies} a \emph{specific} third one\ldots{}Models of this kind
+	will be termed \emph{strongly constructive}. The prime example of a
+	strongly constructive system is chemistry.}
+{\autocite{Fontana1994}}
+
+The commentary that immediately follows is also significant:
+
+\quote{
+	A strongly constructive system that contains agent \emph{A} must cope
+	with the network of its implications. But, then, it also must cope with
+	the implications of the implications. And so on.}
+{\autocite[217]{Fontana1994}}
+
+A strongly constructive system is one which maintains closure, and in
+which there is self-consistency and some form of logical structure
+(implications.)
+
+A mechanism for exploration in the EA sense--new products can be
+generated, and new products can participate in reactions. One approach
+is to pre-specify all possible reactions; another is to generate
+reactions `on-the-fly' from the structures of the interacting molecules.
+The first approach is well suited to simulating real chemistry as it
+allows properties of reactions observed in chemical experiments to be
+attached to their simulated equivalents. However, it does not allow for
+arbitrary reactions, and it requires reaction properties to be
+pre-specified--difficult for novel or artificial reactions. It could be
+argued that the first approach is not in fact strongly constructive (in
+the sense of \autocite{Fontana1994,Dittrich:2001zr}) as it is not completely
+open-ended. However, \autocite{Hartenfeller2011} suggests that it is in fact
+adequate.
+
+\section{Rewriting or String-based}
+
+\autocite{Antonakopoulos:2011th}
+
+One developmental mapping for several structures or species e.g., CAs, and boolean networks - sparsely connected networks
+
+Using L-systems - one for cells/nodes, and the other for connectivity rules
+
+Developmental process ``capable of expressing developmental actions e.g., growth and differentiation'' and ``able to express a large variety of topologies within each architecture\ldots{}''
+
+\autocite{Dittrich1998}:
+
+``study the phenomena of life, not by simulating life as it is (weak
+AL) but by instantiating life as it could be (strong AL)'' {[}Langton,
+C. G. (1989). Artificial life{]}
+
+``An important property of most strong AL systems is that they contain
+the ability for self-reference. For instance, Ray's Tierra organisms
+are able to read, copy, and modify their own code {[}27{]}. In
+Fontana's algorithmic chemistry every object is a character string
+able to process other objects by using the lambda-calculus that maps
+the character string into an (active) function {[}13{]}. The dualism
+inherent in those systems can be traced back to Godel {[}15{]} who
+defined a mapping of mathematical statements into natural numbers ``
+that allowed self-reference, to Turing's universal machine {[}31{]},
+and to von Neumann's stored program computer {[}7{]}.''
+
+``Here, we will concentrate on dynamic phenomena, especially on the
+emergence of prebiotic evolution''
+
+``The term self-evolution should refer to an evolutionary process
+within a population system where the components responsible for the
+evolutionary behavior are (only) the individuals of the population
+system itself. Every variation is carried out by the individuals.
+Selection pressure is generated implicitly through interaction among
+the individuals and not by external agents. The system must not
+contain a component that can be identified as a fitness function or
+global operators performing selection or variation (e.g.,
+crossover).''
+
+Introduces S,R,A classification scheme for artificial chemistry -
+here, S=`` binary strings with a constant length of 32 bits'',
+R=s1+s2-\textgreater{}s3, and A=''simulates a well-stirred tank
+reactor with mass-action kinetics, which assures that the probability
+of a collision is proportional to the product of the concentration of
+the colliding objects'' from earlier work (Fontana, Kauffman etc)
+
+A=``1. Select two objects s1,s2 from the soup randomly, without
+removing them. 2. If there exists a reaction s1 + s2 to s3 and the
+filter condition f (s1,s2,s3) holds, replace a randomly selected
+object of the soup by s3.'', s1 and s2 are not consumed, rather they
+act as catalysts. Chosen as this shown capable of hypercyclic
+organisation
+
+AND reaction and an automata reaction to generate s3 from s1, s2.
+Automata is a deterministic FSA, running s1 (4-bit fixed instructions)
+on s2.
+
+
+Measures (all macroscopic)
 
 \begin{itemize}
 	\item
- Novelty and innovation, specifically the ability for new molecules
- introduced to the chemistry to take part in reactions without needing
- changes to the \gls{achem}.
+	
+	Diversity
+	
 	\item
- Range of scales.
+	
+	Distance Distribution Complexity (from Kim)
+	
 	\item
- Dynamic environment.
+	
+	Productivity
+	
 	\item
- Redundancy and degeneracy.
-	\item
- Emergent complex properties.
-	\item
- Unified molecular representation.
-	\item
- Stochasticity.
-	\item
- Emergent mutation rates.
+	
+	Innovativity (innovation = new string)
+	
 \end{itemize}
 
-\paragraph{Examples}\label{examples}
+
+Experiments - initialised always with random (32-bit) strings
+
+Compared to ODE approach in Bagley1992 (AlifeV version)
+
+\autocite{Fenizio2000}:
+
+Original AlChemy reactions of form A+B-\textgreater{}C where C
+replaces an existing element (X)
+
+This system generates A+B-\textgreater{}C1+C2...CN where C is a
+multiset of size N. Done by modifying the original K rule to detach x2
+and eliminate both original elements (like reactants in chemistry)
+
+Uses combinators rather than lambdas
+
+To prevent from stopping (out of elements) added modification where
+randomly add/remove some elements
+
+Combinator first combines (appends) elements, each element other than
+first bracketed. Then each 1-term combinator applied to string, where
+it makes specific changes e.g., K x1x2s0-\textgreater{}x1s0 (s0 is
+remaining substring, may be null). Apply until no further reductions
+possible (that is, in normal form). Two combinators are equivalent if
+can be reduced to same combinator (and previously noted that order is
+not important - same results regardless of order).
+
+Free pool of atoms for conservation of ``mass''
+
+\autocite{Fenizio2001}:
+
+
+Focus on ``identity as an entity separated from its environment'',
+that is, membrane formation. Graph used to model spatial structures
+
+``an artificial chemistry (AC) is embedded in a graph, with each
+molecule being a vertex of the graph and possible interactions being
+allowed only along the edges of the graph''
+
+``Molecules are built from a substrate of elements called atoms. There
+are seven types of atoms (I, K, W, R, B, C, S), each with a different
+function. The total number of atoms in the reactor is kept constant
+during a run. Free atoms (not bounded in molecules) are separately
+stored and form a global pool.''
+
+Provides definition of autopoeisis in terms of graphs
+
+Experiment to show spontaneous formation of autopoietic cells
+
+Rules for combinations of two molecules are predetermined - reaction
+mechanisms are described in \autocite{Fenizio2000}
+
+\section{Boolean Networks and Graphs}
+
+\autocite{Nellis2012}
+
+``Our aim is to improve novelty-generation algorithms by making their
+biological models richer''
+
+Novelty-generation as goal/theme for meta-evolution
+
+No measure for novelty - not even sure is possible. But informal
+definition that says more novelty as result of more embodiment (this
+seems circular?) p87
+
+Embodiment as mechanism. Provides overview in 3.2
+
+AChems categorized as world/chemistry/constraints (p132), with
+constraints being energy model/binding model. RBN-World mentioned as a
+world where elements are RBN networks
+
+States that binding model needs to be rich - empirical evidence
+presented (StringMol) only
+
+Copying is a phenomenon, expressed through mechanisms at different
+levels of the AChem
+
+Explored through embodied copying mechanism built in GraphMol, with
+antecedent in StringMol (Hickingbotham2011)
+
+StringMol includes an embodied copying mechanism -
+start/at-end/char-copy/next. Some elements (at-end) use Smith-Waterman
+matching algorithm, which opens ability for evolution to modify the
+function of at-end (Nellis2012p143). But others, e.g., next, are not
+embodied. GraphMol makes next embodied
+
+Design is graph based (obviously..). ``The world defined by GraphMol
+contains chemicals (represented as graphs) that bind to each other via
+multiple binding sites, and then run simple computer programs (encoded
+in the graphs) that modify the binding of these chemicals.''. Why? No
+explicit rationale presented. Presumably StringMol starting point
+meant programs, copying, then graphs?
+
+Operates (like StringMol) at level of proteins/enzymes e.g.,
+replicases, DNA
+
+Runtimes in weeks to months
+
+\autocite{Nellis2014}
+
+Summary of PhD thesis - computational novelty through embodiment
+
+Comparing StringMol and GraphMol
+
+Emergent systems easy to code but produce surprising results. Cannot
+predict results from rules (or in fact easily predict rules from
+desired results. One-way function, akin to encryption)
+
+Standard GAs search through a fixed space - cannot surprise, limited range
+
+Need something emergent
+
+Mechanism of evolution must be itself evolvable; individuals and
+environment interact to give new ways of producing new individuals.
+Dynamics required for novelty-generation.
+
+Quick defined embodiment in terms of two dynamical systems mutually
+affecting each other - no need for a physical world. System modifies
+environment. Doesn't address if system is constructed from
+environment. Autopoiesis does say though that system built from
+environment. But autopoiesis talks about maintenance not evolution
+
+Functions such as template copying must be embodied mechanisms in the
+world - so can be affected and evolved
+
+
+Stringmol and Graphmol have embodied template copying, done in
+different ways. Different computational models result in different
+properties - ``Stringmol exhibits macro-mutation and two chemical
+copying; GraphMol exhibits two types of quasispecies, cooperative and
+parasitic. These two systems use the same domain (emergent evolution)
+and metamodel (machines copying strings), but different computational
+models.''
+
+\autocite{Faulconbridge2010, Faulconbridge2011}:
+
+RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (\cite[§8]{Faulconbridge2011}). 
+
+Entities are described as a form of Random Boolean Network, with the
+addition of a bonding mechanisms to allow for composition and
+decomposition of RBNs. A number of parameters affect the behaviour
+of the chemistry, and so a series of experiments sampled from the
+parameter-space, and then used a GA, to search for interesting
+variants as measured by non-catalysed loops (ideal measures of
+auto-catalytic sets and Hypercycles too rare for use as a measure)
+(chap 8)
+
+Gillespie-like" - random reaction, random time - not correlated in
+any way with reaction energies or rates (Faulconbridge2011§8.4.3.1)
+
+bRBNs used as atomic elements, properties determined by the network
+
+Larger structures are formed by ``bonding'' two independent bRBNs at
+each bRBNs bonding node. ``All reactions are between two reactants;
+it is assumed that more complicated reactions can be expressed as a
+series of two-reactant reactions with intermediate structures.``
+Record kept of composition so that decomposition can be easily done.
+
+Many design choices - bonding mechanism etc. Examination of
+alternatives done by searching with EA
+
+Each bRBN is a RBN, made up of a number of nodes, each with an
+initial state (true/false) assigned randomly and with a input/output
+matrix assigned randomly. Finally k(=2) inputs are established per
+node. Synchronous state update. All based on Kauffman1969
+(interestingly, although noted as ``original'' so later work known)
+
+bonding method uses ''cycle length as the bonding property and
+equality as the bonding criterion....bonds only exist between bRBNs
+that have the same cycle length.'' in initial examples at least n=5
+and b(k?)=2, and alternatives examined using EA. After initial bond
+formation recalculate cycle lengths, and check again for equality -
+might result in decomposition.
+
+Describes two generic strategies for the selection of reactants,
+spatial and aspatial, where the primary difference is whether
+molecular position is a factor in reactant selection
+
+Measures are Synthesis, Self-Synthesis, Decomposition, Substitution,
+and Catalysis (Faulconbridge2011§7), and non-catalysed `loops' (ideal
+measures of auto-catalytic sets and Hypercycles too rare for use as a
+measure) (Faulconbridge2011§8)
+
+Random sampling + EA (Fitness function (§8.4.3.2) is based on
+non-catalysed loops (§4.3.9.4))		
+
+"identifies three types of \textbackslash{}emph\{mixing method\} or
+reactor algorithm			
+
+Contains an interesting discussion mapping these desirable properties
+onto the emergent properties that are then required of an
+\textbackslash{}gls\{achem\}
+
+Some advantages claimed over Hutton (emergence and computational
+intractability p190)
+
+``As the choice to use RBNs as the sub- symbolic representation in
+RBN-World was based on limited information. As a discrete dynamical
+system that is computationally tractable yet also spans a wide range
+of behaviours, RBNs met the appropriate criteria. It is not expected
+that RBNs are the best representation however; others may be more
+suitable for particular emergent properties.``
+
+\section{Atoms/Molecules}
+
+Ducharme et al \parencite{Ducharme2012}. The approach taken is to model the energy changes associated with reactions. The chemistry is spatial; atoms are arranged on a 2-dimensional grid and have velocity. When two atoms pass within a particular distance, they interact. The possible types of interactions are prespecified, with the type chosen being driven by the atomic composition and energies of the interacting atoms. Reactions are therefore between atoms rather than molecules; a molecule in this chemistry is a combination of atoms arranged in a particular structure, re-examined after each reaction to form a stable configuration based on expectations from real-world chemistry. Although computational costs are not reported, it seems plausible that the calculation of intersections on a 2-dimensional grid will be expensive for large molecular populations. Another cost comes from the re-arrangement of molecules into energy-efficient configurations. This spatial structuring enables the model to restrict atomic interactions to those atoms that are accessible on a molecule, but at the cost of additional modelling complexity. 
+
+
+\autocite{Lucht2012}
+
+Challenge to community - "to develop a system in which, starting with
+a soup of free atoms and a simple ``bootstrap'' chemistry, a cell-like
+creature similar to the one in H-41 evolves."
+
+Based on Hutton2007 Squirm3 chemistry, using Hutton's floods
+
+Squirm3 - fixed molecule types, and pre-defined reactions for
+replication and gene-sequence transcription, and so although capable
+of interesting behaviour is not capable of unlimited extension
+
+Added reaction types to address Squirm3's ``global-extinction problem
+and showing how quasi-universal enzymes can evolve
+
+\autocite{Hutton2007}
+
+Enzymes can act as catalysts so G affects P; but enzyme evolution too
+improbable for OEE
+
+2D grid of squares (lattice), spring force for membrane
+
+Enzymes can now affect all reactions except enzyme production; in
+practice too slow
+
+Production rules hardcoded into AChem
+
+Only with raw materials in environment, niche construction through
+adaptation to availability of raw materials
+
+AChem hand-built with reactions instead of enzymes
+Prespecified reactions - see Faulconbridge2011 p.49
+
+Artificial system capable of life-like \textbackslash{}gls\{oee\}
+(creativity)
+
+Based on hypothesis (materiality, interactions, embedding) of
+\textbackslash{}textcite\{Taylor2001\}, better expressed in
+\textbackslash{}textcite{[}p.341{]}\{Hutton2002\}; membrane to allow
+individuals to benefit from innovations by protecting internal
+reactions from others
+
+\textbackslash{}Gls\{achem\} from
+\textbackslash{}textcite\{Hutton2002\} used to construct all elements
+in world - material and embedded.
+
+Atoms in \textbackslash{}gls\{achem\} of different types and states;
+reaction rules; otherwise no energy modelling; only physics modelling
+is the concept of location (either integer-coordinates or real
+number-coordinates) and impossibility of colocation. Floods are used
+to recycle raw materials.
+
+Individuals (each bounded by a membrane) with the capability for
+division and mutation. Raw materials (atoms) are only required for
+division
+
+Interactions between individuals are limited to effects on shared
+environment (niche construction without direct interaction), so one
+element of hypothesis untested; restrictions on open-endedness:
+evolution of new enzymes unobserved as extremely unlikely, and
+genotype-phenotype mapping hard-coded (unevolvable)
+
+\section{Compositional}
+
+\autocite{Vasas2015, Vasas2012, Vasas2012a}
+
+If inheritance is statistical only then ok; but literature
+stresses digitally encoded although might just be cognitive bias
+
+Unit of selection very important to define now in abiogenesis
+
+Can evolution happen when information transfer is non-digital?
+Specifically where there is a parent-offspring correlation in
+molecular composition?
+
+Based on GARD \autocite{Segre1998}:
 
 \begin{itemize}
-	\item
- Assembler Automata--Avida, Tierra
-	\item
- Geb \autocite{Channon:2001ly}
-	\item
- artificial organisms controlled by neural networks created by a
- developmental process from a bit-string genotype.
-	\item
- Individuals interact with the world through five predefined types of
- interaction generated by the neural network--reproduce (crossover and
- mutation of production rules), fight, turn anti-clockwise or
- clockwise, move forward.
-	\item
- RBN-World
-	\item
- Random Boolean Network, with the addition of a bonding mechanisms to
- allow for composition and decomposition of RBNs, can be used to build
- a chemistry capable of almost limitless extension out of
- non-traditional components
-	\item
- entities are described as a form of Random Boolean Network, with the
- addition of a bonding mechanisms to allow for composition and
- decomposition of RBNs.
-	\item
- A number of parameters affect the behaviour of the chemistry, and so a
- series of experiments sampled from the parameter-space, and then used
- a GA, to search for interesting variants as measured by non-catalysed
- loops (ideal measures of auto-catalytic sets and Hypercycles too rare
- for use as a measure) \autocite[section 8]{Faulconbridge2011}.
-	\item
- Ducharme et al \autocite{Ducharme2012}.
+	\item Compositional inheritance
+	
+	\item claim made that GARD is capable of darwinian evolution, but
+	population analysis showed not in response to directional selection
+	(Vasas2010)
+	
+	\item Eigen threshold applies - mutation rates (see issue of replication -
+	big differences between parent and child) overwhelm selection
 \end{itemize}
 
-The approach taken is to model the energy changes associated with
-reactions. The chemistry is spatial; atoms are arranged on a
-2-dimensional grid and have velocity. When two atoms pass within a
-particular distance, they interact.
+Ganti and Eigen showed that distinct, organizationally different
+alternative autocatalytic networks in same environment might compete
+and fittest would prevail (e.g., autocatalytic networks as units of
+selection).	Check number of network components (=autocatalytic networks). In GARD, end up with just one big component
 
-The possible types of interactions are prespecified, with the type
-chosen being driven by the atomic composition and energies of the
-interacting atoms. Reactions are therefore between atoms rather than
-molecules; a molecule in this chemistry is a combination of atoms
-arranged in a particular structure, re-examined after each reaction to
-form a stable configuration based on expectations from real-world
-chemistry. Although computational costs are not reported, it seems
-plausible that the calculation of intersections on a 2-dimensional grid
-will be expensive for large molecular populations. Another cost comes
-from the re-arrangement of molecules into energy-efficient
-configurations. This spatial structuring enables the model to restrict
-atomic interactions to those atoms that are accessible on a molecule,
-but at the cost of additional modelling complexity.
+GARD does not result in selectable replicating entities - there is no
+replication as certain highly catalytic molecules determine the
+properties of the compotype, and these are not inherited equally -
+instead a child may or may not inherit one of these molecules and so
+its properties may be similar to or very different from its parent
 
+Kauffman 1986 Reflexively Autocatalytic Polymer Networks (RAPN) however are
+evolvable. First, likelihood of such networks higher than expected
+(Hordijk and Steel) and second, in Vasas2012 putting these networks
+into compartments (so not well-stirred) then can do directional
+selection
+
+Differences between GARD and RAPN:
 \begin{itemize}
 	\item
- Stringmol
+	kinetics of growth - RAPN has ligation, GARD does not. Ligation allows new components to be formed with new properties
 	\item
- a bacterial inspired microprogram chemistry--though does demonstrate
- a rich heredity for open-ended evolution using string-matching to
- model binding between sequences
-	\item
- Squirm3
-	\item
- adopts fixed molecule types, and pre-defined reactions for replication
- and gene-sequence transcription, and so although capable of
- interesting behaviour is not capable of unlimited extension
-	\item
- Hutton
-	\item
- Fernando and Rowe
-	\item
- \autocite{Tominaga2009,Tominaga2007,Tominaga2004}
-	\item
- string-based pattern matching applied to examination of the
- feasibility of biochemical pathways
-	\item
- \autocite{Lenaerts2009}
-	\item
- modelling the topological evolution of chemical networks
+	search for adaptations - GARD has fixed catalysis, Kauffman does not - mutant polymers can arise, be incorporated into the set, and influence its fitness
 \end{itemize}
+
+\section{Research Questions}
+
+Research Question: Is there a plausible implementation for a fidelity mechanism in a software system?
+
+Catalysis/autocatalysis possible through emergence in some AChems (e.g., \autocite{Virgo2013})
 
 \chapter{ToyWorld}\label{toyworld}
 

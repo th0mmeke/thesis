@@ -60,6 +60,7 @@ Part 2, the second body of work, describes progress towards a realisation of thi
 Specifically, we show that ToyWorld is capable of emergent behaviour and is familiar enough (although not realistic) to be understandable and to allow for the importation of designs from real-world chemistry. We show that an artificial chemistry provides a good foundation upon which an open-ended evolutionary system may be constructed, although the demonstration of the full mechanism from Part 1 in ToyWorld remains for future work.
 
 Finally, in conclusion, we speculate that this overall direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on arbitrary top-down design decisions.}
+
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
 
 \usereferences
@@ -70,8 +71,6 @@ Finally, in conclusion, we speculate that this overall direction might lead more
 \listofalgorithms
 \include{glossary}
 \include{introduction}
-\include{context}
-\include{previouswork}
 \part{Evolutionary Potential}
 \include{part2a}
 \include{part2b}

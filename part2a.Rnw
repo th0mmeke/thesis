@@ -2333,10 +2333,6 @@ It also recognizes that in both Evolutionary Computation and natural populations
 
 \subsection{Experimental design}
 
-% EXPERIMENT 2 - CHOICE OF LIMIT MECHANISM
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
-@
 
 \begin{table} % 53f6b74
 	\begin{center}
@@ -2358,7 +2354,9 @@ df <- subset(load.results.simple('results/results-53f6b74.data'), environment_ch
 	\end{center}
 \end{table}
 
-<<echo=FALSE>>=
+% EXPERIMENT 2 - CHOICE OF LIMIT MECHANISM
+<<echo=FALSE, cache=TRUE>>=
+df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 runs <- nrow(subset(df,gen==0))
 factors <- nrow(unique(Filter(is.factor,df)))
 replicates <- runs / factors

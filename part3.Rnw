@@ -121,161 +121,97 @@ All Artificial Chemistry based on this model:
 	\end{center}
 \end{figure}
 
-Or in other words, digital models (``in silicon''), wet-chemistry models
-(``in glass''), and life itself.
+Or in other words, digital models (``in silicon''), wet-chemistry models (``in glass''), and life itself.
 
-In general, AChems for these problems are without grounding (so start
-from high-level). Grounding implies that there is a causal justification
-for the higher level chemistry, where that justification is based on
-fundamental supportable processes, rather than unique to particular
+In general, AChems for these problems are without grounding (so start from high-level). Grounding implies that there is a causal justification
+for the higher level chemistry, where that justification is based on fundamental supportable processes, rather than unique to particular
 problem.
 
-All four areas rely on a connection to real chemistries--Molecular
-synthesis and Molecular Programming require results to be transferrable
-to In Vitro; other two expect results to shed light on In Vivo
-processes.
+All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferrable
+to In Vitro; other two expect results to shed light on In Vivo processes.
 
-Therefore expect that a grounded AChem for these should have a basis in
-real Chemistry.
+Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
 
-\subsection{BOX--Physical or Real-world Chemistry}\label{box -- physical-or-real-world-chemistry}
+\begin{figure}
+\begin{framed}
+The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
-The richness of the real world is built on a substantial foundation of
-chemical and physical complexity.
+A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry)
+of reactant and resulting product molecules. The reaction can also be characterized by a description of the dynamics, or kinetics, of the
+reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often
+require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy
+(\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
 
-A \textit{reaction} transforms \emph{reactants} into \emph{products},
-and is often represented by describing the quantities (or stoichiometry)
-of reactant and resulting product molecules. The reaction can also be
-characterized by a description of the dynamics, or kinetics, of the
-reaction to explain how the reaction proceeds in response to temperature
-changes or to varying concentrations of reactants. Reactions often
-require an input of energy, such as from molecular collisions, to
-proceed; the energy required is called the reaction's activation energy
-(\(A_e\)), and is specific to the particular reaction. In general there
-is no accurate mechanism to predict reaction dynamics without
-experiment.
+The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\)
+means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between
+the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order}
+describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree
+polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is
+\(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and
+overall (the sum of terms), third-order. (Example taken from \autocite{Kotz2006})
 
-The \textit{reaction rate} is the change in concentration of a substance
-over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\)
-means that concentration of \(X\) and \(k\) is the reaction rate
-constant) leading to Arrenhius' description of the relationship between
-the activation energy (\(E_a\)), the temperature (\(T\)) and the rate
-constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order}
-describes how the reaction rate changes with the concentration of the
-reactants, usually captured as a first-, second-, or third-degree
-polynomial expression determined empirically. For example, the reaction
-rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is
-\(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is
-second-order with respect to \(NO\), first-order with \(Cl_2\) and
-overall (the sum of terms), third-order. (Example taken from
-\autocite{Kotz2006})
+Reactions in theory can be decomposed to a chain of \emph{elementary steps}, with each step resulting in a single change,
+such as bond formation or cleavage, to the reacting molecules. Elementary steps are somewhat predictable, practical reactions somewhat
+less so. Generally in experimental chemistry we know the reactants and products and can sometimes deduce the sequence of elementary steps.
 
-Reactions in theory can be decomposed to a chain of
-\emph{elementary steps}, with each step resulting in a single change,
-such as bond formation or cleavage, to the reacting molecules.
-Elementary steps are somewhat predictable, practical reactions somewhat
-less so. Generally in experimental chemistry we know the reactants and
-products and can sometimes deduce the sequence of elementary steps.
+In modelling, we can either represent reactions exactly as an atomic transformation from reactants to products with characteristics that can
+only be determined experimentally, or we can attempt to construct the reaction from a sequence of elementary steps with the properties of the
+reaction derived from the properties of the steps involved. This later approach is the only practical one when the reaction is novel, or when
+we lack experimental data. Several alternate sequences of steps, or \textit{reaction pathways}, may be possible between reactants and
+products. Each pathway will have a different activation energy, and hence reaction rate.
 
-In modelling, we can either represent reactions exactly as an atomic
-transformation from reactants to products with characteristics that can
-only be determined experimentally, or we can attempt to construct the
-reaction from a sequence of elementary steps with the properties of the
-reaction derived from the properties of the steps involved. This later
-approach is the only practical one when the reaction is novel, or when
-we lack experimental data. Several alternate sequences of steps, or
-\textit{reaction pathways}, may be possible between reactants and
-products. Each pathway will have a different activation energy, and
-hence reaction rate.
+The kinetics of elementary steps are defined by the stoichiometry of the step and are hence predictable. In theory you might expect to be able to
+predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact,
+when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the
+stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant
+has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of
+order 3. 
 
-The kinetics of elementary steps are defined by the stoichiometry of the
-step and are hence predictable. In theory you might expect to be able to
-predict the overall reactions kinetics from the composition of these
-elementary steps. In practice, the results are close, but not exact,
-when compared to experiment. However they form a useful abstraction for
-analysis. The reaction rate of an elementary step is defined by the
-stoichiometry, where the rate equation is the product of the reactant
-concentrations and the rate constant. Therefore a step with one reactant
-has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The
-step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of
-order 3.
-
-Elementary steps are an abstraction, an aid to analysis, of the
-underlying molecular dynamics. At the molecular level, reactions can be
-modelled as a series of collisions between molecules. The reaction rate
-is then determined by the percentage of collisions (or in other words,
-the concentration) that are energetic enough to overcome the inherent
-stability of the interacting molecules and cause a change in molecular
+Elementary steps are an abstraction, an aid to analysis, of the underlying molecular dynamics. At the molecular level, reactions can be
+modelled as a series of collisions between molecules. The reaction rate is then determined by the percentage of collisions (or in other words,
+the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
 structure or shape (in other words, the activation energy).
 
-Recall that the rate of a reaction is a function of concentration (at
-the gross level) or collision rate (at the molecular level) and the
-activation energy for the reaction, which at the molecular level is
-directly related to the energy required to overcome the stability of the
-reactants. There are therefore two clear mechanisms to alter the rate
-for a reaction: either reduce activation energy, or increase
-concentrations. A catalyst does precisely the first, and autocatalysis
-is one method for the second.
+Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
+activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
+reactants. There are therefore two clear mechanisms to alter the rate for a reaction: either reduce activation energy, or increase
+concentrations. A catalyst does precisely the first, and autocatalysis is one method for the second.
 
-A catalyst is anything that isn't consumed by the reaction and that
-affects the rate (or the kinetic equation for the reaction) without
-affecting the reaction's equilibrium constant. Catalysts allow the
-reaction to proceed by an alternate, lower activation energy, pathway.
-The reaction equation remains the same, but the dynamics are changed -
-in the case of biological enzymes the rate can be increased by several
-orders of magnitude over the uncatalyzed reaction, enabling reactions
-fundamental to life that would be effectively impossible in an
-uncatalysed form. At the molecular level catalysts often function by
-providing a substrate that preferentially attacks the bonds critical to
-the reaction. The platinum within an automotive catalytic converter is a
-well-known example of a catalytic substrate.
+A catalyst is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
+affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
+The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
+orders of magnitude over the uncatalyzed reaction, enabling reactions fundamental to life that would be effectively impossible in an
+uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
+the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate.
 
-Autocatalysis, introduced by \autocite{Ostwald1890}, is a different
-approach to catalysis. Rather than reducing the required activation
-energy, autocatalysis increases the reactant concentrations:
-autocatalysis reactions form feedback loops where a compound is both a
-reactant and a product. In the standard definition, an autocatalytic
-reaction is one that is catalysed by its own products, resulting in a
-characteristic rate acceleration over time given by the differential
-equation -
-\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where
-\(n\) is the order of the reaction \autocite{Plasson2010}. Example
-(indirect network autocatalysis) of glycolysis where pattern is ATP
-\(\rightarrow\) n.ATP--ATP initially consumed, but overall created.
+Autocatalysis, introduced by \autocite{Ostwald1890}, is a different approach to catalysis. Rather than reducing the required activation
+energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
+reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
+characteristic rate acceleration over time given by the differential equation--
+\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where \(n\) is the order of the reaction \autocite{Plasson2010}. Example
+(indirect network autocatalysis) of glycolysis where pattern is ATP \(\rightarrow\) n.ATP--ATP initially consumed, but overall created.
 
-Autocatalysis may be realised by 1) either a single reaction (\eg A + X
-+ Y \(\rightarrow\) 2A + Z) or a linear chain of reactions through
-intermediate products, called template autocatalysis, or 2) by a
-reaction network. Networks may be indirect through a series of
-intermediary products, or collective where there is no connection
-between the component cycles other than through catalysis--as seen for
-example in the replication of viroids where each RNA strand can catalyse
-the production of the other. However, in all cases, the reactions reduce
-to the defining X \(\rightarrow\) nX pattern described by Ostwald's
-differential equation.\autocite{Plasson2010}.
+Autocatalysis may be realised by 1) either a single reaction (\eg A + X + Y \(\rightarrow\) 2A + Z) or a linear chain of reactions through
+intermediate products, called template autocatalysis, or 2) by a reaction network. Networks may be indirect through a series of
+intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for
+example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce
+to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation.\autocite{Plasson2010}.
+\end{framed}
+\captionsetup{name=Box}
+\caption{Review of relevant elements of Physical Chemistry}
+\label{box:physicalchemistry}
+\end{figure}
 
-A related phenomenon is autoinduction where products increase the
-reactivity of the catalyst (rather than directly affecting the reaction
-mechanism). Same signature (Ostwald).
 
-Artificial chemistries are regularly employed in three application
-areas: real-world chemistry emulators; tools for the exploration of
-artificial life, and models to test various hypotheses of the origin of
-life. Chemistry emulators and origins-of-life tools aim for fidelity
-with real-world chemistry, unlike most artificial life models.
-Real-world fidelity requires either the use of a library of predefined
-reactions, which conflicts with the goal of unlimited extension, or a
-chemically plausible method of constructing reactions from first
-principles. Because of the complexities of real-world chemistry this
-later method appears to be quite difficult, and the goal of a realistic,
-computationally practical, artificial chemistry remains open. However,
-the more limited objective of a less realistic, but still fully
-constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for
-examples.). A constructive chemistry (\autocite{Fontana1994}) is one
-where new components may be generated through the action of other
-components, and where those new components may themselves take part in
-new types of reactions, and so on. This appears fundamental to an
-open-ended representation.
+Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of
+artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity
+with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined
+reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first
+principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic,
+computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully
+constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry (\autocite{Fontana1994}) is one
+where new components may be generated through the action of other components, and where those new components may themselves take part in
+new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
 A mathematical treatment of \gls{achem} can be found in \autocite{Benko2009}. \autocite{Dittrich:2001zr} and \autocite{Suzuki2008a} provide excellent reviews of the field.
 
@@ -653,6 +589,182 @@ argued that the first approach is not in fact strongly constructive (in
 the sense of \autocite{Fontana1994,Dittrich:2001zr}) as it is not completely
 open-ended. However, \autocite{Hartenfeller2011} suggests that it is in fact
 adequate.
+
+\section{Assembler Automata}
+
+\subsubsection{Tierra and Avida}
+
+\autocite{Ofria2004}
+
+Avida
+
+``An approach to studying evolution...''
+
+``According to Daniel Dennett, ``...evolution will occur whenever and
+wherever three conditions are met: replication, variation (mutation),
+and differential fitness (competition)''''
+
+
+``(However, as Barton and Zuidema {[}3{]} note, general acceptance
+will ultimately hinge on whether artificial life researchers embrace
+or ignore the large body of population genetics literature.)''
+
+
+Difference with GAs - natural organisms must replicate themselves to
+pass on genetic information - ``final arbiter of fitness'', and
+interaction with other organisms and with environment
+
+Steen Rasmussen inspired by computer game core war - competing
+segments of simplified assembly code in core memory. With change to
+copy command to introduce mutations and hence evolutionary potential,
+core world created. But system ``collapsed into a non-living state''
+{[}non-living?{]} One possible reason - copying over existing
+organisms
+
+Tierra next year (relationship not stated) organisms had to allocate
+memory first before using. Initial selective pressure only from rate
+of replication. Sequential execution of organism code
+
+
+Avida summer of 1993 - better metering and measuring, and parallel
+code execution
+
+
+\begin{itemize}
+	\item
+	
+	``In principle, the only assumption made about these
+	self-replicating automata in the core Avida software is that their
+	initial state can be described by a string of symbols (their genome)
+	and that they autonomously produce offspring organisms. However, in
+	practice our work has focused on automata with a simple von Neumann
+	architecture that operate on an assembly-like language inspired by
+	the Tierra system.''
+	
+	\item
+	
+	Instruction, read, write, and flow control heads for relative rather
+	than absolute addressing - bit like a Turing tape machine
+	
+	\item
+	
+	Many instructions grouped into instruction sets. Default set has 26
+	instructions
+	
+	\item
+	
+	Every program is valid
+	
+\end{itemize}
+
+
+Phenotypes - ``The primary mode of environmental interaction is by
+inputting numbers from the environment, performing computations on
+those numbers, and outputting the results. The organisms receive a
+benefit for performing specific computations associated with
+resources''
+
+All very configurable, and complicated, but why? What rationale behind
+choices? More of a testbed for experiments, e.g., `` in one experiment
+we wanted to study a population that could not adapt, but that would
+nevertheless accumulate deleterious or neutral mutations through
+drift''
+
+
+``The quest to halt adaptation is only one example of a special
+feature in Avida; many more have been explored, and are continuously
+being added to the source code. The most successful features are all
+fully described in the documentation that comes with the software.''
+
+
+\autocite{Lenski2003}
+
+
+Modelled in Avida
+
+
+``Our experiments demonstrate the validity of the hypothesis, first
+articulated by Darwin and supported today by comparative and
+experimental evidence, that complex features generally evolve by
+modifying existing structures and functions.''
+
+
+
+``Some simpler functions were accessible from the ancestor by
+relatively few mutations, and these served as a foundation on which
+more complex features were built. The foundational role of simpler
+functions in the origin of more complex ones was evident in the
+overlap of the genetic networks underlying their expression, and the
+frequent loss of simpler functions as side-effects of mutations
+yielding more complex function''
+
+
+\autocite{Taylor2001}:
+
+
+Derived from Thesis (Taylor:1999sc)
+
+Criticism of Tierra
+\begin{itemize}
+	\item
+	
+	Not built around any particular theory - ``This weakness is not
+	specific to Tierra, but is shared by most, if not all, of the other
+	Tierra-like systems which have emerged over the last
+	decade\ldots{}''
+	
+	\item
+	
+	In Ray's words, ``...this approach involves engineering over the
+	early history of life to design complex evolvable organisms, and
+	then attempting to create conditions that will set off a spontaneous
+	evolutionary process of increasing diversity and complexity of
+	organisms''
+	
+	
+	\begin{itemize}
+		\item
+		
+		Problem with `engineering over' is we don't understand the natural
+		examples well enough to engineer them
+		
+		\item
+		
+		Similar criticism by Pattee1988 - ``simulations that are dependent
+		on ad hoc and special-purpose rules and constraints for their
+		mimicry cannot be used to support theories of life''
+		
+	\end{itemize}
+\end{itemize}
+
+
+General points
+
+\begin{itemize}
+	
+	\item
+	
+	Phenotype fundamentally ``involves interaction with the environment
+	(and that this is the essential distinction between the notions of
+	phenotype and genotype - the latter being an informational
+	concept)''
+	
+	\item
+	
+	Seed (proto-DNA) must itself be an indefinite heredity replicator
+	{[}assumes that this is minimal starting point, rather than that
+	this itself may evolve{]}
+	
+	\item
+	
+	Assume that early stages see A+B implicitly encoded in the
+	environment {[}essentially because simpler than explicit mechanism,
+	but little justification{]} ``At the early stages of an evolutionary
+	process, however, we would not expect there to be mechanisms for
+	explicitly decoding the proto-DNA\ldots{}''
+	
+\end{itemize}
+
 
 \section{Rewriting or String-based}
 

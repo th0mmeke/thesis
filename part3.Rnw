@@ -196,11 +196,54 @@ intermediate products, called template autocatalysis, or 2) by a reaction networ
 intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for
 example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation.\autocite{Plasson2010}.
+
+
 \end{framed}
 \captionsetup{name=Box}
 \caption{Review of relevant elements of Physical Chemistry}
 \label{box:physicalchemistry}
 \end{figure}
+
+%
+%autocatalysis
+
+%Autocatalytic sets are proposed for bootstrapping (from less differentiated systems to more complex ones), as a mechanism to increase
+%order and so counteract entropy, for stability, and as a unit of competition. The catalytic properties of autocatalytic sets result in
+%bootstrapping, where the reaction rates in the set are ratcheted-up as the product quantities increase. Autocatalytic sets form a complex or dynamical system, where the feedback loops and interactions can result in forms of temporal (waves and cycles) and spatial order (stable structures.) Similarly stability follows from the formation of attractors in the complex system that are resistant to pertubation. Finally, as the set forms a coherent unit expressing certain properties, such as the ability to maintain itself or to create copies of itself, it
+%can be seen as a unit of competition where success is measured by life-time or by control of resources.
+%
+%Autocatalysis is a source of dynamical behaviour--leads to bifurcations, multistability, oscillators, attractors \autocite{Plasson2010}
+%\begin{itemize}
+
+%	\item
+%	present in all three elements (\autocite{Ganti:2003hl}--or
+%	earlier?) of life
+%	\item
+%	DNA replicates with enzymatic help
+%	\item
+%	some metabolites, such as ATP, exclusively autocatalytic
+%	\item
+%	lipids in a membrane enhance addition of other lipids--Formation of
+%	autocatalytic cycles/sets (\autocite{Hordijk2004})--percolation increases
+%	likelihood
+%	\item
+%	\autocite{Sousa2015} for detection of RAF sets in e coli metabolic
+%	networks
+%	\item
+%	Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \autocite{Fernando:2005ly})
+%	\item
+%	\autocite{Fernando:2007pf}--selection/liposomes/chemical avalanches
+%	based on Wachtershauser
+%	\item
+%	autocatalytic cores (\autocite{Vasas2012})
+%	\item
+%	Kauffman's original Reflexively Autocatalytic Polymer Networks
+%	(RAPN) \autocite{Kauffman1986,Farmer1986} are not capable of
+%	non-digital evolution. RAPN stabilise into single network without
+%	variation
+%\end{itemize}
+
+%Some properties of RAF sets established by Hordijk and Steel have application beyond origin-of-life: linear growth rate in level of catalysis compared to size of molecules (n) is sufficient for RAF set to form. For a RAF set to appear with high probability (P\textgreater{}0.5) in even a model with n=20 (about 1 million molecular types) each molecule needs to catalyze 1-2 reactions on average. For the given model, need around 65,000 different molecule types (n=15-16) for RAF set if use more realistic probability of catalysis of 1:1 million of a molecule catalysing any particular reaction. \autocite{Hordijk2011}
 
 
 Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of

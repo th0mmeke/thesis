@@ -7,9 +7,9 @@ Without hesitation or ambiguity, and fully mindful of such paleontological wonde
 
 The underlying motivation for this work is to understand the requirements for the onset of artificial evolution; how robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world. Why evolution? Simply as it is the best example we have today of a transformative, adaptive improvement process. Many fields would benefit from a robust general optimisation heuristic for use when exact methods are not possible, and the example of natural evolution is our current gold-standard. 
 
-Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. \todo{By contrast, as a technology, artificial evolutionary systems are exogenous, problem-specific and designed.}
+Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. By contrast, artificial evolutionary systems such as Evolutionary Algorithms are exogenous, problem-specific and designed.
 
-A convenient shorthand capturing these differences labels the biological original as bottom-up and the derived fields as top-down. If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
+A convenient shorthand capturing these differences labels the biological inspiration as bottoms-up or emergent and the derived fields as top-down or designed. If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
 
 But as biology is contingent, what is the most useful starting point for a recapitulation? Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons. And also assume that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
 
@@ -33,279 +33,54 @@ Then our belief is that the evolution of evolution itself can and will emerge un
 \subsection{Life, the gold standard}
 
 \epigraph{%
-	In the world of human thought generally, and in physical sciences in particular, the most important and most fruitful concepts are those to which it is impossible to attach a well-defined meaning.}%
+In the world of human thought generally, and in physical sciences in particular, the most important and most fruitful concepts are those to which it is impossible to attach a well-defined meaning.}%
 {\textsc{\\H.A. Kramers}}
 
-\quote{
-	What modifications must be made to this type of experiment to allow at least one of the following outcomes:
-	‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the
-	recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the
-	production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and
-	Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of
-	biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of
-	bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the
-	minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{\autocite{Fernando:2007pf}}
 
-	Ganti's observation that contemporary living things always have a metabolic subsystem, a heritable control system, and a boundary system
-	to contain (in \autocite{Szathmary:2006ty}).
-	
-	One distinction between living and non-living comes from \autocite{Rasmussen2004} -- non-living systems explore a state-space driven by thermodynamics, and so in a sense through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \autocite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things.
-	
-	\autocite{Pascal2013}: details of early life may be unknown and unknowable, but principles possible. Sudden transition to life like today astronomically unlikely - single RNA strand capable of ribozyme activity probability of 10E-60\ldots{} (for 100 monomers). The more likely alternative is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living.
-	
-	metabolism = how ``living matter evades the decay to equilibrium'' (Schrodinger 1944) in \autocite{Pascal2013}
-	
-	Definition of Life  \autocite{Pascal2013}: Elusive, and probably not useful
-	
+As stated by many (\eg \autocite{Pascal2013}) a definition of life is elusive, and probably not useful. There is no definite boundary between the living and the non-living; as \autocite{Pascal2013} goes on to explain, the most likely scenario for the origin of life is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living. Think of a present day virus--is it alive, or not? Reproduction is generally thought of as a requirement for life, yet viruses cannot reproduce without co-opting the necessary machinery from an independent host. 
+
+\autocite{Fernando:2007pf} presents a partial compendium of definitions which illustrates the range of opinion:
+
+\quote{
+...at least one of the following outcomes: ‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{\autocite{Fernando:2007pf}}
+
+One interesting distinction between living and non-living comes from \autocite{Rasmussen2004}--non-living systems explore a state-space driven by thermodynamics, and so in a sense through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \autocite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things. Given the relationship between information and entropy, the statement about metabolism in \cite{Schrodinger1944}--how ``living matter evades the decay to equilibrium''--seems very similar.
+
 \begin{figure}
 \begin{framed}
+%\epigraph{%
+%``What we do not know today we shall know tomorrow. A whole army of biologists is studying the structure and organization of
+%living matter, while a no less number of physicists and chemists are daily revealing to us new properties of dead things. Like two parties
+%of workers boring from the two opposite ends of a tunnel, they are working towards the same goal. The work has already gone a long way
+%and very, very soon the last barriers between the living and the dead will crumble under the attack of patient work and powerful scientific
+%thought.''}%
+%{\textit{\\The Origin of Life}\\\textsc{Alexander Oparin}}
 
-\epigraph{%
-``What we do not know today we shall know tomorrow. A whole army of biologists is studying the structure and organization of
-living matter, while a no less number of physicists and chemists are daily revealing to us new properties of dead things. Like two parties
-of workers boring from the two opposite ends of a tunnel, they are working towards the same goal. The work has already gone a long way
-and very, very soon the last barriers between the living and the dead will crumble under the attack of patient work and powerful scientific
-thought.''}%
-{\textit{\\The Origin of Life}\\\textsc{Alexander Oparin}}
+%Darwin ``warm little pond'' Life and letters vol3 1887
+%(``\emph{\textbf{But if (and Oh! What a big if!) we could conceive in
+%	some warm little pond, with all sorts of ammonia and phosphoric salts,
+%	light, heat, electricity etc, present, that a protein compound was
+%	chemically formed ready to undergo still more complex
+%	changes\ldots{}'')}} \autocite{Vasas2012}
 
-Similar problem--from chemistry to biology. Transition to biology.
+Tthe evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \autocite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspect, it is not possible to test hypotheses by falsification, and hence they can only be speculative.
 
-Systems Chemistry is tightly related field.
+However, a consensus is forming that early life began with chemoautotrophs fueled by energy from inorganic redox couples and biomass from CO\textsubscript{2}, and that innovations in carbon-fixation created the main branches in the tree-of-life \autocite{Braakman2012}. Initiation of selection marked by \gls{ida}, probably from RNA world, followed substantially later by Last Universal Common Ancestor (LUCA) \autocite{Yarus2011}, which, it is important to note for clarity, was almost certainly not a single cell or even species, but rather a construct of evolutionary genetics because of the likely predominance of Lateral Gene Transfer (LGT) in archaic biology (http://sandwalk.blogspot.ca/2007/03/web-of-life.html).
 
-Analogous to origin of life, but despite parallels, must resist temptation to extend claims to this--the evolution of life was contingent, and because of lack of evidence from early stages, no way anyway to test or confirm.
+Self-replicating RNA enzymes shown in \autocite{Lincoln2009}, forming basis of selective system (link to natural selection) (also see \autocite{Cheng2010}, \autocite{Powner2009} for formation of RNA in prebiotic conditions). Some elements of \gls{ida} thought still with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \autocite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \autocite{Wilson2009}. Next major transition to Protein world (although predominance of RNA transcripts leads to suggestions that should be called RNA-Protein world \autocite{Altman2013}). Note however that Lateral or Horizontal Gene Transfer thought to have been so common in early life that there was no single common ancestor, but genes from multiple lineages combined into all lineages today.\autocite{Ragan2009}
 
-Work to describe a pathway from plausible conditions on the early abiotic Earth to the first living things. Important to understand that this pathway only describes one possible form of life, and one possible mechanism -- restricted in scope to connecting the two endpoints.
+Two alternative models exist for the step from abiotic to \gls{ida}: genetic or replicators or RNA-first, and metabolism or protein-first. Both metabolism and replication were almost certainly required for \gls{ida} however. A self-sustaining autocatalytic network (in terms of a RAF set specifically a ``set of molecules and reactions which is collectively autocatalytic in the sense that all molecules help in producing each other (through mutual catalysis, and supported by a food set).'') generally considered essential \autocite{Pross2013}, but not sufficient \autocite{Hordijk2011}. Both competing models--replication first and metabolism first--build on that. Autocatalysis expressed by self-replication of oligomeric compounds in replication first; by cycles and network in metabolism first. In the broadest sense, life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities.
+From another perspective, Metabolism-first privileges function, while replicator-first privileges descent.
 
-The primary postulates of OOL are not our postulates. We do though have concepts and principles in common - meta-ENS, or the workings of evolutionary processes, of which the mechanisms of OOL are one concrete example (a form of existence proof.)
+The main issues with replicator-first model are the sizeable step required from abiotic compounds to template-based replication (although ribonucleotides conceivably could form in pre-life conditions see \autocite{Powner2009}). Templates encode information in biology, so require a encode/decode mechanism as well as an information code to represent the product. This is a step more complex than simpler duplication. By contrast, the main issue with metabolism-first model concerns the shift from composome inheritance to template-based, and the ability of composomes to fulfill heredity requirement for natural selection.
 
-\begin{itemize}
-\item
-hypercycles \autocite{Eigen1971}
-\item
-autocatalysis
-\begin{itemize}
-	\item
-	present in all three elements (\autocite{Ganti:2003hl}--or
-	earlier?) of life
-	\item
-	DNA replicates with enzymatic help
-	\item
-	some metabolites, such as ATP, exclusively autocatalytic
-	\item
-	lipids in a membrane enhance addition of other lipids--Formation of
-	autocatalytic cycles/sets (\autocite{Hordijk2004})--percolation increases
-	likelihood
-	\item
-	\autocite{Sousa2015} for detection of RAF sets in e coli metabolic
-	networks
-	\item
-	Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \autocite{Fernando:2005ly})
-	\item
-	\autocite{Fernando:2007pf}--selection/liposomes/chemical avalanches
-	based on Wachtershauser
-	\item
-	autocatalytic cores (\autocite{Vasas2012})
-	\item
-	Kauffman's original Reflexively Autocatalytic Polymer Networks
-	(RAPN) \autocite{Kauffman1986,Farmer1986} are not capable of
-	non-digital evolution. RAPN stabilise into single network without
-	variation
-\end{itemize}
-\item
-GARD (fixed catalysts) \autocite{Segre1998} not capable of evolution -
-lack heredity of variation (mutations overwhelm heredity) \autocite{Vasas2010}
-\item
-Bimolecular rearrangements (\autocite{Fernando:2008xy,Fernando:2007pf})?
-\item
-template replicators--highly unlikely without intermediate steps
-\item
-Must be driven far-from-equilibrium (many references e.g.,
-\autocite{Pascal2015}--continuous supply of energy required (explicit
-modelling unlike say \autocite{Fontana1994} where energy only
-implicitly modelled)--and maintained there (by metabolism--e.g., how
-\quote{living matter evades the decay to equilibrium}{\autocite{Schrodinger1944}})
-\item
-Eigen threshold for replicators--high mutation rates overwhelm
-heredity
-\item
-Biological evolutionary theory
-\item
-Extension beyond biology
-
-\begin{itemize}
-	\item
-	Previous work on extending evolution--\autocite{Bourrat2015} etc
-	\item
-	Evolution of culture, language, technology
-\end{itemize}
-\item
-OOL is focussed on plausible explanations for life-as-we-know-it
-\item
-And must be constrained by biological givens, i.e.
-\item
-Starting point consistent with what is known about archaic Earth
-\item
-Must lead to end-point consistent with earliest known life
-\item
-In a reasonable time period
-\item
-single-step astronomically unlikely (single RNA strand probability
-about 10E-60, based on 100 monomers--\autocite{Pascal2013})
-\item
-Requires a series of steps--akin to OOL where single-step
-astronomically unlikely (single RNA strand probability about 10E-60,
-based on 100 monomers--\autocite{Pascal2013})
-\item
-Contingent and specific--constraints
-\item
-starting point compatible with what is known of prebiotic conditions
-(either on earth or extraterrestrially)
-\item
-end point of ENS at something that might be LUCA
-\item
-Must be simplified and abstracted
-\item
-Choosing an artificial chemistry similar to natural chemistry enables
-an argument by analogy
-\item
-Meets known constraints for OEE--and we have OOL as an example of OEE
-from natural chemistry
-\item
-Catalysis/autocatalysis possible through emergence in some AChems
-(\eg \autocite{Virgo2013})
-\item
-Some fundamental differences remain however between our domain and the
-natural domain
-\item
-The sheer size of the Biosphere means we can never duplicate the
-number of individual evolutionary ``trials'' (selection, mutation and
-reproduction) events in our model
-\item
-The Biosphere is underpinned by a phenomenally rich set of physical
-and chemical laws, implicitly constraining each and every action and
-interaction
-\end{itemize}
-
-Darwin ``warm little pond'' Life and letters vol3 1887
-(``\emph{\textbf{But if (and Oh! What a big if!) we could conceive in
-	some warm little pond, with all sorts of ammonia and phosphoric salts,
-	light, heat, electricity etc, present, that a protein compound was
-	chemically formed ready to undergo still more complex
-	changes\ldots{}'')}} \autocite{Vasas2012}
-
-
-Of the historic and ahistoric aspects of the Origin-of-life problem,
-historic aspect may never be known \autocite{Pross2013}. Constrained by
-what we do know, but many different pathways, and unless some record
-somewhere (either geological or phylogenetic), actual path essentially
-lost to history. So without evidence for historic aspect, not possible
-to test by falsification, and hence can only be speculative.
-
-Consensus forming that early life formed by chemoautotrophs with energy
-from inorganic redox couples and biomass from CO\textsubscript{2}, and
-that innovations in carbon-fixation created main branches in
-tree-of-life \autocite{Braakman2012}. Initiation of selection marked by
-\gls{ida}, probably from RNA world, followed substantially later by Last
-Universal Common Ancestor (LUCA) \autocite{Yarus2011}, which, it is
-important to note for clarity, was almost certainly not a single cell or
-even species, but rather a construct of evolutionary genetics because of
-the likely predominance of Lateral Gene Transfer (LGT) in archaic
-biology (http://sandwalk.blogspot.ca/2007/03/web-of-life.html).
-Self-replicating RNA enzymes shown in \autocite{Lincoln2009}, forming
-basis of selective system (link to natural selection) (also see
-\autocite{Cheng2010}, \autocite{Powner2009} for formation of RNA in
-prebiotic conditions). Some elements of \gls{ida} thought still with us
-in lineages of informational (for protein synthesis and RNA
-transcription) and operational genes (for some standard cellular
-processes) \autocite{Ragan2009}, for example the ribosome and
-ribonuclease P (RNase P) \autocite{Wilson2009}. Next major transition to
-Protein world (although predominance of RNA transcripts leads to
-suggestions that should be called RNA-Protein world
-\autocite{Altman2013})
-
-Two alternative models for the step from abiotic to \gls{ida}: genetic
-or replicators or RNA-first, and metabolism or protein-first. Both
-metabolism and replication almost certainly required for \gls{ida}. A
-self-sustaining autocatalytic network (in terms of a RAF set
-specifically a ``set of molecules and reactions which is collectively
-autocatalytic in the sense that all molecules help in producing each
-other (through mutual catalysis, and supported by a food set).'')
-generally considered essential \autocite{Pross2013}, but not sufficient
-\autocite{Hordijk2011}. Both competing models--replication first and
-metabolism first--build on that. Autocatalysis expressed by
-self-replication of oligomeric compounds in replication first; by cycles
-and network in metabolism first. In the broadest sense, life can be seen
-as an autocatalytic process where an entity catalyses the production of
-one or more descendant entities.
-
-Metabolism-first privileges function, while replicator-first privileges
-descent.
-
-If life is metabolism plus information, then for metabolism-first where
-lack template-based replication, replication is compositional (composome
-- Vasas)
-
-Common functions required in both protocells and minimal cells, but
-approaches quite different. Protocells must build up from abiotic
-conditions to point where known processes can take over, and to point
-where we have historical evidence--bridge gap between abiotic
-conditions and first hypothetical cells in record
-
-Main issues with replicator-first model: big step from abiotic compounds
-to template-based replication (although ribonucleotides conceivably
-could form in pre-life conditions see \autocite{Powner2009}). Templates
-encode information in biology, so require a encode/decode mechanism as
-well as an information code to represent the product. This is a step
-more complex than simpler duplication.
-
-Main issue with metabolism-first model: shift from composome inheritance
-to template-based; ability of composomes to fulfill heredity requirement
-for natural selection.
-
-Autocatalytic sets are proposed for bootstrapping (from less
-differentiated systems to more complex ones), as a mechanism to increase
-order and so counteract entropy, for stability, and as a unit of
-competition. The catalytic properties of autocatalytic sets result in
-bootstrapping, where the reaction rates in the set are ratcheted-up as
-the product quantities increase. Autocatalytic sets form a complex or
-dynamical system, where the feedback loops and interactions can result
-in forms of temporal (waves and cycles) and spatial order (stable
-structures.) Similarly stability follows from the formation of
-attractors in the complex system that are resistant to pertubation.
-Finally, as the set forms a coherent unit expressing certain properties,
-such as the ability to maintain itself or to create copies of itself, it
-can be seen as a unit of competition where success is measured by
-life-time or by control of resources.
-
-Some abiogenesis results fundamentally assume real-world chemistry and
-conditions, a constraint that doesn't apply to Alife or artificial OEE,
-and so is more restrictive than required. Other abiogenesis work such as
-on properties of autocatalytic sets, is broader in applicability.
-Genetic and catalytic properties of RNA make well suited to creation of
-Alife \autocite{Cheng2010}
-
-Autocatalysis is a source of dynamical behaviour--leads to
-bifurcations, multistability, oscillators, attractors
-\autocite{Plasson2010}
-
-Some properties of RAF sets established by Hordijk and Steel have
-application beyond origin-of-life: linear growth rate in level of
-catalysis compared to size of molecules (n) is sufficient for RAF set to
-form. For a RAF set to appear with high probability (P\textgreater{}0.5)
-in even a model with n=20 (about 1 million molecular types) each
-molecule needs to catalyze 1-2 reactions on average. For the given
-model, need around 65,000 different molecule types (n=15-16) for RAF set
-if use more realistic probability of catalysis of 1:1 million of a
-molecule catalysing any particular reaction. \autocite{Hordijk2011}
-
-Lateral or Horizontal Gene Transfer thought so common in early life that
-no single common ancestor, but genes from multiple lineages combined
-into all lineages today.\autocite{Ragan2009}
+The origin of life can be seen as the transition from chemistry to biology, and is analogous to our goal of transitioning from simple uninteresting systems, to systems which evolve. However, the usefulness of the similarity is limited: the primary postulates of OOL are not our postulates. Some abiogenesis results fundamentally assume real-world chemistry and
+conditions, a constraint that doesn't apply to Alife or artificial OEE, and so is more restrictive than required. Other abiogenesis work such as on properties of autocatalytic sets, or the suitability of the genetic and catalytic properties of RNA for Alife \autocite{Cheng2010}, is broader in applicability.
 \end{framed}
 \captionsetup{name=Box}
 \caption{The origins of life}
 \label{box:ool}
-\end{figure}	
+\end{figure}
 
 \subsubsection{Living organisms are supremely well suited to their environments, and can adapt to environmental changes}
 \label{living-organisms-are-supremely-well-suited-to-their-environments-and-can-adapt-to-environmental-changes}
@@ -313,142 +88,67 @@ into all lineages today.\autocite{Ragan2009}
 Adaptation of organisms to their environments occurs in the main on two
 different time-scales.
 
-Evolution by \gls{naturalselection} acts over a period of generations on
-populations of individual organisms. Changes are therefore relatively
-gradual, and many generations can pass before a change such as a
-beneficial mutation becomes ubiquitous in a population (\eg 300-500
-generations for targeted modifications in lactose processing in
-\emph{E. coli} \autocite{Dekel:2005fk}. In contrast, gene regulatory
-effects act during the life cycle of a single individual, either during
-development to affect morphology, or during the adult lifespan in
-reaction to seasonal or other environmental cues. These
-regulation-driven changes are not in themselves heritable, but they can
-be assimilated back into the population by influencing the organisms
-fitness under natural selection (\eg,
-\autocite{Baldwin:1896ly,Dennett:2003ve,Paenke:2009xe,Paenke:2007ve}).
+Evolution by \gls{naturalselection} acts over a period of generations on populations of individual organisms. Changes are therefore relatively gradual, and many generations can pass before a change such as a beneficial mutation becomes ubiquitous in a population (\eg 300-500 generations for targeted modifications in lactose processing in \emph{E. coli} \autocite{Dekel:2005fk}. In contrast, gene regulatory effects act during the life cycle of a single individual, either during development to affect morphology, or during the adult lifespan in reaction to seasonal or other environmental cues. These regulation-driven changes are not in themselves heritable, but they can be assimilated back into the population by influencing the organisms fitness under natural selection (\eg,\autocite{Baldwin:1896ly,Dennett:2003ve,Paenke:2009xe,Paenke:2007ve}).
 
-Similar effects can be seen by another adaptive mechanism that operates
-on individuals during their lifespan: learning, where behavioural
-adaptions can also lead to genetic change
-(\eg \autocite{Hinton:1987vy}.)
+Similar effects can be seen by another adaptive mechanism that operates on individuals during their lifespan: learning, where behavioural adaptions can also lead to genetic change (\eg \autocite{Hinton:1987vy}.)
 
 \subsubsection{Natural selection, acting on populations, is the primary driver for long-term adaptation}
 \label{natural-selection-acting-on-populations-is-the-primary-driver-for-long-term-adaptation}
 
-The year 2009 saw the celebration of the 150\textsuperscript{th}
-anniversary of the publication of \emph{On the Origin of Species}, the
-explanation of evolution by natural selection, with extensive coverage
-in scientific and popular media. The terms are therefore fairly well
-known to many people, but what exactly does \emph{natural selection}
-mean? To quote from \autocite{Futuyama:1979tg}, \gls{naturalselection}
-is the ``differential survival and reproduction of genotypes''.
+The year 2009 saw the celebration of the 150\textsuperscript{th} anniversary of the publication of \emph{On the Origin of Species}, the explanation of evolution by natural selection, with extensive coverage in scientific and popular media. The terms are therefore fairly well known to many people, but what exactly does \emph{natural selection} mean? To quote from \autocite{Futuyama:1979tg}, \gls{naturalselection} is the ``differential survival and reproduction of genotypes''.
 
 Let's examine each of the components in this idea in turn:
 
-Differential survival. Living organisms are constantly engaged in an
-intimate relationship with their environments. Indeed, according to the
-theory of \emph{autopoiesis} \autocite{Varela:1974qd}, organisms are
-defined by this engagement: to be alive means maintaining oneself
-against the surrounding environment. In general the more effectively the
-organism is able to do this, the more likely it is to survive. However,
-in practice survival for an individual may be affected by random events.
-Scholarship winning students can be killed by drunk drivers. Sardines in
-shoals flash and turn, yet sharks still manage to grab one or two from
-the shoal effectively at random. Averaged over a population however
-these chance events balance out; a succession of random trials leads to
-a skewed distribution of fitness away from the less able.
+Differential survival. Living organisms are constantly engaged in an intimate relationship with their environments. Indeed, according to the theory of \emph{autopoiesis} \autocite{Varela:1974qd}, organisms are defined by this engagement: to be alive means maintaining oneself against the surrounding environment. In general the more effectively the organism is able to do this, the more likely it is to survive. However, in practice survival for an individual may be affected by random events. Scholarship winning students can be killed by drunk drivers. Sardines in shoals flash and turn, yet sharks still manage to grab one or two from the shoal effectively at random. Averaged over a population however these chance events balance out; a succession of random trials leads to a skewed distribution of fitness away from the less able.
 
-\footnote{This introduces two significant differences between \glspl{ea}
-	and biology: first, \glspl{ea} conduct a series of discrete trials of fitness,
-	rather than a continuous evaluation. Second, fitness in an \gls{ea} is
-	measured by an explicit \emph{objective function} whereas in biology
-	fitness \emph{emerges dynamically} through continuous interaction with
-the environment.}
+Reproduction. In this sense, reproduction simply means inheritance. Only those characteristics that can be passed on from one generation to the next are relevant. One implication of this is that the only traits of an organism that matter to natural selection are those that are apparent while the organism can reproduce. Altruism and kin-selection, where an individual acts to increase the fitness of a related individual, are interesting for the light they shed on this implication.
 
-Reproduction. In this sense, reproduction simply means inheritance. Only
-those characteristics that can be passed on from one generation to the
-next are relevant. One implication of this is that the only traits of an
-organism that matter to natural selection are those that are apparent
-while the organism can reproduce. Altruism and kin-selection, where an
-individual acts to increase the fitness of a related individual, are
-interesting for the light they shed on this implication.
+Genotypes. An organism's \gls{genotype} is the heritable information that defines an individual, of which the great majority is encoded in DNA (some \emph{epigenetic} information is inherited through DNA-methylation, maternal protein concentrations and other mechanisms. However, generally DNA remains the primary source.)
 
-Genotypes. An organism's \gls{genotype} is the heritable information
-that defines an individual, of which the great majority is encoded in
-DNA (some \emph{epigenetic} information is inherited through
-DNA-methylation, maternal protein concentrations and other mechanisms.
-However, generally DNA remains the primary source.)
+How then does natural selection unfold in practice? Although an organism is defined by its genotype, its survival is based not on the raw genotype, but on the expression of the genotype--called the \gls{phenotype}--that participates in the interaction with the environment. There is not necessarily a direct one-to-one mapping between genotype and phenotype; for example, environmental triggers
+during development can switch the phenotype in different directions (a phenomenon called \gls{polyphenism}.)
 
-How then does natural selection unfold in practice? Although an organism
-is defined by its genotype, its survival is based not on the raw
-genotype, but on the expression of the genotype--called the
-\gls{phenotype}--that participates in the interaction with the
-environment. There is not necessarily a direct one-to-one mapping
-between genotype and phenotype; for example, environmental triggers
-during development can switch the phenotype in different directions (a
-phenomenon called \gls{polyphenism}.)
+This indirect mapping enables a number of important mechanisms significant to the operation of natural selection: first, changes in the genotype (caused by mutations for example) may build up independent of phenotype changes--the idea of \emph{neutral mutations} \autocite{Ohta:1996vn,Ohta:2002ys,Ohta:1973kx}. Examples from studies of RNA secondary structures (the physical folding of RNA molecules) show that many closely-related RNA sequences can produce the same RNA folding \autocite{Fontana:1993zn}. Adjacent changes often have little effect on structure.
 
-This indirect mapping enables a number of important mechanisms
-significant to the operation of natural selection: first, changes in the
-genotype (caused by mutations for example) may build up independent of
-phenotype changes--the idea of \emph{neutral mutations}
-\autocite{Ohta:1996vn,Ohta:2002ys,Ohta:1973kx}. Examples from studies
-of RNA secondary structures (the physical folding of RNA molecules) show
-that many closely-related RNA sequences can produce the same RNA folding
-\autocite{Fontana:1993zn}. Adjacent changes often have little effect on
-structure.
+Second, by extension, \autocite{Gavrilets:1997qt} and \autocite{Gravner:2007yd} have shown that in cases involving many gene loci under well-defined conditions there is a path between viable phenotypes that requires only neutral mutations.
 
-Second, by extension, \autocite{Gavrilets:1997qt} and
-\autocite{Gravner:2007yd} have shown that in cases involving many gene
-loci under well-defined conditions there is a path between viable
-phenotypes that requires only neutral mutations.
+Third, behaviours such as learning, rather than purely genetic mechanisms, can influence the form of this \gls{gpmap} in combination with natural selection, as illustrated by the Baldwin effect \autocite{Baldwin:1896ly} and other examples of genetic assimilation \cite{Hinton:1987vy,Siegal:2002qn,Waddington:1942jb}.
 
-Third, behaviours such as learning, rather than purely genetic
-mechanisms, can influence the form of this \gls{gpmap} in combination
-with natural selection, as illustrated by the Baldwin effect
-\autocite{Baldwin:1896ly} and other examples of genetic assimilation
-{[}\autocite{Hinton:1987vy};Siegal:2002qn;Waddington:1942jb{]}.
-
-Finally, \glspl{grn} provide another mechanism to modify the \gls{gpmap}
-and hence to guide natural selection.
+Finally, a \gls{grn} provides another mechanism to modify the \gls{gpmap} and hence to guide natural selection.
 
 \subsubsection{Novelties often arise from new regulatory connections rather than changes to genes}
 \label{novelties-often-arise-from-new-regulatory-connections-rather-than-changes-to-genes}
 
-\autocite{Prudhomme:2007ax} believe that evolutionary novelties more
-commonly arise from changes or additions of regulatory
-\emph{connections} than from the development of \emph{new} genes or
-regulatory elements; that is, from changes to the network topology
-rather than from additions to the network elements. The underlying
-implication is that novelties are therefore new compositions of
-pre-existing elements, rather than being constructed `\emph{de novo}',
-and that production of novelties may be relatively rapid. Connection
-changes may happen quickly; by comparison, new genes may take many generations.
+\autocite{Prudhomme:2007ax} believe that evolutionary novelties more commonly arise from changes or additions of regulatory \emph{connections} than from the development of \emph{new} genes or regulatory elements; that is, from changes to the network topology rather than from additions to the network elements. The underlying implication is that novelties are therefore new compositions of
+pre-existing elements, rather than being constructed `\emph{de novo}', and that production of novelties may be relatively rapid. Connection changes may happen quickly; by comparison, new genes may take many generations.
 
-\section{Goal}
+\section{Motivation}
 The overall problem we address is to \textit{determine the conditions under which ongoing evolution might occur in a software system}. 
 
-Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that continues to produce interesting, novel, and creative results, as does natural biological evolution; in other words, we mean the evolution of evolution. Finally, we constrain our domain to software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
+Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that continues to produce interesting, novel, and creative results, as does natural biological evolution; in other words, we mean the \textit{evolution of evolution.} Finally, we constrain our domain to software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
 
 This is clearly a broad and ambitious goal, one more suited to a research programme than a single thesis, and a goal that is additionally the subject of a complex body of related and previous work. We shall return to a more specific and pragmatic problem description in the later section, \ref{research-questions}, after presenting a summary of the most relevant literature.
 	
 \section{Previous work}
-The previous sections have established the context, and incidentally identified the primary areas of relevant literature. From biology, the main threads concern the origins of life, and the theory of evolution. Natural selection provides the primary mechanism for evolution in biology, although it is not the only process at work -- genetic drift and neutral theory \cite{Kimura:1968uq} provide a counterpoint. 
 
-In artificial systems, some researchers have recently returned to a reappreciation of how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolution. This has led to a renewed interest in understanding the principles behind biological evolution so that artificial systems can capture some of these admirable properties; the difference now is that the transference is sought at the level of concepts and principles rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
+There has been a longstanding interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
 
 Previous work falls into three main areas:
+
 \begin{itemize}
-	\item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems.
-	\item Work related to the subproblem of a viable model for the evolution-of-evolution in software.
-	\item Work related to implementations of open-ended evolutionary systems in software.
-	\end{itemize}
+\item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems.
+\item Work related to the subproblem of a viable model for the evolution-of-evolution in software.
+\item Work related to implementations of open-ended evolutionary systems in software.
+\end{itemize}
 	
-This section expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in subsequent parts. 
+This section expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in the Previous Work sections of the subsequent Parts of the thesis. 
 
-The review is organized roughly in alignment with the research goal: first an examination of work that discusses evolution in the abstract; next a summary of the adoptation of these ideas in artificial systems; and finally a review of artificial systems that claim to exhibit ongoing creative evolution. The relevant open problems are summarized in the conclusion to this section.
+The relevant open problems are summarized in the conclusion to this section.
 
-\subsection{Evolutionary principles}
+\subsection{Evolutionary principles from Biology}
+
+Pigliucci2008 - ``Is evolvability evolvable?''
+
 
 ``We take it as given that biology instantiates ENS'' - but that doesn't mean that the algorithm of biology is ENS \autocite{Watson2012}.
 
@@ -466,285 +166,76 @@ Adaptation in biology appears to precede Natural Selection, so adaptation is pos
 
 Separate outcome or result from process or mechanism (e.g., adaptation)
 
-
 \subsubsection{Evolution by Natural Selection (ENS))}\label{ens-evolution-by-natural-selection}
 
-``Owing to this struggle for life, any variation, however slight and
-from whatever cause proceeding, if it be in any degree profitable to
-an individual of any species, in its infinitely complex relations to
-other organic beings and to external nature, will tend to the
-preservation of that individual, and will generally be inherited by
-its offspring. The offspring, also, will thus have a better chance
-of surviving, for, of the many individuals of any species which are
-periodically born, but a small number can survive. I have called
-this principle, by which each slight variation, if useful, is
-preserved, by the term of Natural Selection, in order to mark its
-relation to man's power of selection (Darwin 1859, p. 61).'' \autocite{Griesemer2005}
+\cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear, or discriminatory--``this process is ENS''. In other words, constitutive or causal readings, or in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant''.
 
-ENS is an example of OEE
-ENS is strongly tied to life, and mostly presupposes living subjects.
+Of these summaries, three are predominant:
 
-Greisemer 2000 states that the elements of evolution in the Lewontin (variation, fitness differences, heritability of fitness) and Maynard-Smith (variation, multiplication, heritability) formulations are fundamentally different (from \autocite{Vasas2015}).
+\begin{enumerate}
+\item
+``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \cite{Darwin1859}
 
+\item
+``if there is a population of entities with multiplication, variation and heredity, and if some of the variations alter the probability of multiplying, then the population will evolve. Further, it will evolve so that the entities come to have adaptations....'' (Maynard-Smith, in \cite{Griesemer2001})
 
-``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' \autocite{Griesemer2005}
+\item
+``1. Different individuals in a population have different morphologies, physiologies, and behaviors (phenotypic variation). 2. Different phenotypes have different rates of survival and reproduction
+in different environments (differential fitness). 3. There is a correlation between parents and offspring in the contribution of each to future generations (fitness is heritable).'' \cite{Lewontin:1970mc}
 
-Restricted by \autocite{Griesemer2005}:
-\begin{itemize}
-	\item natural selection, not drift or Lamarckian (biased) inheritance
-	\item organisms not defined - so scope vague. Many treat vertebrates as paradigm, despite rarity
-	\item organismal level - but many other levels
-\end{itemize}
+\end{enumerate}
 
-\autocite{Griesemer2001}
+From the study of the summaries, \cite{Godfrey-Smith2007} concludes that the core requirement for \gls{ens} is some ``combination of variation, heredity, and fitness differences'', although he identified a number of differences between the summaries. For example, the most commonly cited summary is \cite{Lewontin:1970mc}, but unusually that formulation states that ``fitness is heritable'' whereas typically phenotypic heredity (as appears in Lewontin's later 1980 summary) is stated as sufficient for a trait to evolve. 
 
-examination of difference between Lewontin and Maynard Smith's views
-of units of selection/evolution
+These differences are also captured in \autocite{Griesemer2001}, in particular with reference to the variations between Darwin's concept of inheritance in \cite{Darwin1859} which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both. \autocite{Griesemer2001}
 
-Maynard-Smith
-\begin{itemize}
-	\item
-	
-	``if there is a population of entities with multiplication,
-	variation and heredity, and if some of the variations alter the
-	probability of multiplying, then the population will evolve.
-	Further, it will evolve so that the entities come to have
-	adaptations....''
-	
-	\item
-	
-	M,V,H necessary for units of evolution. F sufficient for evolution
-	of adaptations (with proviso in text)
-	
-	\item
-	
-	Units of evolution that have F are units of selection. Units of
-	selection though do not imply units of evolution as not all MVHF
-	necessary.
-	
-\end{itemize}
-
-Lewontin
-\begin{itemize}
-	\item
-	
-	phentotypic variation, differential fitness, fitness is heritable
-	(by generalizing from Darwin 1859 p61) ``Owing to this struggle for
-	life...Natural Selection\ldots{}''
-	
-	\item
-	
-	``These principles mention quantities that describe quantitative
-	roles of causal capacities (Woodward, 1993)''
-	
-\end{itemize}
-
-Darwin's concept of inheritance in 1859 p61 includes heritability (a capacity) and inheritance (a process carrying the capacity). Lewontin stresses first, assuming second, and Maynard Smith's multiplication is about the second; his heredity is both. \autocite{Griesemer2001}
-
-
-\autocite{Godfrey-Smith2007}:
-
-\begin{itemize}
-	\item
-	
-	Purposes of summaries vary - typically either pedagogy, defending
-	evolutionary theory, extensions to other domains (e.g., cultural), and
-	have ``intrinsic scientific and philosophical interest as attempts to
-	capture some core principles of evolutionary theory in a highly
-	concise way.''
-	
-	\item
-	
-	Subject to counterexamples, and connection to formal models ``not
-	straightforward''
-	
-	\item
-	
-	Core requirement for ENS from various summaries is ``combination of
-	variation, heredity, and fitness differences.''
-	
-	\item
-	
-	Most commonly cited summary is Lewontin1970 - but unusual in that says
-	``fitness is heritable'' - typically phenotypic heredity is sufficient
-	for trait to evolve. 1980 version more typical
-	
-	\item
-	
-	Endler1986 and Ridley1996 discussed
-	
-	\item
-	
-	Necessary and sufficient ambiguous in any summary - might mean will
-	result in ENS when know what ENS is, or discriminatory - this process
-	is ENS. That is, constitutive or causal readings. E.g., conditions for
-	``becoming pregnant\ldots{}{[}versus{]} being pregnant''
-	
-	\item
-	
-	Usual aim is to ``give conditions that are sufficient ceteris paribus
-	for a certain kind of change occurring.'' where the change is assumed
-	to be wrt some trait
-	
-	\item
-	
-	Problem cases for summaries
-	
-	
-	\begin{itemize}
-		\item
-		
-		Culling - no reproduction. If ENS, then no heredity necessary
-		
-		\item
-		
-		Different generation times - only difference is reproductive rate
-		
-		\item
-		
-		Biased inheritance
-		
-		\item
-		
-		Heritability fails in the fit
-		
-		\item
-		
-		Stabilizing selection in an asexual population
-		
-		\item
-		
-		Covariance positive with no variation in Z
-		
-		\item
-		
-		Accident
-		
-		\item
-		
-		Correlated Response
-		
-	\end{itemize}
-\end{itemize}
+Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \autocite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological.
 
 \subsubsection{Compositional evolution}
 
-In life, have HGT e.g., \autocite{Ochman2000}
+In life, have \gls{hgt} e.g., \autocite{Ochman2000}; \autocite{Watson2002} discusses compositional evolution and building blocks; \autocite{Pross2011} introduces Dynamic Kinetic Stability as a general principle underlying evolution, and proposes it as the driver for the origin of life.
 
-In general though, compositional evolution does not attempt to understand life, but instead as a guide to achieving similar property in another domain, or in understanding similar processes in another domain \autocite{Arthur2009}
+\autocite{Arthur2009} investigates the evolution of technology, where evolution is used in the sense of \quote{all objects of some class are related by ties of common descent from the collection of earlier objects.}{\autocite{Arthur2009}} In general though, Arthur's compositional evolution does not attempt to understand life, but instead as a guide to achieving similar property in another domain, or in understanding similar processes in another domain \autocite{Arthur2009}.
 
-\autocite{Watson2002} discusses compositional evolution and building blocks
+Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later
+technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural
+phenomena starts each lineage, and provides new raw components for inclusion in later technologies.
 
-\autocite{Pross2011}--Dynamic Kinetic Stability
+Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise
+as the result of an evolutionary process, rather than de novo from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' : ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}'' to illustrate the impossibility of slavish adoption of biological models.
 
-\autocite{Arthur2009} investigates the evolution of
-technology, where evolution is used in the sense of \quote{all objects of
-	some class are related by ties of common descent from the collection
-	of earlier objects.}{\autocite{Arthur2009}}
-\begin{itemize}
-	
-	\item
-	Evolution in technology occurs by using earlier technologies as
-	building blocks in the composition of new technologies, and these new
-	technologies then become building blocks for use in later
-	technologies, and so on. Arthur calls this ``combinatorial
-	evolution.'' But what is the starting point? How is this regression
-	grounded? Arthur proposes that the capture and harnessing of natural
-	phenomena starts each lineage, and provides new raw components for
-	inclusion in later technologies.
-	\item
-	Evolution is related to innovation: in fact, Arthur claims that by
-	understanding the mechanism by which technologies evolve we will
-	understand how innovations arise. In other words, innovations arise
-	as the result of an evolutionary process, rather than de novo from
-	the brain of a designer.
-	\item
-	Darwinian evolution, or natural selection, is not appropriate for
-	technology. Arthur quotes from Samuel Butler's essay ``Darwin Among
-	the Machines'' : ``{[}t{]}here is nothing which our infatuated race
-	would desire more than to see a fertile union between two steam
-	engines\ldots{}'' to illustrate the impossibility of slavish
-	adoption of biological models.
-	\item
-	However, we can clearly see descent of form, in the example given by
-	Gilfillan in 1935 tracing the development of various elements of the
-	sailing ship: planking, sails, keels, ribbing and fastenings. In
-	each case we see a line of gradual improvements leading to the
-	present day component. But the point is made that this is not
-	evolution in the full sense, as it lacks both universal scope and an
-	underlying mechanism.
-	\item
-	The first obstacle to a more general scope is the existence of
-	innovations such as the jet engine, laser, railroad locomotive, or
-	QuickSort computer algorithm (to name Arthur's examples.)
-	Innovations seem to appear without obvious parentage; they do not
-	appear to be the result of gradual changes or adaptations to earlier
-	technologies.
-	\item
-	Arthur's answer is to look inside the innovation and to recognise
-	that each is made up of recognisable components or modules; the key
-	lies in the nature of heredity in technology. Technologies are
-	formed by combining modules of earlier technologies. These groupings
-	start as loose assemblages to meet some new function, but over time
-	become fixed into a standard unit (for example, the change in DNA
-	amplification mechanisms from assemblages of laboratory equipment to
-	standard off-the-shelf products.)
-	\item
-	\autocite{Bourrat2015} comments that distributive evolution (where
-	distribution of elements changes, as result of selection or drift)
-	cannot result in novelties
-	\item
-	Arthur's response is that novelty comes from incorporating new
-	phenomena\ldots{}
-\end{itemize}
+The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
+
+\autocite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties. Arthur's response is that novelty comes from incorporating new phenomena from the source, the natural world.
 
 \subsection{Evolution in artificial systems}
 
-\begin{itemize}
-	\item
-	EAs originally abstracted/inspired by biological ENS
-	\item
-	Since specialized, radiated into new areas
-	\item
-	Re-unification attempted in works such as \autocite{Paixao2015} but hence not concerned with extension beyond \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}
-	\item
-	\quote{Some EDAs can be regarded abstractions of evolutionary processes:
-		instead of generating new solutions through variation and then
-		selecting from these, EDAs use a more direct approach to refine the
-		underlying probability distribution. The perspective of updating a
-		probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
-\end{itemize}
-
-Major points of difference:
+\Glspl{ea} were originally inspired by an abstraction of biological \gls{ens}, but have since radiated into a variety of specialized forms. The fundamental differences between the biological original and the current \gls{ea} include:
 
 \begin{itemize}
-	\item
-	Mutation combines copying errors with genetic drift (and probably more). (This, as we will later see, is important for our thesis)
-	\item
-	Search through a fixed space, cannot surprise \eg \autocite{Nellis2014}
-	\item
-	Fitness mechanism--implicit vs explicit.  ``The
-	difference is that we require a system with the potential for a
-	large degree of intrinsic adaptation for open-ended evolution,
-	rather than a system where the selection of individuals is
-	determined by an externally-defined fitness function'' \autocite{Taylor2001}
-	\item
-	top-down for EAs--specific constructs without endogenous evolution (processes used not subject to evolution)
+\item \Glspl{ea} search through a fixed space, and hence cannot surprise by 'kind', only by 'degree' (\eg \autocite{Nellis2014})
+\item Fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment.``The difference is that we require a system with the potential for a large degree of intrinsic adaptation for open-ended evolution, rather than a system where the selection of individuals is determined by an externally-defined fitness function'' \autocite{Taylor2001}
+\item \Glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation.
+\item Individuals in a \gls{ea} do not interact other than indirectly through the pre-designed selection mechanism.
+\item The evolutionary process in an \gls{ea} is not itself subject to evolution; it is designed, and a large body of literature exists to guide the implementor in the choice of algorithms to employ.
 \end{itemize}
 
-Similar interests in desirable properties:
+A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \autocite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
 
+Recent research in biology continues to be applied in \gls{ea}:
 \begin{itemize}
-	\item redundancy and degeneracy -- \autocite{Whitacre:2010qy})
-	\item novelty (novelty-search - \autocite{Lehman:2008cr})
+	\item Redundancy and degeneracy-- \eg \autocite{Whitacre:2010qy}
+	\item Novelty--\eg novelty search \autocite{Lehman:2008cr}
+	\item EvoEvo, or the evolution of evolution--\eg the remainder of this work.
 \end{itemize}
-
 
 \subsection{Evolution-of-evolution in artificial systems}
 
-Pigliucci2008 - ``Is evolvability evolvable?''
+First, a distinction: open-ended evolution refers to a goal or result, while evolution-of-evolution, or EvoEvo, describes a process or mechanism.
 
-Open-ended evolution can be seen as evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals (ideally without any restriction). Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \cite{Lehman2012}.
+Recognition of open-ended evolution
+
+\autocite{Taylor2001} like others makes a distinction between OEE and ``kinds of evolutionary innovation''. He gives as an example of limited innovation the emergence of paratism in \cite{Ray1977} as direct result of system design and initial seeding conditions. In this reading, ``fundamentally new'' (labelled by Taylor as ``creative'') means new ways of sensing the environment and interacting with it \cite{Taylor2001}.
 
 \quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws)}{\cite{Ruiz-Mirazo2004}}
 
@@ -755,8 +246,22 @@ Open-ended evolution can be seen as evolution in an open-ended system (\eg Chemi
 	\item An open-ended evolutionary system must have an endogenous implementation of niches.
 \end{itemize} \cite{Maley1999} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
 
-\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
+``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \autocite{Soros2014}
 
+
+``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.'' -
+although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \autocite{Maley1999}
+
+\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws.}{\autocite{Ruiz-Mirazo2004}}
+
+Conditions for open-ended evolution
+
+Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals (ideally without any restriction). In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicator (in contrast to limited replicators where the number of possible types is less than the number of individuals.)
+
+Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \cite{Lehman2012}.
+
+
+\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
 \begin{enumerate}[label=\roman*] 
 	\item Be fully embedded in their arena of competition 
 	\item Have rich, unlimited interactions between each other and with their environment 
@@ -764,261 +269,55 @@ Open-ended evolution can be seen as evolution in an open-ended system (\eg Chemi
 	\item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
 \end{enumerate}
 
-Bottom-up models for open-ended evolution leverage richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon.
-
-Top-down models assume a knowledge of the necessary elements.
-
-Limited heredity replicators vs unlimited - the first where the number of possible types is less than the number of individuals; the second where it far exceeds\cite{Szathmary:2006ty}
-
-Blurring in use of OEE
-
-\begin{itemize}
-	\item Either in sense of quote{an indefinitely large number of structures are each capable of replication.}{\autocite{MaynardSmith1999}}, or
-	\item Additionally meaning novel, interesting, surprising
-\end{itemize}
-
-Ongoing generation of novel forms
-
-Inevitably leads to increasing complexity as without complexity will exhaust new possibilities and cover old ground
-
-
-Minimal conditions for evolutionary system capable of open-ended (but not necessarily interesting behaviour)
-
-\begin{itemize}
-	\item
-	Elements that allow for ongoing evolution--necessary, and starting
-	point for novelty
-	\item
-	Open-ended evolution can be seen as evolution in an open-ended system
-	(\eg Chemistry), where an open-ended system has effectively
-	unrestricted representation: the number of possible types must be much
-	larger than the number of individuals (ideally without any
-	restriction). Without this property all possible types can be
-	generated in a finite time, and the system will either reach stasis or
-	begin to repeat. Not all open-ended systems necessarily support
-	evolution, but in those that do, our intuition suggests that
-	open-ended evolution produces increasing complexity, increasing
-	diversity, accumulation of novelty and continual adaptation
-	\autocite{Lehman2012}.
-\end{itemize}
-
 \autocite{Taylor2001}:
 Competition between individuals for resources - VanValen1973 Red Queen
 hypothesis - primary source of intrinsic selection pressure.
 Individuals and environment mutually affect each other
 
-Resources must be ``(a) a vital commodity to individuals in the
-population; (b) of limited availability; and (c) that individuals
-can compete for (at either a global or local level). This resource
-can usually be interpreted as energy, space, matter, or a
-combination of these.''
+Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as energy, space, matter, or a combination of these.''
 
 ``the potential for a large degree of intrinsic adaptation''
 
 Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 		
 
-
-Hypothesis - four necessary conditions for OEE (left open if these are also sufficient conditions) \autocite{Soros2014}:
-
-General prereqs: good genetic representation, ``sufficiently large world for every individual to be evaluated'', and a seed or starting point
-
+\autocite{Soros2014} presents four necessary conditions for OEE (it is left open if these are also sufficient conditions):
 \begin{itemize}
-	\item
-	
-	A rule should be enforced that individuals must meet some minimal
-	criterion (MC) before they can reproduce, and that criterion must be
-	nontrivial.
-	
-	\item
-	
-	The evolution of new individuals should create novel opportunities
-	for satisfying the MC
-	
-	\item
-	
-	Decisions about how and where individuals interact with the world
-	should be made by the individuals themselves.
-	
-	\item
-	
-	The potential size and complexity of the individuals' phenotypes
-	should be (in principle) unbounded.
-	
+\item A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.
+\item The evolution of new individuals should create novel opportunities for satisfying the MC
+\item Decisions about how and where individuals interact with the world should be made by the individuals themselves.
+\item The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.
 \end{itemize}
-
-``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \autocite{Soros2014}
+Along with these specific conditions, \autocite{Soros2014} assumes certain general conditions: a ``good'' genetic representation, a ``sufficiently large world for every individual to be evaluated'', and a seed or starting point.
 
 Minimal conditions for OEE \autocite{Vasas2015}:
 \begin{itemize}
-	\item
-	
-	very rich combinatorial generative mechanism e.g., organic
-	chemistry. Underlies the evolvability of niches (Dorin and Korb
-	2011)
-	
-	\item
-	
-	unlimited heredity - number of possible heritable types should
-	astronomically exceed individuals in population
-	(Maynard-Smith:1995lw)
-	
-	\item
-	
-	inexhaustible fitness landscape - implies rich, dynamical
-	environment
-	
-	\item
-	
-	Cannot state in advance possible preadaptations. (not clear why this
-	is a condition\ldots{}seems to be saying that evolution is
-	algorithmic but results are not - are emergent) Richness part of
-	real chemistry, not from representations of chemistry which are
-	limited - necessary requirement for OEE in material systems. (But
-	real chemistry is also limited...just not as much)
-	
+\item
+Very rich combinatorial generative mechanism e.g., organic chemistry.
+\item
+Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population (Maynard-Smith:1995lw).
+\item
+Inexhaustible fitness landscape - implies rich, dynamical environment.
+\item
+Cannot state in advance possible preadaptations.
 \end{itemize}
 
-\quote{
-	by open-ended evolutionary capacity we understand the potential of a
-	system to reproduce its basic functional-constitutive dynamics, bringing
-	about an un-limited variety of equivalent systems, of ways of expressing
-	that dynamics, which are not subject to any predetermined upper bound of
-	organizational complexity (even if they are, indeed, to the
-	energetic-material restrictions imposed by a finite environment and by
-	the universal physico-chemical laws.}
-{\autocite{Ruiz-Mirazo2004}}
+Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon.
 
-\begin{itemize}
-	\item
-	Open-ended from \autocite{MaynardSmith1999} definition--\TODO{ size of search space vs population}
-	\item
-	Heritability a challenge--biological organisms employ digital
-	heredity; sophisticated mechanism with controlled error rates, but
-	exceedingly unlikely to arise spontaneously
-	\item
-	Multiplication/heredity for maintenance of population
-	\item
-	Analog methods possible--\eg:
-	
-	\begin{itemize}
-		\item
-		compositional (where new entity contains some elements of original)
-		(as seen in ACS ``core'' inheritance e.g., \autocite{Vasas2015, Watson2012}?)
-		\item
-		\quote{migrant pools}{\autocite{Watson2015}}
-		\item
-		Group fissioning \autocite{Watson2015}
-		\item
-		Attractor based \autocite{Szathmary2000}
-	\end{itemize}
-	\item
-	Heredity seen as method to maintain low entropy over much longer time
-	than possible with non-''biological'' systems \autocite{Adami2015}
-	\item
-	Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-	\item
-	\autocite{Kauffman:1993kk} argued that self-organization (RAPN) can replace the genome
-\end{itemize}
+Top-down models assume a knowledge of the necessary elements.
 
-EvoEvo project taking a similar approach, but from a higher level biological starting point (genotype-phenotype mappings)
-http://evoevo.liris.cnrs.fr/about-evoevo-project/
+``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and
+likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
 
-\begin{itemize}
-	\item Presupposes microbial evolution, ``at the level of genomes, biological networks and populations.''
-	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
-	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
-\end{itemize}
-
-Previous work coming to consensus on conditions--e.g., rich generative mechanism, unlimited heredity, inexhaustible fitness landscape, emergence \autocite{Vasas2015}, and good genetic representation, ``sufficiently large world for every individual to be evaluated'', and a seed or starting point, (plus four specific conditions \autocite{Soros2014})
-
-General difficulties with earlier work:
-\begin{itemize}
-	\item Somewhat arbitrary choices of elements of description
-	\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
-	\item Lack causality--so hard to use as mechanism
-	\item Leave options and alternatives for implementer
-	\item Sheer number of EA algorithms
-\end{itemize}
-
-
-
-
-\autocite{Taylor2001}:
-
-Distinction between OEE and ``kinds of evolutionary innovation'' -
-e.g., in Ray1977 innovations quite limited - e.g., parasitism emerged
-because of system design and initial seeding conditions.
-
-\begin{itemize}
-	\item
-	
-	`fundamentally new' (labelled `creative') means new ways of sensing
-	environment and interacting with it
-	
-	\item
-	
-	``From the point of view of the evolvability of individuals, the
-	more embedded they are, and the less restricted the interactions
-	are, then the more potential there is for the very structure of the
-	individual to be modified. Recall that this is one aspect of my
-	definition of creative evolution. Sections of the individual which
-	are not embedded in the arena of competition are `hard-wired' and
-	likely to remain unchanged unless specific mechanisms are included
-	to allow them to change (and the very fact that specific mechanisms
-	are required suggests that they would still only be able to change
-	in certain restricted ways).``
-	
-	\item
-	
-	Similar to Pattee's semantic closure - ``organisms should be
-	constructed `with the parts and laws of an artificial physical
-	world'''
-	
-\end{itemize}
+Similar to the semantic closure of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
 
 \autocite{Maley1999}
 
-``we would like the evolutionary system, like life, to continue to
-produce individuals of increasing complexity and diversity.'' -
-although note, following McShea, that much of life is single-celled
-and hasn't become much more complex in billions of years.
-
-
-Focus on diversity (to make progress)
-
-
-Some suggestions previously that diversity is bounded (at minimum, by
+Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by
 number of molecules available for biosphere, also by energy and
 minimal populations and probably other things), and plateaus
-(punctuated equilibrium). Indicates two time constants
+(punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
 
-
-\begin{itemize}
-	\item
-	
-	fast - expansion to use available resources
-	
-	\item
-	
-	slow - innovations to open new adaptive space
-	
-\end{itemize}
-
-
-Urmodel1 - neutral landscape, mutation, early stop before all niches
-filled (to prevent edge effects)
-
-\begin{itemize}
-	\item
-	
-	32-bit genotype - mutation flips one-bit
-	
-	\item
-	
-	Get unbounded diversity, but no selection or heritable effect on
-	fitness
-	
-\end{itemize}
+Maley builds up the requirements by beginning with almost the simplest model possible (called Urmodel 1) where the only changes in the population from generation to generation are 1-bit flips in a 32-bit genotype. This results in a neutral fitness landscape (as no selection) and to prevent edge effects each run was stopped before all niches were filled. The, unsurprising, result was unbounded diversity, but no selection or heritable effect on fitness.
 
 Posits that need selection : ``Requirement 2 An open-ended
 evolutionary system must embody selection'' - because ``fails to meet
@@ -1028,16 +327,13 @@ a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing
 (`positive') new adaptive activity'' {[}ignore neutral theory, and
 accepts Bedau - perhaps to allow use of Anew as measure?{]}
 
-
 Urmodel2 - natural selection: mutation, ``dissimilarity'' for
 competitive advantage (justified by biological example of niche
 overlap theory (Levins, 1968)) - no increase in Anew
 
-
 Urmodel3 - selective sweep (hypothesis): parasites (mutations) and
 hosts (fixed genotypes). Fitness on degree of match between parasite
 and host bit patterns.
-
 
 \begin{itemize}
 	\item
@@ -1058,7 +354,6 @@ and host bit patterns.
 	
 \end{itemize}
 
-
 Urmodel4 - ``the most important aspect of an organism's environment
 are the other organisms with which it interacts'' - add coevolution to
 Urmodel3 by letting hosts mutate
@@ -1066,24 +361,36 @@ Urmodel3 by letting hosts mutate
 Two ``distasteful aspects of Urmodel3'' leading to belief that metrics
 aren't right
 
-
 \begin{itemize}
-	\item
-	
-	niches are imposed from outside, not endogenous - this becomes
-	Requirement 4
-	
-	\item
-	
-	no surprise - claim is because not complex - ``A puddle of inert,
+	\item niches are imposed from outside, not endogenous - this becomes Requirement 4
+	\item no surprise - claim is because not complex - ``A puddle of inert,
 	multicoloured and diverse algae would not be nearly so inspirational
-	as the rain forest.'' Again, a biological metaphor.
-	
+	as the rain forest.'' Again, a biological metaphor.	
 \end{itemize}
 
+\subsection{The onset of evolution in artificial systems}
 
+EvoEvo project from a higher level biological starting point (genotype-phenotype mappings), presupposing a larger set of required elements
+http://evoevo.liris.cnrs.fr/about-evoevo-project/
+
+\begin{itemize}
+	\item Presupposes microbial evolution, ``at the level of genomes, biological networks and populations.''
+	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
+	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
+\end{itemize}
 
 \subsection{Discussion}
+
+Previous work is coming to a loose consensus on the conditions for open-ended evolution, without any existing system meeting these conditions demonstrating the sought-for outcome.
+
+In general the difficulties with earlier work include:
+\begin{itemize}
+	\item Somewhat arbitrary choices of elements of description
+	\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
+	\item Lack causality--so hard to use as mechanism
+	\item Leave options and alternatives for implementer
+	\item Sheer number of EA algorithms
+\end{itemize}
 
 \section{Research Questions}
 
@@ -1093,19 +400,13 @@ The field of artificial life is synonymous with simulation \autocite[chap.2]{Aic
 
 Emergence and dynamic behaviours are important, and yet they are hard to capture with mathematical models relying on reduction. In studies of microbial populations which form ``complex systems only poorly explained by reduction'' \autocite{Ferrer:2008hv}
 
-Types of investigation
-
 \subsection{Thought experiments}\label{thought-experiments}
 
 non-empirical, clarification, contradictions/dissonance, fast, cheap.
 
 \subsection{Models}\label{models}
 
-\quote{
-	It is seldom the case in biology that a model is derived deductively
-	from a more fundamental quantitative theory, with the possible exception
-	of population genetics which has its foundations in evolutionary
-	theory.}{\autocite{Krakauer2011}}
+\quote{It is seldom the case in biology that a model is derived deductively from a more fundamental quantitative theory, with the possible exception of population genetics which has its foundations in evolutionary theory.}{\autocite{Krakauer2011}}
 
 Models can be ``useful stop-gaps'' towards a theory, by providing a testable body of data for experiments and predictions \autocite{Krakauer2011}, and may be constructed either bottom-up (such as in ABM) or top-down, by the application of constraints \autocite{Krakauer2011}. Many types in \eg ecology--eleven according to \autocite{Jorgensen2008}--of which fall into two main groups
 
@@ -1208,12 +509,7 @@ experiments on it as would any other system
 \autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
 Avida,
 
-\quote{
-	These organisms, because they are defined by the sequence of
-	instructions that constitute their genome, are not simulated. They are
-	physically present in the computer's memory and live there. The world to
-	which these creatures adapt, on the other hand, is
-	simulated\ldots}{\autocite{Adami2002}}
+\quote{These organisms, because they are defined by the sequence of instructions that constitute their genome, are not simulated. They are physically present in the computer's memory and live there. The world to which these creatures adapt, on the other hand, is	simulated\ldots}{\autocite{Adami2002}}
 
 They certainly have elements of uncertainty and error, like experiments.
 

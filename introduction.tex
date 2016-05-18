@@ -129,11 +129,11 @@ Ongoing evolution means something more than continual change of population frequ
 
 This is clearly a broad and ambitious goal, one more suited to a research programme than a single thesis, and a goal that is additionally the subject of a complex body of related and previous work. We shall return to a more specific and pragmatic problem description in the later section, \ref{research-questions}, after presenting a summary of the most relevant literature.
 	
-\section{Previous work}
+\section{Background and context}
 
-There has been a longstanding interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
+There has long been interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
 
-Previous work falls into three main areas:
+Related work falls into three main areas:
 
 \begin{itemize}
 \item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems.
@@ -203,24 +203,24 @@ The first obstacle to a more general scope is the existence of innovations such 
 
 \subsection{Evolution in artificial systems}
 
-\Glspl{ea} were originally inspired by an abstraction of biological \gls{ens}, but have since radiated into a variety of specialized forms. The fundamental differences between the biological original and the current \gls{ea} include:
+The field of \glspl{ea} originated in the exploration of abstract biological evolution, but soon diverted into problem-solving and optimization \cite{DeJong2006}. The fundamental differences between the biological original and the modern canonical \gls{ea} include:
 
 \begin{itemize}
 \item \Glspl{ea} search through a fixed space, and hence cannot surprise by 'kind', only by 'degree' (\eg \autocite{Nellis2014})
-\item Fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment.``The difference is that we require a system with the potential for a large degree of intrinsic adaptation for open-ended evolution, rather than a system where the selection of individuals is determined by an externally-defined fitness function'' \autocite{Taylor2001}
-\item \Glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation.
-\item Individuals in a \gls{ea} do not interact other than indirectly through the pre-designed selection mechanism.
 \item The evolutionary process in an \gls{ea} is not itself subject to evolution; it is designed, and a large body of literature exists to guide the implementor in the choice of algorithms to employ.
+\item Fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment. ``The difference is that we require a system with the potential for a large degree of intrinsic adaptation for open-ended evolution, rather than a system where the selection of individuals is determined by an externally-defined fitness function'' \autocite{Taylor2001}
+\item \Glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation.
+\item Individuals in a \gls{ea} do not interact other than indirectly through a pre-designed selection mechanism.
 \end{itemize}
 
-A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \autocite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
-
-Recent research in biology continues to be applied in \gls{ea}:
+The first two of these differences are significant; \glspl{ea} are not capable of open-ended, or evolutionary, evolution. However, recent research in biology continues to be applied to improve the performance of \glspl{ea} in their core function of optimization:
 \begin{itemize}
 	\item Redundancy and degeneracy-- \eg \autocite{Whitacre:2010qy}
 	\item Novelty--\eg novelty search \autocite{Lehman:2008cr}
 	\item EvoEvo, or the evolution of evolution--\eg the remainder of this work.
 \end{itemize}
+
+A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \autocite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\autocite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\autocite{Paixao2015}}
 
 \subsection{Evolution-of-evolution in artificial systems}
 
@@ -363,7 +363,7 @@ aren't right
 	as the rain forest.'' Again, a biological metaphor.	
 \end{itemize}
 
-\subsection{The onset of evolution in artificial systems}
+\section{Previous work}
 
 EvoEvo project from a higher level biological starting point (genotype-phenotype mappings), presupposing a larger set of required elements
 http://evoevo.liris.cnrs.fr/about-evoevo-project/
@@ -373,8 +373,6 @@ http://evoevo.liris.cnrs.fr/about-evoevo-project/
 	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
 	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
 \end{itemize}
-
-\subsection{Discussion}
 
 Previous work is coming to a loose consensus on the conditions for open-ended evolution, without any existing system meeting these conditions demonstrating the sought-for outcome.
 
@@ -387,8 +385,6 @@ In general the difficulties with earlier work include:
 	\item Sheer number of EA algorithms
 \end{itemize}
 
-\todo{Link from previous work to research questions}
-
 \section{Research Questions}
 
 Given the overall goal, to \emph{determine the conditions under which ongoing evolution might occur in a software system}:
@@ -396,197 +392,64 @@ Given the overall goal, to \emph{determine the conditions under which ongoing ev
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
 	\begin{enumerate}[label=RQ\arabic*:]
-		\item What emergent model of evolution, without dependency on biology, applies to a software system?
-		\item Can this model be practically implement in software?
+		\item What emergent model of a self-referential evolutionary process, without dependency on biology, can be initiated in a software system?
+		\item Can this model be practically implemented in software?
 	\end{enumerate}
 \end{minipage}
 \vspace{0.3cm}
 
 \section{Methods}
 
-The field of artificial life is synonymous with simulation \autocite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of tools, including experiments, mathematical models, thought experiments, and simulations. Each method is well suited to some types of questions, and inappropriate for others. Is the use of simulation justified for our proposed investigation?
+The field of artificial life is synonymous with simulation \autocite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments, mathematical models, and thought experiments. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 
-Emergence and dynamic behaviours are important, and yet they are hard to capture with mathematical models relying on reduction. In studies of microbial populations which form ``complex systems only poorly explained by reduction'' \autocite{Ferrer:2008hv}
-
-\subsection{Thought experiments}\label{thought-experiments}
-
-non-empirical, clarification, contradictions/dissonance, fast, cheap.
-
-\subsection{Models}\label{models}
-
-\quote{It is seldom the case in biology that a model is derived deductively from a more fundamental quantitative theory, with the possible exception of population genetics which has its foundations in evolutionary theory.}{\autocite{Krakauer2011}}
-
-Models can be ``useful stop-gaps'' towards a theory, by providing a testable body of data for experiments and predictions \autocite{Krakauer2011}, and may be constructed either bottom-up (such as in ABM) or top-down, by the application of constraints \autocite{Krakauer2011}. Many types in \eg ecology--eleven according to \autocite{Jorgensen2008}--of which fall into two main groups
-
-Mathematical models: complexity, need for abstraction/assumptions
-(\eg Fisher's famous equation describing the changes in allele
-distribution under selection assumes independent genes--extending this
-to realistic cases remains an open problem \autocite{Schuster2011}),
-difficulty in handling dynamism/emergence. Cheap, fast. Non-empirical.
-
-Simulations: bottom-up approaches, holistic, variability so diversity
-closer to real systems, adaptive behaviour/changing
-\autocite{Ferrer:2008hv}. Non-empirical data.
+\subsection{Thought experiments}
+Although thought-experiments are fast and cheap, they appear ill-suited to the study of emergent phenomenon, and hence are not discussed further.
 
 \subsection{Experiments}\label{experiments}
 
-reductionism, conflation (difficulty in removing other factors e.g.,
-Heinemann), expense, time (generations). Source of empirical data.
+In the biological sciences, experiments are clearly a source of empirical data (that is, derived from the subject of investigation.) This is not so clear in artificial systems as our subject is instead a program; a model or simulation. Whether this remains a source of empirical data rather depends on your interpretation of the epistimological meaning of a simulation or model, as discussed in the next subsection.
 
-\quote{
-	Although this may seem a paradox, all exact science is dominated by the
-	idea of approximation.}{The Scientific Outlook, Bertrand Russell}
+\subsection{Models, and Simulations}\label{models}
 
-\subsection{Benefits}\label{benefits}
+\quote{It is seldom the case in biology that a model is derived deductively from a more fundamental quantitative theory, with the possible exception of population genetics which has its foundations in evolutionary theory.}{\autocite{Krakauer2011}}
 
-Unique ability to explore subject = unique object of enquiry e.g., study
-of emergence, complex, self-organizing subjects. Biology stands alone in
-the importance of emergence \autocite{Bersini:2006ve}, and the
-interconnection of levels of analysis, \eg behaviour can influence gene
-expression, and genes can affect behaviour \autocite{Krakauer2011}. As
-summarized by \autocite{Krakauer2011}, when asking how much of biology
-can be predicted bottom-up from the application of basic physical and
-chemical laws--``This question is simple to answer: effectively zero.''
+Models can be ``useful stop-gaps'' towards a theory, by providing a testable body of data for experiments and predictions \autocite{Krakauer2011}, and may be constructed either bottom-up or top-down, increasing in specificity by the successive application of constraints \autocite{Krakauer2011}, and fall into two main groups, although there are many types and forms (for example, eleven types in ecology according to \autocite{Jorgensen2008}):
 
-Unique method of enquiry, that is, properties that improve on existing
-techniques, e.g., by relaxing assumptions
+Mathematical models, based on reduction, abstraction and simplifying assumptions (\eg Fisher's famous equation describing the changes in allele distribution under selection assumes independent genes--although extending this to realistic cases remains an open problem \autocite{Schuster2011}). Emergence and dynamic behaviours are important, and yet they are hard to capture with mathematical models relying on reduction \autocite{Ferrer:2008hv}
+
+Simulations by contrast are holistic and bottom-up, and encompass variability so that the diversity of the results is closer to that seen in real systems \autocite{Ferrer:2008hv}. They have a unique ability to explore systems encompassing emergence and self-organization. Biology, and by plausible extension, biologically-based systems, stand alone in the pervasiveness of emergence \autocite{Bersini:2006ve}, and the
+interconnection of levels of analysis, \eg behaviour can influence gene expression, and genes can affect behaviour \autocite{Krakauer2011}.
 
 \subsection{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
 
-Simulations seem to fall somewhere in between thought experiments or
-abstract models, and experiments. They are also relatively novel; common
-use has only come with increased access to digital computers.
-Consequently the nature of simulation--what can be claimed as a result
-of simulation, and what role may be played legitimately by simulation in
-scientific discovery--is a hot topic for philosophers of science. As
-might not be unexpected, there are two opposing positions taken, plus a
-synthesis that claims the middle ground.
+Simulations seem to fall somewhere in between thought experiments or abstract models, and experiments. They are also relatively novel; common use has only come with increased access to digital computers. Consequently the nature of simulation--what can be claimed as a result of simulation, and what role may be played legitimately by simulation in scientific discovery--is a hot topic for philosophers of science. As might not be unexpected, two opposing positions have been commonly taken, plus a synthesis that claims the middle ground.
 
 \newthought{Simulations are just calculators}\label{simulations-are-just-calculators}
 
-a computational means to solve analytically intractable equations
-\autocite[31]{Winsberg2010}, producing nothing new (just consequences
+a computational means to solve analytically intractable equations \autocite[31]{Winsberg2010}, producing nothing new (just consequences
 of what is ``fed in''\autocite{DiPaolo2000}), nothing empirical.
 
-\quote{A simulation is ultimately
-	only a high-speed generator of the consequences that some theory assigns
-	various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett 1979 p192}
+\quote{A simulation is ultimately only a high-speed generator of the consequences that some theory assigns various antecedent conditions.}{\autocite{Eldridge}, quoting from Dennett}
 
-If a model, then might take many forms--analogy, model, pure exploration \autocite{Webb2009}.
+In this view simulations are aimed at answering specific questions, or analysing particular scenarios. The more accurate the simulation however, and hence the more valuable the results, the harder it is to generalize to other cases. It is hard to understand the behaviour of complicated simulations, and the causes of particular behaviours of interest may be unclear if there are many variables in play. For this reason \autocite{MaynardSmith1974} prefers the use of simple models, designed to illuminate the ``causes of differences of behaviour between different species or systems'' rather than ``assertions which are true of all systems or of all species.''
 
-Models are \quote{a purposeful representation. A model needs to have a
-	purpose because otherwise there would be no way to decide what to
-	include in it. A model's purpose is a filter: the model should not
-	include anything not believed essential for explaining the phenomenon
-	of interest}{\autocite{Grimm:2009th}}
-
-\autocite{MaynardSmith1974} distinguishes between
-``practical'' descriptions of ecological systems, or ``simulations'', and
-theoretical ones: ``models''.
-
-Simulations are aimed at answering specific questions, or analysing
-particular scenarios. The more accurate the simulation however, and
-hence the more valuable the results, the harder it is to generalize to
-other cases. It is hard to understand the behaviour of complicated
-simulations, and the causes of particular behaviours of interest may be
-unclear if there are many variables in play.
-
-Instead, \autocite{MaynardSmith1974} prefers the use of simple models, designed
-to illuminate the ``causes of differences of behaviour between different
-species or systems'' rather than ``assertions which are true of all
-systems or of all species.''
-
-Hughes 1999 would argue that simulations have genuinely ``mimetic''
-character, particularly ones that present results graphically as
-real-world systems do, that goes beyond plain number-crunching. They use
-a variety of methods beyond calculation (such as graphics) to draw
-inferences from data. They also incorporate approximations and creative
-choices to make the problem tractable, which introduces need for
-justification. Simulations need interpretation and justification--they
-are not self-contained, their own justifications
+Hughes 1999 would argue that simulations have genuinely ``mimetic'' character, particularly ones that present results graphically as
+real-world systems do, that goes beyond plain number-crunching. They use a variety of methods beyond calculation (such as graphics) to draw
+inferences from data. They also incorporate approximations and creative choices to make the problem tractable, which introduces need for
+justification. Simulations need interpretation and justification--they are not self-contained, their own justifications
 \autocite[31]{Winsberg2010}
 
-\newthought{Simulations are themselves an instance of the
-	thing}\label{simulations-are-themselves-an-instance-of-the-thing}
+\newthought{Simulations are themselves an instance of the thing}\label{simulations-are-themselves-an-instance-of-the-thing}
 
-That is, the thing is not a shadow but the object. The Animats are
-actually alive, and therefore instances of biology.
+That is, the thing is not a shadow but the object. The Animats are actually alive, and therefore instances of biology.
 \footnote{And this way leads us to the claims of Strong Alife--the simulation is actually alive.}
-The simulation is a stand-in for the real world, and you can perform
-experiments on it as would any other system
-\autocite[31]{Winsberg2010}. As \autocite{Adami2002} says, describing
-Avida,
-
-\quote{These organisms, because they are defined by the sequence of instructions that constitute their genome, are not simulated. They are physically present in the computer's memory and live there. The world to which these creatures adapt, on the other hand, is	simulated\ldots}{\autocite{Adami2002}}
-
-They certainly have elements of uncertainty and error, like experiments.
-
-TODO Paul Humphreys 1994 says Monte Carlo simulations are experiments; Von
-Neumann ``replace a computation from an unquestioned theory by direct
-measurement'' (quoted in TODO [28]{Winkler et al 1987}).
-
-Norton and Suppe 2001 argue that they are experiments, when proper conditions met:
-``Empirical
-data about real phenomena are produced under conditions of experimental
-control'', although ``lacking other data, we can never evaluate the
-information that these experiments provide'' Hughes 1999 p.142 so no inherent epistemological force to his
-argument. Validity solely depends on validation.
+The simulation is a stand-in for the real world, and you can perform experiments on it as would any other system \autocite[31]{Winsberg2010}. Simulations certainly have elements of uncertainty and error, like experiments. As \autocite{Adami2002} says, describing Avida, \quote{These organisms, because they are defined by the sequence of instructions that constitute their genome, are not simulated. They are physically present in the computer's memory and live there. The world to which these creatures adapt, on the other hand, is simulated\ldots}{\autocite{Adami2002}}
 
 \newthought{A third-way, neither experimental or theoretical}\label{a-third-way-neither-experimental-or-theoretical}
 
-\autocite[31]{Winsberg2010} or an Opaque Thought Experiment"
-\autocite{DiPaolo2000}. A common view, among others Dowling 1999, 264:
-simulation is like theory as about ``manipulating equations'' and
-``developing ideas'' but like experiments as ``fiddling with machines'',
-``trying ideas out'', ``watching to see what happens.'' Simulation is a
-form of Kuhn's theory articulation or ``model building''--making
-principles apply to local, concrete systems in the real world. In this
-view, \quote{Simulation is a process of knowledge creation}{\autocite[6]{Winsberg2010}}
+\autocite[31]{Winsberg2010} or an ``Opaque Thought Experiment" \autocite{DiPaolo2000}. A common view, among others Dowling 1999, 264: simulation is like theory as about ``manipulating equations'' and ``developing ideas'' but like experiments as ``fiddling with machines'', ``trying ideas out'', ``watching to see what happens.'' 
 
-\subsection{The legitimate role of simulation in scientific
-	enquiry}\label{the-legitimate-role-of-simulation-in-scientific-enquiry}
-
-Following this third way, simulations might be seen as a source of new
-hypotheses \autocite{Eldridge}. The fundamental question remains
-however: what is the exact relationship between world and simulation? If
-the simulation exhibits an analogous behaviour, under a set of
-assumptions, to the real world, then we can contend that there exist
-similar mechanisms in the real world to the assumptions in our model.
-TODO Noble 1997, quoted in \autocite{Eldridge}). The example given by
-\autocite{Eldridge} is Boids \autocite{Reynolds1987} where flocking behaviour in
-birds is very similar to that that results from a set of three simple
-rules in a simulation.
-
-However, \autocite{Eldridge} identifies three problems with this
-approach: first, logically, similarity does not require congruence
-\autocite{Weitzenfeld1984}, second, how is the degree of similarity to
-be assessed, and third, the impossibility of proving that a simulation
-is an accurate model of a theory. That is, where does attribution lie?
-Is the result a result of the underlying theory or a quirk of the
-implementation? There may be no way of resolving this absolutely as it
-may not even be possible to distinguish between the two
-\autocite{DiPaolo2000}--we cannot prove correctness through testing.
-
-TODO On the other hand, Taylor (1989) in \autocite{Webb2009}, argues for
-``pure exploration'' or ``exploratory tools'' that do not need
-justification, and that may be used to generate ``new questions to ask,
-new terms to employ, or different models to construct'' (Taylor 1989,
-p122). But in this case you might reasonably argue that any insights are
-``insights about a mathematical system'' not necessarily insights into
-the real-world (123–124 Taylor 1989).
-
-In practice then, any form of model claiming a significance beyond its
-own self must show a correspondence with the thing it claims to be
-modelling.
-
-\quote{However, existence proofs clearly do require comparisons
-	between model results and empirical data. One cannot evaluate the claim
-	that phenomenon X requires condition Y unless one can show that
-	phenomenon X is actually produced (with or without Y). And the claim or
-	proof will be stronger or weaker depending on how well the simulated X
-	matches the real X; for example, demonstrating successful behaviour in
-	the same physical situation as the animal.}{\autocite[278]{Webb2009}}
-The strength of our belief depends on the degree of similarity.
+In this view, simulation is a form of Kuhn's theory articulation or ``model building''--making principles apply to local, concrete systems in the real world: \quote{Simulation is a process of knowledge creation.}{\autocite[6]{Winsberg2010}} Following this third way, simulations might be seen as a source of new hypotheses \autocite{Eldridge}. Similarly, Taylor as summarized in \autocite{Webb2009}, argues for ``pure exploration'' or ``exploratory tools'' that do not need justification, and that may be used to generate ``new questions to ask, new terms to employ, or different models to construct''.
 
 \section{Guide to this work}
 

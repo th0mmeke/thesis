@@ -1002,7 +1002,7 @@ Simulation is a natural fit for the exploration of emergent systems where we exp
 
 If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
 
-Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{the-legitimate-role-of-simulation-in-scientific-enquiry}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
@@ -1141,7 +1141,7 @@ In this case, entities start with a higher initial fidelity and a greater range 
 
 \chapter{Initial screening}
 
-Translating model parameters into factors in the experiment design results in the factors in the first column of \ref{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
+Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
 There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
 
@@ -1165,9 +1165,9 @@ The number of \glspl{replicate} required for a particular statistical power is r
 
 Although several parameters in the model are continuous, at this stage the main ones can be reduced to a set of A/B alternatives, or two-level factors.
 
-Of the others, $p_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter; the value $0$ for the corresponding model parameter in each case means ``use parent's value'', and so is a special case. And as discussed in \ref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling.
+Of the others, $p_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter; the value $0$ for the corresponding model parameter in each case means ``use parent's value'', and so is a special case. And as discussed in \cref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling.
 
-The factors and levels used are given in \ref{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}.
+The factors and levels used are given in \cref{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}.
 
 \begin{table}
 	\begin{center}
@@ -1180,7 +1180,7 @@ The factors and levels used are given in \ref{tbl:factor-levels-for-investigatio
 			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                                                                                                            \\
 			$n_{children}$         & 2                & 2 or 5                                                                                                                                              \\
 			Population Restriction & 1                & Fitness-independent sampling                                                                                                                        \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \footnote{But see discussion in \ref{screening-distribution} as to the implementation} \\
+			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \footnote{But see discussion in \cref{screening-distribution} as to the implementation} \\
 			Correlate Fidelity     & 2                & false or true                                                                                                                                       \\
 			\bottomrule
 		\end{tabular}
@@ -1254,7 +1254,7 @@ Under these initial conditions, no experiment without an upper population bound 
 
 \subsection[Choice of limit mechanism]{Is the choice of limit mechanism significant?}
 
-Given then that an upper bound is needed for practicality, this section describes two possible approaches to the implementation of the \emph{Restriction} function in \ref{upper-bound-model-algorithm} and attempts to understand the form of the bias each introduces into the experimental results.
+Given then that an upper bound is needed for practicality, this section describes two possible approaches to the implementation of the \emph{Restriction} function in \cref{upper-bound-model-algorithm} and attempts to understand the form of the bias each introduces into the experimental results.
 
 \begin{algorithm}
 	\For{each generation $\in [1\dots$number of generations]}{
@@ -1420,7 +1420,7 @@ df <- subset(load.results.simple('results/results-53f6b74.data'), environment_ch
 	\end{center}
 \end{table}
 
-We now turn to the other bound, and the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \ref{upper-size-bound} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:popoverall}), and of those that did, not all completed with a sustainable population size.
+We now turn to the other bound, and the impact of population extinctions. Runs in which the population dies out are incompatible with ongoing evolution, and so should be separated from other, sustainable, runs in the analysis. This situation does arise in our simulation: not all runs in the experiment described in \cref{upper-size-bound} completed the target of \Sexpr{max(df['gen'])} generations (\cref{fig:popoverall}), and of those that did, not all completed with a sustainable population size.
 
 <<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left, discussed in the text.'>>=
 ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
@@ -1428,7 +1428,7 @@ ggplot(df) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Po
 
 Of the \Sexpr{nrow(subset(df,gen==0))} experiment runs, \Sexpr{nrow(subset(df,gen==0))-nrow(subset(df, gen==500))} fail to reach completion, and \Sexpr{english(nrow(subset(df, gen==500 & pop < 4000)))} complete with a population size substantially smaller ($\leq$ \Sexpr{max(subset(df, gen==500 & pop < 4000)['pop'])}) than the population size in the other completed runs. In fact, all other runs reach completion with a population size at the upper bound limit of \Sexpr{min(subset(df, gen==500 & pop >=4000)['pop'])}.
 
-From the clustering evident in \ref{fig:popoverall} we assert that the experiment runs can be separated into two disjoint sets - those that reach completion with a population size at or very near the upper-size limit, and those whose population is tending towards zero. Our interest lies only in sustainable populations and therefore from here on we exclude all runs where the population does not reach completion at or near the upper-size limit, without loss of generality.
+From the clustering evident in \cref{fig:popoverall} we assert that the experiment runs can be separated into two disjoint sets - those that reach completion with a population size at or very near the upper-size limit, and those whose population is tending towards zero. Our interest lies only in sustainable populations and therefore from here on we exclude all runs where the population does not reach completion at or near the upper-size limit, without loss of generality.
 
 %Inspecting the results by factor:
 %\begin{enumerate}

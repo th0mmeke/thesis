@@ -128,7 +128,7 @@ pre-existing elements, rather than being constructed `\emph{de novo}', and that 
 
 Natural evolution is the best example we have today of a transformative, adaptive improvement process. Many fields would benefit from a robust general optimisation heuristic for use when exact methods are not possible, and the example of natural evolution is our current gold-standard. 
 	
-\section{Background and context}
+\section{Background and context}\label{background-and-context}
 
 There has long been interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
 
@@ -140,7 +140,7 @@ Related work falls into three main areas:
 \item Work related to implementations of open-ended evolutionary systems in software.
 \end{itemize}
 	
-This section expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in the Previous Work sections of the subsequent Parts of the thesis. 
+This \namecref{background-and-context} expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in the Previous Work sections of the subsequent Parts of the thesis. 
 
 The relevant open problems are summarized in the conclusion to this section.
 
@@ -378,8 +378,44 @@ Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial org
 
 Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \autocite{Sanchez-Dehesa:2008uq}) and so lack this loop.
 
+Previous work is evaluated against three criteria: non-biological domain and purpose, emergence, and a self-referential or evolvable evolutionary mechanism.
 
-Emergent, non-biological domain and purpose, evolution-of-evolution (mechanism evolvable)
+\begin{table}
+	\scriptsize
+	\caption{Previous work}
+	\label{tab1}
+	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
+		\hline\noalign{\smallskip}
+		\Gls{achem}                                                        	& Type \autocite{Dittrich:2001zr}	& Domain	& Emergence		& EvoEvo\\ 
+		\\ \noalign{\smallskip}
+		\hline
+		\noalign{\smallskip}
+		\cite{Ducharme2012}                                                	&Atoms/Molecules&&&\\
+		StringMol \parencite{Hickinbotham2012}                             	&Rewriting or String-based&&&\\
+		Squirm3 \parencite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&&&\\
+		RBN-World \parencite{Faulconbridge2011}                            	&Boolean Networks and Graphs&&&\\
+		\cite{Lenaerts2009}                                                	&&&&\\
+		ZChem \parencite{Tominaga2009}                                     	&&&&\\
+		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} 	&&&&\\
+		\cite{Fernando:2008xy,Fernando:2007pf}                             	&&&&\\
+		\cite{Gardiner2007}                                                	&&&&\\
+		NAC \parencite{Suzuki2006}                                         	&&&&\\						
+		GGL/ToyChem \parencite{Benko2003,Benko2005}                        	&Atoms/Molecules&&&\\
+		Lattice Artificial Chemistry \parencite{Ono2000,Madina2003}        	&&&&\\
+		\autocite{Ofria2004}                                  				&Assembler Automata&&&\\
+		\autocite{Ray1991}                                  				&Assembler Automata&&&\\
+		\autocite{Lenski2003}												&Assembler Automata&&&\\
+		\autocite{Taylor2001}												&&&&\\
+		\autocite{Antonakopoulos:2011th}									&Rewriting or String-based&&&\\
+		\autocite{Dittrich1998}												&Rewriting or String-based&&&\\
+		\autocite{Fenizio2000}\autocite{Fenizio2001}						&Rewriting or String-based&&&\\
+		\autocite{Nellis2012}\autocite{Nellis2014}							&Boolean Networks and Graphs&&&\\
+		\autocite{Segre1998}												&Compositional&&&\\
+		\autocite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&&\\
+		\autocite{Kauffman1986}												&Compositional&&&\\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Assembler Automata}
 
@@ -398,7 +434,6 @@ core world created. But system ``collapsed into a non-living state'' {[}non-livi
 
 Tierra next year (relationship not stated) organisms had to allocate memory first before using. Initial selective pressure only from rate of replication. Sequential execution of organism code
 
-
 Avida summer of 1993 - better metering and measuring, and parallel code execution
 
 ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by
@@ -410,18 +445,17 @@ benefit for performing specific computations associated with resources''
 All very configurable, and complicated, but why? What rationale behind choices? More of a testbed for experiments, e.g., `` in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift''
 ``The quest to halt adaptation is only one example of a special feature in Avida; many more have been explored, and are continuously being added to the source code. The most successful features are all fully described in the documentation that comes with the software.''
 
+\autocite{Taylor2001}:
+Derived from Thesis (Taylor:1999sc)
+Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype - the latter being an informational concept)'' \autocite{Taylor2001}
+Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \autocite{Taylor2001}
+Assume that early stages see A+B implicitly encoded in the environment {[}essentially because simpler than explicit mechanism, but little justification{]} ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \autocite{Taylor2001}
 
 \autocite{Lenski2003}
 Modelled in Avida
 ``Our experiments demonstrate the validity of the hypothesis, first articulated by Darwin and supported today by comparative and experimental evidence, that complex features generally evolve by
 modifying existing structures and functions.''
 ``Some simpler functions were accessible from the ancestor by relatively few mutations, and these served as a foundation on which more complex features were built. The foundational role of simpler functions in the origin of more complex ones was evident in the overlap of the genetic networks underlying their expression, and the frequent loss of simpler functions as side-effects of mutations yielding more complex function''
-
-\autocite{Taylor2001}:
-Derived from Thesis (Taylor:1999sc)
-Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype - the latter being an informational concept)'' \autocite{Taylor2001}
-Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \autocite{Taylor2001}
-Assume that early stages see A+B implicitly encoded in the environment {[}essentially because simpler than explicit mechanism, but little justification{]} ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \autocite{Taylor2001}
 
 \subsection{Rewriting or String-based}
 
@@ -698,7 +732,7 @@ In general the difficulties with earlier work include:
 	\item Sheer number of EA algorithms
 \end{itemize}
 
-\section{Methods}
+\section{Methods}\label{methods}
 
 The field of artificial life is synonymous with simulation \autocite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments, mathematical models, and thought experiments. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 

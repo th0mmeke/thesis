@@ -12,7 +12,7 @@ Our intuition is that the average fidelity of the population will be inversely r
 
 This seems a reasonable supposition. \cite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity)'' \cite{Adami2002}. \cite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
 
-In this chapter we further develop this hypothesis to a testable form; propose it be tested by experiment on a simulation; describe an appropriate experimental design and model for a variety of environmental changes; and finally discuss the results of the experiment. The conceptual model underlying all of these steps is shown in \ref{fig:conceptual-model-for-environmental-change}. 
+In this chapter we further develop this hypothesis to a testable form; propose it be tested by experiment on a simulation; describe an appropriate experimental design and model for a variety of environmental changes; and finally discuss the results of the experiment. The conceptual model underlying all of these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
 
 \begin{figure}
 	\begin{center}
@@ -83,7 +83,7 @@ From the hypothesis we make these predictions:
 
 \section{Experimental design}
 
-As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables, our earlier factorial and fractional-factorial experiment designs are no longer appropriate. Instead we adopt a response surface design where each experiment run has initial values of the independent variables taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \ref{fig:hypercube}.)
+As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables, our earlier factorial and fractional-factorial experiment designs are no longer appropriate. Instead we adopt a response surface design where each experiment run has initial values of the independent variables taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
 
 \begin{figure}
 	\begin{center}
@@ -175,7 +175,7 @@ ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # f
 #summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
 @
 
-The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \ref{tbl:range-of-independent-variables}.
+The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \cref{tbl:range-of-independent-variables}.
 
 \begin{table}
 	\begin{center}
@@ -221,7 +221,7 @@ dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(st
 grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 @
 
-A summary of the results from each of the four datasets is given in \ref{tbl:summary-for-changing-datasets}. The difference in the proportion of  completed runs to total runs reflects the respective ranges of the independent variables (as seen in \ref{tbl:range-of-independent-variables}), as shown graphically in \ref{fig:figure22}.
+A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}. The difference in the proportion of  completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), as shown graphically in \cref{fig:figure22}.
 
 \begin{table}
 	\begin{center}

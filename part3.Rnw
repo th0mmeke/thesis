@@ -240,7 +240,7 @@ to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential
 
 Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of eal-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry (\autocite{Fontana1994}) is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
-A mathematical treatment of \gls{achem} can be found in \autocite{Benko2009}. \autocite{Dittrich:2001zr} and \autocite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \autocite{Dittrich:2001zr}, described in \ref{classification-of-artificial-chemistries}.
+A mathematical treatment of \glspl{achem} can be found in \autocite{Benko2009}. \autocite{Dittrich:2001zr} and \autocite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \autocite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
 
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
@@ -345,11 +345,11 @@ Network Artificial Chemistry (NAC) \autocite{Suzuki2006}
 \end{itemize}
 
 \section{Alife}\label{alife}
-Finally, as previously discussed in \ref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \autocite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \autocite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \autocite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+Finally, as previously discussed in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \autocite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \autocite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \autocite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
-In \autocite{Dittrich:2001zr}, \glspl{achem} are divided into six major types, based on the implementation technology:
+In \cite{Dittrich:2001zr}, \glspl{achem} are divided into six major types, based on the implementation technology:
 
 \begin{enumerate}
 	\item
@@ -466,7 +466,7 @@ Artificial Chemistries have been used in the exploration of open-ended or creati
 A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
 {\autocite{Benko2009}}
 
-A \gls{achem} is \textit{constructive} \autocite{Fontana1994} if new components may be generated through the action of other components--a form of emergence.
+A \gls{achem} is \textit{constructive} \autocite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties. As defined in that text: ``construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.'' \cite{Fontana1994}
 
 \quote{We refer to models in which new agents are constructed in an unspecific (essentially stochastic) fashion as \emph{weakly constructive}. This is to be contrasted with a situation in which the encounter of two agents \emph{implies} a \emph{specific} third one\ldots{}Models of this kind will be termed \emph{strongly constructive}. The prime example of a strongly constructive system is chemistry.}{\autocite{Fontana1994}}
 

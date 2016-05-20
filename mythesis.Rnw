@@ -77,6 +77,7 @@ Finally, in conclusion, we speculate that this overall direction might lead more
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 \include{part3}
 \part{Appendices}
+\renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place
 \appendix{
 \include{appendices}
 }

@@ -950,29 +950,13 @@ extension, for four products, a square and so on.
 \end{algorithm}
 
 
-Following a standard method, we first transfer the molecules from the
-frame of reference of the reaction vessel into the centre of mass (CoM)
-reference frame by subtracting the velocity of the CoM from each
-particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also
-adjust the energy of the collision by subtracting the KE of the CoM. We
-recognize that in the CoM frame the vector sum of the momentums will be
-zero; working in this frame reduces the number of vectors we must sum by
-one (the momentum of the CoM itself.)
+Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognize that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
 
 We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \cref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
 
-Finally, we convert from the CoM reference frame to the initial frame by
-adding back the velocity of the CoM (line \cref{alg:CoM_to_lab_frame}).
+Finally, we convert from the CoM reference frame to the initial frame by adding back the velocity of the CoM (line \cref{alg:CoM_to_lab_frame}).  This method satisfies our requirements of conservation of momentum and energy for arbitrary numbers of reactants and products while being computationally straightforward. The limitation is that product vectors are arranged in regular and consistent, although reasonably realistic, configurations. An improvement would be to perturb the geometry of the vectors in the CoM frame to remove the regularity.
 
-This method satisfies our requirements of conservation of momentum and
-energy for arbitrary numbers of reactants and products while being
-computationally straightforward. The limitation is that product vectors
-are arranged in regular and consistent, although reasonably realistic,
-configurations. An improvement would be to perturb the geometry of the
-vectors in the CoM frame to remove the regularity.
-
-The outcomes for each reaction alternative from an example collision are
-shown in \cref{fig:collision_diagrams}.
+The outcomes for each reaction alternative from an example collision are shown in \cref{fig:collision_diagrams}.
 
 \tdplotsetmaincoords{60}{110}
 

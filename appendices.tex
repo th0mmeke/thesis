@@ -186,3 +186,170 @@ experiment design, for example:
         <Method>evaluators.evaluator_iterations.EvaluatorIterations</Method>
 </Evaluation>
 \end{verbatim}
+
+\chapter{Previous work in GRN modelling}\label{previous-work-in-grn-modelling}
+
+Two broad classes of models have been used for modelling \glspl{grn}. The first, \emph{biological} models, focus on selecting and modelling particular sets of biological \emph{features} (such as promotors, binding sites, artificial chemistries, protein classes and so on) that may be combined to generate a \gls{grn}. The goal is often to attempt to construct a biologically plausible \glspl{grn} in the belief that the properties of real \glspl{grn} are complex phenomenon that emerge from, and are dependent on, the subtleties of the biological elements. The difficulty is one of detail: some important behaviours within biological \gls{grn} derive from phenomenon such as chemical interactions that are in practice un-modellable, and so some simplification is unavoidable. The range of these models then reflects practitioner's beliefs as to which biological elements are critical, and which can usefully be simplified.
+
+The second, \emph{abstract} models, by contrast are constructed to shed light on analogous \emph{behaviours} of biological \glspl{grn}. Abstract models such as Random Boolean Networks and Threshold Boolean Networks have proved useful in developing insights into the properties of real \glspl{grn} without attempting to faithfully reproduce the biology. A criticism of these models however is that each form is developed for a particular purpose, and no single model can reproduce all properties of the biological source. Knowing under which conditions conclusions drawn from a model might be reasonable is a matter in many cases of active research.  A further consideration is that the correspondence with the biology can sometimes be serendipitous rather that based on any theoretical justification, and sometimes post-hoc rather than preplanned.
+
+Reviews can be found in \cite{Sima:2009lv} for the modelling of \glspl{grn} using time-series data, and in \cite{De-Jong:2002jv} for an overview of the main formalisms used to describe \glspl{grn}. Although many forms of \gls{grn} model exist, for the purpose of capturing the dynamics of a \gls{grn}, based on time-series data, the major classes of models are the various forms of \gls{bn}, \gls{dbn} and Differential Equations \cite{Sima:2009lv}.
+
+Boolean networks arose from the question by Kauffman \cite{Kauffman:1969ne} whether stability in ``genetic
+regulatory circuits'' (as \glspl{grn} were then known) has arisen as a quirk of evolutionary history or whether it is an
+inevitable property of certain types of dynamic network. \cite{Kauffman:1969ne} constructed a simplified network of
+binary genes (either expressed or not) with each gene's state determined by a boolean function of the state of other
+selected genes in the network - a \emph{boolean network}. Over time, the consecutive states of such a network form a
+trajectory, and as the number of states in the network is finite, the number of states in the trajectory will be finite
+also \cite{De-Jong:2002jv}. Trajectories in a boolean network will result in attractors within basins of
+attraction, and so can be analysed as dynamical systems \cite{Luque:1997qo,Kauffman:1969ne,Kauffman:1993kk}.
+
+An overall review of the field of artificial embryogeny can be found in \cite{Stanley:2003fh}; artificial chemistries
+are explored in \cite{Dittrich:2001zr}.
+
+Turing's influential 1952 paper \parencite{Turing:1952qr} on the chemical mechanisms of \gls{morphogenesis}
+is often cited by researchers in biology, artificial intelligence, and indeed, other peripherally related areas
+(linguistics, to take one example.) It is, as far as we know, the first mathematical model of biological development.
+Turing presents a comprehensive treatment ranging from the modelling of physical interactions based on Newton's laws of
+motion, through considerations of symmetry, to models of development based on rings of cells or tissues and hollow
+spheres such as those formed by the blastula in the early stages of embryo formation. Two elements of the treatment have
+proved particularly influential: first, the modelling by differential equations of a `reaction-diffusion' developmental
+model with chemicals, dubbed \emph{morphogenes} ``reacting together and diffusing through a tissue''
+\parencite{Turing:1952qr} to control the process of development, and second, the emphasis on what would later be known
+as chaotic behaviour (``instabilities'') as a significant factor in morphology.
+
+\cite{Fleischer:1994kx} introduced a low-level model of a cell based on Turing's diffusion/reaction model
+\parencite{Turing:1952qr} plus additional mechanisms for electrical, mechanical and physical models based on
+differential equations. The cell genotypes were hand-coded rather than evolved however, and the high complexity of the
+model meant that it proved computationally impractical at the time.
+
+In an effort to reduce the computational requirements of the low-level approach, \cite{Dellaert:1995po}
+introduced an abstraction of a biological \gls{grn} where the genotype consists of a set of rules (operons) that defined
+its behaviour in the presence or absence of classes of simulated proteins in a simulated cytoplasm. However, even this
+simplification resulted in a genotype search space too big for effective evolution, and in \cite{Dellaert:1996ys} the
+\gls{grn} was further abstracted by replacing the operon model as an abstraction of the genotype by a random Boolean
+network model. Interestingly, this final model proved able to evolve behaviours that were beyond the capabilities of the
+earlier more biologically defensible model.
+
+\cite{Jakobi:1995py}, taking inspiration directly from biological research (e.g., \cite{Kauffman:1969ne}), constructed a \gls{grn} for the development of \gls{ann} controllers for robots. The \gls{grn} is encoded by a genotype consisting of a number of genes each containing a TATA box-equivalent (as found in biology \cite[pg. 397]{Watson:2008fm}) to identify the beginning of the gene, a threshold region defining an activation threshold, a link template for regulation, a protein class specification and finally the coding region for the protein expressed by the gene. Genes express circular proteins made up strings of amino-acid like units decoded from the gene's coding region by a process similar in outline to \gls{translation}.  A``computationally expensive'' \parencite[sec. 4.2]{Jakobi:1995py} pre-processing stage produces a \gls{grn} from this genotype, which, when embedded in a representation of a single cell embedded in a spatial field and supplied with artificial protein nutrients, shapes the growth of a multi-dendrite organism that
+defines the form and connections of an ANN destined to control a robot.
+
+Regulation in \cite{Jakobi:1995py} occurs through a complicated procedure during pre-processing involving matching
+proteins to link template regions on genes, checking the strength of each match against the gene's activation threshold,
+and then establishing a link in the \gls{grn} between the protein and the gene's expressed protein of a weight that depends on
+a further degree of match with an ``arbitrarily defined but fixed template'' \parencite[sec. 4.2]{Jakobi:1995py}.
+Regulation therefore is always up-regulation in that it establishes new connections and can not remove connections.
+Proteins belong to one of six classes - signals, movers, dendritics, splitters, differentiators, and threshold proteins
+- as specified by the protein class region of each encoding gene, and each class has a specific function within ANN
+development (for details, see \cite[sec. 4.3]{Jakobi:1995py}). One class, the signal proteins, are worth examining
+further. Signal proteins, emitted by cells and by pre-placed extra-cellular sources, are used to control the activity of
+the \gls{grn} by setting the direction of cell growth - cells grow in the direction of maximum gradient of the signal
+proteins.
+
+\cite{Jakobi:1995py} then used an \gls{ea} to evolve working controllers. Few details of this process are
+provided, but \cite{Jakobi:1995py} does conclude that the described combination of an \gls{ea} and a developmental
+\gls{grn} can evolve modular structures, one of the hallmarks of biological \glspl{grn}.
+
+\cite{Reil:1999rp}, in reaction to the ``abstract nature''\parencite[pg. 1]{Reil:1999rp} of the boolean networks of \cite{Kauffman:1969ne} describes a ``biologically more plausible'' \cite[pg. 1]{Reil:1999rp} model of development. Reil's model defines a genotype consisting of fixed-length genes
+marked by a initial TATA-equivalent sequence (the sequence `0101') and a coding region. Genes produce ``gene products''
+(protein-equivalents) that are simple transformations of the sequence in the gene coding region. Genes are preceded by a
+regulatory region made up of a predefined number of sequences of the same length as the gene products. Regulatory
+sequences that end in a pre-defined set of digits act as inhibitors (repressors) for their associated gene; the others
+are enhancers (activators.) Any complete match of a gene product with an inhibitor suppresses production of the product
+of the gene associated with the inhibitor; any activator in the absence of an inhibitor triggers production of the
+product. Interactions however are independent of concentrations. genotype size, gene size, base (range of allowable
+symbols or digits in the genotype) and a factor describing the ratio of enhancing gene products to inhibitory products are
+parameters to the model.
+
+A run begins with only one gene active; over a number of steps the interplay of inhibitors and enhancers leads to
+patterns of gene expression. \cite{Reil:1999rp} shows that these patterns correspond with the behaviour of attractors
+in dynamical systems, and that the choice of attractor depends on external signals (controlled on \emph{switch} genes.)
+
+The model described by \cite{Reil:1999rp} was later extended by \cite{Rohlf:2009sh} to improve the
+biological plausibility of the regulatory implementation. In \cite{Rohlf:2009sh} the action of the \gls{tf} on the gene
+(activation or repression) is calculated by summing the digits in the \gls{tf} sequence; sequences which fall in the the
+lower-half of all possible sums are inhibitors and those in the upper-half, activators. The interaction of competing
+\glspl{tf} on expression is modelled by summing all of these interactions and weighting by the previous expression
+level. Increasing concentrations of activators will now increase the level of expression, with the reverse true of
+inhibitors. However, one acknowledged restriction of this model is in the modelling of \gls{tf} binding - in biology,
+the binding of a \glspl{tf} is more complex than the simple sequence match (see sections \ref{sec:networkinteractions}
+and \ref{sec:proteinbindings}) found in both \cite{Reil:1999rp} and \cite{Rohlf:2009sh}.
+
+\cite{Kuo:2006fv} investigate the effect of gene duplication events and regulatory interactions on network topology using an independently derived yet similar model to \cite{Reil:1999rp} (originally described in \cite{Banzhaf:2003kx}). The genotype is encoded as a bit-string, with genes made up of a single inhibition site, a single enhancer site, a promotor region (a fixed ``01010101'' sequence) \footnote{Genes may overlap - a promotor region for one gene may arise within the coding region of another} and finally the coding region. The regulatory regions (inhibition site and enhancer site) are each 32 bits long; the coding region is made up of a number of 32 bit coding units. The significant non-coding regions are a factor in the ability of the model to support neutral mutations \parencite[sec.5]{Banzhaf:2003kx,Kuo:2006fv}.
+
+Translation is simplified in \cite{Kuo:2006fv}'s model. The product of a gene is a 32-bit protein formed by taking the
+most common value at each bit position in turn from the units within the coding region. A bit-string model of the genotype
+was chosen instead of a network model such as a boolean network for ease in investigating the effects of gene
+duplication \parencite[sec. 3 introduction]{Kuo:2006fv}. The  genotype is produced from an initial randomised 32 bit long
+bit-string by a series of duplications followed by mutations (using a fixed mutation rate), as informed by evidence in
+biology for the role of gene duplications in the creation of new proteins, and in speciation \parencite[sec.
+2.3]{Kuo:2006fv}.
+
+Regulation is based on the strength of the match between a protein and the inhibitor and enhancer sites of a gene. Each
+protein in the model may match either or both regulatory sites in a gene. The number of bits a protein has in common
+with a regulatory site (calculated by XORing protein and site bit-strings) determines the strength of the match, and so
+the strength of the enhancement or inhibitory effect due to that protein. After scaling and normalising, the rate of
+gene expression is given by the summation of all these enhancing and inhibitory interactions \parencite[sec.
+2.2]{Kuo:2006fv}.  Changing the strength of the match (by adjusting a ``threshold'' parameter in the calculation) was
+observed in simulation to modify the topology of the regulatory network.
+
+A more complicated model is described in \cite{Ghanem:2008ct} for the exploration of developmental network
+topologies and the influence of initial conditions on development, with a theoretical grounding in the hypothesis of
+\cite{Kauffman:1993kk} regarding the association of cell fate or types with network attractors. Ghanem's model extends
+previous work by the specification of explicit functional layers within the \gls{grn} - maternal, signalling, control,
+labelling and action layers - that are interconnected by specific predetermined ``weight matrices'' which determine the
+regulatory effect of a protein upon another gene. The regulatory strength of an interaction between protein and gene is
+determined by this weight multiplied by the protein's concentration. The strength of all interactions for the gene are
+combined to give an \emph{activation state} and if over a threshold value the gene is expressed at an \emph{expression
+	level} according to a sigmoid function of the activation state.
+
+The control layer contains several predefined ``functional configurations'' or modules that correspond to the final
+values of Kauffman's attractors, and a ``selector'' layer that implements a dynamic network with fixed-point attractors;
+the selector layer takes input from maternal and signalling layers, causing its state to shift into one or other
+attractor. The final attractor then selects an associated functional configuration that controls further development,
+and thus produces modularity and the spatial and temporal variations in development associated by \cite{Carroll:2005ja}
+with highly-conserved developmental modules.
+
+\cite{Quick:2003uq} use signalling protein concentrations to \emph{continually} connect the developing system with its surrounding environment, according to the ideas of autopoiesis \parencite{Varela:1974qd} and embodiment theory. In their \emph{Biosys} model a bit-string genotype contains 8-bit genes made up of a number of 4-bit ``activatory'' sites (equally divided between inhibiting and activating sites) and a 4-bit ``output template.'' Genes encode 3-bit proteins with the first 3-bits of the output template directly specifying the protein, and the last bit by setting the initial level of activation for the gene effectively determines if the gene is \gls{constitutively} expressed or if it requires activation for expression.
+
+Regulation is by direct matching of 3-bit proteins with the last three bits of an activatory site; if there is an exact
+match, the gene's activation level is either increased by one if the first bit of the activatory site is on (actually, a
+'+' in the notation used), and reduced by one otherwise. A final expression level greater than zero results in
+expression at a level set by $tanh$, the hyperbolic tangent, of the activation level. Each instance of an expressed
+protein increases the protein's concentration in the cell; concentrations degrade with time. As noted by the authors,
+the model shares similarities with \cite{Reil:1999rp} \parencite[sec. 2.2]{Quick:2003uq}. Differences however lie in
+the environmental connection, and in the modelling of the affect of \gls{tf} upon expression. In this, it more closely
+resembles the later work by  \cite{Rohlf:2009sh}, \cite{Banzhaf:2003kx} and \cite{Kuo:2006fv}.
+
+\emph{Biosys} serves as the starting point for \cite{Knabe:2006vn}. In this model every gene can have multiple regulatory modules (``\emph{cis}-regulatory modules'') and each module can contain multiple protein binding sites. This configuration is often found in real-world biology and its adoption here has been motivated by a desire to approach the complexity of regulatory interactions found in nature \parencite[pg.16]{Knabe:2006vn}. As a result of this change to the regulatory regions the activation level of a gene is now calculated by an expression that adds or subtracts only the \emph{minimum} amount for any protein bound to a \emph{cis}-module, and the genotype is now an integer-string (instead of the bit-string found in \cite{Quick:2003uq}) to accommodate two new coding signals : `2' to mark the end of a \emph{cis}-module and `3' the end of a gene. Otherwise the basics are as found in the \emph{Biosys} model.
+
+In \cite{Knabe:2008xe} the mechanism to determine if a protein binds to a binding site
+changes from an exact match to a ``smooth binding'' based on the Hamming distance between protein and site (similar to
+the mechanism in \emph{aevol} and \emph{RAevol}). Specificity Factors (SFs), proteins produced by the same gene as their
+companion regulatory protein, are used to further modify the binding action of the regulatory protein, where the
+concentration of the associated SF adjusts the sensitivity of the binding.
+
+\chapter{Applications of GRN in EAs}\label{applications-of-grn-in-eas}
+
+Although a variety of approaches have been explored for genotype-phenotype encoding in EAs, two forms of inspiration are apparent. The following summary is drawn from the review in \textcite{Stanley:2003fh}:
+
+\newthought{Grammatical approaches,} such as L-systems, Grammar Trees, Cellular Encoding, and the application of Genetic Programming to encoding, where the mechanism is based upon the manipulation of abstract data structures. The origins of the grammatical approach lie in the observation by \textcite{Lindenmayer:1968nl} that the structure of plants was essentially fractal and could be modelled by a series of nested rewrite rules. With the addition of parameters to control when and how a rule would become active the resulting L-system had the potential to describe many biological structures. L-systems however were never intended to be evolved, and so Lindenmayer's approach has needed to be adapted somewhat for use within evolutionary algorithms. Some researchers have modified the original string representation of the rules into a form more suitable for evolution, such as bit-strings \parencite{Boers:1992cn}, 2x2 matrices \parencite{Kitano:1990fs}, or graph structures (e.g.,\cite{Sims:1994uq}). Another direction, known as Cellular Encoding (Gruau, 1993), replaces the L-system rules by grammar trees, thus recruiting (inherently evolvable) Genetic Programming for developmental encoding.
+
+\newthought{Cell chemistry approaches,} such as cell diffusion and Cellular Automata, where the mechanism is explicitly based upon processes found in living organisms. Given these considerations, the focus of this thesis is on \emph{biological} models as they possess the greatest likelihood of successfully capturing the range of behaviours in which we are interested. As \textcite{Stanley:2003fh} described, further development of biologically-inspired models has taken two philosophically defined paths. On one path, the research attempts to solve an independently interesting problem, such as neural network development, (\eg \cite{Bongard:2003tf}), with the expectation that this will speed the eventual realisation of a complete developmental system. However, on this path it can be difficult to assess the relative contribution of the developmental system itself within the much larger system. On the other path, researchers have chosen to focus on simpler proof-of-concept problems where the focus is on developing and demonstrating the particular aspects thought needed of a future goal system (\eg \cite{Bentley:1999zr,Roggen:2007kl}). This path however, in my opinion, presupposes that those particular aspects have been correctly identified.
+
+The need for search space compaction is common in problems in design (e.g., \cite{Benedetti:2006bl,Nicolaou:2009hs,Yang:2009ch}), Neural Networks \parencite{Roy:2009jf}, and Electronic Circuit Design \parencite{Roggen:2007kl,Trefzer:2009qf,Tufte:2006bh,Remortel:2002fk}. Therefore one motivation for improving the genotype-phenotype encoding is to reduce the genotype complexity and to improve search performance.  
+
+Other reasons also exist however: \textcite{Dorica:2007wq,Hornby:2003jt,Hornby:2005rw,Hornby:2006kj} believe that developmental encoding improves the modularity of solutions, which is particularly desirable in design problems; \textcite{Devert:2007wl,Federici:2006pb,Miller:2003qy,Roggen:2007kl,Trefzer:2009qf,Yu:1998hx} argue that developmental encoding improves the robustness of evolved solutions; and \textcite{Hornby:2005rw,Hornby:2006kj,Yang:2009li} are advocates for the belief that developmental encoding can improve solution quality as perceived by a human decision maker. 
+
+The first two of these motivations are further explored in the sections below. 
+
+\subsubsection{Search space compaction}
+
+Search space compaction is related to genotype size as the size of the search space grows exponentially with the size of the genotype. A reduction in genotype size therefore leads to a reduction in the search space. Three types of embryological developmental system were compared in \cite{Bentley:1999zr}: a hand-designed development program which in effect used pre-developed modular components to construct complete solutions, an explicit embryology in the form of a program tree to control development and to act as a genotype, and an implicit embryology based on a CA with a gradient-directed development program. 
+
+In the system described in \cite{Federici:2006pb} the issue at hand was how to increase genotype/phenotype correlation; that is, how differences between phenotypes can be made proportional to the difference between the genotypes. The mechanism described was Neutral Complexification (NC), or ``an increase in genetic material that is functional (expressed) but neutral to the phenotype'', implemented by duplication of a control gene within the \gls{grn} without immediate mutation. At each generation a single control gene may be duplicated; experimental results showed that this then resulted in improved genotype-phenotype correlation. However, the mechanism by which NC achieves this was essentially left unexplained. Interestingly, the \gls{ca} was controlled by a Recursive Neural Network (RNN) modelling a \gls{grn} with the claim that it was faster to evaluate than a standard model of a \gls{grn}, and that the evolutionary properties of RNNs were better understood than those of \glspl{grn}.
+
+\subsubsection{Modularity}
+The modularity displayed by most living organisms is striking: from the segmentation of thorax and abdomen in insects, to the repetition of fingers on a hand or toes on a foot.  These patterns are created by the expression of regulatory genes during development, and this has lead to the belief that developmental encoding might also improve modularity in artificial systems. 
+
+\cite{Hornby:2003jt}) introduced a generic evolutionary development system, GENRE, and compared generative (incorporating repeated or reused elements) and non-generative L-system developmental programs on problems from a selection of design domains: voxels (cubes), neural-networks, robots, and neural-network controlled robots.  \cite{Hornby:2005rw} reapplied GENRE to table design and in \cite{Hornby:2006kj} extended the use of GENRE for robot design. All of these works demonstrated improvements in fitness over direct representation encodings that the authors attributed to the modularity, increased reuse of components, and possibility of large-scale mutations enabled by the L-system developmental program. \cite{Dorica:2007li} investigated the effect of developmental encoding on the performance of an EA for the design a 2-D patch antenna for operation at two radio frequencies. The most impressive evolved designs rediscovered and improved upon the design of a well-known E-patch antenna, and the developmental encoding adopted (the \emph{quadtree} - a recursive tree mapping from genotype to a grid cell within the 2-D space) resulted in a less fragmented and easier to manufacture shape. However, the quadtree genotype structure appears restricted to the design of 2-D structures, and may not be easily generalised.

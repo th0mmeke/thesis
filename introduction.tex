@@ -38,7 +38,6 @@ Then our belief is that the evolution of evolution itself can and will emerge un
 In the world of human thought generally, and in physical sciences in particular, the most important and most fruitful concepts are those to which it is impossible to attach a well-defined meaning.}%
 {\textsc{\\H.A. Kramers}}
 
-
 As stated by many (\eg \parencite{Pascal2013}) a definition of life is elusive, and probably not useful. There is no definite boundary between the living and the non-living; as \parencite{Pascal2013} goes on to explain, the most likely scenario for the origin of life is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living. Think of a present day virus--is it alive, or not? Reproduction is generally thought of as a requirement for life, yet viruses cannot reproduce without co-opting the necessary machinery from an independent host. 
 
 \parencite{Fernando:2007pf} presents a partial compendium of definitions which illustrates the range of opinion:
@@ -71,6 +70,15 @@ However, a consensus is forming that early life began with chemoautotrophs fuele
 
 Self-replicating RNA enzymes shown in \parencite{Lincoln2009}, forming basis of selective system (link to natural selection) (also see \parencite{Cheng2010}, \parencite{Powner2009} for formation of RNA in prebiotic conditions). Some elements of \gls{ida} thought still with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \parencite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \parencite{Wilson2009}. Next major transition to Protein world (although predominance of RNA transcripts leads to suggestions that should be called RNA-Protein world \parencite{Altman2013}). Note however that Lateral or Horizontal Gene Transfer thought to have been so common in early life that there was no single common ancestor, but genes from multiple lineages combined into all lineages today.\parencite{Ragan2009}
 
+\begin{tikzpicture}
+\node (prebiota) at (0,0) {prebiota};
+\node (metabolism-first) at (1,-1) {metabolism-first} edge [<-] (prebiota);
+\node (replication-first) at (1,1) {replication-first} edge [<-] (prebiota);
+\node (acs) at (2,0) {autocatalytic sets} edge [<-] (replication-first) edge [<-] (metabolism-first);
+\node (ida) at (4,0) {IDA} edge [<-] (acs);
+\node at (5.5,0) {LUCA} edge [<-] (ida);
+\end{tikzpicture}
+
 Two alternative models exist for the step from abiotic to \gls{ida}: genetic or replicators or RNA-first, and metabolism or protein-first. Both metabolism and replication were almost certainly required for \gls{ida} however. A self-sustaining autocatalytic network (in terms of a RAF set specifically a ``set of molecules and reactions which is collectively autocatalytic in the sense that all molecules help in producing each other (through mutual catalysis, and supported by a food set).'') generally considered essential \parencite{Pross2013}, but not sufficient \parencite{Hordijk2011}. Both competing models--replication first and metabolism first--build on that. Autocatalysis expressed by self-replication of oligomeric compounds in replication first; by cycles and network in metabolism first. In the broadest sense, life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities.
 From another perspective, Metabolism-first privileges function, while replicator-first privileges descent.
 
@@ -85,17 +93,14 @@ conditions, a constraint that doesn't apply to Alife or artificial OEE, and so i
 \end{figure}
 
 \subsubsection{Living organisms are supremely well suited to their environments, and can adapt to environmental changes}
-\label{living-organisms-are-supremely-well-suited-to-their-environments-and-can-adapt-to-environmental-changes}
 
-Adaptation of organisms to their environments occurs in the main on two
-different time-scales.
+Adaptation of organisms to their environments occurs in the main on two different time-scales.
 
 Evolution by \gls{naturalselection} acts over a period of generations on populations of individual organisms. Changes are therefore relatively gradual, and many generations can pass before a change such as a beneficial mutation becomes ubiquitous in a population (\eg 300-500 generations for targeted modifications in lactose processing in \emph{E. coli} \parencite{Dekel:2005fk}. In contrast, gene regulatory effects act during the life cycle of a single individual, either during development to affect morphology, or during the adult lifespan in reaction to seasonal or other environmental cues. These regulation-driven changes are not in themselves heritable, but they can be assimilated back into the population by influencing the organisms fitness under natural selection (\eg,\parencite{Baldwin:1896ly,Dennett:2003ve,Paenke:2009xe,Paenke:2007ve}).
 
 Similar effects can be seen by another adaptive mechanism that operates on individuals during their lifespan: learning, where behavioural adaptions can also lead to genetic change (\eg \parencite{Hinton:1987vy}.)
 
 \subsubsection{Natural selection, acting on populations, is the primary driver for long-term adaptation}
-\label{natural-selection-acting-on-populations-is-the-primary-driver-for-long-term-adaptation}
 
 The year 2009 saw the celebration of the 150\textsuperscript{th} anniversary of the publication of \emph{On the Origin of Species}, the explanation of evolution by natural selection, with extensive coverage in scientific and popular media. The terms are therefore fairly well known to many people, but what exactly does \emph{natural selection} mean? To quote from \parencite{Futuyama:1979tg}, \gls{naturalselection} is the ``differential survival and reproduction of genotypes''.
 
@@ -119,10 +124,35 @@ Third, behaviours such as learning, rather than purely genetic mechanisms, can i
 Finally, a \gls{grn} provides another mechanism to modify the \gls{gpmap} and hence to guide natural selection.
 
 \subsubsection{Novelties often arise from new regulatory connections rather than changes to genes}
-\label{novelties-often-arise-from-new-regulatory-connections-rather-than-changes-to-genes}
+
+The phenotype in living organisms is many orders of magnitude more complex than the genotype, and the methods used during development to build this complexity are many and various.
+
+Cells call upon a complex of regulatory processes to regulate the expression of genes, and hence to control development and morphology (as well as to implement the cell's basic machinery.) The majority of these processes (at current understanding) use proteins to affect the initiation of transcription (the production of RNA from a segment of DNA, the first stage of gene expression); most commonly the presence of a specific protein promotes or inhibits the transcription of a related gene, and without transcription the gene is silenced.
+
+One step further along the protein production chain, editing and splicing of the RNA products of transcription in eukaryotes prior to translation (the production of a protein from mRNA) is also under regulatory control. Many alternative proteins from one transcript can be produced, triggered by environmental or other influencing factors; each alternative protein will have a different effect on cell function. As a result, in biological organisms, the phenotype is not uniquely determined by the genotype, and a genotype contains the potential for multiple different phenotypes under the influence of the environment (a phenomenon known as plasticity).
+
+Patterns of gene expression can also have an effect outside the originating cell, a phenomenon crucial for development. Signalling proteins produced by a cell act as regulators on the machinery of surrounding cells, and epigenetic mechanisms allow signal effects to be long-lived so that a pattern of expressions may be inherited by daughter cells without the continued presence of the original signals. These mechanisms determine the fate of new cells during development: a cell originating in an area bathed in a particular combination of signalling molecules will develop in a specific manner (such as into a skin cell); another cell in another area will receive different signals, and therefore develop in a different way.
+
+The development of an organism from a zygote is thus controlled by a pattern of gene expression under the combined influence of a regulatory mechanism and the environment.
+
+As the regulatory mechanism is constructed from proteins and RNAs encoded in the genotype, and as the genotype is generally under the influence of natural selection, evolution also acts upon gene regulation, and hence upon development. The study of the evolution of the developmental mechanism itself is known as Evolutionary Development, or, more colloquially, EvoDevo.
 
 \parencite{Prudhomme:2007ax} believe that evolutionary novelties more commonly arise from changes or additions of regulatory \emph{connections} than from the development of \emph{new} genes or regulatory elements; that is, from changes to the network topology rather than from additions to the network elements. The underlying implication is that novelties are therefore new compositions of
 pre-existing elements, rather than being constructed `\emph{de novo}', and that production of novelties may be relatively rapid. Connection changes may happen quickly; by comparison, new genes may take many generations.
+
+\begin{flushright}
+	\emph{According to the strictly structural concept, the genotype is considered as a mosaic of independent molecular blue-prints for the building of individual cellular constituents. In the execution of these plans, however, co-ordination is evidently of absolute survival value. The discovery of regulator and operator genes, and of repressive regulation of the activity of structural genes, reveals that the genotype contains not only a series of blue-prints, but a co-ordinated program of protein synthesis and the means of controlling its execution.}
+	\par\cite[p354]{Jacob:1961ys}
+\end{flushright}
+
+A network formed by the regulatory interactions between genes and the transcriptional products of those genes (\glspl{tf}) is known as a Gene Regulatory Network, or \gls{grn}.
+
+\subsubsection{Modularity is an emergent property of GRNs}
+Even a superficial look at a set of randomly sampled insects reveals a striking level of similarity between supposedly distantly related species. Mouthparts, segmented bodies, wings and halteres springing from body segments, antennae on head segments; common patterns abound. The explanation lies in the action of a group of homeotic (or body-patterning) genes, which act in concert to impose a structure on the developing body plan. These regulatory genes, amongst the first patterning genes to be identified and characterised, in fact appear in very similar forms across all animals and hence appear to share a common evolutionary origin, and to be highly conserved \parencite{Shubin:2009vw}. 
+
+As an example of their action, the gene \emph{Ubx}, or \emph{Ultrabithorax}, is involved in development of the \gls{metathorax}, one of the body segments, in \glspl{arthropod} \parencite[pg. 696-697]{Watson:2008fm}. Changes in \emph{Ubx} expression in combination with expression of a second homeotic gene, \emph{Scr}, are responsible for some of the differences in body plan between two arthropod groups - brachiopods, and isopods. In brachiopods, the expression of \emph{Ubx} suppresses \emph{Scr} in the leading thorax segment leading to development there of swimming legs. In isopods however, \emph{Ubx} expression has been lost in that segment, and instead a feeding appendage develops \parencite{Watson:2008fm}.
+
+The morphological patterns that result from changes in expression of the \emph{hox} homeotic genes are textbook examples of modularity caused by regulatory networks. These networks in general appear to take a characteristic form, sometimes called a `medusa' network \parencite{Kauffman:2004zi,Aldana:2007da} where a regulatory head controls the expression of many functional genes. For example, in \gls{drosophila}, the medusa has a head of around 80 genes \parencite{Aldana:2007da}. \Textcite{Davidson:2006wi}, using the well-characterised sea urchin genotype, identifies GRN `kernels' of interconnected and hence very robust regulatory genes that control essential functions such as heart development and the endoderm specification in sea urchins. 
 
 \section{Motivation}
 
@@ -202,7 +232,7 @@ The first obstacle to a more general scope is the existence of innovations such 
 
 \subsection{Evolution in artificial systems}
 
-The field of \glspl{ea} originated in the exploration of abstract biological evolution, but soon diverted into problem-solving and optimization \cite{DeJong2006}. The fundamental differences between the biological original and the modern canonical \gls{ea} include:
+The field of \glspl{ea} originated in the exploration of abstract biological evolution, but rapidly diverged into problem-solving and optimization \cite{De-Jong:1993gy,DeJong2006}. The fundamental differences between the biological original and the modern canonical \gls{ea} include:
 
 \begin{itemize}
 \item \Glspl{ea} search through a fixed space, and hence cannot surprise by 'kind', only by 'degree' (\eg \parencite{Nellis2014})
@@ -214,10 +244,12 @@ The field of \glspl{ea} originated in the exploration of abstract biological evo
 
 The first two of these differences are significant; \glspl{ea} are not capable of open-ended, or evolutionary, evolution. However, recent research in biology continues to be applied to improve the performance of \glspl{ea} in their core function of optimization:
 \begin{itemize}
-	\item Redundancy and degeneracy-- \eg \parencite{Whitacre:2010qy}
+	\item Redundancy and degeneracy--\eg \parencite{Whitacre:2010qy}
 	\item Novelty--\eg novelty search \parencite{Lehman:2008cr}
 	\item EvoEvo, or the evolution of evolution--\eg the remainder of this work.
 \end{itemize}
+
+For example, a summary of some relevant work in the application of \glspl{grn} to \glspl{ea} to improve the robustness and modularity of solutions can be found in \ref{applications-of-grn-in-eas}.
 
 A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \parencite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\parencite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\parencite{Paixao2015}}
 
@@ -360,21 +392,27 @@ aren't right
 	as the rain forest.'' Again, a biological metaphor.	
 \end{itemize}
 
+The EvoEvo project (\url{http://evoevo.liris.cnrs.fr/about-evoevo-project/}), an Information and Communication Technologies initiative funded by the European Commission, begins at a higher level biological starting point (genotype-phenotype mappings). The project presupposes microbial evolution, ``at the level of genomes, biological networks and populations.'', with a focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness. Later work is planned to remove the biological specificity to provide a framework for applying EvoEvo to ICT problems. Along with development of a model founded on the ``genotype-to-phenotype mapping and the fitness landscape'', the project states that make use of \emph{Aevol} \parencite{Knibbe:2006vn,Knibbe:2007kx} to model developmental processes in microorganisms.
+
+\emph{Aevol} describes the genotype-phenotype map of an artificial organism modelled closely on a prokaryotic cell. The genotype is therefore made up of a \emph{double-stranded circular} bit-string with genes marked by promotor sequences and terminated by sequences that can form a ``stem-loop'' structure (where bases are arranged in sequence along a protein such that the binding between complementary bases causes a characteristic loop to form in the protein.) Expression levels of a gene are based on the degree of similarity between the gene's promotor sequence and a predefined ``consensus'' sequence (as calculated by the Hamming distance), as is the case in real-world prokaryotes where the basal transcription level depends on the quality of the promotor \parencite{Sanchez-Dehesa:2008uq}. Translation in \emph{aevol} takes place between marked regions of the gene, and proceeds three-bit codon by codon, with each codon translated according to an artificial genetic code into an amino-acid equivalent in a protein.
+
+The \emph{aevol} model contains several innovations:
+
+\begin{itemize}
+\item \emph{aevol} includes a proteome abstraction in the model in addition to the usual genotype and phenotype. Proteins in \emph{aevol} describe abstract ``processes'' instead of chemical interactions, where a process is described by a triangular probability distribution over $\mathbb{R}$ (in practice $[0,1]$ representing all processes) where triangles with positive height enhance the process and negative height processes act as inhibitors. The proteome then may be represented as either the superimposition of all protein distribution, or as the network of their ``functional interactions'' (the overlap between two protein distributions.) Note that the range of a process (protein) is equivalent to \gls{pleiotropy}; genes with a small range are functionally specialised. The phenotype of the organism is then the set of all positive processes (as calculated by Lukasiewicz fuzzy operators); that is, all activated but not inhibited processes.
+\item Mutations are not only the usual point-mutations (small deletions and insertions) but also \emph{genotype rearrangements}: deletions, translocations, inversions and duplications that act on a larger-scale.
+\item The environment for selection is also modelled by a similar distribution over $\mathbb{R}$. The closer the match between the organisms phenotype (as described above) and the environment distribution, the fitter the organism. This marks the full extent of environmental interactions in \emph{aevol} however. 
+\end{itemize}
+
+To study the relationship between regulatory processes and adaptation to changing environments \parencite{Sanchez-Dehesa:2008uq}, two major changes have been made to \emph{aevol} to give \emph{RAevol} or Regulatory \emph{Aevol} \parencite{Beslon:2010zr,Sanchez-Dehesa:2008uq}. The first is the implementation of a fine-grained time model; proteins concentrations now vary dynamically (instead of remaining static as in \emph{aevol}), and the organism's proteome and phenome change over time to reflect these protein changes. The other is the addition of a regulatory model. The calculation of the basal expression level of a gene in \emph{RAevol} is the same as that in \emph{aevol} - a function of the Hamming distance between consensus sequence and gene promotor sequence. However, in \emph{RAevol} this level is modified by the action of regulation, either up-regulating or down-regulating the basal expression. The degree of regulation is determined by the concentration of proteins that may bind to two regulatory sites (an enhancer site and an operator site for inhibition) each 20-bits long. The ability of a protein to bind to the binding site is calculated from a predetermined ``affinity'' matrix that mediates between the DNA bit-string representation of the binding site, and the amino-acid representation of the protein. A simple process change in \emph{RAevol} enables interaction with the environment:  during simulation, a signalling protein of set sequence that has no metabolic function but can act as a \gls{tf} is sent to the organism when the target environment changes.
+
 \section{Previous work}\label{previous-work}
 
 \epigraph{%
 	It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
 {\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
 
-EvoEvo project from a higher level biological starting point (genotype-phenotype mappings), presupposing a larger set of required elements http://evoevo.liris.cnrs.fr/about-evoevo-project/
-
-\begin{itemize}
-	\item Presupposes microbial evolution, ``at the level of genomes, biological networks and populations.''
-	\item Focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness
-	\item Later work to remove biological specificity to provide framework for applying EvoEvo to ICT problems
-\end{itemize}
-
-Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward.
+Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward. But the use of predefined interaction types, and the lack of a self-referential evolutionary model undermine this claim.
 
 Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
 
@@ -383,36 +421,40 @@ Previous work is evaluated against three criteria: non-biological domain and pur
 \begin{table}
 	\scriptsize
 	\caption{Previous work}
-	\label{tab1}
-	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
+	\label{tb:previous-work}
+	\begin{tabular}{@{}lllll@{}}
 		\hline\noalign{\smallskip}
-		\Gls{achem}                                                        	& Type 	& Domain	& Emergence		& EvoEvo\\ 
+		\Gls{achem}                                                        	& Type 	& Domain	& Emergent		& Self-referential Evolutionary mechanism\\ 
 		\\ \noalign{\smallskip}
 		\hline
 		\noalign{\smallskip}
-		\cite{Ducharme2012}                                                	&Atoms/Molecules&&&\\
-		StringMol \parencite{Hickinbotham2012}                             	&Rewriting or String-based&&&\\
-		Squirm3 \parencite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&&&\\
-		RBN-World \parencite{Faulconbridge2011}                            	&Boolean Networks and Graphs&&&\\
-		\cite{Lenaerts2009}                                                	&&&&\\
-		ZChem \parencite{Tominaga2009}                                     	&&&&\\
-		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} 	&&&&\\
+		\cite{Ducharme2012}                                             &Atoms/Molecules&&&\\
+		StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&&\\
+		Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&&&\\
+		RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs&&&\\
+		\cite{Lenaerts2009}                                             &&&&\\
+		ZChem \cite{Tominaga2009}                                     	&&&&\\
+		Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&&&\\
 		\cite{Fernando:2008xy,Fernando:2007pf}                             	&&&&\\
 		\cite{Gardiner2007}                                                	&&&&\\
-		NAC \parencite{Suzuki2006}                                         	&&&&\\						
-		GGL/ToyChem \parencite{Benko2003,Benko2005}                        	&Atoms/Molecules&&&\\
-		Lattice Artificial Chemistry \parencite{Ono2000,Madina2003}        	&&&&\\
-		\parencite{Ofria2004}                                  				&Assembler Automata&&&\\
-		\parencite{Ray1991}                                  				&Assembler Automata&&&\\
-		\parencite{Lenski2003}												&Assembler Automata&&&\\
-		\parencite{Taylor2001}												&&&&\\
-		\parencite{Antonakopoulos:2011th}									&Rewriting or String-based&&&\\
-		\parencite{Dittrich1998}												&Rewriting or String-based&&&\\
-		\parencite{Fenizio2000}\parencite{Fenizio2001}						&Rewriting or String-based&&&\\
-		\parencite{Nellis2012}\parencite{Nellis2014}							&Boolean Networks and Graphs&&&\\
-		\parencite{Segre1998}												&Compositional&&&\\
-		\parencite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&&\\
-		\parencite{Kauffman1986}												&Compositional&&&\\
+		NAC \cite{Suzuki2006}                                         	&&&&\\						
+		GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&&\\
+		Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&&\\
+		Avida \cite{Ofria2004}                                  		&Assembler Automata&	Alife&	Yes&\\
+		Tierra \cite{Ray1991}                                  			&Assembler Automata&	Alife&	Yes&\\
+		Using Avida\cite{Lenski2003}									&Assembler Automata&	Both&	Yes&\\
+		\cite{Taylor2001}												&&&&\\
+		\cite{Antonakopoulos:2011th}									&Rewriting or String-based	&Alife	&Developmental 	&No\\
+		\cite{Dittrich1998}												&Rewriting or String-based&&&\\
+		\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&&\\
+		\cite{Fontana1992}												&Rewriting or String-based&&&Yes\\
+		\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&&\\
+		\cite{Segre1998}												&Compositional&&&\\
+		\cite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&&\\
+		\cite{Kauffman1986}												&Compositional&&&\\
+		Turing															&Rewriting 	&Alife	&Yes	&Yes\\
+		Von Neumann														&&&&\\
+		Waddington														&	Biology&&&\\
 		\hline
 	\end{tabular}
 \end{table}
@@ -446,11 +488,11 @@ All very configurable, and complicated, but why? What rationale behind choices? 
 ``The quest to halt adaptation is only one example of a special feature in Avida; many more have been explored, and are continuously being added to the source code. The most successful features are all fully described in the documentation that comes with the software.''
 
 \parencite{Taylor2001}:
-Derived from Thesis (Taylor:1999sc)
+Derived from Thesis (Taylor:1999sc): creation of \gls{alife}, Extension of Tierra \cite{Ray1991} by cell regulation, parallel processes, energy modelling \cite[p.4]{Taylor:1999sc}, Cells are explicitly modelled as bitstrings which run as programs, and an adhoc theoretical model (essentially Tierra plus some previously identified improvements)
 Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype - the latter being an informational concept)'' \parencite{Taylor2001}
 Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
 Assume that early stages see A+B implicitly encoded in the environment {[}essentially because simpler than explicit mechanism, but little justification{]} ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
-
+		
 \parencite{Lenski2003}
 Modelled in Avida
 ``Our experiments demonstrate the validity of the hypothesis, first articulated by Darwin and supported today by comparative and experimental evidence, that complex features generally evolve by
@@ -638,6 +680,13 @@ Some advantages claimed over Hutton (emergence and computational intractability 
 
 Ducharme et al \parencite{Ducharme2012}. The approach taken is to model the energy changes associated with reactions. The chemistry is spatial; atoms are arranged on a 2-dimensional grid and have velocity. When two atoms pass within a particular distance, they interact. The possible types of interactions are prespecified, with the type chosen being driven by the atomic composition and energies of the interacting atoms. Reactions are therefore between atoms rather than molecules; a molecule in this chemistry is a combination of atoms arranged in a particular structure, re-examined after each reaction to form a stable configuration based on expectations from real-world chemistry. Although computational costs are not reported, it seems plausible that the calculation of intersections on a 2-dimensional grid will be expensive for large molecular populations. Another cost comes from the re-arrangement of molecules into energy-efficient configurations. This spatial structuring enables the model to restrict atomic interactions to those atoms that are accessible on a molecule, but at the cost of additional modelling complexity. 
 
+\cite{Fernando:2008xy,Fernando:2007pf}:
+Driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems'') so attempt to establish a phylogeny that includes first autonomous system
+Simulation of laboratory experiment of lipid aggregates in a reactor. Strong theoretical justification. Hypothesis supported by inspection - single entities that are examples; Novelty is implicit in overall goals with sole quantitative measure (``fitness``) of integral of quantity and size - more and bigger is better
+Molecules and food molecules share same representation and chemistry
+Molecules, light-energy and thermodynamics
+Hill-climbing algorithm replaces parent with first 10\% better-fitness child; explicit fitness calculation
+Experiment reported in \textcite{Fernando:2008xy} generates phylogeny which is then examined and interpreted - danger of arguing from specific to general. Shows only possible, no more.
 
 \parencite{Lucht2012}
 
@@ -646,9 +695,15 @@ Challenge to community - "to develop a system in which, starting with a soup of 
 Based on Hutton2007 Squirm3 chemistry, using Hutton's floods 
 Squirm3 - fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension
 
-Added reaction types to address Squirm3's ``global-extinction problem and showing how quasi-universal enzymes can evolve
+Added reaction types to address Squirm3's ``global-extinction problem and showing how quasi-universal enzymes can evolve''
 
-\parencite{Hutton2007}
+\cite{Hutton2007,Hutton2002}:
+Artificial system capable of life-like \gls{oee} (creativity).
+Based on hypothesis (materiality, interactions, embedding) of \textcite{Taylor2001}, better expressed in \textcite[p.341]{Hutton2002}; membrane to allow individuals to benefit from innovations by protecting internal reactions from others.
+\Gls{achem} from \textcite{Hutton2002} used to construct all elements in world - material and embedded.
+Atoms in \gls{achem} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
+Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division.
+Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)
 
 Enzymes can act as catalysts so G affects P; but enzyme evolution too improbable for OEE
 
@@ -713,7 +768,20 @@ Differences between GARD and RAPN:
 	search for adaptations - GARD has fixed catalysis, Kauffman does not - mutant polymers can arise, be incorporated into the set, and influence its fitness
 \end{itemize}
 
-\section{Research questions}
+\subsection{Other}	
+	
+% \cite{Sayama2011} & Swarm Chemistry & & & & \\
+%\cite{Sayama2011} explores ability of Swarm Chemistry - an integration of Artificial Chemistry with Swarm Robotics - to achieve Open-Ended Evolution. The models are rather non-biological, and interpretation as biology is difficult. One specific difficulty with the results as reported, noted by the author, is that all results were obtained by visual inspection, and that measures need to be developed based on some standard works.
+
+% \cite{Dorin:2006fk} &
+% Demonstrate that \gls{achem} can support a simple ecology - autotrophs and heterotrophs, with interactions between organisms and between organisms and the abiotic environment&
+% Loosely based on simplified model of generic terrestrial ecosystem &
+% All elements emerge from \gls{achem}&
+% Atoms and energy&
+% No evolutionary model; proposed ecosystem made up of a number of component organisms&
+% Description of model only - no results; adhoc theoretical justification and choice of ecosystem elements\\
+		
+\section{Research questions}\label{research-questions}
 
 Previous work is coming to a loose consensus on the conditions for open-ended evolution, without any existing system meeting these conditions demonstrating the sought-for outcome.
 
@@ -734,10 +802,7 @@ In general the difficulties with earlier work include:
 
 \section{Methods}\label{methods}
 
-The field of artificial life is synonymous with simulation \parencite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments, mathematical models, and thought experiments. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
-
-\subsection{Thought experiments}
-Although thought-experiments are fast and cheap, they appear ill-suited to the study of emergent phenomenon, and hence are not discussed further.
+The field of artificial life is synonymous with simulation \parencite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments and mathematical models. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 
 \subsection{Experiments}\label{experiments}
 
@@ -751,8 +816,7 @@ Models can be ``useful stop-gaps'' towards a theory, by providing a testable bod
 
 Mathematical models, based on reduction, abstraction and simplifying assumptions (\eg Fisher's famous equation describing the changes in allele distribution under selection assumes independent genes--although extending this to realistic cases remains an open problem \parencite{Schuster2011}). Emergence and dynamic behaviours are important, and yet they are hard to capture with mathematical models relying on reduction \parencite{Ferrer:2008hv}
 
-Simulations by contrast are holistic and bottom-up, and encompass variability so that the diversity of the results is closer to that seen in real systems \parencite{Ferrer:2008hv}. They have a unique ability to explore systems encompassing emergence and self-organization. Biology, and by plausible extension, biologically-based systems, stand alone in the pervasiveness of emergence \parencite{Bersini:2006ve}, and the
-interconnection of levels of analysis, \eg behaviour can influence gene expression, and genes can affect behaviour \parencite{Krakauer2011}.
+Simulations by contrast are holistic and bottom-up, and encompass variability so that the diversity of the results is closer to that seen in real systems \parencite{Ferrer:2008hv}. They have a unique ability to explore systems encompassing emergence and self-organization. Biology, and by plausible extension, biologically-based systems, stand alone in the pervasiveness of emergence \parencite{Bersini:2006ve}, and the interconnection of levels of analysis, \eg behaviour can influence gene expression, and genes can affect behaviour \parencite{Krakauer2011}.
 
 \subsection{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
 
@@ -760,18 +824,9 @@ Simulations seem to fall somewhere in between thought experiments or abstract mo
 
 \newthought{Simulations are just calculators}\label{simulations-are-just-calculators}
 
-a computational means to solve analytically intractable equations \parencite[31]{Winsberg2010}, producing nothing new (just consequences
-of what is ``fed in''\parencite{DiPaolo2000}), nothing empirical.
-
-\quote{A simulation is ultimately only a high-speed generator of the consequences that some theory assigns various antecedent conditions.}{\parencite{Eldridge}, quoting from Dennett}
+That is, a computational means to solve analytically intractable equations \parencite[31]{Winsberg2010}, ``...a high-speed generator of the consequences that some theory assigns various antecedent conditions'' \parencite[quoting from Dennett]{Eldridge}, producing nothing new (just consequences of what is ``fed in''\parencite{DiPaolo2000}). In this sense, simulations are not empirical.
 
 In this view simulations are aimed at answering specific questions, or analysing particular scenarios. The more accurate the simulation however, and hence the more valuable the results, the harder it is to generalize to other cases. It is hard to understand the behaviour of complicated simulations, and the causes of particular behaviours of interest may be unclear if there are many variables in play. For this reason \parencite{MaynardSmith1974} prefers the use of simple models, designed to illuminate the ``causes of differences of behaviour between different species or systems'' rather than ``assertions which are true of all systems or of all species.''
-
-Hughes 1999 would argue that simulations have genuinely ``mimetic'' character, particularly ones that present results graphically as
-real-world systems do, that goes beyond plain number-crunching. They use a variety of methods beyond calculation (such as graphics) to draw
-inferences from data. They also incorporate approximations and creative choices to make the problem tractable, which introduces need for
-justification. Simulations need interpretation and justification--they are not self-contained, their own justifications
-\parencite[31]{Winsberg2010}
 
 \newthought{Simulations are themselves an instance of the thing}\label{simulations-are-themselves-an-instance-of-the-thing}
 
@@ -786,6 +841,7 @@ The simulation is a stand-in for the real world, and you can perform experiments
 In this view, simulation is a form of Kuhn's theory articulation or ``model building''--making principles apply to local, concrete systems in the real world: \quote{Simulation is a process of knowledge creation.}{\parencite[6]{Winsberg2010}} Following this third way, simulations might be seen as a source of new hypotheses \parencite{Eldridge}. Similarly, Taylor as summarized in \parencite{Webb2009}, argues for ``pure exploration'' or ``exploratory tools'' that do not need justification, and that may be used to generate ``new questions to ask, new terms to employ, or different models to construct''.
 
 \section{Guide to this work}
+
 
 \section{Previous publications}\label{previous-publications}
 

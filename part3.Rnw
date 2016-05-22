@@ -364,6 +364,8 @@ A \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgr
 
 In practice the \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification as the classification appears to be based on specific example chemistries rather than on sets of values for \textless{}\emph{S},\emph{R},\emph{A}\textgreater{}. Furthermore, some categories, such as Abstract Automata, are incompletely specified. Applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry. Furthermore, because the system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion.
 
+Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \cite{Faulconbridge2011} as a world where the elements are RBN networks.
+
 \cite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
 
 \begin{itemize}
@@ -371,6 +373,7 @@ In practice the \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more usef
 	\item Structured - one or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
 	\item Sub-symbolic - emergence of properties from lower-levels (ala real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
 \end{itemize}
+
 
 \subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
 

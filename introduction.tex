@@ -32,6 +32,27 @@ Then our belief is that the \emph{\gls{evoevo}} itself can and will emerge under
 	      Not the same as most type of Alife, where evolution is not the subject of the research but rather a tool or mechanism towards some other goal (canonically, creating artificial life.)
 \end{itemize}
 
+Constitutive definitions of \gls{oee}
+
+\parencite{Taylor2001} like others makes a distinction between OEE and ``kinds of evolutionary innovation''. He gives as an example of limited innovation the emergence of paratism in \cite{Ray1991} as direct result of system design and initial seeding conditions. In this reading, ``fundamentally new'' (labelled by Taylor as ``creative'') means new ways of sensing the environment and interacting with it \cite{Taylor2001}.
+
+\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws)}{\cite{Ruiz-Mirazo2004}}
+
+\begin{itemize}
+	\item An open-ended evolutionary system must demonstrate unbounded diversity during its growth phase.
+	\item An open-ended evolutionary system must embody selection.
+	\item An open-ended evolutionary system must exhibit continuing (``positive'') new adaptive activity.
+	\item An open-ended evolutionary system must have an endogenous implementation of niches.
+\end{itemize} \cite{Maley1999} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
+
+``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \parencite{Soros2014}
+
+``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.'' -
+although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \parencite{Maley1999}
+
+\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws.}{\parencite{Ruiz-Mirazo2004}}
+
+
 \section{Motivation}
 
 \epigraph{%
@@ -162,15 +183,13 @@ There has long been interest in understanding how biological evolution generates
 
 Related work falls into three main areas:
 
-\begin{itemize}
-\item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems.
-\item Work related to the subproblem of a viable model for the evolution-of-evolution in software.
-\item Work related to implementations of open-ended evolutionary systems in software.
-\end{itemize}
+\begin{enumerate}
+\item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems--below.
+\item Work related to the subproblem of a viable model for the evolution-of-evolution in software--in \ref{}
+\item Work related to implementations of open-ended evolutionary systems in software--in \ref{}
+\end{enumerate}
 	
 This \namecref{background-and-context} expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in the Previous Work sections of the subsequent Parts of the thesis. 
-
-The relevant open problems are summarized in the conclusion to this section.
 
 \subsection{Evolutionary principles from Biology}
 
@@ -185,27 +204,25 @@ Although the advantages of a distinction between genotype and phenotype are disc
 \quote{
 	Biological evolution consists of change in the hereditary characteristics of groups of organisms over the course of generations. Groups of organisms, termed populations and species, are formed by the division of ancestral populations or species, and the descendant groups then change independently. Hence, from a long-term perspective, evolution is the descent, with modification, of different lineages from common ancestors.}{``Evolution, Science, and Society: Evolutionary Biology and the National Research Agenda'', Working Draft, 28 September 1998, \url{http://www.zoology.ubc.ca/~otto/evolution/Evolwhite.pdf}}
 
+
 \subsubsection{Evolution by Natural Selection (ENS))}\label{ens-evolution-by-natural-selection}
 
-\cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant''.
-
-Of these summaries, three are predominant:
+\cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant'':
 
 \begin{enumerate}
-\item
-``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \cite{Darwin1859}
+\item ``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \cite{Darwin1859}
 
-\item
-``if there is a population of entities with multiplication, variation and heredity, and if some of the variations alter the probability of multiplying, then the population will evolve. Further, it will evolve so that the entities come to have adaptations....'' (Maynard-Smith, in \cite{Griesemer2001})
+\item ``if there is a population of entities with multiplication, variation and heredity, and if some of the variations alter the probability of multiplying, then the population will evolve. Further, it will evolve so that the entities come to have adaptations....'' (Maynard-Smith, in \cite{Griesemer2001})
 
-\item
-``1. Different individuals in a population have different morphologies, physiologies, and behaviors (phenotypic variation). 2. Different phenotypes have different rates of survival and reproduction in different environments (differential fitness). 3. There is a correlation between parents and offspring in the contribution of each to future generations (fitness is heritable).'' \cite{Lewontin:1970mc}
+\item ``1. Different individuals in a population have different morphologies, physiologies, and behaviors (phenotypic variation). 2. Different phenotypes have different rates of survival and reproduction in different environments (differential fitness). 3. There is a correlation between parents and offspring in the contribution of each to future generations (fitness is heritable).'' \cite{Lewontin:1970mc}
+
+\item ``...evolution will occur whenever and wherever three conditions are met: replication, variation (mutation), and differential fitness (competition)'' \parencite[quoting Daniel Dennett]{Ofria2004}
 
 \end{enumerate}
 
 From the study of the summaries, \cite{Godfrey-Smith2007} concludes that the core requirement for \gls{ens} is some ``combination of variation, heredity, and fitness differences'', although he identified a number of differences between the summaries. For example, the most commonly cited summary is \cite{Lewontin:1970mc}, but unusually that formulation states that ``fitness is heritable'' whereas typically phenotypic heredity (as appears in Lewontin's later 1980 summary) is stated as sufficient for a trait to evolve. 
 
-These differences are also captured in \parencite{Griesemer2001}, in particular with reference to the variations between Darwin's concept of inheritance in \cite{Darwin1859} which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both. \parencite{Griesemer2001}
+These differences are also discussed in \parencite{Griesemer2001}, in particular with reference to the variations between Darwin's concept of inheritance in \cite{Darwin1859} which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both. \parencite{Griesemer2001}
 
 Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \parencite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological.
 
@@ -238,6 +255,8 @@ The field of \glspl{ea} originated in the exploration of abstract biological evo
 \item Fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment. ``The difference is that we require a system with the potential for a large degree of intrinsic adaptation for open-ended evolution, rather than a system where the selection of individuals is determined by an externally-defined fitness function'' \parencite{Taylor2001}
 \item \Glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation.
 \item Individuals in a \gls{ea} do not interact other than indirectly through a pre-designed selection mechanism.
+\item \Glspl{ea} are not dynamical systems unlike the biological origina. Dynamics required for novelty-generation \parencite{Nellis2012}
+\item Natural organisms must replicate themselves to pass on genetic information - ``final arbiter of fitness'', and interaction with other organisms and with environment \parencite{Ofria2004}
 \end{itemize}
 
 The first two of these differences are significant; \glspl{ea} are not capable of open-ended, or evolutionary, evolution. However, recent research in biology continues to be applied to improve the performance of \glspl{ea} in their core function of optimization:
@@ -283,14 +302,9 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 	It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
 {\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
 
-Geb \parencite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward. But the use of predefined interaction types, and the lack of a self-referential evolutionary model undermine this claim.
 
-Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
 
-``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
-
-``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population
-system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (e.g., crossover).'' \cite{Dittrich1998}
+Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption) \parencite{Nellis2014}
 
 Much of this work falls under the banner of \gls{alife}, both weak and strong as distinguished by \cite{Langton1989}: ``study the phenomena of life, not by simulating life as it is (weak AL) but by instantiating life as it could be (strong AL)''
 
@@ -299,149 +313,141 @@ First, a distinction: open-ended evolution refers to a goal or result, while evo
 \quote{A key challenge is whether digital systems based on symbolic logic harbor the same potential for evolutionary innovation as physical systems. A preliminary challenge is to unlock the full potential of evolution in digital media. Many believe that digital life today falls far short in this regard, and this issue is starting to be approached quantitatively.}{\cite{Bedau:2000mi}}
 
 Previous work falls into five specific areas:
-
-Ways to recognize open-ended evolution
-Causes of open-ended evolution
-
-Theoretical basis for copy mechanism in Part 2
-
-Systems that implement the specific elements we support
-Systems that are capable of these elements, but are missing one (the copy mechanism)
-
-
-\section{Recognition of open-ended evolution - consitutive definitions}
-
-\parencite{Taylor2001} like others makes a distinction between OEE and ``kinds of evolutionary innovation''. He gives as an example of limited innovation the emergence of paratism in \cite{Ray1991} as direct result of system design and initial seeding conditions. In this reading, ``fundamentally new'' (labelled by Taylor as ``creative'') means new ways of sensing the environment and interacting with it \cite{Taylor2001}.
-
-\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws)}{\cite{Ruiz-Mirazo2004}}
-
-\begin{itemize}
-	\item An open-ended evolutionary system must demonstrate unbounded diversity during its growth phase.
-	\item An open-ended evolutionary system must embody selection.
-	\item An open-ended evolutionary system must exhibit continuing (``positive'') new adaptive activity.
-	\item An open-ended evolutionary system must have an endogenous implementation of niches.
-\end{itemize} \cite{Maley1999} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
-
-``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \parencite{Soros2014}
-
-``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.'' -
-although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \parencite{Maley1999}
-
-\quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws.}{\parencite{Ruiz-Mirazo2004}}
+\begin{enumerate}
+\item Constitutive definitions of open-ended evolution--part of the problem definition, and hence in the Introduction, \ref{}
+\item Causes of open-ended evolution
+\item Theoretical basis for copy mechanism--extracted into the Previous Work section of \ref{} as it is a major contribution.
+\item Systems that implement the specific elements we support
+\item Systems that are capable of these elements, but are missing one (the copy mechanism)
+\end{enumerate}
 
 \section{Conditions for open-ended evolution - causal definitions}
 
-Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals (ideally without any restriction). In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicator (in contrast to limited replicators where the number of possible types is less than the number of individuals.)
+Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
 
-Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \cite{Lehman2012}.
+Elements/Embodiment/Emergence:
+Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
+Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and
+likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
+Similar to the \emph{semantic closure} of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
+Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as energy, space, matter, or a combination of these.'' \parencite{Taylor2001}
+Need something emergent. \parencite{Nellis2014}
+The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.  \parencite{Soros2014}
+A ``good'' genetic representation \parencite{Soros2014}
+Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population \parencite{Vasas2015}.
+Contains an interesting discussion mapping a list of desirable properties onto the emergent properties that are then required of an \gls{achem} \parencite{Faulconbridge2010, Faulconbridge2011}
+
+Reproduction or replication:
+Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
+Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
+Very rich combinatorial generative mechanism e.g., organic chemistry \parencite{Vasas2015}
+``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
+``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population
+system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (e.g., crossover).'' \cite{Dittrich1998}
+	
+Selection:
+Individuals and environment mutually affect each other \parencite{Taylor2001}
+Competition between individuals for resources - VanValen1973 Red Queen hypothesis - primary source of intrinsic selection pressure. \parencite{Taylor2001}
+Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 
+Decisions about how and where individuals interact with the world should be made by the individuals themselves. \parencite{Soros2014}
+A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.\parencite{Soros2014}
+The evolution of new individuals should create novel opportunities for satisfying the MC \parencite{Soros2014}
+A ``sufficiently large world for every individual to be evaluated'' \parencite{Soros2014}
+``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
+Inexhaustible fitness landscape - implies rich, dynamical environment. \parencite{Vasas2015}
+Cannot state in advance possible preadaptations. \parencite{Vasas2015}
+``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+
+\begin{sidewaystable}
+	\begin{center}
+		\scriptsize
+		\caption{Previous work}
+		\label{tb:previous-work}
+		\begin{tabular}{@{}lllll@{}}
+			\hline\noalign{\smallskip}
+			\Gls{achem}                                                     & Type 	& Domain	& Emergent		& Self-referential Evolutionary mechanism\\ 
+			\\ \noalign{\smallskip}
+			\hline
+			\noalign{\smallskip}
+			\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&&\\
+			\midrule
+			\cite{Ducharme2012}                                             &Atoms/Molecules&&&\\
+			StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&&\\
+			Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&&&\\
+			RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs&&&\\
+			\cite{Lenaerts2009}                                             &&&&\\
+			ZChem \cite{Tominaga2009}                                     	&&&&\\
+			Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&&&\\
+			\cite{Fernando:2008xy,Fernando:2007pf}                             	&&&&\\
+			\cite{Gardiner2007}                                                	&&&&\\
+			NAC \cite{Suzuki2006}                                         	&&&&\\						
+			GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&&\\
+			Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&&\\
+			Avida \cite{Ofria2004}                                  		&Assembler Automata&	Alife&	Yes&\\
+			Tierra \cite{Ray1991}                                  			&Assembler Automata&	Alife&	Yes&\\
+			Using Avida\cite{Lenski2003}									&Assembler Automata&	Both&	Yes&\\
+			\cite{Taylor2001}												&&&&\\
+			\cite{Antonakopoulos:2011th}									&Rewriting or String-based	&Alife	&Developmental 	&No\\
+			\cite{Dittrich1998}												&Rewriting or String-based&&&\\
+			\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&&\\
+			\cite{Fontana1992}												&Rewriting or String-based&&&Yes\\
+			\cite{Segre1998}												&Compositional&&&\\
+			\cite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&&\\
+			\cite{Kauffman1986}												&Compositional&&&\\
+			Turing															&Rewriting 	&Alife	&Yes	&Yes\\
+			Von Neumann														&&&&\\
+			Waddington														&	Biology&&&\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Previous work evaluated against three criteria: non-biological domain and purpose, emergence, and a self-referential or evolvable evolutionary mechanism.}
+\end{sidewaystable}
 
 \Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
-\begin{enumerate}[label=\roman*] 
+\begin{enumerate}
 	\item Be fully embedded in their arena of competition 
 	\item Have rich, unlimited interactions between each other and with their environment 
 	\item Initially replicate implicitly, rather than using some encoding of the replication process, and 
 	\item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
 \end{enumerate}
 
-\parencite{Taylor2001}:
-Competition between individuals for resources - VanValen1973 Red Queen
-hypothesis - primary source of intrinsic selection pressure.
-Individuals and environment mutually affect each other
-
-Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as energy, space, matter, or a combination of these.''
-
-``the potential for a large degree of intrinsic adaptation''
-
-Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 		
+``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
 
 \parencite{Soros2014} presents four necessary conditions for OEE (it is left open if these are also sufficient conditions):
-\begin{itemize}
+\begin{enumerate}
 	\item A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.
 	\item The evolution of new individuals should create novel opportunities for satisfying the MC
 	\item Decisions about how and where individuals interact with the world should be made by the individuals themselves.
 	\item The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.
-\end{itemize}
+\end{enumerate}
 Along with these specific conditions, \parencite{Soros2014} assumes certain general conditions: a ``good'' genetic representation, a ``sufficiently large world for every individual to be evaluated'', and a seed or starting point.
 
 Minimal conditions for OEE \parencite{Vasas2015}:
-\begin{itemize}
-	\item
-	Very rich combinatorial generative mechanism e.g., organic chemistry.
-	\item
-	Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population (Maynard-Smith:1995lw).
-	\item
-	Inexhaustible fitness landscape - implies rich, dynamical environment.
-	\item
-	Cannot state in advance possible preadaptations.
-\end{itemize}
-
-Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon.
-
-Top-down models assume a knowledge of the necessary elements.
-
-``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and
-likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
-
-Similar to the semantic closure of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
+\begin{enumerate}
+\item Very rich combinatorial generative mechanism e.g., organic chemistry.
+\item Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population (Maynard-Smith:1995lw).
+\item Inexhaustible fitness landscape - implies rich, dynamical environment.
+\item Cannot state in advance possible preadaptations.
+\end{enumerate}
 
 \parencite{Maley1999}
 
-Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by
-number of molecules available for biosphere, also by energy and
-minimal populations and probably other things), and plateaus
-(punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
+Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by number of molecules available for biosphere, also by energy and minimal populations and probably other things), and plateaus (punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
 
 Maley builds up the requirements by beginning with almost the simplest model possible (called Urmodel 1) where the only changes in the population from generation to generation are 1-bit flips in a 32-bit genotype. This results in a neutral fitness landscape (as no selection) and to prevent edge effects each run was stopped before all niches were filled. The, unsurprising, result was unbounded diversity, but no selection or heritable effect on fitness.
 
-Posits that need selection : ``Requirement 2 An open-ended
-evolutionary system must embody selection'' - because ``fails to meet
-one of the basic criteria of natural selection: the heritable
-variation has no effect on fertility'' {[}ignoring use of fertility as
-a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing
-(`positive') new adaptive activity'' {[}ignore neutral theory, and
-accepts Bedau - perhaps to allow use of Anew as measure?{]}
+Posits that need selection : ``Requirement 2 An open-ended evolutionary system must embody selection'' - because ``fails to meet one of the basic criteria of natural selection: the heritable variation has no effect on fertility'' {[}ignoring use of fertility as a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing (`positive') new adaptive activity'' {[}ignore neutral theory, and accepts Bedau - perhaps to allow use of Anew as measure?{]}
 
-Urmodel2 - natural selection: mutation, ``dissimilarity'' for
-competitive advantage (justified by biological example of niche
-overlap theory (Levins, 1968)) - no increase in Anew
+Urmodel 2 - natural selection: mutation, ``dissimilarity'' for competitive advantage (justified by biological example of niche overlap theory (Levins, 1968)) - no increase in Anew
 
-Urmodel3 - selective sweep (hypothesis): parasites (mutations) and
-hosts (fixed genotypes). Fitness on degree of match between parasite
-and host bit patterns.
+Urmodel 3 - selective sweep (hypothesis): parasites (mutations) and hosts (fixed genotypes). Fitness on degree of match between parasite and host bit patterns. Restricted by 32-bit genomes, no death. Claim shows unbounded activity - ``the first known artificial evolutionary system demonstrating unbounded evolutionary activity''. But in Maley's words this is probably not a unique or even significant result--``The only trick is to defer the point when the model hits its true asymptotic behaviour for long enough that the growth dynamics of the model are themselves asymptotic in some sense'' \parencite{Maley1999}.
 
-\begin{itemize}
-	\item
+The niches in Urmodel3 are imposed from outside, rather than arising endogenously. This leads to Urmodel 4, where coevolution is added to Urmodel 3 by letting hosts mutate.
+ 
+No model however resulted in ``surprise''. Maley believes this is because of a lack of complexity, illustrated through a nice biological metaphor: ``A puddle of inert, multicoloured and diverse algae would not be nearly so inspirational as the rain forest.''
 	
-	Claim shows unbounded activity - ``the first known artificial
-	evolutionary system demonstrating unbounded evolutionary activity''
-	
-	\item
-	
-	Restricted by 32-bit genomes, no death
-	
-	\item
-	
-	But probably not a unique or even significant result - ``The only
-	trick is to defer the point when the model hits its true asymptotic
-	behaviour for long enough that the growth dynamics of the model are
-	themselves asymptotic in some sense''
-	
-\end{itemize}
-
-Urmodel4 - ``the most important aspect of an organism's environment
-are the other organisms with which it interacts'' - add coevolution to
-Urmodel3 by letting hosts mutate
-
-Two ``distasteful aspects of Urmodel3'' leading to belief that metrics
-aren't right
-
-\begin{itemize}
-	\item niches are imposed from outside, not endogenous - this becomes Requirement 4
-	\item no surprise - claim is because not complex - ``A puddle of inert,
-	multicoloured and diverse algae would not be nearly so inspirational
-	as the rain forest.'' Again, a biological metaphor.	
-\end{itemize}
-
+\subsubsection{EvoEvo Project}
 The EvoEvo project (\url{http://evoevo.liris.cnrs.fr/about-evoevo-project/}), an Information and Communication Technologies initiative funded by the European Commission, begins at a higher level biological starting point (genotype-phenotype mappings). The project presupposes microbial evolution, ``at the level of genomes, biological networks and populations.'', with a focus on four specific properties of a genotype-phenotype mapping - Variability, Robustness, Evolvability, Open-endedness. Later work is planned to remove the biological specificity to provide a framework for applying EvoEvo to ICT problems. Along with development of a model founded on the ``genotype-to-phenotype mapping and the fitness landscape'', the project states that make use of \emph{Aevol} \parencite{Knibbe:2006vn,Knibbe:2007kx} to model developmental processes in microorganisms.
 
 \emph{Aevol} describes the genotype-phenotype map of an artificial organism modelled closely on a prokaryotic cell. The genotype is therefore made up of a \emph{double-stranded circular} bit-string with genes marked by promotor sequences and terminated by sequences that can form a ``stem-loop'' structure (where bases are arranged in sequence along a protein such that the binding between complementary bases causes a characteristic loop to form in the protein.) Expression levels of a gene are based on the degree of similarity between the gene's promotor sequence and a predefined ``consensus'' sequence (as calculated by the Hamming distance), as is the case in real-world prokaryotes where the basal transcription level depends on the quality of the promotor \parencite{Sanchez-Dehesa:2008uq}. Translation in \emph{aevol} takes place between marked regions of the gene, and proceeds three-bit codon by codon, with each codon translated according to an artificial genetic code into an amino-acid equivalent in a protein.
@@ -456,130 +462,61 @@ The \emph{aevol} model contains several innovations:
 
 To study the relationship between regulatory processes and adaptation to changing environments \parencite{Sanchez-Dehesa:2008uq}, two major changes have been made to \emph{aevol} to give \emph{RAevol} or Regulatory \emph{Aevol} \parencite{Beslon:2010zr,Sanchez-Dehesa:2008uq}. The first is the implementation of a fine-grained time model; proteins concentrations now vary dynamically (instead of remaining static as in \emph{aevol}), and the organism's proteome and phenome change over time to reflect these protein changes. The other is the addition of a regulatory model. The calculation of the basal expression level of a gene in \emph{RAevol} is the same as that in \emph{aevol} - a function of the Hamming distance between consensus sequence and gene promotor sequence. However, in \emph{RAevol} this level is modified by the action of regulation, either up-regulating or down-regulating the basal expression. The degree of regulation is determined by the concentration of proteins that may bind to two regulatory sites (an enhancer site and an operator site for inhibition) each 20-bits long. The ability of a protein to bind to the binding site is calculated from a predetermined ``affinity'' matrix that mediates between the DNA bit-string representation of the binding site, and the amino-acid representation of the protein. A simple process change in \emph{RAevol} enables interaction with the environment:  during simulation, a signalling protein of set sequence that has no metabolic function but can act as a \gls{tf} is sent to the organism when the target environment changes.
 
-
-Previous work is evaluated against three criteria: non-biological domain and purpose, emergence, and a self-referential or evolvable evolutionary mechanism.
-
-\begin{table}
-	\scriptsize
-	\caption{Previous work}
-	\label{tb:previous-work}
-	\begin{tabular}{@{}lllll@{}}
-		\hline\noalign{\smallskip}
-		\Gls{achem}                                                        	& Type 	& Domain	& Emergent		& Self-referential Evolutionary mechanism\\ 
-		\\ \noalign{\smallskip}
-		\hline
-		\noalign{\smallskip}
-		\cite{Ducharme2012}                                             &Atoms/Molecules&&&\\
-		StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&&\\
-		Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&&&\\
-		RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs&&&\\
-		\cite{Lenaerts2009}                                             &&&&\\
-		ZChem \cite{Tominaga2009}                                     	&&&&\\
-		Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&&&\\
-		\cite{Fernando:2008xy,Fernando:2007pf}                             	&&&&\\
-		\cite{Gardiner2007}                                                	&&&&\\
-		NAC \cite{Suzuki2006}                                         	&&&&\\						
-		GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&&\\
-		Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&&\\
-		Avida \cite{Ofria2004}                                  		&Assembler Automata&	Alife&	Yes&\\
-		Tierra \cite{Ray1991}                                  			&Assembler Automata&	Alife&	Yes&\\
-		Using Avida\cite{Lenski2003}									&Assembler Automata&	Both&	Yes&\\
-		\cite{Taylor2001}												&&&&\\
-		\cite{Antonakopoulos:2011th}									&Rewriting or String-based	&Alife	&Developmental 	&No\\
-		\cite{Dittrich1998}												&Rewriting or String-based&&&\\
-		\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&&\\
-		\cite{Fontana1992}												&Rewriting or String-based&&&Yes\\
-		\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&&\\
-		\cite{Segre1998}												&Compositional&&&\\
-		\cite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&&\\
-		\cite{Kauffman1986}												&Compositional&&&\\
-		Turing															&Rewriting 	&Alife	&Yes	&Yes\\
-		Von Neumann														&&&&\\
-		Waddington														&	Biology&&&\\
-		\hline
-	\end{tabular}
-\end{table}
-
 \section{Copy-based approaches to the evolution-of-evolution in artificial systems}
 
 Specifically based on evolvable copy mechanisms.
 
-\parencite{Nellis2012}
+\parencite{Nellis2012} PhD thesis, and \parencite{Nellis2014} (summary of thesis)
 
 ``Our aim is to improve novelty-generation algorithms by making their biological models richer''
 
-Novelty-generation as goal/theme for meta-evolution
-
-No measure for novelty - not even sure is possible. But informal definition that says more novelty as result of more embodiment (this seems circular?) p87
-
-Embodiment as mechanism. Provides overview in 3.2
-
-AChems categorized as world/chemistry/constraints (p132), with constraints being energy model/binding model. RBN-World mentioned as a world where elements are RBN networks
-
-States that binding model needs to be rich - empirical evidence presented (StringMol) only
-
-Copying is a phenomenon, expressed through mechanisms at different levels of the AChem
-
-Explored through embodied copying mechanism built in GraphMol, with antecedent in StringMol (Hickingbotham2011)
-
-StringMol includes an embodied copying mechanism - start/at-end/char-copy/next. Some elements (at-end) use Smith-Waterman matching algorithm, which opens ability for evolution to modify the function of at-end (Nellis2012p143). But others, e.g., next, are not embodied. GraphMol makes next embodied
-
-Design is graph based (obviously..). ``The world defined by GraphMol contains chemicals (represented as graphs) that bind to each other via multiple binding sites, and then run simple computer programs (encoded in the graphs) that modify the binding of these chemicals.''. Why? No explicit rationale presented. Presumably StringMol starting point meant programs, copying, then graphs? 
-Operates (like StringMol) at level of proteins/enzymes e.g., replicases, DNA
-
-Runtimes in weeks to months
-
-\parencite{Nellis2014}
-
-Summary of PhD thesis - computational novelty through embodiment
-
-Comparing StringMol and GraphMol
-
-Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption)
-
-Standard GAs search through a fixed space - cannot surprise, limited range
-
-Need something emergent
-
-Mechanism of evolution must be itself evolvable; individuals and environment interact to give new ways of producing new individuals.
-Dynamics required for novelty-generation.
-
+Computational novelty through embodiment. Comparing StringMol and GraphMol
+Novelty-generation as goal/theme for meta-evolution. No measure for novelty - not even sure is possible. But informal definition that says more novelty as result of more embodiment (this seems circular?) p87 Embodiment as mechanism. 
 Quick defined embodiment in terms of two dynamical systems mutually affecting each other - no need for a physical world. System modifies environment. Doesn't address if system is constructed from environment. Autopoiesis does say though that system built from environment. But autopoiesis talks about maintenance not evolution
 
-Functions such as template copying must be embodied mechanisms in the world - so can be affected and evolved
+Operates (like StringMol) at level of proteins/enzymes e.g., replicases, DNA
+Design is graph based (obviously..). ``The world defined by GraphMol contains chemicals (represented as graphs) that bind to each other via multiple binding sites, and then run simple computer programs (encoded in the graphs) that modify the binding of these chemicals.''. Why? No explicit rationale presented. Presumably StringMol starting point meant programs, copying, then graphs? 
 
+States that binding model needs to be rich - empirical evidence presented (StringMol) only
+Runtimes in weeks to months.
+
+Mechanism of evolution must be itself evolvable; functions such as template copying must be embodied mechanisms in the world - so can be affected and evolved.
+Individuals and environment interact to give new ways of producing new individuals.
 Stringmol and Graphmol have embodied template copying, done in different ways. Different computational models result in different properties - ``Stringmol exhibits macro-mutation and two chemical copying; GraphMol exhibits two types of quasispecies, cooperative and parasitic. These two systems use the same domain (emergent evolution) and metamodel (machines copying strings), but different computational models.''
+Copying is a phenomenon, expressed through mechanisms at different levels of the AChem. Explored through embodied copying mechanism built in GraphMol, with antecedent in StringMol (Hickingbotham2011)
+StringMol includes an embodied copying mechanism - start/at-end/char-copy/next. Some elements (at-end) use Smith-Waterman matching algorithm, which opens ability for evolution to modify the function of at-end \parencite[p.143]{Nellis2012}. But others, e.g., next, are not embodied. GraphMol makes next embodied.
 
 \section{Other potentially open-ended artificial chemistries}
 Might be capable of EvoEvo, but either not demonstrated, or not a focus of the work. Meet the criteria other than demonstration of an evolvable copy mechanism.
 
 \subsection{Assembler Automata}
 
-Avida \parencite{Ofria2004}
+Steen Rasmussen inspired by computer game core war - competing segments of simplified assembly code in core memory. With change to copy command to introduce mutations and hence evolutionary potential,
+core world created. But system ``collapsed into a non-living state'' {[}non-living?{]} One possible reason - copying over existing organisms \parencite{Ofria2004}
 
+Tierra next year (relationship not stated)
+
+Tierra \parencite{Ray1991}
+
+Organisms had to allocate memory first before using. Initial selective pressure only from rate of replication. Sequential execution of organism code. \parencite{Ofria2004}
+
+In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
+
+Avida \parencite{Ofria2004}
 ``An approach to studying evolution...''
 
-``According to Daniel Dennett, ``...evolution will occur whenever and wherever three conditions are met: replication, variation (mutation), and differential fitness (competition)''''
+Avida summer of 1993 - Tierra based with better metering and measuring, and parallel code execution.
 
-``(However, as Barton and Zuidema {[}3{]} note, general acceptance will ultimately hinge on whether artificial life researchers embrace or ignore the large body of population genetics literature.)''
-
-Difference with GAs - natural organisms must replicate themselves to pass on genetic information - ``final arbiter of fitness'', and interaction with other organisms and with environment \parencite{Ofria2004}
-
-Steen Rasmussen inspired by computer game core war - competing segments of simplified assembly code in core memory. With change to copy command to introduce mutations and hence evolutionary potential,
-core world created. But system ``collapsed into a non-living state'' {[}non-living?{]} One possible reason - copying over existing organisms
-
-Tierra next year (relationship not stated) organisms had to allocate memory first before using. Initial selective pressure only from rate of replication. Sequential execution of organism code
-
-Avida summer of 1993 - better metering and measuring, and parallel code execution
+Phenotypes - ``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a
+benefit for performing specific computations associated with resources''
 
 ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by
 the Tierra system.''
-
 Instruction, read, write, and flow control heads for relative rather than absolute addressing - bit like a Turing tape machine. Many instructions grouped into instruction sets. Default set has 26 instructions, and by definition every program is valid.
-Phenotypes - ``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a
-benefit for performing specific computations associated with resources''
-All very configurable, and complicated, but why? What rationale behind choices? More of a testbed for experiments, e.g., `` in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift''
+
 ``The quest to halt adaptation is only one example of a special feature in Avida; many more have been explored, and are continuously being added to the source code. The most successful features are all fully described in the documentation that comes with the software.''
+
+All very configurable, and complicated, but why? What rationale behind choices? More of a testbed for experiments, e.g., `` in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift''
 
 \parencite{Taylor2001}:
 Derived from Thesis (Taylor:1999sc): creation of \gls{alife}, Extension of Tierra \cite{Ray1991} by cell regulation, parallel processes, energy modelling \cite[p.4]{Taylor:1999sc}, Cells are explicitly modelled as bitstrings which run as programs, and an adhoc theoretical model (essentially Tierra plus some previously identified improvements)
@@ -641,33 +578,23 @@ As the rules for the combinations of two molecules are predetermined (the reacti
 
 \parencite{Faulconbridge2010, Faulconbridge2011}:
 
-RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (\cite[§8]{Faulconbridge2011}). 
+RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. ``As the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.``
 
-Entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed loops (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (chap 8)
+A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}. 
 
-Gillespie-like" - random reaction, random time - not correlated in any way with reaction energies or rates (Faulconbridge2011§8.4.3.1)
-
+Entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed loops (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}
 bRBNs used as atomic elements, properties determined by the network
+Each bRBN is a RBN, made up of a number of nodes, each with an initial state (true/false) assigned randomly and with a input/output matrix assigned randomly. Finally k(=2) inputs are established per node. Synchronous state update. All based on \cite{Kauffman:1969ne} (interestingly, although noted as ``original'' so later work known) bonding method uses ''cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' in initial examples at least n=5 and b(k?)=2, and alternatives examined using EA. After initial bond formation recalculate cycle lengths, and check again for equality - might result in decomposition.
 
 Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.`` Record kept of composition so that decomposition can be easily done.
 
+``Gillespie-like" - random reaction, random time - not correlated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}
+
 Many design choices - bonding mechanism etc. Examination of alternatives done by searching with EA
-
-Each bRBN is a RBN, made up of a number of nodes, each with an initial state (true/false) assigned randomly and with a input/output matrix assigned randomly. Finally k(=2) inputs are established per node. Synchronous state update. All based on Kauffman1969 (interestingly, although noted as ``original'' so later work known) bonding method uses ''cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' in initial examples at least n=5 and b(k?)=2, and alternatives examined using EA. After initial bond formation recalculate cycle lengths, and check again for equality - might result in decomposition.
-
-Describes two generic strategies for the selection of reactants, spatial and aspatial, where the primary difference is whether molecular position is a factor in reactant selection
-
-Measures are Synthesis, Self-Synthesis, Decomposition, Substitution, and Catalysis (Faulconbridge2011§7), and non-catalysed `loops' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) (Faulconbridge2011§8)
-
-Random sampling + EA (Fitness function (§8.4.3.2) is based on non-catalysed loops (§4.3.9.4))		
-
-"identifies three types of \textbackslash{}emph\{mixing method\} or reactor algorithm			
-
-Contains an interesting discussion mapping these desirable properties onto the emergent properties that are then required of an \textbackslash{}gls\{achem\}
+Measures are Synthesis, Self-Synthesis, Decomposition, Substitution, and Catalysis \parencite[chap.7]{Faulconbridge2011}, and non-catalysed `loops' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}
+Random sampling + EA, with a fitness function based on non-catalysed loops.
 
 Some advantages claimed over Hutton (emergence and computational intractability p190)
-
-``As the choice to use RBNs as the sub- symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.``
 
 \subsection{Atoms/Molecules}
 
@@ -709,57 +636,27 @@ Production rules hardcoded into AChem
 Only with raw materials in environment, niche construction through adaptation to availability of raw materials
 
 AChem hand-built with reactions instead of enzymes
-Prespecified reactions - see Faulconbridge2011 p.49
-
-Artificial system capable of life-like \textbackslash{}gls\{oee\} (creativity)
-
-Based on hypothesis (materiality, interactions, embedding) of \textbackslash{}textcite\{Taylor2001\}, better expressed in \textbackslash{}textcite{[}p.341{]}\{Hutton2002\}; membrane to allow
-individuals to benefit from innovations by protecting internal reactions from others
-
-\textbackslash{}Gls\{achem\} from \textbackslash{}textcite\{Hutton2002\} used to construct all elements in world - material and embedded.
-
-Atoms in \textbackslash{}gls\{achem\} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
-
-Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division
-
-Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)
+Prespecified reactions - see description in \cite[p.49]{Faulconbridge2011}.
 
 \subsection{Compositional}
 
+\cite{Kauffman1986}
+Reflexively Autocatalytic Polymer Networks (RAPN) are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in Vasas2012 putting these networks into compartments (so not well-stirred) then can do directional selection.
+
+GARD \parencite{Segre1998}
+Eigen threshold applies - mutation rates (see issue of replication--big differences between parent and child) overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}
+
+Claim made that GARD is capable of darwinian evolution, but population analysis showed not in response to directional selection (Vasas2010) \parencite{Vasas2015, Vasas2012, Vasas2012a}
+GARD does not result in selectable replicating entities - there is no replication as certain highly catalytic molecules determine the properties of the compotype, and these are not inherited equally - instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent \parencite{Vasas2015, Vasas2012, Vasas2012a}
+
+Differences to RAPN:
+\begin{itemize}
+	\item Kinetics of growth - RAPN has ligation, GARD does not. Ligation allows new components to be formed with new properties
+	\item Search for adaptations - GARD has fixed catalysis, Kauffman does not - mutant polymers can arise, be incorporated into the set, and influence its fitness
+\end{itemize}
+
 \parencite{Vasas2015, Vasas2012, Vasas2012a}
-
-If inheritance is statistical only then ok; but literature stresses digitally encoded although might just be cognitive bias
-
-Unit of selection very important to define now in abiogenesis
-
-Can evolution happen when information transfer is non-digital? Specifically where there is a parent-offspring correlation in molecular composition?
-
-Based on GARD \parencite{Segre1998}:
-
-\begin{itemize}
-	\item Compositional inheritance
-	
-	\item claim made that GARD is capable of darwinian evolution, but
-	population analysis showed not in response to directional selection
-	(Vasas2010)
-	
-	\item Eigen threshold applies - mutation rates (see issue of replication -
-	big differences between parent and child) overwhelm selection
-\end{itemize}
-
-Ganti and Eigen showed that distinct, organizationally different alternative autocatalytic networks in same environment might compete and fittest would prevail (e.g., autocatalytic networks as units of selection).	Check number of network components (=autocatalytic networks). In GARD, end up with just one big component
-
-GARD does not result in selectable replicating entities - there is no replication as certain highly catalytic molecules determine the properties of the compotype, and these are not inherited equally - instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent
-
-Kauffman 1986 Reflexively Autocatalytic Polymer Networks (RAPN) however are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in Vasas2012 putting these networks into compartments (so not well-stirred) then can do directional selection
-
-Differences between GARD and RAPN:
-\begin{itemize}
-	\item
-	kinetics of growth - RAPN has ligation, GARD does not. Ligation allows new components to be formed with new properties
-	\item
-	search for adaptations - GARD has fixed catalysis, Kauffman does not - mutant polymers can arise, be incorporated into the set, and influence its fitness
-\end{itemize}
+Based on GARD \parencite{Segre1998}. Can evolution happen when information transfer is non-digital? Specifically where there is a parent-offspring correlation in molecular composition? Compositional inheritance. If inheritance is statistical only then ok; but literature stresses digitally encoded although might just be cognitive bias. Ganti and Eigen showed that distinct, organizationally different alternative autocatalytic networks in same environment might compete and fittest would prevail (e.g., autocatalytic networks as units of selection).	Check number of network components (=autocatalytic networks). In GARD, end up with just one big component
 
 %\subsection{Other} % Not capable of OEE
 %	
@@ -767,28 +664,20 @@ Differences between GARD and RAPN:
 %
 %\cite{Dorin:2006fk} demonstrates that an \gls{achem} can support a simple ecology--autotrophs and heterotrophs--loosely based on simplified model of generic terrestrial ecosystem, with interactions between organisms, and between organisms and the abiotic environment. All organisms emerge from an environment consisting of unbound atoms, from a fixed set with given properties. A set of predetermined reactions, most catalysed by an specific enzyme taken from a set of enzyme atoms, models various biologically-inspired types of interaction. For example, photosynthesis is defined as $AO + BO --(chlorophyll & sunlight) \rightarrow AB + 2O$, where chlorophyll is an enzyme.
 
+\section{Discussion}
+Previous work is coming to a general consensus on the pre-conditions for open-ended evolution, without any meeting the constitutive definition (by showing the desired results).
+
+Geb \parencite{Channon:iw,Channon:2001ly} was the first to claim to be \gls{oee} under \cite{Bedau:2000mi}. In Geb, artificial organisms are controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward. But the use of predefined interaction types, and the lack of a self-referential evolutionary model undermine this claim; from our earlier review it is clear that Geb lacks essential elements for an \gls{oee} system.
+
+Not built around any particular theory:
+``This weakness is not specific to Tierra, but is shared by most, if not all, of the other Tierra-like systems which have emerged over the last decade\ldots{}''\parencite{Taylor2001}
+Similar criticism by Pattee1988 - ``simulations that are dependent on ad hoc and special-purpose rules and constraints for their mimicry cannot be used to support theories of life'' \parencite{Taylor2001}
+
 \chapter{Methods}\label{methods}
 
 The field of artificial life is synonymous with simulation \parencite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments and mathematical models. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 
 \section{Research questions}\label{research-questions}
-
-Previous work is coming to a loose consensus on the conditions for open-ended evolution, without any existing system meeting these conditions demonstrating the sought-for outcome.
-
-Not built around any particular theory - ``This weakness is not specific to Tierra, but is shared by most, if not all, of the other Tierra-like systems which have emerged over the last decade\ldots{}''\parencite{Taylor2001}
-
-In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
-
-Similar criticism by Pattee1988 - ``simulations that are dependent on ad hoc and special-purpose rules and constraints for their mimicry cannot be used to support theories of life'' \parencite{Taylor2001}
-
-In general the difficulties with earlier work include:
-\begin{itemize}
-	\item Somewhat arbitrary choices of elements of description
-	\item Genotype/Phenotype, Selection,\ldots{} often based on goal of rationalizing existing descriptions, so not a re-examination
-	\item Lack causality--so hard to use as mechanism
-	\item Leave options and alternatives for implementer
-	\item Sheer number of EA algorithms
-\end{itemize}
 
 \section{Experiments}\label{experiments}
 

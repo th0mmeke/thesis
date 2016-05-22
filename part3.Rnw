@@ -128,7 +128,7 @@ All four areas rely on a connection to real chemistries--Molecular synthesis and
 Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
 
 \begin{figure}
-\begin{framed}
+\begin{mdframed}
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
 A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry)
@@ -191,7 +191,7 @@ intermediate products, called template autocatalysis, or 2) by a reaction networ
 intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for
 example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation.\parencite{Plasson2010}.
-\end{framed}
+\end{mdframed}
 \captionsetup{name=Box}
 \caption{Review of relevant elements of Physical Chemistry}
 \label{box:physicalchemistry}

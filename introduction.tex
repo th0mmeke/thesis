@@ -7,7 +7,7 @@ Without hesitation or ambiguity, and fully mindful of such paleontological wonde
 
 The goal for this work is to determine the conditions under which robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world. 
 
-Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that continues to produce interesting, novel, and creative results, as does natural biological evolution; in other words, we mean the \textit{evolution of evolution.} Finally, we constrain our domain to software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
+Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that continues to produce interesting, novel, and creative results, as does natural biological evolution; in other words, a changing process, and so our goal is the \textit{gls{evoevo}}. Finally, we constrain our domain to software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
 
 Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. By contrast, artificial evolutionary systems such as Evolutionary Algorithms are exogenous, problem-specific and designed.
 
@@ -15,8 +15,7 @@ A convenient shorthand capturing these differences labels the biological inspira
 
 But as biology is contingent, what is the most useful starting point for a recapitulation? Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons. And also assume that biological evolution does not depend upon embodiment - that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
 
-Then our belief is that the evolution of evolution itself can and will emerge under certain conditions, and that an emergent approach will be more successful than the predominant design-driven top-down approach today.
-
+Then our belief is that the \emph{\gls{evoevo}} itself can and will emerge under certain conditions, and that an emergent approach will be more successful than the predominant design-driven top-down approach today.
 
 %Simple ongoing evolution is not the same as creative or interesting evolution; the current state-of-the-art is both insufficient and unsatisfying. \parencite{Bourrat2015} makes a related distinction between distributive and transformative forms of evolution, where distributive evolution sees simply a change in population distribution without the generation of novelties or new elements characteristic of transformative evolution. The fundamental open problem is how to achieve transformative evolution in artificial systems.
 
@@ -51,7 +50,7 @@ As stated by many (\eg \parencite{Pascal2013}) a definition of life is elusive, 
 One interesting distinction between living and non-living comes from \parencite{Rasmussen2004}--non-living systems explore a state-space driven by thermodynamics, and so in a sense through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \parencite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things. Given the relationship between information and entropy, the statement about metabolism in \cite{Schrodinger1944}--how ``living matter evades the decay to equilibrium''--seems very similar.
 
 \begin{figure}
-\begin{framed}
+\begin{mdframed}
 %\epigraph{%
 %``What we do not know today we shall know tomorrow. A whole army of biologists is studying the structure and organization of
 %living matter, while a no less number of physicists and chemists are daily revealing to us new properties of dead things. Like two parties
@@ -67,7 +66,7 @@ One interesting distinction between living and non-living comes from \parencite{
 %	chemically formed ready to undergo still more complex
 %	changes\ldots{}'')}} \parencite{Vasas2012}
 
-Tthe evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspect, it is not possible to test hypotheses by falsification, and hence they can only be speculative.
+The evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspect, it is not possible to test hypotheses by falsification, and hence they can only be speculative.
 
 However, a consensus is forming that early life began with chemoautotrophs fueled by energy from inorganic redox couples and biomass from CO\textsubscript{2}, and that innovations in carbon-fixation created the main branches in the tree-of-life \parencite{Braakman2012}. Initiation of selection marked by \gls{ida}, probably from RNA world, followed substantially later by Last Universal Common Ancestor (LUCA) \parencite{Yarus2011}, which, it is important to note for clarity, was almost certainly not a single cell or even species, but rather a construct of evolutionary genetics because of the likely predominance of Lateral Gene Transfer (LGT) in archaic biology (http://sandwalk.blogspot.ca/2007/03/web-of-life.html).
 
@@ -89,7 +88,7 @@ The main issues with replicator-first model are the sizeable step required from 
 
 The origin of life can be seen as the transition from chemistry to biology, and is analogous to our goal of transitioning from simple uninteresting systems, to systems which evolve. However, the usefulness of the similarity is limited: the primary postulates of OOL are not our postulates. Some abiogenesis results fundamentally assume real-world chemistry and
 conditions, a constraint that doesn't apply to Alife or artificial OEE, and so is more restrictive than required. Other abiogenesis work such as on properties of autocatalytic sets, or the suitability of the genetic and catalytic properties of RNA for Alife \parencite{Cheng2010}, is broader in applicability.
-\end{framed}
+\end{mdframed}
 \captionsetup{name=Box}
 \caption{The origins of life}
 \label{box:ool}
@@ -284,10 +283,9 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 	It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
 {\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
 
-Geb \cite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward. But the use of predefined interaction types, and the lack of a self-referential evolutionary model undermine this claim.
+Geb \parencite{Channon:iw,Channon:2001ly} is claimed to be open-ended: artificial organisms controlled by neural networks created by a developmental process from a bit-string genotype. Individuals interact with the world through five predefined types of interaction generated by the neural network - reproduce (crossover and mutation of production rules), fight, turn anti-clockwise or clockwise, move forward. But the use of predefined interaction types, and the lack of a self-referential evolutionary model undermine this claim.
 
 Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
-
 
 ``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
 
@@ -299,6 +297,17 @@ Much of this work falls under the banner of \gls{alife}, both weak and strong as
 First, a distinction: open-ended evolution refers to a goal or result, while evolution-of-evolution, or EvoEvo, describes a process or mechanism. The first is constitutive, the second causal. In artificial systems, the most influention formulation of the problem overall remains that of \cite{Bedau:2000mi}:
 
 \quote{A key challenge is whether digital systems based on symbolic logic harbor the same potential for evolutionary innovation as physical systems. A preliminary challenge is to unlock the full potential of evolution in digital media. Many believe that digital life today falls far short in this regard, and this issue is starting to be approached quantitatively.}{\cite{Bedau:2000mi}}
+
+Previous work falls into five specific areas:
+
+Ways to recognize open-ended evolution
+Causes of open-ended evolution
+
+Theoretical basis for copy mechanism in Part 2
+
+Systems that implement the specific elements we support
+Systems that are capable of these elements, but are missing one (the copy mechanism)
+
 
 \section{Recognition of open-ended evolution - consitutive definitions}
 
@@ -491,7 +500,9 @@ Previous work is evaluated against three criteria: non-biological domain and pur
 	\end{tabular}
 \end{table}
 
-\section{Simulations of the evolution-of-evolution in artificial systems}
+\section{Copy-based approaches to the evolution-of-evolution in artificial systems}
+
+Specifically based on evolvable copy mechanisms.
 
 \parencite{Nellis2012}
 
@@ -540,6 +551,8 @@ Functions such as template copying must be embodied mechanisms in the world - so
 Stringmol and Graphmol have embodied template copying, done in different ways. Different computational models result in different properties - ``Stringmol exhibits macro-mutation and two chemical copying; GraphMol exhibits two types of quasispecies, cooperative and parasitic. These two systems use the same domain (emergent evolution) and metamodel (machines copying strings), but different computational models.''
 
 \section{Other potentially open-ended artificial chemistries}
+Might be capable of EvoEvo, but either not demonstrated, or not a focus of the work. Meet the criteria other than demonstration of an evolvable copy mechanism.
+
 \subsection{Assembler Automata}
 
 Avida \parencite{Ofria2004}
@@ -585,9 +598,9 @@ Using L-systems - one for cells/nodes, and the other for connectivity rules
 Developmental process ``capable of expressing developmental actions e.g., growth and differentiation'' and ``able to express a large variety of topologies within each architecture\ldots{}''
 
 \cite{Dittrich1998}:
-A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry, with advantages claimed over ODE approaches such as those in \cite{Bagley1992}
+A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry.
 
-Introduction of  S,R,A classification scheme for artificial chemistry, where S=`` binary strings with a constant length of 32 bits'', R=s1+s2-\textgreater{}s3, and A=''simulates a well-stirred tank  reactor with mass-action kinetics, which assures that the probability of a collision is proportional to the product of the concentration of the colliding objects'' based on earlier work by Fontana and Kauffman.
+Introduction of \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme for artificial chemistry, elaborated in \parencite{Dittrich:2001zr}, where in this work \emph{S} are `` binary strings with a constant length of 32 bits'', \emph{R} are of the form $s1+s2 \rightarrow s3$, and \emph{A} ''simulates a well-stirred tank reactor with mass-action kinetics, which assures that the probability of a collision is proportional to the product of the concentration of the colliding objects'' (based on earlier work by Fontana and Kauffman.)
 
 A=``1. Select two objects s1,s2 from the soup randomly, without removing them. 2. If there exists a reaction s1 + s2 to s3 and the filter condition f (s1,s2,s3) holds, replace a randomly selected object of the soup by s3.'', s1 and s2 are not consumed, rather they act as catalysts. Chosen as this shown capable of hypercyclic organisation
 
@@ -597,19 +610,9 @@ Measures (all macroscopic)
 
 \begin{itemize}
 	\item Diversity
-	
-	\item
-	
-	Distance Distribution Complexity (from Kim)
-	
-	\item
-	
-	Productivity
-	
-	\item
-	
-	Innovativity (innovation = new string)
-	
+	\item Distance Distribution Complexity
+	\item Productivity
+	\item Innovativity (innovation = new string)
 \end{itemize}
 
 \parencite{Fenizio2000}:
@@ -635,8 +638,6 @@ Experiment to show spontaneous formation of autopoietic cells, with a focus on `
 As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \cite{Fenizio2000}), this model is not by our definition open-ended.
 
 \subsection{Boolean Networks and Graphs}
-
-
 
 \parencite{Faulconbridge2010, Faulconbridge2011}:
 
@@ -760,20 +761,11 @@ Differences between GARD and RAPN:
 	search for adaptations - GARD has fixed catalysis, Kauffman does not - mutant polymers can arise, be incorporated into the set, and influence its fitness
 \end{itemize}
 
-\subsection{Other}	
-	
-% \cite{Sayama2011} & Swarm Chemistry & & & & \\
-%\cite{Sayama2011} explores ability of Swarm Chemistry - an integration of Artificial Chemistry with Swarm Robotics - to achieve Open-Ended Evolution. The models are rather non-biological, and interpretation as biology is difficult. One specific difficulty with the results as reported, noted by the author, is that all results were obtained by visual inspection, and that measures need to be developed based on some standard works.
-
-% \cite{Dorin:2006fk} &
-% Demonstrate that \gls{achem} can support a simple ecology - autotrophs and heterotrophs, with interactions between organisms and between organisms and the abiotic environment&
-% Loosely based on simplified model of generic terrestrial ecosystem &
-% All elements emerge from \gls{achem}&
-% Atoms and energy&
-% No evolutionary model; proposed ecosystem made up of a number of component organisms&
-% Description of model only - no results; adhoc theoretical justification and choice of ecosystem elements\\
-		
-
+%\subsection{Other} % Not capable of OEE
+%	
+%\cite{Sayama2011} explores the ability of Swarm Chemistry--an integration of Artificial Chemistry with Swarm Robotics--to achieve \gls{oee}. The models are rather non-biological, and interpretation as biology is difficult. One specific difficulty with the results as reported, noted by the author, is that all results were obtained by visual inspection, and that measures need to be developed based on some standard works.
+%
+%\cite{Dorin:2006fk} demonstrates that an \gls{achem} can support a simple ecology--autotrophs and heterotrophs--loosely based on simplified model of generic terrestrial ecosystem, with interactions between organisms, and between organisms and the abiotic environment. All organisms emerge from an environment consisting of unbound atoms, from a fixed set with given properties. A set of predetermined reactions, most catalysed by an specific enzyme taken from a set of enzyme atoms, models various biologically-inspired types of interaction. For example, photosynthesis is defined as $AO + BO --(chlorophyll & sunlight) \rightarrow AB + 2O$, where chlorophyll is an enzyme.
 
 \chapter{Methods}\label{methods}
 
@@ -816,19 +808,19 @@ Simulations by contrast are holistic and bottom-up, and encompass variability so
 
 Simulations seem to fall somewhere in between thought experiments or abstract models, and experiments. They are also relatively novel; common use has only come with increased access to digital computers. Consequently the nature of simulation--what can be claimed as a result of simulation, and what role may be played legitimately by simulation in scientific discovery--is a hot topic for philosophers of science. As might not be unexpected, two opposing positions have been commonly taken, plus a synthesis that claims the middle ground.
 
-\newthought{Simulations are just calculators}\label{simulations-are-just-calculators}
+\newthought{Simulations are only programs}
 
 That is, a computational means to solve analytically intractable equations \parencite[31]{Winsberg2010}, ``...a high-speed generator of the consequences that some theory assigns various antecedent conditions'' \parencite[quoting from Dennett]{Eldridge}, producing nothing new (just consequences of what is ``fed in''\parencite{DiPaolo2000}). In this sense, simulations are not empirical.
 
 In this view simulations are aimed at answering specific questions, or analysing particular scenarios. The more accurate the simulation however, and hence the more valuable the results, the harder it is to generalize to other cases. It is hard to understand the behaviour of complicated simulations, and the causes of particular behaviours of interest may be unclear if there are many variables in play. For this reason \parencite{MaynardSmith1974} prefers the use of simple models, designed to illuminate the ``causes of differences of behaviour between different species or systems'' rather than ``assertions which are true of all systems or of all species.''
 
-\newthought{Simulations are themselves an instance of the thing}\label{simulations-are-themselves-an-instance-of-the-thing}
+\newthought{Simulations are themselves an instance of the thing}
 
 That is, the thing is not a shadow but the object. The Animats are actually alive, and therefore instances of biology.
 \footnote{And this way leads us to the claims of Strong Alife--the simulation is actually alive.}
 The simulation is a stand-in for the real world, and you can perform experiments on it as would any other system \parencite[31]{Winsberg2010}. Simulations certainly have elements of uncertainty and error, like experiments. As \parencite{Adami2002} says, describing Avida, \quote{These organisms, because they are defined by the sequence of instructions that constitute their genome, are not simulated. They are physically present in the computer's memory and live there. The world to which these creatures adapt, on the other hand, is simulated\ldots}{\parencite{Adami2002}}
 
-\newthought{A third-way, neither experimental or theoretical}\label{a-third-way-neither-experimental-or-theoretical}
+\newthought{Simulations are model builders}
 
 \parencite[31]{Winsberg2010} or an ``Opaque Thought Experiment" \parencite{DiPaolo2000}. A common view, among others Dowling 1999, 264: simulation is like theory as about ``manipulating equations'' and ``developing ideas'' but like experiments as ``fiddling with machines'', ``trying ideas out'', ``watching to see what happens.'' 
 

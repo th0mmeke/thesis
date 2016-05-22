@@ -265,15 +265,7 @@ A run begins with only one gene active; over a number of steps the interplay of 
 patterns of gene expression. \cite{Reil:1999rp} shows that these patterns correspond with the behaviour of attractors
 in dynamical systems, and that the choice of attractor depends on external signals (controlled on \emph{switch} genes.)
 
-The model described by \cite{Reil:1999rp} was later extended by \cite{Rohlf:2009sh} to improve the
-biological plausibility of the regulatory implementation. In \cite{Rohlf:2009sh} the action of the \gls{tf} on the gene
-(activation or repression) is calculated by summing the digits in the \gls{tf} sequence; sequences which fall in the the
-lower-half of all possible sums are inhibitors and those in the upper-half, activators. The interaction of competing
-\glspl{tf} on expression is modelled by summing all of these interactions and weighting by the previous expression
-level. Increasing concentrations of activators will now increase the level of expression, with the reverse true of
-inhibitors. However, one acknowledged restriction of this model is in the modelling of \gls{tf} binding - in biology,
-the binding of a \glspl{tf} is more complex than the simple sequence match (see sections \ref{sec:networkinteractions}
-and \ref{sec:proteinbindings}) found in both \cite{Reil:1999rp} and \cite{Rohlf:2009sh}.
+The model described by \cite{Reil:1999rp} was later extended by \cite{Rohlf:2009sh} to improve the biological plausibility of the regulatory implementation. In \cite{Rohlf:2009sh} the action of the \gls{tf} on the gene (activation or repression) is calculated by summing the digits in the \gls{tf} sequence; sequences which fall in the the lower-half of all possible sums are inhibitors and those in the upper-half, activators. The interaction of competing \glspl{tf} on expression is modelled by summing all of these interactions and weighting by the previous expression level. Increasing concentrations of activators will now increase the level of expression, with the reverse true of inhibitors. However, one acknowledged restriction of this model is in the modelling of \gls{tf} binding - in biology, the binding of a \glspl{tf} is more complex than the simple sequence match found in both \cite{Reil:1999rp} and \cite{Rohlf:2009sh}.
 
 \cite{Kuo:2006fv} investigate the effect of gene duplication events and regulatory interactions on network topology using an independently derived yet similar model to \cite{Reil:1999rp} (originally described in \cite{Banzhaf:2003kx}). The genotype is encoded as a bit-string, with genes made up of a single inhibition site, a single enhancer site, a promotor region (a fixed ``01010101'' sequence) \footnote{Genes may overlap - a promotor region for one gene may arise within the coding region of another} and finally the coding region. The regulatory regions (inhibition site and enhancer site) are each 32 bits long; the coding region is made up of a number of 32 bit coding units. The significant non-coding regions are a factor in the ability of the model to support neutral mutations \parencite[sec.5]{Banzhaf:2003kx,Kuo:2006fv}.
 

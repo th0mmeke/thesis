@@ -349,7 +349,9 @@ Finally, as previously discussed in \cref{previous-work}, Artificial Chemistries
 
 \section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
-A \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. \cite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
+A \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature, \eg \cite{Lenaerts2009,Gardiner2007}.
+
+\cite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
 
 \begin{enumerate}
 	\item
@@ -445,7 +447,7 @@ Artificial Chemistries have been used in the exploration of open-ended or creati
 		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                                                 & No                                       \\
 		RBN-World \parencite{Faulconbridge2011}                            & Unknown                                                            & Yes                                      \\
 		\cite{Lenaerts2009}                                                & No                                                                 & Yes - molecular interactions             \\
-		ZChem \parencite{Tominaga2009}                                     & Conservation of mass                                               & No - reactions are atomic with wildcards \\
+		ZChem \parencite{Tominaga2004}                                     & Conservation of mass                                               & No - reactions are atomic with wildcards \\
 		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & No                                                                 & Unknown                                  \\
 		\cite{Fernando:2008xy,Fernando:2007pf}                             & Yes, and thermodynamics govern reactions                           & No - atomic reactions                    \\
 		\cite{Gardiner2007}                                                & No                                                                 & No - atomic reactions                    \\

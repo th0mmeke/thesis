@@ -61,7 +61,7 @@ In the world of human thought generally, and in physical sciences in particular,
 
 Natural evolution is the best example we have today of a transformative, adaptive improvement process. Many fields would benefit from a robust general optimisation heuristic for use when exact methods are not possible, and the example of natural evolution is our current gold-standard. 
 
-As stated by many (\eg \parencite{Pascal2013}) a definition of life is elusive, and probably not useful. There is no definite boundary between the living and the non-living; as \parencite{Pascal2013} goes on to explain, the most likely scenario for the origin of life is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living. Think of a present day virus--is it alive, or not? Reproduction is generally thought of as a requirement for life, yet viruses cannot reproduce without co-opting the necessary machinery from an independent host. 
+As stated by many (\eg \cite{Pascal2013, Malaterre2015}) a definition of life is elusive, and probably not useful. There is no definite boundary between the living and the non-living; as \parencite{Pascal2013} goes on to explain, the most likely scenario for the origin of life is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living. Think of a present day virus--is it alive, or not? Reproduction is generally thought of as a requirement for life, yet viruses cannot reproduce without co-opting the necessary machinery from an independent host. 
 
 \parencite{Fernando:2007pf} presents a partial compendium of definitions which illustrates the range of opinion:
 
@@ -270,7 +270,75 @@ For example, a summary of some relevant work in the application of \glspl{grn} t
 
 A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \parencite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\parencite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\parencite{Paixao2015}}
 
+\subsection{Conditions for open-ended evolution - causal definitions}
 
+Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
+
+Elements/Embodiment/Emergence:
+Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
+Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and
+likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
+Similar to the \emph{semantic closure} of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
+Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as energy, space, matter, or a combination of these.'' \parencite{Taylor2001}
+Need something emergent. \parencite{Nellis2014}
+The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.  \parencite{Soros2014}
+A ``good'' genetic representation \parencite{Soros2014}
+Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population \parencite{Vasas2015}.
+Contains an interesting discussion mapping a list of desirable properties onto the emergent properties that are then required of an \gls{achem} \parencite{Faulconbridge2010, Faulconbridge2011}
+``A phenomenon is embodied within a world if there exist some mechanisms within the world that enable the phenomenon to emerge.'' \cite{Nellis2014}
+Quick defined embodiment in terms of two dynamical systems mutually affecting each other - no need for a physical world. System modifies environment. Doesn't address if system is constructed from environment. Autopoiesis does say though that system built from environment. But autopoiesis talks about maintenance not evolution. \parencite{Nellis2014}
+
+Reproduction or replication:
+Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
+Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
+Very rich combinatorial generative mechanism e.g., organic chemistry \parencite{Vasas2015}
+``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
+``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population
+system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (e.g., crossover).'' \cite{Dittrich1998}
+``We want to embody the copying program, implementing it as a phenomenon resulting from the interaction of multiple mechanisms in a world. This will allow the copied strings to vary and evolve, and will also allow the copying process to vary and evolve.'' \cite{Nellis2014}
+``Rasmussen then designed a system similar to core war in which the command that copied instructions was flawed and would sometimes write a random instruction instead on the one intended.'' \parencite{Ofria2004}
+
+Selection:
+Individuals and environment mutually affect each other \parencite{Taylor2001}
+Competition between individuals for resources - VanValen1973 Red Queen hypothesis - primary source of intrinsic selection pressure. \parencite{Taylor2001}
+Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 
+Decisions about how and where individuals interact with the world should be made by the individuals themselves. \parencite{Soros2014}
+A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.\parencite{Soros2014}
+The evolution of new individuals should create novel opportunities for satisfying the MC \parencite{Soros2014}
+A ``sufficiently large world for every individual to be evaluated'' \parencite{Soros2014}
+``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
+Inexhaustible fitness landscape - implies rich, dynamical environment. \parencite{Vasas2015}
+Cannot state in advance possible preadaptations. \parencite{Vasas2015}
+``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+
+
+\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
+\begin{compactenum}
+	\item Be fully embedded in their arena of competition 
+	\item Have rich, unlimited interactions between each other and with their environment 
+	\item Initially replicate implicitly, rather than using some encoding of the replication process, and 
+	\item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
+\end{compactenum}
+
+``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
+
+\parencite{Soros2014} presents four necessary conditions for OEE (it is left open if these are also sufficient conditions):
+\begin{compactenum}
+	\item A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.
+	\item The evolution of new individuals should create novel opportunities for satisfying the MC
+	\item Decisions about how and where individuals interact with the world should be made by the individuals themselves.
+	\item The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.
+\end{compactenum}
+Along with these specific conditions, \parencite{Soros2014} assumes certain general conditions: a ``good'' genetic representation, a ``sufficiently large world for every individual to be evaluated'', and a seed or starting point.
+
+Minimal conditions for OEE \parencite{Vasas2015}:
+\begin{compactenum}
+	\item Very rich combinatorial generative mechanism e.g., organic chemistry.
+	\item Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population (Maynard-Smith:1995lw).
+	\item Inexhaustible fitness landscape - implies rich, dynamical environment.
+	\item Cannot state in advance possible preadaptations.
+\end{compactenum}
 
 \section{Guide to this work}
 
@@ -311,6 +379,46 @@ Previous work falls into five specific areas:
 \item Systems that implement the specific elements we support
 \item Systems that are capable of these elements, but are missing one (the copy mechanism)
 \end{compactenum}
+
+\section{Replicators and inheritance}
+
+We're interested in heredity and inheritance, which in biology is tied to the concept of a replicator. Dawkins first to define replicators - includes genes, memes. Many other definitions and formulations followed as various properties or features examined in subsequent works. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. In summary,
+
+``Replicator: any autocatalytic entity for which there is a selection process defined. Selection is a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010} (terminology slightly different in Bourrat2015 - persistors, replicators, reproducers...)
+
+''A regenerating/recreating entity can produce at least
+one entity equivalent to it. It is possible that the original
+entity immediately decomposes (that is, cannot be the
+subject of further turns of the cycle), causing sequential
+replacement, although this is the most simple of regenerating
+entities. If it can effectively increase the number
+of entities equivalent to itself, then it is autocatalytic
+and is a \emph{replicator}. The simplest of replicators is the
+\emph{exact replicator}, which is \emph{non-informational}, and any
+change made to it causes a change in the phenotype. If
+a variation can arise in the structure in such a way that
+it does not change equivalence of the entity, then it is a
+\emph{variable} replicator, with more than one stable state. If
+such changes can be passed on to the offspring then the
+replicator is \emph{informational}. If the non-heritable part is
+constructed by a developmental process, then the replicator
+is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
+
+Autocatalysis by definition is replication - the autocatalytic reaction $x+A->2A$ replicates the molecule $A$ \cite{Lifson1997} - applied at first to molecules. Only variation through mutations (unless alternative reaction products/networks, but even then restricted to a small set of alternatives by catalytic structure. Stoichiometrics not so significant in ACS/linear growth overwhelmed by exponential dynamics of catalysis.)
+
+Heredity by \cite{MaynardSmith1999} is modular or holistic - if module changed only that module changes in descendants, holistic change part changes whole. Believe it true that unlimited heredity => modular. \cite{Szathmary1999} calls these digital and holistic, and adds phenotypic replicators whereby ‘phenotype or function of one object is translated to the other, without any modular copying effect” (how does this differ from holistic?)
+
+\cite{Hogeweg1997} describes attractor-based heredity (inheritance of state) and storage-based. 
+
+\cite{Vasas2012a} ACS cores are attractor based, DNA/RNA storage based. HGT/LGT - compositional inheritance.
+Difficulties with Compositional inheritance in something like GARD where just a correlation between parent and child - response to selection not seen \parencite{Vasas2015} - end up with just one large component (so no selection), no replication as contents not inherited equally, so properties might be quite different from parent. Information fidelity varies widely. Mutations in cycles \parencite{Vasas2012a} generally not heritable as mutant copies generally not functional in autocatalysis. So problem with mutations as source of variation. Alternative to mutations is avalanches - form new cycles from side-products.
+But can see heredity in autocatalytic cores (one or more linked autocatalytic loops) as a form of genotype - any molecule in core will produce remaining species in core and periphery \parencite{Vasas2012a}. Core forms an attractor; one core=one attractor, and no evolution possible as no selection. Multiple cores (from inhibition \cite{Vasas2012a})=multiple attractors, but need attractors to be stable for stable selection. Cores are equivalent to one-bit of heritable information, so hard to see as unrestricted heredity as limits to numbers of cores…
+\cite{Watson2015} summarizes two forms of inheritance for groups, being either ``migrant pools'', where members disperse horizontally to form new pools, or group fissioning, where the dispersion is vertical. Fissioning, in the view of \cite{Watson2015}, provides for group inheritance whereas migrant pools do not.
+
+Modular/template heredity has advantages of: mutations hereditary; problems of correct copying \parencite{Eigen1977}
+
+Selection implies limits on fidelity - at least one perfect copy on average at each replication required \parencite{Eigen1977}
+
 
 \section{Systematic Map}
 
@@ -383,50 +491,19 @@ Exclusions: Simulations and simulation studies, biological \emph{modelling}, har
 			Web of Science & Broad coverage, multiple fields\\
 			Previous primary studies & Quality and consistency check\\
 			References and citations from previous primary studies & Likely to be relevant \\
-			Conferences - major conferences not included in ACM and IEEE databases & Main publication mechanism in Computer Science\\
-			PhD and MSc Thesis repositories & Previously identified works \parencite{Knibbe:2006vn}\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 	\caption{Data sources}
 \end{table}
 
-No journals were directly included as \textit{Artificial Life} and \textit{Adaptive Behavior}, the two principal journals in the Artificial Life field \cite{Aicardi2010}, are indexed by \textit{Web of Science}.
-No general internet search was performed. 
+No journals were directly included as \textit{Artificial Life} and \textit{Adaptive Behavior}, the two principal journals in the Artificial Life field \cite{Aicardi2010}, are indexed by \textit{Web of Science}. No general internet search was performed. 
 
 \subsubsection{Stage 2 - Keywords}
 
-\begin{table}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}p{10cm}r@{}}
-			\toprule
-			Keywords & Count\\
-			\midrule
-			Artificial AND (Embryogeny OR Embryology OR Ontogeny) & 11\\
-			Computational AND (Embryogeny OR Embryology OR Ontogeny) & 2\\
-			Developmental & 321\\
-			Embryogeny & 6\\
-			``Evolutionary Development'' & 23\\
-			EvoDevo & 0\\
-			Generative AND (Encoding OR Mapping OR Representation) AND NOT (``Generative Topographic Mapping'' OR GTM) & 130 \\
-			Indirect Encoding & 12\\
-			Morphogenesis & 34\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Keywords used to construct search strings for the literature search, with a count of the number of matches in SpringerLink on 27 June 2012 to indicate relative volumes.}
-\end{table}
-
-Keywords chosen from research questions; alternative keywords found in review of known papers and with completion from (Stanley Gecco 2009 workshop)
-
-Keyword "Developmental" returns many papers from Education, and from Software Engineering \eg "Developmental and operational testing \ldots"
-"Networks" might refer to either computer networks (excluded) or developmental networks (included), so cannot be excluded on the basis of title alone.
-``Generative'' also applies to machine learning.
+"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)
 
 \subsubsection{Stage 3 - Automated Search}
-
-Only those papers published between 2000 and the present were included.
 
 Publication bias - tendency of published papers to support hypothesis, reject null hypothesis. Papers which do not less likely to be published. Address by 1) awareness 2) grey literature search 3) funnel plot of variance against effect - expect higher variance for small samples
 
@@ -435,89 +512,24 @@ Publication bias - tendency of published papers to support hypothesis, reject nu
 	\begin{center}
 		\begin{tabular}{@{}p{2cm}p{2cm}p{9cm}@{}}
 			\toprule
-			Datasource & Parameter & Value\\
+			Datasource & Query & Results\\
 			\midrule
-			ACM Guide to Computing Literature &
-			Query string & Abstract:((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation)) OR "Indirect Encoding" OR Morphogenesis)\\
+			ACM Guide to Computing Literature & (+"artificial chemistry" inheritance replicator template holistic reproduction reproduce heredity composome)&73 records\\
 			\midrule
-			IEEE &
-			Query string & ((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation) AND NOT ("Generative Topographic Mapping" OR GTM)) OR "Indirect Encoding" OR Morphogenesis)\\\cmidrule(l){2-3}
-			& Topic & Computing \& Processing (Hardware/Software), metadata-only\\
+			IEEE & "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
 			\midrule
-			Web of Science &
-			Query string & TS=((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation)) OR "Indirect Encoding" OR Morphogenesis)\\\cmidrule(l){2-3}
-			& Subject Areas & Computer Science\\\cmidrule(l){2-3}
-			& Databases & SCI-EXPANDED, CPCI-S\\\cmidrule(l){2-3}
-			& Lemmatization & On\\
+			Web of Science & (TS=("artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome))) AND LANGUAGE: (English)&26 records\\
 			\midrule
-			SpringerLink &
-			Query string & ab:(Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR
-			ab:(Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR
-			ab:(Developmental) OR
-			ab:Embryogeny OR
-			ab:"Evolutionary Development" OR
-			ab:EvoDevo OR
-			ab:(Generative AND (Encoding OR Mapping OR Representation) AND NOT ("Generative Topographic Mapping" OR GTM)) OR
-			ab:"Indirect Encoding" OR
-			ab:Morphogenesis\\
-			\cmidrule(l){2-3}
-			& Collection & Computer Science\\
+			SpringerLink & Advanced search with Exact phrase: '"artificial chemistry" and One of the words: inheritance replicator template holistic reproduction reproduce heredity composome & 182 records\\ 
 			\bottomrule
 		\end{tabular}
 	\end{center}
-	\caption{Query parameters for search 3a. All searches restricted to the period 2000--present.}
+	\caption{Query parameters for search 3a. Searches were not restricted to any year range.}
 \end{table*}
 
 \subsubsection{Stage 4 - Screening on title}
 
 Quality check - did we rediscover the papers we'd found earlier by expert search? And if not, why not?
-Of the papers reviewed in \myref{sec:biologicalmodels}, %\cite{Banzhaf:2003kx,Beslon:2010zr,Dellaert:1995po,Dellaert:1996ys,Fleischer:1994kx,Ghanem:2008ct,Jakobi:1995py,Knabe:2006vn,Knabe:2008xe,Knibbe:2006vn,Knibbe:2007kx,Kuo:2006fv,Quick:2003uq,Reil:1999rp,Rohlf:2009sh,Sanchez-Dehesa:2008uq,Turing:1952qr},
-two are theses \parencite{Ghanem:2008ct,Knibbe:2006vn}, and 6 predate the study period \parencite{Dellaert:1995po,Dellaert:1996ys,Fleischer:1994kx,Jakobi:1995py,Reil:1999rp,Turing:1952qr},
-leaving 9 unaccounted for \parencite{Banzhaf:2003kx,Beslon:2010zr,Knabe:2006vn,Knabe:2008xe,Knibbe:2007kx,Kuo:2006fv,Quick:2003uq,Rohlf:2009sh,Sanchez-Dehesa:2008uq}.
-
-Three of these papers share a common research program focussed on biological robustness, but there is little otherwise in either titles or abstracts to indicate that these papers are relevant:
-
-\cite{Knibbe:2007kx} is by the author of a previously discovered thesis; the abstract and title refer to properties of biological evolution. Only the use of Aevol (not mentioned in either) makes it relevant.
-
-\cite{Sanchez-Dehesa:2008uq} does mention RAevol, but the other terms in the abstract are not sufficient to identify this as a relevant paper (\eg ``evolution of bacteria and their adaptation to the environment. Our model simulates the evolution of a population of artificial bacteria in a changing environment, providing us with an insight into the strategies that digital organisms develop to adapt to new conditions'')
-
-\cite{Beslon:2010zr} cites a previously discovered paper, and shares authors and a research program (Aevol and RAevol) with that paper.
-
-The remaining papers do however include phrases that should signal significance, although these terms were not originally included in our keywords:
-\begin{itemize}
-	\item \cite{Knabe:2006vn} references ``artificial genetic regulatory networks'' and ``artificial GRNs''.
-	\item The title of \cite{Knabe:2008rz} includes the phrase ``Genetic Regulatory Network Models'', while the abstract again references ``artificial genetic regulatory networks''  and ``artificial GRNs''.
-	\item The abstract of \cite{Banzhaf:2003kx} references ``artificial regulatory networks (ARNs)'' and ``artificial evolution''.
-	\item ``Artificial genetic regulatory network model'' is included in the title of \cite{Kuo:2006fv}, while the abstract includes ``artificial regulatory network model''.
-	\item The phrase ``Embodied Genetic Regulatory Network'' appears in both title and abstract of \cite{Quick:2003uq}.
-	\item Finally, the title of \cite{Rohlf:2009sh} includes ``Artificial Genome Model'' while the abstract references both ``artificial genomes'' and \cite{Reil:1999rp}.
-\end{itemize}
-
-\begin{table*}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}p{2cm}p{2cm}p{9cm}@{}}
-			\toprule
-			Datasource & Parameter & Value\\
-			\midrule
-			ACM Guide to Computing Literature &
-			Query string & Abstract:((artificial or embodied) and "regulatory network")\\
-			\midrule
-			IEEE &
-			Query string & Abstract:((artificial or embodied) and "regulatory network")\\
-			\midrule
-			Web of Science &
-			Query string & TS=((artificial OR embodied) AND "regulatory network")\\
-			\midrule
-			SpringerLink &
-			Query string & ab:((artificial or embodied) and "regulatory network")\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Query strings for search 3b. All other parameters as in search 3a. All searches restricted to the period 2000--present.}
-\end{table*}
-
-This additional search does detect the previously discovered papers: \cite{Banzhaf:2003kx}, \cite{Quick:2003uq}, \cite{Kuo:2006fv}, \cite{Rohlf:2009sh}, and versions of \cite{Knabe:2006vn,Knabe:2008rz} \parencite{Knabe:2008vz}, and \cite{Sanchez-Dehesa:2008uq} \parencite{Sanchez-Dehesa:2007nu}.
 
 \subsubsection{Stage 5 - Screening on abstract}
 Difficult to be error-free; preference is therefore not to exclude, relying on better information from later stages to complete, although this does increase the workload.
@@ -538,58 +550,12 @@ Removal of exact duplicates - same publication source, title, authors
 Removal of likely duplicates - difficult however to judge conclusively from abstracts alone if two papers do describe the same research.
 
 \subsection{Results}
-%
-%\begin{figure}
-%\centering
-%\begin{minipage}{\linewidth}
-%\centering\includegraphics[width=\linewidth]{Figures/SystematicMap}\\
-%\end{minipage}
-%\centering\caption{Stages of the Systematic Map, showing papers remaining at the conclusion of each stage.}
-%\label{fig:mapstages}
-%\end{figure}
 
-\begin{table}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}lllll@{}}
-			\toprule
-			Source & Stage 3a & Stage 3b & Stage 4 & Stage 5\\
-			\midrule
-			ACM Guide to Computing Literature & 402 & 256 & 64 & 58\\
-			IEEE & 1,328 & 1 & 90 & 64\\
-			Web of Science & 2,346 & 104 & 312 & 210\\
-			SpringerLink & 537 & 12 & 86 & 45\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Papers remaining at conclusion of Stages 3-5, by data source. Dates for searches - all part b searches on 31 August 2012, part a as follows: 
-		ACM: 5 July 2012, IEEE: 28 June 2012, Web of Science: 27 June 2012, SpringerLink: 28 June 2012. Only title returned for IEEE search was a Notice of Violation}
-\end{table}
 
 At conclusion of Stage 5 - selection on abstracts - there are 377 papers.
 After removing duplicates, 255 papers remain.
 
 \cite{Petersen:2008fk} recommends the use of paper classes in \cite{Wieringa:2006ly}; these classes are derived from an Engineering model that is appropriate for Systematic Maps in general, but not for this task as we are interested in basic research, not engineering. Our paper classification is instead as follows:
-
-\begin{table}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}llp{7cm}@{}}
-			\toprule
-			Classification & Count & Description\\
-			\midrule
-			Method & 110 & Investigation of developmental methods themselves, perhaps with experimental evalution in a particular application. The focus however is on the method itself.\\
-			Application & 77 & Use of developmental methods to solve some particular problem, where the emphasis is on the resolution of the problem rather than on the particulars of the method.\\
-			Properties & 63 & Examination of the benefits or results of developmental methods in general.\\
-			Evaluation & 5 & Assessment of another method.\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Classes of paper, with count of papers by class}
-	\label{tbl:paperclasses}
-\end{table}
-
-Keywords: manual search through abstracts. Automated methods (tag clouds, phrase finders) return too many poor results to be useful - keywords are very context dependent.
 
 \subsection{Synthesis, analysis and discussion}
 
@@ -601,7 +567,7 @@ Keyword - manual generation of keywords from abstracts, then normalised by takin
 
 \newthought{RQ2: What are the main publication sources?}
 
-Primary publication sources are collated in \myref{tbl:publicationsources}.
+Primary publication sources are collated in \ref{tbl:publicationsources}.
 
 \begin{table}
 	\footnotesize
@@ -628,58 +594,10 @@ Primary publication sources are collated in \myref{tbl:publicationsources}.
 	\caption{Number of papers by source - only those sources with four or more papers shown (152 papers out of 262 total)\label{tbl:publicationsources}}
 \end{table}
 
-%Adaptive Behavior - published by Sage, journal of the ISAB, editor Ezequiel Di Paolo.
-
-\newthought{RQ3: What forms of research are published?}
-
-The main classes of research are collected in \myref{tbl:paperclasses}.
-
 \subsection{Limitations}
-Subjective assessment of papers from title and abstract - may miss some relevant studies based solely on quality of
-abstract.
-Only published papers - missing commercial and open source works that have not been subject of published research.
+Subjective assessment of papers from title and abstract - may miss some relevant studies based solely on quality of abstract.
 
-\section{Conditions for open-ended evolution - causal definitions}
-
-Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
-
-Elements/Embodiment/Emergence:
-Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
-Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
-``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and
-likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
-Similar to the \emph{semantic closure} of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
-Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as energy, space, matter, or a combination of these.'' \parencite{Taylor2001}
-Need something emergent. \parencite{Nellis2014}
-The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.  \parencite{Soros2014}
-A ``good'' genetic representation \parencite{Soros2014}
-Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population \parencite{Vasas2015}.
-Contains an interesting discussion mapping a list of desirable properties onto the emergent properties that are then required of an \gls{achem} \parencite{Faulconbridge2010, Faulconbridge2011}
-``A phenomenon is embodied within a world if there exist some mechanisms within the world that enable the phenomenon to emerge.'' \cite{Nellis2014}
-Quick defined embodiment in terms of two dynamical systems mutually affecting each other - no need for a physical world. System modifies environment. Doesn't address if system is constructed from environment. Autopoiesis does say though that system built from environment. But autopoiesis talks about maintenance not evolution. \parencite{Nellis2014}
-
-Reproduction or replication:
-Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
-Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
-Very rich combinatorial generative mechanism e.g., organic chemistry \parencite{Vasas2015}
-``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
-``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population
-system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (e.g., crossover).'' \cite{Dittrich1998}
-``We want to embody the copying program, implementing it as a phenomenon resulting from the interaction of multiple mechanisms in a world. This will allow the copied strings to vary and evolve, and will also allow the copying process to vary and evolve.'' \cite{Nellis2014}
-``Rasmussen then designed a system similar to core war in which the command that copied instructions was flawed and would sometimes write a random instruction instead on the one intended.'' \parencite{Ofria2004}
-	
-Selection:
-Individuals and environment mutually affect each other \parencite{Taylor2001}
-Competition between individuals for resources - VanValen1973 Red Queen hypothesis - primary source of intrinsic selection pressure. \parencite{Taylor2001}
-Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 
-Decisions about how and where individuals interact with the world should be made by the individuals themselves. \parencite{Soros2014}
-A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.\parencite{Soros2014}
-The evolution of new individuals should create novel opportunities for satisfying the MC \parencite{Soros2014}
-A ``sufficiently large world for every individual to be evaluated'' \parencite{Soros2014}
-``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
-Inexhaustible fitness landscape - implies rich, dynamical environment. \parencite{Vasas2015}
-Cannot state in advance possible preadaptations. \parencite{Vasas2015}
-``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+\todo{name for evolutionary replicators - Zachar?}
 
 \begin{sidewaystable}
 	\begin{center}
@@ -688,86 +606,58 @@ Cannot state in advance possible preadaptations. \parencite{Vasas2015}
 		\label{tb:previous-work}
 		\begin{tabular}{@{}llll@{}}
 			\hline\noalign{\smallskip}
-			\Gls{achem}                                                     & Type 	&& Inheritance mechanism\\ 
+			\Gls{achem}                                                     & Type 	& Notes\\ 
 			\\ \noalign{\smallskip}
 			\hline
 			\noalign{\smallskip}
+			
 			Avida \cite{Ofria2004}                                  		&Assembler Automata&	& Embedded copy algorithm\\
 			Tierra \cite{Ray1991}                                  			&Assembler Automata&	& Embedded copy algorithm\\
 			\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&\\
 			StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&\\
 			\cite{Fontana1992}												&Rewriting or String-based&&2-parent function\\
 			\cite{Dittrich1998}												&Rewriting or String-based&&2-parent function\\
-
-			\midrule
-			
+\hline
 			\cite{Nowostawski2005}											&&&\\		
 			Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&Non-template\\
 			\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&\\			
 			NAC \cite{Suzuki2006}                                         	&&&\\	
 			\cite{Gardiner2007}                                             &&&\\
-
+\hline			
 			\cite{Kauffman1986}												&Compositional&&\\
 			Turing															&Rewriting 	&&Yes\\
 			Von Neumann														&&&\\
 			Waddington														&Biology&&\\
-			
-			ZChem \cite{Tominaga2004}                                     	&&&Not self-referential - recombination rules are defined separately from objects\\
-			Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&&Not self-referential - recombination rules are defined separately from objects\\
-			GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&None--at level of reactions\\			
-			Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
-			RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs& &None--at level of ACS\\
-			\cite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&&Non-template: Autocatalytic core-based inheritance\\
-			\cite{Segre1998}												&Compositional&&Non-template: Composomal\\
-			\cite{Fernando:2008xy,Fernando:2007pf}                          &&&Non-template: Lipid aggregates\\
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{Previous work evaluated against three criteria: type of model, emergence, and the form of any inheritance mechanism.}
+	\caption{Achems with evolutionary replicators.}
 \end{sidewaystable}
 
-\Textcite{Taylor2001,Taylor:1999sc} discuss creativity in \gls{oee} in depth and argues that, for it to be possible, the replicators must \parencite{Hutton2004}:
-\begin{compactenum}
-	\item Be fully embedded in their arena of competition 
-	\item Have rich, unlimited interactions between each other and with their environment 
-	\item Initially replicate implicitly, rather than using some encoding of the replication process, and 
-	\item Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
-\end{compactenum}
-
-``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
-
-\parencite{Soros2014} presents four necessary conditions for OEE (it is left open if these are also sufficient conditions):
-\begin{compactenum}
-	\item A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.
-	\item The evolution of new individuals should create novel opportunities for satisfying the MC
-	\item Decisions about how and where individuals interact with the world should be made by the individuals themselves.
-	\item The potential size and complexity of the individuals' phenotypes should be (in principle) unbounded.
-\end{compactenum}
-Along with these specific conditions, \parencite{Soros2014} assumes certain general conditions: a ``good'' genetic representation, a ``sufficiently large world for every individual to be evaluated'', and a seed or starting point.
-
-Minimal conditions for OEE \parencite{Vasas2015}:
-\begin{compactenum}
-\item Very rich combinatorial generative mechanism e.g., organic chemistry.
-\item Unlimited heredity - number of possible heritable types should astronomically exceed individuals in population (Maynard-Smith:1995lw).
-\item Inexhaustible fitness landscape - implies rich, dynamical environment.
-\item Cannot state in advance possible preadaptations.
-\end{compactenum}
-
-\parencite{Maley1999}
-
-Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by number of molecules available for biosphere, also by energy and minimal populations and probably other things), and plateaus (punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
-
-Maley builds up the requirements by beginning with almost the simplest model possible (called Urmodel 1) where the only changes in the population from generation to generation are 1-bit flips in a 32-bit genotype. This results in a neutral fitness landscape (as no selection) and to prevent edge effects each run was stopped before all niches were filled. The, unsurprising, result was unbounded diversity, but no selection or heritable effect on fitness.
-
-Posits that need selection : ``Requirement 2 An open-ended evolutionary system must embody selection'' - because ``fails to meet one of the basic criteria of natural selection: the heritable variation has no effect on fertility'' {[}ignoring use of fertility as a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing (`positive') new adaptive activity'' {[}ignore neutral theory, and accepts Bedau - perhaps to allow use of Anew as measure?{]}
-
-Urmodel 2 - natural selection: mutation, ``dissimilarity'' for competitive advantage (justified by biological example of niche overlap theory (Levins, 1968)) - no increase in Anew
-
-Urmodel 3 - selective sweep (hypothesis): parasites (mutations) and hosts (fixed genotypes). Fitness on degree of match between parasite and host bit patterns. Restricted by 32-bit genomes, no death. Claim shows unbounded activity - ``the first known artificial evolutionary system demonstrating unbounded evolutionary activity''. But in Maley's words this is probably not a unique or even significant result--``The only trick is to defer the point when the model hits its true asymptotic behaviour for long enough that the growth dynamics of the model are themselves asymptotic in some sense'' \parencite{Maley1999}.
-
-The niches in Urmodel3 are imposed from outside, rather than arising endogenously. This leads to Urmodel 4, where coevolution is added to Urmodel 3 by letting hosts mutate.
- 
-No model however resulted in ``surprise''. Maley believes this is because of a lack of complexity, illustrated through a nice biological metaphor: ``A puddle of inert, multicoloured and diverse algae would not be nearly so inspirational as the rain forest.''
+\begin{sidewaystable}
+	\begin{center}
+		\scriptsize
+		\caption{Previous work}
+		\label{tb:previous-work}
+		\begin{tabular}{@{}llll@{}}
+			\hline\noalign{\smallskip}
+			\Gls{achem}                                                     & Type 	& Notes\\ 
+			\\ \noalign{\smallskip}
+			\hline
+			\noalign{\smallskip}			
+			ZChem \cite{Tominaga2004}                                     	&&Not self-referential - recombination rules are defined separately from objects\\
+			Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&Not self-referential - recombination rules are defined separately from objects\\
+			GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&None--at level of reactions\\			
+			Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
+			RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs& None--at level of ACS\\
+			\cite{Vasas2015, Vasas2012, Vasas2012a}							&Compositional&Non-template: Autocatalytic core-based inheritance\\
+			\cite{Segre1998}												&Compositional&Non-template: Composomal\\
+			\cite{Fernando:2008xy,Fernando:2007pf}                          &Compositional&Non-template: Lipid aggregates\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Achems with non-evolutionary replicators.}
+\end{sidewaystable}
 
 \section{Copy-based approaches to the evolution-of-evolution in artificial systems}
 

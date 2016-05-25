@@ -37,7 +37,7 @@
 \newtheorem{hypothesis}{Hypothesis}[chapter]
 
 \author{Thom Young}
-\title{The Emergence of\\Evolution in\\Artificial Systems}
+\title{The Emergence of\\Inheritance and Heredity in\\Artificial Chemistries}
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{

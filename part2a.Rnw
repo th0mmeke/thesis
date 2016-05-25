@@ -73,6 +73,22 @@ Q*s are part of Ej satisfies condition one {[}recursive?{]}
 Second is an emergent one - ``it is not sufficient to create new mutations which merely insert new parameters into existing programmes; they must actually be able to rewrite the programme''
 - key distinction between OEE and creative evolution
 
+\parencite{Maley1999}
+
+Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by number of molecules available for biosphere, also by energy and minimal populations and probably other things), and plateaus (punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
+
+Maley builds up the requirements by beginning with almost the simplest model possible (called Urmodel 1) where the only changes in the population from generation to generation are 1-bit flips in a 32-bit genotype. This results in a neutral fitness landscape (as no selection) and to prevent edge effects each run was stopped before all niches were filled. The, unsurprising, result was unbounded diversity, but no selection or heritable effect on fitness.
+
+Posits that need selection : ``Requirement 2 An open-ended evolutionary system must embody selection'' - because ``fails to meet one of the basic criteria of natural selection: the heritable variation has no effect on fertility'' {[}ignoring use of fertility as a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing (`positive') new adaptive activity'' {[}ignore neutral theory, and accepts Bedau - perhaps to allow use of Anew as measure?{]}
+
+Urmodel 2 - natural selection: mutation, ``dissimilarity'' for competitive advantage (justified by biological example of niche overlap theory (Levins, 1968)) - no increase in Anew
+
+Urmodel 3 - selective sweep (hypothesis): parasites (mutations) and hosts (fixed genotypes). Fitness on degree of match between parasite and host bit patterns. Restricted by 32-bit genomes, no death. Claim shows unbounded activity - ``the first known artificial evolutionary system demonstrating unbounded evolutionary activity''. But in Maley's words this is probably not a unique or even significant result--``The only trick is to defer the point when the model hits its true asymptotic behaviour for long enough that the growth dynamics of the model are themselves asymptotic in some sense'' \parencite{Maley1999}.
+
+The niches in Urmodel3 are imposed from outside, rather than arising endogenously. This leads to Urmodel 4, where coevolution is added to Urmodel 3 by letting hosts mutate.
+
+No model however resulted in ``surprise''. Maley believes this is because of a lack of complexity, illustrated through a nice biological metaphor: ``A puddle of inert, multicoloured and diverse algae would not be nearly so inspirational as the rain forest.''
+
 \autocite{Paixao2015}:
 
 attempt to unify single-objective evolutionary computation and population genetics -  based on common conception of evolutionary process

@@ -312,6 +312,333 @@ Previous work falls into five specific areas:
 \item Systems that are capable of these elements, but are missing one (the copy mechanism)
 \end{compactenum}
 
+\section{Systematic Map}
+
+Purpose: to identify gaps in current research. Summary of research area required to ensure 1) outline where proposed work fits into existing body of knowledge 2) do not repeat previous work 3) identify future research directions
+
+Research Method: the method is a Systematic Map. Evidence-based. Derived from Evidence-based medicine (see \cite{Cochrane:2011qy, CRD:2008fj}). Primary motivation is to remove unintended bias in reviews; also can quantify consistency or variation in subject \parencite{Kitchenham:2007nx}.
+Major differences with standard expert-review is in pre-definition of research protocol, search strategy, exclusion and inclusion criteria, quality criteria. All documented so can be repeated, or at least, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+\subsection{Need for a review}
+
+Two previous reviews are known of the general topic: \cite{Duthen2010} and \cite{Stanley:2003fh}.
+
+\Textcite{Duthen2010} is a survey of artificial creatures, examining on the mechanisms used rather than the problems or goals addressed. Research is grouped by environmental simulators, means to assemble creatures from pieces (phylogeny) and 
+ways to generate creatures from a seed (ontogeny).
+
+\Textcite{Stanley:2003fh} opens with a mini-review of Artificial Embryology.
+Discounted the value of the traditional distinction between grammatical and chemical encodings, and went on to propose a five-part taxonomy
+instead - cell fate, targeting, heterochrony, canalization and complexification - based on biological research. Quite
+biological in basis, and some aspects of the taxonomy seem prescriptive (\eg cell fate).
+
+Otherwise, no specific reviews of Developmental Encodings known (search 20 June 2012 of Web of Science with search string
+(TI=("Morphogenesis" OR "Embryogeny" OR "Artificial Embryogeny" OR "Developmental" OR "Generative Representation" OR
+"Evolutionary Development")) AND Document Types=(Review) - 3,713 results found, but neither of the two in Computer
+Science are relevant. Note that this search doesn't retrieve either known review: \cite{Stanley:2003fh} is labelled on WoS as an
+"article" rather than as a review, and \cite{Duthen2010} references ``Artificial Creatures''. Removing the "review" condition returns 76,708 results.
+
+\subsection{Method}
+
+\subsubsection{Research questions}
+Our objective is to confirm the range of previous work by supplementing the identified papers by a systematic selection.
+
+\begin{enumerate}[label=RQ\arabic*:]
+	\item What previous work in Artificial Life specifically discusses inheritance or heredity in artificial chemistries?
+\end{enumerate}
+
+\subsubsection{Systematic Reviews and Maps}
+
+Maps are exploratory (``what is known about X?'') while Reviews address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?'')
+For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk}
+For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
+
+Systematic Map \parencite{Petersen:2008fk}, rather than Systematic Literature Review \parencite{Kitchenham:2007nx}. According to Petersen's set of differences between Reviews and Maps, we less interested in the state of  evidence rather than classification; less emphasis on assessing the quality of the primary studies; a broader focus; stronger emphasis on breadth rather than depth of review.
+
+Systematic Maps also provide categorisation of a research area, but this is not the main goal of the process. Instead a Map uses the generated classification as a framework for further analysis, summarising contributions by category. However the processes are similar in that one process for categorisation in Maps \parencite{Petersen:2008fk} extracts keywords from the paper abstracts and iteratively groups and refines these into the final categories.
+
+Note that both Reviews and Maps usually rely exclusively on Primary sources (originals) rather than Secondary (interpretation, or after-the-fact), or Tertiary (distillation or collections of Primary and Secondary sources)
+
+\subsubsection{Research team and decision procedure}
+
+One reviewer only (PhD thesis limitation). 
+
+Quality checks by 1) confirm that search identifies previously known papers 2) check-recheck at different dates or blind sample rechecked and kappa statistic calculated 3) confirm decisions with supervisor 4) send form to paper author for notice if incorrect?
+
+\subsubsection{Inclusion and exclusion criteria}
+Inclusions: Primary research, evolutionary computing, biological \emph{inspirations}
+
+Exclusions: Simulations and simulation studies, biological \emph{modelling}, hardware and FPGAs, education, introductions, surveys, reviews, genetic programming, summaries of research, case studies, application of research, Agents and Swarms, ANNs, Robotics, Keynote abstracts
+
+\subsubsection{Stage 1 - Source selection}
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}p{5cm}p{8cm}@{}}
+			\toprule
+			Data source & Rationale for inclusion\\
+			\midrule
+			IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}\\
+			ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}\\
+			Springer & Proceedings of \textit{ECAL}, \textit{CompLife} and \textit{Parallel Problem Solving from Nature conferences}\\
+			Web of Science & Broad coverage, multiple fields\\
+			Previous primary studies & Quality and consistency check\\
+			References and citations from previous primary studies & Likely to be relevant \\
+			Conferences - major conferences not included in ACM and IEEE databases & Main publication mechanism in Computer Science\\
+			PhD and MSc Thesis repositories & Previously identified works \parencite{Knibbe:2006vn}\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Data sources}
+\end{table}
+
+No journals were directly included as \textit{Artificial Life} and \textit{Adaptive Behavior}, the two principal journals in the Artificial Life field \cite{Aicardi2010}, are indexed by \textit{Web of Science}.
+No general internet search was performed. 
+
+\subsubsection{Stage 2 - Keywords}
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}p{10cm}r@{}}
+			\toprule
+			Keywords & Count\\
+			\midrule
+			Artificial AND (Embryogeny OR Embryology OR Ontogeny) & 11\\
+			Computational AND (Embryogeny OR Embryology OR Ontogeny) & 2\\
+			Developmental & 321\\
+			Embryogeny & 6\\
+			``Evolutionary Development'' & 23\\
+			EvoDevo & 0\\
+			Generative AND (Encoding OR Mapping OR Representation) AND NOT (``Generative Topographic Mapping'' OR GTM) & 130 \\
+			Indirect Encoding & 12\\
+			Morphogenesis & 34\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Keywords used to construct search strings for the literature search, with a count of the number of matches in SpringerLink on 27 June 2012 to indicate relative volumes.}
+\end{table}
+
+Keywords chosen from research questions; alternative keywords found in review of known papers and with completion from (Stanley Gecco 2009 workshop)
+
+Keyword "Developmental" returns many papers from Education, and from Software Engineering \eg "Developmental and operational testing \ldots"
+"Networks" might refer to either computer networks (excluded) or developmental networks (included), so cannot be excluded on the basis of title alone.
+``Generative'' also applies to machine learning.
+
+\subsubsection{Stage 3 - Automated Search}
+
+Only those papers published between 2000 and the present were included.
+
+Publication bias - tendency of published papers to support hypothesis, reject null hypothesis. Papers which do not less likely to be published. Address by 1) awareness 2) grey literature search 3) funnel plot of variance against effect - expect higher variance for small samples
+
+\begin{table*}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}p{2cm}p{2cm}p{9cm}@{}}
+			\toprule
+			Datasource & Parameter & Value\\
+			\midrule
+			ACM Guide to Computing Literature &
+			Query string & Abstract:((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation)) OR "Indirect Encoding" OR Morphogenesis)\\
+			\midrule
+			IEEE &
+			Query string & ((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation) AND NOT ("Generative Topographic Mapping" OR GTM)) OR "Indirect Encoding" OR Morphogenesis)\\\cmidrule(l){2-3}
+			& Topic & Computing \& Processing (Hardware/Software), metadata-only\\
+			\midrule
+			Web of Science &
+			Query string & TS=((Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR (Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR Developmental OR Embryogeny OR "Evolutionary Development" OR EvoDevo OR (Generative AND (Encoding OR Mapping OR Representation)) OR "Indirect Encoding" OR Morphogenesis)\\\cmidrule(l){2-3}
+			& Subject Areas & Computer Science\\\cmidrule(l){2-3}
+			& Databases & SCI-EXPANDED, CPCI-S\\\cmidrule(l){2-3}
+			& Lemmatization & On\\
+			\midrule
+			SpringerLink &
+			Query string & ab:(Artificial AND (Embryogeny OR Embryology OR Ontogeny)) OR
+			ab:(Computational AND (Embryogeny OR Embryology OR Ontogeny)) OR
+			ab:(Developmental) OR
+			ab:Embryogeny OR
+			ab:"Evolutionary Development" OR
+			ab:EvoDevo OR
+			ab:(Generative AND (Encoding OR Mapping OR Representation) AND NOT ("Generative Topographic Mapping" OR GTM)) OR
+			ab:"Indirect Encoding" OR
+			ab:Morphogenesis\\
+			\cmidrule(l){2-3}
+			& Collection & Computer Science\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Query parameters for search 3a. All searches restricted to the period 2000--present.}
+\end{table*}
+
+\subsubsection{Stage 4 - Screening on title}
+
+Quality check - did we rediscover the papers we'd found earlier by expert search? And if not, why not?
+Of the papers reviewed in \myref{sec:biologicalmodels}, %\cite{Banzhaf:2003kx,Beslon:2010zr,Dellaert:1995po,Dellaert:1996ys,Fleischer:1994kx,Ghanem:2008ct,Jakobi:1995py,Knabe:2006vn,Knabe:2008xe,Knibbe:2006vn,Knibbe:2007kx,Kuo:2006fv,Quick:2003uq,Reil:1999rp,Rohlf:2009sh,Sanchez-Dehesa:2008uq,Turing:1952qr},
+two are theses \parencite{Ghanem:2008ct,Knibbe:2006vn}, and 6 predate the study period \parencite{Dellaert:1995po,Dellaert:1996ys,Fleischer:1994kx,Jakobi:1995py,Reil:1999rp,Turing:1952qr},
+leaving 9 unaccounted for \parencite{Banzhaf:2003kx,Beslon:2010zr,Knabe:2006vn,Knabe:2008xe,Knibbe:2007kx,Kuo:2006fv,Quick:2003uq,Rohlf:2009sh,Sanchez-Dehesa:2008uq}.
+
+Three of these papers share a common research program focussed on biological robustness, but there is little otherwise in either titles or abstracts to indicate that these papers are relevant:
+
+\cite{Knibbe:2007kx} is by the author of a previously discovered thesis; the abstract and title refer to properties of biological evolution. Only the use of Aevol (not mentioned in either) makes it relevant.
+
+\cite{Sanchez-Dehesa:2008uq} does mention RAevol, but the other terms in the abstract are not sufficient to identify this as a relevant paper (\eg ``evolution of bacteria and their adaptation to the environment. Our model simulates the evolution of a population of artificial bacteria in a changing environment, providing us with an insight into the strategies that digital organisms develop to adapt to new conditions'')
+
+\cite{Beslon:2010zr} cites a previously discovered paper, and shares authors and a research program (Aevol and RAevol) with that paper.
+
+The remaining papers do however include phrases that should signal significance, although these terms were not originally included in our keywords:
+\begin{itemize}
+	\item \cite{Knabe:2006vn} references ``artificial genetic regulatory networks'' and ``artificial GRNs''.
+	\item The title of \cite{Knabe:2008rz} includes the phrase ``Genetic Regulatory Network Models'', while the abstract again references ``artificial genetic regulatory networks''  and ``artificial GRNs''.
+	\item The abstract of \cite{Banzhaf:2003kx} references ``artificial regulatory networks (ARNs)'' and ``artificial evolution''.
+	\item ``Artificial genetic regulatory network model'' is included in the title of \cite{Kuo:2006fv}, while the abstract includes ``artificial regulatory network model''.
+	\item The phrase ``Embodied Genetic Regulatory Network'' appears in both title and abstract of \cite{Quick:2003uq}.
+	\item Finally, the title of \cite{Rohlf:2009sh} includes ``Artificial Genome Model'' while the abstract references both ``artificial genomes'' and \cite{Reil:1999rp}.
+\end{itemize}
+
+\begin{table*}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}p{2cm}p{2cm}p{9cm}@{}}
+			\toprule
+			Datasource & Parameter & Value\\
+			\midrule
+			ACM Guide to Computing Literature &
+			Query string & Abstract:((artificial or embodied) and "regulatory network")\\
+			\midrule
+			IEEE &
+			Query string & Abstract:((artificial or embodied) and "regulatory network")\\
+			\midrule
+			Web of Science &
+			Query string & TS=((artificial OR embodied) AND "regulatory network")\\
+			\midrule
+			SpringerLink &
+			Query string & ab:((artificial or embodied) and "regulatory network")\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Query strings for search 3b. All other parameters as in search 3a. All searches restricted to the period 2000--present.}
+\end{table*}
+
+This additional search does detect the previously discovered papers: \cite{Banzhaf:2003kx}, \cite{Quick:2003uq}, \cite{Kuo:2006fv}, \cite{Rohlf:2009sh}, and versions of \cite{Knabe:2006vn,Knabe:2008rz} \parencite{Knabe:2008vz}, and \cite{Sanchez-Dehesa:2008uq} \parencite{Sanchez-Dehesa:2007nu}.
+
+\subsubsection{Stage 5 - Screening on abstract}
+Difficult to be error-free; preference is therefore not to exclude, relying on better information from later stages to complete, although this does increase the workload.
+Based on this, justified all exclusions, and those inclusions that were borderline. Clear inclusions were not justified.
+
+Issues:
+\begin{itemize}
+	\item Ambiguous terminology - many fields have common terms \eg map, evolve, generative
+	\item Insufficient detail in abstract
+	\item Downloading abstracts at time of initial title search so don't have to re-search after initial selection
+	\item Depth or degree - difficulty in determining the degree of focus on generative ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded?
+	\item Database specifics - inability of SpringerLink to correctly apply date limits in searches; difficulty in SpringerLink and ACM to batch-download citations - one at a time leads to fatigue and error. ACM bibtex export does not export abstract - must cut and paste. 
+\end{itemize}
+
+\subsubsection{Stage 6 - Removal of duplicates}
+
+Removal of exact duplicates - same publication source, title, authors
+Removal of likely duplicates - difficult however to judge conclusively from abstracts alone if two papers do describe the same research.
+
+\subsection{Results}
+%
+%\begin{figure}
+%\centering
+%\begin{minipage}{\linewidth}
+%\centering\includegraphics[width=\linewidth]{Figures/SystematicMap}\\
+%\end{minipage}
+%\centering\caption{Stages of the Systematic Map, showing papers remaining at the conclusion of each stage.}
+%\label{fig:mapstages}
+%\end{figure}
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}lllll@{}}
+			\toprule
+			Source & Stage 3a & Stage 3b & Stage 4 & Stage 5\\
+			\midrule
+			ACM Guide to Computing Literature & 402 & 256 & 64 & 58\\
+			IEEE & 1,328 & 1 & 90 & 64\\
+			Web of Science & 2,346 & 104 & 312 & 210\\
+			SpringerLink & 537 & 12 & 86 & 45\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Papers remaining at conclusion of Stages 3-5, by data source. Dates for searches - all part b searches on 31 August 2012, part a as follows: 
+		ACM: 5 July 2012, IEEE: 28 June 2012, Web of Science: 27 June 2012, SpringerLink: 28 June 2012. Only title returned for IEEE search was a Notice of Violation}
+\end{table}
+
+At conclusion of Stage 5 - selection on abstracts - there are 377 papers.
+After removing duplicates, 255 papers remain.
+
+\cite{Petersen:2008fk} recommends the use of paper classes in \cite{Wieringa:2006ly}; these classes are derived from an Engineering model that is appropriate for Systematic Maps in general, but not for this task as we are interested in basic research, not engineering. Our paper classification is instead as follows:
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}llp{7cm}@{}}
+			\toprule
+			Classification & Count & Description\\
+			\midrule
+			Method & 110 & Investigation of developmental methods themselves, perhaps with experimental evalution in a particular application. The focus however is on the method itself.\\
+			Application & 77 & Use of developmental methods to solve some particular problem, where the emphasis is on the resolution of the problem rather than on the particulars of the method.\\
+			Properties & 63 & Examination of the benefits or results of developmental methods in general.\\
+			Evaluation & 5 & Assessment of another method.\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Classes of paper, with count of papers by class}
+	\label{tbl:paperclasses}
+\end{table}
+
+Keywords: manual search through abstracts. Automated methods (tag clouds, phrase finders) return too many poor results to be useful - keywords are very context dependent.
+
+\subsection{Synthesis, analysis and discussion}
+
+Sensitivity analysis - remove poor quality or subjective papers or particular type of paper and compare results.
+
+\newthought{RQ1: What are the main research topics for Evolutionary Development and how have these changed over time?}
+
+Keyword - manual generation of keywords from abstracts, then normalised by taking keywords, converting to lower-case then passing through \verb+uniq+. Finally consolidated by replacing keywords with same meanings by chosen term. Automated clustering by Weka attempted, but did not succeed in generating clusters that seemed close to an intuitive understanding of the field. Hence, manual clustering.
+
+\newthought{RQ2: What are the main publication sources?}
+
+Primary publication sources are collated in \myref{tbl:publicationsources}.
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}llp{8cm}l@{}}
+			\toprule
+			Type & Organizer or Publisher & Source & Papers\\
+			\midrule
+			Conference&		SIGEVO & 		Genetic And Evolutionary Computation Conference (GECCO) & 							44\\
+			Conference&		IEEE & 			IEEE Conference on Evolutionary Computation (CEC) &									23\\
+			Conference&		ISAL & 			European Conference on the Synthesis and Simulation of Living Systems (ECAL) &		22\\
+			Journal&		MIT Press & 	Artificial Life &																	15\\
+			Conference&		IEEE & 			International Conference on Evolvable Systems (ICES) &								9\\
+			Journal&		IEEE &			IEEE Transactions on Evolutionary Computation &										7\\
+			Conference&		PPSN & 			Parallel Problem Solving From Nature (PPSN) &										7\\
+			Conference&		IEEE CIS & 		IEEE Symposium on Artificial Life (IEEE ALIFE) &									6\\
+			Conference&		ISAL &			International Conference on the Simulation and Synthesis of Living Systems (Alife)& 5\\
+			Conference&		INNS&			International Joint Conference on Neural Networks (IJCNN) & 						5\\
+			Conference&		ISAB & 			From Animals To Animats: International Conference on Simulation of Adaptive Behavior (SAB) & 5\\
+			Journal&		Elsevier &		BioSystems & 4\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Number of papers by source - only those sources with four or more papers shown (152 papers out of 262 total)\label{tbl:publicationsources}}
+\end{table}
+
+%Adaptive Behavior - published by Sage, journal of the ISAB, editor Ezequiel Di Paolo.
+
+\newthought{RQ3: What forms of research are published?}
+
+The main classes of research are collected in \myref{tbl:paperclasses}.
+
+\subsection{Limitations}
+Subjective assessment of papers from title and abstract - may miss some relevant studies based solely on quality of
+abstract.
+Only published papers - missing commercial and open source works that have not been subject of published research.
+
 \section{Conditions for open-ended evolution - causal definitions}
 
 Bottom-up models for open-ended evolution leverage the richness of underlying environment - less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.

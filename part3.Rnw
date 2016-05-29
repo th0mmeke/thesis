@@ -127,23 +127,12 @@ All four areas rely on a connection to real chemistries--Molecular synthesis and
 
 Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
 
-\begin{figure}
-\begin{mdframed}
+\begin{mdframed}[style=box, frametitle={Review of relevant elements of Physical Chemistry}]
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
-A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry)
-of reactant and resulting product molecules. The reaction can also be characterized by a description of the dynamics, or kinetics, of the
-reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often
-require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy
-(\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
+A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterized by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
 
-The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\)
-means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between
-the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order}
-describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree
-polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is
-\(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and
-overall (the sum of terms), third-order. (Example taken from \parencite{Kotz2006})
+The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order. (Example taken from \parencite{Kotz2006})
 
 Reactions in theory can be decomposed to a chain of \emph{elementary steps}, with each step resulting in a single change,
 such as bond formation or cleavage, to the reacting molecules. Elementary steps are somewhat predictable, practical reactions somewhat
@@ -192,10 +181,6 @@ intermediary products, or collective where there is no connection between the co
 example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation.\parencite{Plasson2010}.
 \end{mdframed}
-\captionsetup{name=Box}
-\caption{Review of relevant elements of Physical Chemistry}
-\label{box:physicalchemistry}
-\end{figure}
 
 %
 %autocatalysis

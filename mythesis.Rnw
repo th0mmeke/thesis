@@ -1,6 +1,6 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
-\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,mdframed,dcolumn,footnote,multirow, amsthm}
+\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,dcolumn,footnote,multirow, amsthm}
 \usepackage[noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
@@ -36,6 +36,10 @@
 % Options for amsthm
 \newtheorem{hypothesis}{Hypothesis}[chapter]
 
+\usepackage[framemethod=tikz]{mdframed}
+% New mdframed style
+\mdfdefinestyle{box}{leftmargin=1cm,rightmargin=2cm,innerleftmargin=1cm,innerrightmargin=1cm,roundcorner=5pt,frametitlerule=true}
+	
 \author{Thom Young}
 \title{The Emergence of\\Inheritance and Heredity in\\Artificial Chemistries}
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer

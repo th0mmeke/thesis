@@ -1,0 +1,750 @@
+﻿
+@article{ ,
+Author = {Lucht, Michael W.},
+Title = {{Size Selection and Adaptive Evolution in an Artificial Chemistry}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2012}},
+Volume = {{18}},
+Number = {{2}},
+Pages = {{143-163}},
+Month = {{SPR}},
+Abstract = {{A simple artificial chemistry for the Squirm3 artificial environment,
+   consisting of replicators that produce quasi-universal enzymes, is
+   presented. The aim of this system is twofold: first, to demonstrate the
+   survival of extracellular replicators despite the presence of
+   faster-replicating parasites; second, to observe the evolution of
+   adaptively useful enzymes. Accomplishing these goals will underpin
+   future attempts to attain open-ended and/or creative evolution in the
+   Squirm3 environment. The first aim is achieved by attaching enzymes to
+   their replicators. Our software implementation demonstrates replicators
+   with 10 bases prospering in the presence of parasites with zero bases.
+   To accomplish the second aim, a process for creating selection pressure
+   toward longer molecules is introduced. The evolution and subsequent
+   dominance of a replicator that produces an adaptively useful enzyme is
+   demonstrated experimentally. Finally, we comment on the crucial role
+   played by neutral evolution and discuss the biological significance of
+   our results.}},
+ISSN = {{1064-5462}},
+}
+
+@article{ ,
+Author = {Fishkis, Maya},
+Title = {{Emergence of Self-Reproduction in Cooperative Chemical Evolution of
+   Prebiological Molecules}},
+Journal = {{ORIGINS OF LIFE AND EVOLUTION OF BIOSPHERES}},
+Year = {{2011}},
+Volume = {{41}},
+Number = {{3}},
+Pages = {{261-275}},
+Month = {{JUN}},
+Abstract = {{The paper presents a model of coevolution of short peptides (P) and
+   short oligonucleotides (N) at an early stage of chemical evolution
+   leading to the origin of life. The model describes polymerization of
+   both P and N types of molecules on mineral surfaces in aqueous solution
+   at moderate temperatures. It is assumed that amino acid and nucleotide
+   monomers were available in a prebiotic milieu, that periodic variation
+   in environmental conditions between dry/warm and wet/cool took place and
+   that energy sources were available for the polymerization. An artificial
+   chemistry approach in combination with agent-based modeling was used to
+   explore chemical evolution from an initially random mixture of monomers.
+   It was assumed that the oligonucleotides could serve as templates for
+   self-replication and for translation of peptide compositional sequences,
+   and that certain peptides could serve as weak catalysts. Important
+   features of the model are the short lengths of the peptide and
+   oligonucleotide molecules that prevent an error catastrophe caused by
+   copying errors and a finite diffusion rate of the molecules on a mineral
+   surface that prevents excessive development of parasitism. The result of
+   the simulation was the emergence of self-replicating molecular systems
+   consisting of peptide catalysts and oligonucleotide templates. In
+   addition, a smaller but significant number of molecules with alternative
+   compositions also survived due to imprecise reproduction and translation
+   of templates providing variability for further evolution. In a more
+   general context, the model describes not only peptide-oligonucleotide
+   molecular systems, but any molecular system containing two types of
+   polymer molecules: one of which serves as templates and the other as
+   catalysts.The presented coevolutionary system suggests a possible
+   direction towards finding the origin of molecular functionality in a
+   prebiotic environment.}},
+DOI = {{10.1007/s11084-010-9220-3}},
+ISSN = {{0169-6149}},
+}
+
+@article{ ,
+Author = {Decraene, James and Mcmullin, Barry},
+Title = {{THE EVOLUTION OF COMPLEXITY IN SELF-MAINTAINING CELLULAR INFORMATION
+   PROCESSING NETWORKS}},
+Journal = {{ADVANCES IN COMPLEX SYSTEMS}},
+Year = {{2011}},
+Volume = {{14}},
+Number = {{1}},
+Pages = {{55-75}},
+Month = {{FEB}},
+Abstract = {{We examine the role of self-maintenance (collective autocatalysis) in
+   the evolution of computational biochemical networks. In primitive
+   proto-cells (lacking separate genetic machinery) self-maintenance is a
+   necessary condition for the direct reproduction and inheritance of what
+   we here term Cellular Information Processing Networks (CIPNs). Indeed,
+   partially reproduced or defective CIPNs may generally lead to
+   malfunctioning or premature death of affected cells. We explore the
+   interaction of this self-maintenance property with the evolution and
+   adaptation of CIPNs capable of distinct information processing
+   abilities. We present an evolutionary simulation platform capable of
+   evolving artificial CIPNs from a bottom-up perspective. This system is
+   an agent-based multi-level selectional Artificial Chemistry (AC) which
+   employs a term rewriting system called the Molecular Classifier System
+   (MCS.bl). The latter is derived from the Holland broadcast language
+   formalism. Using this system, we successfully evolve an artificial CIPN
+   to improve performance on a simple pre-specified information processing
+   task whilst subject to the constraint of continuous self-maintenance. We
+   also describe the evolution of self-maintaining, cross-talking and
+   multi-tasking, CIPNs exhibiting a higher level of topological and
+   functional complexity. This proof of concept aims at contributing to the
+   understanding of the open-ended evolutionary growth of complexity in
+   artificial systems.}},
+DOI = {{10.1142/S0219525911002913}},
+ISSN = {{0219-5259}},
+}
+
+@inproceedings{ ,
+Author = {Schreckling, Daniel and Marktscheffel, Tobias},
+Editor = {{Hart, E and McEwan, C and Timmis, J and Hone, A}},
+Title = {{An Artificial Immune System Approach for Artificial Chemistries Based on
+   Set Rewriting}},
+Booktitle = {{ARTIFICIAL IMMUNE SYSTEMS}},
+Series = {{Lecture Notes in Computer Science}},
+Year = {{2010}},
+Volume = {{6209}},
+Pages = {{250-263}},
+Note = {{9th International Conference on Artificial Immune Systems (ICARIS 2010),
+   Edinburgh, SCOTLAND, JUL 26-29, 2010}},
+Abstract = {{An artificial immune system approach for artificial chemistries (ACs)
+   based on set rewriting methods is introduced. We model signals which are
+   generated by the execution of rewriting rules in the artificial
+   chemistry. They induce signal patterns which trigger a system response.
+   This response is also based on the rewriting rules of the AC. The latter
+   inhibit or accelerate self-reproducing rewriting instructions and
+   eliminate or inhibit non-self rewriting rules in the AC. Exemplarily,
+   the developed artificial immune system model is integrated into the
+   computational model of Fraglets, an AC which is based on multiset
+   rewriting. Experimental results show the feasibility of this approach.}},
+ISSN = {{0302-9743}},
+ISBN = {{978-3-642-14546-9}},
+}
+
+@article{ ,
+Author = {Hutton, Tim J.},
+Title = {{The Organic Builder: A Public Experiment in Artificial Chemistries and
+   Self-Replication}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2009}},
+Volume = {{15}},
+Number = {{1}},
+Pages = {{21-28}},
+Month = {{WIN}},
+Abstract = {{We describe some results submitted by users of the Organic Builder, a
+   Java applet where the rules of an artificial chemistry can be chosen in
+   order to achieve a desired behavior. Though it was initially intended as
+   a set of challenges to be tackled as a game, the users experimented with
+   the system far beyond this and discovered several novel forms of
+   self-replicators. When searching for a system with certain properties
+   such as self-replication, making the system accessible to the public
+   through a Web site is an unusual but effective way of making scientific
+   discoveries, credit for which must go to the users themselves for their
+   tireless experimentation and innovation.}},
+DOI = {{10.1162/artl.2009.15.1.15102}},
+ISSN = {{1064-5462}},
+}
+
+@article{ ,
+Author = {Oohashi, Tsutomu and Ueno, Osamu and Maekawa, Tadao and Kawai, Norie and
+   Nishina, Emi and Honda, Manabu},
+Title = {{An Effective Hierarchical Model for the Biomolecular Covalent Bond: An
+   Approach Integrating Artificial Chemistry and an Actual Terrestrial Life
+   System}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2009}},
+Volume = {{15}},
+Number = {{1}},
+Pages = {{29-58}},
+Month = {{WIN}},
+Abstract = {{Under the AChem paradigm and the programmed self-decomposition (PSD)
+   model, we propose a hierarchical model for the biomolecular covalent
+   bond (HBCB model). This model assumes that terrestrial organisms arrange
+   their biomolecules in a hierarchical structure according to the energy
+   strength of their covalent bonds. It also assumes that they have
+   evolutionarily selected the PSD mechanism of turning biological polymers
+   (BPs) into biological monomers (BMs) as an efficient biomolecular
+   recycling strategy. We have examined the validity and effectiveness of
+   the HBCB model by coordinating two complementary approaches: biological
+   experiments using existent terrestrial life, and simulation experiments
+   using an AChem system. Biological experiments have shown that
+   terrestrial life possesses a PSD mechanism as an endergonic, genetically
+   regulated process and that hydrolysis, which decomposes a BP into BMs,
+   is one of the main processes of such a mechanism. In simulation
+   experiments, we compared different virtual self-decomposition processes.
+   The virtual species in which the self-decomposition process mainly
+   involved covalent bond cleavage from a BP to BMs showed evolutionary
+   superiority over other species in which the self-decomposition process
+   involved cleavage from BP to classes lower than BM. These converging
+   findings strongly support the existence of PSD and the validity and
+   effectiveness of the HBCB model.}},
+DOI = {{10.1162/artl.2009.15.1.15103}},
+ISSN = {{1064-5462}},
+}
+
+@article{ ,
+Author = {Femando, Chrisantha and Rowe, Jonathan},
+Title = {{The origin of autonomous agents by natural selection}},
+Journal = {{BIOSYSTEMS}},
+Year = {{2008}},
+Volume = {{91}},
+Number = {{2}},
+Pages = {{355-373}},
+Month = {{FEB}},
+Abstract = {{We propose conditions in which an autonomous agent could arise, and
+   increase in complexity. It is assumed that on the primitive Earth there
+   arose a recycling flow-reactor containing spontaneously formed oil
+   droplets or lipid aggregates. These droplets grew at a basal rate by
+   simple incorporation of lipid phase material, and divided by external
+   agitation. This type of system was able to implement a natural selection
+   algorithm once heredity was added. Macroevolution became possible by
+   selection for rarely occurring chemical reactions that produced holistic
+   autocatalytic molecular replicators (contained within the aggregate)
+   capable of doubling at least as fast as the lipid aggregate, and which
+   were also capable of benefiting the growth of its lipid aggregate
+   container. No nucleotides or monomers capable of modular heredity were
+   required at the outset. To explicitly state this hypothesis, a computer
+   model was developed that employed an artificial chemistry, exhibiting
+   conservation of mass and energy, incorporated within each individual of
+   a population of lipid aggregates. This model evolved increasingly
+   complex self-sustaining processes of constitution, a result that is also
+   expected in real chemistry. (c) 2007 Elsevier Ireland Ltd. All rights
+   reserved.}},
+DOI = {{10.1016/j.biosystems.2007.05.012}},
+ISSN = {{0303-2647}},
+}
+
+@inproceedings{ ,
+Author = {Meyer, Thomas and Schreckling, Daniel and Tschudin, Christian and
+   Yamamoto, Lidia},
+Editor = {{Priami, C and Akan, OB and Dressler, F and Ngom, A}},
+Title = {{Robustness to Code and Data Deletion in Autocatalytic Quines}},
+Booktitle = {{TRANSACTIONS ON COMPUTATIONAL SYSTEMS BIOLOGY X}},
+Series = {{Lecture Notes in Computer Science}},
+Year = {{2008}},
+Volume = {{5410}},
+Pages = {{20-40}},
+Note = {{2nd International Conference on Bio-Inspired Models of Network,
+   Information and Computing Systems, Budapest, HUNGARY, DEC 10-13, 2007}},
+Abstract = {{Software systems nowadays are becoming increasingly complex and
+   vulnerable to all sorts of failures and attacks. There is a rising need
+   for robust self-repairing systems able to restore full functionality in
+   the face of internal and external perturbations, including those that
+   affect their own code base. However, it is difficult to achieve code
+   self-repair with conventional programming models.
+   We propose and demonstrate a solution to this problem based on
+   self-replicating programs in an artificial chemistry. In this model,
+   execution proceeds by chemical reactions that modify virtual molecules
+   carrying code and data. Self-repair is achieved by what we call
+   autocatalytic quines: programs that permanently reproduce their own code
+   base. The concentration of instructions reflects the health of the
+   system, and is kept stable by the instructions themselves. We show how
+   the chemistry of such programs enables them to withstand arbitrary
+   amounts of random code and data deletion, without affecting the results
+   of their computations.}},
+ISSN = {{0302-9743}},
+ISBN = {{978-3-540-92272-8}},
+ResearcherID-Numbers = {{Yamamoto, Lidia/B-7246-2013}},
+}
+
+@article{ ,
+Author = {Hutton, Tim J.},
+Title = {{Evolvable self-reproducing cells in a two-dimensional artificial
+   chemistry}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2007}},
+Volume = {{13}},
+Number = {{1}},
+Pages = {{11-30}},
+Month = {{WIN}},
+Abstract = {{We present a novel unit of evolution a self reproducing cell in a
+   two-dimensional artificial chemistry. The cells have a strip of genetic
+   material that is used to produce enzymes, each catalyzing a specific
+   reaction that may affect the survival of the cell. The enzymes are kept
+   inside the cell by a loop of membrane, thus ensuring that only the cell
+   that produced them gets their benefit. A set of reaction rules, each
+   simple and local, allows the cells to copy their genetic information and
+   physically divide. The evolutionary possibilities of the cells arc
+   explored, and it is suggested that the system provides a useful
+   framework for testing hypotheses about self-driven evolution.}},
+DOI = {{10.1162/artl.2007.13.1.11}},
+ISSN = {{1064-5462}},
+}
+
+@article{ ,
+Author = {Fernando, Chrisantha and Rowe, Jonathan},
+Title = {{Natural selection in chemical evolution}},
+Journal = {{JOURNAL OF THEORETICAL BIOLOGY}},
+Year = {{2007}},
+Volume = {{247}},
+Number = {{1}},
+Pages = {{152-167}},
+Month = {{JUL 7}},
+Abstract = {{We propose that chemical evolution can take place by natural selection
+   if a geophysical process is capable of heterotrophic formation of
+   liposomes that grow at some base rate, divide by external agitation, and
+   are subject to stochastic chemical avalanches, in the absence of
+   nucleotides or any monomers capable of modular heredity. We model this
+   process using a simple hill-climbing algorithm, and an artificial
+   chemistry that is unique in exhibiting conservation of mass and energy
+   in an open thermodynamic system. Selection at the liposome level results
+   in the stabilization of rarely occurring molecular autocatalysts that
+   either catalyse or are consumed in reactions that confer liposome level
+   fitness; typically they contribute in parallel to an increasingly
+   conserved intermediary metabolism. Loss of competing autocatalysts can
+   sometimes be adaptive. Steady-state energy flux by the individual
+   increases due to the energetic demands of growth, but also of memory,
+   i.e. maintaining variations in the chemical network. Self-organizing
+   principles such as those proposed by Kauffman, Fontana, and Morowitz
+   have been hypothesized as an ordering principle in chemical evolution,
+   rather than chemical evolution by natural selection. We reject those
+   notions as either logically flawed or at best insufficient in the
+   absence of natural selection. Finally, a finite population model without
+   elitism shows the practical evolutionary constraints for achieving
+   chemical evolution by natural selection in the lab. (C) 2007 Elsevier
+   Ltd. All rights reserved.}},
+DOI = {{10.1016/j.jtbi.2007.01.028}},
+ISSN = {{0022-5193}},
+EISSN = {{1095-8541}},
+}
+
+@article{ ,
+Author = {Suzuki, Hideaki},
+Title = {{Mathematical folding of node chains in a molecular network}},
+Journal = {{BIOSYSTEMS}},
+Year = {{2007}},
+Volume = {{87}},
+Number = {{2-3}},
+Pages = {{125-135}},
+Month = {{FEB}},
+Note = {{6th International Workshop on Information Processing in Cells and
+   Tissues, St Williams Coll, York, ENGLAND, AUG 30-SEP 01, 2005}},
+Abstract = {{Under the framework of network artificial chemistry (NAC), a method to
+   construct a phenotypic machine from genotypic information is proposed.
+   The genotype is expressed as a sequence of nodes (a node chain) with
+   symbol data. According to an implemented algorithm, a chain is
+   agglomerated, tangled, and finally folded into a node cluster that works
+   as a control-flow machine in the network. Two examples of control-flow
+   clusters, splitase and replicase, are presented and their functionality
+   is demonstrated. Several meanings and future research directions are
+   discussed. (c) 2006 Elsevier Ireland Ltd. All rights reserved.}},
+DOI = {{10.1016/j.biosystems.2006.09.005}},
+ISSN = {{0303-2647}},
+}
+
+@inproceedings{ ,
+Author = {McMullin, Barry and Kelly, Ciaran and O'Brien, Darragh},
+Editor = {{Costa, FAE and Rocha, LM and Costa, E and Harvey, I and Coutinho, A}},
+Title = {{Multi-level selectional stalemate in a simple artificial chemistry}},
+Booktitle = {{Advances in Artificial Life, Proceedings}},
+Series = {{LECTURE NOTES IN ARTIFICIAL INTELLIGENCE}},
+Year = {{2007}},
+Volume = {{4648}},
+Pages = {{22-31}},
+Note = {{9th European Conference on Artificial Life, Lisbon, PORTUGAL, SEP 10-14,
+   2007}},
+Abstract = {{We describe a simple artificial chemistry which abstracts a small number
+   of key features from the origin of life ``replicator world{''}
+   hypotheses. We report how this can already give rise to moderately
+   complex and counter-intuitive evolutionary phenomena, including
+   macro-evolutionary deterioration in replication fidelity (which
+   corresponds to intrinsic replicator fitness in this model). We briefly
+   describe the extension of this model to incorporate a higher, protocell,
+   level of selection. We show that the interaction between the two levels
+   of selection then serves to control parasitic exploitation at the
+   molecular level, while still significantly constraining accessible
+   evolutionary trajectories at the protocell level. We conclude with a
+   brief discussion of the implications for further work.}},
+ISSN = {{0302-9743}},
+ISBN = {{978-3-540-74912-7}},
+ResearcherID-Numbers = {{McMullin, Barry/B-9504-2009}},
+}
+
+@article{ ,
+Author = {Kvasnicka, Vladimir and Pospichal, Jiri},
+Title = {{Artificial chemistry and replicator theory of coevolution of genes and
+   memes}},
+Journal = {{COLLECTION OF CZECHOSLOVAK CHEMICAL COMMUNICATIONS}},
+Year = {{2007}},
+Volume = {{72}},
+Number = {{2}},
+Pages = {{223-251}},
+Abstract = {{A simple replication theory of coevolution of genes and memes is
+   proposed. A population composed of pairs of genes and memes, the
+   so-called m-genes, is postulated as a subject of Darwinian evolution.
+   Three different types of operations over m-genes are introduced:
+   Replication (an m-gene is replicated with mutations onto an offspring
+   m-gene), interaction (a memetic transfer from a donor to an acceptor),
+   and extinction (an m-gene is eliminated). Computer simulations of the
+   present model allow to identify different mechanisms of gene and meme
+   coevolution.}},
+DOI = {{10.1135/cccc20070223}},
+ISSN = {{0010-0765}},
+ResearcherID-Numbers = {{Pospichal, Jiri/K-6541-2015}},
+}
+
+@article{ ,
+Author = {Ono, N},
+Title = {{Computational studies on conditions of the emergence of autopoietic
+   protocells}},
+Journal = {{BIOSYSTEMS}},
+Year = {{2005}},
+Volume = {{81}},
+Number = {{3}},
+Pages = {{223-233}},
+Month = {{SEP}},
+Abstract = {{It has been pointed out that the acquisition of self-maintaining
+   protocells was one of the most important evolutionary steps in the
+   earliest stage of life. However, there remains little evidence to show
+   what the components of the protocells were and how they were acquired. A
+   theoretical study to investigate the possible process of the emergence
+   of protocells is therefore required. In this paper, we present a
+   computational model that demonstrates the emergence and evolution of
+   self-maintaining and self-reproducing structures to analyze conditions
+   under which precellular autocatalytic molecules could evolve into
+   self-reproducing protocells. We focused on the supply rates of molecular
+   resources as environmental parameters and explored the pathways of
+   evolution from molecular replication to cellular reproduction under
+   various conditions. The results showed that the spontaneous organization
+   of protocells from a random initial state takes place in a parameter
+   region where the metabolism becomes difficult because of an insufficient
+   supply of resources, but once cell structures are organized, they can
+   survive in a wider range of environments. We investigated the evolution
+   in temporally or spatially changing environments and found that the
+   protocells can take over the precellular metabolic system after the
+   transition. These results suggest a possible scenario for the evolution
+   from precellular to cellular reproduction. (c) 2005 Elsevier Ireland
+   Ltd. All rights reserved.}},
+DOI = {{10.1016/j.biosystems.2005.04.005}},
+ISSN = {{0303-2647}},
+ORCID-Numbers = {{ONO, Naoaki/0000-0002-7722-055X}},
+}
+
+@inproceedings{ ,
+Author = {Hutton, TJ},
+Editor = {{Pollack, J and Bedau, M and Husbands, P and Ikegami, T and Watson, RA}},
+Title = {{A functional self-reproducing cell in a two-dimensional artificial
+   chemistry}},
+Booktitle = {{Artificial Life IX}},
+Year = {{2004}},
+Pages = {{444-449}},
+Note = {{9th International Conference on the Simulation and Synthesis of
+   Artificial Life (ALIFE9), Boston, MA, SEP 12-15, 2004}},
+Abstract = {{We show how it is possible to make a self-reproducing cell in an
+   artificial chemistry by surrounding a replicating molecule with a
+   semi-permeable membrane. The molecule can carry an arbitrary amount of
+   information, encoded in a material form as a sequence of bases, as in
+   DNA. The cells produce enzymes through a decoding of their base
+   sequence, and these enzymes trigger reactions essential to the cell's
+   survival. Earlier work in a similar artificial chemistry showed that
+   replicators free in solution could obtain no survival advantage from
+   producing enzymes; here we show that when surrounded by a membrane the
+   replicators can obtain an advantage. We show that the cells reliably
+   reproduce over many generations under environmental pressure for
+   resources. By creating cells in a material-based artificial chemistry we
+   hope that the system might have the potential for open-ended, creative
+   evolution.}},
+ISBN = {{0-262-66183-7}},
+}
+
+@inproceedings{ ,
+Author = {Madina, D and Ikegami, T},
+Editor = {{Pollack, J and Bedau, M and Husbands, P and Ikegami, T and Watson, RA}},
+Title = {{Cellular dynamics in a 3D molecular dynamics system with chemistry}},
+Booktitle = {{Artificial Life IX}},
+Year = {{2004}},
+Pages = {{461-465}},
+Note = {{9th International Conference on the Simulation and Synthesis of
+   Artificial Life (ALIFE9), Boston, MA, SEP 12-15, 2004}},
+Abstract = {{We present a three-dimensional model of the formation of simple
+   protocellular structures. The model is based on an earlier lattice
+   artificial chemistry due to Ono and Ikegami which consisted of a
+   primitive metabolic system built on an artificial chemistry. This model
+   computed the interactions of simple amphiphilic molecules which
+   organized into membrane-like structures. The current model, however,
+   treats space as continuous rather than a lattice. Moreover, although
+   forces between atoms are computed in a more realistic manner, an
+   adaptive method of computing intermolecular forces allows for efficient
+   computation.}},
+ISBN = {{0-262-66183-7}},
+}
+
+@article{ ,
+Author = {Rasmussen, S and Chen, LH and Nilsson, M and Abe, S},
+Title = {{Bridging nonliving and living matter}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2003}},
+Volume = {{9}},
+Number = {{3}},
+Pages = {{269-316}},
+Month = {{SUM}},
+Abstract = {{Assembling non-biological materials (geomaterials) into a proto-organism
+   constitutes a bridge between nonliving and living matter. In this
+   article we 2 present a simple step-by-step route to assemble a
+   proto-organism. Many pictures have been proposed to describe this
+   transition within the origins-of-life and artificial life communities,
+   and more recently alternative pictures have been emerging from advances
+   in nanoscience and biotechnology. The proposed proto-organism lends
+   itself to both traditions and defines a new picture based on a simple
+   idea: Given a set of required functionalities, minimize the
+   physicochemical structures that support these functionalities, and make
+   sure that all Structures self-assemble and Mutually enhance each other's
+   existence. The result is the first concrete, rational design of a simple
+   physicochemical system that integrates the key functionalities in a
+   thermodynamically favorable manner as a lipid aggregate integrates
+   proto-genes and a proto-metabolisin. Under external pumping of free
+   energy, the metabolic processes produce the required building blocks,
+   and only specific gene sequences enhance the metabolic kinetics
+   sufficiently for the whole system to survive. We propose an experimental
+   implementation of the proto-organism with a discussion of our
+   experimental results, together with relevant results produced by other
+   experimental groups, and we specify what is still missing
+   experimentally. Identifying the missing steps is just as important as
+   providing the road map for the transition. We derive the kinetic and
+   thermodynamic conditions of each of the proto-organism subsystems
+   together with relevant theoretical and computational results about these
+   subsystems. We present and discuss detailed 3D simulations of the lipid
+   aggregation processes. From the reaction kinetics we derive analytical
+   aggregate size distributions, and derive key properties of the metabolic
+   efficiency and stability. Thermodynamics and kinetics of the ligation
+   directed self-replication of the proto-genes is discussed, and we
+   summarize the full life cycle of the proto-organism by comparing size,
+   replication time, and energy with the biomass efficiency of contemporary
+   unicells. Finally, we also compare our proto-organism picture with
+   existing origins-of-life and protocell pictures.
+   By assembling one possible bridge between nonliving and living matter we
+   hope to provide a piece in the ancient puzzle about who we are and where
+   we come from.}},
+DOI = {{10.1162/106454603322392479}},
+ISSN = {{1064-5462}},
+ResearcherID-Numbers = {{nilsson jacobi, martin/C-9296-2012}},
+}
+
+@article{ ,
+Author = {Suzuki, H and Ono, N and Yuta, K},
+Title = {{Several necessary conditions for the evolution of complex forms of life
+   in an artificial environment}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2003}},
+Volume = {{9}},
+Number = {{2}},
+Pages = {{153-174}},
+Month = {{SPR}},
+Abstract = {{In order for an artificial life (Alife) system to evolve complex
+   creatures, an artificial environment prepared by a designer has to
+   satisfy several conditions. To clarify this requirement, we first assume
+   that an artificial environment implemented in the computational medium
+   is composed of an information space in which elementary symbols move
+   around and react with each other according to human-prepared elementary
+   rules. As fundamental properties of these factors (space, symbols,
+   transportation, and reaction), we present ten criteria from a comparison
+   with the biochemical reaction space in the real world. Then, in the
+   latter half of the article, we take several computational Alife systems
+   one by one, and assess them in terms of the proposed criteria. The
+   assessment can be used not only for improving previous Alife systems but
+   also for devising new Alife models in which complex forms of artificial
+   creatures can be expected to evolve.}},
+DOI = {{10.1162/106454603322221504}},
+ISSN = {{1064-5462}},
+}
+
+@inproceedings{ ,
+Author = {Hutton, TJ},
+Editor = {{Banzhaf, W and Christaller, T and Dittrich, P and Kim, JT and Ziegler, J}},
+Title = {{Simulating evolution's first steps}},
+Booktitle = {{ADVANCES IN ARTIFICIAL LIFE, PROCEEDINGS}},
+Series = {{Lecture Notes in Artificial Intelligence}},
+Year = {{2003}},
+Volume = {{2801}},
+Pages = {{51-58}},
+Note = {{7th European Conference on Artificial Life, DORTMUND, GERMANY, SEP
+   14-17, 2003}},
+Abstract = {{We demonstrate a simple artificial chemistry environment in which two
+   small evolutionary transitions from the simplest self-replicators to
+   larger ones are observed. The replicators adapt to increasingly harsh
+   environments, where they must synthesise the components they need for
+   replication. The evolution of a biosynthetic pathway of increasing
+   length is thus achieved, through the use of simple chemical rules for
+   catalytic action.}},
+ISSN = {{0302-9743}},
+ISBN = {{3-540-20057-6}},
+}
+
+@inproceedings{ ,
+Author = {Suzuki, H},
+Editor = {{Banzhaf, W and Christaller, T and Dittrich, P and Kim, JT and Ziegler, J}},
+Title = {{Models for the conservation of genetic information with string-based
+   artificial chemistry}},
+Booktitle = {{ADVANCES IN ARTIFICIAL LIFE, PROCEEDINGS}},
+Series = {{LECTURE NOTES IN ARTIFICIAL INTELLIGENCE}},
+Year = {{2003}},
+Volume = {{2801}},
+Pages = {{78-88}},
+Note = {{7th European Conference on Artifical Life, DORTMUND, GERMANY, SEP 14-17,
+   2003}},
+Abstract = {{A model of artificial chemistry in which both genotypic and phenotypic
+   strings mingle together and react with each other is presented. A cell
+   that includes a string set for the replication and translation of
+   genetic information is designed on this system, and the cells are
+   reproduced by cell division cycles. From experiments that emulate cell
+   selection, it is shown that a complete set of genes constituting the
+   designed system can be stably transmitted to the offspring cells if they
+   are put into a long single chromosome or the gene replication is
+   strictly regulated and the replicated genes are transferred to the two
+   daughter cells by a spindle.}},
+ISSN = {{0302-9743}},
+ISBN = {{3-540-20057-6}},
+}
+
+@inproceedings{ ,
+Author = {Hoar, RM and Penner, JK and Jacob, C},
+Book-Group-Author = {{IEEE}},
+Title = {{Transcription and evolution of a virtual bacteria culture}},
+Booktitle = {{CEC: 2003 CONGRESS ON EVOLUTIONARY COMPUTATION, VOLS 1-4, PROCEEDINGS}},
+Series = {{IEEE Congress on Evolutionary Computation}},
+Year = {{2003}},
+Pages = {{54-61}},
+Note = {{Congress on Evolutionary Computation (CEC), Canberra, AUSTRALIA, DEC
+   08-12, 2003}},
+Abstract = {{This paper describes implementation details and results from a simulated
+   multi-agent bacteria ecosystem. Each bacterium is encoded on a DNA-like
+   genome which is interpreted to specify the gene binding sites and
+   protein production rules. Protein and gene compounds interact in an
+   artificial chemistry, producing regulatory networks and observable
+   behaviours such as moving, splitting and eating. Through genome
+   inheritance and mutation, a virtual bacteria culture evolves.}},
+ISBN = {{0-7803-7804-0}},
+}
+
+@article{ ,
+Author = {Kvasnicka, V and Pospichal, J},
+Title = {{Artificial chemistry and molecular Darwinian evolution in silico}},
+Journal = {{COLLECTION OF CZECHOSLOVAK CHEMICAL COMMUNICATIONS}},
+Year = {{2003}},
+Volume = {{68}},
+Number = {{1}},
+Pages = {{139-177}},
+Abstract = {{A simplified model of Darwinian evolution at the molecular level is
+   studied by applying the methods of artificial chemistry. A chemical
+   reactor (chemostat) contains molecules that are represented by binary
+   strings, the strings being capable of replication with a probability
+   proportional to their fitness. Moreover, the process of replication is
+   not fully precise, sporadic mutations may produce new offspring strings,
+   which are slightly different from their parent templates. The dynamics
+   of such an autoreplicating system is described by Eigen's differential
+   equations. These equations have a unique asymptotically stable state,
+   which corresponds to those strings that have the highest rate constants
+   (fitness). Fitness of binary string is calculated as a graph-theory
+   similarity between a folding (phenotype) of respective string and the
+   so-called required folding. The presented method offers a detailed view
+   of mechanisms of the molecular Darwinian evolution, in particular of the
+   meaning and importance of neutral mutations.}},
+DOI = {{10.1135/cccc20030139}},
+ISSN = {{0010-0765}},
+ResearcherID-Numbers = {{Pospichal, Jiri/K-6541-2015}},
+}
+
+@article{ ,
+Author = {Hutton, TJ},
+Title = {{Evolvable self-replicating molecules in an artificial chemistry}},
+Journal = {{ARTIFICIAL LIFE}},
+Year = {{2002}},
+Volume = {{8}},
+Number = {{4}},
+Pages = {{341-356}},
+Abstract = {{This paper gives details of Squirm3, a new artificial environment based
+   on a simple physics and chemistry that supports self-replicating
+   molecules somewhat similar to DNA. The self-replicators emerge
+   spontaneously from a random soup given the right conditions.
+   Interactions between the replicators can result in mutated versions that
+   can outperform their parents. We show how artificial chemistries such as
+   this one can be implemented as a cellular automaton. We concur with
+   Dittrich, Ziegler, and Banzhaf that artificial chemistries are a good
+   medium in which to study early evolution.}},
+DOI = {{10.1162/106454602321202417}},
+ISSN = {{1064-5462}},
+}
+
+@inproceedings{ ,
+Author = {Kvasnicka, V},
+Editor = {{Roy, R and Koppen, M and Ovaska, S and Furuhashi, T and Hoffman, F}},
+Title = {{Artificial chemistry - a new metaphor for evolutionary algorithms}},
+Booktitle = {{SOFT COMPUTING AND INDUSTRY: RECENT APPLICATIONS}},
+Year = {{2002}},
+Pages = {{665-673}},
+Note = {{6th On-Line World Conference on Soft Computing in Industrial
+   Applications (WSC6), ELECTR NETWORK, SEP, 2001}},
+Abstract = {{An artificial chemistry is a branch of contemporary computer science
+   that uses a chemical metaphor as a new highly parallel approach to
+   computations. It can be defined by (1) a set of objects (a chemostat
+   composed of molecules) and (2) a set of transformation rules (chemical
+   reactions), which specify how the objects are transformed into other
+   objects. The purpose of the present short communication is to use the
+   well-known Eigen's chemical system of replicators as a new (chemical)
+   metaphor. It is then applied in design of the so-called replicator
+   algorithm. This algorithm has some common features with genetic
+   algorithms, but as an advantage of the presented replicator algorithm we
+   consider an existence of relatively simple proof that the algorithm
+   offers globally optimal solutions.}},
+ISBN = {{1-85233-539-4}},
+}
+
+@inproceedings{ ,
+Author = {Ono, Naoaki and Ikegami, Takashi},
+Editor = {{Kelemen, J and Sosik, P}},
+Title = {{Artificial chemistry: Computational studies on the emergence of
+   self-reproducing units}},
+Booktitle = {{ADVANCES IN ARTIFICIAL LIFE}},
+Series = {{LECTURE NOTES IN ARTIFICIAL INTELLIGENCE}},
+Year = {{2001}},
+Volume = {{2159}},
+Pages = {{186-195}},
+Note = {{6th European Conference on Artificial Life (ECAL), Prague, CZECH
+   REPUBLIC, SEP 10-14, 2001}},
+Abstract = {{Acquisition of self-maintenance of cell membranes is an essential step
+   to evolve from molecular to cellular reproduction. In this report, we
+   present a model of artificial chemistry that simulates metabolic
+   reactions, diffusion and repulsion of abstract chemicals in a
+   two-dimensional space to realize the organization of proto-cell
+   structures. It demonstrates that proto-cell structures that maintain and
+   reproduce themselves autonomously emerge from a non-organized initial
+   configuration. The results also suggest that a metabolic system that
+   produces membranes can be selected in the chemical evolution of a
+   pre-cellular stage.}},
+ISSN = {{0302-9743}},
+ISBN = {{978-3-540-42567-0}},
+}
+
+@inproceedings{ ,
+Author = {di Fenizio, Pietro Speroni and Dittrich, Peter and Banzhaf, Wolfgang},
+Editor = {{Kelemen, J and Sosik, P}},
+Title = {{Spontaneous formation of proto-cells in an universal artificial
+   chemistry on a planar graph}},
+Booktitle = {{ADVANCES IN ARTIFICIAL LIFE}},
+Series = {{LECTURE NOTES IN ARTIFICIAL INTELLIGENCE}},
+Year = {{2001}},
+Volume = {{2159}},
+Pages = {{206-215}},
+Note = {{6th European Conference on Artificial Life (ECAL), Prague, CZECH
+   REPUBLIC, SEP 10-14, 2001}},
+Abstract = {{An artificial chemistry is embedded in a triangular planar graph, that
+   allows the molecules to act only locally along the edges. We observe the
+   formation of effectively separated components in the graph structure.
+   Those components are kept separated by elastic reactions from molecules
+   generated inside the component itself. We interpret those components as
+   self-maintaining proto-cells and the elastic nodes as their
+   proto-membrane. The possibility for these cells to be autopoietic is
+   discussed.}},
+ISSN = {{0302-9743}},
+ISBN = {{978-3-540-42567-0}},
+}

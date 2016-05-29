@@ -5,33 +5,6 @@
 Without hesitation or ambiguity, and fully mindful of such paleontological wonders as large dinosaurs andAfrican ape-men, I state that the invertebrates of the Burgess Shale, found high in the Canadian Rockies in YohoNational Park, on the eastern border of British Columbia, are the world's most important animal fossils. Modern multicellular animals make their first uncontested appearance in the fossil record some 570 million years ago--and with a bang, not a protracted crescendo.}%
 {\textit{\\Wonderful life : the Burgess Shale and the nature of history}\\\textsc{Stephen Jay Gould}}
 
-The goal for this work is to determine the conditions under which robust, interesting, adaptive evolution can be started and undergo self-improvement in the non-living world. 
-
-Ongoing evolution means something more than continual change of population frequencies; instead we refer to the goal of a process that continues to produce interesting, novel, and creative results, as does natural biological evolution; in other words, a changing process, and so our goal is the \textit{gls{evoevo}}. Finally, we constrain our domain to software rather than wetware or hardware; simulations and models, rather than elements embedded in the physical world.
-
-Natural evolution is the foundation for several related bodies of literature, in Computational Intelligence and Artificial Life, as well of course of the study of evolution in natural systems. As many have observed, there are major differences between the original inspiration and the spin-offs. Biological evolutionary systems are complex, contingent, emergent, endogenous and general. By contrast, artificial evolutionary systems such as Evolutionary Algorithms are exogenous, problem-specific and designed.
-
-A convenient shorthand capturing these differences labels the biological inspiration as bottoms-up or emergent and the derived fields as top-down or designed. If the top-down approach has failed, then perhaps there might be mileage in returning to biology, our sole example of a general self-improving, self-organizing system.
-
-But as biology is contingent, what is the most useful starting point for a recapitulation? Assume first of all that we are in the domain of software, rather than hardware or wetware, for practical reasons. And also assume that biological evolution does not depend upon embodiment--that the outcome can be adequately modelled at a conceptual level without being grounded in either the physical world, or in contingent biology such as enzymes, proteins and genes.
-
-Then our belief is that the \emph{\gls{evoevo}} itself can and will emerge under certain conditions, and that an emergent approach will be more successful than the predominant design-driven top-down approach today.
-
-%Simple ongoing evolution is not the same as creative or interesting evolution; the current state-of-the-art is both insufficient and unsatisfying. \parencite{Bourrat2015} makes a related distinction between distributive and transformative forms of evolution, where distributive evolution sees simply a change in population distribution without the generation of novelties or new elements characteristic of transformative evolution. The fundamental open problem is how to achieve transformative evolution in artificial systems.
-
-\emph{A copy mechanism with adjustable fidelity can auto-adjust for example to changing environmental conditions.}
-
-\begin{compactitem}
-	\item
-	      Not same as ENS--that explains natural processes; our goal is to achieve something that is as interesting in a different domain
-	\item 
-	      Not same as EAs--EAs have exogenous fitness, not open-ended (search through a fixed space, cannot surprise (\eg \parencite{Nellis2014})
-	\item  
-	      Not same as approach where take ideas from biology and evaluate for different purpose (\eg in EAs, island populations, GRNs (\eg L-systems), Lamarkian learning, co-evolution, evolutionary transitions (cooperation and mediation in \parencite{Defaweux:2005fk}\ldots{}). All seem to follow model of currently we use these tools, biology has something we don't have, let's try it\ldots{}
-	\item
-	      Not the same as most type of Alife, where evolution is not the subject of the research but rather a tool or mechanism towards some other goal (canonically, creating artificial life.)
-\end{compactitem}
-
 Constitutive definitions of \gls{oee}
 
 \parencite{Taylor2001} like others makes a distinction between OEE and ``kinds of evolutionary innovation''. He gives as an example of limited innovation the emergence of paratism in \cite{Ray1991} as direct result of system design and initial seeding conditions. In this reading, ``fundamentally new'' (labelled by Taylor as ``creative'') means new ways of sensing the environment and interacting with it \cite{Taylor2001}.
@@ -47,8 +20,7 @@ Constitutive definitions of \gls{oee}
 
 ``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \parencite{Soros2014}
 
-``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.'' -
-although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \parencite{Maley1999}
+``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.''--although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \parencite{Maley1999}
 
 \quote{by open-ended evolutionary capacity we understand the potential of a system to reproduce its basic functional-constitutive dynamics, bringing about an un-limited variety of equivalent systems, of ways of expressing that dynamics, which are not subject to any predetermined upper bound of organizational complexity (even if they are, indeed, to the energetic-material restrictions imposed by a finite environment and by the universal physico-chemical laws.}{\parencite{Ruiz-Mirazo2004}}
 
@@ -178,21 +150,13 @@ system itself. Every variation is carried out by the individuals. Selection pres
 \section{Background and context}\label{background-and-context}
 
 There has long been interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
-
-Related work falls into three main areas:
-
-\begin{compactenum}
-\item Work specific to the overall problem: the conditions for the evolution-of-evolution in software systems--below.
-\item Work related to the subproblem of a viable model for the evolution-of-evolution in software--in \ref{}
-\item Work related to implementations of open-ended evolutionary systems in software--in \ref{}
-\end{compactenum}
 	
-This \namecref{background-and-context} expands upon previous work that is directly relevant to our overall problem, with the other two areas being reviewed in the Previous Work sections of the subsequent Parts of the thesis. 
+This \namecref{background-and-context} expands upon prior work that is relevant, but not specific, to our thesis to provide context and background.
 
 \subsection{Life}
 
 \epigraph{%
-	In the world of human thought generally, and in physical sciences in particular, the most important and most fruitful concepts are those to which it is impossible to attach a well-defined meaning.}%
+In the world of human thought generally, and in physical sciences in particular, the most important and most fruitful concepts are those to which it is impossible to attach a well-defined meaning.}%
 {\textsc{\\H.A. Kramers}}
 
 Natural evolution is the best example we have today of a transformative, adaptive improvement process. Many fields would benefit from a robust general optimisation heuristic for use when exact methods are not possible, and the example of natural evolution is our current gold-standard. 
@@ -202,26 +166,11 @@ As stated by many (\eg \cite{Pascal2013, Malaterre2015}) a definition of life is
 \parencite{Fernando:2007pf} presents a partial compendium of definitions which illustrates the range of opinion:
 
 \quote{
-	...at least one of the following outcomes: ‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{\parencite{Fernando:2007pf}}
+...at least one of the following outcomes: ‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{\parencite{Fernando:2007pf}}
 
 One interesting distinction between living and non-living comes from \parencite{Rasmussen2004}--non-living systems explore a state-space driven by thermodynamics, and so in a sense through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \parencite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things. Given the relationship between information and entropy, the statement about metabolism in \cite{Schrodinger1944}--how ``living matter evades the decay to equilibrium''--seems very similar.
 
-
-\begin{mdframed}[style=box, frametitle={The origins of life}]
-%\epigraph{%
-%``What we do not know today we shall know tomorrow. A whole army of biologists is studying the structure and organization of
-%living matter, while a no less number of physicists and chemists are daily revealing to us new properties of dead things. Like two parties
-%of workers boring from the two opposite ends of a tunnel, they are working towards the same goal. The work has already gone a long way
-%and very, very soon the last barriers between the living and the dead will crumble under the attack of patient work and powerful scientific
-%thought.''}%
-%{\textit{\\The Origin of Life}\\\textsc{Alexander Oparin}}
-
-%Darwin ``warm little pond'' Life and letters vol3 1887
-%(``\emph{\textbf{But if (and Oh! What a big if!) we could conceive in
-%	some warm little pond, with all sorts of ammonia and phosphoric salts,
-%	light, heat, electricity etc, present, that a protein compound was
-%	chemically formed ready to undergo still more complex
-%	changes\ldots{}'')}} \parencite{Vasas2012}
+\begin{mdframed}[style=box, frametitle={The orgins of life}]
 
 The evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspect, it is not possible to test hypotheses by falsification, and hence they can only be speculative.
 
@@ -323,7 +272,7 @@ Although the advantages of a distinction between genotype and phenotype are disc
 	Biological evolution consists of change in the hereditary characteristics of groups of organisms over the course of generations. Groups of organisms, termed populations and species, are formed by the division of ancestral populations or species, and the descendant groups then change independently. Hence, from a long-term perspective, evolution is the descent, with modification, of different lineages from common ancestors.}{``Evolution, Science, and Society: Evolutionary Biology and the National Research Agenda'', Working Draft, 28 September 1998, \url{http://www.zoology.ubc.ca/~otto/evolution/Evolwhite.pdf}}
 
 
-\subsubsection{Evolution by Natural Selection (ENS))}\label{ens-evolution-by-natural-selection}
+\subsection{Evolution by Natural Selection (ENS))}\label{ens-evolution-by-natural-selection}
 
 \cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant'':
 
@@ -346,7 +295,7 @@ Quite apart from these differences in interpretation, the major theoretical diff
 
 Pigliucci2008--``Is evolvability evolvable?''
 
-\subsubsection{Compositional evolution}
+\subsection{Compositional evolution}
 
 In life, have \gls{hgt} \eg \parencite{Ochman2000}; \parencite{Watson2002} discusses compositional evolution and building blocks; \parencite{Pross2011} introduces Dynamic Kinetic Stability as a general principle underlying evolution, and proposes it as the driver for the origin of life.
 
@@ -406,7 +355,7 @@ ToyWorld is available under an GNU GPL v2 open source licence from GitHub \cite{
 \chapter{Previous work}\label{previous-work}
 
 \epigraph{%
-	It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
+It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
 {\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
 
 Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption) \parencite{Nellis2014}
@@ -432,23 +381,7 @@ We're interested in heredity and inheritance, which in biology is tied to the co
 
 ``Replicator: any autocatalytic entity for which there is a selection process defined. Selection is a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010} (terminology slightly different in Bourrat2015--persistors, replicators, reproducers...)
 
-''A regenerating/recreating entity can produce at least
-one entity equivalent to it. It is possible that the original
-entity immediately decomposes (that is, cannot be the
-subject of further turns of the cycle), causing sequential
-replacement, although this is the most simple of regenerating
-entities. If it can effectively increase the number
-of entities equivalent to itself, then it is autocatalytic
-and is a \emph{replicator}. The simplest of replicators is the
-\emph{exact replicator}, which is \emph{non-informational}, and any
-change made to it causes a change in the phenotype. If
-a variation can arise in the structure in such a way that
-it does not change equivalence of the entity, then it is a
-\emph{variable} replicator, with more than one stable state. If
-such changes can be passed on to the offspring then the
-replicator is \emph{informational}. If the non-heritable part is
-constructed by a developmental process, then the replicator
-is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
+''A regenerating/recreating entity can produce at least one entity equivalent to it. It is possible that the original entity immediately decomposes (that is, cannot be the subject of further turns of the cycle), causing sequential replacement, although this is the most simple of regenerating entities. If it can effectively increase the number of entities equivalent to itself, then it is autocatalytic and is a \emph{replicator}. The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
 
 Autocatalysis by definition is replication--the autocatalytic reaction $x+A->2A$ replicates the molecule $A$ \cite{Lifson1997}--applied at first to molecules. Only variation through mutations (unless alternative reaction products/networks, but even then restricted to a small set of alternatives by catalytic structure. Stoichiometrics not so significant in ACS/linear growth overwhelmed by exponential dynamics of catalysis.)
 
@@ -471,17 +404,10 @@ Purpose: to identify gaps in current research. Summary of research area required
 
 Research Method: the method is a Systematic Map. Evidence-based. Derived from Evidence-based medicine (see \cite{Cochrane:2011qy, CRD:2008fj}). Primary motivation is to remove unintended bias in reviews; also can quantify consistency or variation in subject \parencite{Kitchenham:2007nx}.
 Major differences with standard expert-review is in pre-definition of research protocol, search strategy, exclusion and inclusion criteria, quality criteria. All documented so can be repeated, or at least, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+
 \subsection{Need for a review}
 
-Two previous reviews are known of the general topic: \cite{Duthen2010} and \cite{Stanley:2003fh}.
-
-\Textcite{Duthen2010} is a survey of artificial creatures, examining on the mechanisms used rather than the problems or goals addressed. Research is grouped by environmental simulators, means to assemble creatures from pieces (phylogeny) and 
-ways to generate creatures from a seed (ontogeny).
-
-\Textcite{Stanley:2003fh} opens with a mini-review of Artificial Embryology.
-Discounted the value of the traditional distinction between grammatical and chemical encodings, and went on to propose a five-part taxonomy
-instead--cell fate, targeting, heterochrony, canalization and complexification--based on biological research. Quite
-biological in basis, and some aspects of the taxonomy seem prescriptive (\eg cell fate).
+To the best of our knowledge, no review has been published of our specific topic of inheritance in artificial chemistries.
 
 Otherwise, no specific reviews of Developmental Encodings known (search 20 June 2012 of Web of Science with search string
 (TI=("Morphogenesis" OR "Embryogeny" OR "Artificial Embryogeny" OR "Developmental" OR "Generative Representation" OR
@@ -492,7 +418,7 @@ Science are relevant. Note that this search doesn't retrieve either known review
 \subsection{Method}
 
 \subsubsection{Research questions}
-Our objective is to confirm the range of previous work by supplementing the identified papers by a systematic selection.
+Our objective is to confirm that we have identified all relevant previous work:
 
 \begin{enumerate}[label=RQ\arabic*:]
 	\item What previous work in Artificial Life specifically discusses inheritance or heredity in artificial chemistries?
@@ -500,30 +426,28 @@ Our objective is to confirm the range of previous work by supplementing the iden
 
 \subsubsection{Systematic Reviews and Maps}
 
-Maps are exploratory (``what is known about X?'') while Reviews address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?'')
-For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk}
-For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
+Maps are exploratory (``what is known about X?'') while Reviews address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?''). For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk} For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
 
-Systematic Map \parencite{Petersen:2008fk}, rather than Systematic Literature Review \parencite{Kitchenham:2007nx}. According to Petersen's set of differences between Reviews and Maps, we less interested in the state of  evidence rather than classification; less emphasis on assessing the quality of the primary studies; a broader focus; stronger emphasis on breadth rather than depth of review.
+Systematic Map \parencite{Petersen:2008fk}, rather than Systematic Literature Review \parencite{Kitchenham:2007nx}. According to Petersen's set of differences between Reviews and Maps, we less interested in the state of evidence rather than classification; less emphasis on assessing the quality of the primary studies; a broader focus; stronger emphasis on breadth rather than depth of review.
 
 Systematic Maps also provide categorisation of a research area, but this is not the main goal of the process. Instead a Map uses the generated classification as a framework for further analysis, summarising contributions by category. However the processes are similar in that one process for categorisation in Maps \parencite{Petersen:2008fk} extracts keywords from the paper abstracts and iteratively groups and refines these into the final categories.
 
-Note that both Reviews and Maps usually rely exclusively on Primary sources (originals) rather than Secondary (interpretation, or after-the-fact), or Tertiary (distillation or collections of Primary and Secondary sources)
+Note that both Reviews and Maps usually rely exclusively on Primary sources (originals) rather than Secondary (interpretation, or after-the-fact), or Tertiary sources (distillation or collections of Primary and Secondary sources).
 
 \subsubsection{Research team and decision procedure}
-RQ1: what previous work exists for inheritance or heredity in artificial chemistries?
-RQ2: who are the main researchers, and what research communities exist?
-
 One reviewer only (PhD thesis limitation). 
 
-Quality checks by 1) confirm that search identifies previously known papers 2) check-recheck at different dates or blind sample rechecked and kappa statistic calculated 3) confirm decisions with supervisor 4) send form to paper author for notice if incorrect?
+The quality of the map was checked by confirming that the search identified previously known papers.
 
 \subsubsection{Inclusion and exclusion criteria}
-Inclusions: Primary research
+Inclusions: Primary research, published in conference proceedings or peer-reviewed journals.
 
-Exclusions: Reference works,biological modelling,  education, introductions, summaries of research, case studies, application of research, Keynote abstracts, programming paradigms, computer art, biology, software engineering, genetic programming and algorithms
+Exclusions: Reference works, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
 
 \subsubsection{Stage 1--Source selection}
+The main conferences for \gls{alife} are Alife, the International Conference on the Synthesis and Simulation of Living Systems, and ECAL, the European Conference in Artificial Life, both published by MIT Press. The first in the Alife series, An Interdisciplinary Workshop on the Synthesis and Simulation of Living Systems, was held in 1987 at Los Alamos, New Mexico, and the $15^{th}$ is to be held in June 2016. Alife is now held biennially in even numbered years, although earlier conferences were more irregular. ECAL began  in 1991 with the $13^{th}$ and most recent held in 2015, and is also held biennially, in odd numbered years so as not to conflict with Alife.
+
+Other sources were identified by examining the publishers and publications of the primary sources previously discovered by an earlier standard literature review. The main publishers were MIT Press, and Springer (indexed by \emph{Web of Science} and \emph{SpringerLink}, respectively), with the most common sources being the conference proceedings of \emph{Alife} or the journals \emph{Artificial Life} and the \emph{Journal of Theoretical Biology}, all indexed by \emph{Web of Science}).
 
 \begin{table}
 	\footnotesize
@@ -532,21 +456,22 @@ Exclusions: Reference works,biological modelling,  education, introductions, sum
 			\toprule
 			Data source & Rationale for inclusion\\
 			\midrule
-			IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}\\
-			ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}\\
-			Springer & Proceedings of \textit{ECAL}, \textit{CompLife} and \textit{Parallel Problem Solving from Nature conferences}\\
-			Web of Science & Broad coverage, multiple fields\\
-			Previous primary studies & Quality and consistency check\\
-			References and citations from previous primary studies & Likely to be relevant \\
+			IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}.\\
+			ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}.\\
+			Springer & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
+			Web of Science & Broad coverage, multiple fields, includes indexing for MIT Press publications.\\
+			Previously identified primary studies & Quality and consistency check\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 	\caption{Data sources}
 \end{table}
 
-No journals were directly included as \textit{Artificial Life} and \textit{Adaptive Behavior}, the two principal journals in the Artificial Life field \cite{Aicardi2010}, are indexed by \textit{Web of Science}. No general internet search was performed. 
+No journals were directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
 
 \subsubsection{Stage 2--Keywords}
+
+The keywords used were driven by the research question, expanded with common synonyms:
 
 "artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)
 
@@ -574,12 +499,12 @@ Publication bias--tendency of published papers to support hypothesis, reject nul
 	\caption{Query parameters for search 3a. Searches were not restricted to any year range.}
 \end{table*}
 
-SpringerLink search syntax difficult to structure exact same query; acceptable, but returns many false positives.
 \subsubsection{Stage 4--Screening on title}
 
-Combine all entries, and remove duplicates. 81 entries remaining.
+Combine all entries, and remove duplicates. After the removal of duplicates, 81 entries remained.
 
 Quality check--did we rediscover the papers we'd found earlier by expert search? And if not, why not?
+
 \begin{table*}
 	\footnotesize
 	\begin{center}
@@ -611,27 +536,23 @@ Based on this, justified all exclusions and inclusions that were borderline. Cle
 
 Issues:
 \begin{itemize}
-	\item Ambiguous terminology--many fields have common terms \eg map, evolve, generative
-	\item Insufficient detail in abstract
-	\item Downloading abstracts at time of initial title search so don't have to re-search after initial selection
-	\item Depth or degree--difficulty in determining the degree of focus on generative ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded?
-	\item Database specifics--inability of SpringerLink to correctly apply date limits in searches; difficulty in SpringerLink and ACM to batch-download citations--one at a time leads to fatigue and error. ACM bibtex export does not export abstract--must cut and paste. 
+\item Ambiguous terminology--many fields have common terms \eg map, evolve, generative
+\item Insufficient detail in abstract
+\item Downloading abstracts at time of initial title search so don't have to re-search after initial selection
+\item Depth or degree--difficulty in determining the degree of focus on generative ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded?
+\item Database specifics--ACM bibtex export does not export abstract--must cut and paste. 
 \end{itemize}
 
 \subsubsection{Stage 6--Removal of duplicates}
 
-Removal of exact duplicates--same publication source, title, authors. Performed as part of Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the algorithm appears to be case-sensitive, and so didn't detect some potential duplicates that were then identified in a follow-up by inspection.
+Removal of exact duplicates--same publication source, title, authors. Performed as part of Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so didn't detect some potential duplicates that were then identified in a follow-up by inspection.
 Removal of likely duplicates--difficult however to judge conclusively from abstracts alone if two papers do describe the same research. However, this case didn't occur in our dataset.
 
-\subsection{Results}
+\subsection{Results, and discussion}
 
+At the end of the exercise, our Systematic Map contained 58 papers.
 
-\subsection{Synthesis, analysis and discussion}
-
-Sensitivity analysis--remove poor quality or subjective papers or particular type of paper and compare results.
-
-\subsection{Limitations}
-Subjective assessment of papers from title and abstract--may miss some relevant studies based solely on quality of abstract.
+This review does have some limitations. Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of abstract.
 
 \todo{name for evolutionary replicators--Zachar?}
 
@@ -700,8 +621,6 @@ Subjective assessment of papers from title and abstract--may miss some relevant 
 
 Tierra \parencite{Ray1991}
 
-Organisms had to allocate memory first before using. Initial selective pressure only from rate of replication. Sequential execution of organism code. \parencite{Ofria2004}
-
 In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
 
 Mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
@@ -713,13 +632,11 @@ Emergence claimed in the three forms of \cite{Cariani1991}.
 Avida \parencite{Ofria2004}
 ``An approach to studying evolution...''
 
-Avida summer of 1993--Tierra based with better metering and measuring, and parallel code execution.
+Avida summer of 1993--based on Tierra wth better metering and measuring, and parallel code execution.
 
-Phenotypes--``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a
-benefit for performing specific computations associated with resources''
+Phenotypes--``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources''
 
-``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by
-the Tierra system.''
+``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
 Instruction, read, write, and flow control heads for relative rather than absolute addressing--bit like a Turing tape machine. Many instructions grouped into instruction sets. Default set has 26 instructions, and by definition every program is valid.
 
 New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is then placed at the beginning of its code, write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \cite[A1.3]{Ofria2004} consists of 15 instructions.

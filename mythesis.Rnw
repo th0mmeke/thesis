@@ -75,7 +75,7 @@ Finally, in conclusion, we speculate that this overall direction might lead more
 \listofalgorithms
 \include{glossary}
 \include{introduction}
-\part{Evolutionary Potential}
+\part{Inheritance and Fidelity Modelling}
 \include{part2a}
 \include{part2b}
 \part{ToyWorld, a semi-realistic Artificial Chemistry}

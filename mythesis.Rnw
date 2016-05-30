@@ -41,7 +41,7 @@
 \mdfdefinestyle{box}{leftmargin=1cm,rightmargin=2cm,innerleftmargin=1cm,innerrightmargin=1cm,roundcorner=5pt,frametitlerule=true}
 	
 \author{Thom Young}
-\title{The Emergence of\\Inheritance and Heredity in\\Artificial Chemistries}
+\title{The Emergence of\\Inheritance and\\Heredity in\\Artificial\\Chemistries}
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{
@@ -69,6 +69,7 @@ Finally, in conclusion, we speculate that this overall direction might lead more
 
 \usereferences
 \addtoreferences{mythesis}
+\addtoreferences{SystematicMap/pre5}
 \biblatexstyle{authoryear}
 
 \begin{document}

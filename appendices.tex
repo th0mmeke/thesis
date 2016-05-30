@@ -187,6 +187,207 @@ experiment design, for example:
 </Evaluation>
 \end{verbatim}
 
+\chapter{Systematic Map}
+
+Purpose: to identify gaps in current research. Summary of research area required to ensure 1) outline where proposed work fits into existing body of knowledge 2) do not repeat previous work 3) identify future research directions
+
+Research Method: the method is a Systematic Map. Evidence-based. Derived from Evidence-based medicine (see \cite{Cochrane:2011qy, CRD:2008fj}). Primary motivation is to remove unintended bias in reviews; also can quantify consistency or variation in subject \parencite{Kitchenham:2007nx}.
+Major differences with standard expert-review is in pre-definition of research protocol, search strategy, exclusion and inclusion criteria, quality criteria. All documented so can be repeated, or at least, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+
+\section{Need for a review}
+
+To the best of our knowledge, no review has been published of our specific topic of inheritance in artificial chemistries.
+
+Otherwise, no specific reviews of Developmental Encodings known (search 20 June 2012 of Web of Science with search string
+(TI=("Morphogenesis" OR "Embryogeny" OR "Artificial Embryogeny" OR "Developmental" OR "Generative Representation" OR
+"Evolutionary Development")) AND Document Types=(Review)--3,713 results found, but neither of the two in Computer
+Science are relevant. Note that this search doesn't retrieve either known review: \cite{Stanley:2003fh} is labelled on WoS as an
+"article" rather than as a review, and \cite{Duthen2010} references ``Artificial Creatures''. Removing the "review" condition returns 76,708 results.
+
+\section{Method}
+
+Our objective is to confirm that we have identified all relevant previous work:
+
+\begin{enumerate}[label=RQ\arabic*:]
+	\item What previous work in Artificial Life specifically discusses inheritance or heredity in artificial chemistries?
+\end{enumerate}
+
+\subsection{Systematic Reviews and Maps}
+
+Systematic Maps \parencite{Petersen:2008fk}are exploratory (``what is known about X?'') while Systematic Literature Reviews \parencite{Kitchenham:2007nx} address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?''). For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk} For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
+
+Systematic Maps also provide categorisation of a research area, but this is not the main goal of the process. Instead a Map uses the generated classification as a framework for further analysis, summarising contributions by category. However the processes are similar in that one process for categorisation in Maps \parencite{Petersen:2008fk} extracts keywords from the paper abstracts and iteratively groups and refines these into the final categories.
+
+Note that both Reviews and Maps usually rely exclusively on Primary sources (originals) rather than Secondary (interpretation, or after-the-fact), or Tertiary sources (distillation or collections of Primary and Secondary sources).
+
+\subsection{Inclusion and exclusion criteria}
+Inclusions: Primary research, published in conference proceedings or peer-reviewed journals.
+
+Exclusions: Reference works, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
+
+\subsection{Stage 1--Source selection}
+The main conferences for \gls{alife} are Alife, the International Conference on the Synthesis and Simulation of Living Systems, and ECAL, the European Conference in Artificial Life, both published by MIT Press. The first in the Alife series, An Interdisciplinary Workshop on the Synthesis and Simulation of Living Systems, was held in 1987 at Los Alamos, New Mexico, and the $15^{th}$ is to be held in June 2016. Alife is now held biennially in even numbered years, although earlier conferences were more irregular. ECAL began  in 1991 with the $13^{th}$ and most recent held in 2015, and is also held biennially, in odd numbered years so as not to conflict with Alife.
+
+Other sources were identified by examining the publishers and publications of the primary sources previously discovered by an earlier standard literature review. The main publishers were MIT Press, and Springer (indexed by \emph{Web of Science} and \emph{SpringerLink}, respectively), with the most common sources being the conference proceedings of \emph{Alife} or the journals \emph{Artificial Life} and the \emph{Journal of Theoretical Biology}, all indexed by \emph{Web of Science}).
+
+\begin{table}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}p{4cm}p{9cm}@{}}
+			\toprule
+			Data source & Rationale for inclusion\\
+			\midrule
+			IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}.\\
+			ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}.\\
+			Springer & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
+			Web of Science & Broad coverage, multiple fields, includes indexing for MIT Press publications.\\
+			Previously identified primary studies & Quality and consistency check\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Data sources}
+\end{table}
+
+No journals were directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
+
+\subsection{Stage 2--Keywords}
+
+The keywords used were driven by the research question, expanded with common synonyms:
+
+"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)
+
+\subsection{Stage 3--Automated Search}
+
+Publication bias--tendency of published papers to support hypothesis, reject null hypothesis. Papers which do not less likely to be published. Address by 1) awareness 2) grey literature search 3) funnel plot of variance against effect--expect higher variance for small samples
+
+\begin{table*}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}lp{8cm}p{2cm}@{}}
+			\toprule
+			Datasource & Query & Results\\
+			\midrule
+			ACM Guide to Computing Literature & (+"artificial chemistry" inheritance replicator template holistic reproduction reproduce heredity composome)&73 records\\
+			\midrule
+			IEEE & "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
+			\midrule
+			Web of Science & (TS=("artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome))) AND LANGUAGE: (English)&26 records\\
+			\midrule
+			SpringerLink (via JabRef) &"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome) & 129 records\\ 
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\caption{Query parameters for automated search. Searches were not restricted to any year range.}
+\end{table*}
+
+\subsection{Stage 4--Screening on title}
+
+Combine all entries, and remove duplicates. After the removal of duplicates, 78 entries remained.
+
+Quality check--did we rediscover the papers we'd found earlier by expert search? And if not, why not?
+
+\begin{table*}
+	\footnotesize
+	\begin{center}
+		\begin{tabular}{@{}lp{6cm}@{}}
+		\toprule	
+		Literature & Result \\
+		\midrule		
+		Avida \cite{Ofria2004}&No.\\
+		Tierra \cite{Ray1991} &No.\\
+		\cite{Nellis2012}\cite{Nellis2014} & No--abstracts reference embodiment and novelty but not inheritance and heredity.\\
+		StringMol \cite{Hickinbotham2012}   & No, but similar found.\\
+		\cite{Fontana1992}	& No--abstract doesn't reference inheritance or heredity, but focusses on function composition and patterns.\\
+		\cite{Dittrich1998}	& No, but similar found.	\\
+		\cite{Nowostawski2005} & No.\\
+		\cite{Fenizio2000}\cite{Fenizio2001} & Yes.	\\		
+		NAC \cite{Suzuki2006}    & No, but similar found.\\
+		\cite{Gardiner2007}  & Yes.\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\caption{Rediscovery of existing key papers.}
+\end{table*}
+
+\subsection{Stage 5--Screening on abstract}
+Difficult to be error-free; preference is therefore not to exclude based solely on abstract, although this does increase the workload.
+Based on this, justified all exclusions and inclusions that were borderline. Clear inclusions and exclusions were not justified.
+
+Issues:
+\begin{itemize}
+	\item Ambiguous terminology--many fields have common terms \eg map, evolve, generative
+	\item Insufficient detail in abstract
+	\item Downloading abstracts at time of initial title search so don't have to re-search after initial selection
+	\item Depth or degree--difficulty in determining the degree of focus on generative ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded?
+	\item Database specifics--ACM bibtex export does not export abstract--must cut and paste. 
+\end{itemize}
+
+\cite{smDecraeneMcmullin2011}
+\cite{smMadinaIkegami2004}
+\cite{smHutton2003}
+\cite{smKvasnicka2002}
+\cite{smBedauMcCaskillPackardEtAl2000}
+\cite{smSuzukiDittrich2009}
+\cite{smBanzhafBaumgaertnerBeslonEtAl2016}
+\cite{smBanzhafMcMullin2012}
+\cite{smBersini2010}
+\cite{smEibenKernbachHaasdijk2012}
+\cite{smGarzonBlainBobbaEtAl2003}
+\cite{smGohEweGoh2013}
+\cite{smHarrisChen2012}
+\cite{smHutton2003a}
+\cite{smIngerSolomonShenhavEtAl2009}
+\cite{smKobayashiSuzukiArita2012}
+\cite{smKvasnickaPospichalKalab2001}
+\cite{smMadinaOnoIkegami2003}
+\cite{smMenezesCosta2007}
+\cite{smSperonidiFenizioDittrich2007} - dynamics of chemical reaction system at different scales
+\cite{smStadler2016}
+\cite{smSuzukiIkegami2003}
+\cite{smGrossMcMullin2002} - micellar structures, response to other work on dynamical hierarchies
+\cite{smFenizioBanzhaf2001} - no mention of replication or inheritance
+\cite{smMcMullinGros2001} - autopoiesis based on Swarm Achem, and no mention of keywords in abstract
+\cite{smOnoFujiwaraYuta2005} - consideration of topological structures of networks, metabolism
+\cite{smGrosMcMullin2003} - general discussion around novelty in artificial chemistries
+\cite{smKomosinskiAdamatzky2009} - book, general discussion of available Alife software
+\cite{smMarro2013} - hard to determine content from abstract
+\cite{smGazzolaBuchananPackardEtAl2007} - no mention of keywords in abstract
+\cite{smFilisettiVillaniDamianiEtAl2014} - RAF sets, pre-replication
+\cite{smSuzuki2011} - no mention of keywords in abstract
+47 records after abstract screening.
+
+\subsection{Stage 6--Removal of duplicates}
+
+Removal of exact duplicates--same publication source, title, authors. Performed as part of Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so didn't detect some potential duplicates that were then identified in a follow-up by inspection.
+Removal of likely duplicates--difficult however to judge conclusively from abstracts alone if two papers do describe the same research. However, this case didn't occur in our dataset.
+
+% sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" post5.bib > titles
+% sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" ../mythesis.bib > fulltitles
+% diff -iw titles fulltitles | grep -e "^<" | wc
+
+Finally, we removed duplicates of previously identified works (32 duplicates).
+\eg \cite{smFaulconbridgeStepneyMillerEtAl2011} - similar to \cite{Faulconbridge2011, Faulconbridge2010}
+
+\section{Results, and discussion}
+
+At the end of the exercise, our Systematic Map contained 12 papers.
+
+\cite{smAdamsLipson2003}
+\cite{smBobrikKvasnickaPospichal2008a}
+\cite{smBobrikKvasnickaPospichal2008}
+\cite{smEllabaan2007}
+\cite{smSugiuraSuzukiShioseEtAl2003}
+\cite{smFenizioMatsumaruDittrich2011} - discussion of AlChemy, and novelties so likely to involve replication
+\cite{smHickinbothamClarkNellisEtAl2016} - StringMol, not clear if discuss replication, but given that other works concerning StringMol do, included
+\cite{smHinzeFaslerLenserEtAl2009}
+\cite{smSuzuki2003a}
+\cite{smBanzhafDittrichEller1999} - ``survival strategies'' might involve replication
+\cite{smGordon-Smith2011}
+\cite{smGohEweGoh2014}
+
+
+This review does have some limitations. Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of abstract.
+
 \chapter{Previous work in GRN modelling}\label{previous-work-in-grn-modelling}
 
 Two broad classes of models have been used for modelling \glspl{grn}. The first, \emph{biological} models, focus on selecting and modelling particular sets of biological \emph{features} (such as promotors, binding sites, artificial chemistries, protein classes and so on) that may be combined to generate a \gls{grn}. The goal is often to attempt to construct a biologically plausible \glspl{grn} in the belief that the properties of real \glspl{grn} are complex phenomenon that emerge from, and are dependent on, the subtleties of the biological elements. The difficulty is one of detail: some important behaviours within biological \gls{grn} derive from phenomenon such as chemical interactions that are in practice un-modellable, and so some simplification is unavoidable. The range of these models then reflects practitioner's beliefs as to which biological elements are critical, and which can usefully be simplified.

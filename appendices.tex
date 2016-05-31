@@ -107,13 +107,13 @@ Energy&300&Int&The initial average kinetic energy (KE) for each molecule in the 
 EnergyModel&\url{DefaultEnergyModel}&Subclass of \url{DefaultEnergyModel}&More sophisticated model of energy inflow and outflow from the reaction vessel\\
 RadiationRate&0.0&Float&Proportion of kinetic energy lost (apparently by radiation) each unit time interval from the reaction vessel\\
 EnergyInput&0.0&Float&Absolute energy added to reaction vessel each unit time interval\\
-Reactions&\url{EmergentReactions}&Subclass of \url{Reactions}&Reaction mechanism - EmergentReactions provides a fully constructive reaction chemistry\\
+Reactions&\url{EmergentReactions}&Subclass of \url{Reactions}&Reaction mechanism--EmergentReactions provides a fully constructive reaction chemistry\\
 ProductSelectionStrategy&"energy"&String&See Section \cref{product-selection-strategies}\\
 Molecule&molecule.Molecule&Subclass of Molecule&Model of a molecule\\
 Vessel&\url{ReactionVessel}&Subclass of \url{ReactionVessel}&Model of the container in which the simulation proceeds\\
 DipoleForceConstant&0.01&Float&Multiplier for the electro-magnetic force acting between two \url{ChargedMolecule}s\\
 \midrule
-name&<None>&String&Name of the experiment - primarily used to identify the output data files for the experiment\\
+name&<None>&String&Name of the experiment--primarily used to identify the output data files for the experiment\\
 PopulationFilename&None&Filename&Name of the XML file defining the initial set of molecules to be placed in the reaction vessel\\
 Iterations&10000&Int&Number of reactions before finishing\\
 recover&True&Boolean&If True then do not redo completed repeats if the simulation is restarted, say after a machine reboot\\
@@ -138,7 +138,7 @@ stages:
 
 \begin{enumerate}
 \item
-  Create the overall experiment design in XML - either manually, or by
+  Create the overall experiment design in XML--either manually, or by
   modifying an existing design, or by running \url{doe.py} which will
   generate an experiment design from a set of inputs.
 \item
@@ -223,7 +223,7 @@ Note that both Reviews and Maps usually rely exclusively on Primary sources (ori
 \subsection{Inclusion and exclusion criteria}
 Inclusions: Primary research, published in conference proceedings or peer-reviewed journals.
 
-Exclusions: Reference works, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
+Exclusions: Reference works, technical reports, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
 
 \subsection{Stage 1--Source selection}
 The main conferences for \gls{alife} are Alife, the International Conference on the Synthesis and Simulation of Living Systems, and ECAL, the European Conference in Artificial Life, both published by MIT Press. The first in the Alife series, An Interdisciplinary Workshop on the Synthesis and Simulation of Living Systems, was held in 1987 at Los Alamos, New Mexico, and the $15^{th}$ is to be held in June 2016. Alife is now held biennially in even numbered years, although earlier conferences were more irregular. ECAL began  in 1991 with the $13^{th}$ and most recent held in 2015, and is also held biennially, in odd numbered years so as not to conflict with Alife.
@@ -231,21 +231,21 @@ The main conferences for \gls{alife} are Alife, the International Conference on 
 Other sources were identified by examining the publishers and publications of the primary sources previously discovered by an earlier standard literature review. The main publishers were MIT Press, and Springer (indexed by \emph{Web of Science} and \emph{SpringerLink}, respectively), with the most common sources being the conference proceedings of \emph{Alife} or the journals \emph{Artificial Life} and the \emph{Journal of Theoretical Biology}, all indexed by \emph{Web of Science}).
 
 \begin{table}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}p{4cm}p{9cm}@{}}
-			\toprule
-			Data source & Rationale for inclusion\\
-			\midrule
-			IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}.\\
-			ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}.\\
-			Springer & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
-			Web of Science & Broad coverage, multiple fields, includes indexing for MIT Press publications.\\
-			Previously identified primary studies & Quality and consistency check\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Data sources}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}p{4cm}p{9cm}@{}}
+\toprule
+Data source & Rationale for inclusion\\
+\midrule
+IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}.\\
+ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}.\\
+Springer & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
+Web of Science & Broad coverage, multiple fields, includes indexing for MIT Press publications.\\
+Previously identified primary studies & Quality and consistency check\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Data sources}
 \end{table}
 
 No journals were directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
@@ -261,23 +261,23 @@ The keywords used were driven by the research question, expanded with common syn
 Publication bias--tendency of published papers to support hypothesis, reject null hypothesis. Papers which do not less likely to be published. Address by 1) awareness 2) grey literature search 3) funnel plot of variance against effect--expect higher variance for small samples
 
 \begin{table*}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}lp{8cm}p{2cm}@{}}
-			\toprule
-			Datasource & Query & Results\\
-			\midrule
-			ACM Guide to Computing Literature & (+"artificial chemistry" inheritance replicator template holistic reproduction reproduce heredity composome)&73 records\\
-			\midrule
-			IEEE & "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
-			\midrule
-			Web of Science & (TS=("artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome))) AND LANGUAGE: (English)&26 records\\
-			\midrule
-			SpringerLink (via JabRef) &"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome) & 129 records\\ 
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Query parameters for automated search. Searches were not restricted to any year range.}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}lp{8cm}p{2cm}@{}}
+\toprule
+Datasource & Query & Results\\
+\midrule
+ACM Guide to Computing Literature & (+"artificial chemistry" inheritance replicator template holistic reproduction reproduce heredity composome)&73 records\\
+\midrule
+IEEE & "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
+\midrule
+Web of Science & (TS=("artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome))) AND LANGUAGE: (English)&26 records\\
+\midrule
+SpringerLink (via JabRef) &"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome) & 129 records\\ 
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Query parameters for automated search. Searches were not restricted to any year range.}
 \end{table*}
 
 \subsection{Stage 4--Screening on title}
@@ -287,27 +287,31 @@ Combine all entries, and remove duplicates. After the removal of duplicates, 78 
 Quality check--did we rediscover the papers we'd found earlier by expert search? And if not, why not?
 
 \begin{table*}
-	\footnotesize
-	\begin{center}
-		\begin{tabular}{@{}lp{6cm}@{}}
-		\toprule	
-		Literature & Result \\
-		\midrule		
-		Avida \cite{Ofria2004}&No.\\
-		Tierra \cite{Ray1991} &No.\\
-		\cite{Nellis2012}\cite{Nellis2014} & No--abstracts reference embodiment and novelty but not inheritance and heredity.\\
-		StringMol \cite{Hickinbotham2012}   & No, but similar found.\\
-		\cite{Fontana1992}	& No--abstract doesn't reference inheritance or heredity, but focusses on function composition and patterns.\\
-		\cite{Dittrich1998}	& No, but similar found.	\\
-		\cite{Nowostawski2005} & No.\\
-		\cite{Fenizio2000}\cite{Fenizio2001} & Yes.	\\		
-		NAC \cite{Suzuki2006}    & No, but similar found.\\
-		\cite{Gardiner2007}  & Yes.\\
-		\bottomrule
-	\end{tabular}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}lp{6cm}@{}}
+\toprule	
+Literature & Result \\
+\midrule
+Coreworld \cite{Rasmussen1990} & No, no mention of replication or inheritance, just emergence.\\
+Tierra \cite{Ray1991} & No.\\
+Amoeba \cite{Pargellis2001} & No, no mention of ``Artificial Chemistry'', instead domain is given as ``Digital life''.\\
+Avida \cite{Ofria2004} & No.\\
+\cite{Nellis2012}\cite{Nellis2014} & No--abstracts reference embodiment and novelty but not inheritance and heredity.\\
+StringMol \cite{Hickinbotham2012} & No, but similar found. This is a special case as  \cite{Hickinbotham2012} is a technical report rather than a peer-reviewed paper (see inclusion and exclusion criteria).\\
+\cite{Fontana1992}	& No--abstract doesn't reference inheritance or heredity, but focusses on function composition and patterns.\\
+\cite{Dittrich1998}	& No, but similar found.	\\
+\cite{Nowostawski2005} & No.\\
+\cite{Fenizio2000}\cite{Fenizio2001} & Yes.	\\		
+NAC \cite{Suzuki2006}    & No, but similar found.\\
+\cite{Gardiner2007}  & Yes.\\
+\bottomrule
+\end{tabular}
 \end{center}
 \caption{Rediscovery of existing key papers.}
 \end{table*}
+
+There is a variety of reasons why earlier papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
 
 \subsection{Stage 5--Screening on abstract}
 Difficult to be error-free; preference is therefore not to exclude based solely on abstract, although this does increase the workload.
@@ -322,38 +326,38 @@ Issues:
 	\item Database specifics--ACM bibtex export does not export abstract--must cut and paste. 
 \end{itemize}
 
-\cite{smDecraeneMcmullin2011}
-\cite{smMadinaIkegami2004}
-\cite{smHutton2003}
-\cite{smKvasnicka2002}
-\cite{smBedauMcCaskillPackardEtAl2000}
-\cite{smSuzukiDittrich2009}
-\cite{smBanzhafBaumgaertnerBeslonEtAl2016}
-\cite{smBanzhafMcMullin2012}
-\cite{smBersini2010}
-\cite{smEibenKernbachHaasdijk2012}
-\cite{smGarzonBlainBobbaEtAl2003}
-\cite{smGohEweGoh2013}
-\cite{smHarrisChen2012}
-\cite{smHutton2003a}
-\cite{smIngerSolomonShenhavEtAl2009}
-\cite{smKobayashiSuzukiArita2012}
-\cite{smKvasnickaPospichalKalab2001}
-\cite{smMadinaOnoIkegami2003}
-\cite{smMenezesCosta2007}
-\cite{smSperonidiFenizioDittrich2007} - dynamics of chemical reaction system at different scales
-\cite{smStadler2016}
-\cite{smSuzukiIkegami2003}
-\cite{smGrossMcMullin2002} - micellar structures, response to other work on dynamical hierarchies
-\cite{smFenizioBanzhaf2001} - no mention of replication or inheritance
-\cite{smMcMullinGros2001} - autopoiesis based on Swarm Achem, and no mention of keywords in abstract
-\cite{smOnoFujiwaraYuta2005} - consideration of topological structures of networks, metabolism
-\cite{smGrosMcMullin2003} - general discussion around novelty in artificial chemistries
-\cite{smKomosinskiAdamatzky2009} - book, general discussion of available Alife software
-\cite{smMarro2013} - hard to determine content from abstract
-\cite{smGazzolaBuchananPackardEtAl2007} - no mention of keywords in abstract
-\cite{smFilisettiVillaniDamianiEtAl2014} - RAF sets, pre-replication
-\cite{smSuzuki2011} - no mention of keywords in abstract
+%\cite{smDecraeneMcmullin2011}
+%\cite{smMadinaIkegami2004}
+%\cite{smHutton2003}
+%\cite{smKvasnicka2002}
+%\cite{smBedauMcCaskillPackardEtAl2000}
+%\cite{smSuzukiDittrich2009}
+%\cite{smBanzhafBaumgaertnerBeslonEtAl2016}
+%\cite{smBanzhafMcMullin2012}
+%\cite{smBersini2010}
+%\cite{smEibenKernbachHaasdijk2012}
+%\cite{smGarzonBlainBobbaEtAl2003}
+%\cite{smGohEweGoh2013}
+%\cite{smHarrisChen2012}
+%\cite{smHutton2003a}
+%\cite{smIngerSolomonShenhavEtAl2009}
+%\cite{smKobayashiSuzukiArita2012}
+%\cite{smKvasnickaPospichalKalab2001}
+%\cite{smMadinaOnoIkegami2003}
+%\cite{smMenezesCosta2007}
+%\cite{smSperonidiFenizioDittrich2007}--dynamics of chemical reaction system at different scales
+%\cite{smStadler2016}
+%\cite{smSuzukiIkegami2003}
+%\cite{smGrossMcMullin2002}--micellar structures, response to other work on dynamical hierarchies
+%\cite{smFenizioBanzhaf2001}--no mention of replication or inheritance
+%\cite{smMcMullinGros2001}--autopoiesis based on Swarm Achem, and no mention of keywords in abstract
+%\cite{smOnoFujiwaraYuta2005}--consideration of topological structures of networks, metabolism
+%\cite{smGrosMcMullin2003}--general discussion around novelty in artificial chemistries
+%\cite{smKomosinskiAdamatzky2009}--book, general discussion of available Alife software
+%\cite{smMarro2013}--hard to determine content from abstract
+%\cite{smGazzolaBuchananPackardEtAl2007}--no mention of keywords in abstract
+%\cite{smFilisettiVillaniDamianiEtAl2014}--RAF sets, pre-replication
+%\cite{smSuzuki2011}--no mention of keywords in abstract
 47 records after abstract screening.
 
 \subsection{Stage 6--Removal of duplicates}
@@ -366,24 +370,26 @@ Removal of likely duplicates--difficult however to judge conclusively from abstr
 % diff -iw titles fulltitles | grep -e "^<" | wc
 
 Finally, we removed duplicates of previously identified works (32 duplicates).
-\eg \cite{smFaulconbridgeStepneyMillerEtAl2011} - similar to \cite{Faulconbridge2011, Faulconbridge2010}
+\eg \cite{smFaulconbridgeStepneyMillerEtAl2011}--similar to \cite{Faulconbridge2011, Faulconbridge2010}
 
 \section{Results, and discussion}
 
-At the end of the exercise, our Systematic Map contained 12 papers.
+At the end of the exercise, our Systematic Map contained 12 papers:
 
-\cite{smAdamsLipson2003}
-\cite{smBobrikKvasnickaPospichal2008a}
-\cite{smBobrikKvasnickaPospichal2008}
-\cite{smEllabaan2007}
-\cite{smSugiuraSuzukiShioseEtAl2003}
-\cite{smFenizioMatsumaruDittrich2011} - discussion of AlChemy, and novelties so likely to involve replication
-\cite{smHickinbothamClarkNellisEtAl2016} - StringMol, not clear if discuss replication, but given that other works concerning StringMol do, included
-\cite{smHinzeFaslerLenserEtAl2009}
-\cite{smSuzuki2003a}
-\cite{smBanzhafDittrichEller1999} - ``survival strategies'' might involve replication
-\cite{smGordon-Smith2011}
-\cite{smGohEweGoh2014}
+\begin{itemize}
+\item \cite{smAdamsLipson2003}
+\item \cite{smBobrikKvasnickaPospichal2008a}
+\item \cite{smBobrikKvasnickaPospichal2008}
+\item \cite{smEllabaan2007}
+\item \cite{smSugiuraSuzukiShioseEtAl2003}--enhancements to Tierra
+\item \cite{smFenizioMatsumaruDittrich2011}--discussion of AlChemy, and novelties so likely to involve replication
+\item \cite{smHickinbothamClarkNellisEtAl2016}--StringMol, not clear if discuss replication, but given that other works concerning StringMol do, included
+\item \cite{smHinzeFaslerLenserEtAl2009}
+\item \cite{smSuzuki2003a}
+\item \cite{smBanzhafDittrichEller1999}--``survival strategies'' might involve replication
+\item \cite{smGordon-Smith2011}
+\item \cite{smGohEweGoh2014}
+\end{itemize}
 
 
 This review does have some limitations. Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of abstract.
@@ -400,7 +406,7 @@ Boolean networks arose from the question by Kauffman \cite{Kauffman:1969ne} whet
 regulatory circuits'' (as \glspl{grn} were then known) has arisen as a quirk of evolutionary history or whether it is an
 inevitable property of certain types of dynamic network. \cite{Kauffman:1969ne} constructed a simplified network of
 binary genes (either expressed or not) with each gene's state determined by a boolean function of the state of other
-selected genes in the network - a \emph{boolean network}. Over time, the consecutive states of such a network form a
+selected genes in the network--a \emph{boolean network}. Over time, the consecutive states of such a network form a
 trajectory, and as the number of states in the network is finite, the number of states in the trajectory will be finite
 also \cite{De-Jong:2002jv}. Trajectories in a boolean network will result in attractors within basins of
 attraction, and so can be analysed as dynamical systems \cite{Luque:1997qo,Kauffman:1969ne,Kauffman:1993kk}.
@@ -440,11 +446,11 @@ proteins to link template regions on genes, checking the strength of each match 
 and then establishing a link in the \gls{grn} between the protein and the gene's expressed protein of a weight that depends on
 a further degree of match with an ``arbitrarily defined but fixed template'' \parencite[sec. 4.2]{Jakobi:1995py}.
 Regulation therefore is always up-regulation in that it establishes new connections and can not remove connections.
-Proteins belong to one of six classes - signals, movers, dendritics, splitters, differentiators, and threshold proteins
+Proteins belong to one of six classes--signals, movers, dendritics, splitters, differentiators, and threshold proteins
 - as specified by the protein class region of each encoding gene, and each class has a specific function within ANN
 development (for details, see \cite[sec. 4.3]{Jakobi:1995py}). One class, the signal proteins, are worth examining
 further. Signal proteins, emitted by cells and by pre-placed extra-cellular sources, are used to control the activity of
-the \gls{grn} by setting the direction of cell growth - cells grow in the direction of maximum gradient of the signal
+the \gls{grn} by setting the direction of cell growth--cells grow in the direction of maximum gradient of the signal
 proteins.
 
 \cite{Jakobi:1995py} then used an \gls{ea} to evolve working controllers. Few details of this process are
@@ -466,9 +472,9 @@ A run begins with only one gene active; over a number of steps the interplay of 
 patterns of gene expression. \cite{Reil:1999rp} shows that these patterns correspond with the behaviour of attractors
 in dynamical systems, and that the choice of attractor depends on external signals (controlled on \emph{switch} genes.)
 
-The model described by \cite{Reil:1999rp} was later extended by \cite{Rohlf:2009sh} to improve the biological plausibility of the regulatory implementation. In \cite{Rohlf:2009sh} the action of the \gls{tf} on the gene (activation or repression) is calculated by summing the digits in the \gls{tf} sequence; sequences which fall in the the lower-half of all possible sums are inhibitors and those in the upper-half, activators. The interaction of competing \glspl{tf} on expression is modelled by summing all of these interactions and weighting by the previous expression level. Increasing concentrations of activators will now increase the level of expression, with the reverse true of inhibitors. However, one acknowledged restriction of this model is in the modelling of \gls{tf} binding - in biology, the binding of a \glspl{tf} is more complex than the simple sequence match found in both \cite{Reil:1999rp} and \cite{Rohlf:2009sh}.
+The model described by \cite{Reil:1999rp} was later extended by \cite{Rohlf:2009sh} to improve the biological plausibility of the regulatory implementation. In \cite{Rohlf:2009sh} the action of the \gls{tf} on the gene (activation or repression) is calculated by summing the digits in the \gls{tf} sequence; sequences which fall in the the lower-half of all possible sums are inhibitors and those in the upper-half, activators. The interaction of competing \glspl{tf} on expression is modelled by summing all of these interactions and weighting by the previous expression level. Increasing concentrations of activators will now increase the level of expression, with the reverse true of inhibitors. However, one acknowledged restriction of this model is in the modelling of \gls{tf} binding--in biology, the binding of a \glspl{tf} is more complex than the simple sequence match found in both \cite{Reil:1999rp} and \cite{Rohlf:2009sh}.
 
-\cite{Kuo:2006fv} investigate the effect of gene duplication events and regulatory interactions on network topology using an independently derived yet similar model to \cite{Reil:1999rp} (originally described in \cite{Banzhaf:2003kx}). The genotype is encoded as a bit-string, with genes made up of a single inhibition site, a single enhancer site, a promotor region (a fixed ``01010101'' sequence) \footnote{Genes may overlap - a promotor region for one gene may arise within the coding region of another} and finally the coding region. The regulatory regions (inhibition site and enhancer site) are each 32 bits long; the coding region is made up of a number of 32 bit coding units. The significant non-coding regions are a factor in the ability of the model to support neutral mutations \parencite[sec.5]{Banzhaf:2003kx,Kuo:2006fv}.
+\cite{Kuo:2006fv} investigate the effect of gene duplication events and regulatory interactions on network topology using an independently derived yet similar model to \cite{Reil:1999rp} (originally described in \cite{Banzhaf:2003kx}). The genotype is encoded as a bit-string, with genes made up of a single inhibition site, a single enhancer site, a promotor region (a fixed ``01010101'' sequence) \footnote{Genes may overlap--a promotor region for one gene may arise within the coding region of another} and finally the coding region. The regulatory regions (inhibition site and enhancer site) are each 32 bits long; the coding region is made up of a number of 32 bit coding units. The significant non-coding regions are a factor in the ability of the model to support neutral mutations \parencite[sec.5]{Banzhaf:2003kx,Kuo:2006fv}.
 
 Translation is simplified in \cite{Kuo:2006fv}'s model. The product of a gene is a 32-bit protein formed by taking the
 most common value at each bit position in turn from the units within the coding region. A bit-string model of the genotype
@@ -489,8 +495,8 @@ observed in simulation to modify the topology of the regulatory network.
 A more complicated model is described in \cite{Ghanem:2008ct} for the exploration of developmental network
 topologies and the influence of initial conditions on development, with a theoretical grounding in the hypothesis of
 \cite{Kauffman:1993kk} regarding the association of cell fate or types with network attractors. Ghanem's model extends
-previous work by the specification of explicit functional layers within the \gls{grn} - maternal, signalling, control,
-labelling and action layers - that are interconnected by specific predetermined ``weight matrices'' which determine the
+previous work by the specification of explicit functional layers within the \gls{grn}--maternal, signalling, control,
+labelling and action layers--that are interconnected by specific predetermined ``weight matrices'' which determine the
 regulatory effect of a protein upon another gene. The regulatory strength of an interaction between protein and gene is
 determined by this weight multiplied by the protein's concentration. The strength of all interactions for the gene are
 combined to give an \emph{activation state} and if over a threshold value the gene is expressed at an \emph{expression
@@ -545,4 +551,4 @@ In the system described in \cite{Federici:2006pb} the issue at hand was how to i
 \subsubsection{Modularity}
 The modularity displayed by most living organisms is striking: from the segmentation of thorax and abdomen in insects, to the repetition of fingers on a hand or toes on a foot.  These patterns are created by the expression of regulatory genes during development, and this has lead to the belief that developmental encoding might also improve modularity in artificial systems. 
 
-\cite{Hornby:2003jt}) introduced a generic evolutionary development system, GENRE, and compared generative (incorporating repeated or reused elements) and non-generative L-system developmental programs on problems from a selection of design domains: voxels (cubes), neural-networks, robots, and neural-network controlled robots.  \cite{Hornby:2005rw} reapplied GENRE to table design and in \cite{Hornby:2006kj} extended the use of GENRE for robot design. All of these works demonstrated improvements in fitness over direct representation encodings that the authors attributed to the modularity, increased reuse of components, and possibility of large-scale mutations enabled by the L-system developmental program. \cite{Dorica:2007li} investigated the effect of developmental encoding on the performance of an EA for the design a 2-D patch antenna for operation at two radio frequencies. The most impressive evolved designs rediscovered and improved upon the design of a well-known E-patch antenna, and the developmental encoding adopted (the \emph{quadtree} - a recursive tree mapping from genotype to a grid cell within the 2-D space) resulted in a less fragmented and easier to manufacture shape. However, the quadtree genotype structure appears restricted to the design of 2-D structures, and may not be easily generalised.
+\cite{Hornby:2003jt}) introduced a generic evolutionary development system, GENRE, and compared generative (incorporating repeated or reused elements) and non-generative L-system developmental programs on problems from a selection of design domains: voxels (cubes), neural-networks, robots, and neural-network controlled robots.  \cite{Hornby:2005rw} reapplied GENRE to table design and in \cite{Hornby:2006kj} extended the use of GENRE for robot design. All of these works demonstrated improvements in fitness over direct representation encodings that the authors attributed to the modularity, increased reuse of components, and possibility of large-scale mutations enabled by the L-system developmental program. \cite{Dorica:2007li} investigated the effect of developmental encoding on the performance of an EA for the design a 2-D patch antenna for operation at two radio frequencies. The most impressive evolved designs rediscovered and improved upon the design of a well-known E-patch antenna, and the developmental encoding adopted (the \emph{quadtree}--a recursive tree mapping from genotype to a grid cell within the 2-D space) resulted in a less fragmented and easier to manufacture shape. However, the quadtree genotype structure appears restricted to the design of 2-D structures, and may not be easily generalised.

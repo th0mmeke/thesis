@@ -25,20 +25,7 @@ df
 
 \chapter{Introduction}
 
-\section{Research questions}
-
 The model of \cite{Bourrat2015} assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. This is unexplored by Bourrat.
-
-In this section we explore the following research questions:
-
-\vspace{0.3cm}
-\begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=RQ\arabic*:]
-		\item Can evolution act on the inheritance mechanism to tune it for varying environmental conditions?
-		\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
-	\end{enumerate}
-\end{minipage}
-\vspace{0.3cm}
 
 \section{Previous work}
 
@@ -1018,13 +1005,13 @@ Simulation is a natural fit for the exploration of emergent systems where we exp
 
 If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
 
-Experimental tests are the strongest method we have to examine the claims made in hypothesis \autoref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+Experimental tests are the strongest method we have to examine the claims made in hypothesis \cref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
 \section{Base model}\label{base-model}
 
-All experiments in this part of the work make use of some variant of the same base model (\autoref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
+All experiments in this part of the work make use of some variant of the same base model (\cref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
 We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions.
 
@@ -1130,7 +1117,7 @@ At the beginning of each run we construct an initial population to some design. 
 
 \subsection{Low-start case}\label{low-start-case}
 
-Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \autoref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
+Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \cref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
 
 \begin{table}[t]
 	\begin{center}
@@ -1296,7 +1283,7 @@ Returning then to our examination of fitness-independent and fitness-based upper
 
 \subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
-The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \autoref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
+The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \cref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
 \begin{function}
 	\SetKwProg{Def}{def}{:}{}
@@ -1553,9 +1540,9 @@ Set remaining parameters based on these screening experiments:
 	      	
 \end{enumerate}
 
-\chapter[Stable environments]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
+\chapter[Hypothesis test under stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-Returning to the overall goals for these experiments (to test the predictions of hypothesis \autoref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \autoref{hypothesis-2} makes two predictions for fixed environments:
+Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for fixed environments:
 
 \begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, and
@@ -1586,7 +1573,7 @@ We start with the following null and alternative hypotheses:
 From the predictions of the hypothesis (\cref{predictions}), the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable.
 \\
 
-Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under hypothesis \autoref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
+Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under hypothesis \cref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
 
 \subsection{Design}\label{design}
 
@@ -1852,5 +1839,388 @@ ggplot(df,aes(x=gen,y=sd_cor,group=run, colour=factor(correlation_correlation)))
 %grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %@
 
+\chapter{Model behaviour in changing environments}
+
+Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. 
+
+Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and hence to complexity. 
+
+This seems a reasonable supposition. \cite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity)'' \cite{Adami2002}. \cite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
+
+In this chapter we further develop this hypothesis to a testable form; propose it be tested by experiment on a simulation; describe an appropriate experimental design and model for a variety of environmental changes; and finally discuss the results of the experiment. The conceptual model underlying all of these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\linewidth]{figures/conceptual-model-for-environmental-change}
+	\end{center}
+\end{figure}\label{fig:conceptual-model-for-environmental-change}
+
+First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure. \todo{first a time series for both, and then a separate measure...}
+
+Now for some definitions:
+
+A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \cite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.
+
+\emph{Context} is any attribute whose values are largely independent but tend to be stable over contiguous intervals of another attribute known as the \emph{environmental attribute.} \cite{Sammut:2010cr} The environmental attribute is typically, but not always, time; other attributes such as location are also possible. A sequence with stationary distribution is a context \cite[p289]{Gama:2004ve}.
+
+An instance $X_j$ is generated by a source, $S_j$. If every instance is sampled from the same source, that is $S_1 = S_2 = ... = S_{t+1} = S$ then the concept is \emph{stable}. If for any time points $i$ and $j$ $S_i \ne S_j$ then there is \emph{concept drift} \cite{Zliobaite:2009cr}
+
+According to Zliobaite \cite{Bifet:2011uq,Zliobaite:2009cr}, the main types of concept drift can be classified using two attributes - speed, and reoccurrence - where speed can be either sudden or gradual, and reoccurrence either always new or reoccurring.  
+
+These attributes when combined produce three independent categories - sudden, gradual and reoccurring.  In sudden drift there is a distinct break between concepts; gradual drift shows a period of mixed concepts, and reoccurring drift shows alternating or repeating concepts.  A problem may exhibit more than one source of concept drift, and in fact many real-world problems are of this form.
+
+\section{Environmental model}
+
+The model must describe two particular elements of the environmental change: the scope of the change, and the shape of the change. First, we discuss the scope of change. Our evolutionary model allows us to group entities at three different levels:
+\begin{enumerate}
+	\item The group of all entities.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
+	\item A single-member group for each entity.
+\end{enumerate}
+
+In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. \todo{explanation for not addressing third level}
+
+The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterize the set of interesting enviromental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+Our chosen method is to represent environmental change as a parameterized timeseries of particular form. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+
+$x_t = \Theta x_{t-1} + e_t + \delta$
+
+where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
+
+This series allows us to represent a broad range of environmental changes:
+
+\begin{itemize}
+	\item Each timeseries is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
+	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment timeseries itself would show a trend.
+	\item The timeseries is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item An AR timeseries has the property of stationarity, meaning that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing timeseries to describe a steady improvement or worsening in fitness.
+	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
+\end{itemize}
+
+\section{Models of environmental change}
+
+Statistical techniques are commonplace for time-series predictions \cite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a series where \todo{Add definition}, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model \todo{reference}. If instead of mean value prediction we are interested in the mean variance (such as in financial markets) then ARCH and GARCH models are appropriate. ARMA or ARIMA combined with ARCH or GARCH can be used in iterative sequence to simultaneously predict both mean and variance for \todo{add defn - heteroscedastic} series. 
+
+Time-series modeling provides techniques for describing time-series data in terms of an underlying model, summarizable in a few parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
+
+\section{Hypothesis}
+
+Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to some relation involving $\Theta$, $\sigma_e$ and $\delta$.
+
+From the hypothesis we make these predictions:
+\begin{enumerate}
+	\item Fidelity is at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$, $\delta=0$ and $\sigma_e>0$.
+	\item Fidelity is proportional to the predictability in the environment.
+\end{enumerate}
+
+\section{Experimental design}
+
+As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables, our earlier factorial and fractional-factorial experiment designs are no longer appropriate. Instead we adopt a response surface design where each experiment run has initial values of the independent variables taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\linewidth]{figures/hypercube}
+	\end{center}
+\end{figure}\label{fig:hypercube}
+
+<<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+library(reshape2)
+library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra)
+
+t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sd", "bias")
+t2 <- melt(t1,id=c('run','theta','sd','bias'))
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+
+for (r in unique(t2$run)) {
+	t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+	
+	fitness <- 0.5
+	for (t in 1:50) {
+		fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+		t2[t2$run==r & t2$t==t,'fitness'] = fitness
+	}
+}
+ap <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+<<factorialsdbias, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+library(reshape2)
+library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
+
+t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sd", "bias")
+t2 <- melt(t1,id=c('run','theta','sd','bias'))
+t2$theta <- round(t2$theta,3)
+t2$sd <- round(t2$sd,3)
+t2$bias <- round(t2$bias,3)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sd+bias, labeller='label_both') + labs(x="t", y="Fitness change")
+@
+
+% Needs sampleenvironment
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap=''>>=
+for (r in unique(t2$run)) {
+	t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+	
+	fitness <- 0.5
+	for (t in 1:50) {
+		fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+		t2[t2$run==r & t2$t==t,'fitness'] = fitness
+	}
+}
+
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
+@
+
+% Needs sampleenvironment
+<<sampleentropy, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Approximate entropy of each example environment.'>>=
+library(pracma)
+library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
+
+t2 <- t1[,1:3]
+names(t2)[1]<-"theta"
+names(t2)[2]<-"sd"
+names(t2)[3]<-"bias"
+for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+
+#summary(lm(sample_entropy~theta+sd,data=t2)) # can error as some sample_entropy values may be Inf
+ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+
+#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
+@
+
+The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \cref{tbl:range-of-independent-variables}.
+
+\begin{table}
+	\begin{center}
+		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
+		\label{tbl:range-of-independent-variables}
+		\begin{tabular}{@{}llll@{}}
+			\toprule
+			Dataset   	 	&  $\Theta$		& $\sigma_e$	& $\delta$\\
+			\midrule
+			Dataset no.1	& $[-0.4, 0.4]$	& $[0, 0.2]$ 	& $[-0.1, 0.1]$\\
+			Dataset no.2	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.3	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.4	& $[-0.4, 0.4]$	& $[0, 0.4]$	& $[-0.04, 0.04]$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\section{Results and discussion}
+
+<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs are ordered by final generation reached.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+# BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
+colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
+r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
+r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
+r3 <- read.csv('results/results-cc648a0a9.csv', colClasses=colClasses)
+r4 <- read.csv('results/results-996060f.csv', colClasses=colClasses)
+results = rbind(r1,r2,r3,r4)
+
+t1 <- aggregate(r1$gen,by=list(r1$run),max)
+t2 <- aggregate(r2$gen,by=list(r2$run),max)
+t3 <- aggregate(r3$gen,by=list(r3$run),max)
+t4 <- aggregate(r4$gen,by=list(r4$run),max)
+max_nrow <- max(nrow(t1),nrow(t2),nrow(t3),nrow(t4))
+ap <- ggplot(t1,aes(1:nrow(t1),t1[order(t1[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+bp <- ggplot(t2,aes(1:nrow(t2),t2[order(t2[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+cp <- ggplot(t3,aes(1:nrow(t3),t3[order(t3[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(stat="identity") + scale_x_continuous(limits=c(0,max_nrow)) + labs(x="", y="Final generation")
+grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
+@
+
+A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}. The difference in the proportion of  completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), as shown graphically in \cref{fig:figure22}.
+
+\begin{table}
+	\begin{center}
+		\caption{Summary of results for changing environments}
+		\label{tbl:summary-for-changing-datasets}
+		\begin{tabular}{@{}lll@{}}
+			\toprule
+			Dataset    		& $n$ (total runs) 				& Completed runs\\
+			\midrule
+			Dataset no.1	& \Sexpr{max(r1$run)+1}			& 	\Sexpr{nrow(r1[r1$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r2$run)+1}			& 	\Sexpr{nrow(r2[r2$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r3$run)+1}			& 	\Sexpr{nrow(r3[r3$gen==500,])+1}\\
+			Dataset no.1	& \Sexpr{max(r4$run)+1}			& 	\Sexpr{nrow(r4[r4$gen==500,])+1}\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+ap <- ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(ar_bias,ave_fid)) # fid ~ -bias when bias <0, otherwise fid can reach max
+grid.arrange(ap,bp,nrow=2,ncol=1)
+
+#anova(lm(ave_fid ~ ar_theta*ar_sd*ar_bias, data=subset(results,gen==500))) # theta not significant
+#anova(lm(ave_fid ~ ar_sd*ar_bias, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
+#anova(lm(sd_fid ~ ar_sd*ar_bias, data=subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001))) # Remove effect of bias, then ar_sd 0.001
+@
+<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  # ave fid drops as sd increases
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  # sd fid increases as sd increases
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') # and relationship between these two
+# Relationship between sd_fid and ave_fid!
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid))
+grid.arrange(ap,bp,nrow=2,ncol=1)
+#anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
+@
+
+<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Effect of lineage upon results.'>>=
+library(ggplot2)
+library(gridExtra)
+library(cowplot) # styling of plots, extension of ggplot2
+
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+%<<figure27, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Sample entropy.'>>=
+%library(pracma)
+%library(ggplot2)
+%library(cowplot) # styling of plots, extension of ggplot2
+%
+%t2 <- t1[,1:3]
+%names(t2)[1]<-"theta"
+%names(t2)[2]<-"sd"
+%names(t2)[3]<-"bias"
+%for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+%for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+%
+%ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+%@
+
+The unbiased sample variance with Bessel's correction is \todo{reference}:
+\[
+s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+\]
+
+Let us assume that the upper bound on fidelity of 1.0 has no effect on $s^2$.
+Then we can divide the fidelity values at time $t$ into those below the mean and those above; arrange the sample values so that the first $m$ fall below the mean and the remainder above. The sample variance can now be written as:  
+
+\[
+s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac {1}{n-1} \sum_{i=1}^m  \left( \left(x_i - \overline{x} \right)^ 2 + \sum_{i=m}^n  \left(x_i - \overline{x} \right)^ 2 \right)
+\]
+
+As $\overline{x}$ approaches 1.0 (the upper bound on fidelity) from below:
+
+\[
+s^2 = \frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right)
+\]
+
+But by our initial statement, $s^2$ remains unchanged, therefore...
+
+\[
+\frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right) = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+\]
+
+\section{Independent measure}
+
+Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \cite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
+
+In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity - the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterization.
+
+In a time-dependent way compression equals prediction - in the sense that we can produce an algorithm that improves our ability to predict the future output of a process. Prediction on one spatial dimension is called a time series. Most prediction requires consistent conditions or contexts - when these change our predictive ability is reduced, (in time-series this is called concept drift). 
+
+Compression, as mechanism to identify patterns, will identify items spatially if we can map items to patterns. The choice of compression method will privilege different ways of defining a pattern - if we are to use pattern discovery we need to determine what are interesting patterns - which is hardly domain agnostic. 
+
+\cite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \cite{Prokopenko2009}, \cite{Ladyman2011} and \cite{Lloyd2001}.
+
+Approximate entropy
+
+Sample entropy
+
+
+Statistical Complexity, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \cite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \cite{Young2005}.
+
+The benefits of $C_{\mu}$ \cite{Crutchfield1989} are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \cite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's PhD thesis \cite{Shalizi2001a} provides further context. 
+
+$C_{\mu}$ has been applied to a number of domains including random boolean networks \cite{Gong2012}, spin \cite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \cite{Young2008}, autonomy of protocells \cite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \cite{Xiang2008}.
+The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \cite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \cite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \cite[p.119]{Shalizi2001}.
+
+\section{Future work}
+
+Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
+
+Stationarity is inherently a constraint for applying statistical methods to the analysis of evolutionary models, where almost by definition, the outcomes change over time. One common approach is be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
+
+Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \cite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
+
+\chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
+
+\section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}
+
+As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
+
+\section{Selection alone is sufficient for Inheritance}\label{selection-alone-sufficient-for-inheritance-s-i}
+
+The test is to show an example of S and not I.
+
+\section{Variation and Selection, without property correlation, is sufficient for Inheritance}
+
+Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
+
+\chapter{Conclusions}
+
+Given:\newline
+Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
+hypothesis \autoref{hypothesis-2} (that Variation and Selection are sufficient for Inheritance),\newline
+we suggest that:
+
+\textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
+
+Possible extensions
+
+\begin{itemize}
+	\item Experimental test: demonstrate Evolution given Variation and Selection
+	\item Consistency and sufficiency--classification of existing systems
+	\item Fitness independent of inheritance potential--bias applied only to bias value of offspring, not fitness. However, fitness dependent on inheritance is more likely. A mechanism that doesn't copy well unlikely to preserve information leading to high fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
+	\item Both \autocite{Bourrat2015} and this work introduce a check-for-overcrowding step; although motivated by practical considerations, under endogenous selection shouldn't overcrowding also be endogenous?
+\end{itemize}
+	
 
 	

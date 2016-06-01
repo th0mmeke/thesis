@@ -1,6 +1,6 @@
 \documentclass[final,los,noindex,glossary,noloa,10pt]{mythesis}
 
-\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,dcolumn,footnote,multirow, amsthm}
+\usepackage{array,booktabs,nameref,bbding,enumitem,epigraph,tabularx,longtable,lscape,tikz,pifont,amsmath,amsfonts,listings,float,dcolumn,footnote,multirow,amsthm}
 \usepackage[noline, linesnumbered]{algorithm2e}
 \usepackage[figuresright]{rotating}
 \usepackage[update,prepend]{epstopdf}
@@ -33,12 +33,27 @@
 \SetKwBlock{Prob}{with probability }{end}
 \DontPrintSemicolon
 
+% Options for enumitem
+\setlist[itemize]{leftmargin=*}
+\setlist[description]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+
 % Options for amsthm
 \newtheorem{hypothesis}{Hypothesis}[chapter]
 
 \usepackage[framemethod=tikz]{mdframed}
 % New mdframed style
-\mdfdefinestyle{box}{leftmargin=1cm,rightmargin=2cm,innerleftmargin=1cm,innerrightmargin=1cm,roundcorner=5pt,frametitlerule=true}
+\mdfdefinestyle{box}{leftmargin=1cm,rightmargin=3cm,innerleftmargin=1cm,innerrightmargin=1cm,roundcorner=8pt,frametitlerule=true}
+	
+\makeatletter
+\newcommand\fs@myRoundBox{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@plain
+	\def\@fs@pre{\begin{mdframed}[style=box]}%
+	\def\@fs@mid{\vspace{\abovecaptionskip}}%
+	\def\@fs@post{\end{mdframed}}\let\@fs@iftopcapt\iffalse}
+\makeatother
+
+\floatstyle{myRoundBox} 
+\restylefloat{figure}
 	
 \author{Thom Young}
 \title{The Emergence of\\Inheritance and\\Heredity in\\Artificial\\Chemistries}
@@ -76,11 +91,12 @@ Finally, in conclusion, we speculate that this overall direction might lead more
 \listofalgorithms
 \include{glossary}
 \include{introduction}
-\part{Inheritance and Fidelity Modelling}
-\include{part2a}
-\include{part2b}
+\part{Modelling Inheritance and Fidelity}
+\include{part2}
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 \include{part3}
+\part{Conclusions}
+\include{conclusions}
 \part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place
 \appendix{

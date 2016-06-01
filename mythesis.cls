@@ -28,7 +28,7 @@
 \RequirePackage{anyfontsize}
  
 \RequirePackage{units}
-\RequirePackage[font=small,labelfont=bf]{caption}
+\RequirePackage[font=small,labelfont=bf, justification=raggedright]{caption}
 
 \newboolean{mylistoftables} \setboolean{mylistoftables}{true}
 \newboolean{mylistoffigures} \setboolean{mylistoffigures}{true}
@@ -76,7 +76,7 @@
 
 \providecommand\newthought[1]{%
    \addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%
-   \noindent\textsc{#1}%
+   \noindent\textbf{#1}%
 }
 
 \renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{\Large\guillemotleft}#1{\Large\guillemotright}\footnote{#2}}}

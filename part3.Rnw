@@ -25,82 +25,6 @@ Still higher emergent levels emerge under favourable conditions. Reactions may f
 
 By demonstrating the formulation of cycles, we suggest that ToyWorld is capable of emergent behaviour.
 
-\section{Alife}
-
-``Synthesis and simulation of living systems'' or contemporary artificial life as \quote{an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesizing simple forms of them.}{\parencite{Bedau:2007ga}}
-
-``life-as-it-could-be'' rather than ``life-as-we-know-it'' \parencite{Langton1989}
-
-Implicit rather than explicit fitness
-
-\begin{itemize}
-	\item
-	The mapping between representation and fitness must be implicit
-	\item
-	a property that arises from the representation itself rather than from
-	an external measure
-	\item
-	difficult to imagine how to pre-specify a mapping that remains
-	relevant in an open-ended system
-\end{itemize}
-
-Life a subset of Alife
-
-Life is the only \emph{provided} example that we have
-
-Life has non-trivial emergence
-
-Alife doesn't have to, but it is a guide
-
-Hard vs Soft vs Wet forms of Alife
-
-Swimming--\parencite{Terzopoulos1994}
-
-Themes \parencite{Aguilar2014}
-
-\begin{itemize}
-	\item
-	Properties of living systems--Origins of life, autonomy, self-organization, adaptation (evolution, development, and learning)
-	\item
-	Life at different scales--Ecology, artificial societies, behaviour, computational biology, artificial chemistries
-	\item
-	Understanding, uses and descriptions of the living--information, living technology, art and philosophy
-\end{itemize}
-
-History
-
-\begin{itemize}
-	\item Prehistory
-	\item Various automata
-	\item
-	Philosophy about automata
-	\item
-	1818 Mary Shelley ``Frankenstein; or, The Modern Prometheus''
-	\item
-	Uptick in mentions of ``Artificial Life'' as quoted in \parencite{Aguilar2014}
-	\item
-	Modern field
-	\item
-	1951 Von Neumann--first formal model
-	\item
-	1984 Christopher Langton
-	\item
-	1987 ``Official'' birth of field--first ``Workshop on the Synthesis
-	and Simulation of Living Systems'' in Sante Fe, NM, by Langton
-	\item
-	Conway Game of Life
-	\item
-	Cellular Automata
-	\item
-	Tierra, Avida
-	\item
-	Dawkin's Biomorphs
-	\item
-	Bedau Challenges
-	\item
-	Overlap with Brooks's robotics, AI, etc
-\end{itemize}
-
 \section{Artificial Chemistries}\label{artificial-chemistries}
 
 One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real-world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant.
@@ -300,7 +224,7 @@ rate constant of the reaction.
 
 \end{itemize}
 		
-\section{Origins of life}
+\section{Origins of life modelling with realistic artificial chemistries}
 
 Real-world chemical processes are also important to modelling scenarios for the origin of life or of other related areas such as the formation of metabolic networks in the earliest protocells.
 
@@ -329,8 +253,8 @@ Network Artificial Chemistry (NAC) \parencite{Suzuki2006}
 \parencite{Dyson1999}
 \end{itemize}
 
-\section{Alife}\label{alife}
-Finally, as previously discussed in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+\section{Artificial chemistries and Alife}\label{artificial-chemistries-and-alife}
+Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
@@ -473,12 +397,6 @@ A strongly constructive system is one which maintains closure, and in which ther
 Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense--new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions `on-the-fly' from the structures of the interacting molecules. 
 
 Pre-sepecification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be pre-determined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \cite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \cite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
-
-\section{Research Questions}
-
-Research Question: Is there a plausible implementation for a fidelity mechanism in a software system?
-
-Catalysis/autocatalysis possible through emergence in some AChems (e.g., \parencite{Virgo2013})
 
 \chapter{ToyWorld}\label{toyworld}
 
@@ -1404,192 +1322,3 @@ The most significant limitation of our analysis overall is that the values chose
 
 \TODO{Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...}
 
-\part{Conclusions}\label{the-search-for-creativity}
-
-\chapter{TODO-Introduction}
-
-The parameters themselves become endogenized, in the case of \emph{Fitness} into an implicit relative fitness and for \emph{Fidelity} into the outcome of the copying/variation mechanism.
-
-``Fitness determines context''--in contrast to Part 2, the entity affects its environment
-
-Fitness is relative to a context or niche. Creativity is where the
-entity changes niche or context--either by moving to a new niche, or
-creating or modifying one
-
-Creativity requires a feedback loop between entity and environment--a
-common representation for both so that they can interact (and entities
-can interact with other entities, and elements within the enviroment
-with other elements\ldots{})
-
-Other open areas--workings of selection
-
-Hints--e.g., Taylor, Van Valen\ldots{}--regarding resource
-competition, when individuals are embedded (required for single set of
-omnipotent rules)
-
-Hypothesis--Resource competition as the mechanism of selection
-
-\begin{itemize}
-	\item
- Does this simplify/remove choices? (as we earlier saw with
- reproduction/replication?)
-	\item
- Addition/Removal follows automatically
-\end{itemize}
-
-\section{Requirements for chemistry}\label{requirements-for-chemistry}
-
-\section{Previous work}\label{previous-work-1}
-
-\section{Match to requirements}\label{match-to-requirements}
-
-\section{Chemistry selection}\label{chemistry-selection}
-
-\quote{
-	Standish (2003), which is that openendedness depends fundamentally on
-the continual production of novelty.}
-{\parencite{Soros2014}}
-
-\section{What is interesting?}
-
-Levels are interesting in biology (should defn encompass biology or
-focus on CS?)
-
-Interesting seems to be different search space, not just bigger space.
-What about better search of same space? Is that interesting?
-
-\quote{\ldots{}the processes associated with the major transitions are an
-	automatic consequence of mutation and selection, due to the generation
-of higher levels of selection due to spatial self-organization.}
-{\parencite{Hogeweg1998}}
-
-\begin{itemize}
-	\item
- although somewhat quantified by scope (spatial structures e.g.,
- waves/spirals) and lack of fourth of element of Maynard-Smith:1995lw -
- ``transition from limited inheritance to universal inheritance''
-\end{itemize}
-
-Evolutionary mechanism from earlier is made up of variation and
-selection elements
-
-Evolutionary mechanism must be itself capable of improvement
-
-\begin{itemize}
-	\item
- Levels of selection requires changes in mechanism
-	\item
- And levels are correlated with surprise--major transitions in
- evolution (Maynard-Smith:1995lw) (although specifics here are
- biologically derived)
-	\item
- e.g., Mechanism of evolution must be itself evolvable; individuals and
- environment interact to give new ways of producing new individuals.
- Dynamics required for novelty-generation (Nellis2014)
-	\item
- Evolvable mechanism; implies embodied, or endogenous--mechanism must
- be capable of evolvable under same conditions as shown earlier for
- evolutionary potential
-	\item
- Inheritable variation under selection
- 
- \begin{itemize}
-	      	\item
- 	      If intrinsic selection, then mechanism for
- 	      inheritance/variation/selection should be expressed in same language
- 	      as other evolvable elements--a common rule set or chemistry. If
- 	      different, then cannot have interactions between other elements and
- 	      evolutionary mechanism--limited EvoEvo
- \end{itemize}
-\end{itemize}
-
-Show that given 1) OEE evolutionary system from above 2) capable of
-self-modification--process evolution, capable of ``interesting''
-
-Sufficient condition
-
-\textit{Hypothesis 4}: Endogenous selection and variation under evolutionary control sufficient for ``novelty-generation'' in evolution
-
-From earlier Hypothesis 3, V+S-\textgreater{}E
-
-Endogenous selection by resource competition
-
-World = Elements + Interactions
-
-More complex interactions emerge (constructive)
-
-\begin{itemize}
-	\item
- Some compositions actively evolve (strong selection), all others
- potentially affected (weak selection and no selection)
-	\item
- How do compositions form and how are they maintained? Some rule in
- world must impose a form of bias or asymmetry to allow differences to
- develop. In biology, locality of effect is one example
-	\item
- Compositions rely on external-to-them elements and lacking those,
- cannot maintain themselves. Growth and maintenance results from
- success in resource competition
-\end{itemize}
-
-Variation under evolutionary control
-
-\begin{itemize}
-	\item
- A' = f(A), if f() fixed then must be capable of generating all future
- variation. Alternative is a f() which is not-fixed, but is itself
- capable of variation. What type of variation?
-	\item
- Needs to be novel and open-ended itself!
-	\item
- EvoEvo simplest--same mechanism
-	\item
- Shared mechanism for I and V--capable of introducing some V during I
-	\item
- V must be exposed to S
-	\item
- Feedback loop--V refined by S
-	\item
- Prediction: V changes over time. In more detailed models, form of V
- may change over time (not possible without an EvoEvo mechanism)
-	\item
- Prediction: correlation between parent and offspring properties is highest
- in unchanging (stable) environments, and lowest in varying ones. In
- systems without variation under evolutionary control, correlation is
- unchanging. (in previous section, correlation modelled as under
- evolutionary control with degree of correlation as endogenous
- parameter)
-\end{itemize}
-
-\subsection{Tests for evolutionary activity}\label{tests-for-evolutionary-activity-1}
-
-Sustainability may be undecidable--Wiedermann:2005ys
-
-Alife community--Channon, etc
-
-Population measures e.g., Vasas2015
-
-Artificial selection
-
-Moran's test
-
-Search mechanism--thermodynamic or ergodic search vs evolutionary
-search (implied by Rasmussen2004)
-
-Local entropy (implied by Adami2015)
-
-Measure of OEE -
-http://link.springer.com/article/10.1007\%2Fs11084-012-9309-y
-
-\chapter{TODO-Discussion and Conclusions}\label{discussion-and-conclusions}
-
-We have shown that:
-\begin{itemize}
-	\item Selection and Variation are sufficient for Evolution in an Artificial System
-	\item Such a system is capable of adjusting to changing environments without preselection of parameters
-	\item Such a system can be implemented in an Artificial Chemistry
-\end{itemize}
-
-\section{Future work}
-
-Extension from asexual reproduction in model, to two-parent model.

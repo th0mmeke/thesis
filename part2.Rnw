@@ -25,60 +25,20 @@ df
 
 \chapter{Introduction}
 
+Models (not simulations) for the emergence of inheritance, for the purpose of strengthening the theoretical basis for any simulation.
+
+\begin{NOTES}
 The model of \cite{Bourrat2015} assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. This is unexplored by Bourrat.
+\end{NOTES}
 
 \section{Previous work}
 
-In biology, standard population genetics describes the dynamics over time of genotype frequencies, but remains bound to biology. The models and methods are drawn from biological theory, but the goal remains the prediction of biology population evolution. 
 
-Waddington explored the requirements for open-ended ongoing evolution.
-In theory of computation, Von Neumann machines provide the first detailed recipe for self-replicating machines.
-Paixao2015 sought common principles between population genetics and evolutionary computation in an attempt to unify the two fields. Similarly MWUAs seek a deeper meaning to evolution, placing it as one of a family of closely related algorithms all based on multiplicative weights.
 
-\autocite{VonNeumann1966} as reviewed in \autocite{Taylor1999} (Lack of environmental emphasis)
-Von Neumann's architecture for how ``complicated machines could evolve from simple machines''
-
-\begin{enumerate}[label=\Alph*]
-	\item A \emph{constructive} machine that takes a description and builds a new machine;
-	\item A \emph{copying} machine to make a copy of a description, and 
-	\item A \emph{control} machine to sequence the other two machines - first the copying machine, then constructive, then finally to link the new machine to its description.
-\end{enumerate}
-
-Von Neumann makes a fundamental distinction between a description of a machine and the machine itself; in biological terms, the architecture separates between genotype (description) and phenotype (the machine.) However, because some of the function of the three machines (A, B, C) are provided by the world there is a limit to how self-referential the system can be, and hence how much its function can evolve over time.
-
-Taylor states ``I would suggest that the reproducing programs in Tierra and similar systems can also sensibly be analysed in terms of von Neumann's architecture.''
-
-Just a few years later, 
-\autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
-
-Also Genotype (G) and Phenotype (Q*) based, where Q* associated with an environment (E from Ej)
-
-For OEE need: Ej infinite numbered set, and sufficient Qs for Q*s for all those Ejs
-
-Q*s are part of Ej satisfies condition one {[}recursive?{]}
-
-Second is an emergent one - ``it is not sufficient to create new mutations which merely insert new parameters into existing programmes; they must actually be able to rewrite the programme''
-- key distinction between OEE and creative evolution
-
-\parencite{Maley1999}
-
-Focus on diversity (to make progress). Some suggestions previously that diversity is bounded (at minimum, by number of molecules available for biosphere, also by energy and minimal populations and probably other things), and plateaus (punctuated equilibrium). Indicates two time constants - a fast expansion to use available resources, with a slower rhythm of innovations to create and enter new adaptive spaces.
-
-Maley builds up the requirements by beginning with almost the simplest model possible (called Urmodel 1) where the only changes in the population from generation to generation are 1-bit flips in a 32-bit genotype. This results in a neutral fitness landscape (as no selection) and to prevent edge effects each run was stopped before all niches were filled. The, unsurprising, result was unbounded diversity, but no selection or heritable effect on fitness.
-
-Posits that need selection : ``Requirement 2 An open-ended evolutionary system must embody selection'' - because ``fails to meet one of the basic criteria of natural selection: the heritable variation has no effect on fertility'' {[}ignoring use of fertility as a fitness-analogue{]}, and from Bedau ``Requirement 3 ...continuing (`positive') new adaptive activity'' {[}ignore neutral theory, and accepts Bedau - perhaps to allow use of Anew as measure?{]}
-
-Urmodel 2 - natural selection: mutation, ``dissimilarity'' for competitive advantage (justified by biological example of niche overlap theory (Levins, 1968)) - no increase in Anew
-
-Urmodel 3 - selective sweep (hypothesis): parasites (mutations) and hosts (fixed genotypes). Fitness on degree of match between parasite and host bit patterns. Restricted by 32-bit genomes, no death. Claim shows unbounded activity - ``the first known artificial evolutionary system demonstrating unbounded evolutionary activity''. But in Maley's words this is probably not a unique or even significant result--``The only trick is to defer the point when the model hits its true asymptotic behaviour for long enough that the growth dynamics of the model are themselves asymptotic in some sense'' \parencite{Maley1999}.
-
-The niches in Urmodel3 are imposed from outside, rather than arising endogenously. This leads to Urmodel 4, where coevolution is added to Urmodel 3 by letting hosts mutate.
-
-No model however resulted in ``surprise''. Maley believes this is because of a lack of complexity, illustrated through a nice biological metaphor: ``A puddle of inert, multicoloured and diverse algae would not be nearly so inspirational as the rain forest.''
-
-\autocite{Paixao2015}:
-
-attempt to unify single-objective evolutionary computation and population genetics -  based on common conception of evolutionary process
+\begin{NOTES}
+In biology, standard population genetics describes the dynamics over time of genotype frequencies, but remains bound to biology. The models and methods are drawn from biological theory, but the goal remains the prediction of biology population evolution. \cite{Paenke:2007ie} and \cite{Gaucherel2012} compare the inheritance of non-acquired characteristics and acquired characteristics. Synthesis paper \cite{Schuster2011} identifies error threshold rates for mutation (Eigen1971), work on fitness landscapes, and neutral landscapes (relationship between genotypes and phenotypes)
+	
+\cite{Paixao2015} sought common principles between population genetics and evolutionary computation in an attempt to unify the two fields. Similarly MWUAs seek a deeper meaning to evolution, placing it as one of a family of closely related algorithms all based on multiplicative weights.
 
 Any evolutionary process describes ``population undergoing changes over time based on some set of transformations''
 
@@ -112,87 +72,6 @@ Demonstrates how existing ``classical models in theoretical population genetics 
 
 Close similarity between simplest EDA (the Univariate Marginal Distribution Algorithm) and Linkage equilibrium models in population genetics as pointed out in Chastain2014 (``We demonstrate that in
 the regime of weak selection, the standard equations of population genetics describing natural selection in the presence of sex become identical to those of a repeated game between genes played according to multiplicative weight updates (MWUA), an algorithm known in computer science to be surprisingly powerful and versatile. MWUA maximizes a tradeoff between cumulative performance and entropy, which suggests a new view on the maintenance of diversity in evolution.'')
-
-\subsection{MWUA}
-
-AdaBoost is a form of MWUA
-(\href{https://www.cs.princeton.edu/~arora/pubs/MWsurvey.pdf}{\emph{https://www.cs.princeton.edu/\textasciitilde{}arora/pubs/MWsurvey.pdf}})
-
-\autocite{Barton2014}
-Experts in MWUA equivalent to alleles in NS
-In selection, ``frequency of each type {[}allele{]} is simply multiplied by its relative fitness; which corresponds precisely to MWUA''
-MWUA ``maximizes the sum of two quantities: the expected total fitness of the chosen allele, summed over past generations, plus the entropy, which is a measure of the allelic diversity.''
-Fitness differences increase over time, and so population converges towards type with best performance; entropy term acts to slow down this convergence
-
-Problems
-\begin{itemize}
-	\item
-	because MWUA is deterministic, and some interesting problems e.g., 	recombination as a mechanism for reintroducing gene combinations lost through drift in finite populations, are essentially stochastic, MWUA cannot address them
-	\item
-	Value of sex - MWUA applies equally to sexual and asexual populations so hard to gain insights as to role of sex
-\end{itemize}
-
-\autocite{Chastain2014}:
-
-Assumes weak selection - from paper: differences in fitness between genotypes are small relative to the recombination rate and so evolution proceeds near linkage equilibrium - probability of
-occurrence of a certain genotype is the product of the probabilities of each of its alleles
-
-{[}Weak selection where two phenotypes have similar fitness, and so one only slightly preferred. Only relevant (claim elsewhere - wikipedia) that only relevant in Moran process (fixed population as
-births-deaths paired - no birth without a death) as in growing population both can proliferate and weak selection results in effectively no selection{]}
-
-{[}Also assumes sexual reproduction - ``in the presence of sexual reproduction'', and does not address mutation{]}
-
-
-Shows that ``equations of population genetic dynamics are mathematically equivalent to positing that each locus selects a probability distribution on alleles according to a particular rule...known as the multiplicative weight updates algorithm (MWUA)''
-	
-Uses Nagylaki's theorem for allele frequencies given weak selection in presence of sex
-
-NS is ``tantamount to each locus choosing at each generation its allele frequencies in the population so as to maximize the sum of the expected cumulative differential fitness over the alleles, plus
-the distribution's entropy.''
-
-Hints that MWUA enhances entropy of alleles' distribution, so helping to maintain genetic diversity under NS - a ``tradeoff between increasing entropy and increasing (cumulative) fitness.''
-
-\section{Elements of biological evolution}
-
-\autocite{Hogeweg1998}
-
-``The simplest way of defining an evolutionary process is to define some set of predefined interactions between replicators and subject one (or a few) of the parameters of the system to mutations (selection automatically ensues from the dynamics of the system).''
-
-``\ldots{}the processes associated with the major transitions are an automatic consequence of mutation and selection, due to the generation of higher levels of selection due to spatial self-organization.''
-
-
-iff the interactions between the replicators are defined locally (meaning spatially) (from earlier work)
-
-because local interactions will form ``higher-level structures (e.g., spiral waves, turbulence, path like structures of different sizes) which constitute different levels of selection.''
-stress is on new levels of selection, rather than other elements of transitions
-
-But still ``they do not give us `novel' entities, as biotic evolution undoubtedly has''. Perhaps because lack one of the elements in Maynard-Smith:1995lw - ``transition from limited inheritance to universal inheritance''
-
-Claim see other three in earlier work:
-
-\begin{itemize}
-	\item
-	
-	Symbiogenesis - ``properties of local interacting, evolutionary
-	systems ...embody a process reminiscent of `Symbiogenesis' in
-	that self-sufficiency is (partly) given up in favor of the
-	larger scale entities.''
-	
-	\item
-	
-	Conflicts among levels of selection - claims interactions
-	between meso-scale and micro-scale entities are inherent (from
-	observation of spiral wave experiments)
-	
-	\item
-	
-	Division of labour - different elements of spatial structure
-	reproduce differently, hence germ-like and soma-like...
-	
-\end{itemize}
-
-
-Necessary/essential for OEE - ability to redefine interactions, genetic representations, and fitness of the replicators
 
 \autocite{Bourrat2015}
 
@@ -612,225 +491,38 @@ Issues
 	
 \end{itemize}
 
-\autocite{Watson2010}:
-
-Adaptation in biology appears to precede Natural Selection, so adaptation is possible without NS \autocite{Watson2010}
-
-Fundamental open question - mechanisms for adaptation
-
-Explored through variety of different projects, self-organized
-adaptive systems without NS - ``We present an abstract model and
-simulation of this process and discuss how it relates to a number of
-different domains: the evolution of evolvability in gene regulation
-networks {[}12{]}, the evolution of new units of selection {[}10{]}
-via symbiosis {[}15{]} and 'social niche construction' {[}8,9{]},
-games on adaptive networks {[}2{]}, distributed optimisation in
-multi-agent complex adaptive systems {[}13,14{]} and multi-scale
-optimisation algorithms {[}6,7{]}.``
-
-
-\autocite{Saunders1994} Evolution without Natural Selection (DaisyWorld):
-
-Lovelock proposed Daisyworld as alternative explanation (rather than selection) for regulation as seen in Gaia hypothesis, and in organisms. Two feedback loops lead to regulation, ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not.''
-
-The fundamental insight in Daisyworld is that individuals modify environments: the daisies adapt planet (temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet. Little benefit to adaptation by daisies to planet. In fact, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.''
-
-\autocite{Watson2015}:
-
-Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples
-
-\begin{itemize}
-	\item
-	
-	Major transitions in evolution not possible without
-	self-referentiality - unit of evolution must change between levels
-	e.g., from molecules to cells. This was/is accomplished by changing
-	the way that individuals interact, from competition to cooperation
-	(fitness change) to form the next level. How does selection at one
-	level get suppressed, and introduced at the next?
-
-	\item
-	
-	Independent replication before transition, must replicate as part of a larger whole afterwards
-	
-	\item
-	
-	Fundamental for complexity - complexity associated with levels
-	
-	\item
-	
-	Draws analogy with Hinton 2008 Deep Learning
-	
-	\item
-	
-	At one level, supervised learning improving adaptation; at next higher, unsupervised improving robustness
-	
-	\item
-	
-	Modes of inheritance (for groups)
-	
-	
-	\begin{itemize}
-		\item
-		
-		``migrant pools'' - particles disperse horizontally and reform
-		into new pools - type 1 group selection - no group inheritance
-		
-		\item
-		
-		Group fissioning - vertical inheritance - group inheritance
-		(differences are heritable) - type 2
-		
-	\end{itemize}
-\end{itemize}
-	
-There is now a body of literature where the goal is to abstract general principles of evolution from the specifics seen in particular fields.
-
-In biology, standard population genetics describes the dynamics over time of genotype frequencies, but remains bound to biology. The models and methods are drawn from biological theory, but the goal remains the prediction of biology population evolution. 
-
-Waddington explored the requirements for open-ended ongoing evolution.
-In theory of computation, Von Neumann machines provide the first detailed recipe for self-replicating machines.
-Paixao2015 sought common principles between population genetics and evolutionary computation in an attempt to unify the two fields. Similarly MWUAs seek a deeper meaning to evolution, placing it as one of a family of closely related algorithms all based on multiplicative weights.
-
-\autocite{VonNeumann1966} as reviewed in \autocite{Taylor1999} (Lack of environmental emphasis)
-Von Neumann's architecture for how ``complicated machines could evolve from simple machines''
-
-\begin{enumerate}[label=\Alph*]
-	\item A \emph{constructive} machine that takes a description and builds a new machine;
-	\item A \emph{copying} machine to make a copy of a description, and 
-	\item A \emph{control} machine to sequence the other two machines - first the copying machine, then constructive, then finally to link the new machine to its description.
-\end{enumerate}
-
-Von Neumann makes a fundamental distinction between a description of a machine and the machine itself; in biological terms, the architecture separates between genotype (description) and phenotype (the machine.) However, because some of the function of the three machines (A, B, C) are provided by the world there is a limit to how self-referential the system can be, and hence how much its function can evolve over time.
-
-Taylor states ``I would suggest that the reproducing programs in Tierra and similar systems can also sensibly be analysed in terms of von Neumann's architecture.''
-
-Just a few years later,  \autocite{Waddington2008} as reviewed in \autocite{Taylor:1999sc}--Originally published in ``Towards a Theoretical Biology, Vol. 2'' in 1969
-
-Also Genotype (G) and Phenotype (Q*) based, where Q* associated with
-an environment (E from Ej)
-
-For OEE need: Ej infinite numbered set, and sufficient Qs for Q*s
-for all those Ejs
-
-Q*s are part of Ej satisfies condition one {[}recursive?{]}
-
-Second is an emergent one - ``it is not sufficient to create new
-mutations which merely insert new parameters into existing
-programmes; they must actually be able to rewrite the programme''
-- key distinction between OEE and creative evolution
-
-\autocite{Paixao2015}:
-
-attempt to unify evolutionary computation and population genetics -
-based on common conception of evolutionary process
-
-
-Any evolutionary process describes ``population undergoing changes
-over time based on some set of transformations''
-
-A transformation can be decomposed into a collection of (stochastic)
-operators. Operator can be described as a probability distribution of
-potential outcomes; and evolutionary process as a trajectory through a
-space of distributions.
-
-Process described both as a sequence of population transformations,
-and as distribution transformations
-
-
-Individuals described with both genotype and phenotype; gp mapping
-between them. Some operators act on genotype others on phenotype
-
-
-Various operators defined - for selection (uniform, proportional,
-tournament, truncation, cut, replace); variation (mutation) (uniform,
-single-point), variation (recombination) (one-point crossover, k-point
-crossover, uniform crossover, unbiased variation)
-
-Most models satisfy five given mathematical properties
-
-\begin{itemize}
-	\item
-	
-	V1 - uniformity preserving - no change to distribution if uniformly
-	distributed
-	
-	\item
-	
-	M1 - mutation acts on individuals
-	
-	\item
-	
-	M2 - mutation can generate whole search space ie an ergodic operator
-	(defining characteristic of mutations)
-	
-	\item
-	
-	R1 - recombination preserves allele frequencies (in expectation)
-	
-	\item
-	
-	S1 - selection doesn't change individuals
-	
-\end{itemize}
-
-Demonstrates how existing ``classical models in theoretical population
-genetics and in the theory of evolutionary computation'' can be mapped
-into this framework. Most of PG models can be represented
-(unsurprising as most variants of classical models that have been
-demonstrated in framework); some topic-specific EC models could not be
-- but not ones that have a relationship with PG and so of little
-interest to biologists. GP models omitted for reasons of balance
-between simplicity and inclusiveness
-
-Leaves MOEAs for later work
-
-``In an Estimation Distribution Algorithm (EDA), the algorithm tries
-to determine the distribution of the solution features, e.g.
-probability of having a 1-bit at a particular position, at the
-optimum. Some EDAs can be regarded abstractions of evolutionary
-processes: instead of generating new solutions through variation and
-then selecting from these, EDAs use a more direct approach to refine
-the underlying probability distribution. The perspective of updating a
-probability distribution is similar to the Wright--Fisher model.''
-
-\begin{itemize}
-	\item
-	
-	Close similarity between simplest EDA (the Univariate Marginal
-	Distribution Algorithm) and Linkage equilibrium models in population
-	genetics as pointed out in Chastain2014 (``We demonstrate that in
-	the regime of weak selection, the standard equations of population
-	genetics describing natural selection in the presence of sex become
-	identical to those of a repeated game between genes played according
-	to multiplicative weight updates (MWUA), an algorithm known in
-	computer science to be surprisingly powerful and versatile. MWUA
-	maximizes a tradeoff between cumulative performance and entropy,
-	which suggests a new view on the maintenance of diversity in
-	evolution.'')
-	
-	\item
-	
-	AdaBoost is a form of MWUA
-	(\href{https://www.cs.princeton.edu/~arora/pubs/MWsurvey.pdf}{\emph{https://www.cs.princeton.edu/\textasciitilde{}arora/pubs/MWsurvey.pdf}})
-	
-\end{itemize}
-
-
-``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
-
-Lewontin argued that can abstract form of individual to more general entity (at any level) - ``any entities in nature that have variation, reproduction and heritability may evolve'' Lewontin1970
-as necessary and sufficient conditions (despite ``may''?) \autocite{Griesemer2005}
+\end{NOTES}
 
 
 ``An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from
 concrete objects so as to regard objects in a manner closer to their essential natures.'' \autocite{Griesemer2005}
 					
+\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+
+\begin{NOTES}
+Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
+be varied by interaction with the environment.
+
+Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
+
+For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
+\end{NOTES}
+\begin{hypothesis}
+	Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance, or $V'+S\rightarrow I$
+\end{hypothesis}\label{hypothesis-2}
+\begin{NOTES}
+we mean inheritance increases to some optimal level
+Inheritance is defined as any correlation better than 0.5, or in other words, as better than chance. Fidelity is defined as the degree of correlation between parent and offspring values for the same trait.
+
+I iff V' (that is, with initial correlation)
+Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
+
+
 V+S-\textgreater{}I
 Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
 
 Heredity seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
-	
+
 ``Context determines fitness'', where the environment is stable and affects the development of the entities
 
 Degree of variation between generations important (no correlation means effectively unguided search, complete correlation means no source of novelties)
@@ -846,127 +538,9 @@ correlation along lineage, so high fitness more likely to be passed
 down. (Also low fitness, but they will suffer). On average then high
 inheritance increases average fitness over time
 
-\section{Assumptions}\label{assumptions}
 
-No learning mechanisms--changes during lifetime
 
-Corollary--if elements cannot change, then for population level change need to add or remove elements
-
-\begin{itemize}
-	\item
- If have no removals then population is either static (contradiction)
- or indefinitely expanding (practical problem)
-	\item
- If have no additions, then cannot adjust population proportions
-\end{itemize}
-
-\section{Variation (and Inheritance)}\label{variation-and-inheritance}
-
-Assume that variation occurs only on addition
-
-\begin{itemize}
-	\item
- If during life then, by definition, a learning mechanism
-\end{itemize}
-
-Corollary: no Lamarckian inheritance
-
-Variation is in some element from parent to offspring
-
-\begin{itemize}
-	\item
- Degree of relationship interesting
-	\item
- No relationship (no covariance) is as before--no learning
-	\item
- If not related, then effectively random search--process is not
- `learning'--no information inheritance
-	\item
- Duplication is effectively the same as just extending the lifespan -
- not interesting
-	\item
- Somewhere in between (between 0 and 1) means heredity/inheritance
-	\item
- Earlier work in biology has connected evolvability to mutation
- rate/inheritance rate
-\end{itemize}
-
-\section{Selection}\label{selection}
-
-\subsection{Exogenous}\label{exogenous}
-
-External calculation used directly to adjust population
-
-Or guided evolution--external agency adjusts population directly
-
-But as external element shared across population not evolvable
-
-\subsection{Endogenous}\label{endogenous}
-
-Feedback loop between element and everything else (in the sense of Pattee’s ``semantic closure’’ discussed extensively in \autocite[sect. 3.5]{Taylor2001})
-
-Causally results in a proportional change in population proportions
-
-e.g., resource competition, or some other interaction between element and other things
-
-Could occur on fixed timeframe (fixed generations, as common in biological modelling) or continuous
-
-More generally, on range from \textasciitilde{}0 (continuous selection) to 1 (generations), although mid-points likely to be of little additional value
-
-Affected by element and by everything else, so conceivably could be guided by modifying the environment in a calculated way
-
-Reproduction follows from replication--no need to choose degree of similarity, emergent from lower level rules
-
-\section{Hypothesis: Variation and Inheritance and Selection are sufficient for Evolution}\label{h1}
-
-\begin{hypothesis}
-	Variation and Inheritance and Selection are sufficient for Evolution, or V+S+I-\textgreater{}E
-\end{hypothesis}\label{hypothesis-1}
-
-From previous work\ldots{}
-
-For some forms of V, S, I, E\ldots{}what are requirements?
-
-\begin{itemize}
-	\item
- For I, reasonable to define by degree--\autocite{Bourrat2015} = bias
- or degree of correlation between parent and offspring
-	\item
- For S, compatible with resource competition--endogenous fitness
-	\item
- For V, compatible with copy mutation
-\end{itemize}
-
-Can we construct a causal diagram from variation and selection that:
-
-\begin{itemize}
-	\item
- complies with requirement (optimizer, population dominated by best)
-	\item
- less choice, more inevitable, less arbitrary
-	\item
- foundation for creativity?
-\end{itemize}
-
-\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
-
-Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
-be varied by interaction with the environment.
-
-Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
-
-For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
-
-\begin{hypothesis}
-	Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance, or $V'+S\rightarrow I$
-\end{hypothesis}\label{hypothesis-2}
-
-\TODO{we mean inheritance increases to some optimal level}
-Inheritance is defined as any correlation better than 0.5, or in other words, as better than chance. Fidelity is defined as the degree of correlation between parent and offspring values for the same trait.
-
-\TODO{I iff V' (that is, with initial correlation)}
-\TODO{Mechanism vs measure for fidelity}
-\TODO{Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?}
+\end{NOTES}
 
 \section{Predictions}\label{predictions}
 
@@ -999,11 +573,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 
 \chapter{Simulation model}
 
-To test our hypothesis, we turn to simulation and experiment.
-
-Simulation is a natural fit for the exploration of emergent systems where we expect complex behaviour from simple rules. 
-
-If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
+To test our hypothesis, we turn to simulation and experiment. Simulation is a natural fit for the exploration of emergent systems where we expect complex behaviour from simple rules. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
 
 Experimental tests are the strongest method we have to examine the claims made in hypothesis \cref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems. Thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
@@ -1113,34 +683,21 @@ The model as described is general, under the assumptions given below. It is also
 
 \section{Initial conditions and settings}\label{initial-conditions}
 
-At the beginning of each run we construct an initial population to some design. Although a randomly chosen population is useful so as not to introduce any bias that may result from a consistent starting point, our interest is also in two other factors. First, under evolution we expect a general increase in fitness over time from any low initial starting point, and second, if a population is already in an evolved state with a reasonably high relative fitness we would not expect to see a decrease over time in fitness. We call these two initial starting points the low-start and High Start cases respectively, and they are described in the sections below.
-
-\subsection{Low-start case}\label{low-start-case}
-
-Entities in the low-start case begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) This case is of interest for two reasons: first, directly from hypothesis \cref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities  eventually replaced by one of high (or at least higher) fidelity ones. Second, this is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
+At the beginning of each run we construct an initial population to some design, randomly chosen (so as not to introduce any bias that might result from a consistent starting point.) Entities begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) From the hypothesis \cref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities eventually replaced by one of high (or at least higher) fidelity ones. This is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
 
 \begin{table}[t]
 	\begin{center}
-		\caption{Initial conditions for low-start and High Start cases}\label{tbl:ic}
-		\begin{tabular}{@{}lll@{}}
+		\caption{Initial conditions}\label{tbl:ic}
+		\begin{tabular}{@{}ll@{}}
 			\toprule
-			Case                        & Property & Initial range           \\
+			Property & Initial range\\
 			\midrule
-			\multirow{2}{*}{Low-start}  & Fitness  & $\mathcal{U}[0, 0.3]$   \\
-                         & Fidelity & $\mathcal{U}[0, 0.3]$   \\
-			\midrule
-			\multirow{2}{*}{High Start} & Fitness  & $\mathcal{U}[0, 0.9]$   \\
-                         & Fidelity & $\mathcal{U}[0.5, 0.9]$ \\
+			Fitness  & $\mathcal{U}[0, 0.3]$\\
+            Fidelity & $\mathcal{U}[0, 0.3]$\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
-
-\subsection{High-start case}\label{high-start-case}
-
-In this case, entities start with a higher initial fidelity and a greater range of fitnesses (again, for specifics see \cref{tbl:ic}). This case examines the ability of the model to preserve advantageous entities, although, in the broader scope of the thesis, it is highly unlikely that any randomly created population would be of this initial form.
-
-%In biological systems, random genetic drift can result in a decreasing fitness trend under certain circumstances \TODO{ref} but as our model omits drift \TODO{ true?} we can eliminate it as an acceptable explanation for any downwards trend.
 
 \chapter{Initial screening}
 
@@ -1152,7 +709,7 @@ The usual alternative is some variant of a factorial design, where each paramete
 
 \section{Experimental design}
 
-As our interest is in the behaviour of the model both overall, and under specific conditions (such as the low-start case, or to the \emph{Correlate Fidelity} parameter), a factorial design is preferred.
+As our interest is in the behaviour of the model, both overall and under specific conditions (such as \emph{Correlate Fidelity}), a factorial design is preferred.
 
 Now, a full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our exploratory goals.
 
@@ -1174,7 +731,7 @@ The factors and levels used are given in \cref{tbl:factor-levels-for-investigati
 
 \begin{table}
 	\begin{center}
-		\caption{Factor levels for investigation into inheritance under low-start conditions}\label{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}
+		\caption{Factor levels for investigation into inheritance}\label{tbl:factor-levels-for-investigation-into-inheritance-under-low-start-conditions}
 		\begin{tabular}{@{}llp{6cm}@{}}
 			\toprule
 			Factor                 & Number of Levels & Levels                                                                                                                                              \\
@@ -1223,7 +780,7 @@ If there is an affect on the hypothesis tests attributable to the bound mechanis
 df <- subset(load.results.simple('results/results-d9f18e2.data'), environment_change_frequency==0)
 @
 
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements constructed according to the low-start case (\cref{low-start-case}), and the model run with a maximum of \Sexpr{max(df['gen'])} generations with
+The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and the model run with a maximum of \Sexpr{max(df['gen'])} generations with factors as follows:
 
 \begin{table} % d9f18e2
 	\begin{center}
@@ -1475,7 +1032,7 @@ df$n_offspring = factor(df$n_offspring, labels=c("2","5"))
 ggplot(df) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation", y="Population size") + facet_wrap(~n_offspring)
 @
 
-The vertical line on the extreme left of the right-hand side facet of \cref{fig:popoffspring} (for $n_{offspring} = 5$) consists of \Sexpr{nrow(subset(temp,gen==1))} runs from a total of nrow(subset(df,gen==0)) where the population dropped in the first generation to a mean size of \Sexpr{mean(subset(temp,gen==2)$pop)}, before recovering to the population upper limit by generation \Sexpr{max(temp['gen'])+1}. This is a characteristic of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value,  the initial values are defined by the low-start case and $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
+The vertical line on the extreme left of the right-hand side facet of \cref{fig:popoffspring} (for $n_{offspring} = 5$) consists of \Sexpr{nrow(subset(temp,gen==1))} runs from a total of nrow(subset(df,gen==0)) where the population dropped in the first generation to a mean size of \Sexpr{mean(subset(temp,gen==2)$pop)}, before recovering to the population upper limit by generation \Sexpr{max(temp['gen'])+1}. This is a characteristic of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
 
@@ -1549,11 +1106,9 @@ Returning to the overall goals for these experiments (to test the predictions of
 	\item Population variance for inheritance will decrease more than chance.
 \end{enumerate}
 
-The low-start case is the most significant as it describes the core of the thesis - that good quality inheritance can develop from imperfect beginnings, such as could occur in the emergence of artificial evolution, or indeed as might be found during the transition from non-living to life. This makes it a key step along the way towards the evolution of artifical evolution, the main subject of this thesis.
+The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions \cref{inheritance-low-start}, and then test whether the population variance for inheritance decreases as predicted \cref{sd-low-start}.
 
-The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions \cref{inheritance-low-start} and confirm that it is maintained under high-start conditions \cref{inheritance-high-start}, and then finally test whether the population variance for inheritance decreases as predicted \cref{sd-low-start}.
-
-\section{Emergence of inheritance from low-start initial conditions}\label{inheritance-low-start}
+\section{Emergence of inheritance}\label{inheritance-low-start}
 
 As discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
 
@@ -1601,7 +1156,7 @@ df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection ==
 	\end{center}
 \end{table}
 
-<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for low-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
+<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
@@ -1609,7 +1164,7 @@ dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary for low-start, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
+<<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
 ap <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 bp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 cp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
@@ -1621,29 +1176,13 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
-<<highstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results for high-start case, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
-ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
-dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
-grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-@
-
-<<highstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary for high-start, averaged across all replicates for each combination of factors, as seen earlier in the low-start case. Light-coloured points for initial state and dark-coloured ones for final values.Missing points are from replicates that did not complete.'>>=
-ap <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-bp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-dp <-  ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-@
-
 \subsection{Results and discussion}
 
-Our interest is in the final values for fidelity under fixed-environment, low-start, conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
+Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
 A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
-<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated factors in the low-start case for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
+<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('false','true'))
 ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='Final mean fidelity',y='')
 bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='Final mean fitness',y='')
@@ -1654,42 +1193,7 @@ From \cref{fig:lowstartbyfactor}, all runs result in an increase in fidelity fro
 
 In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is \emph{true}, that is, when the child's fidelity is correlated with that of its parent.
 
-\section{Confirmation of inheritance under high-start conditions}\label{inheritance-high-start}
-
-\TODO{Experiment settings}
-
-% EXPERIMENT 4 - Inheritance under high-start conditions
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
-@
-
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for confirmation of hypothesis prediction under high-start initial conditions}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
-
-<<highstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated factors in the high-start case for the factor \\textbf{Correlate Fidelity}. As before, results for final mean fidelity ($\\overline{fidelity}_{end}$) are on the left, and for final mean fitness ($\\overline{fitness}_{end}$) on the right.'>>=
-df$correlation_correlation <- factor(df$correlation_correlation, labels=c('false','true'))
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='Final mean fidelity',y='')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='Final mean fitness',y='')
-grid.arrange(ap,bp,nrow=1,ncol=2)
-@
-
-\section{Variance of Fidelity reduces under low-start conditions}\label{sd-low-start}
+\section{Variance of Fidelity}\label{sd-low-start}
 
 % EXPERIMENT 5 - SD of Fidelity approaches 0
 
@@ -1750,34 +1254,6 @@ Data is all generations for those fixed-environment runs that reached completion
 %z3<-as.data.frame(cbind(1:501,z2[1,],z2[2,],z2[3,]))
 %ggplot(z3,aes(V1,V2,V3)) + geom_ribbon(data=z3,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
 %@
-
-\section{Confirmation that variance decreases under high-start conditions}
-
-% EXPERIMENT 6 - SD of Fidelity approaches 0
-
-<<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
-@
-
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for confirmation that variance also decreases under high-start conditions}
-		\label{Factor-levels-for-investigation-into-variance-under-high-start-conditions}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
 
 \subsection{Response variables}
 
@@ -1871,6 +1347,10 @@ These attributes when combined produce three independent categories - sudden, gr
 
 \section{Environmental model}
 
+\begin{NOTES}
+	\cite[79]{Schuster2011} relationship between fitness landscapes and error thresholds - ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+\end{NOTES}
+
 The model must describe two particular elements of the environmental change: the scope of the change, and the shape of the change. First, we discuss the scope of change. Our evolutionary model allows us to group entities at three different levels:
 \begin{enumerate}
 	\item The group of all entities.
@@ -1900,7 +1380,6 @@ This series allows us to represent a broad range of environmental changes:
 	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-\section{Models of environmental change}
 
 Statistical techniques are commonplace for time-series predictions \cite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a series where \todo{Add definition}, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model \todo{reference}. If instead of mean value prediction we are interested in the mean variance (such as in financial markets) then ARCH and GARCH models are appropriate. ARMA or ARIMA combined with ARCH or GARCH can be used in iterative sequence to simultaneously predict both mean and variance for \todo{add defn - heteroscedastic} series. 
 
@@ -2190,37 +1669,24 @@ Stationarity is inherently a constraint for applying statistical methods to the 
 
 Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \cite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
 
-\chapter{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
-
-\section{Variation alone is sufficient for Inheritance}\label{variation-alone-sufficient-for-inheritance -- v-i}
-
+\section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
+\begin{NOTES}
+\subsection{Variation alone is sufficient for Inheritance}
 As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
 
-\section{Selection alone is sufficient for Inheritance}\label{selection-alone-sufficient-for-inheritance-s-i}
-
+\subsection{Selection alone is sufficient for Inheritance}
 The test is to show an example of S and not I.
 
-\section{Variation and Selection, without property correlation, is sufficient for Inheritance}
-
+\subsection{Variation and Selection, without property correlation, is sufficient for Inheritance}
 Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
+\end{NOTES}
 
 \chapter{Conclusions}
-
+\begin{NOTES}
 Given:\newline
 Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
 hypothesis \autoref{hypothesis-2} (that Variation and Selection are sufficient for Inheritance),\newline
 we suggest that:
 
 \textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
-
-Possible extensions
-
-\begin{itemize}
-	\item Experimental test: demonstrate Evolution given Variation and Selection
-	\item Consistency and sufficiency--classification of existing systems
-	\item Fitness independent of inheritance potential--bias applied only to bias value of offspring, not fitness. However, fitness dependent on inheritance is more likely. A mechanism that doesn't copy well unlikely to preserve information leading to high fitness\ldots{}--the parent's fidelity influences the offspring's fidelity, and to offspring's fitness
-	\item Both \autocite{Bourrat2015} and this work introduce a check-for-overcrowding step; although motivated by practical considerations, under endogenous selection shouldn't overcrowding also be endogenous?
-\end{itemize}
-	
-
-	
+\end{NOTES}

@@ -52,6 +52,10 @@
 	\def\@fs@post{\end{mdframed}}\let\@fs@iftopcapt\iffalse}
 \makeatother
 
+\usepackage{versions}
+\markversion{DRAFT}
+\markversion{NOTES}
+
 \floatstyle{myRoundBox} 
 \restylefloat{figure}
 	
@@ -60,6 +64,7 @@
 \degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{
+\begin{DRAFT}
 This work is motivated by the vision of achieving an artificial system capable of non-trivial self-improvement. Despite a substantial body of previous work in Computational Intelligence, Biology remains the one domain in which it is uncontroversial to claim the existence of such a creative system. Our goal is to return to the inspiration, but not the specifics, of biology and search for a starting point that allows ongoing creative evolution to emerge in an artificial system. 
 
 Previous work has speculated that creative evolution is a consequence of a self-referential evolutionary mechanism, emergent from the same simulation as the elements it operates upon. We build upon this conjecture by extending previous work to demonstrate a plausible model for a self-referential, emergent, mechanism.
@@ -78,7 +83,9 @@ Part 2, the second body of work, describes progress towards a realisation of thi
 
 Specifically, we show that ToyWorld is capable of emergent behaviour and is familiar enough (although not realistic) to be understandable and to allow for the importation of designs from real-world chemistry. We show that an artificial chemistry provides a good foundation upon which an open-ended evolutionary system may be constructed, although the demonstration of the full mechanism from Part 1 in ToyWorld remains for future work.
 
-Finally, in conclusion, we speculate that this overall direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on arbitrary top-down design decisions.}
+Finally, in conclusion, we speculate that this overall direction might lead more directly to transformative evolution than alternative methods based either directly on biology, or on arbitrary top-down design decisions.
+\end{DRAFT}
+}
 
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
 

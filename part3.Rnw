@@ -17,39 +17,39 @@ df
 
 \chapter{Introduction}
 
-The second open problem is the demonstration of a self-referential mechanism to provide the fidelity property of Bourrat, or the inheritance and variation properties assumed by other models, that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be self-referential, accessible to evolution and therefore must be made of the same things as everything else that is subject to evolution in the system - it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
+The second open problem is the demonstration of a self-referential mechanism to provide an inheritance and variation ``erroneous copying'' mechanism that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be accessible to evolution, and therefore made of the same things as everything else that is subject to evolution in the system--it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
 
-Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tuneable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world Chemistry, and potentially Biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
+Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tuneable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
 
-Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence eventually returns to an earlier product. Our interest is in identifying the factors that influence the emergence of these higher levels. Cycles in particular are interesting as many biological processes are cyclical. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in Artificial Chemistry evolution and Biology, we believe like others (e.g., \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in Artificial Chemistries.
+Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence eventually returns to an earlier product. Our interest is in identifying the factors that influence the emergence of these higher levels. Cycles in particular are interesting as many biological processes are cyclical. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in \gls{achem} evolution and biology, we believe like others (e.g., \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in \glspl{achem}.
 
 By demonstrating the formulation of cycles, we suggest that ToyWorld is capable of emergent behaviour.
 
 \section{Artificial Chemistries}\label{artificial-chemistries}
 
-One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real-world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant.
+One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant. \Glspl{achem} are a particular type of model, familiar from real world chemistry, for the simulation of reaction-based systems. Every \gls{achem} defines a set of constituitive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and order the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr} These components are described in more detail in \cref{classification-of-artificial-chemistries}; an introduction to the general uses and applications of \glspl{achem} is given immediately below, and a discussion of ToyWorld, our \gls{achem} for the simulation of emergent evolution, in \cref{toyworld}.
 
-All Artificial Chemistry based on this model:
-
-\begin{figure}[t]
-	\begin{center}
-		\begin{tikzpicture}
-			\node (silico) at (0,0) {\textit{In Silico}};
-			\node (vitro) at (4,0) {\textit{In Vitro}};
-			\node (vivo) at (8,0) {\textit{In Vivo}};
-			\draw [<->] (silico) -- (vitro) node [midway,above] {validation};
-			\draw [<->] (vitro) -- (vivo) node [midway,above] {validation};
-		\end{tikzpicture}
-	\end{center}
-\end{figure}
-
-Or in other words, digital models (``in silicon''), wet-chemistry models (``in glass''), and life itself.
-
-In general, AChems for these problems are without grounding (so start from high-level). Grounding implies that there is a causal justification for the higher level chemistry, where that justification is based on fundamental supportable processes, rather than unique to particular problem.
-
-All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferrable to In Vitro; other two expect results to shed light on In Vivo processes.
-
-Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
+%All Artificial Chemistry based on this model:
+%
+%\begin{figure}[t]
+%	\begin{center}
+%		\begin{tikzpicture}
+%			\node (silico) at (0,0) {\textit{In Silico}};
+%			\node (vitro) at (4,0) {\textit{In Vitro}};
+%			\node (vivo) at (8,0) {\textit{In Vivo}};
+%			\draw [<->] (silico) -- (vitro) node [midway,above] {validation};
+%			\draw [<->] (vitro) -- (vivo) node [midway,above] {validation};
+%		\end{tikzpicture}
+%	\end{center}
+%\end{figure}
+%
+%Or in other words, digital models (``in silicon''), wet-chemistry models (``in glass''), and life itself.
+%
+%In general, AChems for these problems are without grounding (so start from high-level). Grounding implies that there is a causal justification for the higher level chemistry, where that justification is based on fundamental supportable processes, rather than unique to particular problem.
+%
+%All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferrable to In Vitro; other two expect results to shed light on In Vivo processes.
+%
+%Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
 
 \begin{mdframed}[style=box, frametitle={Review of relevant elements of Physical Chemistry}]
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
@@ -147,88 +147,23 @@ to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential
 
 %Some properties of RAF sets established by Hordijk and Steel have application beyond origin-of-life: linear growth rate in level of catalysis compared to size of molecules (n) is sufficient for RAF set to form. For a RAF set to appear with high probability (P\textgreater{}0.5) in even a model with n=20 (about 1 million molecular types) each molecule needs to catalyze 1-2 reactions on average. For the given model, need around 65,000 different molecule types (n=15-16) for RAF set if use more realistic probability of catalysis of 1:1 million of a molecule catalysing any particular reaction. \parencite{Hordijk2011}
 
-Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of eal-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see Table \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry (\parencite{Fontana1994}) is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
+Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry (\parencite{Fontana1994}) is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
 A mathematical treatment of \glspl{achem} can be found in \parencite{Benko2009}. \parencite{Dittrich:2001zr} and \parencite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \parencite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
 
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
-Modeling chemical reactions (\eg \parencite{Gibson:2000kx}). Emulators are often used for backward chaining from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (e.g., \parencite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (e.g., \parencite{Faulon2001}). Both applications effectively produce static descriptions of dynamic processes, and are less useful for exploring the changes in a network over time.
+\Glspl{achem} may be used for backward chaining from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \parencite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \parencite{Faulon2001}). Finally, \glspl{achem} have been used in the modeling of biological phenomenon such as enzyme function (\eg cite{Flamm2010}.)
 
-\parencite{Hartenfeller2012} suggests that R=\{set of 58 reactions\} might meet requirements for de-novo drug discovery, but based on S=\{10k-50k building-block molecules\}. Given much smaller S, will this R still suffice?. Goal of identifying collection of synthesis reactions that can be used by tools to construct pathway from provided building blocks to desired compounds. Set of 58 reactions, 29 of which are ring-forming, implemented in reaction-SMARTS and RDKit.Previous work deficient in its potential to generated innovative chemo-types, because of the small number of ring-forming reactions (only 3 ring-formations versus 29 in this work.) Why is a small set of reactions (50-60) adequate? Most reliable, so transferrable to bench-top; with reasonable collection of building-blocks (10k-50k) can fill combinatorial space beyond ability to enumerate. Even with this set need search mechanism to limit combinatorics.
+The primary requirement in both cases is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a family of Artificial Chemistries, beginning with \parencite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters taken directly from chemical experiments and later extended (for example in \parencite{Benko2005}) to a general purpose model with parameters derived from theoretical chemistry. The model was used in \parencite{Hogerl2010} for the study of the behaviour and topology of chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (e.g, \parencite{Flamm2010} and \parencite{Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts.
 
-The primary requirement is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a family of Artificial Chemistries, beginning with \parencite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters taken directly from chemical experiments and later extended (for example in \parencite{Benko2005}) to a general purpose model with parameters derived from theoretical chemistry. The model was used in \parencite{Hogerl2010} for the study of the behaviour and topology of chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (e.g, \parencite{Flamm2010} and \parencite{Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts.
+The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The Chemical Abstract Service (CAS) database references approximately 34 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for de-novo drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approachs. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
-An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
-
-Rather than from symbol manipulation, Chemical properties emerge from fundamental laws. This gives a richness and depth that cannot easily be equalled in a simulation. For example, the three-dimensional structure of a molecule--the arrangement of the elements in space--drives even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. A cell can in affect regulate the activity of an enzyme by either blocking or unblocking the enzymes active site with another protein. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology. In \gls{achem}, an interesting, but highly simplified, attempt at this can be found in the work of \parencite{Flamm2010} and \parencite{Ullrich2010}.
-
-Investigating natural selection for chemical evolution (\eg \parencite{Fernando:2007pf})
-
-Reaction network discovery and Drug discovery
-
-\begin{itemize}
-\item
-Chemical Abstract Service (CAS) database references approx 34 million
-reactions in published work
-\item
-Either from products back to reactants, or enumeration of all products
-from reactants
-\item
-describe a closed set of reactions and reactants from some initial
-reactants and reactions (e.g., \parencite{Faulon2001}
-\item
-Realism fundamental
-\item
-There is an inbuilt tension between realism and speed in artificial chemistries. Realistic reaction selection must involve calculations of  likelihood, where the current state of the art is to use quantum  chemistry simulators to determine the properties of a particular  reaction. Each reaction that fires alters molecular quantities, and in
-models based on a Gillespie-like method, requires the recalculation of
-the firing probabilities for all affected reactions.
-\item
-The field has generally progressed from simpler, abstract models (such
-as \parencite{Fontana1992}) to more chemically-realistic ones
-\parencite{Suzuki2008a}.
-\item
-Examples
-\item
-\parencite{Hogerl2010} etc--Diels-Alder and Formose reaction networks
-\end{itemize}
-
-\parencite{Virgo2014}:
-\begin{itemize}
-\item
-Thermodynamics at heart of far-from-equilibrium structures
-\item
-Achem (Virgo and Ikegami 2013) that is thermodynamically reasonable,
-and that doesn't include catalysis, but catalysis emerged as property
-of reaction network. Generated ``moderately large and complex
-autocatalytic cycles''
-\item
-Direction of reactions chosen by thermodynamic principles, and that
-enabled it to generate catalysis and autocatalytic cycles
-\item
-Question is under which conditions do these cycles emerge
-\item
-Basic cause is flow of energy from more to less constrained states, or
-low to high entropy. Blocking simple direct pathways is needed for
-autocatalysis to emerge
-\item
-Results are robust; only one parameter requires tuning and that only
-for one result (oscillatory behaviour)
-\item
-Previous work, such as Fontana and Buss 1994 assumed reactions driven
-by external energy source, not modelled. But dynamics quite different
-from model where energetics modelled
-\item
-Energy modelled by reactions occurring with probability determined by
-rate constant of the reaction.
-
-\end{itemize}
-		
+Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \parencite{Flamm2010} and \parencite{Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Cite{Flamm2010} and \cite{Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
+	
 \section{Origins of life modelling with realistic artificial chemistries}
 
-Real-world chemical processes are also important to modelling scenarios for the origin of life or of other related areas such as the formation of metabolic networks in the earliest protocells.
-
-In many cases though the specific focus is less on the bottoms-up model from the most elementary elements, and more on task-based models of processes where the particular starting point is predetermined by the researcher--in the former, Kauffman's autocatalytic protein sets, and Kaneko's protocell toy model; in the later, Ganti's chemoton.
+Real-world chemical processes are also important to modelling scenarios for the origin of life or of other related areas such as the formation of metabolic networks in the earliest protocells. In many cases though the specific focus is less on the bottoms-up model from the most elementary elements, and more on task-based models of processes where the particular starting point is predetermined by the researcher--in the former, Kauffman's autocatalytic protein sets, and Kaneko's protocell toy model; in the later, Ganti's chemoton.
 
 Some examples of artificial chemistries for the investigation of the origin of life include:
 
@@ -239,6 +174,7 @@ Lattice Artificial Chemistry \parencite{Madina2003,Ono2000}. Membrane formation 
 SCL. Three types of particle are employed by the Substrate-Catalyst-Link (or SCL) chemistry of \parencite{Varela:1974qd,Suzuki2008}: the eponymous Substrate, Link and Catalyst. Cells are formed from links around a catalyst, with a single predefined reaction rule S+S+C\(\Rightarrow\) L+C and some straightforward constraints on movement of the particles in the matrix (for example, bonded Link particles cannot cross each other.)
 \item
 \parencite{Flamm2010, Ullrich2010}. The evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts
+\item \parencite{Hogerl2010}. The simulation of chemical reaction networks characteristic of the transition to life, specifically the Diels-Alder and Formose reaction networks.
 \item
 Network Artificial Chemistry (NAC) \parencite{Suzuki2006}
 \item
@@ -254,92 +190,8 @@ Network Artificial Chemistry (NAC) \parencite{Suzuki2006}
 \end{itemize}
 
 \section{Artificial chemistries and Alife}\label{artificial-chemistries-and-alife}
+
 Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
-
-\section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
-
-A \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature, \eg \cite{Lenaerts2009,Gardiner2007}.
-
-\cite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
-
-\begin{enumerate}
-	\item
-	Rewriting or Production Systems (symbols and rewriting rules)--Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus (AlChemy)
-	\item Arithmetic Operations (molecules are natural numbers, operations are arithmetic operators)
-	\item Autocatalytic Polymer Chemistries (polymers made from chains of	monomer symbols, reactions are concatenation and cleavage)
-	\item Abstract Automata (
-	\item Artificial Molecular Machines
-	\item Assembler Automata
-	\item Lattice Molecular Systems (molecules occupy positions on a fixed lattice structure)
-\end{enumerate}
-
-In practice the \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification as the classification appears to be based on specific example chemistries rather than on sets of values for \textless{}\emph{S},\emph{R},\emph{A}\textgreater{}. Furthermore, some categories, such as Abstract Automata, are incompletely specified. Applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry. Furthermore, because the system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion.
-
-Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \cite{Faulconbridge2011} as a world where the elements are RBN networks.
-
-\cite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
-
-\begin{itemize}
-	\item Symbolic - symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
-	\item Structured - one or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
-	\item Sub-symbolic - emergence of properties from lower-levels (ala real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
-\end{itemize}
-
-
-\subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
-
-Molecule representation e.g., labelled graphs
-
-Properties of molecules e.g., energy calculation by Extended Huckel
-Theory (EHT); salvation energies; reaction rates.
-
-\subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
-
-Analogous to Chemistry--transformation from reactants to products. Many (most) reactions are bidirectional; rates determined by concentrations. In systems enforcing conservation of energy, elements are neither created or destroyed so reactions can be represented solely by rearrangments or bond changes.
-
-Chemical Abstract Service (CAS) database references approx 34 million
-reactions in published work (1) Which ones to adopt? Which reactions
-direct evolution to more interesting places?
-
-Reactions may be pre-defined (if S represents real-world molecules) or
-dynamically-determined using molecular properties--the problem of how
-to select a reaction is addressed by the Reactor Algorithm (below.)
-
-\parencite{Tominaga2007} showed for a particular artificial chemistry, that it is computationally universal with only unimolecular and bimolecular reactions.
-
-\subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
-
-Mechanism to select reactions, e.g., Through the introduction of a
-reaction generator (A) the artificial chemistry triplet (S, R, A) is
-completely defined \parencite{Lenaerts2009}. Or in
-\parencite[sect. 4.1.3]{Faulconbridge2011}, The mixing component of an
-Artificial Chemistry is an algorithm which describes the order of and
-intervals between reactions, starting from an initial collection of
-molecules; this can be termed a ``mixing space''.
-
-Analogous to physics - the way that molecules move and collide determines which reactions are possible.
-
-\parencite{Faulconbridge2011} identifies three types of \emph{mixing method} or reactor algorithm:
-
-\begin{itemize}
-	\item
-	Well-mixed/aspatial: with either discrete time (uniform probability
-	distribution for selecting reactions) or continuous time
-	(Gillespie1976) assuming the reactions are known in advance (not
-	possible for a strongly constructive AChem)
-	\item
-	nDimensional: grid with reactions with adjacent cells, or continuous
-	where molecules have position and velocity. Major advantage is ability
-	to simulate spatial affects; disadvantage is performance
-	\item
-	Mixed scale: hierarchical spaces, such as aspatial cells within bigger
-	grid, mostly for simulating biology (e.g., \parencite{Jeschke2008}). One possible
-	advantage is potential for parallelization
-\end{itemize}
-
-Scaling can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance dives. The general problem is model reduction--see \parencite{Radulescu2012} for a recent review; \parencite{Faulon2001} has a well-received method.
-
-Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2002,Hutton2009,Lucht2012} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011} - a bacterial inspired microprogram chemistry - though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \begin{table}
 	\scriptsize
@@ -368,12 +220,10 @@ Artificial Chemistries have been used in the exploration of open-ended or creati
 	\end{tabular}
 \end{table}
 
-\quote{Erasing the distinction in simulation between organism and environment allows a model to explore the exchange and transformation of matter and energy.} {\parencite{Dorin:2006fk}}
-
 \section{Constructive chemistries}\label{constructive-chemistries}
 
 \quote{
-A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
+	A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
 {\parencite{Benko2009}}
 
 A \gls{achem} is \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties. As defined in that text: ``construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.'' \cite{Fontana1994}
@@ -388,19 +238,73 @@ The commentary that immediately follows in the reference is significant:
 A strongly constructive system is one which maintains closure, and in which there is self-consistency and some form of logical structure (the ``implications''.) Both implicit laws and implicit molecule definitions are required for constructive chemistries. 
 
 \begin{itemize}
-	\item
-	Explicit reaction laws = independent of molecular structure; implicit = laws must refer to structure.
-	\item
-	Explicit molecule definitions = from an fixed set of symbols; implicit = description for construction.
+\item Explicit reaction laws are independent of molecular structure, while implicit laws are structure-based.
+\item Explicit molecule definitions are taken from an fixed set of symbols whereas implicit definitions provide a description for a molecule's construction.
 \end{itemize}
 
 Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense--new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions `on-the-fly' from the structures of the interacting molecules. 
 
 Pre-sepecification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be pre-determined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \cite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \cite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
 
+An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
+
+\section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
+
+An \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature, \eg \cite{Lenaerts2009,Gardiner2007}.
+
+\cite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
+
+\begin{enumerate}
+\item Rewriting or Production Systems (symbols and rewriting rules)--Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus (AlChemy)
+\item Arithmetic Operations (molecules are natural numbers, operations are arithmetic operators)
+\item Autocatalytic Polymer Chemistries (polymers made from chains of monomer symbols, reactions are concatenation and cleavage)
+\item Abstract Automata
+\item Artificial Molecular Machines
+\item Assembler Automata
+\item Lattice Molecular Systems (molecules occupy positions on a fixed lattice structure)
+\end{enumerate}
+
+\footnote{In practice \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification. Because the system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion. Some categories, such as Abstract Automata, are incompletely specified. Finally, applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry.}
+
+Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \cite{Faulconbridge2011} as a world where the elements are RBN networks.
+
+\cite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
+
+\begin{itemize}
+	\item Symbolic - symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
+	\item Structured - one or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
+	\item Sub-symbolic - emergence of properties from lower-levels (ala real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
+\end{itemize}
+
+\subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
+
+This element describes how molecule are represented in the gls{chem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, for example, bond energy calculations by Extended Huckel Theory (EHT).
+
+\subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
+
+Reaction rules in an artificial chemistry describe how reactants are transformed to reaction products. Reactions may be pre-defined (often the case when simulating real-world chemistry where exact pathways are important) or dynamically determined using molecular properties. In \glspl{achem} enforcing conservation of energy, elements are neither created or destroyed so reactions can be represented solely by rearrangments or bond changes. \parencite{Tominaga2007} showed for a particular artificial chemistry, that it is computationally universal with only unimolecular and bimolecular reactions; the reaction rules in most \glspl{achem} therefore only describe these forms of reaction.
+
+\subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
+
+The reactor algorithm provides the mechanism to select (in effect, to order) reactions, or in the words of \cite[sect. 4.1.3]{Faulconbridge2011}, the ``...algorithm which describes the order of and intervals between reactions, starting from an initial collection of molecules...''
+
+If the reaction rules are analogous to chemistry, the reactor algorithm is analogous to physics--the way molecules move and collide in the reaction vessel determines which reactions are possible (for example, by providing enough kinetic energy to overcome a reaction's activation energy), and the order in which they occur.
+
+\Cite{Faulconbridge2011} identifies three types of \emph{mixing method} or reactor algorithm:
+\begin{enumerate}
+\item
+Well-mixed/aspatial: with either discrete time (uniform probability	distribution for selecting reactions) or continuous time \parencite{Gillespie1976} assuming the reactions are known in advance (which of course is not possible for a strongly constructive \gls{achem}.)
+\item
+nDimensional: a grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
+\item
+Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (e.g., \parencite{Jeschke2008}). One possible advantage is the potential for parallelization.
+\end{enumerate}
+
+Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance recuces in concert. The general solution is called model reduction--see \parencite{Radulescu2012} for a recent review; \parencite{Faulon2001} has a well-received method.
+
 \chapter{ToyWorld}\label{toyworld}
 
-ToyWorld, our Artificial Chemistry for the exploration of emergent behaviours, was first introduced in \cite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
+ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \cite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
 Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps, but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results--our model cannot be used to investigate real-world chemical behaviours. There is another reason why familiarity may be important: following our earlier proposal that a replicase-like mechanism would fulfil the requirements for a self-referential copying mechanism, it might be fruitful to base any implementation in ToyWorld on a simplified version of a real biological replicase. Clearly, a simple mapping from real-world chemistry to the rules in our Artificial Chemistry would improve the feasibility of this idea.s
 
@@ -410,17 +314,10 @@ The name has been chosen as both an acknowledgement of ToyChem \parencite{Benko2
 creating an artificial world for exploration. That world, the ToyWorld model, consists of:
 
 \begin{itemize}
-	\item
- Analogues of physical elements such as atoms and molecules;
-	\item
- An overall energy model that describes the transformations that can
- occur between potential, kinetic and internal energy;
-	\item
- A physics model to describe how molecules interact within the reaction
- vessel; and
-	\item
- A chemical model that details the bond changes that can occur when two
- molecules collide.
+\item Analogues of physical elements such as atoms and molecules;
+\item An overall energy model that describes the transformations that can occur between potential, kinetic and internal energy;
+\item A physics model to describe how molecules interact within the reaction vessel; and
+\item A chemical model that details the bond changes that can occur when two molecules collide.
 \end{itemize}
 
 All atoms, and therefore molecules and reactions, are contained within a
@@ -487,40 +384,15 @@ Energy within ToyWorld is found in only three standard forms -- kinetic,
 internal and potential.
 
 \begin{itemize}
-	\item
- Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$
- where $m$ is the mass of a molecule and $v$ its velocity.
-	\item
- Internal energy is an abstraction of vibrational energy or heat energy
- within a molecule. Internal energy, while incidentally consistent with
- real-world chemical models, is actually included in ToyWorld as a
- major mechanism to introduce stochasticity in reactions. Without
- internal energy, all excess energy following a reaction must be
- allocated to kinetic energy (following energy conservation), and so
- there is an iso-map between reaction and product kinetic energies.
- With internal energy, we can divert an arbitrary proportion into
- internal energy and therefore we have a stochastic multi-map.
-	\item
- Potential energy is the energy associated with the bonds between
- Atoms. Creating a bond reduces the potential energy of a molecule;
- breaking a bond increases it. The potential energy of a molecule is
- the sum of the potential energies of every bond in the molecule. The
- base state of no bonds is equal to $0$, and so molecules with bonds
- have negative potential energy. The specific value of each bond is
- absolutely determined by the atomic number of the two Atoms at either
- end of the bond, and the type of bond itself -- single, double or
- triple. ToyWorld provides a table of standard values in
- \cref{default_bond_energies}, based upon real-world chemistry.
- Unspecified bonds are given the average energy of specified bonds of
- the same bond type. Examples of molecules with associated potential
- energies are given in \cref{example_potential_energies}.
+\item
+Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$ where $m$ is the mass of a molecule and $v$ its velocity.
+\item
+Internal energy is an abstraction of vibrational energy or heat energy within a molecule. Internal energy, while incidentally consistent with real-world chemical models, is actually included in ToyWorld as a major mechanism to introduce stochasticity in reactions. Without internal energy, all excess energy following a reaction must be allocated to kinetic energy (following energy conservation), and so there is an iso-map between reaction and product kinetic energies. With internal energy, we can divert an arbitrary proportion into internal energy and therefore we have a stochastic multi-map.
+\item
+Potential energy is the energy associated with the bonds between Atoms. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energies of every bond in the molecule. The base state of no bonds is equal to $0$, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two Atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of standard values in \cref{default_bond_energies}, based upon real-world chemistry. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
-Our energy model enforces conservation of mass so reactions can be
-represented solely by bond changes in RDKit. This follows the approach
-taken in graph-based chemistries such as GGL/ToyChem
-\parencite{Benko2003,Benko2005} where reactions are modelled as a series
-of changes to graph edges, or bonds, only.
+Our energy model enforces conservation of mass so reactions can be represented solely by bond changes in RDKit. This follows the approach taken in graph-based chemistries such as GGL/ToyChem \parencite{Benko2003,Benko2005} where reactions are modelled as a series of changes to graph edges, or bonds, only.
 
 \begin{table}[t]
 	\begin{center}
@@ -1319,6 +1191,7 @@ The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent 
 The most significant limitation of our analysis overall is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in RQ3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
 \chapter{Discussion}
-
-\TODO{Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...}
+\begin{NOTES}
+Autocatalysis as a very simple form of inheritance and reproduction without variation. Pathway perhaps from this towards a form with variation, when hypothesis-2 kicks in...
+\end{NOTES}
 

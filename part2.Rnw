@@ -32,9 +32,9 @@ Models (not simulations) for the emergence of heredity, for the purpose of stren
 
 \section{Previous work}
 
-A massive body of literature has accumulated over the years on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \cite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck themselves. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying \parencite{Eigen1971}, and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. In comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oee}.
+A significant body of literature has accumulated over the years on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \cite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck themselves. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying \parencite{Eigen1971}, and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
 
-However, in relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed, but are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
+In comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oee}. However, in relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed, but are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
 
 \Cite{Paixao2015} sought common principles between population genetics and evolutionary computation with the goal of unifying the two fields, starting from a broad description of evolutionary processes as a ``population undergoing changes over time based on some set of transformations''. A transformation can be decomposed into a collection of (stochastic) operators, with an operator being a probability distribution of potential outcomes; some operators act on phenotypes, others on genotypes. Various operators drawn from evolutionary computing are defined: for selection (uniform, proportional, tournament, truncation, cut, replace); variation from mutation (uniform, single-point), and variation from recombination (one-point crossover, k-point crossover, uniform crossover, unbiased variation).
 
@@ -51,106 +51,35 @@ The evolutionary process is then a trajectory through a space of distributions; 
 %\item S1--selection doesn't change individuals.
 %\end{itemize}
 
-\begin{NOTES}
+More specific models of inheritance and heredity can be found in three works comparing the adaptive value of acquired and non-acquired characteristics. In the first two works, \cite{Jablonka1995} and \cite{Paenke:2007ie}, the comparison is made with respect to an environment that alternates between two states, $E_0$ and $E_1$. Each environment is associated with a corresponding adapted phenotype $P_0$ and $P_1$, respectively.  In both works variation only affects the ratio of each phenotype in the population (directly in \cite{Jablonka1995}, indirectly via a ``predisposition'' or tendency in \cite{Paenke:2007ie}); no new phenotypes are created, and as inheritance is modelled only at a population level, that is without reproduction, we cannot use these models to investigate the emergence of heredity.
 
-\autocite{Bourrat2015}
+Inheritance however is modelled in \cite{Gaucherel2012}, the third work, in relationship to individuals. Two models are presented, the first and simplest describing a non-spatial scenario conceptually similar to that in \cite{Jablonka1995} and \cite{Paenke:2007ie}, while the second examines a spatial world based on DaisyWorld \parencite{LovelockMargulis2011}. Focussing on the first and most relevant of the two models, reproduction is the middle of three repeated stages--first ``annihilation'' where the population size is adjusted to some practical level, then reproduction, and finally development. Concentrating on the second, reproduction, stage, individuals, represented by a single trait, or phenotype, value, are chosen for reproduction with some probability (based on the trait value), and the child given a trait value that slightly varies from the parent's value to model mutation (paraphrasing \cite{Gaucherel2012}, $trait_{child} = trait_{parent} + \delta$, where $\delta$ is described as taken from a uniform distribution of given range around the parent's trait value. \footnote{although this appears to be an error and instead it should centered on $0$.})
 
-Difference between Evolution, Natural Selection and ENS
+The most relevant previous work is that of \cite{Bourrat2015} who, in the course of examining the difference between evolution, natural selection and \gls{ens}, models the emergence of heredity in unchanging environments. \Cite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants). The context is explicity in relationship to biology; his examples involve genes, traits, phenotypes and drift.
 
+The six applicable models in \cite{Bourrat2015} are designed to explore the implications of bias on inheritance; in \cite{Bourrat2015}, unbiased means a trait is uncorrelated with parent, in practice as a random choice between lower and upper bound \parencite[p.153]{Bourrat2015}. Biased inheritance is naturally the opposite: there is some correlation between parent and child values for a trait, and so some prediction of traits is possible--a parent can ``pass it on''. Note that \cite[p.173]{Bourrat2015} expressly notes that his ``biased inheritance'' is not the `transmission bias` of the second term in the Price equation: ``The bias in ‘biased inheritance’ is in reference to the type of the parent(s) (biased toward the type of the parent), while the bias in ‘transmission bias’ refers to a departure from an event of perfect transmission.''
 
-All from a biological reading; examples are regarding genes, traits, phenotypes and drift. And philosophical reading - epistemology regarding causality and ability to reason - of earlier work e.g., `` So far this chapter has shown that there is an alternative to the concept of fitness as a propensity. I have argued for a concept of fitness as relational properties between two or more individual entities forming a population. I have shown, using causal graphs that distinguishing between extrinsic and intrinsic-variable properties on the one hand and intrinsic-invariable properties of entities on the other hand could be the basis for distinguishing natural selection from drift.`` \parencite[p.65]{Bourrat2015}
+Model 1 begins with a population of 5000 ``persistors'' (that is without reproduction), each of which has a survival rate (viability) between 0-0.99 (the likelihood of surviving at each time step). Unsurprisingly, all eventually die. Model 2 introduces a single ``procreator'', capable of reproduction with both survival and fertility rates (offspring per unit time), into the population of persistors. The traits of the offspring of the procreator are uncorrelated (that is, unbiased inheritance) to those of the procreator. Again, all eventually die.
 
-\Cite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants).
+Model 3 begins to get interesting: \cite{Bourrat2015} replaces the procreator by a ``minimal reproducer'' which differs from a procreator in that the ability to procreate is itself a heritable trait, although as ``minimal'' it is an unbiased trait. As such, the offspring of the minimal reproducer may be either minimal reproducers or persistors without the ability to reproduce. Now the population size drops then increases to maximum size with about 10\% of the population being minimal reproducers. However, the proportion of high fitness (that is, high viability) entities doesn't increase beyond about 0.05, so there is no cumulative adaptation.
 
-``The goal of the process perspective is to delimit what the minimal requirements for a population to exhibit nothing but natural selection (what I will call pure ENS) are. Thus, the goal here is to assess whether the evolutionary change observed in a population with imperfect transmission of traits across generations is compatible with pure ENS. One way to carry out this evaluation is to consider a population (albeit a highly idealised one) of entities in which all the evolutionary forces except natural selection have been stripped down: that is, one without mutation, migration and/or drift. In such a case, any remaining evolutionary change in this population will be ENS in its pure form. I call this class of populations, which is a subclass of minimal Darwinian populations, pure Darwinian populations.'' {[}p83{]}
+Biased (in fact, perfect) inheritance of viability is introduced in Model 4; the offspring inherit the viability of their parent. The proportion of high fitness entities rapidly approaches the upper limit of $1.0$, as expected as high viability entities live longer and so produce more offspring while low viability entities die sooner and so produce less-- fertility random, but viability is heritable.
 
+The most significant model is Model 5 which adds a variable ability to procreate to Model 4. At each mutation stage, there can be an increase or decrease in both the ability to transmit the ability to procreate, and in degree of bias (that is, relationship to parent's ability) in the ability to procreate.
+The first defines the proportion of offspring of the parent who are themselves able to procreate; a low trait value for the parent means a low proportion of siblings can procreate, while bias represents the correlation between the parent and offspring's abilities to transmit procreation--low bias means the offspring's ability is only weakly correlated with parents ability. The initial population contains entities with viability in the full range $[0,1)$, an ability to procreate in $[0,0.2)$ and initial bias of $0$. Both the ability to procreate and the bias \emph{increase} over time in the population towards the upper limit of $1.0$. The model is asymmetric in with respect to the change of inheritance of ability to procreate: reductions lead to extinction of a line, while increases lead to increased population. Bourrat's conclusion is that an initial population of unreliable reproducers (a low proportion of procreating offspring, no bias) will evolve into one of reliable reproducers--that is, inheritance can emerge.
 
-Modelling
+(For completeness, in Model 6 Bourrat demonstrates the same behaviour for the inheritance of another trait, that of viability.)
 
-The models in \cite{Bourrat2015} are designed to explore the implications of bias on inheritance; in \cite{Bourrat2015}, unbiased means a trait is uncorrelated with parent, in practice as a random choice between lower and upper bound \parencite[p.153]{Bourrat2015}. Biased inheritance is naturally the opposite: there is some correlation between parent and child values for a trait, and so some prediction of traits is possible--a parent can ``pass it on''. Note that \cite[p.173]{Bourrat2015} expressly notes that his ``biased inheritance'' is not the `transmission bias` of the second term in the Price equation: ``The bias in ‘biased inheritance’ is in reference to the type of the parent(s) (biased toward the type of the parent), while the bias in ‘transmission bias’ refers to a departure from an event of perfect transmission.''
+First, as seen by the trend of trait values towards the limit of $1.0$, the model of \cite{Bourrat2015} assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging: evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. 
 
-All models assume property has occurred (so exogenous) and then
-investigates implications e.g., mutation or reproducer at
-onset\ldots{} {[}Models p149{]}
+Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed, helpful as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat. 
 
-Model 1
-\begin{itemize}
-\item 5000 persistors, with random survival rate (viability) between 0-0.99 (chance of surviving at each time step). Selection only. Essentially null hypothesis.
-\item All eventually die
-\item Viability reflects life-span; other events are proportional to life-span so procreators with long life-spans will produce more children, everything else being equal (note that standard meaning for fitness is viability*fertility)
-\end{itemize}
+Second, heredity and fitness (viability) are treated as independent traits. But the mechanism for heredity is the thing that copies the information that generates an offspring's traits, so in practice they are not independent.
 
-Model 2
-\begin{itemize}
-\item 4999 persistors and 1 procreator (survival rate, and fertility rate - offspring per unit time). Offspring traits uncorrelated with parent. Selection -\textgreater{} Reproduction -\textgreater{} Check-for-overcrowding (\emph{what is the ceiling on population size?})
-\item For procreator: Viability=0.99, fertility=10: all extinct a little later than in Model 1 (unsurprising)
-\end{itemize}
-
-Model 3
-\begin{itemize} 
-\item Model 2 except single procreator replaced by single minimal reproducer - viability and fertility of offspring are unbiased, ability to procreate is unbiased also (so each offspring may or may not be able to procreate; ones that cannot are persistors). Viability selection is only form of selection in model
-\item ability to procreate random between 0 and 0.20 (=probability offspring can procreate - looks as if same for each offspring, and same each generation - but unclear)
-\item Population size drops then increases to maximum size; about 10\% of minimal reproducers
-\item Proportion of high fitness (high viability=0.99) entities doesn't increase beyond about 0.05, so \emph{no cumulative adaptation}
-\item \emph{Surely also dependent on initial conditions - low rate of procreation will lead to extinction, high rate to proportion related to rate - calculable?}
-\end{itemize}
-
-Model 4
-\begin{itemize} 
-\item Model 3 + (perfect) biased inheritance of viability (survival rate)
-\item Proportion of high fitness entities rapidly increases to near 1.0 (near as some random decreases) - \emph{cumulative adaptation?}
-\item \emph{Mechanism is that high viability entities live longer and so produce more offspring/low viability die sooner and so produce less - fertility random, but viability heritable}
-\item \emph{Why have persistors in initial population? Just die off - affecting proportions\ldots{}}
-\item \emph{Essentially just says that inheritance of viability + selection on viability =\textgreater{} adaptation towards high viability}
-\end{itemize}
-
-Model 5 - variable ability to procreate
-\begin{itemize}
-\item Model 3 + mutation stage (mutation-\textgreater{}selection-\textgreater{}reproduction-\textgreater{}check-for-overcrowding)
-\item At each mutation stage, 0.01 (also stated as 10\^{}-3...) rate for increase/decrease of ability to transmit ability to procreate (max 0.20 - reproducers), and degree of bias (that is, relationship to parent's ability) in ability to procreate (from unbiased to biased)
-\item in a sense, ability to procreate is a relationship between siblings (low ability of parent means low proportion of siblings can procreate, high ability means high proportion of siblings)
-\item while bias is the relationship between parent and offspring - low bias means offspring's ability is only weakly correlated with parents ability.
-\item Viability (fitness) random 0-0.99; Ability to Procreate = initial random between 0 and 0.2, change +/- 0.01 equal probability; Bias initially 0, change +/- 0.01: max for both is 1.0
-\item Both \emph{increase} over time in population -\textgreater{} 1.0 - \emph{why? why does model not result in some infidelity or source of variation? }
-\item Asymmetry in direction of change of inheritance of ability to procreate - reductions lead to extinction of that line, increases lead to increased population\ldots{}
-\item Conclusion: initial population of unreliable reproducers (low proportion of procreating offspring, no bias) results in reliable reproducers - all offspring are procreators
-\end{itemize}
-
-Model 6
-\begin{itemize} 
-\item Population of reproducers with perfect bias in ability and fidelity of reproduction (end state of Model 5) + mutation on viability, and fidelity of transmittal of viability to offspring
-\item 5000 individuals, viabilities random between 0 and 0.99; fertility between 0 and 10.
-\item Fidelity of viability \emph{increases} to 1.0
-\end{itemize}
-
-Results
-\begin{itemize}
-\item Minimal reproduction (not procreation) introduced through a) allows b), requiring only unbiased inheritance \item Unbiased inheritance of procreation and traits insufficient for c)
-\item Biased inheritance of trait (e.g., viability) satisfies c) (``Minimally-reproductive cumulative ENS''), but with unbiased inheritance of procreation doesn't meet d)
-\item Biased inheritance of trait + procreation meets c) and d)
-\end{itemize}
-
-Issues
-
-\begin{itemize}
-\item Fundamental difference to our approach is that previous arguments proceed from biology using a reductive approach, with arguments over the form of the divisions. Bouratt attempts to bring clarity to the divisions in order to come up with a consistent explanation for the biology. Our goal is different - we're interested in the result not the explanation.
-\item From models with particular assumptions -\textgreater{} run (not known how many runs - other than references to ``typical run'') -\textgreater{} analyse output.
-\item Not known how sensitive models are to parameters (e.g, survival rates, fertility rates\ldots{}or inheritance of viability rate - in Model 4 rate is 1=perfect inheritance. Other arbitrary features: check for overcrowding stage in Model 2 onwards, introduced without justification p141)
-\item Why do factors in Models 4/5/6 increase to 1.0? What happens if start at 1.0? Would they drop? Results seem inconsistent with a hypothesis of useful variation\ldots{}
-\item Heredity and fitness (viability) are treated as independent traits. But mechanism for heredity is the thing that copies the information that generates an offspring's traits - so not independent. This might explain trait values trending to 1.0 rather than a lesser value consistent with a hypothesis of heredity as source of variation
-\end{itemize}
-
-The model of \cite{Bourrat2015} assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging - if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. This is unexplored by Bourrat.
-
-
-
-\end{NOTES}
-
-
-``An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from
-concrete objects so as to regard objects in a manner closer to their essential natures.'' \autocite{Griesemer2005}
 
 \section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+
+
 
 \begin{NOTES}
 Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
@@ -225,6 +154,10 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 \end{enumerate}
 
 \chapter{Simulation model}
+
+\epigraph{%
+An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from concrete objects so as to regard objects in a manner closer to their essential natures.}%
+{\textsc{\\\cite{Griesemer2005}}}
 
 To test our hypothesis, we turn to simulation and experiment. Simulation is a natural fit for the exploration of emergent systems where we expect complex behaviour from simple rules. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
 
@@ -915,7 +848,7 @@ The main response variable is the standard deviation of fidelity.
 
 \subsection{Initial conditions}
 
-Initial conditions are given in \cref{Factor-levels-for-investigation-into-variance-under-high-start-conditions}.
+Initial conditions are given in \cref{tbl:factor-levels}.
 
 \subsection{Results and discussion}
 
@@ -1001,7 +934,7 @@ These attributes when combined produce three independent categories - sudden, gr
 
 \section{Environmental model}
 
-\Cite{Paenke:2007ie} describes a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some normal distribution. \Cite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sin$ curve, or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \cite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
+\Cite{Jablonka1995} and \cite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Cite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sin$ curve, or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \cite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
 
 Returning to first principles, any model must describe two particular elements of the environmental change: the scope of the change, and the shape of the change. First, we discuss the scope of change. Our evolutionary model allows us to group entities at three different levels:
 \begin{enumerate}

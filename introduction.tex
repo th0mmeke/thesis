@@ -109,6 +109,7 @@ Minimal conditions for OEE \parencite{Vasas2015}:
 General difficulty with grounding these definitions, as the terms on which they rely are themselves only loosely defined (although commonly understood). \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As \textcite{Gayon2010} notes, many fundamental things generally taken for granted, such as ``life'' and ``energy'', are hard to define. 
 
 ``We therefore arrive at two contrasting definitions. On the one hand, there is the idea of continual (unbounded) creation of \emph{novelty}, which appears to be necessary but not sufficient. On the other hand, there is the notion of continual (unbounded) creation of \emph{complexity}, which appears to be sufficient, but not necessary for OE.'' \parencite{BanzhafBaumgaertnerBeslonEtAl2016}
+\end{NOTES}
 
 \begin{mdframed}[style=box, frametitle={Creativity, and its relationship to Novelty, Surprise, and Value}]
 Creativity is related to exploration--how we explore and what we find--a general problem in Artificial Life, Artificial Evolution, and in fact life in general. That no standard definition exists is a good indication that this is a hard problem. Intuitively, creativity is something that causes a sense of surprise or wonder in an observer. Creative systems and products are beautiful; interesting; impressive; novel; surprising; transformative.  For example, in \parencite{Lehman2012}, creativity is related to beauty and interestingness--while impressiveness is time-independent, interestingness often drops over time.
@@ -131,6 +132,7 @@ Next, changes are obviously relative, so we must identify what we are comparing-
 \footnote{\cite{Bringsjord2000} argues that Boden is wrong in two ways: first, that computer creativity does not shed much insight into human creativity (citing Searle's Chinese Room to demonstrate that shuffling symbols, as a creative AI would do, doesn't add much to our understanding), and second, that Boden's formulation of a rule change is too weak. Systems (citing BRUTUS) that are not considered creative, do rule changes of the form proposed by Boden. Instead, these changes must be more special than simple first-order logic. The first criticism is not relevant to us (echoed by \cite{Dorin2009}), but the second holds.}
 \end{mdframed}
 
+\begin{NOTES}
 \Cite{BanzhafBaumgaertnerBeslonEtAl2016} (an outcome of a workshop held in the summer of 2014 on ``Open-ended Novelty'', attended by many of those whose works are cited elsewhere in this thesis) provide a satisfying way to formalize novelty by making the idea of \cite{Boden2004}, that novelties ``break the rules'', explicit in the form of models and meta-models. By proposing a standard meta-model to describe any \gls{oee} system, be it living or non-living, \cite{BanzhafBaumgaertnerBeslonEtAl2016} can then define three levels of novelty by their effect on the model of the system itself and the overall meta-model:
 
 \begin{itemize}
@@ -140,8 +142,10 @@ Next, changes are obviously relative, so we must identify what we are comparing-
 \end{itemize}
 	
 The significance of this formulation is that novelty for almost the first time becomes non-subjective and measurable (assuming agreement on the overall meta-model, and that a model for the specific system can be defined.)
+\end{NOTES}
 
 \subsection{Elements/Embodiment/Emergence}
+\begin{NOTES}
 Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
 
 Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
@@ -168,8 +172,10 @@ Contains an interesting discussion mapping a list of desirable properties onto t
 Quick defined embodiment in terms of two dynamical systems mutually affecting each other--no need for a physical world. System modifies environment. Doesn't address if system is constructed from environment. Autopoiesis does say though that system built from environment. But autopoiesis talks about maintenance not evolution. \parencite{Nellis2014}
 
 Bottom-up models for open-ended evolution leverage the richness of underlying environment--less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
+\end{NOTES}
 
 \subsection{Selection}
+\begin{NOTES}
 Individuals and environment mutually affect each other \parencite{Taylor2001}
 Competition between individuals for resources--VanValen1973 Red Queen hypothesis--primary source of intrinsic selection pressure. \parencite{Taylor2001}
 Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 
@@ -181,8 +187,11 @@ A ``sufficiently large world for every individual to be evaluated'' \parencite{S
 Inexhaustible fitness landscape--implies rich, dynamical environment. \parencite{Vasas2015}
 Cannot state in advance possible preadaptations. \parencite{Vasas2015}
 ``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+\end{NOTES}
 
-\subsection{Reproduction or replication}\label{reproduction-or-replication}
+\subsection{Replication, reproduction and inheritance}\label{replication-reproduction-and-inheritance}
+
+\begin{NOTES}
 Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
 Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
 Very rich combinatorial generative mechanism \eg organic chemistry \parencite{Vasas2015}
@@ -191,8 +200,17 @@ Very rich combinatorial generative mechanism \eg organic chemistry \parencite{Va
 system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (\eg crossover).'' \cite{Dittrich1998}
 ``We want to embody the copying program, implementing it as a phenomenon resulting from the interaction of multiple mechanisms in a world. This will allow the copied strings to vary and evolve, and will also allow the copying process to vary and evolve.'' \cite{Nellis2014}
 ``Rasmussen then designed a system similar to core war in which the command that copied instructions was flawed and would sometimes write a random instruction instead on the one intended.'' \parencite{Ofria2004}
-\end{NOTES}
 
+\autocite{Watson2015}:
+Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples
+\begin{itemize}
+\item Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level. How does selection at one level get suppressed, and introduced at the next?
+\item Independent replication before transition, must replicate as part of a larger whole afterwards
+\item Fundamental for complexity - complexity associated with levels
+\item Draws analogy with Hinton 2008 Deep Learning
+\item At one level, supervised learning improving adaptation; at next higher, unsupervised improving robustness
+\end{itemize}
+\end{NOTES}
 
 \section{Background and context}\label{background-and-context}
 
@@ -314,7 +332,9 @@ The morphological patterns that result from changes in expression of the \emph{h
 \quote{
 	Biological evolution consists of change in the hereditary characteristics of groups of organisms over the course of generations. Groups of organisms, termed populations and species, are formed by the division of ancestral populations or species, and the descendant groups then change independently. Hence, from a long-term perspective, evolution is the descent, with modification, of different lineages from common ancestors.}{``Evolution, Science, and Society: Evolutionary Biology and the National Research Agenda'', Working Draft, 28 September 1998, \url{http://www.zoology.ubc.ca/~otto/evolution/Evolwhite.pdf}}
 
-\cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant'':
+``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \cite{Watson2010}, and other forms of evolution have been proposed in artificial systems (\eg the compositional evolution of \cite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined in the following \nameref{alternatives-to-evolution-by-natural-selection}, but here we concentrate on canonical \gls{ens}.
+
+\cite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} taken from the most influential items in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.''. Incidentally, as an illustration of the difficulty of definitions, although the usual aim is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring.'', \cite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \cite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant'':
 
 \begin{compactenum}
 \item ``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \cite{Darwin1859}
@@ -329,42 +349,25 @@ These differences are also discussed in \parencite{Griesemer2001}, in particular
 
 Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \parencite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological. This will be discussed further in the following \nameref{alternatives-to-evolution-by-natural-selection}, \labelcref{alternatives-to-evolution-by-natural-selection}.
 
-\begin{NOTES}
-\autocite{Watson2015}:
-Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples
-\begin{itemize}
-\item Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level. How does selection at one level get suppressed, and introduced at the next?
-\item Independent replication before transition, must replicate as part of a larger whole afterwards
-\item Fundamental for complexity - complexity associated with levels
-\item Draws analogy with Hinton 2008 Deep Learning
-\item At one level, supervised learning improving adaptation; at next higher, unsupervised improving robustness
-\end{itemize}
-
-Pigliucci2008--``Is evolvability evolvable?''
-\end{NOTES}
-
 \subsection{Alternatives to evolution by natural selection}\label{alternatives-to-evolution-by-natural-selection}
 
-``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \cite{Watson2010}, and other forms of evolution have been proposed in artificial systems (\eg the compositional evolution of \cite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}).
+Although \gls{ens} is usually only discussed within the context of modern day biology, as we've seen when examining the definition of \gls{ens} there is nothing exclusively biological about the standard formulations. By abstracting the concepts of variation, selection, and in particular inheritance or heredity, a generalised form of \gls{ens} can be developed that goes beyond the usual biological readings. 
 
-Although \gls{ens} is usually interpreted within the context of modern day biology, as we've seen in the earlier discussion on the definition of \gls{ens} it in fact can be viewed much more generally. 
+A specific example lies in the transition from non-living to living things.One of the main problems (of several) in extending \gls{ens} to prebiotic entities is that the meaning of the foundational elements--such as variation, selection, heredity, multiplication--are generally couched in biological forms. For example, heredity is often discussed in terms of alleles, or traits. However, there must have been some point at which the prebiotic processes transitioned to \gls{ens}, and it is clear that this transition did not happen abruptly in a population of fully-fledged modern organisms. The pathway to \gls{ens}, the evolution of evolution itself, is one of the main open problems in origins-of-life research, and it involves an extension of those foundational elements back into the prebiotic world.
 
-At least one superset theory, Dynamic Kinetic Stability \parencite{Pross2011}, has been proposed as a general principle underlying prebiotic and biotic evolution, and as the driver for the origin of life.
+The example of the transition to life is an example of \emph{extending} \gls{ens}; two further examples are now presented that are \emph{alternatives} to \gls{ens}: DaisyWorld, or regulation without selection, and evolution in an entirely non-living domain--the evolution of technology. 
 
-\cite{Saunders1994}, discussing the DaisyWorld model \parencite{LovelockMargulis2011}, explains how regulation can emerge in DaisyWorld without selection--the planet's temperature is adjusted to meet the conditions for maximum growth of the daisies without the daisies adapting to the planet.
+\cite{Arthur2009} describes a mechanism for the evolution of technology, where evolution is used in the sense of \quote{all objects of some class are related by ties of common descent from the collection of earlier objects.}{\parencite{Arthur2009}}. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lineage and provides new raw components for inclusion in later technologies. \Cite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's answer is that novelty comes from this incorporation of new phenomena from the source, the natural world.
 
-Lovelock and Margulis proposed Daisyworld as a example of an alternative to selection for regulation,  based on two feedback loops. ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not.'' \parencite{Saunders1994}
-
-The fundamental insight in Daisyworld is that individuals modify environments: the daisies adapt planet (temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet. There's little benefit to adaptation by the daisies to the planetary conditions. In fact, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.'' \parencite{Saunders1994}
-
-In a different domain, \cite{Arthur2009} investigates the evolution of technology, where evolution is used in the sense of \quote{all objects of some class are related by ties of common descent from the collection of earlier objects.}{\parencite{Arthur2009}}. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lin\eg and provides new raw components for inclusion in later technologies.
-
-Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise as the result of an evolutionary process, rather than de novo from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' : ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}'' to illustrate the impossibility of slavish adoption of biological models.
+Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise as the result of an evolutionary process, rather than de novo from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' to illustrate the impossibility of the slavish adoption of biological models: ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}''.
 
 The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
 
-\Cite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's response is that novelty comes from incorporating new phenomena from the source, the natural world.
+However, even Arthur in his rejection of ``Darininan evolution'', describes a process that still relies on selection, variation and inheritance. This is not the case in our final example, DaisyWorld.
 
+\Cite{LovelockMargulis2011} propose Daisyworld as a example of an alternative to selection for regulation, based on two feedback loops. \cite{Saunders1994} explains how regulation can emerge in DaisyWorld without selection--the planet's temperature is adjusted to meet the conditions for maximum growth of the daisies without the daisies adapting to the planet. ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not.'' \parencite{Saunders1994}
+
+The fundamental insight in Daisyworld is that individuals modify environments (that is, niche construction): the daisies adapt the planet (specifically the temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet; and in fact there's little benefit to adaptation by the daisies to the planetary conditions. As \cite{Saunders1994} states, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.''
 
 \subsection{Evolutionary Algorithms}
 

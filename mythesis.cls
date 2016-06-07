@@ -79,7 +79,7 @@
    \noindent\textbf{#1}%
 }
 
-\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{\Large\guillemotleft}#1{\Large\guillemotright}\footnote{#2}}}
+\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{``}#1{''}\footnote{#2}}}
 \newcommand\Small{\fontsize{9}{9.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\lsstyle}
 

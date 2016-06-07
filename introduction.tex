@@ -193,23 +193,6 @@ system itself. Every variation is carried out by the individuals. Selection pres
 ``Rasmussen then designed a system similar to core war in which the command that copied instructions was flawed and would sometimes write a random instruction instead on the one intended.'' \parencite{Ofria2004}
 \end{NOTES}
 
-\section{Guide to this work}
-
-This work is structured in four parts. The first part contains material general to the entire thesis and establishes the overall research context; the second part moves to theory, specifically the meaning of fidelity and inheritance, and an experimental investigation of a theory-based model; the third part to consideration of how a system based on this model might be implemented in an artificial system, specifically our \gls{achem}, ToyWorld; and the final, fourth, part closes the work with conclusions, a general discussion, and some thoughts on future work.
-
-This first part begins with an introductory chapter to motivate the work and place it in context. The overall impetus for study of inheritance and heredity in artificial systems comes from the age-old dream of self-improving systems, more recently expressed in the research topic of \gls{oee}, as outlined in \cref{motivation}. \Gls{oee} increasingly is seen as an evolutionary, emergent, process and as such we can identify a set of fundamental elements considered either necessary or sufficient for \gls{oee} in artificial systems (\cref{motivation}.) One of those elements is replication, and establishing the means by which an evolutionary replicator can emerge in an artificial system drives the work described in this thesis.
-
-\Gls{oee} is in turn inspired and, in some sense, in competition with the achievements of evolution in living systems. \Cref{life} provides a broad but necessarily shallow overview of relevant ideas from modern biology, to explain this link with \gls{oee} and to give some sense of what might be possible should the goal be reached. Evolution in general and the specific evolutionary mechanism behind the richness of biology, \gls{ens}, are described in \cref{evolution-by-natural-selection} for context. As a second example of evolutionary process that fits within the broad umbrella of evolution in general, compositional evolution is introduced in \cref{compositional-evolution}, foreshadowing its importance to discussions of the origins of life and the evolution of technology.
-
-The field of \gls{alife}, introduced in \cref{alife}, is almost synonymous with \gls{oee}; although little in this thesis is specific or restricted to \gls{alife}, the spirit and historical context of the field permeates the work, and so a brief introduction in \cref{alife} seems appropriate. 
-
-Of the wide variety of approaches to \gls{alife}, one in particular, \glspl{achem}, seems most promising for \gls{oee} in \gls{alife}, as seen concretely in the number of relevant works reviewed in \cref{previous-work} specific to replication and replicators in artificial chemistries. The structure follows the recent broad classification proposed by \cite{Zachar2010} which moves from simple multipliers through to informational replicators and finally reproducers. Most existing work can be placed in the earlier categories; very few systems are capable of emergent replicators, and none at all meet the requirements needed for reproducers.
-
-\begin{DRAFT}
-The question of why this should be is the driving force behind the next section of the work, in part two. 
-
-In the third part we move to the specifics of \glspl{achem} implementations of an emergent inheritance mechanism.  
-\end{DRAFT}
 
 \section{Background and context}\label{background-and-context}
 
@@ -322,21 +305,7 @@ As an example of their action, the gene \emph{Ubx}, or \emph{Ultrabithorax}, is 
 
 The morphological patterns that result from changes in expression of the \emph{hox} homeotic genes are textbook examples of modularity caused by regulatory networks. These networks in general appear to take a characteristic form, sometimes called a `medusa' network \parencite{Kauffman:2004zi,Aldana:2007da} where a regulatory head controls the expression of many functional genes. For example, in \gls{drosophila}, the medusa has a head of around 80 genes \parencite{Aldana:2007da}. \Textcite{Davidson:2006wi}, using the well-characterised sea urchin genotype, identifies GRN `kernels' of interconnected and hence very robust regulatory genes that control essential functions such as heart development and the endoderm specification in sea urchins. 
 
-
 \subsection{Evolution by Natural Selection}\label{evolution-by-natural-selection}
-\begin{NOTES}
-``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \cite{Watson2010}. \cite{Saunders1994}, discussing Lovelock's DaisyWorld model, explains how regulation can emerge in DaisyWorld without selection--the planet's temperature is adjusted to meet the conditions for maximum growth of the daisies without the daisies adapting to the planet. In fact, \cite{Saunders1994}, referencing Mayr, comments that Darwin could not prove that \gls{ens} was the only mechanism for adaptation in biology, just the most likely one. Subsequently, the developing understanding of the biology in areas such as \gls{hgt} and neutral theory \cite{Kimura:1968uq} has enhanced the purely Darwinian view of \gls{ens} in natural populations into what is now generally referred to as the modern evolutionary synthesis.
-
-
-\autocite{Saunders1994} Evolution without Natural Selection (DaisyWorld):
-
-Lovelock proposed Daisyworld as alternative explanation (rather than selection) for regulation as seen in Gaia hypothesis, and in organisms. Two feedback loops lead to regulation, ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not.''
-
-The fundamental insight in Daisyworld is that individuals modify environments: the daisies adapt planet (temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet. Little benefit to adaptation by daisies to planet. In fact, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.''
-
-
-
-Although the advantages of a distinction between genotype and phenotype are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \cite{VonNeumann1966}, there is no inherent dependency on this in \gls{ens}. Early evolution may have involved holistic or composomal evolution before the advent of digital evolution with a separate genome.
 
 \quote{Evolution is a process that results in heritable changes in a population spread over many generations.}{
 	``Sandwalk: strolling with a skeptical biochemist'',
@@ -349,61 +318,53 @@ Although the advantages of a distinction between genotype and phenotype are disc
 
 \begin{compactenum}
 \item ``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \cite{Darwin1859}
-
 \item ``if there is a population of entities with multiplication, variation and heredity, and if some of the variations alter the probability of multiplying, then the population will evolve. Further, it will evolve so that the entities come to have adaptations....'' (Maynard-Smith, in \cite{Griesemer2001})
-
 \item ``any entities in nature that have variation, reproduction and heritability may evolve'' \cite{Lewontin:1970mc} and ``1. Different individuals in a population have different morphologies, physiologies, and behaviors (phenotypic variation). 2. Different phenotypes have different rates of survival and reproduction in different environments (differential fitness). 3. There is a correlation between parents and offspring in the contribution of each to future generations (fitness is heritable).'' \cite{Lewontin:1970mc}
-
 \item ``...evolution will occur whenever and wherever three conditions are met: replication, variation (mutation), and differential fitness (competition)'' \parencite[quoting Daniel Dennett]{Ofria2004}
-
 \end{compactenum}
 
 From the study of the summaries, \cite{Godfrey-Smith2007} concludes that the core requirement for \gls{ens} is some ``combination of variation, heredity, and fitness differences'', although he identified a number of differences between the summaries. For example, the most commonly cited summary is \cite{Lewontin:1970mc}, but unusually that formulation states that ``fitness is heritable'' whereas typically phenotypic heredity (as appears in Lewontin's later 1980 summary) is stated as sufficient for a trait to evolve. 
 
 These differences are also discussed in \parencite{Griesemer2001}, in particular with reference to the variations between Darwin's concept of inheritance in \cite{Darwin1859} which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both. \parencite{Griesemer2001}
 
-Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \parencite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological.
+Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \parencite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological. This will be discussed further in the following \nameref{alternatives-to-evolution-by-natural-selection}, \labelcref{alternatives-to-evolution-by-natural-selection}.
 
+\begin{NOTES}
 \autocite{Watson2015}:
-
 Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples
-
 \begin{itemize}
 \item Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level. How does selection at one level get suppressed, and introduced at the next?
 \item Independent replication before transition, must replicate as part of a larger whole afterwards
 \item Fundamental for complexity - complexity associated with levels
 \item Draws analogy with Hinton 2008 Deep Learning
 \item At one level, supervised learning improving adaptation; at next higher, unsupervised improving robustness
-\item Modes of inheritance (for groups)
-\begin{itemize}
-\item
-``migrant pools'' - particles disperse horizontally and reform
-into new pools - type 1 group selection - no group inheritance
-\item
-Group fissioning - vertical inheritance - group inheritance
-(differences are heritable) - type 2
 \end{itemize}
-\end{itemize}
-
 
 Pigliucci2008--``Is evolvability evolvable?''
 \end{NOTES}
 
-\subsection{Compositional evolution}\label{compositional-evolution}
+\subsection{Alternatives to evolution by natural selection}\label{alternatives-to-evolution-by-natural-selection}
 
-\begin{NOTES}
-In life, have \gls{hgt} \eg \parencite{Ochman2000}; \parencite{Watson2002} discusses compositional evolution and building blocks; \parencite{Pross2011} introduces Dynamic Kinetic Stability as a general principle underlying evolution, and proposes it as the driver for the origin of life.
+``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \cite{Watson2010}, and other forms of evolution have been proposed in artificial systems (\eg the compositional evolution of \cite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}).
 
-\parencite{Arthur2009} investigates the evolution of technology, where evolution is used in the sense of \quote{all objects of some class are related by ties of common descent from the collection of earlier objects.}{\parencite{Arthur2009}} In general though, Arthur's compositional evolution does not attempt to understand life, but instead as a guide to achieving similar property in another domain, or in understanding similar processes in another domain \parencite{Arthur2009}.
+Although \gls{ens} is usually interpreted within the context of modern day biology, as we've seen in the earlier discussion on the definition of \gls{ens} it in fact can be viewed much more generally. 
 
-Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lin\eg and provides new raw components for inclusion in later technologies.
+At least one superset theory, Dynamic Kinetic Stability \parencite{Pross2011}, has been proposed as a general principle underlying prebiotic and biotic evolution, and as the driver for the origin of life.
+
+\cite{Saunders1994}, discussing the DaisyWorld model \parencite{LovelockMargulis2011}, explains how regulation can emerge in DaisyWorld without selection--the planet's temperature is adjusted to meet the conditions for maximum growth of the daisies without the daisies adapting to the planet.
+
+Lovelock and Margulis proposed Daisyworld as a example of an alternative to selection for regulation,  based on two feedback loops. ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not.'' \parencite{Saunders1994}
+
+The fundamental insight in Daisyworld is that individuals modify environments: the daisies adapt planet (temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet. There's little benefit to adaptation by the daisies to the planetary conditions. In fact, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.'' \parencite{Saunders1994}
+
+In a different domain, \cite{Arthur2009} investigates the evolution of technology, where evolution is used in the sense of \quote{all objects of some class are related by ties of common descent from the collection of earlier objects.}{\parencite{Arthur2009}}. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lin\eg and provides new raw components for inclusion in later technologies.
 
 Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise as the result of an evolutionary process, rather than de novo from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' : ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}'' to illustrate the impossibility of slavish adoption of biological models.
 
 The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
 
-\parencite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties. Arthur's response is that novelty comes from incorporating new phenomena from the source, the natural world.
-\end{NOTES}
+\Cite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's response is that novelty comes from incorporating new phenomena from the source, the natural world.
+
 
 \subsection{Evolutionary Algorithms}
 
@@ -426,91 +387,47 @@ The first two of these differences are significant; \glspl{ea} are not capable o
 	\item EvoEvo, or the evolution of evolution--\eg the remainder of this work.
 \end{compactitem}
 
-For example, a summary of some relevant work in the application of \glspl{grn} to \glspl{ea} to improve the robustness and modularity of solutions can be found in \ref{applications-of-grn-in-eas}.
+A summary of some relevant work in the application of \glspl{grn} to \glspl{ea} to improve the robustness and modularity of solutions can be found in \cref{applications-of-grn-in-eas}.
 
 A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \parencite{Paixao2015}, based on \quote{models in theoretical population genetics and in the theory of evolutionary computation}{\parencite{Paixao2015}}. For example: \quote{Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.}{\parencite{Paixao2015}}
 
 \subsection{Alife}\label{alife}
-\begin{NOTES}
-``Synthesis and simulation of living systems'' or contemporary artificial life as \quote{an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesizing simple forms of them.}{\parencite{Bedau:2007ga}}
+The well-known description of \gls{alife} by \cite{Langton1989} is that it is ``life-as-it-could-be'', rather than ``life-as-we-know-it''. The main conference series in \gls{alife}, also called ``Alife'', uses as a tagline ``Synthesis and simulation of living systems'', which is closely related to the definition of \cite{Bedau:2007ga} (not coincidentally one of the prime movers in the field, and a board member of the conference organizing body, the International Society for Artificial Life): ``an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesizing simple forms of them.''. 
 
-``life-as-it-could-be'' rather than ``life-as-we-know-it'' \parencite{Langton1989}
+Interestingly, these later two definitions place the study of living things as a subfield within \gls{alife}, appropriately as many consider life to be the only working example we have of the most interesting ideas in \gls{alife}, such as open-ended, or creative, evolution.
 
-Implicit rather than explicit fitness
+An alternate, thematic, view of \gls{alife} is given by \cite{Aguilar2014}:
+\begin{compactitem}
+\item Properties of living systems--origins of life, autonomy, self-organization, adaptation (evolution, development, and learning)
+\item Life at different scales--Ecology, artificial societies, behaviour, computational biology, artificial chemistries
+\item Understanding, uses and descriptions of the living--information, living technology, art and philosophy
+\end{compactitem}
 
-\begin{itemize}
-	\item
-	The mapping between representation and fitness must be implicit
-	\item
-	a property that arises from the representation itself rather than from
-	an external measure
-	\item
-	difficult to imagine how to pre-specify a mapping that remains
-	relevant in an open-ended system
-\end{itemize}
+Technological imperatives have driven the division of \gls{alife} overall into three largely independent subfields: \emph{hard}, \emph{soft} and \emph{wet} \gls{alife}, where hard \gls{alife} is implemented in physical hardware (made from atoms), soft \gls{alife} in computer software (from bits) and wet \gls{alife} from biological compounds. Soft \gls{alife} has the great advantages of relative cheapness and immediacy, and consequently is the basis for the majority of current research, including this work.
 
-Life a subset of Alife
+Good summaries of the state of the field can be found in \cite{Aicardi2010} and \cite{Aguilar2014}; \cite{Aguilar2014} also contains a comprehensive history from early (classical Greek) interest in automata, through the publication in 1818 of Mary Shelley's ``Frankenstein; or, The Modern Prometheus'', which revitalized interest in artificial creatures in modern times, to the consensus view of the birth of the modern field of \gls{alife} in 1987 with the first ``Workshop on the Synthesis and Simulation of Living Systems'' in Sante Fe, New Mexico.
 
-Life is the only \emph{provided} example that we have
+\section{Guide to this work}
 
-Life has non-trivial emergence
+This work is structured in four parts. The first part contains material general to the entire thesis and establishes the overall research context; the second part moves to theory, specifically the meaning of fidelity and inheritance, and an experimental investigation of a theory-based model; the third part to consideration of how a system based on this model might be implemented in an artificial system, specifically our \gls{achem}, ToyWorld; and the final, fourth, part closes the work with conclusions, a general discussion, and some thoughts on future work.
 
-Alife doesn't have to, but it is a guide
+This first part begins with an introductory chapter to motivate the work and place it in context. The overall impetus for study of inheritance and heredity in artificial systems comes from the age-old dream of self-improving systems, more recently expressed in the research topic of \gls{oee}, as outlined in \cref{motivation}. \Gls{oee} increasingly is seen as an evolutionary, emergent, process and as such we can identify a set of fundamental elements considered either necessary or sufficient for \gls{oee} in artificial systems (\cref{motivation}.) One of those elements is replication, and establishing the means by which an evolutionary replicator can emerge in an artificial system drives the work described in this thesis.
 
-Hard vs Soft vs Wet forms of Alife
+\Gls{oee} is in turn inspired and, in some sense, in competition with the achievements of evolution in living systems. \Cref{life} provides a broad but necessarily shallow overview of relevant ideas from modern biology, to explain this link with \gls{oee} and to give some sense of what might be possible should the goal be reached. Evolution in general and the specific evolutionary mechanism behind the richness of biology, \gls{ens}, are described in \cref{evolution-by-natural-selection} for context. As a second example of evolutionary process that fits within the broad umbrella of evolution in general, compositional evolution is introduced in \cref{compositional-evolution}, foreshadowing its importance to discussions of the origins of life and the evolution of technology.
 
-Swimming--\parencite{Terzopoulos1994}
+The field of \gls{alife}, introduced in \cref{alife}, is almost synonymous with \gls{oee}; although little in this thesis is specific or restricted to \gls{alife}, the spirit and historical context of the field permeates the work, and so a brief introduction in \cref{alife} seems appropriate. 
 
-Themes \parencite{Aguilar2014}
+Of the wide variety of approaches to \gls{alife}, one in particular, \glspl{achem}, seems most promising for \gls{oee} in \gls{alife}, as seen concretely in the number of relevant works reviewed in \cref{previous-work} specific to replication and replicators in artificial chemistries. The structure follows the recent broad classification proposed by \cite{Zachar2010} which moves from simple multipliers through to informational replicators and finally reproducers. Most existing work can be placed in the earlier categories; very few systems are capable of emergent replicators, and none at all meet the requirements needed for reproducers.
 
-\begin{itemize}
-	\item
-	Properties of living systems--Origins of life, autonomy, self-organization, adaptation (evolution, development, and learning)
-	\item
-	Life at different scales--Ecology, artificial societies, behaviour, computational biology, artificial chemistries
-	\item
-	Understanding, uses and descriptions of the living--information, living technology, art and philosophy
-\end{itemize}
+\begin{DRAFT}
+The question of why this should be is the driving force behind the next section of the work, in part two. 
 
-History
-
-\begin{itemize}
-	\item Prehistory
-	\item Various automata
-	\item
-	Philosophy about automata
-	\item
-	1818 Mary Shelley ``Frankenstein; or, The Modern Prometheus''
-	\item
-	Uptick in mentions of ``Artificial Life'' as quoted in \parencite{Aguilar2014}
-	\item
-	Modern field
-	\item
-	1951 Von Neumann--first formal model
-	\item
-	1984 Christopher Langton
-	\item
-	1987 ``Official'' birth of field--first ``Workshop on the Synthesis
-	and Simulation of Living Systems'' in Sante Fe, NM, by Langton
-	\item
-	Conway Game of Life
-	\item
-	Cellular Automata
-	\item
-	Tierra, Avida
-	\item
-	Dawkin's Biomorphs
-	\item
-	Bedau Challenges
-	\item
-	Overlap with Brooks's robotics, AI, etc
-\end{itemize}
-\end{NOTES}
+In the third part we move to the specifics of \glspl{achem} implementations of an emergent inheritance mechanism.  
+\end{DRAFT}
 
 \section{Previous publications}\label{previous-publications}
 
-A version of Reactant and Product Strategies \cref{reactant-and-product-strategies} was published as \cite{Young2015},
-and material from \cref{model-validation} in \cite{Young2013}.
+A version of Reactant and Product Strategies \cref{reactant-and-product-strategies} was published as \cite{Young2015}, and material from \cref{model-validation} in \cite{Young2013}.
 
 ToyWorld, the \gls{achem} from \ref{toyworld}, is available under an GNU GPL v2 open source licence from GitHub \cite{toyworld}.
 
@@ -537,8 +454,21 @@ Much of this work falls under the banner of \gls{alife}, both weak and strong as
 First, a distinction: open-ended evolution refers to a goal or result, while evolution-of-evolution, or EvoEvo, describes a process or mechanism. The first is constitutive, the second causal. In artificial systems, the most influention formulation of the problem overall remains that of \cite{Bedau:2000mi}:
 
 \quote{A key challenge is whether digital systems based on symbolic logic harbor the same potential for evolutionary innovation as physical systems. A preliminary challenge is to unlock the full potential of evolution in digital media. Many believe that digital life today falls far short in this regard, and this issue is starting to be approached quantitatively.}{\cite{Bedau:2000mi}}
+
+Although the advantages of a distinction between genome and phenome are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \cite{VonNeumann1966}; there is no inherent dependency on this in \gls{ens}. Early evolution may have involved the inheritance of complete portions, or components, of the phenome before the advent of a distinct genome, while research into \gls{hgt} (\eg \cite{Ochman2000,Pace:2008vi,Ragan2009}) has shown that not only was component transfer between species a major driver of early evolution, but a horizontal component-based mechanism continues to exist even in many of today's organisms that have a genome built from DNA. 
+
+So in discussing inheritance we can already distinguish between two forms--holistic and digital, based on the absence or presence of a genome (respectively)--and direction, either horizontal or vertical, where horizontal inheritance does not involve reproduction or replication (and so can cross between species), while vertical inheritance does (and cannot). Typically we refer to holistic inheritance as compositional inheritance, digital horizontal inheritance as \gls{hgt},  while digital vertical inheritance is the mechanism usually assumed when discussing \gls{ens}.
+
+\cite{Watson2015} identifies two modes for compositional inheritance:
+\begin{enumerate}
+\item ``Migrant pools'' where elements disperse horizontally and reform into new pools--no group inheritance.
+\item Group fissioning - vertical inheritance--differences are heritable.
+\end{enumerate}
+\cite{Vasas2012a} links heritability to the correlation between the parent and child entities. 
+
+
 \end{NOTES}
-\section{Replicators and inheritance}
+\section{Replicators}
 \begin{NOTES}
 In biology, heredity and inheritance is tied to the concept of a replicator. \Cite{Dawkins1976} first to define replicators--includes genes, memes. Many other definitions and formulations followed as various properties or features examined in subsequent works. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
 

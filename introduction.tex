@@ -10,6 +10,13 @@ Without hesitation or ambiguity, and fully mindful of such paleontological wonde
 	``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
 	
 Constitutive definitions of \gls{oee}
+Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption) \parencite{Nellis2014}
+
+Much of this work falls under the banner of \gls{alife}, both weak and strong as distinguished by \cite{Langton1989}: ``study the phenomena of life, not by simulating life as it is (weak AL) but by instantiating life as it could be (strong AL)''
+
+First, a distinction: open-ended evolution refers to a goal or result, while evolution-of-evolution, or EvoEvo, describes a process or mechanism. The first is constitutive, the second causal. In artificial systems, the most influention formulation of the problem overall remains that of \cite{Bedau:2000mi}:
+
+\quote{A key challenge is whether digital systems based on symbolic logic harbor the same potential for evolutionary innovation as physical systems. A preliminary challenge is to unlock the full potential of evolution in digital media. Many believe that digital life today falls far short in this regard, and this issue is starting to be approached quantitatively.}{\cite{Bedau:2000mi}}
 
 \parencite{Taylor2001} like others makes a distinction between OEE and ``kinds of evolutionary innovation''. He gives as an example of limited innovation the emergence of paratism in \cite{Ray1991} as direct result of system design and initial seeding conditions. In this reading, ``fundamentally new'' (labelled by Taylor as ``creative'') means new ways of sensing the environment and interacting with it \cite{Taylor2001}.
 
@@ -450,29 +457,11 @@ ToyWorld, the \gls{achem} from \ref{toyworld}, is available under an GNU GPL v2 
 \epigraph{%
 It may appear that the properties one would have to assign to a population of self-reproducing elements in order to obtain Darwinian evolution are of a spectacular simplicity. The elements would only have to: (1) Be self-reproducing and (2) Undergo hereditary changes (mutations) in order to permit evolution by a process based on the survival of the fittest.}%
 {\textit{\\Nils Barricelli}\\\textsc{Cited in \cite{Taylor2001}}}
-\begin{NOTES}
-Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption) \parencite{Nellis2014}
 
-Much of this work falls under the banner of \gls{alife}, both weak and strong as distinguished by \cite{Langton1989}: ``study the phenomena of life, not by simulating life as it is (weak AL) but by instantiating life as it could be (strong AL)''
+\ref{evolution-by-natural-selection}
 
-First, a distinction: open-ended evolution refers to a goal or result, while evolution-of-evolution, or EvoEvo, describes a process or mechanism. The first is constitutive, the second causal. In artificial systems, the most influention formulation of the problem overall remains that of \cite{Bedau:2000mi}:
-
-\quote{A key challenge is whether digital systems based on symbolic logic harbor the same potential for evolutionary innovation as physical systems. A preliminary challenge is to unlock the full potential of evolution in digital media. Many believe that digital life today falls far short in this regard, and this issue is starting to be approached quantitatively.}{\cite{Bedau:2000mi}}
-
-Although the advantages of a distinction between genome and phenome are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \cite{VonNeumann1966}; there is no inherent dependency on this in \gls{ens}. Early evolution may have involved the inheritance of complete portions, or components, of the phenome before the advent of a distinct genome, while research into \gls{hgt} (\eg \cite{Ochman2000,Pace:2008vi,Ragan2009}) has shown that not only was component transfer between species a major driver of early evolution, but a horizontal component-based mechanism continues to exist even in many of today's organisms that have a genome built from DNA. 
-
-So in discussing inheritance we can already distinguish between two forms--holistic and digital, based on the absence or presence of a genome (respectively)--and direction, either horizontal or vertical, where horizontal inheritance does not involve reproduction or replication (and so can cross between species), while vertical inheritance does (and cannot). Typically we refer to holistic inheritance as compositional inheritance, digital horizontal inheritance as \gls{hgt},  while digital vertical inheritance is the mechanism usually assumed when discussing \gls{ens}.
-
-\cite{Watson2015} identifies two modes for compositional inheritance:
-\begin{enumerate}
-\item ``Migrant pools'' where elements disperse horizontally and reform into new pools--no group inheritance.
-\item Group fissioning - vertical inheritance--differences are heritable.
-\end{enumerate}
 \cite{Vasas2012a} links heritability to the correlation between the parent and child entities. 
 
-
-\end{NOTES}
-\section{Replicators}
 \begin{NOTES}
 In biology, heredity and inheritance is tied to the concept of a replicator. \Cite{Dawkins1976} first to define replicators--includes genes, memes. Many other definitions and formulations followed as various properties or features examined in subsequent works. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
 
@@ -640,7 +629,7 @@ Replication in these systems emerges from the level-0 rules without being direct
 %\end{sidewaystable}
 
 \subsection{String-manipulation systems}
-\cite{Fontana1992}
+\newthought{AlChemy} \cite{Fontana1992}
 
 A new object in Fontana's Algorithmic Chemistry, or AlChemy, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
@@ -672,17 +661,9 @@ As the rules for the combinations of two molecules are predetermined (the reacti
 
 \subsection{Automata}
 
-Coreworld \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
+\newthought{Coreworld} \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
 
-Tierra was the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}.
-
- by cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
-Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
-Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
-
-Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype--the latter being an informational concept)'' \parencite{Taylor2001}
-
-Tierra \parencite{Ray1991}
+\newthought{Tierra} \parencite{Ray1991}
 
 In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
 
@@ -690,10 +671,18 @@ Mutations are introduced during replication by randomly flipping bits during the
 
 Emergence claimed in the three forms of \cite{Cariani1991}.
 
-\todo{SugiuraSuzukiShioseEtAl2003}
+Tierra was the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}, by adding cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
+
+Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
+Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
+
+Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype--the latter being an informational concept)'' \parencite{Taylor2001}
+
+Tierra has been the testbed for a number of other works. For example, \cite{SugiuraSuzukiShioseEtAl2003} converted Tierra into a string manipulation systems, introducing a set of 140 regular-expression based rewriting rules where each rule encoded one or more of the original 32 Tierran instructions. The initial rewriting ruleset was manually generated by the experimenters, although details are unclear. Unlike in Tierra where the instruction set is fixed during a run, the rewriting rule set for each organism itself could evolve through a separate genetic algorithm. This algorithm removed the least applied rules and inserted the same number of new rules generated by mutating (through duplication, removal and addition of operations) a selection of the most applied rules. Although results support the claim that the ruleset as well as the genome evolves, the use of a separate genetic algorithm for ruleset evolution artificially separates the ruleset from the genome--the feedback loop from genome back to ruleset is broken.
+
 Amoeba \cite{Pargellis2001}
 
-Avida \parencite{Ofria2004}
+\newthought{Avida} \parencite{Ofria2004}
 ``An approach to studying evolution...''
 
 Avida summer of 1993--based on Tierra wth better metering and measuring, and parallel code execution.
@@ -721,10 +710,10 @@ Asn automata reaction with a set of operations (six common logic operations, \eg
 Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
 
 \subsection{Other}
-StringMol \parencite{Hickinbotham2011}
+\newthought{StringMol} \parencite{Hickinbotham2011}
 
 
-GraphMol \parencite{Nellis2012, Nellis2014} 
+\newthought{GraphMol} \parencite{Nellis2012, Nellis2014} 
 
 ``Our aim is to improve novelty-generation algorithms by making their biological models richer''
 
@@ -744,13 +733,21 @@ Mechanism of evolution must be itself evolvable; functions such as template copy
 Individuals and environment interact to give new ways of producing new individuals.
 Stringmol and Graphmol have embodied template copying, done in different ways. Different computational models result in different properties--``Stringmol exhibits macro-mutation and two chemical copying; GraphMol exhibits two types of quasispecies, cooperative and parasitic. These two systems use the same domain (emergent evolution) and metamodel (machines copying strings), but different computational models.''
 
-General algorithm for template copying, used in both StringMol and GraphMol: \cite{Nellis2014}
-\begin{verbatim}
-i := start(string B)
-while i not at-end(string B) do
-	string A(i) := char-copy(string B(i))
-	i := next(i)
-\end{verbatim}
+%\begin{verbatim}
+%i := start(string B)
+%while i not at-end(string B) do
+%	string A(i) := char-copy(string B(i))
+%	i := next(i)
+%\end{verbatim}
+
+\begin{algorithm}[ht]
+$i=start(\text{string B})$\;
+\While{$\text{i} not at-end(\text{string B})$}{
+	$\text{string A(i)} \leftarrow char-copy(\text(string B(i)))$\;
+    $\text{i} \leftarrow next\text{i}$\;
+}
+\caption{Algorithm for template copying, taken from \cite{Nellis2014}, used in both StringMol and GraphMol}
+\end{algorithm}
 
 Each of these four functions--\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}--can either be ``crisp'' (\ie perfect) or embodied (variable, the subject of evolution). Replicases are elements in the population that can copy themselves using this algorithm.
 
@@ -761,6 +758,10 @@ GraphMol has embodied start, at-end and next, with crisp char-copy. At-end uses 
 \end{NOTES}
 
 \section{Discussion}
+Although the advantages of a distinction between genome and phenome are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \cite{VonNeumann1966}; there is no inherent dependency on this in \gls{ens}. Early evolution may have involved the inheritance of complete portions, or components, of the phenome before the advent of a distinct genome, while research into \gls{hgt} (\eg \cite{Ochman2000,Pace:2008vi,Ragan2009}) has shown that not only was component transfer between species a major driver of early evolution, but a horizontal component-based mechanism continues to exist even in many of today's organisms that have a genome built from DNA. 
+
+So in discussing inheritance we can already distinguish between two forms--holistic and digital, based on the absence or presence of a genome (respectively)--and direction, either horizontal or vertical, where horizontal inheritance does not involve reproduction or replication (and so can cross between species), while vertical inheritance does (and cannot). Typically we refer to holistic inheritance as compositional inheritance, digital horizontal inheritance as \gls{hgt},  while digital vertical inheritance is the mechanism usually assumed when discussing \gls{ens}.
+
 \begin{NOTES}
 The EvoEvo project \footnote{\url{http://evoevo.liris.cnrs.fr/about-evoevo-project/})} an Information and Communication Technologies initiative funded by the European Commission, begins at a higher level biological starting point (genotype-phenotype mappings). The project presupposes microbial evolution, ``at the level of genomes, biological networks and populations'', with a focus on four specific properties of a genotype-phenotype mapping--Variability, Robustness, Evolvability and Open-endedness. Later work is planned to remove the biological specificity to provide a framework for applying EvoEvo to ICT problems. Along with development of a model founded on the ``genotype-to-phenotype mapping and the fitness landscape'', the project states that make use of \emph{Aevol} \parencite{Knibbe:2006vn,Knibbe:2007kx} to model developmental processes in microorganisms.
 

@@ -59,6 +59,15 @@ The most relevant previous work is that of \cite{Bourrat2015} who, in the course
 
 The six applicable models in \cite{Bourrat2015} are designed to explore the implications of bias on inheritance; in \cite{Bourrat2015}, unbiased means a trait is uncorrelated with parent, in practice as a random choice between lower and upper bound \parencite[p.153]{Bourrat2015}. Biased inheritance is naturally the opposite: there is some correlation between parent and child values for a trait, and so some prediction of traits is possible--a parent can ``pass it on''. Note that \cite[p.173]{Bourrat2015} expressly notes that his ``biased inheritance'' is not the `transmission bias` of the second term in the Price equation: ``The bias in ‘biased inheritance’ is in reference to the type of the parent(s) (biased toward the type of the parent), while the bias in ‘transmission bias’ refers to a departure from an event of perfect transmission.''
 
+%\Cite{Bourrat2015}
+%\begin{itemize}
+%\item Persistors - unable to reproduce, selection only in ``weak'' sense of granite grains for hardness
+%\item Procreators can reproduce but without inheritance of any property (including ability to procreate) except ``fact of coming into existence and membership of that class'' (class is class of parents defined by ``those properties that do not vary in the population''...{[}acknowledged as loose, but has benefit that no varying traits included{]}) p137. Procreator's offspring is persistors
+%\item Minimal reproducers - indefinite procreation - where procreation can be transmitted from parent to offspring (with some low degree of fidelity)
+%\item Unreliable reproducers (low bias for ability to procreate- ability to procreate randomly chosen between 0 and parent's ability), reliable reproducers (high bias - ability to procreate is same as parent's ability)
+%\item Replicator - all traits (including procreation) can be inherited
+%\end{itemize}
+
 Model 1 begins with a population of 5000 ``persistors'' (that is without reproduction), each of which has a survival rate (viability) between 0-0.99 (the likelihood of surviving at each time step). Unsurprisingly, all eventually die. Model 2 introduces a single ``procreator'', capable of reproduction with both survival and fertility rates (offspring per unit time), into the population of persistors. The traits of the offspring of the procreator are uncorrelated (that is, unbiased inheritance) to those of the procreator. Again, all eventually die.
 
 Model 3 begins to get interesting: \cite{Bourrat2015} replaces the procreator by a ``minimal reproducer'' which differs from a procreator in that the ability to procreate is itself a heritable trait, although as ``minimal'' it is an unbiased trait. As such, the offspring of the minimal reproducer may be either minimal reproducers or persistors without the ability to reproduce. Now the population size drops then increases to maximum size with about 10\% of the population being minimal reproducers. However, the proportion of high fitness (that is, high viability) entities doesn't increase beyond about 0.05, so there is no cumulative adaptation.

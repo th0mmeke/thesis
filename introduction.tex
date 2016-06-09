@@ -424,7 +424,7 @@ This work is structured in four parts. The first part contains material general 
 
 This first part begins with an introductory chapter to motivate the work and place it in context. The overall impetus for study of inheritance and heredity in artificial systems comes from the age-old dream of self-improving systems, more recently expressed in the research topic of \gls{oee}, as outlined in \cref{motivation}. \Gls{oee} increasingly is seen as an evolutionary, emergent, process and as such we can identify a set of fundamental elements considered either necessary or sufficient for \gls{oee} in artificial systems (\cref{motivation}.) One of those elements is replication, and establishing the means by which an evolutionary replicator can emerge in an artificial system drives the work described in this thesis.
 
-\Gls{oee} is in turn inspired and, in some sense, in competition with the achievements of evolution in living systems. \Cref{life} provides a broad but necessarily shallow overview of relevant ideas from modern biology, to explain this link with \gls{oee} and to give some sense of what might be possible should the goal be reached. Evolution in general and the specific evolutionary mechanism behind the richness of biology, \gls{ens}, are described in \cref{evolution-by-natural-selection} for context. As a second example of evolutionary process that fits within the broad umbrella of evolution in general, compositional evolution is introduced in \cref{compositional-evolution}, foreshadowing its importance to discussions of the origins of life and the evolution of technology.
+\Gls{oee} is in turn inspired and, in some sense, in competition with the achievements of evolution in living systems. \Cref{life} provides a broad but necessarily shallow overview of relevant ideas from modern biology, to explain this link with \gls{oee} and to give some sense of what might be possible should the goal be reached. Evolution in general and the specific evolutionary mechanism behind the richness of biology, \gls{ens}, are described in \cref{evolution-by-natural-selection} for context. As a second example of evolutionary process that fits within the broad umbrella of evolution in general, compositional evolution is introduced in \cref{alternatives-to-evolution-by-natural-selection}, foreshadowing its importance to discussions of the origins of life and the evolution of technology.
 
 The field of \gls{alife}, introduced in \cref{alife}, is almost synonymous with \gls{oee}; although little in this thesis is specific or restricted to \gls{alife}, the spirit and historical context of the field permeates the work, and so a brief introduction in \cref{alife} seems appropriate. 
 
@@ -462,69 +462,34 @@ Our focus in this work is on the nature of inheritance and heredity, specificall
 
 By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
 
-Now, in the transfer from the prebiotic world to the biotic one, it’s clear that the proportion of information held by a predecessor that could be passed on to its successor increased somehow, probably over many generations, from ``none’’ to ``nearly all’’, as seen today. Heredity is therefore likely a matter of degree, rather than being a binary relationship; related or not-related, and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
+Now, in the transfer from the prebiotic world to the biotic one, it’s clear that the proportion of information held by a predecessor that could be passed on to its successor increased somehow, probably over many generations, from ``none’’ to ``nearly all’’, as seen today; \cite{Vasas2012a} links heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship; related or not-related, and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
+
+This progression is comprehensively explored in \cite{Zachar2010}, extending earlier work by \cite{Szathmary1999,Szathmary:2006ty}: ''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
 
 Interestingly, in biology at least, the starting point for the development of modern replicators might have began with horizontal inheritance. First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.
 
-But what does this mean? Is a rock that erodes to form grains of sand a replicator? Is a set of autocatalytic reactions that splits into two replicating?
+But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator \footnote{In \cite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness}? Is a set of autocatalytic reactions that splits into two replicating? \Cite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
 
+%A regenerating/recreating entity can produce at least one entity equivalent to it. It is possible that the original entity immediately decomposes (that is, cannot be the subject of further turns of the cycle), causing sequential replacement, although this is the most simple of regenerating entities. If it can effectively increase the number of entities equivalent to itself, then it is autocatalytic and is a \emph{replicator}.
 
-
-\cite{Vasas2012a} links heritability to the correlation between the parent and child entities. 
-
-
-\begin{NOTES}
-In biology, heredity and inheritance is tied to the concept of a replicator. \Cite{Dawkins1976} first to define replicators--includes genes, memes. Many other definitions and formulations followed as various properties or features examined in subsequent works. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
-
-``Replicator: any autocatalytic entity for which there is a selection process defined. Selection is a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010} (terminology slightly different in Bourrat2015--persistors, replicators, reproducers...)
-
-''A regenerating/recreating entity can produce at least one entity equivalent to it. It is possible that the original entity immediately decomposes (that is, cannot be the subject of further turns of the cycle), causing sequential replacement, although this is the most simple of regenerating entities. If it can effectively increase the number of entities equivalent to itself, then it is autocatalytic and is a \emph{replicator}. The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
-
-Ability to \emph{procreate}	\autocite{Bourrat2015}
-\begin{itemize}
-\item Persistors - unable to reproduce, selection only in ``weak'' sense of granite grains for hardness
-\item Procreators can reproduce but without inheritance of any property (including ability to procreate) except ``fact of coming into existence and membership of that class'' (class is class of parents defined by ``those properties that do not vary in the population''...{[}acknowledged as loose, but has benefit that no varying traits included{]}) p137. Procreator's offspring is persistors
-\item Minimal reproducers - indefinite procreation - where procreation can be transmitted from parent to offspring (with some low degree of fidelity)
-\item Unreliable reproducers (low bias for ability to procreate- ability to procreate randomly chosen between 0 and parent's ability), reliable reproducers (high bias - ability to procreate is same as parent's ability)
-\item Replicator - all traits (including procreation) can be inherited
-\end{itemize}
-
-\end{NOTES}
+\Cite{Zachar2010} concludes that a replicator is ``any autocatalytic entity for which there is a selection process defined'', using autocatalysis in the general sense of a process where $X + A\rightarrow 2A + Y$, and where selection has the fairly standard definition of ``a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010}
 
 \section{Multipliers}
-\begin{NOTES}
-Autocatalysis by definition is replication--the autocatalytic reaction $x+A->2A$ replicates the molecule $A$ \cite{Lifson1997}--applied at first to molecules. Only variation through mutations (unless alternative reaction products/networks, but even then restricted to a small set of alternatives by catalytic structure. Stoichiometrics not so significant in ACS/linear growth overwhelmed by exponential dynamics of catalysis.)
+
+Autocatalysis by definition is replication; where the entities are molecules, the autocatalytic reaction $X + A\rightarrow 2A + Y$ replicates the molecule $A$ (\eg \cite{Zachar2010,Lifson1997}). Evolutionary variation though is difficult as the exponential growth of the main autocatalytic product will generally overwhelm the molecules produced by any side reactions unless 1) they are also autocatalytic, and 2) the solution contains the molecules needed to initiate and maintain this alternate autocatalysis cycle.
 
 %GGL/ToyChem \cite{Benko2003,Benko2005}                        	&Atoms/Molecules&&None--at level of reactions\\	
 %RBN-World \cite{Faulconbridge2011}                            	&Boolean Networks and Graphs& None--at level of ACS\\
 
-RBN-World \cite{Faulconbridge2011} chemistry where the entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. ``As the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.``
+\emph{RBN-World} \parencite{Faulconbridge2011} is a \gls{achem} where the entities take the form of \gls{rbn} \parencite{Kauffman:1969ne}, with the addition of a bonding mechanisms to allow for their composition and decomposition. The resulting form of \gls{rbn} is called a bonding \gls{rbn} or bRBN.  Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.'' The choice of reactants is described as ``Gillespie-like'', and essentially random, uncorrelated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}.
+
+Each bRBN is a synchronous RBN, made up of a number of nodes, each with an initial state (true/false) assigned randomly and with a input/output matrix assigned randomly. Finally k(=2) inputs are established per node. The bonding method uses ``cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' After initial bond formation the algorithm recalculates cycle lengths, and checks again for equality. This might result then in decomposition (records are kept of composition operations so that the reverse decomposition can be easily done.)
 
 A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}. 
 
-Entities are described as a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs. A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed loops (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}
-bRBNs used as atomic elements, properties determined by the network
-Each bRBN is a RBN, made up of a number of nodes, each with an initial state (true/false) assigned randomly and with a input/output matrix assigned randomly. Finally k(=2) inputs are established per node. Synchronous state update. All based on \cite{Kauffman:1969ne} (interestingly, although noted as ``original'' so later work known) bonding method uses ''cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' in initial examples at least n=5 and b(k?)=2, and alternatives examined using EA. After initial bond formation recalculate cycle lengths, and check again for equality--might result in decomposition.
+The development of RBN-World involved many design choices, some essentially adhoc, such as the choice of \gls{rbn}: ``...the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.''
 
-Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.`` Record kept of composition so that decomposition can be easily done.
-
-``Gillespie-like''--random reaction, random time--not correlated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}
-
-Many design choices--bonding mechanism etc. Examination of alternatives done by searching with EA
-Measures are Synthesis, Self-Synthesis, Decomposition, Substitution, and Catalysis \parencite[chap.7]{Faulconbridge2011}, and non-catalysed `loops' (ideal measures of auto-catalytic sets and Hypercycles too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}
-Random sampling + EA, with a fitness function based on non-catalysed loops.
-
-Some advantages claimed over \cite{Hutton2007} (emergence and computational intractability p190)
-
-
-\cite{Fernando:2008xy,Fernando:2007pf}:
-Driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems'') so attempt to establish a phylogeny that includes first autonomous system
-Simulation of laboratory experiment of lipid aggregates in a reactor. Strong theoretical justification. Hypothesis supported by inspection--single entities that are examples; Novelty is implicit in overall goals with sole quantitative measure (``fitness``) of integral of quantity and size--more and bigger is better
-Molecules and food molecules share same representation and chemistry
-Molecules, light-energy and thermodynamics
-Hill-climbing algorithm replaces parent with first 10\% better-fitness child; explicit fitness calculation
-Experiment reported in \textcite{Fernando:2008xy} generates phylogeny which is then examined and interpreted--danger of arguing from specific to general. Shows only possible, no more.
-\end{NOTES}
+The model for \emph{Chemical Evolution by Natural Selection} in \cite{Fernando:2008xy,Fernando:2007pf} is driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems''), and takes the form of a simulation of laboratory experiments of lipid aggregates (``phase separated ‘individuals’, e.g. liposomes'') in a reactor. The molecules and food molecules (that make up an autocatalytic cycle) share a common representation and underlying chemistry, while replication, unlike the (rare) autocatalytic cycles in \cite{Faulconbridge2011}, is by `` division by externally imposed agitation, i.e. replication rather than self-replication.''. New molecular species (evolutionary variation), comes from chemical ``avalances'' initiated when two existing species are chosen at random, tested to see if a reaction between them is possible by thermodynamics, and then the resulting products seeded in the reactor at low concentrations. These new reactions may be autocatalytic, or the products may complete a food-set for another autocatalytic reaction, or they may enable a side-reaction from an existing autocatalytic one. Introducing these new species into the reactor therefore can trigger the rapid formation of a series of novel products--a chemical avalanche.
 
 \section{Variable replicators}
 \begin{NOTES}
@@ -640,7 +605,7 @@ Replication in these systems emerges from the level-0 rules without being direct
 %\end{sidewaystable}
 
 \subsection{String-manipulation systems}
-\newthought{AlChemy} \cite{Fontana1992}
+\emph{AlChemy} \cite{Fontana1992}
 
 A new object in Fontana's Algorithmic Chemistry, or AlChemy, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
@@ -672,9 +637,9 @@ As the rules for the combinations of two molecules are predetermined (the reacti
 
 \subsection{Automata}
 
-\newthought{Coreworld} \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
+\emph{Coreworld} \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
 
-\newthought{Tierra} \parencite{Ray1991}
+\emph{Tierra} \parencite{Ray1991}
 
 In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
 
@@ -697,10 +662,9 @@ Mutations are introduced during replication by randomly flipping bits during the
 
 Emergence claimed in the three forms of \cite{Cariani1991}.
 
-\todo{SugiuraSuzukiShioseEtAl2003}
-Amoeba \cite{Pargellis2001}
+\emph{Amoeba} \parencite{Pargellis2001}
 
-\newthought{Avida} \parencite{Ofria2004}
+\emph{Avida} \parencite{Ofria2004}
 ``An approach to studying evolution...''
 
 Avida summer of 1993--based on Tierra wth better metering and measuring, and parallel code execution.
@@ -728,10 +692,10 @@ Asn automata reaction with a set of operations (six common logic operations, \eg
 Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
 
 \subsection{Other}
-\newthought{StringMol} \parencite{Hickinbotham2011}
+\emph{StringMol} \parencite{Hickinbotham2011}
 
 
-\newthought{GraphMol} \parencite{Nellis2012, Nellis2014} 
+\emph{GraphMol} \parencite{Nellis2012, Nellis2014} 
 
 ``Our aim is to improve novelty-generation algorithms by making their biological models richer''
 
@@ -820,19 +784,19 @@ Simulations by contrast are holistic and bottom-up, and encompass variability so
 
 Simulations seem to fall somewhere in between thought experiments or abstract models, and experiments. They are also relatively novel; common use has only come with increased access to digital computers. Consequently the nature of simulation--what can be claimed as a result of simulation, and what role may be played legitimately by simulation in scientific discovery--is a hot topic for philosophers of science. As might not be unexpected, two opposing positions have been commonly taken, plus a synthesis that claims the middle ground.
 
-\newthought{Simulations are only programs}
+\emph{Simulations are only programs}
 
 That is, a computational means to solve analytically intractable equations \parencite[31]{Winsberg2010}, ``...a high-speed generator of the consequences that some theory assigns various antecedent conditions'' \parencite[quoting from Dennett]{Eldridge}, producing nothing new (just consequences of what is ``fed in''\parencite{DiPaolo2000}). In this sense, simulations are not empirical.
 
 In this view simulations are aimed at answering specific questions, or analysing particular scenarios. The more accurate the simulation however, and hence the more valuable the results, the harder it is to generalize to other cases. It is hard to understand the behaviour of complicated simulations, and the causes of particular behaviours of interest may be unclear if there are many variables in play. For this reason \parencite{MaynardSmith1974} prefers the use of simple models, designed to illuminate the ``causes of differences of behaviour between different species or systems'' rather than ``assertions which are true of all systems or of all species.''
 
-\newthought{Simulations are themselves an instance of the thing}
+\emph{Simulations are themselves an instance of the thing}
 
 That is, the thing is not a shadow but the object. The Animats are actually alive, and therefore instances of biology.
 \footnote{And this way leads us to the claims of Strong Alife--the simulation is actually alive.}
 The simulation is a stand-in for the real world, and you can perform experiments on it as would any other system \parencite[31]{Winsberg2010}. Simulations certainly have elements of uncertainty and error, like experiments. As \parencite{Adami2002} says, describing Avida, \quote{These organisms, because they are defined by the sequence of instructions that constitute their genome, are not simulated. They are physically present in the computer's memory and live there. The world to which these creatures adapt, on the other hand, is simulated\ldots}{\parencite{Adami2002}}
 
-\newthought{Simulations are model builders}
+\emph{Simulations are model builders}
 
 \parencite[31]{Winsberg2010} or an ``Opaque Thought Experiment" \parencite{DiPaolo2000}. A common view, among others Dowling 1999, 264: simulation is like theory as about ``manipulating equations'' and ``developing ideas'' but like experiments as ``fiddling with machines'', ``trying ideas out'', ``watching to see what happens.'' 
 

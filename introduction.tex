@@ -542,27 +542,11 @@ Selection implies limits on fidelity--at least one perfect copy on average at ea
 %Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&Not self-referential--recombination rules are defined separately from objects\\
 %Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
 
-Squirm3 \cite{Hutton2007,Hutton2002}:
-Artificial system capable of life-like \gls{oee} (creativity).
-Based on hypothesis (materiality, interactions, embedding) of \textcite{Taylor2001}, better expressed in \textcite[p.341]{Hutton2002}; membrane to allow individuals to benefit from innovations by protecting internal reactions from others.
-\Gls{achem} from \textcite{Hutton2002} used to construct all elements in world--material and embedded.
-Atoms in \gls{achem} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
-Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division.
-Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)
-Enzymes can act as catalysts so G affects P; but enzyme evolution too improbable for OEE
-2D grid of squares (lattice), spring force for membrane
-Enzymes can now affect all reactions except enzyme production; in practice too slow
-Production rules hardcoded into AChem
-Only with raw materials in environment, niche construction through adaptation to availability of raw materials
-AChem hand-built with reactions instead of enzymes
-Prespecified reactions \parencite[p.4]{Hutton2007}- also see description in \cite[p.49]{Faulconbridge2011} where this set of reaction rules is presented as an example of an explicit set of rules. As these reaction rules that drive replication and hence inheritance are external to the model, the inheritance mechanism in Squirm3 lacks the property of self-reference.
+\textbf{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oee} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
 
-\parencite{Lucht2012}
+All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g., a, b, c\dots) and \emph{states} (e.g., 0, 1, 2\dots). Atoms and hence molecules are located on a 2D grid, and molecules cannot overlap or pass through each other. All reaction rules, such as \emph{R1: e8 + e0 $\rightarrow$ e4e3}, are prespecified (\cite[p.4]{Hutton2007} and \cite[p.49]{Faulconbridge2011}), and a shortcut consisting of a set of eight rules in \cite{Hutton2002} is sufficient to replicate single molecules. As all reaction rules, including those responsible for replication and hence inheritance, are exogenous to the model, the inheritance mechanism in Squirm3 is not evolvable. 
 
-Challenge to community--"to develop a system in which, starting with a soup of free atoms and a simple ``bootstrap'' chemistry, a cell-like creature similar to the one in H-41 evolves."
-Based on Hutton2007 Squirm3 chemistry, using Hutton's floods 
-Squirm3--fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension
-Added reaction types to address Squirm3's ``global-extinction problem and showing how quasi-universal enzymes can evolve''
+Individual entites in \cite{Hutton2002} are simply single molecules. \Cite{Hutton2007} introduces cells made up of a collection of molecules and bounded by a membrane of a particular atom type of limited reactivity; the membrane is intended to allow individuals to benefit from innovations by protecting their internal reactions from others. With a greatly increased set of predefined reaction rules (34 rules now for the cell replication shortcut, extended further again in \cite{Lucht2012}), each cell has the capacity for division and mutation (through the stochastic application of equally applicable rules).  Selection is purely by indirect competition for the raw materials (atoms in the environment) required by the reactions in a cell; interactions between individuals are purely through this indirect competition (niche construction without direct interaction). Cells in \cite{Hutton2007} are incapable of making use of resources from other cells (as they are effectively protected by non-reactant membranes) and so an intermittent exogenous mechanism (``floods'') is used to return the atoms in a number of randomly chosen cells to the environment.
 
 \end{NOTES}
 

@@ -29,6 +29,8 @@ First, a distinction: open-ended evolution refers to a goal or result, while evo
 	\item An open-ended evolutionary system must have an endogenous implementation of niches.
 \end{compactitem} \cite{Maley1999} (considered ``rather abstract'' by Hutton \parencite[p.341]{Hutton2002}).
 
+Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples \parencite{Watson2015}
+
 ``openendedness depends fundamentally on the continual production of novelty.'' Standish, in \parencite{Soros2014}
 
 ``we would like the evolutionary system, like life, to continue to produce individuals of increasing complexity and diversity.''--although note, following McShea, that much of life is single-celled and hasn't become much more complex in billions of years \parencite{Maley1999}
@@ -139,7 +141,6 @@ Next, changes are obviously relative, so we must identify what we are comparing-
 \footnote{\cite{Bringsjord2000} argues that Boden is wrong in two ways: first, that computer creativity does not shed much insight into human creativity (citing Searle's Chinese Room to demonstrate that shuffling symbols, as a creative AI would do, doesn't add much to our understanding), and second, that Boden's formulation of a rule change is too weak. Systems (citing BRUTUS) that are not considered creative, do rule changes of the form proposed by Boden. Instead, these changes must be more special than simple first-order logic. The first criticism is not relevant to us (echoed by \cite{Dorin2009}), but the second holds.}
 \end{mdframed}
 
-\begin{NOTES}
 \Cite{BanzhafBaumgaertnerBeslonEtAl2016} (an outcome of a workshop held in the summer of 2014 on ``Open-ended Novelty'', attended by many of those whose works are cited elsewhere in this thesis) provide a satisfying way to formalize novelty by making the idea of \cite{Boden2004}, that novelties ``break the rules'', explicit in the form of models and meta-models. By proposing a standard meta-model to describe any \gls{oee} system, be it living or non-living, \cite{BanzhafBaumgaertnerBeslonEtAl2016} can then define three levels of novelty by their effect on the model of the system itself and the overall meta-model:
 
 \begin{itemize}
@@ -149,51 +150,71 @@ Next, changes are obviously relative, so we must identify what we are comparing-
 \end{itemize}
 	
 The significance of this formulation is that novelty for almost the first time becomes non-subjective and measurable (assuming agreement on the overall meta-model, and that a model for the specific system can be defined.)
-\end{NOTES}
 
 \subsection{Elements/Embodiment/Emergence}
 \begin{NOTES}
-Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
+Open-ended evolution can be seen as the outcome of evolution in an open-ended system (\eg Chemistry), where an open-ended system has effectively unrestricted representation: the number of possible types must be much larger than the number of individuals. In the terminology of \cite{Szathmary:2006ty}, these are unlimited replicators, in contrast to limited replicators where the number of possible types is less than the number of individuals. Without this property all possible types can be generated in a finite time, and the system will either reach stasis or begin to repeat. 
 
-Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+Not all open-ended systems necessarily support evolution, but in those that do, our intuition suggests that open-ended evolution produces increasing complexity, increasing diversity, accumulation of novelty and continual adaptation \parencite{Lehman2012}.
 
-Similar to the \emph{semantic closure} of \cite{Pattee1995a}--``organisms should be constructed `with the parts and laws of an artificial physical world''' \cite{Taylor2001}
-Smith-Szathmary hypothesis that major transitions in biology are characterized by new ways of transmitting information. Adami follows this direction in stating ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity).'' \cite{Adami2002}
+A ``good'' genetic representation \parencite{Soros2014}
 
-\cite{Pattee1995a}: complementary matter (\eg genotype, hardware, brain, physical laws)--symbol (\eg phenotype, software, mind, measurements) aspects (referred to as \textit{Semantic Closure}) define life. Matter is objective and compressible; symbols are subjective and incompressible, specific to the individual's purpose. Semantic Closure is also a necessary condition for \gls{oee}. \Textcite{VonNeumann1966}
+\Textcite{VonNeumann1966}
 
-The argument is as follows: evolution requires self-replication. Self-replication requires both matter and symbols. In essence, \quote{"the organism's measurement,memory, and control constraints must be \textit{constructed} by the genes of the organism from parts of the artificial physical world.}{\cite[p.29]{Pattee1995},emphasis in original} 
+
+\cite{Pattee1995a}: complementary matter (\eg genotype, hardware, brain, physical laws) and symbols (\eg phenotype, software, mind, measurements) aspects (referred to as \textit{Semantic Closure}) define life. Matter is objective and compressible; symbols are subjective and incompressible, specific to the individual's purpose. 
+
+Semantic Closure is also a necessary condition for \gls{oee}. The argument is as follows: evolution requires self-replication. Self-replication requires both matter and symbols. In essence, \quote{"the organism's measurement,memory, and control constraints must be \textit{constructed} by the genes of the organism from parts of the artificial physical world.}{\cite[p.29]{Pattee1995},emphasis in original} 
 
 \cite[p.29]{Pattee1995}: three fundamental types of knowledge must be represented in models of \gls{alife}: laws, initial conditions, and statistics. Given that initial conditions are measurements, the implication is that \quote{any form of artificial life must be able to detect events and discover laws of its artificial world.}{\cite[p.29]{Pattee1995}}
 
 \quote{Additionally, from an epistemological point of view, Pattee (1995b) points out that symbolic information (such as that contained in an organism's genes) has ``no intrinsic meaning outside the context of an entire symbol system as well as the material organization  that constructs (writes) and interprets (reads) the symbol for a specific function, such a classification, control, construction, communication\ldots''. He argues that a necessary condition for an organism to be capable of creative open-ended evolution is that it encapsulates this entire self-referent organisation (Pattee refers to this condition as semantic closure). From this it follows that organisms should be constructed ``with the parts and the laws of an artificial physical world'' Pattee (1995a) (p.36). In other words, the interpretation (phenotype) of the symbolic information (genotype) of an artificial organism should be constructed and act within the artificial physical environment of the system. Additionally, if the system is to model the origin of genetic information, then the genotype itself must also be embedded within the environment; that is, the complete semantically-closed organisation `the entire organism' must be completely embedded within the physical environment. }{\cite[p.82]{Taylor2001}}
 
-``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001}
+``From the point of view of the evolvability of individuals, the more embedded they are, and the less restricted the interactions are, then the more potential there is for the very structure of the individual to be modified. Recall that this is one aspect of my definition of creative evolution. Sections of the individual which are not embedded in the arena of competition are `hard-wired' and likely to remain unchanged unless specific mechanisms are included to allow them to change (and the very fact that specific mechanisms are required suggests that they would still only be able to change in certain restricted ways).'' \cite{Taylor2001} 
+
 
 Resources must be ``(a) a vital commodity to individuals in the population; (b) of limited availability; and (c) that individuals can compete for (at either a global or local level). This resource can usually be interpreted as en\eg space, matter, or a combination of these.'' \parencite{Taylor2001}
 
+Everything in our artificial world must be built from a common set of raw materials; a loop connects the targets of selection with the environment. Other work, although superficially similar in that it models objects of similar scale, uses different models for the objects and the world (see \parencite{Sanchez-Dehesa:2008uq}) and so lack this loop.
+
+Smith-Szathmary hypothesis that major transitions in biology are characterized by new ways of transmitting information. Adami follows this direction in stating ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity).'' \cite{Adami2002}
+
+Bottom-up models for open-ended evolution leverage the richness of underlying environment--less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
+
 Need something emergent. \parencite{Nellis2014}
-A ``good'' genetic representation \parencite{Soros2014}
-Contains an interesting discussion mapping a list of desirable properties onto the emergent properties that are then required of an \gls{achem} \parencite{Faulconbridge2010, Faulconbridge2011}
+
 ``A phenomenon is embodied within a world if there exist some mechanisms within the world that enable the phenomenon to emerge.'' \cite{Nellis2014}
 Quick defined embodiment in terms of two dynamical systems mutually affecting each other--no need for a physical world. System modifies environment. Doesn't address if system is constructed from environment. Autopoiesis does say though that system built from environment. But autopoiesis talks about maintenance not evolution. \parencite{Nellis2014}
 
-Bottom-up models for open-ended evolution leverage the richness of underlying environment--less information in entity definition, more in environment definition. Similar to biology, where physics and chemistry underpin living organisms, where definition of minimal cell many orders of magnitude simpler than the working out of the chemical and physical rules that it relies upon. Top-down models assume a knowledge of the necessary elements.
+Contains an interesting discussion mapping a list of desirable properties onto the emergent properties that are then required of an \gls{achem} \parencite{Faulconbridge2010, Faulconbridge2011}
+
+
+
 \end{NOTES}
 
 \subsection{Selection}
 \begin{NOTES}
-Individuals and environment mutually affect each other \parencite{Taylor2001}
-Competition between individuals for resources--VanValen1973 Red Queen hypothesis--primary source of intrinsic selection pressure. \parencite{Taylor2001}
-Ray made similar arguments in favour of interactions with other individuals (rather than isolated as in EA) 
+Individuals and environment mutually affect each other and ``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
+Some support the Red Queen hypothesis \parencite{VanValen1973}:
+\begin{itemize}
+\item Competition between individuals for resources is the primary source of intrinsic selection pressure. \parencite{Taylor2001}
+\item ``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+\item Ray makes similar arguments \parencite[p.23]{Ray1991} in favour of interactions with others to ``provide the primary driving force in evolution.'' (rather than independence and isolation as in an \gls{ea}) 
+\end{itemize}
+
+Selection implies limits on fidelity--at least one perfect copy on average at each replication required \parencite{Eigen1977}
+
+How does selection at one level get suppressed, and introduced at the next?  \parencite{Watson2015}
+
+``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (\eg crossover).'' \cite{Dittrich1998}
+Cannot state in advance possible preadaptations. \parencite{Vasas2015}
 Decisions about how and where individuals interact with the world should be made by the individuals themselves. \parencite{Soros2014}
 A rule should be enforced that individuals must meet some minimal criterion (MC) before they can reproduce, and that criterion must be nontrivial.\parencite{Soros2014}
 The evolution of new individuals should create novel opportunities for satisfying the MC \parencite{Soros2014}
 A ``sufficiently large world for every individual to be evaluated'' \parencite{Soros2014}
 ``the potential for a large degree of intrinsic adaptation'' \parencite{Taylor2001}
 Inexhaustible fitness landscape--implies rich, dynamical environment. \parencite{Vasas2015}
-Cannot state in advance possible preadaptations. \parencite{Vasas2015}
-``the most important aspect of an organism's environment are the other organisms with which it interacts'' \parencite{Maley1999}
+
 \end{NOTES}
 
 \subsection{Replication, reproduction and inheritance}\label{replication-reproduction-and-inheritance}
@@ -202,22 +223,15 @@ Cannot state in advance possible preadaptations. \parencite{Vasas2015}
 Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
 Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\cite[s3.6]{Taylor2001}})
 Very rich combinatorial generative mechanism \eg organic chemistry \parencite{Vasas2015}
+
 ``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
-``The term self-evolution should refer to an evolutionary process within a population system where the components responsible for the evolutionary behavior are (only) the individuals of the population
-system itself. Every variation is carried out by the individuals. Selection pressure is generated implicitly through interaction among the individuals and not by external agents. The system must not contain a component that can be identified as a fitness function or global operators performing selection or variation (\eg crossover).'' \cite{Dittrich1998}
+
 ``We want to embody the copying program, implementing it as a phenomenon resulting from the interaction of multiple mechanisms in a world. This will allow the copied strings to vary and evolve, and will also allow the copying process to vary and evolve.'' \cite{Nellis2014}
-``Rasmussen then designed a system similar to core war in which the command that copied instructions was flawed and would sometimes write a random instruction instead on the one intended.'' \parencite{Ofria2004}
-\end{NOTES}
-\begin{NOTES}
-\autocite{Watson2015}:
-Darwinian machine is fundamentally self-referential - products of evolution affect process of evolution - lots of examples
-\begin{itemize}
-\item Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level. How does selection at one level get suppressed, and introduced at the next?
-\item Independent replication before transition, must replicate as part of a larger whole afterwards
-\item Fundamental for complexity - complexity associated with levels
-\item Draws analogy with Hinton 2008 Deep Learning
-\item At one level, supervised learning improving adaptation; at next higher, unsupervised improving robustness
-\end{itemize}
+
+
+Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level,; independent replication before transition, must replicate as part of a larger whole afterwards. 
+Fundamental for complexity - complexity associated with levels  \parencite{Watson2015}
+
 \end{NOTES}
 
 \section{Background and context}\label{background-and-context}
@@ -468,7 +482,15 @@ This progression is comprehensively explored in \cite{Zachar2010}, extending ear
 
 Interestingly, in biology at least, the starting point for the development of modern replicators might have began with horizontal inheritance. First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.
 
-But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator \footnote{In \cite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness}? Is a set of autocatalytic reactions that splits into two replicating? \Cite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
+But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator \footnote{In \cite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness}? Is a set of autocatalytic reactions that splits into two replicating? \Cite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. 
+
+\cite{Hogeweg1998} describes attractor-based heredity (inheritance of state) and storage-based. 
+
+Heredity by \cite{MaynardSmith1999} is modular or holistic--if module changed only that module changes in descendants, holistic change part changes whole. Believe it true that unlimited heredity implies modular. \cite{Szathmary1999} calls these digital and holistic, and adds phenotypic replicators whereby ``phenotype or function of one object is translated to the other, without any modular copying effect” 
+
+Modular/template heredity has advantages of: mutations hereditary; problems of correct copying \parencite{Eigen1977}
+
+Relatively recently, \cite{Zachar2010} saw a need to rexamine the definition primarily to resolve issues of discrimination between entities which are clearly replicators or not replicators, and those which are borderline, and between biological replicators and non-biological or cultural ones. 
 
 %A regenerating/recreating entity can produce at least one entity equivalent to it. It is possible that the original entity immediately decomposes (that is, cannot be the subject of further turns of the cycle), causing sequential replacement, although this is the most simple of regenerating entities. If it can effectively increase the number of entities equivalent to itself, then it is autocatalytic and is a \emph{replicator}.
 
@@ -493,9 +515,8 @@ The model for \emph{Chemical Evolution by Natural Selection} in \cite{Fernando:2
 
 \section{Variable replicators}
 \begin{NOTES}
-Heredity by \cite{MaynardSmith1999} is modular or holistic--if module changed only that module changes in descendants, holistic change part changes whole. Believe it true that unlimited heredity => modular. \cite{Szathmary1999} calls these digital and holistic, and adds phenotypic replicators whereby ‘phenotype or function of one object is translated to the other, without any modular copying effect” (how does this differ from holistic?)
 
-\cite{Hogeweg1998} describes attractor-based heredity (inheritance of state) and storage-based. 
+\emph{Reflexively Autocatalytic Polymer Networks} (RAPN) \parencite{Kauffman1986} are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in \cite{Vasas2012} putting these networks into compartments (so not well-stirred) then can do directional selection.
 
 \cite{Vasas2012a} ACS cores are attractor based, DNA/RNA storage based. HGT/LGT--compositional inheritance.
 Difficulties with Compositional inheritance in something like GARD where just a correlation between parent and child--response to selection not seen \parencite{Vasas2015}--end up with just one large component (so no selection), no replication as contents not inherited equally, so properties might be quite different from parent. Information fidelity varies widely. Mutations in cycles \parencite{Vasas2012a} generally not heritable as mutant copies generally not functional in autocatalysis. So problem with mutations as source of variation. Alternative to mutations is avalanches--form new cycles from side-products.
@@ -505,10 +526,8 @@ But can see heredity in autocatalytic cores (one or more linked autocatalytic lo
 %\cite{Fernando:2008xy,Fernando:2007pf}                          &Compositional&Non-template: Lipid aggregates\\
 %Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&Non-template\\
 			
-\cite{Kauffman1986}
-Reflexively Autocatalytic Polymer Networks (RAPN) are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in Vasas2012 putting these networks into compartments (so not well-stirred) then can do directional selection.
 
-GARD \parencite{Segre1998}
+\emph{GARD} \parencite{Segre1998}
 Eigen threshold applies--mutation rates (see issue of replication--big differences between parent and child) overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}
 
 Claim made that GARD is capable of darwinian evolution, but population analysis showed not in response to directional selection (Vasas2010) \parencite{Vasas2015, Vasas2012, Vasas2012a}
@@ -531,88 +550,35 @@ Based on GARD \parencite{Segre1998}. Can evolution happen when information trans
 \end{NOTES}
 
 \section{Informational replicators with shortcut replication mechanism}
+
+An informational replicator with a shortcut is one where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended.
+
 \begin{NOTES}
-Modular/template heredity has advantages of: mutations hereditary; problems of correct copying \parencite{Eigen1977}
-
-Selection implies limits on fidelity--at least one perfect copy on average at each replication required \parencite{Eigen1977}
-
-\Cite{BanzhafBaumgaertnerBeslonEtAl2016} where the replication mechanism is directly implemented by the experimenter rather than being an emergent property. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended.
 
 %ZChem \cite{Tominaga2004}                                     	&&Not self-referential--recombination rules are defined separately from objects\\
 %Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&Not self-referential--recombination rules are defined separately from objects\\
 %Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
 
-Squirm3 \cite{Hutton2007,Hutton2002}:
-Artificial system capable of life-like \gls{oee} (creativity).
-Based on hypothesis (materiality, interactions, embedding) of \textcite{Taylor2001}, better expressed in \textcite[p.341]{Hutton2002}; membrane to allow individuals to benefit from innovations by protecting internal reactions from others.
-\Gls{achem} from \textcite{Hutton2002} used to construct all elements in world--material and embedded.
-Atoms in \gls{achem} of different types and states; reaction rules; otherwise no energy modelling; only physics modelling is the concept of location (either integer-coordinates or real number-coordinates) and impossibility of colocation. Floods are used to recycle raw materials.
-Individuals (each bounded by a membrane) with the capability for division and mutation. Raw materials (atoms) are only required for division.
-Interactions between individuals are limited to effects on shared environment (niche construction without direct interaction), so one element of hypothesis untested; restrictions on open-endedness: evolution of new enzymes unobserved as extremely unlikely, and genotype-phenotype mapping hard-coded (unevolvable)
-Enzymes can act as catalysts so G affects P; but enzyme evolution too improbable for OEE
-2D grid of squares (lattice), spring force for membrane
-Enzymes can now affect all reactions except enzyme production; in practice too slow
-Production rules hardcoded into AChem
-Only with raw materials in environment, niche construction through adaptation to availability of raw materials
-AChem hand-built with reactions instead of enzymes
-Prespecified reactions \parencite[p.4]{Hutton2007}- also see description in \cite[p.49]{Faulconbridge2011} where this set of reaction rules is presented as an example of an explicit set of rules. As these reaction rules that drive replication and hence inheritance are external to the model, the inheritance mechanism in Squirm3 lacks the property of self-reference.
-
-\parencite{Lucht2012}
-
-Challenge to community--"to develop a system in which, starting with a soup of free atoms and a simple ``bootstrap'' chemistry, a cell-like creature similar to the one in H-41 evolves."
-Based on Hutton2007 Squirm3 chemistry, using Hutton's floods 
-Squirm3--fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension
-Added reaction types to address Squirm3's ``global-extinction problem and showing how quasi-universal enzymes can evolve''
-
 \end{NOTES}
+\textbf{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oee} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
+
+All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g., a, b, c\dots) and \emph{states} (e.g., 0, 1, 2\dots). Atoms and hence molecules are located on a 2D grid, and molecules cannot overlap or pass through each other. All reaction rules, such as \emph{R1: e8 + e0 $\rightarrow$ e4e3}, are prespecified (\cite[p.4]{Hutton2007} and \cite[p.49]{Faulconbridge2011}), and a shortcut consisting of a set of eight rules in \cite{Hutton2002} is sufficient to replicate single molecules. As all reaction rules, including those responsible for replication and hence inheritance, are exogenous to the model, the inheritance mechanism in Squirm3 is not evolvable. 
+
+Individual entites in \cite{Hutton2002} are simply single molecules. \Cite{Hutton2007} introduces cells made up of a collection of molecules and bounded by a membrane of a particular atom type of limited reactivity; the membrane is intended to allow individuals to benefit from innovations by protecting their internal reactions from others. With a greatly increased set of predefined reaction rules (34 rules now for the cell replication shortcut, extended further again in \cite{Lucht2012}), each cell has the capacity for division and mutation (through the stochastic application of equally applicable rules).  Selection is purely by indirect competition for the raw materials (atoms in the environment) required by the reactions in a cell; interactions between individuals are purely through this indirect competition (niche construction without direct interaction). Cells in \cite{Hutton2007} are incapable of making use of resources from other cells (as they are effectively protected by non-reactant membranes) and so an intermittent exogenous mechanism (``floods'') is used to return the atoms in a number of randomly chosen cells to the environment.
 
 \section{Informational replicators or self-replicators}
 \begin{NOTES}
 Replication in these systems emerges from the level-0 rules without being directly specified by the experimenter or designer. However, even here most systems still shortcut this by providing a seed or universal ancestor (\eg \cite{Ofria2004}) that contains a working module for replication that can be then modified (for good or ill) in each subsequent generation.
-%
-%\begin{sidewaystable}
-%	\begin{center}
-%		\scriptsize
-%		\caption{Previous work}
-%		\label{tb:previous-work}
-%		\begin{tabular}{@{}llll@{}}
-%			\hline\noalign{\smallskip}
-%			\Gls{achem}                                                     & Type 	& Notes\\ 
-%			\\ \noalign{\smallskip}
-%			\hline
-%			\noalign{\smallskip}
-%			Avida \cite{Ofria2004}                                  		&Assembler Automata&	& Embedded copy algorithm\\
-%			Tierra \cite{Ray1991}                                  			&Assembler Automata&	& Embedded copy algorithm\\
-%			\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&\\
-%			StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&\\
-%			\cite{Fontana1992}												&Rewriting or String-based&&2-parent function\\
-%			\cite{Dittrich1998}												&Rewriting or String-based&&2-parent function\\
-%\hline
-%			\cite{Nowostawski2005}											&&&\\		
-%
-%			\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&\\			
-%			NAC \cite{Suzuki2006}                                         	&&&\\	
-%			\cite{Gardiner2007}                                             &&&\\
-%\hline			
-%			\cite{Kauffman1986}												&Compositional&&\\
-%			Turing															&Rewriting 	&&Yes\\
-%			Von Neumann														&&&\\
-%			Waddington														&Biology&&\\
-%			\hline
-%		\end{tabular}
-%	\end{center}
-%	\caption{Achems with evolutionary replicators.}
-%\end{sidewaystable}
-
+\end{NOTES}
 \subsection{String-manipulation systems}
-\emph{AlChemy} \cite{Fontana1992}
 
-A new object in Fontana's Algorithmic Chemistry, or AlChemy, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
+A new object in Fontana's Algorithmic Chemistry, or \emph{AlChemy} \parencite{Fontana1992}, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
 How then is the interaction expression $(('f)('g))$ between $f$ and $g$ evaluated to produce $h$? AlChemy is a form of pure LISP (with some ``minor idiosyncrasies''), based on toyLISP, with six primitive operators defined in \cite[p.205]{Fontana1992}. The interaction expression is defined in \cite[Definition A.9, p.204]{Fontana1992} as $V[(('f)('g)),()] = (V[f,(a\leftarrow g)])$, using the notation $V[e,L]=v$ to mean the expression $e$ with the ``association list'' $L$ (a list of value assignments between atoms and expressions) evaluates to $v$. The result $h$ is described as $f(g)$ and the process as $f+g \rightarrow (('f)('g)) \rightarrow h + f + g$.
 
 Clearly reproduction in AlChemy is self-referential--the process to construct a child object is defined in the code of the parent objects. Unfortunately, inheritance doesn't follow straightforwardly as the reproduction process is unique in two important ways. First, each new object has two parents, rather than one, as is more common. Producing new objects as some function of the two parents in turn means that the relationship between parents and child is not a straightforward mutation or other syntactic difference, but rather a complex functional relationship. What this means for the relationship between the parent's fitness and the child's fitness is not obvious. It seems that the fitness differences in AlChemy might be more extreme than in other systems where parent and child are syntactically similar.
 
+\begin{NOTES}
 \parencite{Fenizio2000}:
 
 Original AlChemy reactions of form $A+B\rightarrow C$ where $C$ replaces an existing element.
@@ -634,52 +600,36 @@ Experiment to show spontaneous formation of autopoietic cells, with a focus on `
 ``Molecules are built from a substrate of elements called atoms. There are seven types of atoms ($I, K, W, R, B, C, S$), each with a different function. The total number of atoms in the reactor is kept constant during a run. Free atoms (not bounded in molecules) are separately stored and form a global pool.''
 
 As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \cite{Fenizio2000}), this model is not by our definition open-ended.
-
+\end{NOTES}
 \subsection{Automata}
 
-\emph{Coreworld} \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
+\emph{Coreworld} \parencite{Rasmussen1990}, inspired by the early computer game ``Core War''\footnote{See \url{corewar.co.uk}}, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
 
-\emph{Tierra} \parencite{Ray1991}
+In \emph{Tierra} \parencite{Ray1991} mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
 
-In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
-
-Mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
-
-Emergence claimed in the three forms of \cite{Cariani1991}.
-
-Tierra was the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}, by adding cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
-
-Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
-Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
-
-Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype--the latter being an informational concept)'' \parencite{Taylor2001}
+In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms'' \parencite[p.3]{Ray1991}. As Taylor criticizes though, the problem with ``engineering over'' is that we don't understand the natural examples well enough to engineer them at all \parencite{Taylor2001}
 
 Tierra has been the testbed for a number of other works. For example, \cite{SugiuraSuzukiShioseEtAl2003} converted Tierra into a string manipulation systems, introducing a set of 140 regular-expression based rewriting rules where each rule encoded one or more of the original 32 Tierran instructions. The initial rewriting ruleset was manually generated by the experimenters, although details are unclear. Unlike in Tierra where the instruction set is fixed during a run, the rewriting rule set for each organism itself could evolve through a separate genetic algorithm. This algorithm removed the least applied rules and inserted the same number of new rules generated by mutating (through duplication, removal and addition of operations) a selection of the most applied rules. Although results support the claim that the ruleset as well as the genome evolves, the use of a separate genetic algorithm for ruleset evolution artificially separates the ruleset from the genome--the feedback loop from genome back to ruleset is broken.
 
-In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
+Tierra was also the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}, by adding cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
 
-Mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
+% Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
+%Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
 
-Emergence claimed in the three forms of \cite{Cariani1991}.
 
-\emph{Amoeba} \parencite{Pargellis2001}
+\emph{Avida} \parencite{Ofria2004}, introduced in the summer of 1993, based on Tierra with improvements including better metering and measuring, and a 2D lattice or well-stired reaction vessel topography (unlike the shared linear memory of Tierra, for example). ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
 
-\emph{Avida} \parencite{Ofria2004}
-``An approach to studying evolution...''
+Like Tierra, the automata engine in Avida is based on a Turing tape-like metaphor, with instruction, read, write, and flow control heads that can be moved forward and backwards through memory using relative rather than absolute addressing. Instructions are grouped into instruction sets, with the default set containing 26 instructions, and by definition every program is valid. Each organism runs on its own virtual automata; the only interaction between organisms is via resources in the shared environment and through competition for virtual machine CPU cycles based on ``merit'' or fitness. Direct Tierra-style interactions by insertion of code into another organism is not enabled by default, but is possible through configuration. Phenotypes take the form of computations (entities take in resources, perform computations that result in merit, and perhaps produce output or byproduct resources): ``\ldots by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources'' \parencite{Ofria2004}. Interestingly, the resources in the environment are not the same as the elements of the organisms (instructions from an instruction set.) Avidan organisms are not fully-embedded in their environment.
 
-Avida summer of 1993--based on Tierra wth better metering and measuring, and parallel code execution.
+New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is placed at the beginning of its code, the write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \cite[A1.3]{Ofria2004} consists of 15 instructions.
 
-Phenotypes--``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources''
+Avida is extremely configurable, but provides little guidance or theoretical justification for any particular configuration. Indeed this variability allows it to function most usefully as a general testbed for experiments, \eg ``in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift'' \parencite{Ofria2004}.
 
-``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
-Instruction, read, write, and flow control heads for relative rather than absolute addressing--bit like a Turing tape machine. Many instructions grouped into instruction sets. Default set has 26 instructions, and by definition every program is valid.
+\emph{Amoeba-II} \parencite{Pargellis2001} shares similar features to Tierra and Avida in that it is an instruction-set based automata, but unlike in those systems, replication spontaneously emerges in Amoeba-II. The replication process requires four steps: ``register initiation, memory allocation, copying of the parent's instructions to the child (embryo), and division where the child is initiated as a cell on its own'' \parencite[p.69]{Pargellis2001}. Two specific instructions in the parent's genome are required at a minimum. The MALL command allocates memory, and a virtual CPU to the child, and DIVD performs the division. Register initiation and copying of the parent's instructions can be done in a variety of different ways, and a good deal of the interest of the Amoeba-II system lies in the evolvability of these mechanisms. Selection is by efficiency of replication, where faster and more efficient replicators replace less efficient ones in the population (as \cite{Pargellis2001} says, ``Amoeba has only one task: replication'') and so there is selective pressure from the least efficient, but functioning, mechanisms in the direction of improved replication. To complement selection and inheritance, variability is provided by the DIVD instruction, which introduces a mix of instruction substitutions, deletions and insertions into the child's program at a fixed but low rate.
 
-New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is then placed at the beginning of its code, write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \cite[A1.3]{Ofria2004} consists of 15 instructions.
+Inheritance in Amoeba-II is almost too effective. Fit organisms rapidly evolve into extremely rapid reproducers and out-replicate all other entities, leaving a mono-culture.
 
-``The quest to halt adaptation is only one example of a special feature in Avida; many more have been explored, and are continuously being added to the source code. The most successful features are all fully described in the documentation that comes with the software.''
-
-All very configurable, and complicated, but why? What rationale behind choices? More of a testbed for experiments, \eg `` in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift''
-
+\begin{NOTES}
 \cite{Dittrich1998}:
 A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry.
 
@@ -690,8 +640,9 @@ A=``1. Select two objects s1,s2 from the soup randomly, without removing them. 2
 Asn automata reaction with a set of operations (six common logic operations, \eg OR, and nine computational instructions), represented as 4-bit sequences, to generate s3 from s1, s2. Automata is a deterministic FSA, running s1 on s2 to produce s3. As Dittrich observes ``The first noticeable property is that the structure of the product s3 is similar to its 'parents' s1; s2. This indicates that there is a correlation between s1, s2, and s3 that is a prerequisite for evolution.''
 
 Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
-
+\end{NOTES}
 \subsection{Other}
+\begin{NOTES}
 \emph{StringMol} \parencite{Hickinbotham2011}
 
 
@@ -723,12 +674,12 @@ Stringmol and Graphmol have embodied template copying, done in different ways. D
 %\end{verbatim}
 
 \begin{algorithm}[ht]
-$i=start(\text{string B})$\;
-\While{$\text{i} not at-end(\text{string B})$}{
-	$\text{string A(i)} \leftarrow char-copy(\text(string B(i)))$\;
-    $\text{i} \leftarrow next\text{i}$\;
+$\text{i} \leftarrow \text{start(string B)}$\;
+\While{$\text{i not at-end(string B)}$}{
+	$\text{string A(i)} \leftarrow \text{char-copy(string B(i)))}$\;
+    $\text{i} \leftarrow \text{next i}$\;
 }
-\caption{Algorithm for template copying, taken from \cite{Nellis2014}, used in both StringMol and GraphMol}
+\caption{The algorithm for template copying used by StringMol and GraphMol, taken from \cite{Nellis2014}}
 \end{algorithm}
 
 Each of these four functions--\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}--can either be ``crisp'' (\ie perfect) or embodied (variable, the subject of evolution). Replicases are elements in the population that can copy themselves using this algorithm.

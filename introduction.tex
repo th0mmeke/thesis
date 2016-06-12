@@ -542,61 +542,26 @@ Selection implies limits on fidelity--at least one perfect copy on average at ea
 %Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&Not self-referential--recombination rules are defined separately from objects\\
 %Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
 
+\end{NOTES}
 \textbf{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oee} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
 
 All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g., a, b, c\dots) and \emph{states} (e.g., 0, 1, 2\dots). Atoms and hence molecules are located on a 2D grid, and molecules cannot overlap or pass through each other. All reaction rules, such as \emph{R1: e8 + e0 $\rightarrow$ e4e3}, are prespecified (\cite[p.4]{Hutton2007} and \cite[p.49]{Faulconbridge2011}), and a shortcut consisting of a set of eight rules in \cite{Hutton2002} is sufficient to replicate single molecules. As all reaction rules, including those responsible for replication and hence inheritance, are exogenous to the model, the inheritance mechanism in Squirm3 is not evolvable. 
 
 Individual entites in \cite{Hutton2002} are simply single molecules. \Cite{Hutton2007} introduces cells made up of a collection of molecules and bounded by a membrane of a particular atom type of limited reactivity; the membrane is intended to allow individuals to benefit from innovations by protecting their internal reactions from others. With a greatly increased set of predefined reaction rules (34 rules now for the cell replication shortcut, extended further again in \cite{Lucht2012}), each cell has the capacity for division and mutation (through the stochastic application of equally applicable rules).  Selection is purely by indirect competition for the raw materials (atoms in the environment) required by the reactions in a cell; interactions between individuals are purely through this indirect competition (niche construction without direct interaction). Cells in \cite{Hutton2007} are incapable of making use of resources from other cells (as they are effectively protected by non-reactant membranes) and so an intermittent exogenous mechanism (``floods'') is used to return the atoms in a number of randomly chosen cells to the environment.
 
-\end{NOTES}
-
 \section{Informational replicators or self-replicators}
 \begin{NOTES}
 Replication in these systems emerges from the level-0 rules without being directly specified by the experimenter or designer. However, even here most systems still shortcut this by providing a seed or universal ancestor (\eg \cite{Ofria2004}) that contains a working module for replication that can be then modified (for good or ill) in each subsequent generation.
-%
-%\begin{sidewaystable}
-%	\begin{center}
-%		\scriptsize
-%		\caption{Previous work}
-%		\label{tb:previous-work}
-%		\begin{tabular}{@{}llll@{}}
-%			\hline\noalign{\smallskip}
-%			\Gls{achem}                                                     & Type 	& Notes\\ 
-%			\\ \noalign{\smallskip}
-%			\hline
-%			\noalign{\smallskip}
-%			Avida \cite{Ofria2004}                                  		&Assembler Automata&	& Embedded copy algorithm\\
-%			Tierra \cite{Ray1991}                                  			&Assembler Automata&	& Embedded copy algorithm\\
-%			\cite{Nellis2012}\cite{Nellis2014}								&Boolean Networks and Graphs&&\\
-%			StringMol \cite{Hickinbotham2012}                             	&Rewriting or String-based&&\\
-%			\cite{Fontana1992}												&Rewriting or String-based&&2-parent function\\
-%			\cite{Dittrich1998}												&Rewriting or String-based&&2-parent function\\
-%\hline
-%			\cite{Nowostawski2005}											&&&\\		
-%
-%			\cite{Fenizio2000}\cite{Fenizio2001}							&Rewriting or String-based&&\\			
-%			NAC \cite{Suzuki2006}                                         	&&&\\	
-%			\cite{Gardiner2007}                                             &&&\\
-%\hline			
-%			\cite{Kauffman1986}												&Compositional&&\\
-%			Turing															&Rewriting 	&&Yes\\
-%			Von Neumann														&&&\\
-%			Waddington														&Biology&&\\
-%			\hline
-%		\end{tabular}
-%	\end{center}
-%	\caption{Achems with evolutionary replicators.}
-%\end{sidewaystable}
-
+\end{NOTES}
 \subsection{String-manipulation systems}
-\emph{AlChemy} \cite{Fontana1992}
 
-A new object in Fontana's Algorithmic Chemistry, or AlChemy, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
+A new object in Fontana's Algorithmic Chemistry, or \emph{AlChemy} \parencite{Fontana1992}, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
 How then is the interaction expression $(('f)('g))$ between $f$ and $g$ evaluated to produce $h$? AlChemy is a form of pure LISP (with some ``minor idiosyncrasies''), based on toyLISP, with six primitive operators defined in \cite[p.205]{Fontana1992}. The interaction expression is defined in \cite[Definition A.9, p.204]{Fontana1992} as $V[(('f)('g)),()] = (V[f,(a\leftarrow g)])$, using the notation $V[e,L]=v$ to mean the expression $e$ with the ``association list'' $L$ (a list of value assignments between atoms and expressions) evaluates to $v$. The result $h$ is described as $f(g)$ and the process as $f+g \rightarrow (('f)('g)) \rightarrow h + f + g$.
 
 Clearly reproduction in AlChemy is self-referential--the process to construct a child object is defined in the code of the parent objects. Unfortunately, inheritance doesn't follow straightforwardly as the reproduction process is unique in two important ways. First, each new object has two parents, rather than one, as is more common. Producing new objects as some function of the two parents in turn means that the relationship between parents and child is not a straightforward mutation or other syntactic difference, but rather a complex functional relationship. What this means for the relationship between the parent's fitness and the child's fitness is not obvious. It seems that the fitness differences in AlChemy might be more extreme than in other systems where parent and child are syntactically similar.
 
+\begin{NOTES}
 \parencite{Fenizio2000}:
 
 Original AlChemy reactions of form $A+B\rightarrow C$ where $C$ replaces an existing element.
@@ -618,52 +583,36 @@ Experiment to show spontaneous formation of autopoietic cells, with a focus on `
 ``Molecules are built from a substrate of elements called atoms. There are seven types of atoms ($I, K, W, R, B, C, S$), each with a different function. The total number of atoms in the reactor is kept constant during a run. Free atoms (not bounded in molecules) are separately stored and form a global pool.''
 
 As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \cite{Fenizio2000}), this model is not by our definition open-ended.
-
+\end{NOTES}
 \subsection{Automata}
 
-\emph{Coreworld} \parencite{Rasmussen1990}, inspired by the computer game core war, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
+\emph{Coreworld} \parencite{Rasmussen1990}, inspired by the early computer game ``Core War''\footnote{See \url{corewar.co.uk}}, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
 
-\emph{Tierra} \parencite{Ray1991}
+In \emph{Tierra} \parencite{Ray1991} mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
 
-In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
-
-Mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
-
-Emergence claimed in the three forms of \cite{Cariani1991}.
-
-Tierra was the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}, by adding cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
-
-Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
-Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
-
-Phenotype fundamentally ``involves interaction with the environment (and that this is the essential distinction between the notions of phenotype and genotype--the latter being an informational concept)'' \parencite{Taylor2001}
+In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms'' \parencite[p.3]{Ray1991}. As Taylor criticizes though, the problem with ``engineering over'' is that we don't understand the natural examples well enough to engineer them at all \parencite{Taylor2001}
 
 Tierra has been the testbed for a number of other works. For example, \cite{SugiuraSuzukiShioseEtAl2003} converted Tierra into a string manipulation systems, introducing a set of 140 regular-expression based rewriting rules where each rule encoded one or more of the original 32 Tierran instructions. The initial rewriting ruleset was manually generated by the experimenters, although details are unclear. Unlike in Tierra where the instruction set is fixed during a run, the rewriting rule set for each organism itself could evolve through a separate genetic algorithm. This algorithm removed the least applied rules and inserted the same number of new rules generated by mutating (through duplication, removal and addition of operations) a selection of the most applied rules. Although results support the claim that the ruleset as well as the genome evolves, the use of a separate genetic algorithm for ruleset evolution artificially separates the ruleset from the genome--the feedback loop from genome back to ruleset is broken.
 
-In Ray's words, ``...this approach involves engineering over the early history of life to design complex evolvable organisms, and then attempting to create conditions that will set off a spontaneous evolutionary process of increasing diversity and complexity of organisms''\parencite{Taylor2001}. The problem with `engineering over' is we don't understand the natural examples well enough to engineer them \parencite{Taylor2001}
+Tierra was also the starting point for \cite{Taylor2001, Taylor:1999sc} to explore the creation of \gls{alife}, by adding cell regulation, parallel processes and energy modelling \cite[p.4]{Taylor:1999sc}.
 
-Mutations are introduced during replication by randomly flipping bits during the copy operation (at a given rate of generally between 1 bit flip per 1,000 and 2,500 instructions copied). This rate is set by the experimenter, and is not evolvable. Mutations can also be introduced by the copy algorithm itself however; as it is an algorithm defined in the organism in standard Tierra instructions (and hence fulled embedded), mutations in the algorithm during a copy will be inherited by the child. The initial copy algorithm is part of the 80-instruction ancestral creature documented in \cite[app.C]{Ray1991}.
+% Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
+%Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
 
-Emergence claimed in the three forms of \cite{Cariani1991}.
 
-\emph{Amoeba} \parencite{Pargellis2001}
+\emph{Avida} \parencite{Ofria2004}, introduced in the summer of 1993, based on Tierra with improvements including better metering and measuring, and a 2D lattice or well-stired reaction vessel topography (unlike the shared linear memory of Tierra, for example). ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
 
-\emph{Avida} \parencite{Ofria2004}
-``An approach to studying evolution...''
+Like Tierra, the automata engine in Avida is based on a Turing tape-like metaphor, with instruction, read, write, and flow control heads that can be moved forward and backwards through memory using relative rather than absolute addressing. Instructions are grouped into instruction sets, with the default set containing 26 instructions, and by definition every program is valid. Each organism runs on its own virtual automata; the only interaction between organisms is via resources in the shared environment and through competition for virtual machine CPU cycles based on ``merit'' or fitness. Direct Tierra-style interactions by insertion of code into another organism is not enabled by default, but is possible through configuration. Phenotypes take the form of computations (entities take in resources, perform computations that result in merit, and perhaps produce output or byproduct resources): ``\ldots by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources'' \parencite{Ofria2004}. Interestingly, the resources in the environment are not the same as the elements of the organisms (instructions from an instruction set.) Avidan organisms are not fully-embedded in their environment.
 
-Avida summer of 1993--based on Tierra wth better metering and measuring, and parallel code execution.
+New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is placed at the beginning of its code, the write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \cite[A1.3]{Ofria2004} consists of 15 instructions.
 
-Phenotypes--``The primary mode of environmental interaction is by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources''
+Avida is extremely configurable, but provides little guidance or theoretical justification for any particular configuration. Indeed this variability allows it to function most usefully as a general testbed for experiments, \eg ``in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift'' \parencite{Ofria2004}.
 
-``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
-Instruction, read, write, and flow control heads for relative rather than absolute addressing--bit like a Turing tape machine. Many instructions grouped into instruction sets. Default set has 26 instructions, and by definition every program is valid.
+\emph{Amoeba-II} \parencite{Pargellis2001} shares similar features to Tierra and Avida in that it is an instruction-set based automata, but unlike in those systems, replication spontaneously emerges in Amoeba-II. The replication process requires four steps: ``register initiation, memory allocation, copying of the parent's instructions to the child (embryo), and division where the child is initiated as a cell on its own'' \parencite[p.69]{Pargellis2001}. Two specific instructions in the parent's genome are required at a minimum. The MALL command allocates memory, and a virtual CPU to the child, and DIVD performs the division. Register initiation and copying of the parent's instructions can be done in a variety of different ways, and a good deal of the interest of the Amoeba-II system lies in the evolvability of these mechanisms. Selection is by efficiency of replication, where faster and more efficient replicators replace less efficient ones in the population (as \cite{Pargellis2001} says, ``Amoeba has only one task: replication'') and so there is selective pressure from the least efficient, but functioning, mechanisms in the direction of improved replication. To complement selection and inheritance, variability is provided by the DIVD instruction, which introduces a mix of instruction substitutions, deletions and insertions into the child's program at a fixed but low rate.
 
-New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is then placed at the beginning of its code, write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \cite[A1.3]{Ofria2004} consists of 15 instructions.
+Inheritance in Amoeba-II is almost too effective. Fit organisms rapidly evolve into extremely rapid reproducers and out-replicate all other entities, leaving a mono-culture.
 
-``The quest to halt adaptation is only one example of a special feature in Avida; many more have been explored, and are continuously being added to the source code. The most successful features are all fully described in the documentation that comes with the software.''
-
-All very configurable, and complicated, but why? What rationale behind choices? More of a testbed for experiments, \eg `` in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift''
-
+\begin{NOTES}
 \cite{Dittrich1998}:
 A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry.
 
@@ -674,8 +623,9 @@ A=``1. Select two objects s1,s2 from the soup randomly, without removing them. 2
 Asn automata reaction with a set of operations (six common logic operations, \eg OR, and nine computational instructions), represented as 4-bit sequences, to generate s3 from s1, s2. Automata is a deterministic FSA, running s1 on s2 to produce s3. As Dittrich observes ``The first noticeable property is that the structure of the product s3 is similar to its 'parents' s1; s2. This indicates that there is a correlation between s1, s2, and s3 that is a prerequisite for evolution.''
 
 Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
-
+\end{NOTES}
 \subsection{Other}
+\begin{NOTES}
 \emph{StringMol} \parencite{Hickinbotham2011}
 
 

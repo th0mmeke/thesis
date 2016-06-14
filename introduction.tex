@@ -494,7 +494,7 @@ Major transitions in evolution not possible without self-referentiality - unit o
 Fundamental for complexity - complexity associated with levels  \parencite{Watson2015}
 \end{NOTES}
 
-\section{Non-informational exact replicators}
+\section{Non-informational exact replicators}\label{non-informational-exact-replicators}
 
 Autocatalysis by definition is replication; where the entities are molecules, the autocatalytic reaction $X + A\rightarrow 2A + Y$ replicates the molecule $A$ (\eg \cite{Zachar2010,Lifson1997}). Evolutionary variation though is difficult as the exponential growth of the main autocatalytic product will generally overwhelm the molecules produced by any side reactions unless 1) they are also autocatalytic, and 2) the solution contains the molecules needed to initiate and maintain this alternate autocatalysis cycle.
 
@@ -512,52 +512,22 @@ The development of RBN-World involved many design choices, some essentially adho
 The model for \emph{Chemical Evolution by Natural Selection} in \cite{Fernando:2008xy,Fernando:2007pf} is driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems''), and takes the form of a simulation of laboratory experiments of lipid aggregates (``phase separated ‘individuals’, e.g. liposomes'') in a reactor. The molecules and food molecules (that make up an autocatalytic cycle) share a common representation and underlying chemistry, while replication, unlike the (rare) autocatalytic cycles in \cite{Faulconbridge2011}, is by `` division by externally imposed agitation, i.e. replication rather than self-replication.''. New molecular species (evolutionary variation), comes from chemical ``avalances'' initiated when two existing species are chosen at random, tested to see if a reaction between them is possible by thermodynamics, and then the resulting products seeded in the reactor at low concentrations. These new reactions may be autocatalytic, or the products may complete a food-set for another autocatalytic reaction, or they may enable a side-reaction from an existing autocatalytic one. Introducing these new species into the reactor therefore can trigger the rapid formation of a series of novel products--a chemical avalanche.
 
 \section{Variable replicators}
-\begin{NOTES}
+Ganti and Eigen showed that distinct, organizationally different alternative autocatalytic networks in the same environment might compete and the fittest would prevail. A number of models have since been proposed where autocatalytic networks form stable components that can be inherited in a modular fashion in a process called compositional inheritance. There are however some difficulties in establishing anything more than a ``variable replicator'' (in the term of \cite{Zachar2010}) with these models, namely inconsistent inheritance and a limited potential for information transmission.
 
-\emph{Reflexively Autocatalytic Polymer Networks} (RAPN) \parencite{Kauffman1986} are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in \cite{Vasas2012} putting these networks into compartments (so not well-stirred) then can do directional selection.
+%\emph{Reflexively Autocatalytic Polymer Networks} (RAPN) \parencite{Kauffman1986} are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in \cite{Vasas2012} putting these networks into compartments (so not well-stirred) then can do directional selection.
 
-\cite{Vasas2012a} ACS cores are attractor based, DNA/RNA storage based. HGT/LGT--compositional inheritance.
-Difficulties with Compositional inheritance in something like GARD where just a correlation between parent and child--response to selection not seen \parencite{Vasas2015}--end up with just one large component (so no selection), no replication as contents not inherited equally, so properties might be quite different from parent. Information fidelity varies widely. Mutations in cycles \parencite{Vasas2012a} generally not heritable as mutant copies generally not functional in autocatalysis. So problem with mutations as source of variation. Alternative to mutations is avalanches--form new cycles from side-products.
-But can see heredity in autocatalytic cores (one or more linked autocatalytic loops) as a form of genotype--any molecule in core will produce remaining species in core and periphery \parencite{Vasas2012a}. Core forms an attractor; one core=one attractor, and no evolution possible as no selection. Multiple cores (from inhibition \cite{Vasas2012a})=multiple attractors, but need attractors to be stable for stable selection. Cores are equivalent to one-bit of heritable information, so hard to see as unrestricted heredity as limits to numbers of cores…
-\cite{Watson2015} summarizes two forms of inheritance for groups, being either ``migrant pools'', where members disperse horizontally to form new pools, or group fissioning, where the dispersion is vertical. Fissioning, in the view of \cite{Watson2015}, provides for group inheritance whereas migrant pools do not.
+In the most well-known of these models, the graded autocatalysis replication domain (\emph{GARD}) model \parencite{Segre1998}, highly catalytic molecules determine the properties of the compotype (compositional genotype), and these are not necessarily inherited equally. Instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent \parencite{Vasas2015, Vasas2012, Vasas2012a}. Information fidelity varies widely; the Eigen threshold applies, and mutation rates overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}.
 
-%\cite{Fernando:2008xy,Fernando:2007pf}                          &Compositional&Non-template: Lipid aggregates\\
-%Lattice Artificial Chemistry \cite{Ono2000,Madina2003}        	&&&Non-template\\
-			
+Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant copies are rarely functional in autocatalysis. This makes mutation problematic as a source of variation in these autocatalytic systems; one alternative to mutations is avalanches, to form new cycles from the side-products of the base networks (as discussed in the previous \nameref{non-informational-exact-replicators})
 
-\emph{GARD} \parencite{Segre1998}
-Eigen threshold applies--mutation rates (see issue of replication--big differences between parent and child) overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}
+% Any molecule in the core will produce the remaining species in both the core and periphery \parencite{Vasas2012a} and so reconstitute the core,
 
-Claim made that GARD is capable of darwinian evolution, but population analysis showed not in response to directional selection (Vasas2010) \parencite{Vasas2015, Vasas2012, Vasas2012a}
-GARD does not result in selectable replicating entities--there is no replication as certain highly catalytic molecules determine the properties of the compotype, and these are not inherited equally--instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent \parencite{Vasas2015, Vasas2012, Vasas2012a}
-
-Differences to RAPN:
-\begin{compactitem}
-	\item Kinetics of growth--RAPN has ligation, GARD does not. Ligation allows new components to be formed with new properties
-	\item Search for adaptations--GARD has fixed catalysis, Kauffman does not--mutant polymers can arise, be incorporated into the set, and influence its fitness
-\end{compactitem}
-
-\parencite{Vasas2015, Vasas2012, Vasas2012a}
-Based on GARD \parencite{Segre1998}. Can evolution happen when information transfer is non-digital? Specifically where there is a parent-offspring correlation in molecular composition? Compositional inheritance. If inheritance is statistical only then ok; but literature stresses digitally encoded although might just be cognitive bias. Ganti and Eigen showed that distinct, organizationally different alternative autocatalytic networks in same environment might compete and fittest would prevail (\eg autocatalytic networks as units of selection).	Check number of network components (=autocatalytic networks). In GARD, end up with just one big component
-
-%\subsection{Other} % Not capable of OEE
-%	
-%\cite{Sayama2011} explores the ability of Swarm Chemistry--an integration of Artificial Chemistry with Swarm Robotics--to achieve \gls{oee}. The models are rather non-biological, and interpretation as biology is difficult. One specific difficulty with the results as reported, noted by the author, is that all results were obtained by visual inspection, and that measures need to be developed based on some standard works.
-%
-%\cite{Dorin:2006fk} demonstrates that an \gls{achem} can support a simple ecology--autotrophs and heterotrophs--loosely based on simplified model of generic terrestrial ecosystem, with interactions between organisms, and between organisms and the abiotic environment. All organisms emerge from an environment consisting of unbound atoms, from a fixed set with given properties. A set of predetermined reactions, most catalysed by an specific enzyme taken from a set of enzyme atoms, models various biologically-inspired types of interaction. For example, photosynthesis is defined as $AO + BO --(chlorophyll & sunlight) \rightarrow AB + 2O$, where chlorophyll is an enzyme.
-\end{NOTES}
+The model of \parencite{Vasas2015, Vasas2012, Vasas2012a}, based on GARD, tests the hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \cite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
 
 \section{Informational replicators with shortcut replication mechanism}
 
 An informational replicator with a shortcut is one where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended.
 
-\begin{NOTES}
-
-%ZChem \cite{Tominaga2004}                                     	&&Not self-referential--recombination rules are defined separately from objects\\
-%Substrate-Catalyst-Link (SCL) \cite{Varela:1974qd,Suzuki2008} 	&&Not self-referential--recombination rules are defined separately from objects\\
-%Squirm3 \cite{Hutton2002,Hutton2007,Lucht2012}                	&Atoms/Molecules&Replication by predefined reaction rules (not embedded)&\\
-
-\end{NOTES}
 \textbf{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oee} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
 
 All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g., a, b, c\dots) and \emph{states} (e.g., 0, 1, 2\dots). Atoms and hence molecules are located on a 2D grid, and molecules cannot overlap or pass through each other. All reaction rules, such as \emph{R1: e8 + e0 $\rightarrow$ e4e3}, are prespecified (\cite[p.4]{Hutton2007} and \cite[p.49]{Faulconbridge2011}), and a shortcut consisting of a set of eight rules in \cite{Hutton2002} is sufficient to replicate single molecules. As all reaction rules, including those responsible for replication and hence inheritance, are exogenous to the model, the inheritance mechanism in Squirm3 is not evolvable. 
@@ -613,7 +583,6 @@ Tierra was also the starting point for \cite{Taylor2001, Taylor:1999sc} to explo
 
 % Seed (proto-DNA) must itself be an indefinite heredity replicator {[}assumes that this is minimal starting point, rather than that this itself may evolve{]} \parencite{Taylor2001}
 %Assume that early stages see A+B implicitly encoded in the environment, essentially as simpler than explicit mechanism, but little justification given beyond ``At the early stages of an evolutionary process, however, we would not expect there to be mechanisms for explicitly decoding the proto-DNA\ldots{}'' \parencite{Taylor2001}
-
 
 \emph{Avida} \parencite{Ofria2004}, introduced in the summer of 1993, based on Tierra with improvements including better metering and measuring, and a 2D lattice or well-stired reaction vessel topography (unlike the shared linear memory of Tierra, for example). ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
 

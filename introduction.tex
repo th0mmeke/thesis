@@ -634,6 +634,8 @@ StringMol includes an embodied \emph{start} and \emph{at-end}, crisp \emph{next}
 
 These mechanism differences (the choices of which functions are crisp and which are embodied) result in different outcomes for the overall system: ``Stringmol exhibits macro-mutation and two chemical copying; GraphMol exhibits two types of quasispecies, cooperative and parasitic. These two systems use the same domain (emergent evolution) and metamodel (machines copying strings), but different computational models.'' Other combinations would presumably show different behaviour again.
 
+Despite the use of the term ``embodied'', those functions that aren't ``crisp'' are not in fact fully self-referential as the pattern-matching algorithm itself remains unaffected by evolution. There is also a disconnect between the properties of the targets of the matches and the functioning of the algorithm. The algorithm matches on the symbol, and is completely unaffected by the meaning or properties of those symbols, the underlying microcode. In this it differs significantly from a completely endogenous system such as a biological replicase, where the match or bind is actioned by the same chemical rules that construct and maintain the replicase from component atoms.
+
 %Runtimes for GraphMol are in weeks to months.
 
 \section{Discussion}

@@ -546,29 +546,29 @@ How then is the interaction expression $(('f)('g))$ between $f$ and $g$ evaluate
 
 Clearly reproduction in AlChemy is self-referential--the process to construct a child object is defined in the code of the parent objects. Unfortunately, inheritance doesn't follow straightforwardly as the reproduction process is unique in two important ways. First, each new object has two parents, rather than one, as is more common. Producing new objects as some function of the two parents in turn means that the relationship between parents and child is not a straightforward mutation or other syntactic difference, but rather a complex functional relationship. What this means for the relationship between the parent's fitness and the child's fitness is not obvious. It seems that the fitness differences in AlChemy might be more extreme than in other systems where parent and child are syntactically similar.
 
-\begin{NOTES}
-\parencite{Fenizio2000}:
-
-Original AlChemy reactions of form $A+B\rightarrow C$ where $C$ replaces an existing element.
-
-This system generates $A+B\rightarrow C_1+C_2...C_n$ where $C$ is a multiset of size $n$. Done by modifying the original K rule to detach x2 and eliminate both original elements (like reactants in chemistry)
-
-Uses combinators rather than lambdas
-
-To prevent from stopping (out of elements) added modification where randomly add/remove some elements
-
-Combinator first combines (appends) elements, each element other than first bracketed. Then each 1-term combinator applied to string, where it makes specific changes \eg K x1x2s0-\textgreater{}x1s0 (s0 is remaining substring, may be null). Apply until no further reductions possible (that is, in normal form). Two combinators are equivalent if can be reduced to same combinator (and previously noted that order is not important--same results regardless of order).
-
-Free pool of atoms for conservation of ``mass''
-
-\parencite{Fenizio2001}:
-
-Experiment to show spontaneous formation of autopoietic cells, with a focus on ``identity as an entity separated from its environment'', that is, membrane formation. Graph used to model spatial structures: ``an artificial chemistry (AC) is embedded in a graph, with each molecule being a vertex of the graph and possible interactions being allowed only along the edges of the graph''. Molecules are composed of atoms taken from a 
-
-``Molecules are built from a substrate of elements called atoms. There are seven types of atoms ($I, K, W, R, B, C, S$), each with a different function. The total number of atoms in the reactor is kept constant during a run. Free atoms (not bounded in molecules) are separately stored and form a global pool.''
-
-As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \cite{Fenizio2000}), this model is not by our definition open-ended.
-\end{NOTES}
+%\begin{NOTES}
+%\parencite{Fenizio2000}:
+%
+%Original AlChemy reactions of form $A+B\rightarrow C$ where $C$ replaces an existing element.
+%
+%This system generates $A+B\rightarrow C_1+C_2...C_n$ where $C$ is a multiset of size $n$. Done by modifying the original K rule to detach x2 and eliminate both original elements (like reactants in chemistry)
+%
+%Uses combinators rather than lambdas
+%
+%To prevent from stopping (out of elements) added modification where randomly add/remove some elements
+%
+%Combinator first combines (appends) elements, each element other than first bracketed. Then each 1-term combinator applied to string, where it makes specific changes \eg K x1x2s0-\textgreater{}x1s0 (s0 is remaining substring, may be null). Apply until no further reductions possible (that is, in normal form). Two combinators are equivalent if can be reduced to same combinator (and previously noted that order is not important--same results regardless of order).
+%
+%Free pool of atoms for conservation of ``mass''
+%
+%\parencite{Fenizio2001}:
+%
+%Experiment to show spontaneous formation of autopoietic cells, with a focus on ``identity as an entity separated from its environment'', that is, membrane formation. Graph used to model spatial structures: ``an artificial chemistry (AC) is embedded in a graph, with each molecule being a vertex of the graph and possible interactions being allowed only along the edges of the graph''. Molecules are composed of atoms taken from a 
+%
+%``Molecules are built from a substrate of elements called atoms. There are seven types of atoms ($I, K, W, R, B, C, S$), each with a different function. The total number of atoms in the reactor is kept constant during a run. Free atoms (not bounded in molecules) are separately stored and form a global pool.''
+%
+%As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \cite{Fenizio2000}), this model is not by our definition open-ended.
+%\end{NOTES}
 \subsection{Automata}
 
 \emph{Coreworld} \parencite{Rasmussen1990}, inspired by the early computer game ``Core War''\footnote{See \url{corewar.co.uk}}, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another could spontaneously introduce errors into the copying, and hence could introduce evolutionary variation. However, as reviewed by \cite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps as organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
@@ -596,18 +596,18 @@ Avida is extremely configurable, but provides little guidance or theoretical jus
 
 Inheritance in Amoeba-II is almost too effective. Fit organisms rapidly evolve into extremely rapid reproducers and out-replicate all other entities, leaving a mono-culture.
 
-\begin{NOTES}
-\cite{Dittrich1998}:
-A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry.
-
-Introduction of \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme for artificial chemistry, elaborated in \parencite{Dittrich:2001zr}, where in this work \emph{S} are `` binary strings with a constant length of 32 bits'', \emph{R} are of the form $s1+s2 \rightarrow s3$, and \emph{A} ''simulates a well-stirred tank reactor with mass-action kinetics, which assures that the probability of a collision is proportional to the product of the concentration of the colliding objects'' (based on earlier work by Fontana and Kauffman.)
-
-A=``1. Select two objects s1,s2 from the soup randomly, without removing them. 2. If there exists a reaction s1 + s2 to s3 and the filter condition f (s1,s2,s3) holds, replace a randomly selected object of the soup by s3.'', s1 and s2 are not consumed, rather they act as catalysts. Chosen as this shown capable of hypercyclic organisation
-
-Asn automata reaction with a set of operations (six common logic operations, \eg OR, and nine computational instructions), represented as 4-bit sequences, to generate s3 from s1, s2. Automata is a deterministic FSA, running s1 on s2 to produce s3. As Dittrich observes ``The first noticeable property is that the structure of the product s3 is similar to its 'parents' s1; s2. This indicates that there is a correlation between s1, s2, and s3 that is a prerequisite for evolution.''
-
-Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
-\end{NOTES}
+%\begin{NOTES}
+%\cite{Dittrich1998}:
+%A simulation approach towards ``dynamic phenomena, especially on the emergence of prebiotic evolution'', based on an artificial chemistry.
+%
+%Introduction of \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme for artificial chemistry, elaborated in \parencite{Dittrich:2001zr}, where in this work \emph{S} are `` binary strings with a constant length of 32 bits'', \emph{R} are of the form $s1+s2 \rightarrow s3$, and \emph{A} ''simulates a well-stirred tank reactor with mass-action kinetics, which assures that the probability of a collision is proportional to the product of the concentration of the colliding objects'' (based on earlier work by Fontana and Kauffman.)
+%
+%A=``1. Select two objects s1,s2 from the soup randomly, without removing them. 2. If there exists a reaction s1 + s2 to s3 and the filter condition f (s1,s2,s3) holds, replace a randomly selected object of the soup by s3.'', s1 and s2 are not consumed, rather they act as catalysts. Chosen as this shown capable of hypercyclic organisation
+%
+%Asn automata reaction with a set of operations (six common logic operations, \eg OR, and nine computational instructions), represented as 4-bit sequences, to generate s3 from s1, s2. Automata is a deterministic FSA, running s1 on s2 to produce s3. As Dittrich observes ``The first noticeable property is that the structure of the product s3 is similar to its 'parents' s1; s2. This indicates that there is a correlation between s1, s2, and s3 that is a prerequisite for evolution.''
+%
+%Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
+%\end{NOTES}
 \subsection{Other}
 
 \emph{StringMol} \parencite{Hickinbotham2011} and the related \emph{GraphMol} \parencite{Nellis2012, Nellis2014} explore computational novelty through embodiment: ``Our aim is to improve novelty-generation algorithms by making their biological models richer.'' No measure is proposed for novelty--the author's state that they're not even sure it is possible, but an informal definition is used that sees novelty as the outcome of increasing embodiment \parencite[p.87]{Nellis2012}. 

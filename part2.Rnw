@@ -25,10 +25,7 @@ df
 
 \chapter{Introduction}
 
-Models (not simulations) for the emergence of heredity, for the purpose of strengthening the theoretical basis for any simulation. Goal is a causal, rather than constitutive, model for the emergence of heredity from variation and inheritance.
-
-\begin{NOTES}
-\end{NOTES}
+%Models (not simulations) for the emergence of heredity, for the purpose of strengthening the theoretical basis for any simulation. Goal is a causal, rather than constitutive, model for the emergence of heredity from variation and inheritance.
 
 \section{Previous work}
 
@@ -90,18 +87,18 @@ Second, heredity and fitness (viability) are treated as independent traits. But 
 
 
 
-\begin{NOTES}
+\begin{DRAFT}
 Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
 be varied by interaction with the environment.
 
 Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
 
 For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
-\end{NOTES}
+\end{DRAFT}
 \begin{hypothesis}
 Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance, or $V'+S\rightarrow I$
 \end{hypothesis}\label{hypothesis-2}
-\begin{NOTES}
+\begin{DRAFT}
 we mean inheritance increases to some optimal level
 Inheritance is defined as any correlation better than 0.5, or in other words, as better than chance. Fidelity is defined as the degree of correlation between parent and offspring values for the same trait.
 
@@ -131,7 +128,7 @@ inheritance increases average fitness over time
 
 
 
-\end{NOTES}
+\end{DRAFT}
 
 \section{Predictions}\label{predictions}
 
@@ -1263,14 +1260,14 @@ Stationarity is inherently a constraint for applying statistical methods to the 
 
 Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \cite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
 
-\begin{NOTES}
+\begin{DRAFT}
 Two or more parent inheritance.
 GP-mappings and development (as in \cite{Gaucherel2012})
 Effect of acquired characteristics.
-\end{NOTES}
+\end{DRAFT}
 
 \section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
-\begin{NOTES}
+\begin{DRAFT}
 \subsection{Variation alone is sufficient for Inheritance}
 As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
 
@@ -1279,14 +1276,14 @@ The test is to show an example of S and not I.
 
 \subsection{Variation and Selection, without property correlation, is sufficient for Inheritance}
 Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
-\end{NOTES}
+\end{DRAFT}
 
 \chapter{Conclusions}
-\begin{NOTES}
+\begin{DRAFT}
 Given:\newline
 Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline
 hypothesis \autoref{hypothesis-2} (that Variation and Selection are sufficient for Inheritance),\newline
 we suggest that:
 
 \textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
-\end{NOTES}
+\end{DRAFT}

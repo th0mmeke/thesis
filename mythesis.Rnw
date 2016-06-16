@@ -53,8 +53,8 @@
 \makeatother
 
 \usepackage{versions}
-\markversion{DRAFT}
-\markversion{NOTES}
+\excludeversion{DRAFT}
+%\markversion{DRAFT}
 
 \floatstyle{myRoundBox} 
 \restylefloat{figure}

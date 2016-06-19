@@ -159,7 +159,7 @@ The primary requirement in both cases is fidelity with real-world chemistry, whi
 
 The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The Chemical Abstract Service (CAS) database references approximately 34 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for de-novo drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approachs. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
-Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \parencite{Flamm2010} and \parencite{Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Cite{Flamm2010} and \cite{Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
+Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \parencite{Flamm2010} and \parencite{Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
 	
 \section{Origins of life modelling with realistic artificial chemistries}
 
@@ -226,14 +226,14 @@ Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries ha
 	A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
 {\parencite{Benko2009}}
 
-A \gls{achem} is \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties. As defined in that text: ``construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.'' \cite{Fontana1994}
+A \gls{achem} is \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties. As defined in that text: \quote{construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.}{\cite{Fontana1994}}
 
-\quote{We refer to models in which new agents are constructed in an unspecific (essentially stochastic) fashion as \emph{weakly constructive}. This is to be contrasted with a situation in which the encounter of two agents \emph{implies} a \emph{specific} third one\ldots{}Models of this kind will be termed \emph{strongly constructive}. The prime example of a strongly constructive system is chemistry.}{\parencite{Fontana1994}}
+\quote{We refer to models in which new agents are constructed in an unspecific (essentially stochastic) fashion as \emph{weakly constructive}. This is to be contrasted with a situation in which the encounter of two agents \emph{implies} a \emph{specific} third one\ldots{}Models of this kind will be termed \emph{strongly constructive}. The prime example of a strongly constructive system is chemistry.}{\cite{Fontana1994}}
 
 The commentary that immediately follows in the reference is significant:
 
 \quote{A strongly constructive system that contains agent \emph{A} must cope with the network of its implications. But, then, it also must cope with the implications of the implications. And so on.}
-{\parencite[217]{Fontana1994}}
+{\cite[217]{Fontana1994}}
 
 A strongly constructive system is one which maintains closure, and in which there is self-consistency and some form of logical structure (the ``implications''.) Both implicit laws and implicit molecule definitions are required for constructive chemistries. 
 
@@ -244,7 +244,7 @@ A strongly constructive system is one which maintains closure, and in which ther
 
 Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense--new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions `on-the-fly' from the structures of the interacting molecules. 
 
-Pre-sepecification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be pre-determined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \cite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \cite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
+Pre-sepecification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be pre-determined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \textcite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \textcite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
 
 An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
 
@@ -252,7 +252,7 @@ An artificial chemistry with the ability to create reactions ``on-the-fly'' give
 
 An \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature, \eg \cite{Lenaerts2009,Gardiner2007}.
 
-\cite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
+\Textcite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time into six major types:
 
 \begin{enumerate}
 \item Rewriting or Production Systems (symbols and rewriting rules)--Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus (AlChemy)
@@ -266,9 +266,9 @@ An \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textg
 
 \footnote{In practice \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification. Because the system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion. Some categories, such as Abstract Automata, are incompletely specified. Finally, applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry.}
 
-Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \cite{Faulconbridge2011} as a world where the elements are RBN networks.
+Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \parencite{Faulconbridge2011} as a world where the elements are RBN networks.
 
-\cite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
+\Textcite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
 
 \begin{itemize}
 	\item Symbolic - symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
@@ -286,7 +286,7 @@ Reaction rules in an artificial chemistry describe how reactants are transformed
 
 \subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
 
-The reactor algorithm provides the mechanism to select (in effect, to order) reactions, or in the words of \cite[sect. 4.1.3]{Faulconbridge2011}, the ``...algorithm which describes the order of and intervals between reactions, starting from an initial collection of molecules...''
+The reactor algorithm provides the mechanism to select (in effect, to order) reactions, or in the words of \textcite[sect. 4.1.3]{Faulconbridge2011}, the ``...algorithm which describes the order of and intervals between reactions, starting from an initial collection of molecules...''
 
 If the reaction rules are analogous to chemistry, the reactor algorithm is analogous to physics--the way molecules move and collide in the reaction vessel determines which reactions are possible (for example, by providing enough kinetic energy to overcome a reaction's activation energy), and the order in which they occur.
 
@@ -297,14 +297,14 @@ Well-mixed/aspatial: with either discrete time (uniform probability	distribution
 \item
 nDimensional: a grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
 \item
-Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (e.g., \parencite{Jeschke2008}). One possible advantage is the potential for parallelization.
+Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelization.
 \end{enumerate}
 
-Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance recuces in concert. The general solution is called model reduction--see \parencite{Radulescu2012} for a recent review; \parencite{Faulon2001} has a well-received method.
+Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance recuces in concert. The general solution is called model reduction--see \textcite{Radulescu2012} for a recent review; \textcite{Faulon2001} has a well-received method.
 
 \chapter{ToyWorld}\label{toyworld}
 
-ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \cite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
+ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
 Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps, but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results--our model cannot be used to investigate real-world chemical behaviours. There is another reason why familiarity may be important: following our earlier proposal that a replicase-like mechanism would fulfil the requirements for a self-referential copying mechanism, it might be fruitful to base any implementation in ToyWorld on a simplified version of a real biological replicase. Clearly, a simple mapping from real-world chemistry to the rules in our Artificial Chemistry would improve the feasibility of this idea.s
 
@@ -371,11 +371,11 @@ Some examples of molecules created by ToyWorld are shown in \cref{fig:toyworld-e
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.45\linewidth]{figures/strategies-2-03-molecule.png}
-	\includegraphics[width=0.45\linewidth]{figures/strategies-6-02-molecule.png}
-	\includegraphics[width=0.45\linewidth]{figures/strategies-13-01-molecule.png}
-	\includegraphics[width=0.45\linewidth]{figures/strategies-15-01-molecule.png}
-	\caption[Example molecules generated by ToyWorld]{Example molecules generated by ToyWorld, rendered as 2-D objects from the original SMILES notation - [H][C]N(O[N])OOC([H])(O[H])ON([O])[N][N]N(O[O])OOO[H] (top left), [H]OON(O[N+]([O-])[N+]([O])[O-])N([H])O[O] (top right), [H]OOON([H])ON([H])O[H] (bottom left) and [O]C(=O)OOOON=[C]N([O])[O]  (bottom right)}\label{fig:toyworld-example-molecules}
+	\includegraphics[width=0.45\linewidth]{figures/[H][C]N(O[N])OOC([H])(O[H])ON([O])[N][N]N(O[O])OOO[H].png}
+	\includegraphics[width=0.45\linewidth]{figures/[H]OON(O[N+]([O-])[N+]([O])[O-])N([H])O[O].png}
+	\includegraphics[width=0.45\linewidth]{figures/[H]OOON([H])ON([H])O[H].png}
+	\includegraphics[width=0.45\linewidth]{figures/[O]C(=O)OOOON=[C]N([O])[O].png}
+	\caption[Example molecules generated by ToyWorld]{Example molecules generated by ToyWorld, rendered as 3-D objects from the original SMILES notation by MolView (\url{http://molview.org/}) - [H][C]N(O[N])OOC([H])(O[H])ON([O])[N][N]N(O[O])OOO[H] (top left), [H]OON(O[N+]([O-])[N+]([O])[O-])N([H])O[O] (top right), [H]OOON([H])ON([H])O[H] (bottom left) and [O]C(=O)OOOON=[C]N([O])[O] (bottom right)}\label{fig:toyworld-example-molecules}
 \end{figure}
 
 \section{Energy Model}\label{energy-model}
@@ -474,11 +474,14 @@ energies.
 
 \begin{figure}[t]
 	\begin{center}
-		\begin{tikzpicture}
-			[enode/.style={circle,draw=gray!50,inner sep=5pt,minimum size=30pt}]
-			\node[enode] (pe) at (6,4) {Potential Energy (PE)};
-			\node[enode] (ie) at (1,1) {Internal Energy (IE)};
-			\node[enode] (ke) at (11,1) {Kinetic Energy (KE)};
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+		\node[main node] (PE) at (3,3) {PE};
+		\node[main node] (IE) at (0,0) {IE};
+		\node[main node] (KE) at (6,0) {KE};
+		\path[every node/.style={font=\sffamily\small,fill=white,inner sep=1pt}]
+		    (PE) edge [<->] (IE)
+		    (IE) edge [<->] (KE)
+		    (KE) edge [<->] (PE);
 		\end{tikzpicture}
 		\caption{Energy transformations in ToyWorld}
 		\label{fig:energy_transformations}
@@ -504,7 +507,7 @@ A reaction may be seen as two stages in sequence: first, the choice of reactants
 
 \section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies}
 
-\parencite{Faulconbridge2011} describes two generic strategies for the
+\Textcite{Faulconbridge2011} describes two generic strategies for the
 selection of reactants -- spatial and aspatial -- where the primary
 difference is whether molecular position is a factor in reactant
 selection. It is possible to further generalise this scheme by
@@ -544,8 +547,7 @@ properties of the reacting molecules: it therefore defines a
 \emph{strongly constructive} chemistry in the sense defined earlier. As
 ToyWorld enforces conservation of mass, reactions can be represented
 solely by bond changes. This is closely related conceptually to
-graph-based chemistries such as GGL/ToyChem
-\parencite{Benko2005,Benko2003}, RBN-World \parencite{Faulconbridge2011}
+graph-based chemistries such as GGL/ToyChem \parencite{Benko2005,Benko2003}, RBN-World \parencite{Faulconbridge2011}
 or NAC \parencite{Suzuki2006} where reactions are modelled as a series of
 changes to graph edges. However, in ToyWorld, and RDKit, the graph is
 implicit rather than explicit as it is in a graph-based chemistry.
@@ -1039,7 +1041,7 @@ The experiments follow a full factorial design over four factors ($S_\mathrm{Rea
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
-For details of the Artificial Chemistry, see \parencite{Young2013}. The chemistry makes use of some low-level components from RDKit \parencite{rdkit}, open-source software for cheminformatics. RDKit provides a number of useful capabilities, including format conversions to and from SMILES and graphical forms of molecules; standard sanity checks for molecular structure, and molecular manipulations. In ToyWorld, atoms are closely based on real-world chemistry atoms, and in fact are implemented as wrappers around the Atom definitions provided by RDKit; we allow any atom type provided by RDKit. Bonds in ToyWorld are represented by RDKit bonds, but the addition or subtraction mechanism makes use of the parameterised ToyWorld energy model.
+For details of the Artificial Chemistry, see \textcite{Young2013}. The chemistry makes use of some low-level components from RDKit \parencite{rdkit}, open-source software for cheminformatics. RDKit provides a number of useful capabilities, including format conversions to and from SMILES and graphical forms of molecules; standard sanity checks for molecular structure, and molecular manipulations. In ToyWorld, atoms are closely based on real-world chemistry atoms, and in fact are implemented as wrappers around the Atom definitions provided by RDKit; we allow any atom type provided by RDKit. Bonds in ToyWorld are represented by RDKit bonds, but the addition or subtraction mechanism makes use of the parameterised ToyWorld energy model.
 
 \section{Results}
 All replicates completed a set of 20,000 reactions; given the initial population size of 800 molecules, and from the summary of results below, we believe that this captures a representative set of reactions. This also simplifies the analysis as we can assume a balanced set of treatments in the statistical sense (that is, the sample sizes for all treatments are equal).

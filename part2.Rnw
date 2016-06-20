@@ -911,7 +911,7 @@ According to Zliobaite \textcite{Bifet:2011uq,Zliobaite:2009cr}, the main types 
 
 These attributes when combined produce three independent categories - sudden, gradual and reoccurring.  In sudden drift there is a distinct break between concepts; gradual drift shows a period of mixed concepts, and reoccurring drift shows alternating or repeating concepts.  A problem may exhibit more than one source of concept drift, and in fact many real-world problems are of this form.
 
-\section{Environmental model}
+\section{Environmental model}\label{environmental-model}
 
 \Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sin$ curve, or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
 
@@ -1176,6 +1176,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 %ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
 %@
 
+\begin{DRAFT}
 The unbiased sample variance with Bessel's correction is \todo{reference}:
 \[
 s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
@@ -1199,8 +1200,24 @@ But by our initial statement, $s^2$ remains unchanged, therefore...
 \[
 \frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right) = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
 \]
+\end{DRAFT}
 
-\section{Independent measure}
+
+\section{Future work}\label{part2-future-work}
+
+There are some obvious extensions of this model that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
+
+Two other topics for possible future work are abrupt environmental change, and an information-based measure for change, as explained below.
+
+\subsection{Abrupt environmental change}
+	
+Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
+
+Stationarity is inherently a constraint for applying statistical methods to the analysis of evolutionary models, where almost by definition, the outcomes change over time. One common approach is be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
+
+Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \textcite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
+
+\subsection{Information-based measure}
 
 Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
 
@@ -1212,10 +1229,6 @@ Compression, as mechanism to identify patterns, will identify items spatially if
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \textcite{Prokopenko2009}, \textcite{Ladyman2011} and \textcite{Lloyd2001}.
 
-\emph{Approximate entropy} \todo{discussion}
-
-\emph{Sample entropy} \todo{discussion}
-
 Statistical Complexity, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \textcite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \textcite{Young2005}.
 
 The benefits of $C_{\mu}$ \textcite{Crutchfield1989} are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \textcite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's PhD thesis \textcite{Shalizi2001a} provides further context. 
@@ -1223,19 +1236,6 @@ The benefits of $C_{\mu}$ \textcite{Crutchfield1989} are that it matches our int
 $C_{\mu}$ has been applied to a number of domains including random boolean networks \textcite{Gong2012}, spin \textcite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \textcite{Young2008}, autonomy of protocells \textcite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \textcite{Xiang2008}.
 The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \textcite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \textcite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \textcite[p.119]{Shalizi2001}.
 
-\section{Future work}
-
-Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to coopt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
-
-Stationarity is inherently a constraint for applying statistical methods to the analysis of evolutionary models, where almost by definition, the outcomes change over time. One common approach is be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
-
-Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \textcite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
-
-\begin{DRAFT}
-Two or more parent inheritance.
-GP-mappings and development (as in \textcite{Gaucherel2012})
-Effect of acquired characteristics.
-\end{DRAFT}
 
 \section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
 \begin{DRAFT}

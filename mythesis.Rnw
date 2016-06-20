@@ -96,7 +96,7 @@ ToyWorld is the second contribution of this thesis. Specifically, we show that T
 \include{introduction}
 \part{Modelling Inheritance and Fidelity}\label{part2}
 \include{part2}
-\part{ToyWorld, a semi-realistic Artificial Chemistry}
+\part{ToyWorld, a semi-realistic Artificial Chemistry}\label{part3}
 \include{part3}
 \part{Conclusions}
 \include{conclusions}

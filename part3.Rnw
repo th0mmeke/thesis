@@ -888,14 +888,9 @@ The outcomes for each reaction alternative from an example collision are shown i
 	\end{tikzpicture}}%
 \end{figure}\label{fig:collision_diagrams}
 
-\chapter{Model Validation}\label{model-validation}
+\section{Model Validation}\label{model-validation}
 
-\section{Introduction}\label{introduction-4}
-
-The design outlined in Section
-\cref{toyworld} leads to the following expectations, to be tested
-experimentally.
-
+The design outlined in \cref{toyworld} leads to the following expectations:
 \begin{enumerate}
 	\item
  Given two reactants, changing the reaction energy should result in
@@ -931,7 +926,7 @@ reactant set of H\textsubscript{2}, O\textsubscript{2} and H\textsubscript{2}O.
 	\end{center}
 \end{figure}
 
-\section{Results and Discussion}\label{results-and-discussion}
+\subsection{Results and Discussion}\label{results-and-discussion}
 
 Beyond the initial transition period, both reactant sets showed results
 essentially consistent with equilibrium. Population variability was high
@@ -970,26 +965,11 @@ results between the reaction sets.
 
 \section{Conclusions}\label{conclusions}
 
-Our base artificial chemistry appears to be at least compatible with the
-requirements for the future exploration of open-ended evolution. The
-model is simpler than comparable alternatives, and the energy and
-reaction models produce results consistent with our predictions for the
-system's behaviour (with the exception of achieving equilibrium with the
-N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant
-set). An aspatial approach does however come with restrictions. Most
-obviously, as there is no concept of proximity in the chemistry, there
-can be no boundaries or membranes or even basic distinctions between
-\emph{inside} and \emph{outside}. This is critical in biology but it is
-unclear if this is equally important in non-biological systems. We
-expect that experimental comparison between the aspatial and spatial
-approaches in the course of our exploratory experiments will help to
-clarify this.
+Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution. The model is simpler than comparable alternatives, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear if this is equally important in non-biological systems. We expect that experimental comparison between the aspatial and spatial approaches in the course of our exploratory experiments will help to clarify this.
 
 \chapter{Reactant and Product Strategies}\label{reactant-and-product-strategies}
 
-\section{Introduction}\label{introduction-5}
-
-In this section we explore the following research questions:
+In this section we explore the following questions:
 
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
@@ -1001,20 +981,12 @@ In this section we explore the following research questions:
 \end{minipage}
 \vspace{0.3cm}
 
-To the best of our knowledge, this is the first time that reaction and product selection strategies
-in Artificial Chemistries have been experimentally compared.
-Instead, the general approach of previous work, where there has been a quantitative evaluation,
-has been to propose a particular strategy, build, and evaluate against the initial goals,
-rather than against alternatives.
+To the best of our knowledge, this is the first time that reaction and product selection strategies in Artificial Chemistries have been experimentally compared.
+Instead, the general approach of previous work, where there has been a quantitative evaluation, has been to propose a particular strategy, build, and evaluate against the initial goals, rather than against alternatives.
 
-Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$.
-We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and
-bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
-For simplicity of analysis, all of our factors are two-level, meaning they take one of two
-possible levels, or values, in each run. The parameter values chosen for each level of
-$E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a set of alternatives
-used in initial exploratory experiments; in each case they allowed the simulation to run for an
-extended period without running out of possible reactions (from lack of energy for example.)
+Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$. We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
+
+For simplicity of analysis, all of our factors are two-level, meaning they take one of two possible levels, or values, in each run. The parameter values chosen for each level of $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a set of alternatives used in initial exploratory experiments; in each case they allowed the simulation to run for an extended period without running out of possible reactions (from lack of energy for example.)
 
 \begin{table}
 	\scriptsize

@@ -157,7 +157,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 \item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\chapter{Simulation model}
+\section{Base model}\label{base-model}
 
 \epigraph{%
 An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from concrete objects so as to regard objects in a manner closer to their essential natures.}%
@@ -167,9 +167,7 @@ To test \cref{hypothesis-2}, we turn to simulation and experiment. Simulation is
 
 Experimental tests are the strongest method we have to examine the claims made in \cref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems; thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
 
-Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
-
-\section{Base model}\label{base-model}
+Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
 All experiments in this part of the work make use of some variant of the same base model (\cref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
 
@@ -265,12 +263,6 @@ The model is parameterized (see \cref{tbl:parameter_definitions}) so that differ
 	\end{center}
 \end{table}
 
-\subsection{Claim of generality}
-
-The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
-
-\TODO{Map to standard EA models - mutation only etc}
-
 \section{Initial conditions and settings}\label{initial-conditions}
 
 At the beginning of each run we construct an initial population to some design, randomly chosen (so as not to introduce any bias that might result from a consistent starting point.) Entities begin with a low initial fidelity and fitness chosen randomly from a uniform distribution over a particular range (see \cref{tbl:ic}.) From the hypothesis \cref{hypothesis-2}, and driven by the overall goal of this thesis, we expect to see a population of low fidelity entities eventually replaced by one of high (or at least higher) fidelity ones. This is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying.
@@ -289,7 +281,7 @@ At the beginning of each run we construct an initial population to some design, 
 	\end{center}
 \end{table}
 
-\chapter{Factor screening}
+\chapter{Parameter selection}
 
 Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
@@ -688,7 +680,7 @@ Set remaining parameters based on these screening experiments:
 	      	
 \end{enumerate}
 \end{DRAFT}
-\chapter[Hypothesis test under stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
+\chapter[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for fixed environments:
 
@@ -697,11 +689,7 @@ Returning to the overall goals for these experiments (to test the predictions of
 	\item Population variance for inheritance will decrease more than chance.
 \end{enumerate}
 
-The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then test whether the population variance for inheritance decreases as predicted.
-
-\section{Emergence of inheritance}\label{inheritance-low-start}
-
-As discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
+The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then test whether the population variance for inheritance decreases as predicted. As discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
 
 % EXPERIMENT 3 - Fidelity approaches 1.0
 
@@ -714,14 +702,14 @@ We start with the following null and alternative hypotheses:
  $\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-\subsection{Response variables}\label{response-variables}
+\section{Response variables}\label{response-variables}
 
 From the predictions of the hypothesis (\cref{predictions}), the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable.
 \\
 
 Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under hypothesis \cref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
 
-\subsection{Design}\label{design}
+\section{Design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-819350e.data')
 df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
@@ -746,7 +734,7 @@ df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection ==
 	\end{center}
 \end{table}
 
-\subsection{Results and discussion}
+\section{Results and discussion}
 
 Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, data is from the final generation of those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])} from the low-start dataset; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
@@ -818,8 +806,6 @@ df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection ==
 	\end{center}
 \end{table}
 
-\subsection{Results and discussion}
-
 <<lowstartranges1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Smoothed ranges over time of the standard deviation of fidelity (top) and fitness (bottom) for all levels of all factors, broken out by level of \\emph{Correlate Fidelity}. Lines that drop below zero are an artifact of the line smoothing algorithm used (local polynomial regression fitting).'>>=
 ap <- ggplot(df,aes(x=gen,y=sd_cor,group=run, colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("false","true")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))
 bp <- ggplot(df,aes(x=gen,y=sd_fit,group=run,colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("false","true")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fitness") + theme(legend.key=element_rect(fill="white"))
@@ -843,21 +829,13 @@ Data is all generations for those fixed-environment runs that reached completion
 %ggplot(z3,aes(V1,V2,V3)) + geom_ribbon(data=z3,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
 %@
 
-\subsection{Response variables}
 
-The main response variable is the standard deviation of fidelity.
-
-\subsection{Initial conditions}
-
-Initial conditions are given in \cref{tbl:factor-levels}.
-
-\subsection{Results and discussion}
 
 %<<ExperimentVarianceUnderHighStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='High start case: smoothed ranges for standard deviation of fidelity, as before grouped by \\emph{Correlate Fidelity}.'>>=
 %ggplot(df,aes(x=gen,y=sd_cor,group=run, colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("false","true")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))
 %@
 
-%\section{Factor interactions}
+%\chapter{Factor interactions}
 %% EXPERIMENT 7 - Factor significance
 %% Dataset: 2860d6fe
 %
@@ -887,7 +865,7 @@ Initial conditions are given in \cref{tbl:factor-levels}.
 %
 %Examining this further, factor-by-factor, where \textbf{Correlate Fidelity} is \emph{true}, from \cref{fig:lowstartfactorinfluence} \TODO{complete}.
 %
-%\paragraph{Is the choice of distribution function significant?}\label{distribution-function-1}
+%\subsubsection{Is the choice of distribution function significant?}\label{distribution-function-1}
 %
 %gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
 %
@@ -903,7 +881,7 @@ Initial conditions are given in \cref{tbl:factor-levels}.
 %grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))
 %@
 
-\chapter{Model behaviour in changing environments}
+\chapter{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
 Alongside our existing evolutionary model we now introduce an environmental model. This model describes the change of fitness resulting from enviromental change at each generation of the evolutionary model. 
 
@@ -1279,4 +1257,10 @@ hypothesis \autoref{hypothesis-2} (that Variation and Selection are sufficient f
 we suggest that:
 
 \textit{Hypothesis 3}: Variation and Selection are sufficient for Evolution
+
+\emph{erroneous copying} \parencite{Zachar2010} results in informational replicators.
+
+The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
+
+\TODO{Map to standard EA models - mutation only etc}
 \end{DRAFT}

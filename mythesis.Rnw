@@ -94,7 +94,7 @@ ToyWorld is the second contribution of this thesis. Specifically, we show that T
 \listofalgorithms
 \include{glossary}
 \include{introduction}
-\part{Modelling Inheritance and Fidelity}
+\part{Modelling Inheritance and Fidelity}\label{part2}
 \include{part2}
 \part{ToyWorld, a semi-realistic Artificial Chemistry}
 \include{part3}

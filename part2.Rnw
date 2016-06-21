@@ -299,9 +299,8 @@ The design is complicated a little by the suspicion that two factors - $p_{repro
 
 We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
-The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable.
-
-\TODO{Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design; we confirm that this is sufficient through power calculations for specific tests where required in the later sections.}
+Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design. 
+%The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
 \section{Factors and levels}\label{factors-and-levels}
 
@@ -671,13 +670,7 @@ Set remaining parameters based on these screening experiments:
 \begin{enumerate}
 	\item Upper-size bound - sampling % truncate == 0
 	\item Lower-size bound - sustainable populations % gen for run == max gen, and pop at max gen > 1000
-	\item Probabilities - at least one of $p_{reproduction}$ and $p_{selection}$ is related to the parent's fitness (\ie the factor level has the special case value of 0.) % 
-	      	
- % All runs that complete - that is, where gen == max(df$gen) & pop > 1000 or subset(df,gen==500 & pop>1000)
- % runs <- subset(df, gen==max(df$gen) & pop>1000)[,'run']
- % subset(df, truncate == 0 & run %in% runs & (p_reproduce==0 | p_selection == 0))
- % Use subset(df,correlation_correlation==1) by hypothesis, correlation_correlation==0 is control
-	      	
+	\item Probabilities - at least one of $p_{reproduction}$ and $p_{selection}$ is related to the parent's fitness (\ie the factor level has the special case value of 0.)      	
 \end{enumerate}
 \end{DRAFT}
 \chapter[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}

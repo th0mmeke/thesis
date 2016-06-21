@@ -29,7 +29,7 @@ df
 
 %		\item Can evolution act on the inheritance mechanism to tune it for varying environmental conditions?
 %		\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
-	s
+
 \section{Previous work}
 
 A significant body of literature has accumulated over the years on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck themselves. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying \parencite{Eigen1971}, and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 

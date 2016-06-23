@@ -26,8 +26,7 @@ We can now relate inheritance and variation to the requirements for creative \gl
 In this work we explore two related aspects of an endogenous mechanism for inheritance and variation. First, how can such a mechanism evolve? In \nameref{part2} we describe a simple evolutionary model to show how inheritance arises from variation and selection, and how it can evolve under a variety of selection environments (or environmental forms.) Second, how can this mechanism be embedded in a system to provide the underpinnings for creative \gls{oe}? In \nameref{part2} we begin to answer this through a \gls{achem} that we suggest is capable of supporting an endogenous inheritance and variation mechanism, and therefore of creative \gls{oe}. This is however an ambitious goal, more suited to a research program than a thesis, and we reluctantly leave for future work the implementation of the mechanism, instead establishing a foundation in a chemistry compatible with the goal.
 
 \begin{DRAFT}
-	
-``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
+
 	
 Constitutive definitions of \gls{oe}
 Emergent systems easy to code but produce surprising results. Cannot predict results from rules (or in fact easily predict rules from desired results. One-way function, akin to encryption) \parencite{Nellis2014}
@@ -708,8 +707,13 @@ In this view, simulation is a form of Kuhn's theory articulation or ``model buil
 \vspace{0.3cm}
 
 \section{Approach}
-\begin{DRAFT}
 
-``With this in mind, the strategy of endogenising can be understood has explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model.'' \parencite[p.129]{Bourrat2015}
+\epigraph{%
+An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from concrete objects so as to regard objects in a manner closer to their essential natures.}%
+{\textsc{\\\textcite{Griesemer2005}}}
 
-\end{DRAFT}
+To test \cref{hypothesis-2}, we turn to simulation and experiment. Simulation is a natural fit for the exploration of emergent systems where we expect complex behaviour from simple rules. If a simulation that accurately represents the system in the hypothesis behaves in a way that matches our predictions, the hypothesis is supported. On the other hand, if the behaviour doesn't align with the predictions, our hypothesis will be rejected.
+
+Experimental tests are the strongest method we have to examine the claims made in \cref{hypothesis-2}. As explored earlier in \cref{methods}, logical argument or theorem-proving is difficult to apply to model-based systems; thought experiments lack the strength we hope for, while experimentation is both feasible and, assuming correct design, rigorous.
+
+Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.

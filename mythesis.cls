@@ -52,6 +52,8 @@
 \RequirePackage{bookmark}
 \fi
 \RequirePackage{cleveref}
+\crefname{algocf}{alg.}{algs.}
+\Crefname{algocf}{Algorithm}{Algorithms}
 
  \newcommand{\allcapsspacing}[1]{\textls[200]{#1}}
  \newcommand{\smallcapsspacing}[1]{\textls[50]{#1}}

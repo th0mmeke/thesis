@@ -161,22 +161,18 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 
 We now introduce a general model of the relationship between variation and inheritance in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements of the hypothesis are represented as explicit parameters. Bourrat summarizes this endogenous strategy as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model.'' \parencite[p.129]{Bourrat2015}.
 
-The model consists of a population, consisting of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Let's look at each element in turn.
+The model consists of a population, consisting of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
 
-\emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
+Let's look at each element in turn.
 
-Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}:
-
-\begin{itemize}
-	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. There is a subtle difference between fidelity and inheritance: inheritance is the process that results in fidelity, the degree of correlation between two generations. In other words, fidelity captures the same idea as heredity: ``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
-\end{itemize}
-
-\emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{base-model-algorithm}. The probability of an element being included in the new population ($p_1$ in the algorithm) may be either a fixed value, or equal to its \emph{Fitness}. 
-
-The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a range given by a distribution of some range ($range$ in the algorithm) and an expected value equal to the parent's value (see \cref{fig:correlation}).
-
-Each \gls{run} of the model consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population.
+\begin{enumerate}
+\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
+\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
+\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
+\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. There is a subtle difference between fidelity and inheritance: inheritance is the process that results in fidelity, the degree of correlation between two generations. In other words, fidelity captures the same idea as heredity: ``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
+\item \emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
+\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a range given by a distribution of some range (the value of the function $Range$ in the algorithm) and an expected value equal to the parent's value (see \cref{fig:correlation}).
+\end{enumerate}
 
 \begin{figure}[htb]
 	\centering
@@ -190,12 +186,14 @@ Each \gls{run} of the model consists of a fixed number of time steps (generation
 		\BlankLine
 		\lIf{$population$ size is too small}{break}
 	}
-	\BlankLine
-	\BlankLine
+	\caption{Algorithm for the inheritance and variation model}\label{base-model-algorithm}
+\end{algorithm}
+
+\begin{algorithm}
 	\Def{Selection(population)}{
 		$population_{new}\leftarrow \{\}$\;
 		\For{each $entity \in population$} {
-			\Prob($p_1$:){
+			\Prob($p_{selection}$:){
 				Add $entity$ to $population_{new}$\;
 			}
 		}
@@ -203,21 +201,21 @@ Each \gls{run} of the model consists of a fixed number of time steps (generation
 	}
 	\BlankLine
 	\Def{Variation(population)}{
-		$children\leftarrow \{\}$\;
-		\For{each $entity$ in $population$}{
+		$population_{new}\leftarrow \{\}$\;
+		\For{each $entity$ with $fitness$ and $fidelity$ in $population$}{
 			\BlankLine
-			\Prob($p_2$:){
+			\Prob($p_{reproduction}$:){
 				\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
-					$fitness\leftarrow$ Derive(parent's $fitness$, parent's $fidelity$)\;
-					$fidelity\leftarrow$ Derive(parent's $fidelity$, $range$)\;
-					Create new $child$ with $fitness$ and $fidelity$\;
-					Add $child$ to $children$\;
+					$a\leftarrow$ Derive($fitness$, $fidelity$)\;
+					$b\leftarrow$ Derive($fidelity$, Range($entity$))\;
+					Create new $child$ with fitness $a$ and fidelity $b$\;
+					Add $child$ to $population_{new}$\;
 				}
 			}
 		}
-		\Return $children$\;
+		\Return $population_{new}$\;
 	}
-	\caption{Definitions for the functions Selection and Variation}\label{base-model-algorithm}
+	\caption{Definitions for the functions Selection and Variation}\label{model-functions}
 \end{algorithm}
 					
 \begin{figure}[ht]
@@ -230,22 +228,19 @@ Each \gls{run} of the model consists of a fixed number of time steps (generation
 		\caption{Definitions for all parameters of the model}\label{tbl:parameter_definitions}
 		\begin{tabular}{@{}llp{8cm}@{}}
 			\toprule
-			Parameter          & Value                                & Description                                                                                                                   \\
+			Parameter          & Value                                & Description\\
 			\midrule
-			$p_{reproduction}$ & $0$                                  & Probability of reproduction is given by the parent's $fitness$                                                                \\
-                & $(0,1]$                            	 & Fixed probability of reproduction. The probability of reproduction for any entity is given by $p_{reproduction}$              \\
-			$p_{selection}$    & $0$                                  & Probability of selection is given by the parent's $fitness$                                                                   \\
-                & $(0,1]$                              & Probability of selection is unrelated to parent's $fitness$ and given instead by $p_{selection}$ for all entities             \\
-			$n_{children}$     & $n_{children}\in \mathbb{Z}_{\ge 0}$ & Maximum number of children per parent                                                                                         \\
-			Derive             & $[0,1]\times[0,1]\mapsto[0,1]$       & Function for generating a sample value $x$ from a distribution described by some measure of expected value and range          \\
+			$p_{reproduction}$ & $0$                                  & Probability of reproduction\\
+			$p_{selection}$    & $0$                                  & Probability of selection\\
+			$n_{children}$     & $n_{children}\in \mathbb{Z}_{\ge 0}$ & Maximum number of children per parent\\
+			Derive             & $[0,1]\times[0,1]\mapsto[0,1]$       & Function for generating a sample value $x$ from a distribution described by some measure of expected value and range\\
+			Range			   & $entity\mapsto[0,1]$				  & Some function that generates a range value for Derive perhaps using an entity's fidelity or fitness values, or perhaps returning a constant value\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
 \chapter{Practical experimental considerations}
-
-\section[Upper size bound]{Effect of upper bound on population size}\label{upper-size-bound}
 
 In the absence of any restrictions on population size there is nothing to prevent a population growing beyond the capacity of the simulation system. This is an practical difficulty in experiment design rather than a property of the theoretical model. 
 

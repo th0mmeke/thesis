@@ -169,7 +169,7 @@ Experimental tests are the strongest method we have to examine the claims made i
 
 Note that for those familiar with the design of experiments in the physical world, there are some differences in simulations with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explictly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
-All experiments in this part of the work make use of some variant of the same base model (\cref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is novel and important to the overall thesis.
+All experiments in this part of the work make use of some variant of the same base model (\cref{base-model-algorithm}) where the key elements of the hypothesis, such as inheritance fidelity, are represented as explicit parameters. The main elements will be quite familiar to anyone from Evolutionary Computation or Evolutionary Biology, although the introduction of fidelity is different and important to the overall thesis.
 
 We define a population of entities, each with two properties -- \emph{fitness} and \emph{fidelity} -- and a set of population-transforming functions.
 
@@ -269,7 +269,7 @@ At the beginning of each run we construct an initial population to some design, 
 
 \begin{table}[t]
 	\begin{center}
-		\caption{Initial conditions}\label{tbl:ic}
+		\caption{Initial conditions for each experiment run}\label{tbl:ic}
 		\begin{tabular}{@{}ll@{}}
 			\toprule
 			Property & Initial range\\
@@ -291,51 +291,39 @@ The usual alternative is some variant of a factorial design, where each paramete
 
 \section{Experimental design}
 
-As our interest is in the behaviour of the model, both overall and under specific conditions (such as \emph{Correlate Fidelity}), a factorial design is preferred.
+As our interest is in the behaviour of the model, both overall and under specific conditions (such as \emph{Correlate Fidelity}), a factorial design is preferred. A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \parencite{Montgomery2009}\footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions. This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our goal is to eliminate uninteresting settings for the next set of experiments. Note also that as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
-Now, a full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions.  This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our exploratory goals.
-
-The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where use combinations of our four-level factors,  $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes.
-
-We use a fractional factorial design to reduce the number of experimental runs required when compared to a full factorial design \autocite{Montgomery2009}. Although the number of runs is reduced, as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
+The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where use combinations of our four-level factors,  $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
 
 Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design. 
 %The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
 \section{Factors and levels}\label{factors-and-levels}
 
-Although several parameters in the model are continuous, at this stage the main ones can be reduced to a set of A/B alternatives, or two-level factors.
+Although several parameters in the model are continuous, at this stage the main ones can be reduced to a set of A/B alternatives, or two-level factors. Of the others, as discussed in \cref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling. $P_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter, with three absolute values (0.33, 0.66 and 1.0) irrespective of fitness, and one meaning ``use the parent's value for this parameter.'' 
 
-Of the others, $p_{reproduction}$ and $p_{selection}$ take four levels each to cover a reasonable range given the usual sensitivity of evolutionary models to these type of parameter; the value $0$ for the corresponding model parameter in each case means ``use parent's value'', and so is a special case. And as discussed in \cref{upper-size-bound}, \emph{Population Restriction} is held to Fitness-independent sampling.
+Where one or both parameters are set to use the parent's value, the model is similar to a standard EA, and when both are fixed the major source of variation has been removed from the model and so the behaviour is uninteresting. But what about the case where only one value is fixed; is that still interesting? Imagine the scenario where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness. Both cases are non-trivial and so should be included in our runs, along with the primary case where both are based on the parent's setting.
 
 The factors and levels used are given in \cref{tbl:factor-levels}.
 
 \begin{table}
 	\begin{center}
-		\caption{Factor levels for investigation into inheritance}\label{tbl:factor-levels}
+		\caption{Factor levels for experiments to determine parameter settings}\label{tbl:factor-levels}
 		\begin{tabular}{@{}llp{6cm}@{}}
 			\toprule
-			Factor                 & Number of Levels & Levels\\
+			Factor                 &Number of Levels & Levels\\
 			\midrule
-			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0\\
-			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0\\
-			$n_{children}$         & 2                & 2 or 5\\
-			Population Restriction & 1                & Fitness-independent sampling\\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$%
+			$p_{reproduction}$     &4                & 0.33 or 0.66 or 1.0\\
+			$p_{selection}$        &4                & 0.33 or 0.66 or 1.0\\
+			$n_{children}$         &2                & 2 or 5\\
+
+			Distribution           &2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$%
 														\footnote{But see discussion in \cref{screening-distribution} as to the implementation}\\
-			Correlate Fidelity     & 2                & false or true\\
+			Correlate Fidelity     &2                & false or true\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
-
-\section{Probability of selection and probability of reproduction}
-
-We take these together as they interact. Where one or both parameters equal zero (use the parent's fitness as the probability of selection or probability of reproduction), the model is similar to a standard EA; any other value means selection or reproduction occurs with a fixed probability irrespective of fitness.
-
-Why would we be interested in runs under these conditions? Imagine a run where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness.
-
-The combination where both $p_{selection}$ and $p_{reproduction}$ are non-zero leads to uninteresting behaviour as the major source of variation has been removed from the model.
 
 \section[Upper size bound]{Effect of upper bound on population size}\label{upper-size-bound}
 
@@ -386,7 +374,7 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 \end{table}
 
 <<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
-ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5, fill='gray70') + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
+ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 
 bp <- ggplot(df,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
 grid.arrange(ap,bp,nrow=1,ncol=2)

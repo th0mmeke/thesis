@@ -10,6 +10,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{todonotes}
 %\usepackage{subscript} % provides \textsubscript
+\usepackage{makecell}
 
 \usepackage{fancyvrb}
 \VerbatimFootnotes % allows verbatim text in footnotes

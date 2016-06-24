@@ -279,7 +279,7 @@ The environment is considered ``fixed'' (that is, each element's fitness value d
 			$p_{selection}$        & 2                & 0 or 1.0                                                     \\
 			$n_{children}$         & 2                & 2 or 5                                                       \\
 			Population Restriction & 2                & No upper-bound, or Fitness-independent sampling              \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
 			Correlate Fitness      & 2                & false or true                                                \\
 			Correlate Fidelity     & 2                & false or true                                                \\
 			\bottomrule
@@ -366,7 +366,7 @@ It also recognizes that in both Evolutionary Computation and natural populations
 			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
 			$n_{children}$         & 2                & 2 or 5                                                       \\
 			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
 			Correlate Fitness      & 2                & false or true                                                \\
 			Correlate Fidelity     & 2                & false or true                                                \\
 			\bottomrule
@@ -469,7 +469,7 @@ The factors and levels used for are given in \cref{tbl:factor-levels}.
 
 \begin{table}
 	\caption{Factor levels for experiments to determine parameter settings}\label{tbl:factor-levels}
-	\begin{tabular}{@{}lllp{6cm}@{}}
+	\begin{tabular}{@{}llp{3cm}p{9cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule
@@ -477,20 +477,22 @@ The factors and levels used for are given in \cref{tbl:factor-levels}.
 		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
 		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{})\\
-		Distribution           &--					&2                	& Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$\\
+		Distribution           &--					&2                	& normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{algorithm}
-	$fitness_{new}\leftarrow$ Distribution with expected value of $fitness$ and variance of $1-fidelity$\;
-	$fidelity_{new}\leftarrow$ Distribution with expected value of $fidelity$ and variance of $1-fidelity$\;
-\end{algorithm}
-
-\begin{algorithm}
-	$fitness_{new}\leftarrow$ Distribution with expected value of $fitness$ and variance $v\in\mathcal{U}[0, 1.0]$\;
-	$fidelity_{new}\leftarrow$ Distribution with expected value of $fidelity$ and variance $v\in\mathcal{U}[0, 1.0]$\;
-\end{algorithm}
+\begin{table}
+\begin{tabular}{@{}lll@{}}
+\toprule
+&Normal dist., $\mathbb{N}$	&uniform dist., $\mathcal{U}$\\
+\midrule
+Correlated		&\makecell{$fitness_{new}\leftarrow \mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\$fidelity_{new}\leftarrow\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$}& \makecell{$fitness_{new}\leftarrow \mathcal{U}[0, 1.0]$\\$fidelity_{new}\leftarrow \mathcal{U}[0, 1.0]$}\\
+\midrule
+Uncorrelated	&\makecell{$fitness_{new}\leftarrow \mathbb{N}., \mu=fitness, \sigma=1-fidelity$\\$fidelity_{new}\leftarrow\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$}&\makecell{$fitness_{new}\leftarrow \mathcal{U}[0, 1.0]$\\$fidelity_{new}\leftarrow \mathcal{U}[0, 1.0]$}\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Initial conditions and settings}\label{initial-conditions}
 Before each run we construct an initial population. From the hypothesis \cref{hypothesis-2}, we expect to see a population of low fidelity entities eventually replaced by one of high (or at least higher) fidelity ones. This is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying, but developed it over time. Entities begin with an initial fidelity $\in\mathcal{U}[0, 0.3]$ and fitness $\in\mathcal{U}[0, 0.3]$ chosen randomly from a uniform distribution so as not to introduce any bias that might result from a repeated starting point. 
@@ -511,7 +513,7 @@ df <- subset(load.results.simple('results/results-53f6b74.data'), environment_ch
 			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
 			$n_{children}$         & 2                & 2 or 5                                                       \\
 			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
 			Correlate Fitness      & 2                & false or true                                                \\
 			Correlate Fidelity     & 2                & false or true                                                \\
 			\bottomrule
@@ -549,7 +551,7 @@ df <- subset(load.results.simple('results/results-53f6b74.data'), environment_ch
 			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
 			$n_{children}$         & 2                & 2 or 5                                                       \\
 			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or Uniform dist., $\mathcal{U}$ \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
 			Correlate Fitness      & 2                & false or true                                                \\
 			Correlate Fidelity     & 2                & false or true                                                \\
 			\bottomrule
@@ -557,15 +559,15 @@ df <- subset(load.results.simple('results/results-53f6b74.data'), environment_ch
 	\end{center}
 \end{table}
 
-<<gaussian, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
-df$distribution = factor(df$distribution, labels=c('Gaussian','Uniform'))
+<<normal, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
+df$distribution = factor(df$distribution, labels=c('normal','uniform'))
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
 @
 
-The \emph{Derive} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Derive} include probability distributions, where the function samples a value from a distribution. If the distribution is gaussian, the two parameters to \emph{Derive} would describe its mean and variance.  
+The \emph{Derive} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Derive} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Derive} would describe its mean and variance.  
 
-From a visual inspection, we conclude that the results appear very similar for Uniform and Gaussian distributions.
+From a visual inspection, we conclude that the results appear very similar for uniform and normal distributions.
 
 \section{Conclusions}
 \begin{DRAFT}
@@ -627,7 +629,7 @@ df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection ==
 			$p_{selection}$        & 2                & 0 or 0.66                                                \\
 			$n_{children}$         & 2                & 2 or 5                                                   \\
 			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
 			Correlate Fidelity     & 2                & false or true                                            \\
 			Shape of environment change		2&	Abrupt or continuous\\
 			\bottomrule
@@ -706,7 +708,7 @@ df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection ==
 			$p_{selection}$        & 2                & 0 or 0.66                                                \\
 			$n_{children}$         & 2                & 2 or 5                                                   \\
 			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & Gaussian dist., $\mathbb{N}$ or folded Gaussian          \\
+			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
 			Correlate Fidelity     & 2                & false or true                                            \\
 			Shape of environment change		2&	Abrupt or continuous\\
 			\bottomrule
@@ -760,7 +762,7 @@ Data is all generations for those fixed-environment runs that reached completion
 %df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
 %df$p_selection <- factor(df$p_selection,labels=c(0,0.33,0.66,1.0))
 %df$n_offspring <- factor(df$n_offspring,labels=c(2,5))
-%df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+%df$distribution <- factor(df$distribution, labels=c("normal","uniform"))
 %ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="Final mean fidelity")
 %bp <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="Final mean fidelity")
 %cp <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_cor)) + labs(x="Offspring",y="Final mean fidelity")
@@ -775,15 +777,15 @@ Data is all generations for those fixed-environment runs that reached completion
 %
 %\subsubsection{Is the choice of distribution function significant?}\label{distribution-function-1}
 %
-%gaussian implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> gaussian. But uniform would be worst case--good to know conclusions hold even under these conditions.
+%normal implies a stronger relationship, uniform a broader range and less correlation. Considerations--connection to other fields -> normal. But uniform would be worst case--good to know conclusions hold even under these conditions.
 %
 %\begin{itemize}[label={}]
-%	\item H$_0$: $\overline{gaussian} = \overline{uniform}$
-%	\item H$_1$: $\overline{gaussian} \ne \overline{uniform}$
+%	\item H$_0$: $\overline{normal} = \overline{uniform}$
+%	\item H$_1$: $\overline{normal} \ne \overline{uniform}$
 %\end{itemize}
 %
-%<<distributionfunction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison of Gaussian and Uniform distributions for Factor Distribution.'>>=
-%df$distribution <- factor(df$distribution, labels=c("Gaussian","Uniform"))
+%<<distributionfunction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison of normal and uniform distributions for Factor Distribution.'>>=
+%df$distribution <- factor(df$distribution, labels=c("normal","uniform"))
 %ap <- ggplot(df) + geom_boxplot(aes(x=distribution, y=ave_cor)) + labs(x="",y="Final mean fidelity")
 %bp <- ggplot(df) + geom_boxplot(aes(x=distribution, y=ave_fit)) + labs(x="",y="Final mean fitness")
 %grid.arrange(ap,bp,nrow=1,ncol=2,heights=unit(0.5, "npc"))

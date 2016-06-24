@@ -459,37 +459,34 @@ Although several parameters in the model are continuous, at this stage the main 
 
 Where one or both parameters are set to use the parent's value, the model is similar to a standard EA, and when both are fixed the major source of variation has been removed from the model and so the behaviour is uninteresting. But what about the case where only one value is fixed; is that still interesting? Imagine the scenario where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness. Both cases are non-trivial and so should be examined in our experiments, along with the primary case where both are based on the parent's setting.
 
-The $Range$ parameter deserves further discussion as it is fundamental to the model. The value produced by $Range$ determines the degree to which $Derive$ varies from the given expected value; $Range$ therefore describes the degree of correlation between the expected value input and the output of $Derive$. A small $Range$ value will produce a high degree of correlation between input and output. 
-
-Now if $Range$ is based on an entity's fidelity value, for example if $Range =\lvert 1-fidelity\rvert$, then high values of fidelity will result in a small range and therefore a high degree of correlation between the input and output of $Derive$; low fidelity values will see $Range$ being large, and $Derive$ will have a low degree of correlation. This corresponds to our intuitive sense of how inheritance should work. Some mechanisms will produce terrible copies--fidelity is low and $Derive$ is poorly correlated. Others are perfect replicators--fidelity is perfect (1.0), and $Derive$ will be perfectly correlated. On the other hand, if $Range$ is given a value unrelated to the entity's fidelity value, the output of $Derive$ is uncorrelated with fidelity; this matches our intuitive sense of a non-functioning inheritance mechanism.
-
-Why do we not just remove the parameter $Range$ and define the range of $Derive$ as $\lvert 1-fidelity\rvert$? First, to some degree this would beg the question of this model; we will have pre-determined that inheritance is a mechanism based on fidelity. More interestingly though, it would also remove our ability to explore the effect of different models for $Range$, as we do in a limited way in following sections.
-
-The factors and levels used for are given in \cref{tbl:factor-levels}.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels}.
 
 \begin{table}
-	\caption{Factor levels for experiments to determine parameter settings}\label{tbl:factor-levels}
-	\begin{tabular}{@{}llp{3cm}p{9cm}@{}}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule
 		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{})\\
-		Distribution           &--					&2                	& normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
+		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors})\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{table}
-\begin{tabular}{@{}lll@{}}
+\begin{table}\label{reproduction-distribution-factors}
+\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}p{2.5cm}@{}}
 \toprule
-&Normal dist., $\mathbb{N}$	&uniform dist., $\mathcal{U}$\\
+&&\multicolumn{2}{c}{Distribution}\\
+Reproduction&Child entity parameter					&Normal distribution									&Uniform distribution\\
 \midrule
-Correlated		&\makecell{$fitness_{new}\leftarrow \mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\$fidelity_{new}\leftarrow\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$}& \makecell{$fitness_{new}\leftarrow \mathcal{U}[0, 1.0]$\\$fidelity_{new}\leftarrow \mathcal{U}[0, 1.0]$}\\
-\midrule
-Uncorrelated	&\makecell{$fitness_{new}\leftarrow \mathbb{N}., \mu=fitness, \sigma=1-fidelity$\\$fidelity_{new}\leftarrow\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$}&\makecell{$fitness_{new}\leftarrow \mathcal{U}[0, 1.0]$\\$fidelity_{new}\leftarrow \mathcal{U}[0, 1.0]$}\\
+\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
+								&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$	 		&$\mathcal{U}[0, 1.0]$\\
+
+\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
+								&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$	&$\mathcal{U}[0, 1.0]$\\
 \bottomrule
 \end{tabular}
 \end{table}

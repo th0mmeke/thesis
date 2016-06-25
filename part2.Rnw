@@ -240,7 +240,7 @@ The model is parameterized to make it easy to describe different specific models
 	\includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}\label{fig:correlation}
 
-\chapter{Practical experimental considerations}
+\chapter{Practical considerations}
 
 In the absence of any restrictions on population size there is nothing to prevent a growing population eventually exceeding the capacity of the simulation system. This is unfortunately an unavoidable difficulty in experiments with exponential growth systems rather than a limitation of the theoretical model. 
 
@@ -262,7 +262,7 @@ If there is an affect on the hypothesis tests attributable to the bound mechanis
 
 \subsection{Effect of population limits}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results('results/results-819350e-unrestricted.data'), ecf==0 & distribution==0)
+df <- subset(load.results('results/results-819350e-unrestricted.data'), ecf==0)
 @
 
 The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and the model run with a maximum of \Sexpr{max(df['gen'])} generations with factors as follows:
@@ -275,16 +275,17 @@ The factors and levels along with their mapping to model parameters are given in
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.66 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&4                	& 0.66 or $fitness$\\
+		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c5})\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
 \begin{table}\label{reproduction-distribution-factors-c5}
-	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+	\caption{Levels for the factor \emph{Reproduction}}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
 		\toprule
 		Reproduction&Child entity parameter					&Shape of normal distribution ($\mathbb{N}$)\\
 		\midrule
@@ -318,15 +319,15 @@ The factors and levels along with their mapping to model parameters are given in
 %	\end{center}
 %\end{table}
 
-<<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
-ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
+<<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='The growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before the population size exceeded the specified limit of 50,000 entities.'>>=
+#ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 
-bp <- ggplot(df,aes(x=gen,y=pop,group=interaction(p_reproduce,p_selection,fitness_correlation,correlation_correlation,truncate,distribution))) + geom_line() + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size")
-grid.arrange(ap,bp,nrow=1,ncol=2)
+ggplot(df,aes(x=gen,y=pop,group=exp)) + geom_point() + scale_x_continuous(breaks=1:100) + labs(x="Generation", y="Population size") + geom_smooth(method="loess")
+#grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
 Under these initial conditions, no experiment without an upper population bound continued for more than a handful of generations before the population size reached more than ten times the initial size. It is clear from \cref{fig:unboundedplot} that some form of upper bound is necessary.
-
+s
 \subsection[Choice of limit mechanism]{Is the choice of limit mechanism significant?}
 
 Given then that an upper bound is needed for practicality, this section describes two possible approaches to the implementation of the \emph{Restriction} function in \cref{upper-bound-model-algorithm} and attempts to understand the form of the bias each introduces into the experimental results.
@@ -384,27 +385,6 @@ It also recognizes that in both Evolutionary Computation and natural populations
 
 \subsection{Experimental design}
 
-
-\begin{table} % 53f6b74
-	\begin{center}
-		\caption{Factor levels for the choice of an upper-bound mechanism}
-		\label{tbl:factor-levels-for-the-choice-of-an-upper-bound-mechanism}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                       \\
-			\midrule
-			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$n_{children}$         & 2                & 2 or 5                                                       \\
-			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-			Correlate Fitness      & 2                & false or true                                                \\
-			Correlate Fidelity     & 2                & false or true                                                \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
-
 <<echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 runs <- nrow(subset(df,gen==0))
@@ -413,7 +393,7 @@ replicates <- runs / factors
 df_completed <- subset(df, gen==500)
 @
 
-Data is from \Sexpr{nrow(subset(df,gen==0))} runs -- \Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} replicates -- with settings given in \cref{tbl:factor-levels-for-the-choice-of-an-upper-bound-mechanism} under fixed conditions, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df['gen'])} generations.
+Data is from \Sexpr{nrow(subset(df,gen==0))} runs -- \Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} replicates--with settings from \cref{tbl:factor-levels-c5}, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df['gen'])} generations.
 
 \subsection{Results and discussion}
 
@@ -507,6 +487,7 @@ The factors and levels along with their mapping to model parameters are given in
 \end{table}
 
 \begin{table}\label{reproduction-distribution-factors-c6}
+\caption{Levels for the factor \emph{Reproduction} against factor levels for \emph{Distribution}}
 \begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}p{2.5cm}@{}}
 \toprule
 &&\multicolumn{2}{c}{Shape of distribution}\\
@@ -671,7 +652,8 @@ The factors and levels along with their mapping to model parameters are given in
 \end{table}
 
 \begin{table}\label{reproduction-distribution-factors-c7}
-	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+		\caption{Levels for the factor \emph{Reproduction}}
+		\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
 		\toprule
 		Reproduction&Child entity parameter					&Distribution shape\\
 		\midrule
@@ -775,7 +757,7 @@ dp <- ggplot(df,aes(x=gen,y=ave_fit,group=run, colour=factor(correlation_correla
 grid.arrange(cp,dp,nrow=2,ncol=1)
 @
 
-Data is all generations for those fixed-environment runs that reached completion with a 'sustainable' population (see \cref{lower-size-limit}) at generation \Sexpr{max(df['gen'])}; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
+Data is all generations for those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])}; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
 %<<lowstartranges2, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Range of 25\\% to 75\\% quartiles for \\gls{sd} for \\emph{true} setting for factor \\textbf{Correlate Fidelity}'>>=
 %z<-by(df,df$gen,function(x) {aggregate(x$sd_cor ~ x$correlation_correlation, data=x, quantile)}) # quantiles aggregated by correlation_correlation
@@ -1046,7 +1028,8 @@ The factors and levels along with their mapping to model parameters are given in
 \end{table}
 
 \begin{table}\label{reproduction-distribution-factors-c8}
-	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+	\caption{Levels for the factor \emph{Reproduction}}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
 		\toprule
 		Reproduction&Child entity parameter					&Distribution shape\\
 		\midrule

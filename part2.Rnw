@@ -262,30 +262,62 @@ If there is an affect on the hypothesis tests attributable to the bound mechanis
 
 \subsection{Effect of population limits}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df <- subset(load.results.simple('results/results-d9f18e2.data'), environment_change_frequency==0)
+df <- subset(load.results('results/results-819350e-unrestricted.data'), ecf==0 & distribution==0)
 @
 
 The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and the model run with a maximum of \Sexpr{max(df['gen'])} generations with factors as follows:
 
-\begin{table} % d9f18e2
-	\begin{center}
-		\caption{Factor levels for investigation into the need for an upper-bound mechanism}
-		\label{tbl:factors-levels-for-upper-bound-investigation}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                       \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 1.0                                                     \\
-			$p_{selection}$        & 2                & 0 or 1.0                                                     \\
-			$n_{children}$         & 2                & 2 or 5                                                       \\
-			Population Restriction & 2                & No upper-bound, or Fitness-independent sampling              \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-			Correlate Fitness      & 2                & false or true                                                \\
-			Correlate Fidelity     & 2                & false or true                                                \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c5}.
+
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c5}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&4                	& 0.66 or $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
+		Distribution           &--					&1                	& Normal distribution ($\mathbb{N}$) (see \cref{reproduction-distribution-factors})\\
+		\bottomrule
+	\end{tabular}
 \end{table}
+
+\begin{table}\label{reproduction-distribution-factors}
+	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+		\toprule
+		Reproduction&Child entity parameter					&Distribution\\
+		\midrule
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$\\
+		
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+%\begin{table} % d9f18e2
+%	\begin{center}
+%		\caption{Factor levels for investigation into the need for an upper-bound mechanism}
+%		\label{tbl:factors-levels-for-upper-bound-investigation}
+%		\begin{tabular}{@{}llp{6cm}@{}}
+%			\toprule
+%			Parameter              & Number of Levels & Levels                                                       \\
+%			\midrule
+%			$p_{reproduction}$     & 2                & 0 or 1.0                                                     \\
+%			$p_{selection}$        & 2                & 0 or 1.0                                                     \\
+%			$n_{children}$         & 2                & 2 or 5                                                       \\
+%			Population Restriction & 2                & No upper-bound, or Fitness-independent sampling              \\
+%			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
+%			Correlate Fitness      & 2                & false or true                                                \\
+%			Correlate Fidelity     & 2                & false or true                                                \\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{table}
 
 <<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='On the left, a histogram of number of generations achieved by an unbounded algorithm before either i) the population size increases beyond 10x the original population size, or ii) the simulation succeeds in reaching the expected number of generations (which never occurred in an unbounded population). On the right, the growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before reaching the 10x practicality limit.'>>=
 ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
@@ -374,7 +406,6 @@ It also recognizes that in both Evolutionary Computation and natural populations
 	\end{center}
 \end{table}
 
-% EXPERIMENT 2 - CHOICE OF LIMIT MECHANISM
 <<echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 runs <- nrow(subset(df,gen==0))
@@ -459,10 +490,10 @@ Although several parameters in the model are continuous, at this stage the main 
 
 Where one or both parameters are set to use the parent's value, the model is similar to a standard EA, and when both are fixed the major source of variation has been removed from the model and so the behaviour is uninteresting. But what about the case where only one value is fixed; is that still interesting? Imagine the scenario where selection has the value $1.0$ while reproduction takes value $0$ - parents always survive to the next generation (subject to any population limits naturally), while producing children at each generation with a probability proportional to their fitness. Or reverse these values ($p_{selection} = 0$ while $p_{reproduction} = 1.0$), giving a run where parents always produce a fixed number of $n_{offspring}$ children at each generation, but their own survival rate is proportional to their fitness. Both cases are non-trivial and so should be examined in our experiments, along with the primary case where both are based on the parent's setting.
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels}.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c6}.
 
 \begin{table}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c6}
 	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
@@ -615,24 +646,55 @@ df_full <- load.results('results/results-819350e.data')
 df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for testing the hypothesis prediction of perfect inheritance in unchanging conditions}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}.
+
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&4                	& 0.66 or $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
+		Distribution           &--					&2                	& Normal distribution_1 or Normal distribution_2\\
+		\bottomrule
+	\end{tabular}
 \end{table}
+
+\begin{table}\label{reproduction-distribution-factors}
+	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+		\toprule
+		Reproduction&Child entity parameter					&Distribution\\
+		\midrule
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
+		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$\\
+		
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
+		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+%\begin{table} % 5e33a27 and 819350e
+%	\begin{center}
+%		\caption{Factor levels for testing the hypothesis prediction of perfect inheritance in unchanging conditions}
+%		\begin{tabular}{@{}llp{6cm}@{}}
+%			\toprule
+%			Parameter              & Number of Levels & Levels                                                   \\
+%			\midrule
+%			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
+%			$p_{selection}$        & 2                & 0 or 0.66                                                \\
+%			$n_{children}$         & 2                & 2 or 5                                                   \\
+%			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
+%			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
+%			Correlate Fidelity     & 2                & false or true                                            \\
+%			Shape of environment change		2&	Abrupt or continuous\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{table}
 
 \section{Results and discussion}
 
@@ -693,25 +755,6 @@ We use the same experimental setup and data as in the previous \nameref{does-ave
 df_full <- load.results('results/results-819350e.data')
 df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
-
-\begin{table} % 5e33a27 and 819350e
-	\begin{center}
-		\caption{Factor levels for testing the hypothesis prediction that the population variance of inheritance should reduce to nothing in unchanging environments}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                   \\
-			\midrule
-			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-			$n_{children}$         & 2                & 2 or 5                                                   \\
-			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
-			Correlate Fidelity     & 2                & false or true                                            \\
-			Shape of environment change		2&	Abrupt or continuous\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
 
 <<lowstartranges1, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Smoothed ranges over time of the standard deviation of fidelity (top) and fitness (bottom) for all levels of all factors, broken out by level of \\emph{Correlate Fidelity}. Lines that drop below zero are an artifact of the line smoothing algorithm used (local polynomial regression fitting).'>>=
 ap <- ggplot(df,aes(x=gen,y=sd_cor,group=run, colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("false","true")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))
@@ -804,7 +847,7 @@ In this chapter we further develop this hypothesis to a testable form; propose i
 	\end{center}
 \end{figure}\label{fig:conceptual-model-for-environmental-change}
 
-First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure. \todo{first a time series for both, and then a separate measure...}
+First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure.
 
 Now for some definitions:
 
@@ -960,6 +1003,39 @@ ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # f
 @
 
 The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \cref{tbl:range-of-independent-variables}.
+
+
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}.
+
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
+		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors})\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}\label{reproduction-distribution-factors}
+	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}p{2.5cm}@{}}
+		\toprule
+		&&\multicolumn{2}{c}{Distribution}\\
+		Reproduction&Child entity parameter					&Normal distribution									&Uniform distribution\\
+		\midrule
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
+		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$	 		&$\mathcal{U}[0, 1.0]$\\
+		
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
+		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$	&$\mathcal{U}[0, 1.0]$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \begin{table}
 	\begin{center}

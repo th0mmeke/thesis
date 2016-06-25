@@ -15,7 +15,7 @@
 \VerbatimFootnotes % allows verbatim text in footnotes
 \fvset{fontsize=\scriptsize}
 
-\usetikzlibrary{calc,intersections,through,backgrounds,matrix,mindmap}
+\usetikzlibrary{calc,intersections,through,backgrounds,matrix}
 \usepackage{tikz-3dplot}
 
 \numberwithin{equation}{section} % amsmath - numbering scheme two deep for equations

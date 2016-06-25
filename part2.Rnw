@@ -160,7 +160,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 \item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
 \end{enumerate}
 
-\section{Model of variation and inheritance}\label{base-model}
+\section{Simulation model of variation and inheritance}\label{base-model}
 
 We now introduce a general model of the relationship between variation and inheritance in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements of the hypothesis are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
@@ -514,29 +514,32 @@ The vertical line on the extreme left of the right-hand side facet of \cref{fig:
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
 
-\section{Distribution parameter}\label{screening-distribution}
+\section{Distribution factor}\label{screening-distribution}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
 
-The \emph{Distribution} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} describes its mean and variance.  
+The \emph{Distribution} factor from \cref{tbl:factor-levels-c6} describes a function to return a value in the range $[0,1]$ given two input values, also in the range $[0,1]$, where the first is for the expected value of the result, and the second describes a range. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} equate to its mean and variance. For other probability distributions, the parameters are distribution specific. For example, for a uniform distribution, the parameters have no influence on the output; the output will be a value in the range $[0,1]$ drawn randomly with equal probability, regardless of input parameters.
 
-From a visual inspection, we conclude that the results appear very similar for uniform and normal distributions.
+As \emph{Distribution} is used by \emph{Reproduction} to influences the relationship between the properties of an entity and its offspring, it seems plausible to hypothesise that different mapped shapes may have a significant effect on the experimental result.
 
-\emph{Distribution}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
+Where the underlying probability isn't inherently limited to the output range of $[0,1]$, such as is the case for the normal distribution, then the mechanism used to map the underlying distribution to the output range may modify the probability distribution of the mapped values. Two out of many possible mappings are a straightforward bounded algorithm ($max(0,min(1,normal(mean,variance)))$), and a sampling algorithm:
 
-Specifically, in the experiments described above, one version (level) of the distribution factor used the following function to map the raw gaussian distribution to the range $[0,1]$: max(0,min(1,gaussian(mean,variance)))
+\begin{algorithm}[H]
+\Repeat{for ever}{
+	$x \leftarrow$ normal($mean,variance$)\;
+	\If{$x\geq 0$ and $x\leq 1$}{
+	 \Return $x$\;
+	}
+}
+\end{algorithm}
+	
+A visualisation of the results of these two algorithms alongside the unmapped normal distribution is given in \cref{fig:example_distributions}. The bounded algorithm produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected bell-shape of the standard normal distribution (on the left-hand side of the same figure), while the sampling algorithm distribution appears closer in shape to the unmapped distribution while mapping correctly to the output range. Note that neither shape though is ``wrong'' or ''right'', as the only requirements for the \emph{Distribution} are that it meets $[0,1]x[0,1]\mapsto [0,1]$, which is true of all of these described mappings.
 
-<<normal, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
-df$distribution = factor(df$distribution, labels=c('normal','uniform'))
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
-@
-
-<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of gaussian distribution with mean = 0.5, standard deviation = 0.5'>>=
+<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of normal distribution with mean = 0.5, standard deviation = 0.5'>>=
 x <- rnorm(n=10000, mean=0.5, sd=0.5)
-ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Normal distribution")
-bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Folded normal")
+ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(-1,2),ylim=c(0,1.6)) + labs(x="Normal distribution")
+bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Bounded normal")
 
 x1 <- replicate(10000, {
 repeat {
@@ -550,9 +553,20 @@ cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + la
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-This produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected elongated 'U' of the standard gaussian (on the left-hand side of the same figure), and as \emph{Distribution} is used in \ref{base-model-algorithm} describes the relationship between the properties of an entity and its offspring, it seems plausible that this distortion towards the extremes of the range may have a significant effect on the experimental result.
+<<normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
+df$distribution = factor(df$distribution, labels=c('Bounded normal','Uniform'))
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
+@
 
-To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \cref{fig:example_distributions}.
+From a visual inspection of \cref{fig:normal-uniform}, we conclude that the results appear very similar for uniform and normal distributions, and from \cref{fig:sampling-folding} so do the bounded normal and sampled normal distributions. A more rigorous analysis would both use a factorial design to compare all four combinations (uniform/normal and bounded/sampled), and would use a formal test of similarity but at this stage this can be left for future work.
+
+<<sampling-folding, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
+temp <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0)
+temp$distribution = factor(temp$distribution, labels=c('Bounded normal','Sampled normal'))
+ggplot(temp) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
+ggplot(temp) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
+@
 
 \section{Conclusions}
 \begin{DRAFT}

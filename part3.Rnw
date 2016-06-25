@@ -17,7 +17,10 @@ df
 
 \chapter{Introduction}
 
-The second open problem is the demonstration of a self-referential mechanism to provide an inheritance and variation ``erroneous copying'' mechanism that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be accessible to evolution, and therefore made of the same things as everything else that is subject to evolution in the system--it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
+
+In this final part, we begin to address our final research question, ``Can such a mechanism then be successfully demonstrated in an artificial system?''.
+
+The goal is to demonstrate a self-referential mechanism to provide ``erroneous copying'' that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be accessible to evolution, and therefore made of the same things as everything else that is subject to evolution in the system--it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
 
 Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tuneable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
 

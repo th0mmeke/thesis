@@ -298,27 +298,6 @@ The factors and levels along with their mapping to model parameters are given in
 	\end{tabular}
 \end{table}
 
-
-%\begin{table} % d9f18e2
-%	\begin{center}
-%		\caption{Factor levels for investigation into the need for an upper-bound mechanism}
-%		\label{tbl:factors-levels-for-upper-bound-investigation}
-%		\begin{tabular}{@{}llp{6cm}@{}}
-%			\toprule
-%			Parameter              & Number of Levels & Levels                                                       \\
-%			\midrule
-%			$p_{reproduction}$     & 2                & 0 or 1.0                                                     \\
-%			$p_{selection}$        & 2                & 0 or 1.0                                                     \\
-%			$n_{children}$         & 2                & 2 or 5                                                       \\
-%			Population Restriction & 2                & No upper-bound, or Fitness-independent sampling              \\
-%			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-%			Correlate Fitness      & 2                & false or true                                                \\
-%			Correlate Fidelity     & 2                & false or true                                                \\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-%\end{table}
-
 <<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='The growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before the population size exceeded the specified limit of 50,000 entities.'>>=
 #ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 
@@ -358,13 +337,12 @@ Returning then to our examination of fitness-independent and fitness-based upper
 
 The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \cref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
-\begin{function}
-	\SetKwProg{Def}{def}{:}{}
+\begin{algorithm}
 	\Def{Restriction(population,n)}{
 		\Return $\text{random sample of }n\text{ elements from }population$\;
 	}
 	\caption{Restriction (Fitness-independent sampling)()}
-\end{function}
+\end{algorithm}
 
 %If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism.
 
@@ -374,14 +352,13 @@ The fitness-based population limit is based on \emph{truncation} from \textcite[
 
 It also recognizes that in both Evolutionary Computation and natural populations, the population limit is a function of the carrying capacity of the environment and fitness determines the selection.
 
-\begin{function}
-	\SetKwProg{Def}{def}{:}{}
+\begin{algorithm}
 	\Def{Restriction(population,n)}{
 		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
 		\Return $\text{first }n\text{ elements from }sortedPopulation$\;
 	}
 	\caption{Restriction (Fitness-based selection)()}
-\end{function}
+\end{algorithm}
 
 \subsection{Experimental design}
 
@@ -539,30 +516,24 @@ The vertical line on the extreme left of the right-hand side facet of \cref{fig:
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
 
-\section{Fidelity correlation}
-
-\emph{Fidelity correlation} is parameterized in order to test the hypothesis that correlation is required for inheritance; the alternative hypothesis that inheritance can arise without correlation corresponds to \emph{Fidelity correlation} being false.
-
 \section{Distribution parameter}\label{screening-distribution}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
+
+The \emph{Distribution} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} describes its mean and variance.  
+
+From a visual inspection, we conclude that the results appear very similar for uniform and normal distributions.
+
+\emph{Distribution}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
+
+Specifically, in the experiments described above, one version (level) of the distribution factor used the following function to map the raw gaussian distribution to the range $[0,1]$: max(0,min(1,gaussian(mean,variance)))
 
 <<normal, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
 df$distribution = factor(df$distribution, labels=c('normal','uniform'))
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
 @
-
-The \emph{Distribution} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Derive} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} would describe its mean and variance.  
-
-From a visual inspection, we conclude that the results appear very similar for uniform and normal distributions.
-
-\emph{Distribution}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
-
-Specifically, in the experiments described above, one version (level) of the distribution factor used the following method to map the raw gaussian distribution to the range $[0,1]$:
-
-max(0,min(1,gaussian(mean,variance)))
 
 <<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of gaussian distribution with mean = 0.5, standard deviation = 0.5'>>=
 x <- rnorm(n=10000, mean=0.5, sd=0.5)
@@ -1209,17 +1180,6 @@ $C_{\mu}$ has been applied to a number of domains including random boolean netwo
 The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \textcite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \textcite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \textcite[p.119]{Shalizi2001}.
 
 
-\section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
-\begin{DRAFT}
-\subsection{Variation alone is sufficient for Inheritance}
-As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
-
-\subsection{Selection alone is sufficient for Inheritance}
-The test is to show an example of S and not I.
-
-\subsection{Variation and Selection, without property correlation, is sufficient for Inheritance}
-Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
-\end{DRAFT}
 
 \chapter{Conclusions}
 \begin{DRAFT}
@@ -1235,4 +1195,16 @@ we suggest that:
 The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
 
 \TODO{Map to standard EA models - mutation only etc}
+\end{DRAFT}
+
+\section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
+\begin{DRAFT}
+	\subsection{Variation alone is sufficient for Inheritance}
+	As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
+	
+	\subsection{Selection alone is sufficient for Inheritance}
+	The test is to show an example of S and not I.
+	
+	\subsection{Variation and Selection, without property correlation, is sufficient for Inheritance}
+	Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
 \end{DRAFT}

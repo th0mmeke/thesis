@@ -279,21 +279,20 @@ The factors and levels along with their mapping to model parameters are given in
 		$p_{selection}$        &$p_{selection}$		&4                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
 		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
-		Distribution           &--					&1                	& Normal distribution ($\mathbb{N}$) (see \cref{reproduction-distribution-factors})\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{table}\label{reproduction-distribution-factors}
+\begin{table}\label{reproduction-distribution-factors-c5}
 	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
 		\toprule
-		Reproduction&Child entity parameter					&Distribution\\
+		Reproduction&Child entity parameter					&Shape of normal distribution ($\mathbb{N}$)\\
 		\midrule
-		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$\\
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
 		
-		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$\\
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -469,7 +468,7 @@ Returning to our goal, as the choice of method affects our results and for pract
 
 \chapter{Reducing the parameter space for the experiments}
 
-Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
+Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels-c6}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
 There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
 
@@ -501,23 +500,23 @@ The factors and levels along with their mapping to model parameters are given in
 		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
-		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors})\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c6})\\
+		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors-c6})\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{table}\label{reproduction-distribution-factors}
+\begin{table}\label{reproduction-distribution-factors-c6}
 \begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}p{2.5cm}@{}}
 \toprule
-&&\multicolumn{2}{c}{Distribution}\\
-Reproduction&Child entity parameter					&Normal distribution									&Uniform distribution\\
+&&\multicolumn{2}{c}{Shape of distribution}\\
+Reproduction&Child entity parameter					&Normal distribution								&Uniform distribution\\
 \midrule
-\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
-								&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$	 		&$\mathcal{U}[0, 1.0]$\\
+\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$				&$\mathcal{U}[0, 1.0]$\\
+								&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$	 			&$\mathcal{U}[0, 1.0]$\\
 
-\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
-								&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$	&$\mathcal{U}[0, 1.0]$\\
+\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$				&$\mathcal{U}[0, 1.0]$\\
+								&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$	&$\mathcal{U}[0, 1.0]$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -530,24 +529,24 @@ Before each run we construct an initial population. From the hypothesis \cref{hy
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
 
-\begin{table} % 53f6b74
-	\begin{center}
-		\caption{Factor levels for the investigation into number of offspring}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                       \\
-			\midrule
-			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$n_{children}$         & 2                & 2 or 5                                                       \\
-			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-			Correlate Fitness      & 2                & false or true                                                \\
-			Correlate Fidelity     & 2                & false or true                                                \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
+%\begin{table} % 53f6b74
+%	\begin{center}
+%		\caption{Factor levels for the investigation into number of offspring}
+%		\begin{tabular}{@{}llp{6cm}@{}}
+%			\toprule
+%			Parameter              & Number of Levels & Levels                                                       \\
+%			\midrule
+%			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
+%			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
+%			$n_{children}$         & 2                & 2 or 5                                                       \\
+%			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
+%			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
+%			Correlate Fitness      & 2                & false or true                                                \\
+%			Correlate Fidelity     & 2                & false or true                                                \\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{table}
 
 <<popoffspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of parameter $n_{children}$ - 2 (on the left) and 5 (on the right) .'>>=
 temp <- subset(df,n_offspring==1 & pop < 5000)
@@ -563,29 +562,10 @@ A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$
 
 \emph{Fidelity correlation} is parameterized in order to test the hypothesis that correlation is required for inheritance; the alternative hypothesis that inheritance can arise without correlation corresponds to \emph{Fidelity correlation} being false.
 
-\section{Derive parameter}\label{screening-distribution}
+\section{Distribution parameter}\label{screening-distribution}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
-
-\begin{table} % 53f6b74
-	\begin{center}
-		\caption{Factor levels for the investigation of Derive}
-		\begin{tabular}{@{}llp{6cm}@{}}
-			\toprule
-			Parameter              & Number of Levels & Levels                                                       \\
-			\midrule
-			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-			$n_{children}$         & 2                & 2 or 5                                                       \\
-			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-			Correlate Fitness      & 2                & false or true                                                \\
-			Correlate Fidelity     & 2                & false or true                                                \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
 
 <<normal, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
 df$distribution = factor(df$distribution, labels=c('normal','uniform'))
@@ -593,9 +573,36 @@ ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution"
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
 @
 
-The \emph{Derive} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Derive} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Derive} would describe its mean and variance.  
+The \emph{Distribution} parameter describes a function to return a value in the range $[0,1]$ given two parameters, also in the range $[0,1]$. Obvious candidates for \emph{Derive} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} would describe its mean and variance.  
 
 From a visual inspection, we conclude that the results appear very similar for uniform and normal distributions.
+
+\emph{Distribution}, as described earlier in \ref{screening-distribution}, produces a value in the range $[0,1]$; where the underlying method though isn't inherently limited to this range, such as is the case for the gaussian distribution, then the mechanism used to map the underlying raw distribution to the restricted range may modify the distribution of the mapped values.
+
+Specifically, in the experiments described above, one version (level) of the distribution factor used the following method to map the raw gaussian distribution to the range $[0,1]$:
+
+max(0,min(1,gaussian(mean,variance)))
+
+<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of gaussian distribution with mean = 0.5, standard deviation = 0.5'>>=
+x <- rnorm(n=10000, mean=0.5, sd=0.5)
+ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Normal distribution")
+bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Folded normal")
+
+x1 <- replicate(10000, {
+repeat {
+x <- rnorm(n=1,mean=0.5, sd=0.5)
+if (x >=0 & x<=1)
+break
+}
+x
+})
+cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Sampled normal")
+grid.arrange(ap,bp,cp,nrow=1,ncol=3)
+@
+
+This produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected elongated 'U' of the standard gaussian (on the left-hand side of the same figure), and as \emph{Distribution} is used in \ref{base-model-algorithm} describes the relationship between the properties of an entity and its offspring, it seems plausible that this distortion towards the extremes of the range may have a significant effect on the experimental result.
+
+To test this hypothesis, we compare the results obtained with the folding algorithm described above to those from a non-folding implementation (in ...) which produces the distribution shown on the right-hand side of \cref{fig:example_distributions}.
 
 \section{Conclusions}
 \begin{DRAFT}
@@ -654,25 +661,25 @@ The factors and levels along with their mapping to model parameters are given in
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.66 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&4                	& 0.66 or $fitness$\\
+		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
-		Distribution           &--					&2                	& Normal distribution_1 or Normal distribution_2\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c7})\\
+		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{table}\label{reproduction-distribution-factors}
+\begin{table}\label{reproduction-distribution-factors-c7}
 	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
 		\toprule
-		Reproduction&Child entity parameter					&Distribution\\
+		Reproduction&Child entity parameter					&Distribution shape\\
 		\midrule
-		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
-		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$\\
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
 		
-		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$\\
-		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$\\
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -1004,39 +1011,6 @@ ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # f
 
 The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \cref{tbl:range-of-independent-variables}.
 
-
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}.
-
-\begin{table}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
-		\toprule
-		Factor                 &Model parameter		&Number of Levels 	& Levels\\
-		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
-		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors})\\
-		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors})\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\begin{table}\label{reproduction-distribution-factors}
-	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}p{2.5cm}@{}}
-		\toprule
-		&&\multicolumn{2}{c}{Distribution}\\
-		Reproduction&Child entity parameter					&Normal distribution									&Uniform distribution\\
-		\midrule
-		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
-		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=1-fidelity$	 		&$\mathcal{U}[0, 1.0]$\\
-		
-		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mathbb{N}, \mu=fitness, \sigma=1-fidelity$			&$\mathcal{U}[0, 1.0]$\\
-		&$fidelity_{new}$	&$\mathbb{N}, \mu=fidelity, \sigma=\mathcal{U}[0, 1.0]$	&$\mathcal{U}[0, 1.0]$\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
 \begin{table}
 	\begin{center}
 		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
@@ -1053,6 +1027,38 @@ The factors and levels along with their mapping to model parameters are given in
 		\end{tabular}
 	\end{center}
 \end{table}
+
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}.
+
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c8})\\
+		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}\label{reproduction-distribution-factors-c8}
+	\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{6cm}@{}}
+		\toprule
+		Reproduction&Child entity parameter					&Distribution shape\\
+		\midrule
+		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
+		
+		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 
 \section{Results and discussion}
 

@@ -554,22 +554,23 @@ cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + la
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-<<normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
-df$distribution = factor(df$distribution, labels=c('Bounded normal','Uniform'))
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
-@
-
 From a visual inspection of \cref{fig:normal-uniform}, we conclude that the results appear very similar for uniform and normal distributions, and from \cref{fig:sampling-folding} so do the bounded normal and sampled normal distributions. 
 
 A more rigorous analysis would both use a factorial design to compare all six combinations (correlated:uncorrelated x uniform:normal bounded:normal sampled), and would use a formal test of similarity but at this stage this can be left for future work.
 
-<<sampling-folding, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
-temp <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0)
-temp$distribution = factor(temp$distribution, labels=c('Bounded normal','Sampled normal'))
-ggplot(temp) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution", y="Final mean fidelity")
-ggplot(temp) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
+<<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+df <- load.results('results/results-parameters.data')
+df$distribution = factor(df$distribution, labels=c('Bounded normal','Sampled normal','Uniform'))
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
+ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
 @
+<<correlated-uncorrelated, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Reproduction} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
+df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
+grid.arrange(ap,bp,nrow=1,ncol=2)
+@
+
 
 \section{Conclusions}
 \begin{DRAFT}
@@ -705,9 +706,9 @@ df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 
 The first hypothesis prediction is that average fidelity will tend towards exact inheritance, or $1.0$. A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
 
 <<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
-df$correlation_correlation <- factor(df$correlation_correlation, labels=c('false','true'))
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='Final mean fidelity',y='')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='Final mean fitness',y='')
+df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
+ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 

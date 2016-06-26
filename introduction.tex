@@ -666,7 +666,7 @@ The EvoEvo project \footnote{\url{http://evoevo.liris.cnrs.fr/about-evoevo-proje
 More generally, it is clear that most works lack an overall theoretical background. This observation has been made many times from the earliest days of \gls{alife}--``simulations that are dependent on ad hoc and special-purpose rules and constraints for their mimicry cannot be used to support theories of life''  \parencite{Pattee1988}--through to relevantly recent times: ``This weakness is not specific to Tierra, but is shared by most, if not all, of the other Tierra-like systems which have emerged over the last decade\ldots{}'' \parencite{Taylor2001}
 \end{DRAFT}
 
-\chapter{Methods}\label{methods}
+\chapter{Approach}\label{methods}
 
 The field of artificial life is synonymous with simulation \parencite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments and mathematical models. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 
@@ -701,14 +701,13 @@ In this view, simulation is a form of Kuhn's theory articulation or ``model buil
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
 	\begin{enumerate}[label=RQ\arabic*:]
-	\item What constraints does a focus on creativity impose on variation and inheritance in artificial systems? 
 	\item If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?
 	\item Can such a mechanism then be successfully demonstrated in an artificial system?
 	\end{enumerate}
 \end{minipage}
 \vspace{0.3cm}
 
-\section{Approach}\label{approach}
+\section{Methods}\label{approach}
 
 \epigraph{%
 An important ``Platonic'' conception is that abstraction is a mental process by which properties are thought of as entities distinct from the concrete objects in which they are instantiated. On an alternative, Aristotelian conception, abstraction is the mental process of subtracting certain accidental properties from concrete objects so as to regard objects in a manner closer to their essential natures.}%
@@ -728,9 +727,9 @@ Now to specifics. The approach taken in both \cref{part2,part3} of this work is 
 
 Each simulation model is parameterized. Parameters are elements in the simulation model that can take different possible values, where the different values may (or may not) lead to quite distinct behaviour of the simulation. The purpose is two-fold: first, to allow for the investigation of a range of models simply by changing parameter values (rather than changing entire models) so as to broaden the \emph{scope} and hence the applicability of the results, and second, to permit us to test the \emph{sensitivity} of the simulation to different parameters overall. The combination of these two allows us to robustly justify the scope and strength of any claims that arise from the experiments.
 
-Parameters are elements of the simulation. Each in the most general case may take a wide, perhaps indefinitely large, set of values, and so for practicality in experimentation, we need a way to limit the size of the parameter space defined by the combination of every value of every parameter. 
+Parameters are elements of the simulation. Each in the most general case may take a wide, perhaps indefinitely large, set of values, and so for practicality in experimentation, we need a way to limit the size of the parameter space defined by the combination of every value of every parameter. We do this by first testing the response of the model to each parameter and identifying those that do not make a statistically significant difference; the set of these parameters, those to which the model is insensitive, allows us to establish the scope over which all claims will hold. Those to which the model is on the other hand sensitive, or responsive, are tested separately in all later experiments; any claim must be made conditional on the particular level of each of these parameters. This process particularly applies to \cref{part2} where the number and range of parameters in the simulation model is relatively large; the specific method for identifying sensitive and insensitive parameters and the outcomes when applied to the simulation model are described in detail in \cref{reducing-the-parameter-space-for-the-experiments}.
 
-There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
+Second, we use statistical ``design of experiments'' (\eg cite{Montgomery2009}) methods to simplify the number of separate experiments needed. There are many approaches to this, but they mostly fall into two standard groups. First are response-surface methods which sample from the parameter space in a particular fashion to effectively construct an analysable function, or response-surface, from parameter values to response-variable values that approximates to some degree the behaviour of the model. The emphasis is on the shape of the response-surface; the parameter values are randomly chosen.
 
 The usual alternative is some variant of a factorial design, where each parameter of interest is represented by a factor taking some small number of values, or levels (two levels being most common) and the analysis model constructed from runs that systematically work through a series of combinations of factors at different levels. The emphasis here is on the response given particular factor, and hence parameter, values. A further form of this is a fractional-factorial design, where we in effect take a well-defined sample of factor levels to further reduce the number of level combinations while still maintaining an acceptable level of experimental strength.
 

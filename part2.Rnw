@@ -32,7 +32,7 @@ df
 
 This part of the work addresses our second research question: ``If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?"
 
-\section{Previous work}
+\section{Previous work}\label{previous-work-p2}
 
 Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck themselves. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying \parencite{Eigen1971}, and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
 
@@ -80,101 +80,46 @@ The most significant model is Model 5 which adds a variable ability to procreate
 
 This is extended in the final Model 6, where Bourrat demonstrates the combination of inheritance of procreation with that of another trait, viability. The model begins with a population produced by the end of Model 5 - a set of entities that can reliably transmit the ability to procreate to their offspring. Using the same structure for trait inheritance as in Model 5, Model 6 shows that inheritance of viability or fitness can also emerge. In total then, the entities at the conclusion of Model 6 have full inheritance of multiple traits.
 
-There are some limitations to these otherwise insightful models. First, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging: evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat. 
+There are some limitations however in these otherwise insightful models. First, heredity and fitness (viability) are treated as independent traits. But the mechanism for heredity is the thing that copies the information that generates an offspring's traits, so in practice they are not independent.
 
-Second, heredity and fitness (viability) are treated as independent traits. But the mechanism for heredity is the thing that copies the information that generates an offspring's traits, so in practice they are not independent.
+Second, while Model 5 has perfect inheritance on viability and demonstrates emergent inheritance on procreation, Model 6 shows emergent inheritance on viability while beginning with perfect inheritance on procreation (as it begins with a shortcut population of entities assumed to have been produced by Model 5.) Thus Bourrat does not show in either model the simultaneous emergence of inheritance of both procreation and viability.
 
-Finally, while Model 5 has perfect inheritance on viability and demonstrates emergent inheritance on procreation, Model 6 shows emergent inheritance on viability while beginning with perfect inheritance on procreation (as it begins with a shortcut population of entities assumed to have been produced by Model 5.) Thus Bourrat does not show in either model the simultaneous emergence of inheritance of both procreation and viability.
+Finally, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
 
-\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+\section{Methods}\label{methods-p2}
 
-\begin{DRAFT}
-Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may
-be varied by interaction with the environment.
+The work of \textcite{Bourrat2015} partially addresses our second research question (the focus of this \nameref{part2}.) However, Bourrat as identified in \cref{previous-work-p2}:
+\begin{itemize}
+	\item Does not link heredity and fitness in his model.
+	\item Does not show the simulataneous emergence of inheritance of procreation and viability.
+	\item Most importantly, does not consider the effect of changing environments on inheritance.
+\end{itemize}
 
-Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
-
-For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
-\end{DRAFT}
-\begin{hypothesis}
-Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance ($V'+S\rightarrow I$)
-\end{hypothesis}\label{hypothesis-2}
-\begin{DRAFT}
-we mean inheritance increases to some optimal level
-Inheritance is defined as any correlation better than 0.5, or in other words, as better than chance. Fidelity is defined as the degree of correlation between parent and offspring values for the same trait.
-
-I iff V' (that is, with initial correlation)
-Can this be strengthened to include V+S necessary for I, or I-\textgreater{}V+S?
-
-
-V+S-\textgreater{}I
-Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-
-Heredity seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
-
-``Context determines fitness'', where the environment is stable and affects the development of the entities
-
-Degree of variation between generations important (no correlation means effectively unguided search, complete correlation means no source of novelties)
-
-Problem is how can the optimal degree of variation (that is, inheritance) be established endogenously rather than as a model parameter?
-
-Inheritance related to variation (between generations). Low variation implies high inheritance
-
-Selection strengthens degree of inheritance
-
-high fitness lineages more successful. Inheritance increases
-correlation along lineage, so high fitness more likely to be passed
-down. (Also low fitness, but they will suffer). On average then high
-inheritance increases average fitness over time
-
-
-
-\end{DRAFT}
-
-\section{Predictions}\label{predictions}
-
-In an unchanging environment, where the relative fitness of an entity, with respect to the environment, does not change over time, our expectations are:
+Addressing these limitations becomes the driver for the work in this \nameref{part2}. The method follows that outlined in \cref{approach}: 
 
 \begin{enumerate}
-\item Average inheritance will tend towards perfect inheritance.
-Higher fitness entities will survive longer and reproduce more; higher fidelity reduces variation in fitness and so results in higher fitness being preferred.
-\item Population variance for inheritance will decrease more than chance.
-\end{enumerate}
-
-Under changing environmental conditions, where the fitness of an unchanging entity changes in response to environmental changes, we expect:
-
-\begin{enumerate}
-\item The \gls{sd} of final fidelity under changing conditions \textgreater{} that under fixed conditions.
-\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
-\item \emph{Fidelity} at the end of a run under changing conditions \textless{} that under fixed conditions.
-\item The final \emph{Fitness} will be in the the range described by the distribution applied in the $tweakFitness$ function.
-\end{enumerate}
-
-\section{Alternative explanations}\label{alternative-explanations-1}
-
-The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
-
-\begin{enumerate}
-\item Variation alone is sufficient for Inheritance ($V\rightarrow I$.)
-\item Selection alone is sufficient for Inheritance ($S\rightarrow I$.)
-\item Variation and Selection, without trait or property correlation, is sufficient for Inheritance.
+	\item Construction of a parameterized simulation model [\cref{base-model}]
+	\item Forming a hypothesis [\cref{h2}]
+	\item Characterizing the sensitivity of the simulation model to parameter ranges [\cref{reducing-the-parameter-space-for-the-experiments}]
+	\item Testing the hypothesis under unchanging environmental conditions [\cref{experimental-test-of-h2-under-fixed-conditions}]
+	\item And finally, testing the same under changing environments [\cref{model-behaviour-in-changing-environments}]
 \end{enumerate}
 
 \section{Simulation model of variation and inheritance}\label{base-model}
 
-We now introduce a general model of the relationship between variation and inheritance in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements of the hypothesis are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
+We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, such as fidelity and fitness, are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
 In other respects it resembles a fairly standard \gls{ea} (as briefly reviewed earlier in \cref{ea}). The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
 
 Let's look at each element in turn.
 
 \begin{enumerate}
-\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
-\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
-\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. There is a subtle difference between fidelity and inheritance: inheritance is the process that results in fidelity, the degree of correlation between two generations. In other words, fidelity captures the same idea as heredity: ``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
-\item \emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
-\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value (see \cref{fig:correlation}) and some degree of correlation captured by the value of the function $Range$.
+	\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
+	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
+	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
+	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. There is a subtle difference between fidelity and inheritance: inheritance is the process that results in fidelity, the degree of correlation between two generations. In other words, fidelity captures the same idea as heredity: ``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
+	\item \emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
+	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value (see \cref{fig:correlation}) and some degree of correlation captured by the value of the function $Range$.
 \end{enumerate}
 
 The model is parameterized to make it easy to describe different specific models within this general structure; these parameters are defined in \cref{tbl:parameter_definitions}. In later chapters describing the series of experiments that use this model, these parameters will be mapped to experiment factors, with specific parameter values becoming factor levels.
@@ -236,11 +181,72 @@ The model is parameterized to make it easy to describe different specific models
 	}
 	\caption{Definitions for the functions Selection and Variation}\label{model-functions}
 \end{algorithm}
-					
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}\label{fig:correlation}
+
+\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+
+First we define the two distinct types of relationship between an entity and its environment mentioned in the previous \nameref{methods-p2}: stable, and changing environments. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time. An changing environment is the other case, where the relative fitness does change over time. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing, which are both processes that change the phenotype on a shorter timescale than a lifespan.
+
+
+Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
+
+Heredity seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
+
+``Context determines fitness'', where the environment is stable and affects the development of the entities
+
+Degree of variation between generations important (no correlation means effectively unguided search, complete correlation means no source of novelties)
+
+Problem is how can the optimal degree of variation (that is, inheritance) be established endogenously rather than as a model parameter?
+
+Inheritance related to variation (between generations). Low variation implies high inheritance
+
+Selection strengthens degree of inheritance
+
+high fitness lineages more successful. Inheritance increases correlation along lineage, so high fitness more likely to be passed down. (Also low fitness, but they will suffer). On average then high inheritance increases average fitness over time. Higher fitness entities will survive longer and reproduce more; higher fidelity reduces variation in fitness and so results in higher fitness being preferred.
+
+Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may be varied by interaction with the environment.
+
+Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
+
+For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
+
+\begin{hypothesis}
+Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance ($V'+S\rightarrow I$)
+\end{hypothesis}\label{hypothesis-2}
+
+\section{Predictions}\label{predictions}
+
+
+In a stable or unchanging environment our prediction is that:
+
+\begin{enumerate}
+\item Average inheritance will tend towards perfect inheritance.
+\item Population variance for inheritance will decrease more than chance.
+\end{enumerate}
+
+Under changing environmental conditions, where the fitness of an unchanging entity varies in response to environmental changes, we expect:
+
+\begin{enumerate}
+\item \emph{Fidelity} at the end of a run under changing conditions will be less than that under fixed conditions.
+\item The \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
+\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
+%\item The final population \emph{Fitness} will be in the the range described by the distribution applied in the $tweakFitness$ function.
+\end{enumerate}
+
+\section{Alternative explanations}\label{alternative-explanations-1}
+
+The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
+
+\begin{enumerate}
+\item Variation alone is sufficient for Inheritance ($V\rightarrow I$.)
+\item Selection alone is sufficient for Inheritance ($S\rightarrow I$.)
+\item \emph{Variation} and \emph{Selection}, without trait or property correlation, is sufficient for \emph{Inheritance}.
+\end{enumerate}
+
 
 \chapter{Practical considerations}
 
@@ -425,18 +431,15 @@ This conclusion of course is based on a comparison of two particular methods; a 
 
 Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we adopt fitness-independent sampling rather than fitness-based restriction.
 
-\chapter{Reducing the parameter space for the experiments}
+\chapter{Characterizing the parameter space for the experiments}\label{reducing-the-parameter-space-for-the-experiments}
 
 Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels-c6}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
 \section{Experimental design}
 
-As our interest is in the behaviour of the model, both overall and under specific conditions (such as \emph{Correlate Fidelity}), a factorial design is preferred (as described in \cref{approach}). A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \parencite{Montgomery2009}\footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions. This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our goal is to eliminate uninteresting settings for the next set of experiments. Note also that as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
+As our interest is in the sensitivity of the model to each parameter, a factorial design is preferred (as described in \cref{approach}). 
 
-The design is complicated a little by the suspicion that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where use combinations of our four-level factors,  $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
-
-Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design. 
-%The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
+%A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \parencite{Montgomery2009}\footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions. This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our goal is to eliminate uninteresting settings for the next set of experiments. Note also that as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
 \section{Factors and levels}\label{factors-and-levels}
 
@@ -456,7 +459,7 @@ The factors and levels along with their mapping to model parameters are given in
 		$p_{selection}$        &$p_{selection}$		&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
 		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c6})\\
-		Distribution           &--					&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors-c6})\\
+		Distribution           &Reproduction		&2                	& Normal distribution ($\mathbb{N}$) or Uniform distribution ($\mathcal{U}$) (see \cref{reproduction-distribution-factors-c6})\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -477,32 +480,27 @@ Reproduction&Child entity parameter					&Normal distribution								&Uniform dis
 \end{tabular}
 \end{table}
 
+The design is complicated a little by the fact that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where we use combinations of our four-level factors, $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
+
+Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design. 
+%The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
+
 \section{Initial conditions and settings}\label{initial-conditions}
 Before each run we construct an initial population. From the hypothesis \cref{hypothesis-2}, we expect to see a population of low fidelity entities eventually replaced by one of high (or at least higher) fidelity ones. This is analogous to a key step on the path taken in biology from the abiotic world, where early copy mechanisms lacked the capabilities for high-fidelity copying, but developed it over time. Entities begin with an initial fidelity $\in\mathcal{U}[0, 0.3]$ and fitness $\in\mathcal{U}[0, 0.3]$ chosen randomly from a uniform distribution so as not to introduce any bias that might result from a repeated starting point. 
 
-\section{Number of offspring}
+\section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}
+The parameter $p_{reproduction}$ in the simulation model is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter. 
+
+
+
+\section[Sensitivity to probability of selection]{Sensitivity to the parameter $p_{selection}$}
+The simulation model parameter $p_{selection}$ closely follows the definition of $p_{reproduction}$--related to entity fitness, or a fixed value. Again, we expect that the model will be sensitive to the value of this parameter.
+
+\section[Sensitivity to number of offspring]{Sensitivity to the parameter $n_{offspring}$}
+
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
-
-%\begin{table} % 53f6b74
-%	\begin{center}
-%		\caption{Factor levels for the investigation into number of offspring}
-%		\begin{tabular}{@{}llp{6cm}@{}}
-%			\toprule
-%			Parameter              & Number of Levels & Levels                                                       \\
-%			\midrule
-%			$p_{reproduction}$     & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-%			$p_{selection}$        & 4                & 0 or 0.33 or 0.66 or 1.0                                     \\
-%			$n_{children}$         & 2                & 2 or 5                                                       \\
-%			Population Restriction & 2                & Fitness-independent sampling, or Fitness-based selection     \\
-%			Distribution           & 2                & normal dist., $\mathbb{N}$ or uniform dist., $\mathcal{U}$ \\
-%			Correlate Fitness      & 2                & false or true                                                \\
-%			Correlate Fidelity     & 2                & false or true                                                \\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-%\end{table}
 
 <<popoffspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of parameter $n_{children}$ - 2 (on the left) and 5 (on the right) .'>>=
 temp <- subset(df,n_offspring==1 & pop < 5000)
@@ -514,14 +512,17 @@ The vertical line on the extreme left of the right-hand side facet of \cref{fig:
 
 A similar effect can be seen in the left-hand side facet for $n_{offspring} = 2$ where some of the affected runs recovered while others went to extinction.
 
-\section{Distribution factor}\label{screening-distribution}
+\section{Sensitivity to the parameter Reproduction}
+The parameter $Reproduction$ describes the relationship between the properties of an entity and the properties of the related entity from which it is derived. In the simulation model this parameter is completely general, defined only as a mapping from $entity$ to $entity$. In attempting to characterize the sensitivity of the model to this parameter, we introduce two linked factors of two levels each, \emph{Reproduction} and \emph{Distribution}, that in combination map to the parameter $Reproduction$.
+
+The factor \emph{Reproduction} from \cref{tbl:factor-levels-c6} describes two forms of relationship between parent and child entity. The first is ``correlated'' where the value of each child property has some significant relationship or correlation to the same property in the parent. A simple example of correlated properties from biology might be height: the height of a child at adulthood has a statistically significant correlation with the height of his or her parent. The second relationship is ``uncorrelated'' where the child property value is chosen independently of the parent's value. Our expectation is that the simulation model will prove sensitive to the choice of level for \emph{Reproduction}.
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 @
 
-The \emph{Distribution} factor from \cref{tbl:factor-levels-c6} describes a function to return a value in the range $[0,1]$ given two input values, also in the range $[0,1]$, where the first is for the expected value of the result, and the second describes a range. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} equate to its mean and variance. For other probability distributions, the parameters are distribution specific. For example, for a uniform distribution, the parameters have no influence on the output; the output will be a value in the range $[0,1]$ drawn randomly with equal probability, regardless of input parameters.
+The factor \emph{Distribution} describes a function to return a value in the range $[0,1]$ given two input values, also in the range $[0,1]$, where the first is for the expected value of the result, and the second describes a range. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} equate to its mean and variance. For other probability distributions, the parameters are distribution specific. For example, for a uniform distribution, the parameters have no influence on the output; the output will be a value in the range $[0,1]$ drawn randomly with equal probability, regardless of input parameters.
 
-As \emph{Distribution} is used by \emph{Reproduction} to influences the relationship between the properties of an entity and its offspring, it seems plausible to hypothesise that different mapped shapes may have a significant effect on the experimental result.
+As \emph{Distribution} is used by \emph{Reproduction} to influence the relationship between the properties of an entity and its offspring, it seems plausible to hypothesise that different mapped shapes may have a significant effect on the experimental result.
 
 Where the underlying probability isn't inherently limited to the output range of $[0,1]$, such as is the case for the normal distribution, then the mechanism used to map the underlying distribution to the output range may modify the probability distribution of the mapped values. Two out of many possible mappings are a straightforward bounded algorithm ($max(0,min(1,normal(mean,variance)))$), and a sampling algorithm:
 
@@ -559,7 +560,9 @@ ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="Distribution"
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="Distribution", y="Final mean fitness")
 @
 
-From a visual inspection of \cref{fig:normal-uniform}, we conclude that the results appear very similar for uniform and normal distributions, and from \cref{fig:sampling-folding} so do the bounded normal and sampled normal distributions. A more rigorous analysis would both use a factorial design to compare all four combinations (uniform/normal and bounded/sampled), and would use a formal test of similarity but at this stage this can be left for future work.
+From a visual inspection of \cref{fig:normal-uniform}, we conclude that the results appear very similar for uniform and normal distributions, and from \cref{fig:sampling-folding} so do the bounded normal and sampled normal distributions. 
+
+A more rigorous analysis would both use a factorial design to compare all six combinations (correlated:uncorrelated x uniform:normal bounded:normal sampled), and would use a formal test of similarity but at this stage this can be left for future work.
 
 <<sampling-folding, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold'>>=
 temp <- subset(load.results('results/results-819350e.data'), ecf==0 & truncate == 0)
@@ -587,11 +590,11 @@ Set remaining parameters based on these screening experiments:
 \end{DRAFT}
 \chapter[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for fixed environments:
+Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for stable environments:
 
 \begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, confirming a result of \textcite{Bourrat2015}.
-	\item The variance of inheritance in the population will decrease more than expected by chance only.
+	\item The variance of inheritance in the population will decrease more than would be expected by chance alone.
 \end{enumerate}
 
 The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.

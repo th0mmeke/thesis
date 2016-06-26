@@ -248,7 +248,7 @@ The three main alternatives, examined later in \cref{elimination-of-alternative-
 \end{enumerate}
 
 
-\chapter{Practical considerations}
+\chapter{Practical considerations}\label{practical-considerations}
 
 In the absence of any restrictions on population size there is nothing to prevent a growing population eventually exceeding the capacity of the simulation system. This is unfortunately an unavoidable difficulty in experiments with exponential growth systems rather than a limitation of the theoretical model. 
 

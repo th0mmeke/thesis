@@ -496,9 +496,9 @@ Reproduction&Child entity parameter					&Normal distribution								&Uniform dis
 \end{tabular}
 \end{table}
 
-The design is complicated a little by the fact that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where we use combinations of our four-level factors, $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
+%The design is complicated a little by the fact that two factors - $p_{reproduction}$ and $p_{selection}$ - require more than two levels. Fortunately a $2^n$ fractional design can be extended relatively simply to include 4-level factors (\textcite[368]{Montgomery2009}) either by replacement where each 4-level factor is mapped to two 2-level ones, or, as we choose to do, by a hybrid full-fractional design, where we use combinations of our four-level factors, $p_{reproduction}$ and $p_{selection}$, for two of the two-level factors, X1 and X2, of the standard $2^{(7-3)}$ design. This may not be quite as computationally efficient as a complete mixed-levels fractional factorial design but is efficient enough and meets our purposes. 
 
-Based on preliminary runs, we begin with an initial estimate of 10 replicates for each combination of factor values given in the design. 
+Based on preliminary runs, for this initial exploration we start with 3 replicates for each combination of factor values in the design. 
 %The number of \glspl{replicate} required for a particular statistical power is related to the \gls{sd} of the response variable. 
 
 \section{Initial conditions and settings}\label{initial-conditions}
@@ -511,7 +511,7 @@ df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
 df <- subset(df_full, gen==500)
 df$p_reproduce = factor(df$p_reproduce, labels=c('Fitness','0.33','0.66','1.0'))
 df$p_selection = factor(df$p_selection, labels=c('Fitness','0.33','0.66','1.0'))
-df$distribution = factor(df$distribution, labels=c('Bounded normal','Sampled normal','Uniform'))
+df$distribution = factor(df$distribution, labels=c('Bounded\nnormal','Sampled\nnormal','Uniform'))
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
 @
 
@@ -571,7 +571,7 @@ Confirmation with a single-factor \gls{anova} test with factor $n_{offspring}$ a
 ggplot(df_full) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation", y="Population size") + facet_wrap(~n_offspring)
 @
 
-Note that the vertical lines on the extreme left of both facets of \cref{fig:n-offspring-population} are characteristics of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df_full,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
+Note that the vertical lines on the extreme left of both facets of \cref{fig:n-offspring-population} are characteristics of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df_full,gen==0)[,'ave_fit'])}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
 As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: \Sexpr{nrow(subset(df,n_offspring==2))} when $n_{offspring}=2$ against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_{offspring}=5$.
 
@@ -628,6 +628,22 @@ grid.arrange(ap,bp,nrow=1,ncol=2)
 
 
 \section{Conclusions}
+
+<<echo=FALSE>>=
+df<-subset(df,correlation_correlation=="Correlated" & p_selection == "Fitness-related" & p_reproduce == "Fitness-related")
+a <- with(df,anova(lm(ave_cor~n_offspring+distribution)))
+b <- with(df,anova(lm(ave_fit~n_offspring+distribution)))
+@
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(a)
+@
+
+
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(b)
+@
+
+
 \begin{DRAFT}
 Independent variable is Fidelity correlation, the main factor of interest from hypothesis
 

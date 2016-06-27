@@ -4,6 +4,7 @@ library(cowplot) # styling of plots, extension of ggplot2
 library(gridExtra) # grid layouts for ggplot2
 library(lattice) # needed for bwplot etc
 library(english) # convert numbers to words
+library(xtable) # required for print.xtable.bootabs function
 opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 
@@ -505,7 +506,7 @@ Before each run we construct an initial population. From the hypothesis \cref{hy
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-parameters.data')
-df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
+df_full$n_{offspring} = factor(df_full$n_{offspring}, labels=c("2","5"))
 df <- subset(df_full, gen==500)
 
 df$distribution = factor(df$distribution, labels=c('Bounded normal','Sampled normal','Uniform'))
@@ -514,23 +515,23 @@ df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncor
 
 \section{General observations}
 The response of the model to factor levels can quickly be assessed by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the resulting \gls{anova} analysis is as follows:
-
-<<>>=
+<<echo=FALSE>>=
 a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+@
+<<results='asis',echo=FALSE>>=
 print.xtable.booktabs(a)
 @
 
 And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analysis is:
-
-<<>>=
-b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+<<results='asis',echo=FALSE>>=
 print.xtable.booktabs(b)
 @
 
 \section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}
 The parameter $p_{reproduction}$ in the simulation model is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
 
-<<p-reproduction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+<<p-reproduction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x='',y='Final mean fidelity')
 bp <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
@@ -539,33 +540,33 @@ grid.arrange(ap,bp,nrow=1,ncol=2)
 \section[Sensitivity to probability of selection]{Sensitivity to the parameter $p_{selection}$}
 The simulation model parameter $p_{selection}$ closely follows the definition of $p_{reproduction}$--related to entity fitness, or a fixed value. Again, we expect that the model will be sensitive to the value of this parameter.
 
-<<p-selection, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
-ap <- ggplot(df) + geom_boxplot(aes(x=selection,y=ave_cor)) + labs(x='',y='Final mean fidelity')
-bp <- ggplot(df) + geom_boxplot(aes(x=selection,y=ave_fit)) + labs(x='',y='Final mean fitness')
+<<p-selection, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
+ap <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
 \section[Sensitivity to number of offspring]{Sensitivity to the parameter $n_{offspring}$}
 
-<<n-offspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+<<n-offspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_cor)) + labs(x='',y='Final mean fidelity')
 bp <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
-<<>>=
+<<echo=FALSE>>=
 a <- with(df,anova(lm(ave_cor~n_offspring)))
 b <- with(df,anova(lm(ave_fit~n_offspring)))
 @
 
-Confirmation with a single-factor \gls{anova} test with factor $n_offspring$ and response variables $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ gives F=\Sexpr{a[,'F value'][1]} and p=\Sexpr{a[,'Pr(>F)'][1]}, and F=\Sexpr{b[,'F value'][1]} and p=\Sexpr{b[,'Pr(>F)'][1]}, respectively. However, a visual check of the population growth over time shows a quite different situation (\cref{fig:n-offspring-population}.)
+Confirmation with a single-factor \gls{anova} test with factor $n_{offspring}$ and response variables $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ gives F=\Sexpr{a[,'F value'][1]} and p=\Sexpr{a[,'Pr(>F)'][1]}, and F=\Sexpr{b[,'F value'][1]} and p=\Sexpr{b[,'Pr(>F)'][1]}, respectively. However, a visual check of the population growth over time shows a quite different situation (\cref{fig:n-offspring-population}.)
 
-<<n-offspring-population, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of parameter $n_{children}$ - 2 (on the left) and 5 (on the right) .'>>=
+<<n-offspring-population, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of factor $n_{children}$: $n_children=2$ (on the left) and $n_children=5$ (on the right.)'>>=
 ggplot(df_full) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation", y="Population size") + facet_wrap(~n_offspring)
 @
 
 Note that the vertical lines on the extreme left of both facets of \cref{fig:n-offspring-population} are characteristics of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df_full,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
-As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: when $n_offspring=2$, \Sexpr{nrow(subset(df,n_offspring==2))} against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_offspring=5$, 
+As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: when $n_{offspring}=2$, \Sexpr{nrow(subset(df,n_offspring==2))} against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_{offspring}=5$, 
 
 \section{Sensitivity to the parameter Reproduction}
 The parameter $Reproduction$ describes the relationship between the properties of an entity and the properties of the related entity from which it is derived. In the simulation model this parameter is completely general, defined only as a mapping from $entity$ to $entity$. In attempting to characterize the sensitivity of the model to this parameter, we introduce two linked factors of two levels each, \emph{Reproduction} and \emph{Distribution}, that in combination map to the parameter $Reproduction$.
@@ -606,11 +607,7 @@ cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + la
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-From a visual inspection of \cref{fig:normal-uniform}, we conclude that the results appear very similar for uniform and normal distributions, and from \cref{fig:sampling-folding} so do the bounded normal and sampled normal distributions. 
-
-A more rigorous analysis would both use a factorial design to compare all six combinations (correlated:uncorrelated x uniform:normal bounded:normal sampled), and would use a formal test of similarity but at this stage this can be left for future work.
-
-<<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+<<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
 ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
 @
@@ -827,7 +824,7 @@ Data is all generations for those fixed-environment runs that reached completion
 %#x <- anova(m0)
 %df$p_reproduce <- factor(df$p_reproduce,labels=c(0,0.33,0.66,1.0))
 %df$p_selection <- factor(df$p_selection,labels=c(0,0.33,0.66,1.0))
-%df$n_offspring <- factor(df$n_offspring,labels=c(2,5))
+%df$n_{offspring} <- factor(df$n_{offspring},labels=c(2,5))
 %df$distribution <- factor(df$distribution, labels=c("normal","uniform"))
 %ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x="Reproduction",y="Final mean fidelity")
 %bp <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_cor)) + labs(x="Selection",y="Final mean fidelity")

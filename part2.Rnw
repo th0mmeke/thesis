@@ -506,15 +506,18 @@ Before each run we construct an initial population. From the hypothesis \cref{hy
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-parameters.data')
-df_full$n_{offspring} = factor(df_full$n_{offspring}, labels=c("2","5"))
-df <- subset(df_full, gen==500)
+df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
 
+df <- subset(df_full, gen==500)
+df$p_reproduce = factor(df$p_reproduce, labels=c('Fitness','0.33','0.66','1.0'))
+df$p_selection = factor(df$p_selection, labels=c('Fitness','0.33','0.66','1.0'))
 df$distribution = factor(df$distribution, labels=c('Bounded normal','Sampled normal','Uniform'))
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
 @
 
 \section{General observations}
 The response of the model to factor levels can quickly be assessed by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the resulting \gls{anova} analysis is as follows:
+	
 <<echo=FALSE>>=
 a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
 b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
@@ -523,7 +526,11 @@ b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+c
 print.xtable.booktabs(a)
 @
 
+
 And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analysis is:
+
+
+
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(b)
 @
@@ -566,7 +573,7 @@ ggplot(df_full) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation",
 
 Note that the vertical lines on the extreme left of both facets of \cref{fig:n-offspring-population} are characteristics of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df_full,gen==0)$ave_fit)}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
-As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: when $n_{offspring}=2$, \Sexpr{nrow(subset(df,n_offspring==2))} against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_{offspring}=5$, 
+As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: \Sexpr{nrow(subset(df,n_offspring==2))} when $n_{offspring}=2$ against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_{offspring}=5$.
 
 \section{Sensitivity to the parameter Reproduction}
 The parameter $Reproduction$ describes the relationship between the properties of an entity and the properties of the related entity from which it is derived. In the simulation model this parameter is completely general, defined only as a mapping from $entity$ to $entity$. In attempting to characterize the sensitivity of the model to this parameter, we introduce two linked factors of two levels each, \emph{Reproduction} and \emph{Distribution}, that in combination map to the parameter $Reproduction$.
@@ -608,8 +615,9 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
-ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
+ap <- ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
+bp <- ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
+grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
 <<correlated-uncorrelated, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Reproduction} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=

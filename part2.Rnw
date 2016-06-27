@@ -18,6 +18,21 @@ df <- read.csv(t, colClasses=colClasses)
 df$ecf <- factor(df$ecf,levels=c(0,1,5,10)) # place into natural order
 df
 }
+
+# http://tex.stackexchange.com/questions/25575/how-can-i-use-a-table-generated-by-r-in-latex
+
+print.xtable.booktabs <- function(x){
+
+print(xtable(x),
+floating=F,
+hline.after=NULL,
+add.to.row=list(pos=list(-1,0, nrow(x)),
+command=c(
+'\\toprule\n',
+'\\midrule\n',
+'\\bottomrule\n')))
+
+}
 @
 
 % # Filter(Negate(is.factor),z[[gen]]) # quantile values for each combination of factor levels at gen
@@ -497,15 +512,38 @@ df$distribution = factor(df$distribution, labels=c('Bounded normal','Sampled nor
 df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
 @
 
+\section{General observations}
+The response of the model to factor levels can quickly be assessed by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the resulting \gls{anova} analysis is as follows:
+
+<<>>=
+a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+print.xtable.booktabs(a)
+@
+
+And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analysis is:
+
+<<>>=
+b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+print.xtable.booktabs(b)
+@
+
 \section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}
 The parameter $p_{reproduction}$ in the simulation model is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
 
-This can be tested by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the 
-
-
+<<p-reproduction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_fit)) + labs(x='',y='Final mean fitness')
+grid.arrange(ap,bp,nrow=1,ncol=2)
+@
 
 \section[Sensitivity to probability of selection]{Sensitivity to the parameter $p_{selection}$}
 The simulation model parameter $p_{selection}$ closely follows the definition of $p_{reproduction}$--related to entity fitness, or a fixed value. Again, we expect that the model will be sensitive to the value of this parameter.
+
+<<p-selection, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.45\\linewidth',fig.show='hold',fig.cap=''>>=
+ap <- ggplot(df) + geom_boxplot(aes(x=selection,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=selection,y=ave_fit)) + labs(x='',y='Final mean fitness')
+grid.arrange(ap,bp,nrow=1,ncol=2)
+@
 
 \section[Sensitivity to number of offspring]{Sensitivity to the parameter $n_{offspring}$}
 

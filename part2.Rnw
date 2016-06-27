@@ -104,14 +104,14 @@ Finally, as seen by the trend of trait values towards the limit of $1.0$, the mo
 
 \section{Methods}\label{methods-p2}
 
-The work of \textcite{Bourrat2015} partially addresses our second research question (the focus of this \nameref{part2}.) However, Bourrat as identified in \cref{previous-work-p2}:
+The work of \textcite{Bourrat2015} partially addresses our second research question (the focus of this \namecref{part2}.) However, Bourrat as identified in \cref{previous-work-p2}:
 \begin{itemize}
 	\item Does not link heredity and fitness in his model.
 	\item Does not show the simulataneous emergence of inheritance of procreation and viability.
 	\item Most importantly, does not consider the effect of changing environments on inheritance.
 \end{itemize}
 
-Addressing these limitations becomes the driver for the work in this \nameref{part2}. The method follows that outlined in \cref{approach}: 
+Addressing these limitations becomes the driver for the work in this \namecref{part2}. The method follows that outlined in \cref{approach}: 
 
 \begin{enumerate}
 	\item Construction of a parameterized simulation model [\cref{base-model}]
@@ -205,7 +205,7 @@ The model is parameterized to make it easy to describe different specific models
 
 \section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
 
-First we define the two distinct types of relationship between an entity and its environment mentioned in the previous \nameref{methods-p2}: stable, and changing environments. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time. An changing environment is the other case, where the relative fitness does change over time. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing, which are both processes that change the phenotype on a shorter timescale than a lifespan.
+First we define the two distinct types of relationship between an entity and its environment mentioned in the previous \namecref{methods-p2}: stable, and changing environments. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time. An changing environment is the other case, where the relative fitness does change over time. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing, which are both processes that change the phenotype on a shorter timescale than a lifespan.
 
 
 Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
@@ -507,20 +507,22 @@ Before each run we construct an initial population. From the hypothesis \cref{hy
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-parameters.data')
 df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
+colnames(df_full)[13] <- "Distribution"
+colnames(df_full)[14] <- "Correlation"
 
 df <- subset(df_full, gen==500)
 df$p_reproduce = factor(df$p_reproduce, labels=c('Fitness','0.33','0.66','1.0'))
 df$p_selection = factor(df$p_selection, labels=c('Fitness','0.33','0.66','1.0'))
-df$distribution = factor(df$distribution, labels=c('Bounded\nnormal','Sampled\nnormal','Uniform'))
-df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
+df$Distribution = factor(df$Distribution, labels=c('Bounded\nnormal','Sampled\nnormal','Uniform'))
+df$Correlation <- factor(df$Correlation, labels=c('Uncorrelated','Correlated'))
 @
 
 \section{General observations}
 The response of the model to factor levels can quickly be assessed by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the resulting \gls{anova} analysis is as follows:
 	
 <<echo=FALSE>>=
-a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
-b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+distribution+correlation_correlation)))
+a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+Distribution+Correlation)))
+b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+Distribution+Correlation)))
 @
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(a)
@@ -534,6 +536,8 @@ And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analys
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(b)
 @
+
+This suggests that the model is sensitive (p\textless 0.05) to the choice of \emph{Distribution} and \emph{Correlation} for $\overline{fidelity}_{end}$, and to all parameters except $n_offspring$ for $\overline{fitness}_{end}$. However, this is perhaps overly simplistic as it ignores parameter values or combinations of parameter values that are either unlikely to be of interest or unsuitable for other reasons. These nuances are explored in the following \namecref{}.
 
 \section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}
 The parameter $p_{reproduction}$ in the simulation model is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
@@ -615,14 +619,14 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
-ap <- ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
-bp <- ggplot(df) + geom_boxplot(aes(x=distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
+ap <- ggplot(df) + geom_boxplot(aes(x=Distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
+bp <- ggplot(df) + geom_boxplot(aes(x=Distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
 <<correlated-uncorrelated, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Reproduction} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
+ap <- ggplot(df) + geom_boxplot(aes(x=Correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=Correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
@@ -630,9 +634,9 @@ grid.arrange(ap,bp,nrow=1,ncol=2)
 \section{Conclusions}
 
 <<echo=FALSE>>=
-df<-subset(df,correlation_correlation=="Correlated" & p_selection == "Fitness-related" & p_reproduce == "Fitness-related")
-a <- with(df,anova(lm(ave_cor~n_offspring+distribution)))
-b <- with(df,anova(lm(ave_fit~n_offspring+distribution)))
+df<-subset(df,Correlation=="Correlated" & p_selection == "Fitness-related" & p_reproduce == "Fitness-related")
+a <- with(df,anova(lm(ave_cor~n_offspring+Distribution)))
+b <- with(df,anova(lm(ave_fit~n_offspring+Distribution)))
 @
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(a)
@@ -689,7 +693,7 @@ From the predictions of the hypothesis (\cref{predictions}), the main property o
 \section{Design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-819350e.data')
-df <- subset(df_full, ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
+df <- subset(df_full, ecf==0 & truncate == 0)
 @
 
 The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}.
@@ -796,7 +800,7 @@ The second prediction of the hypothesis is that the population variance for inhe
 	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
-We use the same experimental setup and data as in the previous \nameref{does-average-inheritance-approach-perfect-inheritance}.
+We use the same experimental setup and data as in the previous \namecref{does-average-inheritance-approach-perfect-inheritance}.
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-819350e.data')

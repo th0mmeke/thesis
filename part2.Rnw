@@ -746,8 +746,6 @@ bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
 dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
-
-ap <- ggplot(
 @
 
 <<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
@@ -907,7 +905,7 @@ Returning to first principles, any model must describe two particular elements o
 	\item A single-member group for each entity.
 \end{enumerate}
 
-In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. \todo{explanation for not addressing third level}
+In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has a unique response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although biological mutations of the genome can sometimes cause significant phenotypical differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
 
 The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
@@ -929,9 +927,9 @@ This series allows us to represent a broad range of environmental changes:
 	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a series where \todo{Add definition}, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model \todo{reference}. If instead of mean value prediction we are interested in the mean variance (such as in financial markets) then ARCH and GARCH models are appropriate. ARMA or ARIMA combined with ARCH or GARCH can be used in iterative sequence to simultaneously predict both mean and variance for \todo{add defn - heteroscedastic} series. 
+Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
 
-Time-series modeling provides techniques for describing time-series data in terms of an underlying model, summarizable in a few parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
+Time-series modeling provides techniques for describing time-series data in terms of an underlying model that can be summarised by a small number of parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
 
 \section{Hypothesis}
 
@@ -945,7 +943,7 @@ From the hypothesis we make these predictions:
 
 \section{Experimental design}
 
-As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables, our earlier factorial and fractional-factorial experiment designs are no longer appropriate. Instead we adopt a response surface design where each experiment run has initial values of the independent variables taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
+As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
 
 \begin{figure}
 	\begin{center}
@@ -953,7 +951,7 @@ As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are cont
 	\end{center}
 \end{figure}\label{fig:hypercube}
 
-<<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+<<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for bias=0 with two values of sd (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -982,13 +980,13 @@ bp <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(th
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<factorialsdbias, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+<<factorialsdbias, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of bias (columns), and two values of sd (each facet row.)'>>=
 ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
 bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap=''>>=
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Example time-series produced by our environmental model for a sample of theta, sd and bias values. These are incremental fitness changes, rather than cumulative ones.'>>=
 library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -1004,7 +1002,7 @@ ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+
 @
 
 % Needs sampleenvironment
-<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap=''>>=
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Cumulative time-series examples for samples of theta, sd and bias.'>>=
 for (r in unique(t2$run)) {
 	t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
 	
@@ -1018,26 +1016,26 @@ for (r in unique(t2$run)) {
 ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
 @
 
-% Needs sampleenvironment
-<<sampleentropy, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Approximate entropy of each example environment.'>>=
-library(pracma)
-library(ggplot2)
-library(cowplot) # styling of plots, extension of ggplot2
+%% Needs sampleenvironment
+%<<sampleentropy, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Approximate entropy of each example environment.'>>=
+%library(pracma)
+%library(ggplot2)
+%library(cowplot) # styling of plots, extension of ggplot2
+%
+%t2 <- t1[,1:3]
+%names(t2)[1]<-"theta"
+%names(t2)[2]<-"sd"
+%names(t2)[3]<-"bias"
+%for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+%for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
+%
+%#summary(lm(sample_entropy~theta+sd,data=t2)) # can error as some sample_entropy values may be Inf
+%ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
+%
+%#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
+%@
 
-t2 <- t1[,1:3]
-names(t2)[1]<-"theta"
-names(t2)[2]<-"sd"
-names(t2)[3]<-"bias"
-for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
-for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
-
-#summary(lm(sample_entropy~theta+sd,data=t2)) # can error as some sample_entropy values may be Inf
-ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
-
-#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
-@
-
-The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, defined in \cref{tbl:range-of-independent-variables}.
+We created a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
 
 \begin{table}
 	\begin{center}
@@ -1056,7 +1054,7 @@ The range of each variable (the length of each side of the hypercube) is set fro
 	\end{center}
 \end{table}
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
+The other factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
@@ -1091,7 +1089,7 @@ The factors and levels along with their mapping to model parameters are given in
 
 \section{Results and discussion}
 
-<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs are ordered by final generation reached.'>>=
+<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs (along the x-axis) are ordered by final generation reached.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -1103,6 +1101,8 @@ r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
 r3 <- read.csv('results/results-cc648a0a9.csv', colClasses=colClasses)
 r4 <- read.csv('results/results-996060f.csv', colClasses=colClasses)
 results = rbind(r1,r2,r3,r4)
+
+results$BY_LINEAGE = factor(results$BY_LINEAGE, labels=c("By Population","By Lineage"))
 
 t1 <- aggregate(r1$gen,by=list(r1$run),max)
 t2 <- aggregate(r2$gen,by=list(r2$run),max)
@@ -1116,7 +1116,7 @@ dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(st
 grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 @
 
-A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}. The difference in the proportion of  completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), as shown graphically in \cref{fig:figure22}.
+A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}. The difference in the proportion of completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), shown graphically in \cref{fig:figure22}.
 
 \begin{table}
 	\begin{center}
@@ -1135,47 +1135,47 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 	\end{center}
 \end{table}
 
-<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='.'>>=
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final mean fidelity against sd parameter to environmental model (top) and final standard deviation of fidelity against bias parameter (bottom), for all experimental runs.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm')
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(ar_bias,ave_fid)) # fid ~ -bias when bias <0, otherwise fid can reach max
+ap <- ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sd parameter to environmental model', y='Final mean fidelity')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(ar_bias,ave_fid)) + labs(x='bias parameter to environmental model', y='Final mean fidelity') # fid ~ -bias when bias <0, otherwise fid can reach max
 grid.arrange(ap,bp,nrow=2,ncol=1)
 
 #anova(lm(ave_fid ~ ar_theta*ar_sd*ar_bias, data=subset(results,gen==500))) # theta not significant
 #anova(lm(ave_fid ~ ar_sd*ar_bias, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
 #anova(lm(sd_fid ~ ar_sd*ar_bias, data=subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001))) # Remove effect of bias, then ar_sd 0.001
 @
-<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002\\lt \\lvert bias\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  # ave fid drops as sd increases
-bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  # sd fid increases as sd increases
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm') + labs(x='sd parameter to environmental model', y='Final mean fidelity') # ave fid drops as sd increases
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm') + labs(x='sd parameter to environmental model', y='Final standard deviation of fidelity') # sd fid increases as sd increases
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
-<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='.'>>=
+<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Final mean fidelity against final mean fitness (top) and final mean fidelity against final standard deviation of fidelity (bottom).'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') # and relationship between these two
+ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='Final mean fitness',y='Final mean fidelity')# and relationship between these two
 # Relationship between sd_fid and ave_fid!
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid))
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid)) + labs(x='Final standard deviation of fidelity',y='Final mean fidelity')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 #anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
 @
 
-<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Effect of lineage upon results.'>>=
+<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002\\lt \\lvert bias\\rvert$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
-bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)
+ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sd parameter to environmental model', y='Final mean fidelity')
+bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE) + labs(x='sd parameter to environmental model', y='Final standard deviation of fidelity')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 

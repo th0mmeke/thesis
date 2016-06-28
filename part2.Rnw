@@ -394,7 +394,7 @@ replicates <- runs / factors
 df_completed <- subset(df, gen==500)
 @
 
-Data is from \Sexpr{nrow(subset(df,gen==0))} runs -- \Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} replicates--with settings from \cref{tbl:factor-levels-c5}, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df['gen'])} generations.
+Data is from \Sexpr{nrow(subset(df,gen==0))} runs--\Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} replicates--with settings from \cref{tbl:factor-levels-c5}, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df['gen'])} generations.
 
 \subsection{Results and discussion}
 
@@ -649,7 +649,7 @@ This leads to the following implications:
 	\item The model's response can be clustered according to the values of the key drivers, \emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$.
 \end{itemize}
 	
-The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels:
+The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels, the basis for all remaining experiments:
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c6b}
@@ -670,7 +670,7 @@ Finally, from the discussion around the effect of $p_{reproduction}$, these fact
 
 \chapter[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
-Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for stable environments:
+Returning to the overall goals for these experiments, \cref{hypothesis-2} makes two predictions for stable environments:
 
 \begin{enumerate}
 	\item Average inheritance will tend towards perfect inheritance, confirming a result of \textcite{Bourrat2015}.
@@ -696,11 +696,20 @@ From the predictions of the hypothesis (\cref{predictions}), the main property o
 
 \section{Design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df_full <- load.results('results/results-819350e.data')
-df <- subset(df_full, ecf==0 & truncate == 0)
+df_full <- subset(load.results('results/results-819350e.data'),ecf==0 & truncate == 0 & correlation_correlation == 1) # only stable environment results
+colnames(df_full)[13] <- "Distribution"
+colnames(df_full)[14] <- "Reproduction"
+
+df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
+df_full$p_reproduce = factor(df_full$p_reproduce, labels=c('Fitness','0.66'))
+df_full$p_selection = factor(df_full$p_selection, labels=c('Fitness','0.66'))
+df_full$Distribution = factor(df_full$Distribution, labels=c('Bounded','Sampled'))
+#df_full$Reproduction <- factor(df_full$Reproduction, labels=c('Uncorrelated','Correlated'))
+
+df <- subset(df_full, gen==500)
 @
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}. They closely follow those given in \cref{tbl:factor-levels-c6b} with the exception that  $p_{reproduction}$ and $p_{selection}$ only have one absolute level--$0.66$--instead of three. As the results in the previous \namecrefreducing-the-parameter-space-for-the-experiments} were qualitatively similar for all three, to reduce the number of experiment runs required only $0.66$ is included.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
@@ -711,56 +720,25 @@ The factors and levels along with their mapping to model parameters are given in
 		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c7})\\
-		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
+		Reproduction		   &Reproduction		&1					& Correlated\\
+		Distribution           &Reproduction		&2                	& Normal distribution ($\mathbb{N}$), either sampled or folded\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\begin{table}\label{reproduction-distribution-factors-c7}
-		\caption{Levels for the factor \emph{Reproduction}}
-		\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
-		\toprule
-		Reproduction&Child entity parameter					&Distribution shape\\
-		\midrule
-		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
-		
-		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-%\begin{table} % 5e33a27 and 819350e
-%	\begin{center}
-%		\caption{Factor levels for testing the hypothesis prediction of perfect inheritance in unchanging conditions}
-%		\begin{tabular}{@{}llp{6cm}@{}}
-%			\toprule
-%			Parameter              & Number of Levels & Levels                                                   \\
-%			\midrule
-%			$p_{reproduction}$     & 2                & 0 or 0.66                                                \\
-%			$p_{selection}$        & 2                & 0 or 0.66                                                \\
-%			$n_{children}$         & 2                & 2 or 5                                                   \\
-%			Population Restriction & 2                & Fitness-independent sampling or fitness-based truncation \\
-%			Distribution           & 2                & normal dist., $\mathbb{N}$ or folded normal          \\
-%			Correlate Fidelity     & 2                & false or true                                            \\
-%			Shape of environment change		2&	Abrupt or continuous\\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-%\end{table}
+Each combination of factor levels has 10 replicates, to give a total of $2x2x2x1x2x10$ or 160 experiment runs.
 
 \section{Results and discussion}
 
 %df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0 & truncate==0)
-<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in fixed conditions can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound, while the great majority of unsustainable runs fall within the asymptotically decreasing band from top-left to bottom-right. Note the extreme case represented by the almost vertical set of points to the far left, discussed in the text.'>>=
-ggplot(df_full) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
-@
+%<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in stable environments can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound. The extreme case represented by the almost vertical set of points to the far left followed by steady increases is discussed in the text.'>>=
+%ggplot(df_full) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
+%@
 
-Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all \Sexpr{nrow(subset(df_full, gen==max(df_full['gen'])))} reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. Note that these results also provide one point of validation for the choice of 500 generations as the limit. From \cref{fig:popoverall}, all runs have approached the population size limit by approximately 300 generations, and by generation \Sexpr{max(df_full['gen'])} they are well into a second phase where the size is relatively stable at around that limit.
+% \Sexpr{nrow(subset(df_full, gen==max(df_full['gen'])))}
+Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. 
 
-Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of those fixed-environment runs that reached the limit at generation \Sexpr{max(df['gen'])}; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
+Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of each run, unless otherwise noted.
 
 <<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
@@ -768,6 +746,8 @@ bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',
 cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
 dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
+
+ap <- ggplot(
 @
 
 <<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
@@ -1057,7 +1037,7 @@ ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # f
 #summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
 @
 
-The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, described in \cref{tbl:range-of-independent-variables}.
+The range of each variable (the length of each side of the hypercube) is set from earlier experimentation. We created two independent datasets by sampling from two hypercubes, defined in \cref{tbl:range-of-independent-variables}.
 
 \begin{table}
 	\begin{center}
@@ -1076,7 +1056,7 @@ The range of each variable (the length of each side of the hypercube) is set fro
 	\end{center}
 \end{table}
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
@@ -1093,20 +1073,20 @@ The factors and levels along with their mapping to model parameters are given in
 	\end{tabular}
 \end{table}
 
-\begin{table}\label{reproduction-distribution-factors-c8}
-	\caption{Levels for the factor \emph{Reproduction}}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
-		\toprule
-		Reproduction&Child entity parameter					&Distribution shape\\
-		\midrule
-		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
-		
-		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
-		\bottomrule
-	\end{tabular}
-\end{table}
+%\begin{table}\label{reproduction-distribution-factors-c8}
+%	\caption{Levels for the factor \emph{Reproduction}}
+%	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
+%		\toprule
+%		Reproduction&Child entity parameter					&Distribution shape\\
+%		\midrule
+%		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
+%		
+%		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
+%		\bottomrule
+%	\end{tabular}
+%\end{table}
 
 
 \section{Results and discussion}

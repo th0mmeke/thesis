@@ -506,23 +506,24 @@ Before each run we construct an initial population. From the hypothesis \cref{hy
 
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- load.results('results/results-parameters.data')
-df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
 colnames(df_full)[13] <- "Distribution"
-colnames(df_full)[14] <- "Correlation"
+colnames(df_full)[14] <- "Reproduction"
+
+df_full$n_offspring = factor(df_full$n_offspring, labels=c("2","5"))
+df_full$p_reproduce = factor(df_full$p_reproduce, labels=c('Fitness','0.33','0.66','1.0'))
+df_full$p_selection = factor(df_full$p_selection, labels=c('Fitness','0.33','0.66','1.0'))
+df_full$Distribution = factor(df_full$Distribution, labels=c('Bounded\nnormal','Sampled\nnormal','Uniform'))
+df_full$Reproduction <- factor(df_full$Reproduction, labels=c('Uncorrelated','Correlated'))
 
 df <- subset(df_full, gen==500)
-df$p_reproduce = factor(df$p_reproduce, labels=c('Fitness','0.33','0.66','1.0'))
-df$p_selection = factor(df$p_selection, labels=c('Fitness','0.33','0.66','1.0'))
-df$Distribution = factor(df$Distribution, labels=c('Bounded\nnormal','Sampled\nnormal','Uniform'))
-df$Correlation <- factor(df$Correlation, labels=c('Uncorrelated','Correlated'))
 @
 
 \section{General observations}
 The response of the model to factor levels can quickly be assessed by a simple \gls{anova} fixed-effects model \parencite[p.64]{Montgomery2009}, with the informal null hypothesis ($H_0$) that there is no difference in the mean of the response variable between the various combinations of factor levels. With a response variable of final mean population fidelity ($\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} at the end of a run) and factors and levels as given in \cref{tbl:factor-levels-c6}, the resulting \gls{anova} analysis is as follows:
 	
 <<echo=FALSE>>=
-a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+Distribution+Correlation)))
-b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+Distribution+Correlation)))
+a <- with(df,anova(lm(ave_cor~p_reproduce+p_selection+n_offspring+Distribution+Reproduction)))
+b <- with(df,anova(lm(ave_fit~p_reproduce+p_selection+n_offspring+Distribution+Reproduction)))
 @
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(a)
@@ -537,29 +538,34 @@ And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analys
 print.xtable.booktabs(b)
 @
 
-This suggests that the model is sensitive (p\textless 0.05) to the choice of \emph{Distribution} and \emph{Correlation} for $\overline{fidelity}_{end}$, and to all parameters except $n_offspring$ for $\overline{fitness}_{end}$. However, this is perhaps overly simplistic as it ignores parameter values or combinations of parameter values that are either unlikely to be of interest or unsuitable for other reasons. These nuances are explored in the following \namecref{}.
+This suggests that the model is sensitive (p\textless 0.05) to the choice of \emph{Distribution} and \emph{Reproduction} for $\overline{fidelity}_{end}$, and to all parameters except $n_offspring$ for $\overline{fitness}_{end}$. However, this is perhaps overly simplistic as it ignores parameter values or combinations of parameter values that are either unlikely to be of interest or unsuitable for other reasons. These nuances are explored in the following \namecrefs{sensitivity-to-p-reproduction}.
 
-\section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}
-The parameter $p_{reproduction}$ in the simulation model is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
+\section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}\label{sensitivity-to-p-reproduction}
+The parameter $p_{reproduction}$ in the simulation model \cref{base-model} is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
 
-<<p-reproduction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
+<<p-reproduction, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap='Effect of the factor $p_{reproduction}$ on final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on the right)'>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_cor)) + labs(x='',y='Final mean fidelity')
 bp <- ggplot(df) + geom_boxplot(aes(x=p_reproduce,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
+\Cref{fig:p-reproduction} shows a visible difference in the effect on $\overline{fitness}_{end}$ between fixed values of $p_{reproduction}$ and a value equal to the entity's fitness value. Fixed $p_{reproduction}$ values have little foundation in biology, but in artificial systems it's possible to imagine a combination where either $p_{reproduction}$ or $p_{selection}$ is fixed (or absolute) while the other is based on a fitness value (where the effect instead is relative to other entities).
+
 \section[Sensitivity to probability of selection]{Sensitivity to the parameter $p_{selection}$}
 The simulation model parameter $p_{selection}$ closely follows the definition of $p_{reproduction}$--related to entity fitness, or a fixed value. Again, we expect that the model will be sensitive to the value of this parameter.
 
-<<p-selection, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
+<<p-selection, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap='Effect of the factor $p_{selection}$ on final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on the right)'>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_cor)) + labs(x='',y='Final mean fidelity')
 bp <- ggplot(df) + geom_boxplot(aes(x=p_selection,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
-\section[Sensitivity to number of offspring]{Sensitivity to the parameter $n_{offspring}$}
+The relationship between $p_{selection}$ and $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ closely that of $p_{reproduction}$; little visual difference between the effect on fidelity, but a clear difference on fitness (as would be expected for Selection.)
 
-<<n-offspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
+\section[Sensitivity to number of offspring]{Sensitivity to the parameter $n_{offspring}$}
+The parameter $n_{offspring}$ controls two related aspects of the model. It directly determines the maximum number of new entities derived from an existing entity at each generation, and indirectly it affects the stablity of the population as it strongly influences the proportion of new versus old entities. Finally, when either $p_{reproduction}$ or $p_{selection}$ is absolute rather than relative, we would also expect the population size to be highly sensitive to $n_{offspring}$ as the numbers of new entities may not be sufficient to sustain a population undergoing, for example, a continuous cull.
+
+<<n-offspring, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap='Effect of the factor $n_{offspring}$ on final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on the right)'>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_cor)) + labs(x='',y='Final mean fidelity')
 bp <- ggplot(df) + geom_boxplot(aes(x=n_offspring,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
@@ -569,24 +575,24 @@ a <- with(df,anova(lm(ave_cor~n_offspring)))
 b <- with(df,anova(lm(ave_fit~n_offspring)))
 @
 
-Confirmation with a single-factor \gls{anova} test with factor $n_{offspring}$ and response variables $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ gives F=\Sexpr{a[,'F value'][1]} and p=\Sexpr{a[,'Pr(>F)'][1]}, and F=\Sexpr{b[,'F value'][1]} and p=\Sexpr{b[,'Pr(>F)'][1]}, respectively. However, a visual check of the population growth over time shows a quite different situation (\cref{fig:n-offspring-population}.)
+From \cref{fig:n-offspring} it appears that $n_{offspring}$ is not signifant in the behaviour of the simulation model, supported by a single-factor \gls{anova} test with factor $n_{offspring}$ and response variables $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ gives F=\Sexpr{a[,'F value'][1]} and p=\Sexpr{a[,'Pr(>F)'][1]}, and F=\Sexpr{b[,'F value'][1]} and p=\Sexpr{b[,'Pr(>F)'][1]}, respectively. However, a visual check of the population growth over time shows some interesting differences between the two factor levels (\cref{fig:n-offspring-population}.) As expected, the higher reproduction rate in the right hand facet resulted in a slightly greater proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: \Sexpr{nrow(subset(df,n_offspring==2))}/\Sexpr{nrow(subset(df_full,n_offspring==2&gen==0))} when $n_{offspring}=2$ against \Sexpr{nrow(subset(df,n_offspring==5))}/\Sexpr{nrow(subset(df_full,n_offspring==5&gen==0))} when $n_{offspring}=5$. 
 
-<<n-offspring-population, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two values of factor $n_{children}$: $n_children=2$ (on the left) and $n_children=5$ (on the right.)'>>=
+<<n-offspring-population, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Population size over time for two levels of factor $n_{children}$, $n_children=2$ (on the left) and $n_children=5$ (on the right.)'>>=
 ggplot(df_full) + geom_point(aes(x=gen,y=pop), size=0.25) + labs(x="Generation", y="Population size") + facet_wrap(~n_offspring)
 @
 
 Note that the vertical lines on the extreme left of both facets of \cref{fig:n-offspring-population} are characteristics of the initial conditions: runs where $n_{offspring} = 2$ and the probability of reproduction or selection is low, either because the parameter has a low, fixed, value or because they are derived from the parent's value, suffer high selection and low reproduction initially. Taking the case where both are given by the parent's value, $p_{reproduction} = p_{selection} = $\Sexpr{mean(subset(df_full,gen==0)[,'ave_fit'])}. The difference between the two facets can be explained by the higher reproduction rate in the right-hand facet.
 
-As might be expected, the higher reproduction rate in the right hand facet also resulted in a slightly higher proportion of runs reaching completion at \Sexpr{max(df_full['gen'])} generations: \Sexpr{nrow(subset(df,n_offspring==2))} when $n_{offspring}=2$ against \Sexpr{nrow(subset(df,n_offspring==5))} when $n_{offspring}=5$.
-
 \section{Sensitivity to the parameter Reproduction}
 The parameter $Reproduction$ describes the relationship between the properties of an entity and the properties of the related entity from which it is derived. In the simulation model this parameter is completely general, defined only as a mapping from $entity$ to $entity$. In attempting to characterize the sensitivity of the model to this parameter, we introduce two linked factors of two levels each, \emph{Reproduction} and \emph{Distribution}, that in combination map to the parameter $Reproduction$.
 
-The factor \emph{Reproduction} from \cref{tbl:factor-levels-c6} describes two forms of relationship between parent and child entity. The first is ``correlated'' where the value of each child property has some significant relationship or correlation to the same property in the parent. A simple example of correlated properties from biology might be height: the height of a child at adulthood has a statistically significant correlation with the height of his or her parent. The second relationship is ``uncorrelated'' where the child property value is chosen independently of the parent's value. Our expectation is that the simulation model will prove sensitive to the choice of level for \emph{Reproduction}.
+The factor \emph{Reproduction} from \cref{tbl:factor-levels-c6} describes two forms of relationship between parent and child entity. The first is ``correlated'' where the value of each child property has some significant relationship or correlation to the same property in the parent. A simple example of correlated properties from biology might be height: the height of a child at adulthood has a statistically significant correlation with the height of his or her parent. The second relationship is ``uncorrelated'' where the child property value is chosen independently of the parent's value. Our expectation is that the simulation model will prove sensitive to the choice of level for \emph{Reproduction} as ``uncorrelated'' levels are essentially un-evolutionary.
+
+From \cref{correlated-uncorrelated} it is clear that there is a significant difference for both $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ between the two levels of \emph{Reproduction}, as expected.
 
 The factor \emph{Distribution} describes a function to return a value in the range $[0,1]$ given two input values, also in the range $[0,1]$, where the first is for the expected value of the result, and the second describes a range. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} equate to its mean and variance. For other probability distributions, the parameters are distribution specific. For example, for a uniform distribution, the parameters have no influence on the output; the output will be a value in the range $[0,1]$ drawn randomly with equal probability, regardless of input parameters.
 
-As \emph{Distribution} is used by \emph{Reproduction} to influence the relationship between the properties of an entity and its offspring, it seems plausible to hypothesise that different mapped shapes may have a significant effect on the experimental result.
+As \emph{Distribution} is used by \emph{Reproduction} to influence the relationship between the properties of an entity and its offspring, it seems plausible to hypothesise that different mapped shapes may have a significant effect on the experimental result. In \cref{fig:normal-normal-uniform} this is confirmed; the response, particularly for $\overline{fidelity}_{end}$, to the two levels for normal distributions are qualitatively different to that of a uniform distribution. In fact, the response to the uniform distribution shows that $\overline{fidelity}_{end}$ is almost completely determined by this factor level, regardless of the levels of any other factor.
 
 Where the underlying probability isn't inherently limited to the output range of $[0,1]$, such as is the case for the normal distribution, then the mechanism used to map the underlying distribution to the output range may modify the probability distribution of the mapped values. Two out of many possible mappings are a straightforward bounded algorithm ($max(0,min(1,normal(mean,variance)))$), and a sampling algorithm:
 
@@ -601,7 +607,9 @@ Where the underlying probability isn't inherently limited to the output range of
 	
 A visualisation of the results of these two algorithms alongside the unmapped normal distribution is given in \cref{fig:example_distributions}. The bounded algorithm produces a distribution with fat tails (middle of \cref{fig:example_distributions}), like a 'W', rather than the expected bell-shape of the standard normal distribution (on the left-hand side of the same figure), while the sampling algorithm distribution appears closer in shape to the unmapped distribution while mapping correctly to the output range. Note that neither shape though is ``wrong'' or ''right'', as the only requirements for the \emph{Distribution} are that it meets $[0,1]x[0,1]\mapsto [0,1]$, which is true of all of these described mappings.
 
-<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Effect of folding to range $[0,1]$ of normal distribution with mean = 0.5, standard deviation = 0.5'>>=
+
+
+<<example_distributions, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Example showing a normal distribution with mean = 0.5, standard deviation = 0.5 (left), the effect of folding to range $[0,1]$ of the same distribution (centre), and same distribution filtered through the sampling algorithm.'>>=
 x <- rnorm(n=10000, mean=0.5, sd=0.5)
 ap <- qplot(x,geom='density') + coord_cartesian(xlim=c(-1,2),ylim=c(0,1.6)) + labs(x="Normal distribution")
 bp <- qplot(sapply(sapply(x,min,1.0),max,0),geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + labs(x="Bounded normal")
@@ -618,52 +626,48 @@ cp <- qplot(x1,geom='density') + coord_cartesian(xlim=c(0,1),ylim=c(0,1.6)) + la
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-<<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap=''>>=
+<<normal-normal-uniform, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold',fig.cap='Effect of the factor \\textbf{Reproduction} on final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on the right)'>>=
 ap <- ggplot(df) + geom_boxplot(aes(x=Distribution,y=ave_cor)) + labs(x="", y="Final mean fidelity")
 bp <- ggplot(df) + geom_boxplot(aes(x=Distribution,y=ave_fit)) + labs(x="", y="Final mean fitness")
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
-<<correlated-uncorrelated, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Reproduction} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(x=Correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
-bp <- ggplot(df) + geom_boxplot(aes(x=Correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
+<<correlated-uncorrelated, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated levels for the factor \\textbf{Reproduction} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on the right)'>>=
+ap <- ggplot(df) + geom_boxplot(aes(x=Reproduction,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+bp <- ggplot(df) + geom_boxplot(aes(x=Reproduction,y=ave_fit)) + labs(x='',y='Final mean fitness')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
 
 \section{Conclusions}
+For the model overall, the values of \emph{Distribution} and \emph{Reproduction} have a significant effect on $\overline{fidelity}_{end}$, while $\overline{fitness}_{end}$ is responsive to all parameter values with the exception of $n_offspring$. Therefore we can conclude that the model is sensitive to all parameters with the probable exception (see earlier discussion) of $n_{offspring}$, and that the response is driven by the values of \emph{Distribution} and \emph{Reproduction} and by the boundary between absolute and relative values for $p_{reproduction}$ and $p_{selection}$. This suggests that the sensitivity of the simulation model can in fact be described in simpler terms related to combinations of related values of these key drivers. As one example, models where \emph{Distribution} takes ``uniform'' form a single class of their own as the other factor levels are completely overridden by this level of this factor.
 
-<<echo=FALSE>>=
-df<-subset(df,Correlation=="Correlated" & p_selection == "Fitness-related" & p_reproduce == "Fitness-related")
-a <- with(df,anova(lm(ave_cor~n_offspring+Distribution)))
-b <- with(df,anova(lm(ave_fit~n_offspring+Distribution)))
-@
-<<results='asis',echo=FALSE>>=
-print.xtable.booktabs(a)
-@
+This leads to the following implications:
 
+\begin{itemize}
+	\item All claims resulting from the simulation model must be prefixed by a description of the particular parameter settings under which the claim applies.
+	\item The model's response can be clustered according to the values of the key drivers, \emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$.
+\end{itemize}
+	
+The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels:
 
-<<results='asis',echo=FALSE>>=
-print.xtable.booktabs(b)
-@
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c6b}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&1                	& $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&1					& Correlated\\
+		Distribution           &Reproduction		&2                	& Normal distribution ($\mathbb{N}$), either sampled or folded\\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
+Finally, from the discussion around the effect of $p_{reproduction}$, these factors and levels can be clustered into only two intrarelated groups: group one where $p_{reproduction}$ takes the level ``$fitness$'' and group two where it takes any of the remaining, absolute, levels.
 
-\begin{DRAFT}
-Independent variable is Fidelity correlation, the main factor of interest from hypothesis
-
-Dependent variables, to qualify the sensitivity of the model:
-\begin{enumerate}
-	\item Distribution
-	\item Number of offspring
-\end{enumerate}
-
-Set remaining parameters based on these screening experiments:
-\begin{enumerate}
-	\item Upper-size bound - sampling % truncate == 0
-	\item Lower-size bound - sustainable populations % gen for run == max gen, and pop at max gen > 1000
-	\item Probabilities - at least one of $p_{reproduction}$ and $p_{selection}$ is related to the parent's fitness (\ie the factor level has the special case value of 0.)      	
-\end{enumerate}
-\end{DRAFT}
 \chapter[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
 Returning to the overall goals for these experiments (to test the predictions of hypothesis \cref{hypothesis-2}, and to examine the impact of the factors on the results), hypothesis \cref{hypothesis-2} makes two predictions for stable environments:
@@ -754,7 +758,7 @@ The factors and levels along with their mapping to model parameters are given in
 ggplot(df_full) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
 @
 
-Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, \Sexpr{nrow(subset(df_full, gen==max(df_full['gen'])))} reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. Note that these results also provide one point of validation for the choice of 500 generations as the limit. From \cref{fig:popoverall}, all runs have approached the population size limit by approximately 300 generations, and by generation \Sexpr{max(df_full['gen'])} they are well into a second phase where the size is relatively stable at around that limit.
+Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all \Sexpr{nrow(subset(df_full, gen==max(df_full['gen'])))} reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. Note that these results also provide one point of validation for the choice of 500 generations as the limit. From \cref{fig:popoverall}, all runs have approached the population size limit by approximately 300 generations, and by generation \Sexpr{max(df_full['gen'])} they are well into a second phase where the size is relatively stable at around that limit.
 
 Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of those fixed-environment runs that reached the limit at generation \Sexpr{max(df['gen'])}; a total of \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 

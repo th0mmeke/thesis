@@ -677,7 +677,7 @@ Returning to the overall goals for these experiments, \cref{hypothesis-2} makes 
 	\item The variance of inheritance in the population will decrease more than would be expected by chance alone.
 \end{enumerate}
 
-The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity.
+The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity, and that fidelity ranges between $0$, for no correlation between parent and child, and $1.0$ for perfect correlation.
 
 \section{Does average inheritance approach perfect inheritance?}\label{does-average-inheritance-approach-perfect-inheritance}
 
@@ -692,7 +692,7 @@ We start with the following null and alternative hypotheses:
 
 \section{Response variables}\label{response-variables}
 
-From the predictions of the hypothesis (\cref{predictions}), the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under hypothesis \cref{hypothesis-2} we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
+From the predictions of the hypothesis (\cref{predictions}), the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under the hypothesis (\cref{hypothesis-2}) we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
 
 \section{Design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
@@ -741,18 +741,18 @@ Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all reached the exp
 Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of each run, unless otherwise noted.
 
 <<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
-ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final ave. fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-cp <- qplot(ave_cor, geom="density", data=df, xlab="Final ave. fidelity",ylab="")
-dp <- qplot(ave_fit, geom="density", data=df, xlab="Final ave. fitness",ylab="")
+ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+cp <- qplot(ave_cor, geom="density", data=df, xlab="Final mean fidelity",ylab="")
+dp <- qplot(ave_fit, geom="density", data=df, xlab="Final mean fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, this time averaged across all replicates of each factor combination (that is, grouped by replicate). Dark-coloured points represent values at end of run; light-coloured points are for initial values. Missing points are from those replicates that did not complete.'>>=
-ap <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-bp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-dp <- ggplot(subset(df,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='SD fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+<<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Summary results, this time averaged across all replicates of each unique combination of factor levels (that is, grouped by factor level). Dark-coloured points represent values at end of run; light-coloured points in a horizontal line are for initial values, reflecting averaged initial conditions.'>>=
+ap <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+bp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+cp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='Standard deviation of fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='Standard deviation of fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
@@ -760,18 +760,20 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 df <- subset(load.results('results/results-5e33a27.data'), ecf==0 & truncate == 0 & (p_reproduce==0 || p_selection == 0))
 @
 
-The first hypothesis prediction is that average fidelity will tend towards exact inheritance, or $1.0$. A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure is distinctly bimodal, with peaks around final mean fidelity values 0.5--0.6 and 1.0. Fitness is also bimodal, but less so than fidelity. From inspection, it seems clear that fidelity does approach 1.0 for some combination of factor levels.
+The first hypothesis prediction is that average fidelity will tend towards exact inheritance, or $1.0$. A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure has a strong peak as predicted at $1.0$, with final mean fidelity greater than approximately $0.96$ for all remaining runs. Fitness is bimodal, with peaks around final mean fitness values of approximately $0.45-0.55$ and $1.0$. From \cref{fig:lowstartbyfactor} it seems that the initial peak in fitness is associated with a subset of factor-levels. Closer examination shows that these runs, and only these runs, are associated with the level $0.66$ for both factors $p_{reproduction}$ and $p_{selection}$. This supports the earlier observation in \cref{reducing-the-parameter-space-for-the-experiments} concerning the importance of the distinction between absolute and relative (\eg fitness-based) values for these two factors.
 
-<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
-df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
-ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
-bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
-grid.arrange(ap,bp,nrow=1,ncol=2)
-@
+From inspection, it seems clear that fidelity does approach $1.0$ as predicted by the hypothesis.
 
-From \cref{fig:lowstartbyfactor}, all runs result in an increase in fidelity from the initial range of $[0, 0.3]$ but only some approach or reach 1.0. Those that do are uniformly associated with the \textbf{Correlate Fidelity} factor value of \emph{true} (see top-left plot in \cref{fig:lowstartfactors}), and those that did not had a \textbf{Correlate Fidelity} value of -1.
+%<<lowstartfactors, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Comparison between correlated and uncorrelated values for the factor \\textbf{Correlate Fidelity} showing results for final mean fidelity ($\\overline{fidelity}_{end}$, on the left) and final mean fitness ($\\overline{fitness}_{end}$, on right)'>>=
+%df$correlation_correlation <- factor(df$correlation_correlation, labels=c('Uncorrelated','Correlated'))
+%ap <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_cor)) + labs(x='',y='Final mean fidelity')
+%bp <- ggplot(df) + geom_boxplot(aes(x=correlation_correlation,y=ave_fit)) + labs(x='',y='Final mean fitness')
+%grid.arrange(ap,bp,nrow=1,ncol=2)
+%@
 
-In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design, but is strongest when \textbf{Correlate Fidelity} is \emph{true}, that is, when the child's fidelity is correlated with that of its parent.
+%From \cref{fig:lowstartbyfactor}, all runs result in an increase in fidelity from the initial range of $[0, 0.3]$ but only some approach or reach 1.0. Those that do are uniformly associated with the \textbf{Correlate Fidelity} factor value of \emph{true} (see top-left plot in \cref{fig:lowstartfactors}), and those that did not had a \textbf{Correlate Fidelity} value of -1.
+
+In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design.
 
 \section{Does the variance of inheritance decrease over time in the population?}
 
@@ -811,8 +813,6 @@ Data is all generations for those fixed-environment runs that reached completion
 %z3<-as.data.frame(cbind(1:501,z2[1,],z2[2,],z2[3,]))
 %ggplot(z3,aes(V1,V2,V3)) + geom_ribbon(data=z3,aes(ymin=V2,ymax=V4), alpha = 0.2) + geom_line(aes(V1,V3))
 %@
-
-
 
 %<<ExperimentVarianceUnderHighStart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='High start case: smoothed ranges for standard deviation of fidelity, as before grouped by \\emph{Correlate Fidelity}.'>>=
 %ggplot(df,aes(x=gen,y=sd_cor,group=run, colour=factor(correlation_correlation))) + scale_color_manual(name="Correlate\nFidelity", values=c("grey80", "grey10"), labels=c("false","true")) + stat_smooth() + labs(x="Generation", y="Standard Deviation of Fidelity") + theme(legend.key=element_rect(fill="white"))

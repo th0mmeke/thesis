@@ -696,7 +696,7 @@ From the predictions of the hypothesis (\cref{predictions}), the main property o
 
 \section{Design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
-df_full <- subset(load.results('results/results-819350e.data'),ecf==0 & truncate == 0 & correlation_correlation == 1) # only stable environment results
+df_full <- subset(load.results('results/results-819350e-stable-environment.data'), truncate == 0 & correlation_correlation == 0) # correlation_correlation == 0 means TRUE in this dataset.
 colnames(df_full)[13] <- "Distribution"
 colnames(df_full)[14] <- "Reproduction"
 
@@ -709,7 +709,7 @@ df_full$Distribution = factor(df_full$Distribution, labels=c('Bounded','Sampled'
 df <- subset(df_full, gen==500)
 @
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}. They closely follow those given in \cref{tbl:factor-levels-c6b} with the exception that  $p_{reproduction}$ and $p_{selection}$ only have one absolute level--$0.66$--instead of three. As the results in the previous \namecrefreducing-the-parameter-space-for-the-experiments} were qualitatively similar for all three, to reduce the number of experiment runs required only $0.66$ is included.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}. They closely follow those given in \cref{tbl:factor-levels-c6b} with the exception that  $p_{reproduction}$ and $p_{selection}$ only have one absolute level--$0.66$--instead of three. As the results in the previous \namecref{reducing-the-parameter-space-for-the-experiments} were qualitatively similar for all three, to reduce the number of experiment runs required only $0.66$ is included.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
@@ -1148,7 +1148,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 #anova(lm(ave_fid ~ ar_sd*ar_bias, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
 #anova(lm(sd_fid ~ ar_sd*ar_bias, data=subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001))) # Remove effect of bias, then ar_sd 0.001
 @
-<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002\\lt \\lvert bias\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter.'>>=
+<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002 < \\lvert bias\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -1169,7 +1169,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 #anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
 @
 
-<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002\\lt \\lvert bias\\rvert$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
+<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002 < \\lvert bias\\rvert$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
 library(ggplot2)
 library(gridExtra)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -1194,31 +1194,31 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 %ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
 %@
 
-\begin{DRAFT}
-The unbiased sample variance with Bessel's correction is \todo{reference}:
-\[
-s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
-\]
-
-Let us assume that the upper bound on fidelity of 1.0 has no effect on $s^2$.
-Then we can divide the fidelity values at time $t$ into those below the mean and those above; arrange the sample values so that the first $m$ fall below the mean and the remainder above. The sample variance can now be written as:  
-
-\[
-s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac {1}{n-1} \sum_{i=1}^m  \left( \left(x_i - \overline{x} \right)^ 2 + \sum_{i=m}^n  \left(x_i - \overline{x} \right)^ 2 \right)
-\]
-
-As $\overline{x}$ approaches 1.0 (the upper bound on fidelity) from below:
-
-\[
-s^2 = \frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right)
-\]
-
-But by our initial statement, $s^2$ remains unchanged, therefore...
-
-\[
-\frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right) = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
-\]
-\end{DRAFT}
+%\begin{DRAFT}
+%The unbiased sample variance with Bessel's correction is \todo{reference}:
+%\[
+%s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+%\]
+%
+%Let us assume that the upper bound on fidelity of 1.0 has no effect on $s^2$.
+%Then we can divide the fidelity values at time $t$ into those below the mean and those above; arrange the sample values so that the first $m$ fall below the mean and the remainder above. The sample variance can now be written as:  
+%
+%\[
+%s^2 = \frac {1}{n-1} \sum_{i=1}^n  \left(x_i - \overline{x} \right)^ 2 = \frac {1}{n-1} \sum_{i=1}^m  \left( \left(x_i - \overline{x} \right)^ 2 + \sum_{i=m}^n  \left(x_i - \overline{x} \right)^ 2 \right)
+%\]
+%
+%As $\overline{x}$ approaches 1.0 (the upper bound on fidelity) from below:
+%
+%\[
+%s^2 = \frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right)
+%\]
+%
+%But by our initial statement, $s^2$ remains unchanged, therefore...
+%
+%\[
+%\frac {1}{n-1} \left( \sum_{i=1}^m   \left(x_i - 1 \right)^ 2 + \sum_{i=m}^n  \left(x_i - 1 \right)^ 2 \right) = \frac{\sum_{i=1}^n \left(x_i^2\right)}{n-1} - \frac{\left(\sum_{i=1}^n x_i\right)^2}{(n-1)n}.
+%\]
+%\end{DRAFT}
 
 
 \section{Future work}\label{part2-future-work}
@@ -1237,13 +1237,9 @@ Another broad approach might be to modify the method to reduce its dependence on
 
 \subsection{An information-based measure}
 
-Predictability related to compression and information entropy. Compression is a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
+Predictability is related to information entropy, and to compression; a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
 
-In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity - the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterization.
-
-In a time-dependent way compression equals prediction - in the sense that we can produce an algorithm that improves our ability to predict the future output of a process. Prediction on one spatial dimension is called a time series. Most prediction requires consistent conditions or contexts - when these change our predictive ability is reduced, (in time-series this is called concept drift). 
-
-Compression, as mechanism to identify patterns, will identify items spatially if we can map items to patterns. The choice of compression method will privilege different ways of defining a pattern - if we are to use pattern discovery we need to determine what are interesting patterns - which is hardly domain agnostic. 
+In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity--the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterization.
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \textcite{Prokopenko2009}, \textcite{Ladyman2011} and \textcite{Lloyd2001}.
 
@@ -1252,9 +1248,8 @@ Statistical Complexity, or $C_\mu$, based on causality, is fundamentally time-de
 The benefits of $C_{\mu}$ \textcite{Crutchfield1989} are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \textcite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's PhD thesis \textcite{Shalizi2001a} provides further context. 
 
 $C_{\mu}$ has been applied to a number of domains including random boolean networks \textcite{Gong2012}, spin \textcite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \textcite{Young2008}, autonomy of protocells \textcite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \textcite{Xiang2008}.
+
 The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \textcite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \textcite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \textcite[p.119]{Shalizi2001}.
-
-
 
 \chapter{Conclusions}
 \begin{DRAFT}

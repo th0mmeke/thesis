@@ -527,7 +527,7 @@ And for the response variable $\overline{fitness}_{end}$, the \gls{anova} analys
 print.xtable.booktabs(b)
 @
 
-This suggests that the model is sensitive (p\textless 0.05) to the choice of \emph{Distribution} and \emph{Reproduction} for $\overline{fidelity}_{end}$, and to all parameters except $n_offspring$ for $\overline{fitness}_{end}$. However, this is perhaps overly simplistic as it ignores parameter values or combinations of parameter values that are either unlikely to be of interest or unsuitable for other reasons. These nuances are explored in the following \namecrefs{sensitivity-to-p-reproduction}.
+This suggests that the model is highly sensitive (p\textless 0.001) to the choice of \emph{Distribution} and \emph{Reproduction} for $\overline{fidelity}_{end}$, and to all parameters except $n_{offspring}$ for $\overline{fitness}_{end}$. However, this is perhaps overly simplistic as it ignores parameter values or combinations of parameter values that are either unlikely to be of interest or unsuitable for other reasons. These nuances are explored in the following \namecrefs{sensitivity-to-p-reproduction}.
 
 \section[Sensitivity to probability of reproduction]{Sensitivity to the parameter $p_{reproduction}$}\label{sensitivity-to-p-reproduction}
 The parameter $p_{reproduction}$ in the simulation model \cref{base-model} is either related to the entity's fitness, or is set to a fixed value for all entities, irrespective of their fitness. We would expect, based on the substantial literature in \gls{ea}, that our simulation model would be highly sensitive to the value of this parameter.
@@ -629,7 +629,7 @@ grid.arrange(ap,bp,nrow=1,ncol=2)
 
 
 \section{Conclusions}
-For the model overall, the values of \emph{Distribution} and \emph{Reproduction} have a significant effect on $\overline{fidelity}_{end}$, while $\overline{fitness}_{end}$ is responsive to all parameter values with the exception of $n_offspring$. Therefore we can conclude that the model is sensitive to all parameters with the probable exception (see earlier discussion) of $n_{offspring}$, and that the response is driven by the values of \emph{Distribution} and \emph{Reproduction} and by the boundary between absolute and relative values for $p_{reproduction}$ and $p_{selection}$. This suggests that the sensitivity of the simulation model can in fact be described in simpler terms related to combinations of related values of these key drivers. As one example, models where \emph{Distribution} takes ``uniform'' form a single class of their own as the other factor levels are completely overridden by this level of this factor.
+For the model overall, the values of \emph{Distribution} and \emph{Reproduction} have a significant effect on $\overline{fidelity}_{end}$, while $\overline{fitness}_{end}$ is responsive to all parameter values with the exception of $n_{offspring}$. Therefore we can conclude that the model is sensitive to all parameters with the probable exception (see earlier discussion) of $n_{offspring}$, and that the response is driven by the values of \emph{Distribution} and \emph{Reproduction} and by the boundary between absolute and relative values for $p_{reproduction}$ and $p_{selection}$. This suggests that the sensitivity of the simulation model can in fact be described in simpler terms related to combinations of related values of these key drivers. As one example, models where \emph{Distribution} takes ``uniform'' form a single class of their own as the other factor levels are completely overridden by this level of this factor.
 
 This leads to the following implications:
 
@@ -805,11 +805,10 @@ The initial hypothesis (\cref{hypothesis-2}) assumes a perfectly predictable env
 	Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, where the fidelity of inheritance is proportional to the predictability of the environment.
 \end{hypothesis}\label{hypothesis-3} 
 
-From the hypothesis we make these predictions:
+From the hypothesis we make these two predictions:
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
+	\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}. As a corollary, the \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
 \section{Environmental model}\label{environmental-model}
@@ -844,14 +843,14 @@ This series allows us to represent a broad range of environmental changes:
 \begin{itemize}
 	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
 	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
-	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
 	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
 	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
 Finally, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
 
-<<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for bias=0 with two values of sd (left and right), and three values of theta (each facet row.)'>>=
+<<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -860,11 +859,11 @@ library(gridExtra)
 t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 
 t1$run <- 1:nrow(t1)
-names(t1)[1:3]<-c("theta", "sd", "bias")
-t2 <- melt(t1,id=c('run','theta','sd','bias'))
+names(t1)[1:3]<-c("theta", "sigma", "delta")
+t2 <- melt(t1,id=c('run','theta','sigma','delta'))
 t2$theta <- round(t2$theta,3)
-t2$sd <- round(t2$sd,3)
-t2$bias <- round(t2$bias,3)
+t2$sigma <- round(t2$sigma,3)
+t2$delta <- round(t2$delta,3)
 
 for (r in unique(t2$run)) {
 t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
@@ -875,34 +874,30 @@ fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
 t2[t2$run==r & t2$t==t,'fitness'] = fitness
 }
 }
-ap <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,bias==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sd, labeller='label_both') + labs(x="t", y="Fitness change")
+ap <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<factorialsdbias, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of bias (columns), and two values of sd (each facet row.)'>>=
-ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sd~bias, labeller='label_both') + labs(x="t", y="Fitness change")
+<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
+ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Example time-series produced by our environmental model for a sample of theta, sd and bias values. These are incremental fitness changes, rather than cumulative ones.'>>=
-library(reshape2)
-library(ggplot2)
-library(cowplot) # styling of plots, extension of ggplot2
-
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
 t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 t1$run <- 1:nrow(t1)
-names(t1)[1:3]<-c("theta", "sd", "bias")
-t2 <- melt(t1,id=c('run','theta','sd','bias'))
+names(t1)[1:3]<-c("theta", "sigma", "delta")
+t2 <- melt(t1,id=c('run','theta','sigma','delta'))
 t2$theta <- round(t2$theta,3)
-t2$sd <- round(t2$sd,3)
-t2$bias <- round(t2$bias,3)
-ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sd+bias, labeller='label_both') + labs(x="t", y="Fitness change")
+t2$sigma <- round(t2$sigma,3)
+t2$delta <- round(t2$delta,3)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change")
 @
 
 % Needs sampleenvironment
-<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Cumulative time-series examples for samples of theta, sd and bias.'>>=
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Cumulative time-series examples for samples of theta, sigma and delta.'>>=
 for (r in unique(t2$run)) {
 t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
 
@@ -913,7 +908,7 @@ t2[t2$run==r & t2$t==t,'fitness'] = fitness
 }
 }
 
-ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
 @
 
 %% Needs sampleenvironment
@@ -925,7 +920,7 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller
 %t2 <- t1[,1:3]
 %names(t2)[1]<-"theta"
 %names(t2)[2]<-"sd"
-%names(t2)[3]<-"bias"
+%names(t2)[3]<-"delta"
 %for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
 %for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
 %
@@ -945,7 +940,7 @@ As all three independent variables, $\Theta$, $\sigma_e$ and $\delta$, are conti
 	\end{center}
 \end{figure}\label{fig:hypercube}
 
-We created a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
+We create a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
 
 \begin{table}
 	\begin{center}
@@ -975,7 +970,7 @@ The other factors and levels along with their mapping to model parameters are gi
 		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c8})\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated\\
 		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
 		\bottomrule
 	\end{tabular}
@@ -1000,21 +995,30 @@ Finally, the dependent or response variables, driven by the hypothesis predictio
 
 
 \section{Results}
-<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs of dataset no.1 (top), and dataset no.2 (bottom). Axes are to the same scale. Runs (along the x-axis) are ordered by final generation reached.'>>=
-library(ggplot2)
-library(gridExtra)
-library(cowplot) # styling of plots, extension of ggplot2
 
-# BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	ar_bias	ar_sd	ar_theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final mean fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
+# BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	delta	sigma	theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
 r2 <- read.csv('results/results-0c267bcd2-b.csv', colClasses=colClasses)
 r3 <- read.csv('results/results-cc648a0a9.csv', colClasses=colClasses)
 r4 <- read.csv('results/results-996060f.csv', colClasses=colClasses)
 results = rbind(r1,r2,r3,r4)
+colnames(results)[c(7,8,9)] <- c("delta","sigma","theta")
 
 results$BY_LINEAGE = factor(results$BY_LINEAGE, labels=c("By Population","By Lineage"))
 
+ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x='sigma parameter to environmental model', y='Final mean fidelity')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x='delta parameter to environmental model', y='Final mean fidelity') 
+cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x='theta parameter to environmental model', y='Final mean fidelity')
+grid.arrange(ap,bp,cp,nrow=3,ncol=1)
+
+#anova(lm(ave_fid ~ theta*sigma*delta, data=subset(results,gen==500))) # theta not significant
+#anova(lm(ave_fid ~ sigma*delta, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
+#anova(lm(sd_fid ~ sigma*delta, data=subset(results,gen==500 & -0.001<delta & delta<0.001))) # Remove effect of bias, then sigma 0.001
+@
+
+<<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Distribution of maximum generation reached for all runs for dataset no.1 (top) through dataset no.4 (bottom). Axes are to the same scale. Runs (along the x-axis) are ordered by final generation reached.'>>=
 t1 <- aggregate(r1$gen,by=list(r1$run),max)
 t2 <- aggregate(r2$gen,by=list(r2$run),max)
 t3 <- aggregate(r3$gen,by=list(r3$run),max)
@@ -1027,7 +1031,15 @@ dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(st
 grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 @
 
-A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}. The difference in the proportion of completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), shown graphically in \cref{fig:figure22}.
+%<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Final mean fidelity against final mean fitness (top) and final mean fidelity against final standard deviation of fidelity (bottom).'>>=
+%ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='Final mean fitness',y='Final mean fidelity')# and relationship between these two
+%# Relationship between sd_fid and ave_fid!
+%bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid)) + labs(x='Final standard deviation of fidelity',y='Final mean fidelity')
+%grid.arrange(ap,bp,nrow=2,ncol=1)
+%#anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
+%@
+
+A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}, and a visualisation of all four datasets combined given in \cref{fig:23}. Note that the difference in the proportion of completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), shown graphically in \cref{fig:figure22}.
 
 \begin{table}
 	\begin{center}
@@ -1048,55 +1060,110 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 
 \section{Is fidelity proportional to the predictability of the environment?}
 
+Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a measure of environmental predictability, our null and alternate hypotheses are:
 
-\section{Is the \gls{sd} of final fidelity under changing conditions greater than that under stable conditions?}
-\section{Does \gls{sd} vary in proportion to the variability in the environment?}
+\begin{itemize}[label={}]
+	\item H$_0$: $\overline{fidelity}_{end}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
+	\item H$_1$: $\overline{fidelity}_{end}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
+\end{itemize}
+
+Because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma$ as a parameter to any $f().$ 
+
+By visual inspection of \cref{fig:figure23}, $\overline{fidelity}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{fidelity}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
+
+<<echo=FALSE>>=
+temp <- subset(results,gen==500)
+colnames(temp)[10] <- "mean_fidelity"
+
+a <- with(temp,anova(lm(mean_fidelity~sigma+delta+theta)))
+@
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(a)
+@
+
+As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to the predictability of the environment (as measured by some function $f(\Theta,\delta)$.)
+
+%<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter.'>>=
+%results_low_bias <- subset(results, -0.002<delta & delta<0.002)
+%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final mean fidelity')
+%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final mean fidelity')
+%grid.arrange(ap,bp,nrow=2,ncol=1)
+%@
+%
+%<<figure24a, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter.'>>=
+%results_low_bias <- subset(results, -0.002<delta & delta<0.002)
+%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final standard deviation of fidelity')
+%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final standard deviation of fidelity')
+%grid.arrange(ap,bp,nrow=2,ncol=1)
+%@
+
+\section{Does the standard deviation of fidelity vary in proportion to the variability in the environment?}
+
+\begin{itemize}[label={}]
+	\item H$_0$:  $\sigma_{fidelity_{end}}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
+	\item H$_1$:  $\sigma_{fidelity_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
+\end{itemize}
+
+An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the \gls{sd} of fidelity, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma$ significant (p\textless 0.01). 
+
+<<echo=FALSE>>=
+temp <- subset(results,gen==500)
+colnames(temp)[16] <- "sd_fidelity"
+
+a <- with(temp,anova(lm(sd_fidelity~sigma+delta+theta)))
+@
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(a)
+@
+
+%Visual inspection of \cref{fig:sd-fidelity} provides some support for this, with the standard deviation clearly decreasing as the value of $\delta$ approaches zero from below.
+%<<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
+%ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x='sigma parameter to environmental model', y='Final sd of fidelity')
+%bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x='delta parameter to environmental model', y='Final sd of fidelity') 
+%cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x='theta parameter to environmental model', y='Final sd of fidelity')
+%grid.arrange(ap,bp,cp,nrow=3,ncol=1)
+%@
+
+The corollary of this prediction is that the \gls{sd} of fidelity will be highest in the least predictable environments, and lowest in the most stable (when all three parameters are near 0).
+
+%<<echo=FALSE>>=
+%mean(subset(temp,abs(theta)<0.1 & abs(delta)<0.01 & abs(sigma)<0.1)[,'sd_fidelity'])
+%mean(subset(temp,abs(theta)>=0.1 & abs(delta)>=0.01 & abs(sigma)>=0.1)[,'sd_fidelity'])
+%@
 
 \section{Is there a difference between changes applied by lineage and changes applied across an entire population?}
 Although not a prediction of the hypothesis, it is interesting to examine if the scope of change, as discussed in \cref{environmental-model}, is in fact significant to the results.
-	
-<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final mean fidelity against sd parameter to environmental model (top) and final standard deviation of fidelity against bias parameter (bottom), for all experimental runs.'>>=
-library(ggplot2)
-library(gridExtra)
-library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500),aes(ar_sd,ave_fid)) + geom_point() + labs(x='sd parameter to environmental model', y='Final mean fidelity')
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(ar_bias,ave_fid)) + labs(x='bias parameter to environmental model', y='Final mean fidelity') # fid ~ -bias when bias <0, otherwise fid can reach max
-grid.arrange(ap,bp,nrow=2,ncol=1)
+<<echo=FALSE>>=
+temp <- subset(results,gen==500)
+colnames(temp)[10] <- "mean_fidelity"
+colnames(temp)[16] <- "sd_fidelity"
+colnames(temp)[1] <- "Scope"
 
-#anova(lm(ave_fid ~ ar_theta*ar_sd*ar_bias, data=subset(results,gen==500))) # theta not significant
-#anova(lm(ave_fid ~ ar_sd*ar_bias, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
-#anova(lm(sd_fid ~ ar_sd*ar_bias, data=subset(results,gen==500 & -0.001<ar_bias & ar_bias<0.001))) # Remove effect of bias, then ar_sd 0.001
+a <- with(temp,anova(lm(mean_fidelity~Scope)))
+b <- with(temp,anova(lm(sd_fidelity~Scope)))
 @
-<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $0.002 < \\lvert bias\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter.'>>=
-library(ggplot2)
-library(gridExtra)
-library(cowplot) # styling of plots, extension of ggplot2
-
-ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm') + labs(x='sd parameter to environmental model', y='Final mean fidelity') # ave fid drops as sd increases
-bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm') + labs(x='sd parameter to environmental model', y='Final standard deviation of fidelity') # sd fid increases as sd increases
-grid.arrange(ap,bp,nrow=2,ncol=1)
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(a)
 @
-<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Final mean fidelity against final mean fitness (top) and final mean fidelity against final standard deviation of fidelity (bottom).'>>=
-library(ggplot2)
-library(gridExtra)
-library(cowplot) # styling of plots, extension of ggplot2
 
-ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='Final mean fitness',y='Final mean fidelity')# and relationship between these two
-# Relationship between sd_fid and ave_fid!
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid)) + labs(x='Final standard deviation of fidelity',y='Final mean fidelity')
-grid.arrange(ap,bp,nrow=2,ncol=1)
-#anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
-@
-<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $\\lvert bias\\rvert > 0.002$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sd parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
-library(ggplot2)
-library(gridExtra)
-library(cowplot) # styling of plots, extension of ggplot2
+Applying a unique change to each lineage as opposed to the entire population is only weakly significant (0.05\textless p\textless 0.1) with respect to final mean fidelity, and not significant (p\textgreater 0.1) with regards to final standard deviation of fidelity:
 
-ap <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sd parameter to environmental model', y='Final mean fidelity')
-bp <- ggplot(subset(results,gen==500 & -0.002<ar_bias & ar_bias<0.002),aes(ar_sd,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE) + labs(x='sd parameter to environmental model', y='Final standard deviation of fidelity')
-grid.arrange(ap,bp,nrow=2,ncol=1)
+<<results='asis',echo=FALSE>>=
+print.xtable.booktabs(b)
 @
+
+Therefore we can conclude that there is no significant difference between these two options for the scope of environmental change.
+
+%<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Subset of results where $\\lvert delta\\rvert > 0.002$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
+%ap <- ggplot(subset(results,gen==500 & -0.002<delta & delta<0.002),aes(sigma,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sigma parameter to environmental model', y='Final mean fidelity')
+%bp <- ggplot(subset(results,gen==500 & -0.002<delta & delta<0.002),aes(sigma,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE) + labs(x='sigma parameter to environmental model', y='Final standard deviation of fidelity')
+%ap <- ggplot(subset(results,gen==500 & -0.002<delta & delta<0.002),aes(sigma,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sigma parameter to environmental model', y='Final mean fidelity')
+%bp <- ggplot(subset(results,gen==500 & -0.002<delta & delta<0.002),aes(sigma,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE) + labs(x='sigma parameter to environmental model', y='Final standard deviation of fidelity')
+%ap <- ggplot(subset(results,gen==500),aes(delta,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sigma parameter to environmental model', y='Final mean fidelity')
+%bp <- ggplot(subset(results,gen==500),aes(delta,sd_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE) + labs(x='sigma parameter to environmental model', y='Final standard deviation of fidelity')
+%grid.arrange(ap,bp,nrow=2,ncol=1)
+%@
 
 %<<figure27, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.cap='Sample entropy.'>>=
 %library(pracma)

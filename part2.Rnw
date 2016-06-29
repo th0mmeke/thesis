@@ -207,11 +207,6 @@ The model is parameterized to make it easy to describe different specific models
 
 First we define the two distinct types of relationship between an entity and its environment mentioned in the previous \namecref{methods-p2}: stable, and changing environments. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time. An changing environment is the other case, where the relative fitness does change over time. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing, which are both processes that change the phenotype on a shorter timescale than a lifespan.
 
-
-Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-
-Heredity seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
-
 ``Context determines fitness'', where the environment is stable and affects the development of the entities
 
 Degree of variation between generations important (no correlation means effectively unguided search, complete correlation means no source of novelties)
@@ -230,9 +225,14 @@ Inheritance describes the similarity of an offspring to its parent, and dependin
 
 For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
 
+Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
+
+
 \begin{hypothesis}
 Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance ($V'+S\rightarrow I$)
 \end{hypothesis}\label{hypothesis-2}
+
+%Heredity may be seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
 
 \section{Predictions}\label{predictions}
 In a stable or unchanging environment our prediction is that:
@@ -755,7 +755,7 @@ The first hypothesis prediction is that average fidelity will tend towards exact
 
 From inspection it seems clear that fidelity does approach $1.0$ as predicted by the hypothesis. In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design.
 
-\section{Does the variance of inheritance decrease over time in the population?}
+\section{Does the variance of inheritance decrease over time in the population?}\label{variance-of-inheritance-stable}
 
 The second prediction of the hypothesis is that the population variance for inheritance ($\sigma_{fidelity}$) should decrease over time towards a limit of $0$ in fixed environments.
 
@@ -843,7 +843,7 @@ This series allows us to represent a broad range of environmental changes:
 \begin{itemize}
 	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
 	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
-	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the predictable and unpredictable we can examine the performance of the evolutionary algorithm on some continuum of predictability.
 	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
 	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
@@ -1058,7 +1058,7 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 	\end{center}
 \end{table}
 
-\section{Is fidelity proportional to the predictability of the environment?}
+\section{Is fidelity proportional to the predictability of the environment?}\label{mean-fidelity-predictability}
 
 Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a measure of environmental predictability, our null and alternate hypotheses are:
 
@@ -1067,9 +1067,9 @@ Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a meas
 	\item H$_1$: $\overline{fidelity}_{end}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
-Because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma$ as a parameter to any $f().$ 
+Because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma_e$ as a parameter to any $f().$ 
 
-By visual inspection of \cref{fig:figure23}, $\overline{fidelity}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{fidelity}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
+By visual inspection of \cref{fig:figure23}, $\overline{fidelity}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{fidelity}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma_e$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
 
 <<echo=FALSE>>=
 temp <- subset(results,gen==500)
@@ -1104,31 +1104,60 @@ As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to t
 	\item H$_1$:  $\sigma_{fidelity_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
-An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the \gls{sd} of fidelity, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma$ significant (p\textless 0.01). 
+An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the \gls{sd} of fidelity, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-fidelity-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of fidelity.
 
 <<echo=FALSE>>=
 temp <- subset(results,gen==500)
 colnames(temp)[16] <- "sd_fidelity"
 
 a <- with(temp,anova(lm(sd_fidelity~sigma+delta+theta)))
+
 @
 <<results='asis',echo=FALSE>>=
 print.xtable.booktabs(a)
 @
 
-%Visual inspection of \cref{fig:sd-fidelity} provides some support for this, with the standard deviation clearly decreasing as the value of $\delta$ approaches zero from below.
-%<<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
-%ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x='sigma parameter to environmental model', y='Final sd of fidelity')
-%bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x='delta parameter to environmental model', y='Final sd of fidelity') 
-%cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x='theta parameter to environmental model', y='Final sd of fidelity')
-%grid.arrange(ap,bp,cp,nrow=3,ncol=1)
-%@
+<<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
+ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x='sigma parameter to environmental model', y='Final sd of fidelity')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x='delta parameter to environmental model', y='Final sd of fidelity') 
+cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x='theta parameter to environmental model', y='Final sd of fidelity')
+grid.arrange(ap,bp,cp,nrow=3,ncol=1)
+@
 
-The corollary of this prediction is that the \gls{sd} of fidelity will be highest in the least predictable environments, and lowest in the most stable (when all three parameters are near 0).
+The corollary of this prediction is that the \gls{sd} of fidelity will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
+
+\begin{itemize}[label={}]
+	\item H$_0$:  $\sigma_{fidelity_{end}}$ is close to $0$, for all clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
+	\item H$_1$:  $\sigma_{fidelity_{end}}$ is not close to $0$, for s0me clearly non-zero combinatins of $\Theta$,$\delta$ and $\sigma_e$.
+\end{itemize}
+
+It is clear from a visual inspection of \cref{fig:sd-fidelity} that we can reject H$_0$ in favour of H$_1$: $\sigma_{fidelity_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
+
+This could be greatly strengthened if we had a single measure of predictability (but see suggestion in \cref{information-based-measure}): our conjecture is that the \gls{sd} of fidelity is related also to the degree of predictability, that is $\sigma_{fidelity_{end}} \approx $predictability$^{-1}$. 
+
+Unfortunately, we require a consistent ordering from ``least'' to ``most'' predictable across the three parameters $\Theta$,$\delta$ and $\sigma_e$, although we could:
+\begin{itemize}
+\item Empirically construct a linear regression model relating $\Theta$,$\delta$ and $\sigma_e$ to $\sigma_{fidelity_{end}}$ but this would not provide a measure of predictability (other than a circular one derived from fidelity.) 
+\item Use $\sigma_e$, which is inherently unpredictable, as a proxy however this would ignore the contributions of $\Theta$ and $\delta$ to overall unpredictability.
+\end{itemize}
+
+Instead a better approach would be to extend our environmental model to map $\Theta$,$\delta$ and $\sigma_e$ to predictability and to then use that to confirm this conjecture, as suggested in \cref{information-based-measure}).
 
 %<<echo=FALSE>>=
-%mean(subset(temp,abs(theta)<0.1 & abs(delta)<0.01 & abs(sigma)<0.1)[,'sd_fidelity'])
-%mean(subset(temp,abs(theta)>=0.1 & abs(delta)>=0.01 & abs(sigma)>=0.1)[,'sd_fidelity'])
+%a<-with(temp,lm(sd_fidelity~sigma*theta*delta))['coefficients']
+%t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+%
+%t1$run <- 1:nrow(t1)
+%names(t1)[1:3]<-c("theta", "sigma", "delta")
+%t2 <- melt(t1,id=c('run','theta','sigma','delta'))
+%t2$theta <- round(t2$theta,3)
+%t2$sigma <- round(t2$sigma,3)
+%t2$delta <- round(t2$delta,3)
+%t3<-unique(t2[,c(2,3,4)])
+%predictions <- cbind(t3,sd=predict(a,newdata=t3))
+%predictions[order(predictions$sd),]
+%
+%with(temp,temp[order(sd_fidelity),c("sd_fidelity","delta","sigma","theta")])
 %@
 
 \section{Is there a difference between changes applied by lineage and changes applied across an entire population?}
@@ -1221,7 +1250,7 @@ Stationarity is inherently a constraint for applying statistical methods to the 
 
 Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \textcite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
 
-\subsection{An information-based measure}
+\subsection{An information-based measure}\label{information-based-measure}
 
 Predictability is related to information entropy, and to compression; a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
 

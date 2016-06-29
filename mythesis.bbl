@@ -54,9 +54,6 @@
     \field{pages}{1085\bibrangedash 1094}
     \field{title}{What is complexity?}
     \field{volume}{24}
-    \verb{file}
-    \verb Adami2002.pdf:Adami2002.pdf:PDF
-    \endverb
     \field{journaltitle}{Bioessays}
     \field{year}{2002}
   \endentry
@@ -89,9 +86,6 @@
     \field{title}{Information-theoretic considerations concerning the origin of
   life}
     \field{volume}{45}
-    \verb{file}
-    \verb Adami2015.pdf:Adami2015.pdf:PDF
-    \endverb
     \field{journaltitle}{Origins of Life and Evolution of Biospheres}
     \field{year}{2015}
   \endentry
@@ -242,9 +236,6 @@
     \field{number}{8}
     \field{title}{The past, present, and future of artificial life}
     \field{volume}{1}
-    \verb{file}
-    \verb :Aguilar2014.pdf:PDF
-    \endverb
     \field{journaltitle}{Frontiers in Robotics and AI}
     \field{year}{2014}
   \endentry
@@ -287,9 +278,6 @@
     \list{institution}{1}{%
       {University College London}%
     }
-    \verb{file}
-    \verb Aicardi2010.pdf:Aicardi2010.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2010}
   \endentry
@@ -382,9 +370,6 @@
     \field{pages}{433\bibrangedash 448}
     \field{title}{Robustness and evolvability in genetic regulatory networks}
     \field{volume}{245}
-    \verb{file}
-    \verb :Aldana_2007da.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{annotation}{%
     Hypothesis that attractors of a genetic network correspond to cellular
@@ -459,9 +444,6 @@
     \field{sortinithash}{A}
     \field{booktitle}{ALife XII, Odense, Denmark, August 2010}
     \field{title}{Alife xii, odense, {Denmark}, {August} 2010}
-    \verb{file}
-    \verb :Alife12.pdf:PDF
-    \endverb
     \field{year}{2010}
   \endentry
 
@@ -549,9 +531,6 @@
     \verb http://www.jstor.org/stable/2453130
     \endverb
     \field{volume}{30}
-    \verb{file}
-    \verb :Baldwin_1896ly.pdf:PDF
-    \endverb
     \field{journaltitle}{The American Naturalist}
     \field{year}{1896}
   \endentry
@@ -640,9 +619,6 @@
     \field{booktitle}{Artificial Life IV}
     \field{pages}{109\bibrangedash 118}
     \field{title}{Self-organisation in a system of binary strings}
-    \verb{file}
-    \verb Banzhaf94.pdf:Banzhaf94.pdf:PDF
-    \endverb
     \field{year}{1994}
   \endentry
 
@@ -748,11 +724,6 @@
     \verb{url}
     \verb http://dx.doi.org/10.1007/s12064-016-0229-7
     \endverb
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\BanzhafBaumgaert
-    \verb nerBeslonEtAl2016.pdf:PDF
-    \endverb
     \field{journaltitle}{Theory in Biosciences}
     \field{month}{05}
     \field{year}{2016}
@@ -794,9 +765,6 @@
     \field{booktitle}{Handbook of the Philosophy of Biology}
     \field{pages}{585\bibrangedash 603}
     \field{title}{Artificial life}
-    \verb{file}
-    \verb :Bedau_2007ga.pdf:PDF
-    \endverb
     \field{journaltitle}{Philosophy of Biology}
     \field{year}{2007}
   \endentry
@@ -923,9 +891,6 @@
     \field{pages}{1085\bibrangedash 1093}
     \field{title}{A graph-based toy model of chemistry}
     \field{volume}{43}
-    \verb{file}
-    \verb Benko2003.pdf:Benko2003.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Chemical Information and Computer Sciences}
     \field{year}{2003}
   \endentry
@@ -962,9 +927,6 @@
   realistic artificial chemistry model}
     \verb{url}
     \verb http://www.tbi.univie.ac.at/~xtof/ToyChem/
-    \endverb
-    \verb{file}
-    \verb Benko2005.ps:Benko2005.ps:PostScript;Benko2005.pdf:Benko2005.pdf:PDF
     \endverb
     \field{year}{2005}
   \endentry
@@ -1043,9 +1005,6 @@
     \field{pages}{71\bibrangedash 88}
     \field{title}{A topological approach to chemical organizations}
     \field{volume}{15}
-    \verb{file}
-    \verb Benko2009.pdf:Benko2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2009.15.1.15105%
@@ -1226,9 +1185,6 @@
   Life, ECAL 2006}
     \field{pages}{53\bibrangedash 62}
     \field{title}{Emergent phenomena only belong to biology}
-    \verb{file}
-    \verb :Bersini_2006ve.pdf:PDF
-    \endverb
     \field{year}{2006}
   \endentry
 
@@ -1475,9 +1431,6 @@
   JAPAN, MAR 05-07, 2001}
     \field{pages}{237\bibrangedash 258}
     \field{title}{Evolving complete agents using artificial ontogeny}
-    \verb{file}
-    \verb :Bongard_2003tf.pdf:PDF
-    \endverb
     \field{year}{2003}
   \endentry
 
@@ -1534,11 +1487,6 @@
     \list{institution}{1}{%
       {University of Sydney}%
     }
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\Bourrat2015.pdf:
-    \verb PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2015}
   \endentry
@@ -1644,9 +1592,6 @@
     \verb http://dx.doi.org/10.1371%2Fjournal.pcbi.1002455
     \endverb
     \field{volume}{8}
-    \verb{file}
-    \verb Braakman2012.pdf:Braakman2012.pdf:PDF
-    \endverb
     \field{journaltitle}{PLoS Comput Biol}
     \field{month}{04}
     \field{year}{2012}
@@ -1681,9 +1626,6 @@
   mind of brutus, a storytelling machine}
     \verb{url}
     \verb http://cs5517.userapi.com/u133638729/docs/957b13e071db/Selmer_Bringsjord_Artificial_Intelligence_and_L.pdf
-    \endverb
-    \verb{file}
-    \verb Bringsjord2000.pdf:Bringsjord2000.pdf:PDF
     \endverb
     \field{year}{2000}
   \endentry
@@ -1828,9 +1770,6 @@
     \field{pages}{105\bibrangedash 108}
     \field{title}{Inferring statistical complexity}
     \field{volume}{63}
-    \verb{file}
-    \verb Crutchfield1989.pdf:Crutchfield1989.pdf:PDF
-    \endverb
     \field{journaltitle}{Physical Review Letters}
     \field{month}{07}
     \field{year}{1989}
@@ -1905,9 +1844,6 @@
     \field{title}{Gene regulatory networks and the evolution of animal body
   plans}
     \field{volume}{311}
-    \verb{file}
-    \verb :Davidson_2006wi.pdf:PDF
-    \endverb
     \field{journaltitle}{Science}
     \field{year}{2006}
   \endentry
@@ -1991,9 +1927,6 @@
     \list{location}{1}{%
       {San Mateo, CA}%
     }
-    \verb{file}
-    \verb :De-Jong_1993gy.pdf:PDF
-    \endverb
     \field{year}{1993}
   \endentry
 
@@ -2075,9 +2008,6 @@
     \field{title}{Optimality and evolutionary tuning of the expression level of
   a protein}
     \field{volume}{436}
-    \verb{file}
-    \verb :Dekel_2005fk.pdf:PDF
-    \endverb
     \field{journaltitle}{Nature}
     \field{annotation}{%
     10.1038/nature03842%
@@ -2305,9 +2235,6 @@
     \field{pages}{203\bibrangedash 220}
     \field{title}{Self-evolution in a constructive binary string system}
     \field{volume}{4}
-    \verb{file}
-    \verb Dittrich1998.pdf:Dittrich1998.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{month}{04}
     \field{year}{1998}
@@ -2351,11 +2278,6 @@
     \field{pages}{225\bibrangedash 275}
     \field{title}{Artificial chemistries-a review}
     \field{volume}{7}
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\Dittrich2001zr.p
-    \verb df:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2001}
   \endentry
@@ -2575,9 +2497,6 @@
     \field{series}{Lecture Notes in Computer Science}
     \field{title}{A new definition of creativity}
     \field{volume}{5865}
-    \verb{file}
-    \verb Dorin2009.pdf:Dorin2009.pdf:PDF
-    \endverb
     \field{year}{2009}
   \endentry
 
@@ -2640,9 +2559,6 @@
   the Simulation and Synthesis of Living Systems (Artificial Life 13)}
     \field{pages}{449\bibrangedash 456}
     \field{title}{Energy-based artificial chemistry simulator}
-    \verb{file}
-    \verb Ducharme2012.pdf:Ducharme2012.pdf:PDF
-    \endverb
     \field{year}{2012}
   \endentry
 
@@ -2732,9 +2648,6 @@
     \field{series}{Studies in Computational Intelligence}
     \field{title}{An introduction to the bio-logic of artificial creatures}
     \field{volume}{321}
-    \verb{file}
-    \verb Duthen2010.pdf:Duthen2010.pdf:PDF
-    \endverb
     \field{type}{Proceedings Paper}
     \field{year}{2010}
   \endentry
@@ -2782,9 +2695,6 @@
     \list{institution}{1}{%
       {University of Manchester, Manchester}%
     }
-    \verb{file}
-    \verb Edmonds1999.pdf:Edmonds1999.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{1999}
   \endentry
@@ -2817,9 +2727,6 @@
     \field{title}{Selforganization of matter and the evolution of biological
   macromolecules}
     \field{volume}{58}
-    \verb{file}
-    \verb Eigen1971.pdf:Eigen1971.pdf:PDF
-    \endverb
     \field{journaltitle}{Naturwissenschaften}
     \field{year}{1971}
   \endentry
@@ -2844,9 +2751,6 @@
   inherent problems and remediable weaknesses}
     \verb{url}
     \verb http://ecila.org/ecila_files/content/papers/amiessay.doc
-    \endverb
-    \verb{file}
-    \verb Eldridge.doc:Eldridge.doc:Word
     \endverb
     \field{year}{n.d.}
   \endentry
@@ -2937,9 +2841,6 @@
     \list{institution}{1}{%
       {University of York}%
     }
-    \verb{file}
-    \verb Faulconbridge2011.pdf:Faulconbridge2011.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2011}
   \endentry
@@ -2997,9 +2898,6 @@
     \field{booktitle}{ALife XII, Odense, Denmark, August 2010}
     \field{pages}{261\bibrangedash 268}
     \field{title}{{RBN}-world: the hunt for a rich {AChem}}
-    \verb{file}
-    \verb Faulconbridge2010.pdf:Faulconbridge2010.pdf:PDF
-    \endverb
     \field{year}{2010}
   \endentry
 
@@ -3101,9 +2999,6 @@
     \field{title}{Stochastic generator of chemical structure. 3. reaction
   network generation}
     \field{volume}{41}
-    \verb{file}
-    \verb Faulon2001.pdf:Faulon2001.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Chemical Information and Computer Sciences}
     \field{year}{2001}
   \endentry
@@ -3180,9 +3075,6 @@
     \list{institution}{1}{%
       {Physics, University of California, Davis}%
     }
-    \verb{file}
-    \verb Feldman1998.ps:Feldman1998.ps:PostScript
-    \endverb
     \field{type}{phdthesis}
     \field{year}{1998}
   \endentry
@@ -3228,9 +3120,6 @@
     \field{sortinit}{F}
     \field{sortinithash}{F}
     \field{title}{A less abstract artificial chemistry}
-    \verb{file}
-    \verb :Alife7.pdf:PDF
-    \endverb
     \field{year}{2000}
   \endentry
 
@@ -3349,9 +3238,6 @@
     \field{title}{Spontaneous formation of proto-cells in an universal
   artificial chemistry on a planar graph}
     \field{volume}{2159}
-    \verb{file}
-    \verb Fenizio2001.pdf:Fenizio2001.pdf:PDF
-    \endverb
     \field{year}{2001}
   \endentry
 
@@ -3405,9 +3291,6 @@
     \field{pages}{152\bibrangedash 167}
     \field{title}{Natural selection in chemical evolution}
     \field{volume}{247}
-    \verb{file}
-    \verb :Fernando-2007pf.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{2007}
   \endentry
@@ -3532,9 +3415,6 @@
     \field{title}{Individual-based modelling: an essential tool for
   microbiology}
     \field{volume}{34}
-    \verb{file}
-    \verb :Ferrer_2008hv.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Biological Physics}
     \field{year}{2008}
   \endentry
@@ -3651,9 +3531,6 @@
     \verb http://www.jsystchem.com/content/1/1/4
     \endverb
     \field{volume}{1}
-    \verb{file}
-    \verb Flamm2010.pdf:Flamm2010.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Systems Chemistry}
     \field{year}{2010}
   \endentry
@@ -3730,11 +3607,6 @@
     \list{location}{1}{%
       {Reading}%
     }
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\Fontana1992.pdf:
-    \verb PDF
-    \endverb
     \field{type}{Proceedings Paper}
     \field{year}{1992}
   \endentry
@@ -3771,9 +3643,6 @@
     \field{pages}{211\bibrangedash 227}
     \field{title}{Beyond digital naturalism}
     \field{volume}{1}
-    \verb{file}
-    \verb Fontana1994.pdf:Fontana1994.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{1994}
   \endentry
@@ -3935,9 +3804,6 @@
     \list{institution}{1}{%
       {Department of Computer Science, Brandeis University}%
     }
-    \verb{file}
-    \verb Funes2001.pdf:Funes2001.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2001}
   \endentry
@@ -4119,9 +3985,6 @@
     \field{title}{A framework for the co-evolution of genes, proteins and a
   genetic code within an artificial chemistry reaction set}
     \field{volume}{4828}
-    \verb{file}
-    \verb Gardiner2007.pdf:Gardiner2007.pdf:PDF
-    \endverb
     \field{year}{2007}
   \endentry
 
@@ -4180,9 +4043,6 @@
     \verb http://www.sciencedirect.com/science/article/pii/S0022519312001130
     \endverb
     \field{volume}{304}
-    \verb{file}
-    \verb Gaucherel2012.pdf:Gaucherel2012.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{2012}
   \endentry
@@ -4227,9 +4087,6 @@
     \field{pages}{307\bibrangedash 312}
     \field{title}{Evolution and speciation on holey adaptive landscapes}
     \field{volume}{12}
-    \verb{file}
-    \verb :Gavrilets_1997qt.pdf:PDF
-    \endverb
     \field{journaltitle}{Trends in Ecology \& Evolution}
     \field{annotation}{%
     WHAT IS BEING CLAIMED? P is probability fitness 0, 1-P probability fitness
@@ -4328,9 +4185,6 @@
     \verb http://www.sciencedirect.com/science/article/pii/0021999176900413
     \endverb
     \field{volume}{22}
-    \verb{file}
-    \verb Gillespie1976.pdf:Gillespie1976.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Computational Physics}
     \field{year}{1976}
   \endentry
@@ -4362,9 +4216,6 @@
     \verb http://www.jstor.org/stable/20620050
     \endverb
     \field{volume}{104}
-    \verb{file}
-    \verb Godfrey-Smith2007.pdf:Godfrey-Smith2007.pdf:PDF
-    \endverb
     \field{journaltitle}{The Journal of Philosophy}
     \field{year}{2007}
   \endentry
@@ -4474,9 +4325,6 @@
     \field{number}{6, 2}
     \field{title}{Quantifying the complexity of random boolean networks}
     \field{volume}{85}
-    \verb{file}
-    \verb Gong2012.pdf:Gong2012.pdf:PDF
-    \endverb
     \field{journaltitle}{PHYSICAL REVIEW E}
     \field{month}{06}
     \field{year}{2012}
@@ -4594,9 +4442,6 @@
     \field{title}{Percolation on fitness landscapes: effects of correlation,
   phenotype, and incompatibilities}
     \field{volume}{248}
-    \verb{file}
-    \verb :Gravner_2007yd.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{2007}
   \endentry
@@ -4854,9 +4699,6 @@
     \field{title}{Probing the bioactivity-relevant chemical space of robust
   reactions and common molecular building blocks}
     \field{volume}{52}
-    \verb{file}
-    \verb :Hartenfeller2012.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Chemical Information and Modeling}
     \field{year}{2012}
   \endentry
@@ -4962,9 +4804,6 @@
     \field{series}{Lecture Notes in Computer Science}
     \field{title}{Molecular microprograms}
     \field{volume}{5777}
-    \verb{file}
-    \verb Hickinbotham2011.pdf:Hickinbotham2011.pdf:PDF
-    \endverb
     \field{year}{2011}
   \endentry
 
@@ -5045,9 +4884,6 @@
     \list{institution}{1}{%
       {Univ. of York}%
     }
-    \verb{file}
-    \verb Hickinbotham2012.pdf:Hickinbotham2012.pdf:PDF
-    \endverb
     \field{type}{techreport}
     \field{month}{04}
     \field{year}{2012}
@@ -5183,9 +5019,6 @@
     \field{pages}{495\bibrangedash 502}
     \field{title}{How learning can guide evolution}
     \field{volume}{1}
-    \verb{file}
-    \verb :Hinton_1987vy.pdf:PDF
-    \endverb
     \field{journaltitle}{Complex Systems}
     \field{annotation}{%
     WHAT IS BEING CLAIMED? Learning can be very effective in guiding
@@ -5334,9 +5167,6 @@
     \list{institution}{1}{%
       {Institute for Theoretical Chemistry, University of Vienna}%
     }
-    \verb{file}
-    \verb :Hogerl2010.pdf:PDF
-    \endverb
     \field{type}{mathesis}
     \field{year}{2010}
   \endentry
@@ -5381,9 +5211,6 @@
     \verb http://www.mdpi.com/1422-0067/12/5/3085
     \endverb
     \field{volume}{12}
-    \verb{file}
-    \verb Hordijk2011.pdf:Hordijk2011.pdf:PDF
-    \endverb
     \field{journaltitle}{International Journal of Molecular Sciences}
     \field{year}{2011}
   \endentry
@@ -5483,9 +5310,6 @@
     \field{title}{Creating high-level components with a generative
   representation for body-brain evolution}
     \field{volume}{8}
-    \verb{file}
-    \verb :Hornby_2006kj.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2006}
   \endentry
@@ -5672,9 +5496,6 @@
     \verb http://www.sq3.org.uk/Evolution/Squirm3/EvSelfReps/
     \endverb
     \field{volume}{8}
-    \verb{file}
-    \verb Hutton2002.pdf:Hutton2002.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2002}
   \endentry
@@ -5720,9 +5541,6 @@
     \field{title}{Evolvable self-reproducing cells in a two-dimensional
   artificial chemistry}
     \field{volume}{13}
-    \verb{file}
-    \verb Hutton2007.pdf:Hutton2007.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2007.13.1.11%
@@ -5771,9 +5589,6 @@
     \field{title}{The organic builder: a public experiment in artificial
   chemistries and self-replication}
     \field{volume}{15}
-    \verb{file}
-    \verb :Hutton2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2009.15.1.15102%
@@ -5855,9 +5670,6 @@
     \verb http://www.jstor.org/stable/56329
     \endverb
     \field{volume}{350}
-    \verb{file}
-    \verb :Jablonka1995.pdf:PDF
-    \endverb
     \field{journaltitle}{Philosophical Transactions: Biological Sciences}
     \field{year}{1995}
   \endentry
@@ -5907,9 +5719,6 @@
     \verb http://www.pasteur.fr/ip/resource/filecenter/document/01s-000046-03t/genetic-regulatory.pdf
     \endverb
     \field{volume}{3}
-    \verb{file}
-    \verb :Jacob_1961ys.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Molecular Biology}
     \field{year}{1961}
   \endentry
@@ -5971,9 +5780,6 @@
     \list{location}{1}{%
       {Washington, DC, USA}%
     }
-    \verb{file}
-    \verb Jeschke2008.pdf:Jeschke2008.pdf:PDF
-    \endverb
     \field{year}{2008}
   \endentry
 
@@ -6012,9 +5818,6 @@
     \field{title}{Overview of the model types available for development of
   ecological models}
     \field{volume}{215}
-    \verb{file}
-    \verb Jorgensen2008.pdf:Jorgensen2008.pdf:PDF
-    \endverb
     \field{journaltitle}{Ecological modelling}
     \field{year}{2008}
   \endentry
@@ -6306,9 +6109,6 @@
     \field{title}{An empirical exploration of a definition of creative novelty
   for generative art}
     \field{volume}{5865}
-    \verb{file}
-    \verb Kowaliw2009.pdf:Kowaliw2009.pdf:PDF
-    \endverb
     \field{year}{2009}
   \endentry
 
@@ -6485,9 +6285,6 @@
     \field{title}{What is a complex system?}
     \verb{url}
     \verb http://philsci-archive.pitt.edu/id/eprint/9044
-    \endverb
-    \verb{file}
-    \verb Ladyman2011.pdf:Ladyman2011.pdf:PDF
     \endverb
     \field{year}{2011}
   \endentry
@@ -6681,9 +6478,6 @@
     \field{pages}{75\bibrangedash 82}
     \field{title}{Beyond open-endedness: quantifying impressiveness}
     \field{volume}{13}
-    \verb{file}
-    \verb Lehman2012.pdf:Lehman2012.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2012}
   \endentry
@@ -6736,9 +6530,6 @@
     \field{pages}{89\bibrangedash 103}
     \field{title}{A synthon approach to artificial chemistry}
     \field{volume}{15}
-    \verb{file}
-    \verb Lenaerts2009.pdf:Lenaerts2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2009.15.1.15106%
@@ -6851,9 +6642,6 @@
     \verb http://www.sciencemag.org/content/323/5918/1229.abstract
     \endverb
     \field{volume}{323}
-    \verb{file}
-    \verb Lincoln2009.pdf:Lincoln2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Science}
     \field{year}{2009}
   \endentry
@@ -6947,9 +6735,6 @@
     \field{pages}{7\bibrangedash 8}
     \field{title}{Measures of complexity: a nonexhaustive list}
     \field{volume}{21}
-    \verb{file}
-    \verb Lloyd2001.pdf:Lloyd2001.pdf:PDF
-    \endverb
     \field{journaltitle}{Control Systems, IEEE}
     \field{year}{2001}
   \endentry
@@ -7027,9 +6812,6 @@
     \field{title}{Size selection and adaptive evolution in an artificial
   chemistry}
     \field{volume}{18}
-    \verb{file}
-    \verb Lucht2012.pdf:Lucht2012.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2012}
   \endentry
@@ -7103,9 +6885,6 @@
     \field{series}{Lecture Notes in Computer Science}
     \field{title}{Cellular evolution in a {3D} lattice artificial chemistry}
     \field{volume}{2801}
-    \verb{file}
-    \verb Madina2003.pdf:Madina2003.pdf:PDF
-    \endverb
     \field{year}{2003}
   \endentry
 
@@ -7232,9 +7011,6 @@
     \verb http://www.jstor.org/stable/221710
     \endverb
     \field{volume}{29}
-    \verb{file}
-    \verb McShea1998.pdf:McShea1998.pdf:PDF
-    \endverb
     \field{journaltitle}{Annual Review of Ecology and Systematics}
     \field{year}{1998}
   \endentry
@@ -7471,9 +7247,6 @@
     \list{institution}{1}{%
       {University of York}%
     }
-    \verb{file}
-    \verb Nellis2012.pdf:Nellis2012.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2012}
   \endentry
@@ -7519,9 +7292,6 @@
     \field{title}{Computational novelty: phenomena, mechanisms, worlds}
     \verb{url}
     \verb https://mitpress.mit.edu/sites/default/files/titles/content/alife14/978-0-262-32621-6-ch081.pdf
-    \endverb
-    \verb{file}
-    \verb Nellis2014.pdf:Nellis2014.pdf:PDF
     \endverb
     \field{year}{2014}
   \endentry
@@ -7578,9 +7348,6 @@
     \field{title}{Complexity of classical dynamics of molecular systems. i.
   methodology}
     \field{volume}{117}
-    \verb{file}
-    \verb Nerukh2002.pdf:Nerukh2002.pdf:PDF
-    \endverb
     \field{type}{Article}
     \field{journaltitle}{JOURNAL OF CHEMICAL PHYSICS}
     \field{month}{12}
@@ -7737,9 +7504,6 @@
     \field{title}{An architecture for self-organising evolvable virtual
   machines}
     \field{volume}{3464}
-    \verb{file}
-    \verb Nowostawski2005.pdf:Nowostawski2005.pdf:PDF
-    \endverb
     \field{year}{2005}
   \endentry
 
@@ -7778,9 +7542,6 @@
     \field{pages}{299\bibrangedash 304}
     \field{title}{Lateral gene transfer and the nature of bacterial innovation}
     \field{volume}{405}
-    \verb{file}
-    \verb Ochman2000.pdf:Ochman2000.pdf:PDF
-    \endverb
     \field{journaltitle}{Nature}
     \field{year}{2000}
   \endentry
@@ -7820,9 +7581,6 @@
     \field{title}{Avida: a software platform for research in computational
   evolutionary biology}
     \field{volume}{10}
-    \verb{file}
-    \verb Ofria2004.pdf:Ofria2004.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{month}{03}
     \field{year}{2004}
@@ -8015,9 +7773,6 @@
     \verb http://www.sciencedirect.com/science/article/pii/S0022519300921210
     \endverb
     \field{volume}{206}
-    \verb{file}
-    \verb Ono2000.pdf:Ono2000.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{2000}
   \endentry
@@ -8289,9 +8044,6 @@
     \field{pages}{355\bibrangedash 364}
     \field{title}{On the adaptive disadvantage of lamarckianism in rapidly
   changing environments}
-    \verb{file}
-    \verb :Paenke2007a.pdf:PDF
-    \endverb
     \field{year}{2007}
   \endentry
 
@@ -8442,11 +8194,6 @@
     \verb http://dx.doi.org/10.1162/106454601300328025
     \endverb
     \field{volume}{7}
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\Pargellis2001.pd
-    \verb f:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{year}{2001}
     \warn{\item Invalid format of field 'month'}
@@ -8534,9 +8281,6 @@
     \field{title}{An unfair review of margaret boden's the creative mind from
   the perspective of creative systems}
     \field{volume}{79}
-    \verb{file}
-    \verb Perkins1995.pdf:Perkins1995.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Intelligence}
     \field{year}{1995}
   \endentry
@@ -8641,9 +8385,6 @@
     \field{sortinithash}{P}
     \field{booktitle}{ALife XII, Odense, Denmark, August 2010}
     \field{title}{Autocatalyses}
-    \verb{file}
-    \verb Plasson2010.pdf:Plasson2010.pdf:PDF
-    \endverb
     \field{year}{2010}
   \endentry
 
@@ -8776,9 +8517,6 @@
     \field{title}{An information-theoretic primer on complexity,
   self-organization, and emergence}
     \field{volume}{15}
-    \verb{file}
-    \verb Prokopenko2009.pdf:Prokopenko2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Complexity}
     \field{year}{2009}
   \endentry
@@ -8837,9 +8575,6 @@
     \field{title}{The origin of life: what we know, what we can know and what
   we will never know}
     \field{volume}{3}
-    \verb{file}
-    \verb Pross2013.pdf:Pross2013.pdf:PDF
-    \endverb
     \field{journaltitle}{Open Biology}
     \field{year}{2013}
   \endentry
@@ -8967,9 +8702,6 @@
     \field{title}{Reduction of dynamical biochemical reactions networks in
   computational biology}
     \field{volume}{3}
-    \verb{file}
-    \verb Radulescu2012.pdf:Radulescu2012.pdf:PDF
-    \endverb
     \field{journaltitle}{Frontiers in Genetics}
     \field{year}{2012}
   \endentry
@@ -9037,9 +8769,6 @@
     \verb http://rstb.royalsocietypublishing.org/content/364/1527/2169.short
     \endverb
     \field{volume}{364}
-    \verb{file}
-    \verb Ragan2009.pdf:Ragan2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Philosophical Transactions of the Royal Society B:
   Biological Sciences}
     \field{year}{2009}
@@ -9210,9 +8939,6 @@
   Artificial Life, Alife II}
     \field{pages}{371\bibrangedash 408}
     \field{title}{An approach to the synthesis of life}
-    \verb{file}
-    \verb Ray1991.tex:Ray1991.tex:LaTeX
-    \endverb
     \field{year}{1991}
   \endentry
 
@@ -9562,9 +9288,6 @@
     \field{title}{Evolution without natural selection: further implications of
   the daisyworld parable}
     \field{volume}{166}
-    \verb{file}
-    \verb Saunders1994.pdf:Saunders1994.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{1994}
   \endentry
@@ -9645,9 +9368,6 @@
     \field{pages}{71\bibrangedash 89}
     \field{title}{Mathematical modeling of evolution. solved and open problems}
     \field{volume}{130}
-    \verb{file}
-    \verb Schuster2011.pdf:Schuster2011.pdf:PDF
-    \endverb
     \field{journaltitle}{Theory in Biosciences}
     \field{year}{2011}
   \endentry
@@ -9723,9 +9443,6 @@
     \list{institution}{1}{%
       {University of Wisconsin}%
     }
-    \verb{file}
-    \verb Shalizi2001a.pdf:Shalizi2001a.pdf:PDF
-    \endverb
     \field{type}{phdthesis}
     \field{year}{2001}
   \endentry
@@ -9820,9 +9537,6 @@
     \field{series}{LECTURE NOTES IN COMPUTER SCIENCE}
     \field{title}{Discovering functional communities in dynamical networks}
     \field{volume}{4503}
-    \verb{file}
-    \verb Shalizi2007.pdf:Shalizi2007.pdf:PDF
-    \endverb
     \field{year}{2007}
   \endentry
 
@@ -9862,9 +9576,6 @@
     \field{title}{Computational mechanics: pattern and prediction, structure
   and simplicity}
     \field{volume}{104}
-    \verb{file}
-    \verb Shalizi2001.pdf:Shalizi2001.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Statistical Physics}
     \field{year}{2001}
   \endentry
@@ -10096,9 +9807,6 @@
     \verb http://www.sciencedirect.com/science/article/pii/S0022519313002002
     \endverb
     \field{volume}{332}
-    \verb{file}
-    \verb Steel2013.pdf:Steel2013.pdf:PDF
-    \endverb
     \field{journaltitle}{Journal of Theoretical Biology}
     \field{year}{2013}
   \endentry
@@ -10283,9 +9991,6 @@
     \verb{url}
     \verb http://necsi.edu/events/iccs6/viewabstract.php?id=313
     \endverb
-    \verb{file}
-    \verb Suzuki2006.pdf:Suzuki2006.pdf:PDF
-    \endverb
     \field{year}{2006}
   \endentry
 
@@ -10372,9 +10077,6 @@
     \field{pages}{1\bibrangedash 3}
     \field{title}{Artificial chemistry}
     \field{volume}{15}
-    \verb{file}
-    \verb Suzuki2008a.pdf:Suzuki2008a.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2009.15.1.15100%
@@ -10428,9 +10130,6 @@
     \field{pages}{59\bibrangedash 70}
     \field{title}{Shapes and self-movement in protocell systems}
     \field{volume}{15}
-    \verb{file}
-    \verb Suzuki2008.pdf:Suzuki2008.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2009.15.1.15104%
@@ -10676,9 +10375,6 @@
   environments}
     \field{pages}{74\bibrangedash 108}
     \field{title}{Creative evolutionary systems}
-    \verb{file}
-    \verb Taylor2001.pdf:Taylor2001.pdf:PDF
-    \endverb
     \field{year}{2001}
   \endentry
 
@@ -10720,9 +10416,6 @@
       {Department of Computer Science, University of Illinois at
   Urbana-Champaign}%
     }
-    \verb{file}
-    \verb Tominaga2004.pdf:Tominaga2004.pdf:PDF
-    \endverb
     \field{type}{techreport}
     \field{year}{2004}
   \endentry
@@ -10806,9 +10499,6 @@
     \field{title}{Modeling molecular computing systems by an artificial
   chemistry--its expressive power and application}
     \field{volume}{13}
-    \verb{file}
-    \verb Tominaga2007.pdf:Tominaga2007.pdf:PDF
-    \endverb
     \field{journaltitle}{Artificial Life}
     \field{annotation}{%
     doi: 10.1162/artl.2007.13.3.223%
@@ -11030,9 +10720,6 @@
     \field{booktitle}{Proceedings of the Twelfth International Conference on
   the Synthesis and Simulation of Living Systems (Artificial Life XII)}
     \field{title}{In silico evolution of early metabolism}
-    \verb{file}
-    \verb Ullrich2010.pdf:Ullrich2010.pdf:PDF
-    \endverb
     \field{year}{2010}
   \endentry
 
@@ -11514,9 +11201,6 @@
     \field{title}{Assessing operational complexity of manufacturing systems
   based on statistical complexity}
     \field{volume}{50}
-    \verb{file}
-    \verb Vrabic2012.pdf:Vrabic2012.pdf:PDF
-    \endverb
     \field{journaltitle}{INTERNATIONAL JOURNAL OF PRODUCTION RESEARCH}
     \field{year}{2012}
   \endentry
@@ -11638,9 +11322,6 @@
   the Simulation and Synthesis of Living Systems (Artificial Life 13)}
     \field{pages}{283\bibrangedash 290}
     \field{title}{Evolutionary transitions and top-down causation}
-    \verb{file}
-    \verb Walker2012.pdf:Walker2012.pdf:PDF
-    \endverb
     \field{year}{2012}
   \endentry
 
@@ -11712,9 +11393,6 @@
     \field{pages}{121\bibrangedash 128}
     \field{title}{Is evolution by natural selection the algorithm of biological
   evolution?}
-    \verb{file}
-    \verb Watson2012.pdf:Watson2012.pdf:PDF
-    \endverb
     \field{year}{2012}
   \endentry
 
@@ -11829,9 +11507,6 @@
     }
     \field{booktitle}{ALife XII, Odense, Denmark, August 2010}
     \field{title}{Adaptation without natural selection}
-    \verb{file}
-    \verb Watson2010.pdf:Watson2010.pdf:PDF
-    \endverb
     \field{year}{2010}
   \endentry
 
@@ -11890,9 +11565,6 @@
     \verb http://adb.sagepub.com/content/17/4/269.abstract
     \endverb
     \field{volume}{17}
-    \verb{file}
-    \verb Webb2009.pdf:Webb2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Adaptive Behavior}
     \field{year}{2009}
   \endentry
@@ -11993,9 +11665,6 @@
     \verb http://www.sciencemag.org/content/323/5920/1436.short
     \endverb
     \field{volume}{323}
-    \verb{file}
-    \verb Wilson2009.pdf:Wilson2009.pdf:PDF
-    \endverb
     \field{journaltitle}{Science}
     \field{year}{2009}
   \endentry
@@ -12251,9 +11920,6 @@
     \verb http://cshperspectives.cshlp.org/content/3/4/a003590.abstract
     \endverb
     \field{volume}{3}
-    \verb{file}
-    \verb Yarus2011.pdf:Yarus2011.pdf:PDF
-    \endverb
     \field{journaltitle}{Cold Spring Harbor Perspectives in Biology}
     \field{year}{2011}
   \endentry
@@ -12317,9 +11983,6 @@
     \field{number}{9}
     \field{title}{Summarizing complexity in high dimensions}
     \field{volume}{94}
-    \verb{file}
-    \verb Young2005.pdf:Young2005.pdf:PDF
-    \endverb
     \field{journaltitle}{PHYSICAL REVIEW LETTERS}
     \field{month}{03}
     \field{year}{2005}
@@ -12432,9 +12095,6 @@
     \field{title}{A constructive artificial chemistry to explore open-ended
   evolution}
     \field{volume}{8272}
-    \verb{file}
-    \verb Young2013.pdf:Young2013.pdf:PDF
-    \endverb
     \field{year}{2013}
   \endentry
 
@@ -12518,9 +12178,6 @@
     \field{title}{The effect of reactant and product selection strategies on
   cycle evolution in an artificial chemistry}
     \field{volume}{8955}
-    \verb{file}
-    \verb Young2015.pdf:Young2015.pdf:PDF
-    \endverb
     \field{year}{2015}
   \endentry
 
@@ -12629,11 +12286,6 @@
     \verb http://www.biomedcentral.com/1741-7007/8/21
     \endverb
     \field{volume}{8}
-    \verb{file}
-    \verb :C\:\\Users\\Thom\\Google
-  Drive\\Research\\References\\Zachar2010.pdf:P
-    \verb DF
-    \endverb
     \field{journaltitle}{BMC Biology}
     \field{year}{2010}
   \endentry

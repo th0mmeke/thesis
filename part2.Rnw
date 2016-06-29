@@ -235,22 +235,11 @@ Variation, where there is some initial correlation between generations for a pro
 \end{hypothesis}\label{hypothesis-2}
 
 \section{Predictions}\label{predictions}
-
-
 In a stable or unchanging environment our prediction is that:
 
 \begin{enumerate}
 \item Average inheritance will tend towards perfect inheritance.
 \item Population variance for inheritance will decrease more than chance.
-\end{enumerate}
-
-Under changing environmental conditions, where the fitness of an unchanging entity varies in response to environmental changes, we expect:
-
-\begin{enumerate}
-\item \emph{Fidelity} at the end of a run under changing conditions will be less than that under fixed conditions.
-\item The \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
-\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
-%\item The final population \emph{Fitness} will be in the the range described by the distribution applied in the $tweakFitness$ function.
 \end{enumerate}
 
 \section{Alternative explanations}\label{alternative-explanations-1}
@@ -445,7 +434,7 @@ From these tests it is clear that the two methods do not have statistically simi
 
 This conclusion of course is based on a comparison of two particular methods; a third, fitness-based, method may produce distributions that are statistically similar to those of, say, sampling. In which case we might conclude that any conclusions drawn on the basis of sampling would also extend to this third method. This extension however is left for future work.
 
-Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we adopt fitness-independent sampling rather than fitness-based restriction.
+Returning to our goal, as the choice of method affects our results and for practical reasons we must make a choice, it seems reasonable to choose a method that has as small an influence as possible on the conclusions we draw from our hypothesis tests. As our tests involve fitness, a method that is by design orthogonal to fitness is the better choice. A sampling method is a better fit for this than a selection method, which biases on fitness, and therefore we adopt fitness-independent sampling rather than fitness-based restriction in the remainder of this work.
 
 \chapter{Characterizing the parameter space for the experiments}\label{reducing-the-parameter-space-for-the-experiments}
 
@@ -453,7 +442,7 @@ Translating model parameters into factors in the experiment design results in th
 
 \section{Experimental design}
 
-As our interest is in the sensitivity of the model to each parameter, a factorial design is preferred (as described in \cref{approach}). 
+As our interest is in the sensitivity of the model to each parameter, a factorial design (as described in \cref{approach}) is preferred with factors corresponding to the parameters, and dependent or response variables, determined by the hypothesis predictions, of mean population fidelity and mean population fitness.
 
 %A full factorial design with seven 2-level factors would require testing $2^{7}$ combinations of factor values, or 128 sets of replicated runs, while a $2^{(7-3)}$ fractional factorial design \parencite{Montgomery2009}\footnote{\eg  \url{http://www.itl.nist.gov/div898/handbook/pri/section3/eqns/2to7m3.txt}} can reduce this to 16 sets of replicated runs without loss of validity on the assumption that 3-factor interactions and higher are not significant. In other words, a $2^{(7-3)}$ design is sufficient to separate the main effect from any 2-factor interactions. This seems a reasonable tradeoff between discriminatory power and the total number of runs required, given our goal is to eliminate uninteresting settings for the next set of experiments. Note also that as each level of each factor occurs the same number of times in the results, the design remains ``balanced'' in the statistical sense, greatly easing analysis.
 
@@ -690,11 +679,11 @@ We start with the following null and alternative hypotheses:
  $\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-\section{Response variables}\label{response-variables}
+\subsection{Response variables}\label{response-variables}
 
 From the predictions of the hypothesis (\cref{predictions}), the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we use $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the end of a run, as under the hypothesis (\cref{hypothesis-2}) we expect $\overline{fidelity}_{end}$ to approach 1.0 in an unchanging environment.
 
-\section{Design}\label{design}
+\subsection{Experimental design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df_full <- subset(load.results('results/results-819350e-stable-environment.data'), truncate == 0 & correlation_correlation == 0) # correlation_correlation == 0 means TRUE in this dataset.
 colnames(df_full)[13] <- "Distribution"
@@ -728,7 +717,7 @@ The factors and levels along with their mapping to model parameters are given in
 
 Each combination of factor levels has 10 replicates, to give a total of $2x2x2x1x2x10$ or 160 experiment runs.
 
-\section{Results and discussion}
+\subsection{Results and discussion}
 
 %df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0 & truncate==0)
 %<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Not all runs in stable environments can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound. The extreme case represented by the almost vertical set of points to the far left followed by steady increases is discussed in the text.'>>=
@@ -756,7 +745,7 @@ dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp)
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<mean-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Smoothed ranges over time of the mean fidelity (top) and mean fitness (bottom) for all levels of all factors. Lines that drop below zero are an artifact of the line smoothing algorithm used (local polynomial regression fitting).'>>=
+<<mean-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Ranges by generation of the mean fidelity (top) and mean fitness (bottom) for all levels of all factors. Lines that drop below zero are an artifact of the line smoothing algorithm used (local polynomial regression fitting).'>>=
 ap <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_cor,group=run)) + labs(x="Generation", y="Mean fidelity")
 bp <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_fit,group=run)) + labs(x="Generation", y="Mean fitness")
 grid.arrange(ap,bp,nrow=2,ncol=1)
@@ -775,9 +764,11 @@ The second prediction of the hypothesis is that the population variance for inhe
 	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
-We use the same experimental setup and data as in the previous \namecref{does-average-inheritance-approach-perfect-inheritance}.
+\subsection{Experimental design}
+We use the same experimental design and results dataset as in the previous \namecref{does-average-inheritance-approach-perfect-inheritance}.
 
-<<sd-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Smoothed ranges (local polynomial regression fitting) for the standard deviation rather than the mean - fidelity on the top row, fitness below.'>>=
+\subsection{Results and discussion}
+<<sd-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Ranges by generation of the standard deviation of fidelity on the top row, and standard deviation of fitness below.'>>=
 ap <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_cor,group=run)) + labs(x="Generation", y="Standard deviation of fidelity")
 bp <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_fit,group=run)) + labs(x="Generation", y="Standard deviation of fitness")
 grid.arrange(ap,bp,nrow=2,ncol=1)
@@ -793,7 +784,7 @@ In conclusion, from visual inspection, the variance of fidelity does approach $0
 
 Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
 
-Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and hence to complexity. 
+Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
 
 This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
 
@@ -805,25 +796,28 @@ In this chapter we further develop this hypothesis to a testable form; propose i
 	\end{center}
 \end{figure}\label{fig:conceptual-model-for-environmental-change}
 
-First, we continue the discussion of learnability and predictability for two inter-related reasons: we need a testable measure for our hypothesis, and we need a generator for environmental changes that can be described in terms of the measure.
+\section{Hypothesis}
 
-Now for some definitions:
+The initial hypothesis (\cref{hypothesis-2}) assumes a perfectly predictable environment that can be exactly ``learned'' by an evolutionary algorithm. If we assume that learnabilty is related to predictability, then we can restate the hypothesis in terms of predictability:
 
-A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.
+\begin{hypothesis}
+	Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, where the fidelity of inheritance is proportional to the predictability of the environment.
+\end{hypothesis}\label{hypothesis-3} 
 
-\emph{Context} is any attribute whose values are largely independent but tend to be stable over contiguous intervals of another attribute known as the \emph{environmental attribute.} \textcite{Sammut:2010cr} The environmental attribute is typically, but not always, time; other attributes such as location are also possible. A sequence with stationary distribution is a context \textcite[p289]{Gama:2004ve}.
-
-An instance $X_j$ is generated by a source, $S_j$. If every instance is sampled from the same source, that is $S_1 = S_2 = ... = S_{t+1} = S$ then the concept is \emph{stable}. If for any time points $i$ and $j$ $S_i \ne S_j$ then there is \emph{concept drift} \textcite{Zliobaite:2009cr}
-
-According to \textcite{Zliobaite:2009cr}, the main types of concept drift can be classified using two attributes--speed, and reoccurrence--where speed can be either sudden or gradual, and reoccurrence either always new or reoccurring.  
-
-These attributes when combined produce three independent categories - sudden, gradual and reoccurring.  In sudden drift there is a distinct break between concepts; gradual drift shows a period of mixed concepts, and reoccurring drift shows alternating or repeating concepts.  A problem may exhibit more than one source of concept drift, and in fact many real-world problems are of this form.
+From the hypothesis we make these predictions:
+\begin{enumerate}
+	\item Fidelity is proportional to the predictability of the environment (directly from the hypothesis.)
+	\item Fidelity is at a minimum in conditions of maximum unpredictability, that is for time-series where $\Theta=0$, $\delta=0$ and $\sigma_e>0$.
+	\item Fidelity is at a maximum in stable conditions, as already shown in \cref{experimental-test-of-h2-under-fixed-conditions}.
+	\item The \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}.
+\end{enumerate}
 
 \section{Environmental model}\label{environmental-model}
 
-\Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sin$ curve, or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
+What does it mean in the context of this hypothesis for an environment to be ``predictable''? \Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
 
-Returning to first principles, any model must describe two particular elements of the environmental change: the scope of the change, and the shape of the change. First, we discuss the scope of change. Our evolutionary model allows us to group entities at three different levels:
+Returning to first principles, any model must describe two particular elements of the environmental change: the \emph{scope} of the change, and the \emph{shape} of the change. First, we discuss the \emph{scope} of change. Our evolutionary model (\cref{base-model}) provides the scope to group entities at three different levels:
 \begin{enumerate}
 	\item The group of all entities.
 	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
@@ -832,49 +826,94 @@ Returning to first principles, any model must describe two particular elements o
 
 In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has a unique response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although biological mutations of the genome can sometimes cause significant phenotypical differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
 
-The shape of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+The \emph{shape} of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
 Instead, we need a way to parameterize the set of interesting enviromental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
-Our chosen method is to represent environmental change as a parameterized timeseries of particular form. Environmental change is modelled as an enhanced AR(1) or first-order autoregressive timeseries, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+Our chosen method is to represent environmental change as a parameterized time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
 
-$x_t = \Theta x_{t-1} + e_t + \delta$
+Although time-series modeling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change.
+
+Environmental change is modelled as an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+
+$x_t = \Theta x_{t-1} + e_t + \delta$ \label{ar-1-time-series}
 
 where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
 
 This series allows us to represent a broad range of environmental changes:
 
 \begin{itemize}
-	\item Each timeseries is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
-	\item $\Theta$ in an autoregressive timeseries can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment timeseries itself would show a trend.
-	\item The timeseries is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
-	\item An AR timeseries has the property of stationarity, meaning that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing timeseries to describe a steady improvement or worsening in fitness.
-	\item As a corollary of stationarity, the range is strongly determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
+	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
+	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
+	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($sigma_e$) random and unlearnable. By changing the ratio between the two we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
+	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I, or ``Integrated'' component, of the model provides the differencing. Seasonality, a particular form of re-occuring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
-
-Time-series modeling provides techniques for describing time-series data in terms of an underlying model that can be summarised by a small number of parameters. The process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change. Note however that the change is described by a function or relationship between two or more parameters, depending on the model, rather than the one of a complexity-based measure.
-
-\section{Hypothesis}
-
-Our hypothesis, that fidelity is related to learnability, can now be refined in terms of the predictability of the environment, where predictability is proportional to some relation involving $\Theta$, $\sigma_e$ and $\delta$.
-
-From the hypothesis we make these predictions:
-\begin{enumerate}
-	\item Fidelity is at a minimum in conditions of maximum unpredictability, that is for timeseries where $\Theta=0$, $\delta=0$ and $\sigma_e>0$.
-	\item Fidelity is proportional to the predictability in the environment.
-\end{enumerate}
+Finally, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
 
 \section{Experimental design}
 
-As all three independent variables,  $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
+As all three independent variables, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\linewidth]{figures/hypercube}
 	\end{center}
 \end{figure}\label{fig:hypercube}
+
+We created a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
+
+\begin{table}
+	\begin{center}
+		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
+		\label{tbl:range-of-independent-variables}
+		\begin{tabular}{@{}llll@{}}
+			\toprule
+			Dataset   	 	&  $\Theta$		& $\sigma_e$	& $\delta$\\
+			\midrule
+			Dataset no.1	& $[-0.4, 0.4]$	& $[0, 0.2]$ 	& $[-0.1, 0.1]$\\
+			Dataset no.2	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.3	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
+			Dataset no.4	& $[-0.4, 0.4]$	& $[0, 0.4]$	& $[-0.04, 0.04]$\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+The other factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
+
+\begin{table}
+	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
+	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+		\toprule
+		Factor                 &Model parameter		&Number of Levels 	& Levels\\
+		\midrule
+		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
+		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
+		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
+		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c8})\\
+		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Finally, the dependent or response variables, driven by the hypothesis predictions, are mean population fidelity and mean population fitness.
+
+%\begin{table}\label{reproduction-distribution-factors-c8}
+%	\caption{Levels for the factor \emph{Reproduction}}
+%	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
+%		\toprule
+%		Reproduction&Child entity parameter					&Distribution shape\\
+%		\midrule
+%		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
+%		
+%		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
+%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
+%		\bottomrule
+%	\end{tabular}
+%\end{table}
 
 <<factorialthetasd, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for bias=0 with two values of sd (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
@@ -959,57 +998,6 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sd+bias, labeller
 %
 %#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
 %@
-
-We created a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
-
-\begin{table}
-	\begin{center}
-		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
-		\label{tbl:range-of-independent-variables}
-		\begin{tabular}{@{}llll@{}}
-			\toprule
-			Dataset   	 	&  $\Theta$		& $\sigma_e$	& $\delta$\\
-			\midrule
-			Dataset no.1	& $[-0.4, 0.4]$	& $[0, 0.2]$ 	& $[-0.1, 0.1]$\\
-			Dataset no.2	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
-			Dataset no.3	& $[-0.2, 0.2]$	& $[0, 0.1]$	& $[-0.05, 0.05]$\\
-			Dataset no.4	& $[-0.4, 0.4]$	& $[0, 0.4]$	& $[-0.04, 0.04]$\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
-
-The other factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
-
-\begin{table}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
-		\toprule
-		Factor                 &Model parameter		&Number of Levels 	& Levels\\
-		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
-		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated (see \cref{reproduction-distribution-factors-c8})\\
-		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-%\begin{table}\label{reproduction-distribution-factors-c8}
-%	\caption{Levels for the factor \emph{Reproduction}}
-%	\begin{tabular}{@{}p{2.5cm}p{3cm}p{7cm}@{}}
-%		\toprule
-%		Reproduction&Child entity parameter					&Distribution shape\\
-%		\midrule
-%		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
-%		
-%		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
-%		\bottomrule
-%	\end{tabular}
-%\end{table}
 
 
 \section{Results and discussion}

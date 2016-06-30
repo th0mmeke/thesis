@@ -73,7 +73,7 @@ More specific models of inheritance and heredity can be found in three works com
 
 Inheritance however is modelled in \textcite{Gaucherel2012}, the third work, in relationship to individuals. Two models are presented, the first and simplest describing a non-spatial scenario conceptually similar to that in \textcite{Jablonka1995} and \textcite{Paenke:2007ie}, while the second examines a spatial world based on DaisyWorld \parencite{LovelockMargulis2011}. Focussing on the first and most relevant of the two models, reproduction is the middle of three repeated stages--first ``annihilation'' where the population size is adjusted to some practical level, then reproduction, and finally development. Concentrating on the second, reproduction, stage, individuals, represented by a single trait, or phenotype, value, are chosen for reproduction with some probability (based on the trait value), and the child given a trait value that slightly varies from the parent's value to model mutation (paraphrasing \textcite{Gaucherel2012}, $trait_{child} = trait_{parent} + \delta$, where $\delta$ is described as taken from a uniform distribution of given range around the parent's trait value. \footnote{although this appears to be an error and instead it should centered on $0$.})
 
-The most relevant previous work is that of \textcite{Bourrat2015} who, in the course of examining the difference between evolution, natural selection and \gls{ens}, models the emergence of heredity in unchanging environments. \Textcite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants). The context is explicity in relationship to biology; his examples involve genes, traits, phenotypes and drift.
+The most relevant previous work is that of \textcite{Bourrat2015} who, in the course of examining the difference between evolution, natural selection and \gls{ens}, models the emergence of heredity in unchanging environments. \Textcite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants). The context is unequivocally related to biology; his examples involve genes, traits, phenotypes and drift.
 
 The six applicable models in \textcite[chap.3]{Bourrat2015} are designed to explore the implications of bias on inheritance; in \textcite{Bourrat2015}, unbiased means a trait is uncorrelated with parent, in practice as a random choice between lower and upper bound \parencite[p.153]{Bourrat2015}. Biased inheritance is naturally the opposite: there is some correlation between parent and child values for a trait, and so some prediction of traits is possible--a parent can ``pass it on''. Note that \textcite[p.173]{Bourrat2015} expressly notes that his ``biased inheritance'' is not the `transmission bias` of the second term in the Price equation: ``The bias in ‘biased inheritance’ is in reference to the type of the parent(s) (biased toward the type of the parent), while the bias in ‘transmission bias’ refers to a departure from an event of perfect transmission.'' Bourrat unfortunately doesn't formalize his model descriptions. Instead there is a reference \parencite[p.129]{Bourrat2015} to a NETLOGO 5.02 implementation, and textual narrative descriptions of each model and the results.
 
@@ -133,7 +133,7 @@ Let's look at each element in turn.
 	\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
 	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's. There is a subtle difference between fidelity and inheritance: inheritance is the process that results in fidelity, the degree of correlation between two generations. In other words, fidelity captures the same idea as heredity: ``One must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process)'' \autocite{Griesemer2005}
+	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.
 	\item \emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
 	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value (see \cref{fig:correlation}) and some degree of correlation captured by the value of the function $Range$.
 \end{enumerate}
@@ -203,55 +203,45 @@ The model is parameterized to make it easy to describe different specific models
 	\includegraphics[width=0.95\linewidth]{figures/correlation}
 \end{figure}\label{fig:correlation}
 
-\section{Hypothesis: Correlated Variation and Selection are sufficient for Inheritance}\label{h2}
+\section{Hypothesis}\label{h2}
 
-First we define the two distinct types of relationship between an entity and its environment mentioned in the previous \namecref{methods-p2}: stable, and changing environments. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time. An changing environment is the other case, where the relative fitness does change over time. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing, which are both processes that change the phenotype on a shorter timescale than a lifespan.
+Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. Heredity is related to variation: low variation implies high heredity and vice versa. There is a subtle difference between heredity and inheritance: inheritance is the process that results in heredity the measure (of correlation between entities in two generations.) As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).'' 
 
-``Context determines fitness'', where the environment is stable and affects the development of the entities
+For the single property case, when the correlation between the value for a parent's property and an offspring's property approaches an upper limit of $1.0$ we say we have complete or full inheritance. Conversely, if there is no correlation (at or near the lower limit of $0$) there is no inheritance and the entities are unrelated. We can extend the measure to a group of properties simply by taking the average of the individual correlations.
 
-Degree of variation between generations important (no correlation means effectively unguided search, complete correlation means no source of novelties)
+\Textcite{Bourrat2015} argues that heredity may in fact be a product of evolution rather than a precursor, or in other words, that the process of inheritance emerges from the action of selection and variation upon a population (\cref{previous-work-p2}.) In other words, \emph{variation and selection are sufficient for inheritance}.
 
-Problem is how can the optimal degree of variation (that is, inheritance) be established endogenously rather than as a model parameter?
+The reasoning is as follows: heredity describes the correlation along a lineage, so a high fitness entity with high heredity is likely to have more high fitness descendants than low fitness descendents. Higher fitness entities will survive longer and reproduce more, and so high fitness/high heredity entities will slowly invade the population.
 
-Inheritance related to variation (between generations). Low variation implies high inheritance
+The degree of variation between generations is important; if there is no correlation it effectively means evolution is operating as an unguided, random, search while complete correlation means that each generation is a copy of the previous one, and there are no novelties. Interestingly, the optimal degree is unlikely to be fixed, but instead would be expected to vary depending on the predictability of the environment if we can extrapolate from the experiences of balancing exploration versus exploitation in \gls{ea} (\eg \cite{DeJong2006}.) The fundamental issue therefore is how to determine an appropriate degree of variation (or heredity) for each and all environments. We believe, and will show in the remainder of this \namecref{part2}, that an emergent inheritance mechanism can ``self-adjust'' to varying environmental conditions.
 
-Selection strengthens degree of inheritance
+Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
 
-high fitness lineages more successful. Inheritance increases correlation along lineage, so high fitness more likely to be passed down. (Also low fitness, but they will suffer). On average then high inheritance increases average fitness over time. Higher fitness entities will survive longer and reproduce more; higher fidelity reduces variation in fitness and so results in higher fitness being preferred.
+This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
 
-Inheritance comes from a copy mechanism under evolutionary control, such that the fidelity of the copy may be varied by interaction with the environment.
-
-Inheritance describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single trait or to a group of traits shared between offspring and parent (perhaps all of them.)
-
-For the single trait case, when the correlation between the value for a parent's trait and an offspring's trait approaches the upper limit of 1.0 we say we have complete or full inheritance. Conversely, if there is no correlation (near the lower limit of 0) there is no inheritance and the entities are unrelated. We extend the measure to a group of traits simply by taking the average correlation of the group.
-
-Argument that heredity may in fact be a product of evolution rather than a precursor \autocite{Bourrat2015}
-
+The initial hypothesis of \textcite{Bourrat2015} assumes a perfectly predictable environment that can be exactly ``learned'' by an evolutionary algorithm. If we assume that learnabilty is related to predictability, then we can restate and expand the hypothesis in terms of predictability:
 
 \begin{hypothesis}
-Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for maximal Inheritance ($V'+S\rightarrow I$)
-\end{hypothesis}\label{hypothesis-2}
-
-%Heredity may be seen as method to maintain low entropy over much longer time than possible with non-biological systems: \quote{ Living systems can stay away from maximum entropy for much longer, indeed arbitrarily long (the biotic time scale is, for all we know, only limited by the existence of the biosphere). It is then this ability: to persist in a state of reduced entropy for biotic as opposed to abiotic time scales, that defines a set of molecules as living, and this set of molecules must achieve that feat via the self-replication of information.}{\autocite{Adami2015}}
+Variation and selection are sufficient for inheritance, where the degree and variance of inheritance is proportional to the predictability of the environment.
+\end{hypothesis}\label{hypothesis-2} 
 
 \section{Predictions}\label{predictions}
+
+First we define the two distinct types of relationship between an entity and its environment--stable, and changing--mentioned in an earlier \namecref{methods-p2}. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time, whereas it does in a changing environment. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing. These are both processes that change the phenotype on a shorter timescale than a lifespan.
+
 In a stable or unchanging environment our prediction is that:
 
 \begin{enumerate}
-\item Average inheritance will tend towards perfect inheritance.
-\item Population variance for inheritance will decrease more than chance.
+\item Average inheritance will tend towards perfect inheritance (confirming a result of \textcite{Bourrat2015}.)
+\item The population variance of inheritance will decrease more than would be expected by chance alone.
 \end{enumerate}
 
-\section{Alternative explanations}\label{alternative-explanations-1}
-
-The three main alternatives, examined later in \cref{elimination-of-alternative-explanations} are:
+Our predictions for changing environments are:
 
 \begin{enumerate}
-\item Variation alone is sufficient for Inheritance ($V\rightarrow I$.)
-\item Selection alone is sufficient for Inheritance ($S\rightarrow I$.)
-\item \emph{Variation} and \emph{Selection}, without trait or property correlation, is sufficient for \emph{Inheritance}.
+	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
-
 
 \chapter{Practical considerations}\label{practical-considerations}
 
@@ -662,8 +652,8 @@ Finally, from the discussion around the effect of $p_{reproduction}$, these fact
 Returning to the overall goals for these experiments, \cref{hypothesis-2} makes two predictions for stable environments:
 
 \begin{enumerate}
-	\item Average inheritance will tend towards perfect inheritance, confirming a result of \textcite{Bourrat2015}.
-	\item The variance of inheritance in the population will decrease more than would be expected by chance alone.
+	\item Average inheritance will tend towards perfect inheritance.
+	\item The population variance of inheritance will decrease more than would be expected by chance alone.
 \end{enumerate}
 
 The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity, and that fidelity ranges between $0$, for no correlation between parent and child, and $1.0$ for perfect correlation.
@@ -783,13 +773,7 @@ In conclusion, from visual inspection, the variance of fidelity does approach $0
 
 \chapter{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
-Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
-
-Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
-
-This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbors about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
-
-In this chapter we further develop this hypothesis to a testable form; propose it be tested by experiment on a simulation; describe an appropriate experimental design and model for a variety of environmental changes; and finally discuss the results of the experiment. The conceptual model underlying all of these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
+In this chapter we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. The conceptual basis for these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
 
 \begin{figure}
 	\begin{center}
@@ -797,21 +781,9 @@ In this chapter we further develop this hypothesis to a testable form; propose i
 	\end{center}
 \end{figure}\label{fig:conceptual-model-for-environmental-change}
 
-\section{Hypothesis}
-
-The initial hypothesis (\cref{hypothesis-2}) assumes a perfectly predictable environment that can be exactly ``learned'' by an evolutionary algorithm. If we assume that learnabilty is related to predictability, then we can restate the hypothesis in terms of predictability:
-
-\begin{hypothesis}
-	Variation, where there is some initial correlation between generations for a property, and Selection are sufficient for Inheritance, where the fidelity of inheritance is proportional to the predictability of the environment.
-\end{hypothesis}\label{hypothesis-3} 
-
-From the hypothesis we make these two predictions:
-\begin{enumerate}
-	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of \emph{Fidelity}. As a corollary, the \gls{sd} of final fidelity under changing conditions will be greater than that under stable conditions.
-\end{enumerate}
-
 \section{Environmental model}\label{environmental-model}
+
+Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
 
 What does it mean in the context of this hypothesis for an environment to be ``predictable''? \Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''.
 
@@ -848,7 +820,7 @@ This series allows us to represent a broad range of environmental changes:
 	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-Finally, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
+We claim that, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
 
 <<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
@@ -932,7 +904,14 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 
 \section{Experimental design}
 
-As all three independent variables, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
+\Cref{hypothesis-2} makes these predictions for changing environments:
+
+\begin{enumerate}
+	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+\end{enumerate}
+
+As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probabilty from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
 
 \begin{figure}
 	\begin{center}
@@ -1280,16 +1259,4 @@ we suggest that:
 The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
 
 \TODO{Map to standard EA models - mutation only etc}
-\end{DRAFT}
-
-\section{Elimination of alternative explanations}\label{elimination-of-alternative-explanations}
-\begin{DRAFT}
-	\subsection{Variation alone is sufficient for Inheritance}
-	As an experimental test, we can discount this alternative hypothesis by showing an example of not(V-\textgreater{}I) or, V and not I.
-	
-	\subsection{Selection alone is sufficient for Inheritance}
-	The test is to show an example of S and not I.
-	
-	\subsection{Variation and Selection, without property correlation, is sufficient for Inheritance}
-	Test: already shown in earlier analysis, specifically in the Hypothesis analysis sections where the factor \textbf{Correlate Fidelity} is set to the low value ("false").
 \end{DRAFT}

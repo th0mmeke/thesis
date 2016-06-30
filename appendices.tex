@@ -187,25 +187,23 @@ experiment design, for example:
 </Evaluation>
 \end{verbatim}
 
-\chapter{Systematic Map}
+\chapter{Systematic Map}\label{systematic-map}
 
-Purpose: to identify gaps in current research. Summary of research area required to ensure 1) outline where proposed work fits into existing body of knowledge 2) do not repeat previous work 3) identify future research directions
+The purpose of this \namecref{systematic-map} is to provide a systematic summary of the research area to:
 
-Research Method: the method is a Systematic Map. Evidence-based. Derived from Evidence-based medicine (see \cite{Cochrane:2011qy, CRD:2008fj}). Primary motivation is to remove unintended bias in reviews; also can quantify consistency or variation in subject \parencite{Kitchenham:2007nx}.
-Major differences with standard expert-review is in pre-definition of research protocol, search strategy, exclusion and inclusion criteria, quality criteria. All documented so can be repeated, or at least, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+\begin{enumerate}
+	\item Outline where the proposed work fits into the existing body of knowledge.
+	\item Ensure that we do not repeat previous work.
+	\item Possibly identify future research directions.
+\end{enumerate}
+
+The research method is a an informal systematic Map, derived from evidence-based medicine \parencite{Cochrane:2011qy, CRD:2008fj}. The major difference to a standard expert review is in the pre-definition of a research protocol, search strategy, exclusion and inclusion criteria, and quality criteria. All of these are documented so the review may be repeated or, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
 
 \section{Need for a review}
 
 To the best of our knowledge, no review has been published of our specific topic of inheritance in artificial chemistries.
 
-Otherwise, no specific reviews of Developmental Encodings known (search 20 June 2012 of Web of Science with search string
-(TI=("Morphogenesis" OR "Embryogeny" OR "Artificial Embryogeny" OR "Developmental" OR "Generative Representation" OR
-"Evolutionary Development")) AND Document Types=(Review)--3,713 results found, but neither of the two in Computer
-Science are relevant. Note that this search doesn't retrieve either known review: \cite{Stanley:2003fh} is labelled on WoS as an
-"article" rather than as a review, and \cite{Duthen2010} references ``Artificial Creatures''. Removing the "review" condition returns 76,708 results.
-
 \section{Method}
-
 Our objective is to confirm that we have identified all relevant previous work:
 
 \begin{enumerate}[label=RQ\arabic*:]
@@ -214,7 +212,7 @@ Our objective is to confirm that we have identified all relevant previous work:
 
 \subsection{Systematic Reviews and Maps}
 
-Systematic Maps \parencite{Petersen:2008fk}are exploratory (``what is known about X?'') while Systematic Literature Reviews \parencite{Kitchenham:2007nx} address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?''). For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk} For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
+Systematic Maps \parencite{Petersen:2008fk} are exploratory (``what is known about X?'') while Systematic Literature Reviews \parencite{Kitchenham:2007nx} address specific research questions (``Is procedure X more effective than procedure Y for outcome O in context C?''). For Maps, ``The main goal of a systematic mapping studies is to provide an overview of a research area, and identify the quantity and type of research and results available within it. Often one wants to map the frequencies of publication over time to see trends. A secondary goal can be to identify the forums in which research in the area has been published.'' \parencite{Petersen:2008fk} For Systematic Reviews, \cite{Kitchenham:2007nx} recommends research questions address five criteria: population (those affected), intervention (method or technology under investigation), comparison (control method or technology), outcomes (factors or elements of comparison), context (in which the comparison takes place)
 
 Systematic Maps also provide categorisation of a research area, but this is not the main goal of the process. Instead a Map uses the generated classification as a framework for further analysis, summarising contributions by category. However the processes are similar in that one process for categorisation in Maps \parencite{Petersen:2008fk} extracts keywords from the paper abstracts and iteratively groups and refines these into the final categories.
 
@@ -257,8 +255,6 @@ The keywords used were driven by the research question, expanded with common syn
 "artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)
 
 \subsection{Stage 3--Automated Search}
-
-Publication bias--tendency of published papers to support hypothesis, reject null hypothesis. Papers which do not less likely to be published. Address by 1) awareness 2) grey literature search 3) funnel plot of variance against effect--expect higher variance for small samples
 
 \begin{table*}
 \footnotesize
@@ -311,19 +307,16 @@ NAC \cite{Suzuki2006}    & No, but similar found.\\
 \caption{Rediscovery of existing key papers.}
 \end{table*}
 
-There is a variety of reasons why earlier papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
+There are a variety of reasons why earlier papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
 
 \subsection{Stage 5--Screening on abstract}
-Difficult to be error-free; preference is therefore not to exclude based solely on abstract, although this does increase the workload.
-Based on this, justified all exclusions and inclusions that were borderline. Clear inclusions and exclusions were not justified.
+Difficult to be error-free; preference is therefore not to exclude based solely on abstract unless clear-cut.
 
-Issues:
+Issues specific to the abstracts:
 \begin{itemize}
-	\item Ambiguous terminology--many fields have common terms \eg map, evolve, generative
+	\item Ambiguous terminology
 	\item Insufficient detail in abstract
-	\item Downloading abstracts at time of initial title search so don't have to re-search after initial selection
-	\item Depth or degree--difficulty in determining the degree of focus on generative ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded?
-	\item Database specifics--ACM bibtex export does not export abstract--must cut and paste. 
+	\item Depth or degree--difficulty in determining the degree of focus on relevant ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded? 
 \end{itemize}
 
 %\cite{smDecraeneMcmullin2011}
@@ -362,8 +355,7 @@ Issues:
 
 \subsection{Stage 6--Removal of duplicates}
 
-Removal of exact duplicates--same publication source, title, authors. Performed as part of Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so didn't detect some potential duplicates that were then identified in a follow-up by inspection.
-Removal of likely duplicates--difficult however to judge conclusively from abstracts alone if two papers do describe the same research. However, this case didn't occur in our dataset.
+Removal of exact duplicates--same publication source, title, authors. In practice performed during Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so doesn't detect some potential duplicates that were then identified in a follow-up by inspection.
 
 % sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" post5.bib > titles
 % sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" ../mythesis.bib > fulltitles
@@ -374,8 +366,7 @@ Finally, we removed duplicates of previously identified works (32 duplicates).
 
 \section{Results, and discussion}
 
-At the end of the exercise, our Systematic Map contained 12 papers:
-
+At the end of the exercise, our Systematic Map contained 12 new papers:
 \begin{itemize}
 \item \cite{smAdamsLipson2003}
 \item \cite{smBobrikKvasnickaPospichal2008a}
@@ -391,7 +382,11 @@ At the end of the exercise, our Systematic Map contained 12 papers:
 \item \cite{smGohEweGoh2014}
 \end{itemize}
 
-This review does have some limitations. Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of abstract.
+This review does have some limitations, of which the most serious are:
+\begin{itemize}
+	\item Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of description.
+	\item Sole researcher means no cross-checking of inclusions and exclusions.
+\end{itemize}
 
 \chapter{Applications of GRN in EAs}\label{applications-of-grn-in-eas}
 

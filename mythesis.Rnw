@@ -61,7 +61,7 @@
 	
 \author{Thom Young}
 \title{The Emergence of\\Inheritance and\\Heredity in\\Artificial\\Chemistries}
-\degree{A thesis submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy in Computer
+\degree{A thesis submitted for the degree of Doctor of Philosophy in Computer
 Science in the University of Canterbury}
 \abstract{
 It is generally accepted that all evolutionary systems are based on the same three elements: variation, inheritance and selection. This raises the question of what distinguishes the process of biological Evolution by Natural Selection, which produces such impressive outcomes, from the relatively underwhelming mechanism of artificial evolution. The three elements can be usefully divided in two, where selection acts to reduce and trim each generation while variation and inheritance generate potential novelties and create new possibilities. For this reason, if we think that creativity is the missing factor from artificial evolution, it seems that a focus on variation and inheritance might be promising.

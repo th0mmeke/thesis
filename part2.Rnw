@@ -1256,5 +1256,4 @@ we suggest that:
 
 The model as described is general, under the assumptions given below. It is also directly comparable to models from Evolutionary Computation and so we also expect any results and conclusions to be relevant to EC models.
 
-\TODO{Map to standard EA models - mutation only etc}
 \end{DRAFT}

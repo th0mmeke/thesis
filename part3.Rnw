@@ -17,12 +17,11 @@ df
 
 \chapter{Introduction}
 
-
 In this final part, we begin to address our final research question, ``Can such a mechanism then be successfully demonstrated in an artificial system?''.
 
 The goal is to demonstrate a self-referential mechanism to provide ``erroneous copying'' that is emergent and embedded in the simulation world. Two important observations can be made about this copying mechanism: first, it must be modifiable by evolution and so must be accessible to evolution, and therefore made of the same things as everything else that is subject to evolution in the system--it is self-referential and constructed of the common elements of the world. It cannot be an exterior independent element. Second it combines inheritance and variation, and in that recollects biological replication mechanisms, such as DNA replicase, which result in a varying and imperfect transferral of information from parent to child. 
 
-Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tuneable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
+Artificial Chemistries of discrete atoms provide an interesting testbed for investigating various evolutionary phenomena. Fundamentally, they provide a tunable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
 
 Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence eventually returns to an earlier product. Our interest is in identifying the factors that influence the emergence of these higher levels. Cycles in particular are interesting as many biological processes are cyclical. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in \gls{achem} evolution and biology, we believe like others (e.g., \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in \glspl{achem}.
 
@@ -30,7 +29,7 @@ By demonstrating the formulation of cycles, we suggest that ToyWorld is capable 
 
 \section{Artificial Chemistries}\label{artificial-chemistries}
 
-One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant. \Glspl{achem} are a particular type of model, familiar from real world chemistry, for the simulation of reaction-based systems. Every \gls{achem} defines a set of constituitive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and order the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr} These components are described in more detail in \cref{classification-of-artificial-chemistries}; an introduction to the general uses and applications of \glspl{achem} is given immediately below, and a discussion of ToyWorld, our \gls{achem} for the simulation of emergent evolution, in \cref{toyworld}.
+One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant. \Glspl{achem} are a particular type of model, familiar from real world chemistry, for the simulation of reaction-based systems. Every \gls{achem} defines a set of constitutive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and order the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr} These components are described in more detail in \cref{classification-of-artificial-chemistries}; an introduction to the general uses and applications of \glspl{achem} is given immediately below, and a discussion of ToyWorld, our \gls{achem} for the simulation of emergent evolution, in \cref{toyworld}.
 
 %All Artificial Chemistry based on this model:
 %
@@ -50,14 +49,14 @@ One advantage of \glspl{achem} as pointed out by \parencite[5]{Funes2001} is tha
 %
 %In general, AChems for these problems are without grounding (so start from high-level). Grounding implies that there is a causal justification for the higher level chemistry, where that justification is based on fundamental supportable processes, rather than unique to particular problem.
 %
-%All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferrable to In Vitro; other two expect results to shed light on In Vivo processes.
+%All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferable to In Vitro; other two expect results to shed light on In Vivo processes.
 %
 %Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
 
 \begin{mdframed}[style=box, frametitle={Review of relevant elements of Physical Chemistry}]
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
-A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterized by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
+A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
 
 The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order. (Example taken from \parencite{Kotz2006})
 
@@ -91,7 +90,7 @@ concentrations. A catalyst does precisely the first, and autocatalysis is one me
 A catalyst is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
 affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
 The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
-orders of magnitude over the uncatalyzed reaction, enabling reactions fundamental to life that would be effectively impossible in an
+orders of magnitude over the uncatalysed reaction, enabling reactions fundamental to life that would be effectively impossible in an
 uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
 the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate.
 
@@ -109,58 +108,17 @@ example in the replication of viroids where each RNA strand can catalyse the pro
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation.\parencite{Plasson2010}.
 \end{mdframed}
 
-%
-%autocatalysis
-
-%Autocatalytic sets are proposed for bootstrapping (from less differentiated systems to more complex ones), as a mechanism to increase
-%order and so counteract entropy, for stability, and as a unit of competition. The catalytic properties of autocatalytic sets result in
-%bootstrapping, where the reaction rates in the set are ratcheted-up as the product quantities increase. Autocatalytic sets form a complex or dynamical system, where the feedback loops and interactions can result in forms of temporal (waves and cycles) and spatial order (stable structures.) Similarly stability follows from the formation of attractors in the complex system that are resistant to pertubation. Finally, as the set forms a coherent unit expressing certain properties, such as the ability to maintain itself or to create copies of itself, it
-%can be seen as a unit of competition where success is measured by life-time or by control of resources.
-%
-%Autocatalysis is a source of dynamical behaviour--leads to bifurcations, multistability, oscillators, attractors \parencite{Plasson2010}
-%\begin{itemize}
-
-%	\item
-%	present in all three elements (\parencite{Ganti:2003hl}--or
-%	earlier?) of life
-%	\item
-%	DNA replicates with enzymatic help
-%	\item
-%	some metabolites, such as ATP, exclusively autocatalytic
-%	\item
-%	lipids in a membrane enhance addition of other lipids--Formation of
-%	autocatalytic cycles/sets (\parencite{Hordijk2004})--percolation increases
-%	likelihood
-%	\item
-%	\parencite{Sousa2015} for detection of RAF sets in e coli metabolic
-%	networks
-%	\item
-%	Selection amongst autocatalytic networks (Ganti and Wachtershauser referenced in \parencite{Fernando:2005ly})
-%	\item
-%	\parencite{Fernando:2007pf}--selection/liposomes/chemical avalanches
-%	based on Wachtershauser
-%	\item
-%	autocatalytic cores (\parencite{Vasas2012})
-%	\item
-%	Kauffman's original Reflexively Autocatalytic Polymer Networks
-%	(RAPN) \parencite{Kauffman1986,Farmer1986} are not capable of
-%	non-digital evolution. RAPN stabilise into single network without
-%	variation
-%\end{itemize}
-
-%Some properties of RAF sets established by Hordijk and Steel have application beyond origin-of-life: linear growth rate in level of catalysis compared to size of molecules (n) is sufficient for RAF set to form. For a RAF set to appear with high probability (P\textgreater{}0.5) in even a model with n=20 (about 1 million molecular types) each molecule needs to catalyze 1-2 reactions on average. For the given model, need around 65,000 different molecule types (n=15-16) for RAF set if use more realistic probability of catalysis of 1:1 million of a molecule catalysing any particular reaction. \parencite{Hordijk2011}
-
 Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry (\parencite{Fontana1994}) is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
 A mathematical treatment of \glspl{achem} can be found in \parencite{Benko2009}. \parencite{Dittrich:2001zr} and \parencite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \parencite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
 
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
-\Glspl{achem} may be used for backward chaining from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \parencite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \parencite{Faulon2001}). Finally, \glspl{achem} have been used in the modeling of biological phenomenon such as enzyme function (\eg cite{Flamm2010}.)
+\Glspl{achem} may be used for backward chaining from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \parencite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \parencite{Faulon2001}). Finally, \glspl{achem} have been used in the modelling of biological phenomenon such as enzyme function (\eg cite{Flamm2010}.)
 
 The primary requirement in both cases is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a family of Artificial Chemistries, beginning with \parencite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters taken directly from chemical experiments and later extended (for example in \parencite{Benko2005}) to a general purpose model with parameters derived from theoretical chemistry. The model was used in \parencite{Hogerl2010} for the study of the behaviour and topology of chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (e.g, \parencite{Flamm2010} and \parencite{Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts.
 
-The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The Chemical Abstract Service (CAS) database references approximately 34 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for de-novo drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approachs. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
+The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The Chemical Abstract Service (CAS) database references approximately 34 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for de-Novo drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approaches. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
 Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \parencite{Flamm2010} and \parencite{Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
 	
@@ -194,7 +152,7 @@ Network Artificial Chemistry (NAC) \parencite{Suzuki2006}
 
 \section{Artificial chemistries and Alife}\label{artificial-chemistries-and-alife}
 
-Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. Stringmol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution. Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. StringMol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \begin{table}
 	\scriptsize
@@ -247,7 +205,7 @@ A strongly constructive system is one which maintains closure, and in which ther
 
 Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense--new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions `on-the-fly' from the structures of the interacting molecules. 
 
-Pre-sepecification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be pre-determined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \textcite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \textcite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
+Pre-specification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be predetermined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \textcite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \textcite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
 
 An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
 
@@ -269,23 +227,23 @@ An \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textg
 
 \footnote{In practice \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification. Because the system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion. Some categories, such as Abstract Automata, are incompletely specified. Finally, applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry.}
 
-Another scheme was presented by Nellis with \glspl{ea} categorized as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \parencite{Faulconbridge2011} as a world where the elements are RBN networks.
+Another scheme was presented by Nellis with \glspl{ea} categorised as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \parencite{Faulconbridge2011} as a world where the elements are RBN networks.
 
 \Textcite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
 
 \begin{itemize}
 	\item Symbolic - symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
 	\item Structured - one or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
-	\item Sub-symbolic - emergence of properties from lower-levels (ala real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
+	\item Sub-symbolic - emergence of properties from lower-levels (\eg real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
 \end{itemize}
 
 \subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
 
-This element describes how molecule are represented in the gls{chem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, for example, bond energy calculations by Extended Huckel Theory (EHT).
+This element describes how molecule are represented in the \gls{chem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, for example, bond energy calculations by Extended Huckel Theory (EHT).
 
 \subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
 
-Reaction rules in an artificial chemistry describe how reactants are transformed to reaction products. Reactions may be pre-defined (often the case when simulating real-world chemistry where exact pathways are important) or dynamically determined using molecular properties. In \glspl{achem} enforcing conservation of energy, elements are neither created or destroyed so reactions can be represented solely by rearrangments or bond changes. \parencite{Tominaga2007} showed for a particular artificial chemistry, that it is computationally universal with only unimolecular and bimolecular reactions; the reaction rules in most \glspl{achem} therefore only describe these forms of reaction.
+Reaction rules in an artificial chemistry describe how reactants are transformed to reaction products. Reactions may be pre-defined (often the case when simulating real-world chemistry where exact pathways are important) or dynamically determined using molecular properties. In \glspl{achem} enforcing conservation of energy, elements are neither created or destroyed so reactions can be represented solely by rearrangements or bond changes. \parencite{Tominaga2007} showed for a particular artificial chemistry, that it is computationally universal with only uni-molecular and bimolecular reactions; the reaction rules in most \glspl{achem} therefore only describe these forms of reaction.
 
 \subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
 
@@ -300,10 +258,10 @@ Well-mixed/aspatial: with either discrete time (uniform probability	distribution
 \item
 nDimensional: a grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
 \item
-Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelization.
+Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelisation.
 \end{enumerate}
 
-Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance recuces in concert. The general solution is called model reduction--see \textcite{Radulescu2012} for a recent review; \textcite{Faulon2001} has a well-received method.
+Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance reduces in concert. The general solution is called model reduction--see \textcite{Radulescu2012} for a recent review; \textcite{Faulon2001} has a well-received method.
 
 \chapter{ToyWorld}\label{toyworld}
 
@@ -432,7 +390,7 @@ Our energy model enforces conservation of mass so reactions can be represented s
 
 \begin{table}[t]
 	\begin{center}
-		\caption{Example potential energies calculated by the DefaultChemistry module using simplified bond energies}\label{example_potential_energies}
+		\caption{Example potential energies calculated by the default Chemistry module using simplified bond energies}\label{example_potential_energies}
 		\begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
 			\toprule
 			Molecule   & SMILES                   & Potential Energy \\
@@ -677,7 +635,7 @@ the reaction itself either consumes or liberates energy.
 
 The only constraints are that velocities of the product molecules must
 conserve momentum and total energy within the reacting system. We
-recognize that within the frame of reference of the centre of momentum
+recognise that within the frame of reference of the centre of momentum
 of the reacting system, the vector sum of the momentum of the products
 must equal zero. Therefore one possible solution to the product
 velocities is to arrange their vector momentums according to simple
@@ -735,7 +693,7 @@ extension, for four products, a square and so on.
 \end{algorithm}
 
 
-Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognize that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
+Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \cref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognise that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
 
 We then arbitrarily choose the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \cref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
 
@@ -901,7 +859,7 @@ The design outlined in \cref{toyworld} leads to the following expectations:
 	\item
  Molecular quantities reach equilibrium -- that is, the set of
  interacting molecules is constant, with fluctuations expected in
- quantities. We expect molecular concentrations to stabilize at
+ quantities. We expect molecular concentrations to stabilise at
  non-extreme values (equilibrium rather than driven to an extreme)
  after some transition period from the initial conditions.
 	\item
@@ -944,7 +902,7 @@ norm.
 
 With both reactant sets the model produced a significant number of
 molecules which would be considered unstable in real-world chemistry
-(such as O\textsuperscript{-} and O.) This is likely an artifact of the method
+(such as O\textsuperscript{-} and O.) This is likely an artefact of the method
 we use to generate reaction options, where a bond-break plus
 bond-formation reaction -- moving through an intermediate unstable
 ion -- occurs in our model as two separate reactions. As all molecules
@@ -1012,7 +970,7 @@ We concentrate on three related response, or dependent, variables -- Number of c
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
 \section{Experiment Design}
-The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomized order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \cref{tbl:factors}.
+The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomised order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in Table \cref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
@@ -1071,9 +1029,6 @@ All replicates completed a set of 20,000 reactions; given the initial population
 
 A view of the results is given in Table \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
-\TODO{convert to ggplot2}
-
-\TODO{convert to ggplot2}
 <<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'>>=
 df<-load.toyworld("results/EvaluatorActualCycles.out")
 par(mfrow=c(1,3),cex=0.5)
@@ -1101,7 +1056,6 @@ plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Part
 \subsection{Analysis and Discussion}
 Figure \cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (e.g, Figure \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
-\TODO{convert to ggplot2}
 <<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.cap='Response by Reactant Strategy '>>=
 df <- subset(df,df$Partition.Start != "4750")
 par(mfrow=c(1,3),cex=0.5)
@@ -1117,7 +1071,6 @@ boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count 
 %\label{fig:reactant_strategy}
 %\end{figure}
 
-\TODO{convert to ggplot2}
 <<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.cap='Response by Product Strategy '>>=
 par(mfrow=c(1,3),cex=0.5)
 boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
@@ -1135,9 +1088,8 @@ boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count
 \subsection{Q1: Is there a quantitative difference between the different reactant and product selection strategies?}
 From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
-We use ANOVA (Analysis of Variance) to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
+We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
-\TODO{convert to ggplot2}
 <<reactantproductcombination, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '>>=
 boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
@@ -1160,7 +1112,7 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 
 \subsection{Q3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
 
-We constructed a two-factor with two-levels (2x2) ANOVA model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
+We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
 The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.

@@ -239,7 +239,7 @@ Another scheme was presented by Nellis with \glspl{ea} categorised as world/chem
 
 \subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
 
-This element describes how molecule are represented in the \gls{chem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, for example, bond energy calculations by Extended Huckel Theory (EHT).
+This element describes how molecule are represented in the \gls{achem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, for example, bond energy calculations by Extended Huckel Theory (EHT).
 
 \subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
 
@@ -263,7 +263,7 @@ Mixed scale: hierarchical spaces, such as aspatial cells within bigger grid, mos
 
 Scaling in the reactor algorithm can be an issue: as new products are generated, the space of reactions and reactants can expand exponentially, and therefore performance reduces in concert. The general solution is called model reduction--see \textcite{Radulescu2012} for a recent review; \textcite{Faulon2001} has a well-received method.
 
-\chapter{ToyWorld}\label{toyworld}
+\chapter{ToyWorld, a semi-realistic Artificial Chemistry}\label{toyworld}
 
 ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
@@ -1115,9 +1115,10 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
 \section{Conclusions}
-The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
+In this \namecref{reactant-and-product-strategies} we have explored the impact of the four possible combinations of Reactant and Product selection strategies.
 
-The most significant limitation of our analysis overall is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in Q3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
+By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
 
-\chapter{Discussion}
+The most significant limitation of our analysis is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in Q3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
+In conclusion, this \namecref{part3} has demonstrated that ToyWorld is capable of emergent behaviour, and appears suitable for further development of the inheritance mechanism explored in \cref{part2}.

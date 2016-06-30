@@ -156,11 +156,6 @@ The model is parameterised to make it easy to describe different specific models
 	\end{center}
 \end{table}
 
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width=0.95\linewidth]{figures/model}
-\end{figure}
-
 \begin{algorithm}
 	\For{each generation $\in [1\dots$number of generations]}{
 		$population\leftarrow Selection(population)$\;
@@ -197,11 +192,6 @@ The model is parameterised to make it easy to describe different specific models
 	}
 	\caption{Definitions for the functions Selection and Variation}\label{model-functions}
 \end{algorithm}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.95\linewidth]{figures/correlation}
-\end{figure}\label{fig:correlation}
 
 \section{Hypothesis}\label{h2}
 
@@ -263,14 +253,12 @@ The goal of this section is to:
 
 If there is an affect on the hypothesis tests attributable to the bound mechanism, then the conclusions from the test become contingent on the method. This reduces the scope somewhat, but without a change of investigative approach seems unavoidable.
 
-\subsection{Effect of population limits}
+\section{Experimental design}\label{experimental-design-c5}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
 df <- subset(load.results('results/results-819350e-unrestricted.data'), ecf==0)
 @
 
-The environment is considered ``fixed'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and the model run with a maximum of \Sexpr{max(df['gen'])} generations with factors as follows:
-
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c5}.
+All experiments in this \namecref{practical-considerations} are based on the following factorial experiment design, with factors and factor levels given in \cref{tbl:factor-levels-c5}. The environment is considered ``stable'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and each run is for a maximum of \Sexpr{max(df['gen'])} generations.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c5}
@@ -301,6 +289,9 @@ The factors and levels along with their mapping to model parameters are given in
 	\end{tabular}
 \end{table}
 
+
+\section[Choice of limit mechanism]{Is the choice of limit mechanism significant?}
+
 <<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.cap='The growth of population size grouped by replicate (that is, by common factor levels) showing rapid population growth before the population size exceeded the specified limit of 50,000 entities.'>>=
 #ap <- ggplot(aggregate(df$gen,Filter(is.factor,df),max), aes(x))+geom_histogram(binwidth=1,boundary = .5) + labs(x="Final generation", y="Count of Runs") + scale_x_continuous(breaks=1:12) + scale_y_continuous(limits=c(0,2),breaks=c(0,1,2))
 
@@ -308,11 +299,9 @@ ggplot(df,aes(x=gen,y=pop,group=exp)) + geom_point() + scale_x_continuous(breaks
 #grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
-Under these initial conditions, no experiment without an upper population bound continued for more than a handful of generations before the population size reached more than ten times the initial size. It is clear from \cref{fig:unboundedplot} that some form of upper bound is necessary.
+With this initial experiment design without an upper population bound, no run continued for more than a handful of generations before the population size reached more than ten times the initial size. It is clear from \cref{fig:unboundedplot} that some form of upper bound is necessary. Our implementation introduces a \emph{Restriction} function, mapping $population$ to a restricted $population$, into the base model algorithm from \cref{base-model}. The new algorithm is shown in \cref{upper-bound-model-algorithm}. 
 
-\subsection[Choice of limit mechanism]{Is the choice of limit mechanism significant?}
-
-Given then that an upper bound is needed for practicality, this section describes two possible approaches to the implementation of the \emph{Restriction} function in \cref{upper-bound-model-algorithm} and attempts to understand the form of the bias each introduces into the experimental results.
+This section describes two possible approaches to the implementation of the \emph{Restriction} function and attempts to understand the form of the bias each introduces into the experimental results.
 
 \begin{algorithm}
 	\For{each generation $\in [1\dots$number of generations]}{
@@ -336,7 +325,7 @@ Returning then to our examination of fitness-independent and fitness-based upper
 	\item H$_1$: the two samples are not drawn from the same continuous distribution
 \end{itemize}
 
-\subsubsection{Fitness-independent sampling}\label{fitness-independent-sampling}
+\subsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
 The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \cref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
@@ -349,7 +338,7 @@ The bound is implemented by a fitness-independent sampling of $n$ elements from 
 
 %If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism.
 
-\subsubsection{Fitness-based selection}
+\subsection{Fitness-based selection}
 
 The fitness-based population limit is based on \emph{truncation} from \textcite[124]{DeJong2006}, chosen as it is reasonably representative of methods used in Evolutionary Algorithms, and as a highly-elitist algorithm should provide useful contrast to the effectively uniform mechanism of \cref{fitness-independent-sampling}. If the two mechanisms produce similar results then it might be argued that other mechanisms are likely to be similar also.
 
@@ -363,8 +352,11 @@ It also recognises that in both Evolutionary Computation and natural populations
 	\caption{Restriction (Fitness-based selection)()}
 \end{algorithm}
 
-\subsection{Experimental design}
+\section{Experimental design}
 
+The design is the same as in \cref{experimental-design-c5} with the addition of a further factor for the restriction function, taking two levels: fitness-independent or fitness-based.
+
+\section{Results and discussion}
 <<echo=FALSE, cache=TRUE>>=
 df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0)
 runs <- nrow(subset(df,gen==0))
@@ -374,8 +366,6 @@ df_completed <- subset(df, gen==500)
 @
 
 Data is from \Sexpr{nrow(subset(df,gen==0))} runs--\Sexpr{factors} unique sets of factors, each with \Sexpr{replicates} replicates--with settings from \cref{tbl:factor-levels-c5}, of which we are exclusively concerned with the subset of \Sexpr{nrow(df_completed)} runs that reached completion at \Sexpr{max(df['gen'])} generations.
-
-\subsection{Results and discussion}
 
 The runs that reached completion are evenly distributed between the two methods, fitness-independent (\Sexpr{nrow(df_completed[df_completed['truncate']==0,])} runs) and fitness-based (\Sexpr{nrow(df_completed[df_completed['truncate']==1,])} runs), indicating that the two methods at least appear comparable with respect to their affect on population size.
 
@@ -769,6 +759,16 @@ In a similar fashion to the procedure in \cref{does-average-inheritance-approach
 
 In conclusion, from visual inspection, the variance of fidelity does approach $0$, for all combinations of factor levels except where both $p_{reproduction}$ and $p_{selection}$ are set to $0.66$. Therefore H$_0$ is rejected and H$_1$ accepted.
 
+\section{Conclusions}
+
+In this chapter we have shown by experiment that, as predicted, in stable environments our model of inheritance emerging from variation and selection results in:
+\begin{itemize}
+	\item Inheritance increasing towards an upper limit of $1.0$, or perfect inheritance.
+	\item The variance of inheritance decreases towards a lower limit of $0$.
+\end{itemize}
+
+This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. As hypothesised earlier in \cref{h2} though, this should be different in systems where the environment changes, and in the following \namecref{model-behaviour-in-changing-environments} we shall put this to the test.
+ 
 \chapter{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
 In this chapter we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. The conceptual basis for these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
@@ -1074,7 +1074,7 @@ As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to t
 %grid.arrange(ap,bp,nrow=2,ncol=1)
 %@
 
-\section{Does the standard deviation of fidelity vary in proportion to the variability in the environment?}
+\section{Does the standard deviation of fidelity vary in proportion to the variability in the environment?}\label{sd-fidelity-predictability}
 
 \begin{itemize}[label={}]
 	\item H$_0$:  $\sigma_{fidelity_{end}}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
@@ -1213,9 +1213,25 @@ Therefore we can conclude that there is no significant difference between these 
 %\end{DRAFT}
 
 
-\section{Conclusions}\label{part2-future-work}
+\chapter{Conclusions}\label{part2-future-work}
 
-There are some obvious extensions of this model that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
+The previous \namecref{model-behaviour-in-changing-environments} has tested our hypothesis predictions from \cref{h2} for changing environments. First though we needed to define what we mean by environmental change; in \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two--$\Theta$ and $\delta$--are more discoverable by an evolutionary learner than the other, $\sigma_e$.
+
+\Cref{h2} made these predictions:
+
+\begin{enumerate}
+	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+\end{enumerate}
+
+In \cref{mean-fidelity-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: fidelity in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
+
+The second prediction was also confirmed in similar fashion in \cref{sd-fidelity-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
+
+Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution to suit the population environment. This is a foundational requirement for a practical open-ended evolutionary system.
+
+\section{Future work}
+There are some obvious extensions of the model from \section{base-model} that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
 
 Two other topics for possible future work are abrupt environmental change, and an information-based measure for change, as explained below.
 
@@ -1243,7 +1259,6 @@ $C_{\mu}$ has been applied to a number of domains including random boolean netwo
 
 The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \textcite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \textcite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \textcite[p.119]{Shalizi2001}.
 
-\chapter{Conclusions}
 \begin{DRAFT}
 Given:\newline
 Hypothesis 1 (that Variation, Selection and Inheritance are sufficient for Evolution) and,\newline

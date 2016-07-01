@@ -435,6 +435,7 @@ energies.
 
 \begin{figure}[t]
 	\begin{center}
+		\vspace{10pt}
 		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
 		\node[main node] (PE) at (3,3) {PE};
 		\node[main node] (IE) at (0,0) {IE};
@@ -934,7 +935,7 @@ In this section we explore the following questions:
 
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=Q\arabic*:]
+	\begin{enumerate}[label=RQ2.\arabic*:]
 		\item Is there a quantitative difference between different reactant and product selection strategies?
 		\item Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?
 		\item Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?
@@ -942,7 +943,7 @@ In this section we explore the following questions:
 \end{minipage}
 \vspace{0.3cm}
 
-To the best of our knowledge, this is the first time that reaction and product selection strategies in Artificial Chemistries have been experimentally compared.
+To the best of our knowledge, this is the first time that reaction and product selection strategies in \glspl{achem} have been experimentally compared.
 Instead, the general approach of previous work, where there has been a quantitative evaluation, has been to propose a particular strategy, build, and evaluate against the initial goals, rather than against alternatives.
 
 Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$. We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
@@ -1085,7 +1086,7 @@ boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count
 %\label{fig:product_strategy}
 %\end{figure}
 
-\subsection{Q1: Is there a quantitative difference between the different reactant and product selection strategies?}
+\subsection{RQ2.1: Is there a quantitative difference between the different reactant and product selection strategies?}
 From visual inspection of Figure \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from Figure \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
 We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by Figure \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
@@ -1104,13 +1105,13 @@ boxplot(Count.of.most.common.cycle ~ Reactant.Strategy+Product.Strategy, data=df
 %\caption{Effect of the combination of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ on Response Variables}
 %\end{figure}
 
-\subsection{Q2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
+\subsection{RQ2.2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
 From Figure \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
-\subsection{Q3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
+\subsection{RQ2.3: Is emergence significantly affected by the values of other parameters of an Artificial Chemistry, such as initial kinetic energy or bond energies?}
 
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in Table \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 
@@ -1119,6 +1120,6 @@ In this \namecref{reactant-and-product-strategies} we have explored the impact o
 
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of an emergent Artificial Chemistry; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
 
-The most significant limitation of our analysis is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in Q3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
+The most significant limitation of our analysis is that the values chosen for the high and low values of $E_\mathrm{Bonds}$ make it impossible to determine the cause of the difference observed in RQ2.3. There are two alternative explanations: first, the energy required to make or break bonds is simply different between the two factor levels; second, in the low factor level, based on real-world values, the bond make and break energies for even a single bond vary depending on the atoms involved, while in the high factor level these values are consistent for all bonds of the same degree. To distinguish between the two explanations we would need at least the average levels at each degree to be the same for each factor; this is a suggestion for a future experiment.
 
 In conclusion, this \namecref{part3} has demonstrated that ToyWorld is capable of emergent behaviour, and appears suitable for further development of the inheritance mechanism explored in \cref{part2}.

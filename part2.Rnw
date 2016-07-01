@@ -134,7 +134,7 @@ Let's look at each element in turn.
 	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
 	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.
-	\item \emph{Selection} forms a new population by selecting elements from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
+	\item \emph{Selection} forms a new population by selecting entities from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
 	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value (see \cref{fig:correlation}) and some degree of correlation captured by the value of the function $Range$.
 \end{enumerate}
 
@@ -237,11 +237,11 @@ Our predictions for changing environments are:
 
 In the absence of any restrictions on population size there is nothing to prevent a growing population eventually exceeding the capacity of the simulation system. This is unfortunately an unavoidable difficulty in experiments with exponential growth systems rather than a limitation of the theoretical model. 
 
-The size of the population is determined by how population elements are introduced and removed. In standard Evolutionary Computation (\eg \textcite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New elements can be straight replacements, like-for-like, of their parent, or be placed in competition against elements in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
+The size of the population is determined by how population entities are introduced and removed. In standard Evolutionary Computation (\eg \textcite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New entities can be straight replacements, like-for-like, of their parent, or be placed in competition against entities in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
 Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs (\eg right-hand side of \cref{fig:unboundedplot}), some restriction on population size is needed, and it's important that we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
 
-In \textcite{Gaucherel2012} the approach is to remove individuals from the population stochastically, with probability related to $e$ to the negative power of the population size multiplied by a configurable parameter, $\mu$. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of elements is extracted from the original population, with elements chosen by one of a wide range of selection algorithms (among many sources, see overviews in \textcite[sect. 4.3.1]{DeJong2006} and \textcite[sect. 4.2]{Vose:1999di}.) Here though we separate the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
+In \textcite{Gaucherel2012} the approach is to remove individuals from the population stochastically, with probability related to $e$ to the negative power of the population size multiplied by a configurable parameter, $\mu$. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of entities are extracted from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \textcite[sect. 4.3.1]{DeJong2006} and \textcite[sect. 4.2]{Vose:1999di}.) Here though we separate the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
 The goal of this section is to:
 
@@ -258,7 +258,7 @@ If there is an affect on the hypothesis tests attributable to the bound mechanis
 df <- subset(load.results('results/results-819350e-unrestricted.data'), ecf==0)
 @
 
-All experiments in this \namecref{practical-considerations} are based on the following factorial experiment design, with factors and factor levels given in \cref{tbl:factor-levels-c5}. The environment is considered ``stable'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} elements, and each run is for a maximum of \Sexpr{max(df['gen'])} generations.
+All experiments in this \namecref{practical-considerations} are based on the following factorial experiment design, with factors and factor levels given in \cref{tbl:factor-levels-c5}. The environment is considered ``stable'' (that is, each element's fitness value does not change); the initial population consists of \Sexpr{df[1,]['pop']} entities, and each run is for a maximum of \Sexpr{max(df['gen'])} generations.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c5}
@@ -314,7 +314,7 @@ This section describes two possible approaches to the implementation of the \emp
 	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
-The first approach is to take a random sample of $n$ elements from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \textcite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
+The first approach is to take a random sample of $n$ entities from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \textcite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
 
 It might be argued that \emph{truncation} is too extreme to make a fair comparison. However, without an accepted scheme to order selection algorithms along a dimension of interest, such as selection pressure, it's hard to justify oversetting it by an alternative. The key criteria is whether the conclusions drawn from any particular algorithm can be extended to a more general conclusion, independent of the specifics of the algorithm or algorithms used. The specificity of selection algorithms means this a difficult argument to make, and most likely only possible by examining a number of them, which is beyond the scope of this work.
 
@@ -327,11 +327,11 @@ Returning then to our examination of fitness-independent and fitness-based upper
 
 \subsection{Fitness-independent sampling}\label{fitness-independent-sampling}
 
-The bound is implemented by a fitness-independent sampling of $n$ elements from the population (as given in the $Restriction$ function in \cref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
+The bound is implemented by a fitness-independent sampling of $n$ entities from the population (as given in the $Restriction$ function in \cref{upper-bound-model-algorithm}), if and only if the pre-sampling population size is greater than $n$.
 
 \begin{algorithm}
 	\Def{Restriction(population,n)}{
-		\Return $\text{random sample of }n\text{ elements from }population$\;
+		\Return $\text{random sample of }n\text{ entities from }population$\;
 	}
 	\caption{Restriction (Fitness-independent sampling)()}
 \end{algorithm}
@@ -347,7 +347,7 @@ It also recognises that in both Evolutionary Computation and natural populations
 \begin{algorithm}
 	\Def{Restriction(population,n)}{
 		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
-		\Return $\text{first }n\text{ elements from }sortedPopulation$\;
+		\Return $\text{first }n\text{ entities from }sortedPopulation$\;
 	}
 	\caption{Restriction (Fitness-based selection)()}
 \end{algorithm}
@@ -775,9 +775,33 @@ In this chapter we describe an appropriate experimental design and model to desc
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\linewidth]{figures/conceptual-model-for-environmental-change}
+	\resizebox{0.8\textwidth}{!}{
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
+		main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
+		\node[main node] (evo) at (0,10) {Evolutionary model};
+		\node[main node] (env) at (0,0) {Environmental model};
+		\node[main node] (pop) at (6,10) {Population};
+		\node[main node] (ts) at (6,0) {Time series of fitness changes};
+		\node[main node] (r1) at (12,10) {Metrics};
+		\node[main node] (r2) at (12,0) {Metrics};
+		\node[main node] (test) at (12,5) {Hypothesis test};
+		\node at (4,14) {Simulation};
+		
+		\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
+		(env) edge [->] (ts)
+		(evo) edge [->] (pop)
+		(pop) edge [->] (r1)
+		(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
+		(r1) edge [->] (test)
+		(r2) edge [->] (test)
+		(ts) edge [->] (r2);
+		\draw [every node] (3,13) rectangle (9,-3);
+		\end{tikzpicture}
+	}
+	\caption{Conceptual model for experiments incorporating environmental change}
+	\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
-\end{figure}\label{fig:conceptual-model-for-environmental-change}
+\end{figure}
 
 \section{Environmental model}\label{environmental-model}
 
@@ -909,15 +933,30 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
-As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The values of the independent variables in each run are taken from a uniform random sample from their range, or in other words, a series of random samples with uniform probability from a space described as the hypercube with one variable on each of the three axes (see \cref{fig:hypercube}.)
+As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The independent variables in each run are the parameters to the environmental model, with values taken from a uniform random sample from their range. Or in other words, a series of random samples with uniform probability from a cube formed by a parameter on each of the three axes (see \cref{fig:cube}.)
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\linewidth]{figures/hypercube}
+	\resizebox{0.8\textwidth}{!}{
+		\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm, thick,font=\LARGE]
+		\draw (-4,3) rectangle (4,-5);
+		\draw (-4,3) -- (-1,6) -- (7,6) -- (7,-2) -- (4,-5);
+		\draw (7,6) -- (4,3) ;
+		\draw [dashed] (-1,6) -- (-1,-2) -- (7,-2);
+		\draw [dashed] (-1,-2) -- (-4,-5);
+		\draw [densely dotted] (1,-5) -- (2,-4) -- (5,-4);
+		\draw [densely dotted] (2,-4) -- (2,1.5) node[above] {$\Theta,\delta,\sigma_e$} ;
+		\node at (-5,-1) {$\delta$};
+		\node at (0,-6) {$\Theta$};
+		\node at (6.5,-4) {$\sigma_e$};
+		\end{tikzpicture}
+	}
+	\caption{The cube formed by the ranges of the three parameters to the environmental model, $\Theta$, $\sigma_e$ and $\delta$.}
+	\label{fig:cube}
 	\end{center}
-\end{figure}\label{fig:hypercube}
+\end{figure}
 
-We create a set of independent datasets by sampling from different four hypercubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges saw a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a side of the hypercube) was adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time required.
+We create a set of independent datasets by sampling from different four parameter cubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a cube side) is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
 
 \begin{table}
 	\begin{center}

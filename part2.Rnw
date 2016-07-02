@@ -217,7 +217,9 @@ Variation and selection are sufficient for inheritance, where the degree and var
 
 \section{Predictions}\label{predictions}
 
-First we define the two distinct types of relationship between an entity and its environment--stable, and changing--mentioned in an earlier \namecref{methods-p2}. A stable environment is one where the relative fitness of each entity with respect to the environment does not change over time, whereas it does in a changing environment. These definitions of course assume that the phenotype of the entity remains constant over its lifespan, and hence that the only cause of a fitness change can be a change in environment rather than, for example, the entity learning or developing. These are both processes that change the phenotype on a shorter timescale than a lifespan.
+First we define the two distinct types of relationship between an entity and its environment--stable, and changing: 
+
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In our model the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
 In a stable or unchanging environment our prediction is that:
 

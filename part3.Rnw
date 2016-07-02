@@ -850,7 +850,7 @@ The outcomes for each reaction alternative from an example collision are shown i
 	\end{tikzpicture}}%
 \end{figure}\label{fig:collision_diagrams}
 
-\section{Model Validation}\label{model-validation}
+\section{Model validation}\label{model-validation}
 
 The design outlined in \cref{toyworld} leads to the following expectations:
 \begin{enumerate}
@@ -929,7 +929,7 @@ results between the reaction sets.
 
 Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution. The model is simpler than comparable alternatives, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear if this is equally important in non-biological systems. We expect that experimental comparison between the aspatial and spatial approaches in the course of our exploratory experiments will help to clarify this.
 
-\chapter{Reactant and Product Strategies}\label{reactant-and-product-strategies}
+\chapter{Sensitivity to reactant and product strategies}\label{reactant-and-product-strategies}
 
 In this section we explore the following questions:
 

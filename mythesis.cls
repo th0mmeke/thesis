@@ -320,6 +320,11 @@ Copyright \copyright \the\year\ \theAuthor\\
 \newcommand{\ifprefchar}{\ifpunctmark{'}} % Fix for #365 - problems with names such as "van den..."
 \newcommand{\biblatexstyle}[1]{%
 \usepackage[style=#1,backend=bibtex]{biblatex}
+% Fix for \verb breaking onto multiple lines in BibTex 2016
+% http://tex.stackexchange.com/questions/311426/bibliography-error-use-of-blxbblverbaddi-doesnt-match-its-definition-ve
+\makeatletter
+\def\blx@maxline{77}
+\makeatother
 \bibliography{\listofbibfiles}
 }
 \newcommand{\usebibliography}{\renewcommand{\bibname}{Bibliography}}

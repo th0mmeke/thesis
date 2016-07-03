@@ -197,7 +197,7 @@ The purpose of this \namecref{systematic-map} is to provide a systematic summary
 	\item Possibly identify future research directions.
 \end{enumerate}
 
-The research method is a an informal systematic Map, derived from evidence-based medicine \parencite{Cochrane:2011qy, CRD:2008fj}. The major difference to a standard expert review is in the pre-definition of a research protocol, search strategy, exclusion and inclusion criteria, and quality criteria. All of these are documented so the review may be repeated or, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+The research method is a an informal Systematic Map, derived from evidence-based medicine \parencite{Cochrane:2011qy, CRD:2008fj}. The major difference to a standard expert review is in the pre-definition of a research protocol, search strategy, exclusion and inclusion criteria, and quality criteria. All of these are documented so the review may be repeated or, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
 
 \section{Need for a review}
 
@@ -219,9 +219,11 @@ Systematic Maps also provide categorisation of a research area, but this is not 
 Note that both Reviews and Maps usually rely exclusively on Primary sources (originals) rather than Secondary (interpretation, or after-the-fact), or Tertiary sources (distillation or collections of Primary and Secondary sources).
 
 \subsection{Inclusion and exclusion criteria}
-Inclusions: Primary research, published in conference proceedings or peer-reviewed journals.
 
-Exclusions: Reference works, technical reports, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
+\begin{itemize}
+	\item \emph{Inclusions.} Primary research, published in conference proceedings or peer-reviewed journals.
+	\item \emph{Exclusions}. Reference works, technical reports, biological modelling, education, introductions, summaries of research, case studies, application of research, abstracts of conference keynotes, computer art, biologically-specific works, programming paradigms, work related to the practice or theory of software engineering, and genetic programming and algorithms.
+\end{itemize}
 
 \subsection{Stage 1--Source selection}
 The main conferences for \gls{alife} are Alife, the International Conference on the Synthesis and Simulation of Living Systems, and ECAL, the European Conference in Artificial Life, both published by MIT Press. The first in the Alife series, An Interdisciplinary Workshop on the Synthesis and Simulation of Living Systems, was held in 1987 at Los Alamos, New Mexico, and the $15^{th}$ is to be held in June 2016. Alife is now held biennially in even numbered years, although earlier conferences were more irregular. ECAL began  in 1991 with the $13^{th}$ and most recent held in 2015, and is also held biennially, in odd numbered years so as not to conflict with Alife.
@@ -235,27 +237,29 @@ Other sources were identified by examining the publishers and publications of th
 \toprule
 Data source & Rationale for inclusion\\
 \midrule
+ACM Guide to Computing Literature & Major computer science database and proceedings for \textit{GECCO}.\\
 IEEE Xplore & Major computer science database and proceedings for \textit{IEEE Congress on Evolutionary Computing}.\\
-ACM Digital Library & Major computer science database and proceedings for \textit{GECCO}.\\
-Springer & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
 Web of Science & Broad coverage, multiple fields, includes indexing for MIT Press publications.\\
+SpringerLink & Lecture Notes in Computer Science series, including proceedings of \textit{ECAL}, \textit{CompLife}, \textit{Parallel Problem Solving from Nature conferences}, and other conferences.\\
 Previously identified primary studies & Quality and consistency check\\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Data sources}
+\caption{Data sources}\label{map-data-sources}
 \end{table}
 
 No journals were directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
+
+\Cref{map-data-sources} lists the sources used.
 
 \subsection{Stage 2--Keywords}
 
 The keywords used were driven by the research question, expanded with common synonyms:
 
-"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)
+\texttt{"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)}
 
 \subsection{Stage 3--Automated Search}
-
+Query parameters for each source are given in \cref{map-queries}.
 \begin{table*}
 \footnotesize
 \begin{center}
@@ -265,7 +269,7 @@ Datasource & Query & Results\\
 \midrule
 ACM Guide to Computing Literature & (+"artificial chemistry" inheritance replicator template holistic reproduction reproduce heredity composome)&73 records\\
 \midrule
-IEEE & "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
+IEEE Xplore& "Abstract":“artificial chemistry” AND (“inheritance” OR “replicator” OR “template” OR “holistic” OR “reproduction” OR “reproduce” OR “heredity” OR “composome”)&6 records  \\
 \midrule
 Web of Science & (TS=("artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome))) AND LANGUAGE: (English)&26 records\\
 \midrule
@@ -273,14 +277,12 @@ SpringerLink (via JabRef) &"artificial chemistry" AND (inheritance OR replicator
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Query parameters for automated search. Searches were not restricted to any year range.}
+\caption{Query parameters for automated search. Searches were not restricted to any year range.}\label{map-queries}
 \end{table*}
 
 \subsection{Stage 4--Screening on title}
 
 Combine all entries, and remove duplicates. After the removal of duplicates, 78 entries remained.
-
-Quality check--did we rediscover the papers we'd found earlier by expert search? And if not, why not?
 
 \begin{table*}
 \footnotesize
@@ -304,10 +306,10 @@ NAC \cite{Suzuki2006}    & No, but similar found.\\
 \bottomrule
 \end{tabular}
 \end{center}
-\caption{Rediscovery of existing key papers.}
+\caption{Rediscovery of existing key papers.}\label{map-existing}
 \end{table*}
 
-There are a variety of reasons why earlier papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
+As a quality check, did we rediscover the papers we'd found earlier by expert search? And if not, why not? \Cref{map-existing} gives the results for this check. There are a variety of reasons why a number of previously-identified papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
 
 \subsection{Stage 5--Screening on abstract}
 Difficult to be error-free; preference is therefore not to exclude based solely on abstract unless clear-cut.
@@ -361,13 +363,12 @@ Removal of exact duplicates--same publication source, title, authors. In practic
 % sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" ../mythesis.bib > fulltitles
 % diff -iw titles fulltitles | grep -e "^<" | wc
 
-Finally, we removed duplicates of previously identified works (32 duplicates).
-\eg \cite{smFaulconbridgeStepneyMillerEtAl2011}--similar to \cite{Faulconbridge2011, Faulconbridge2010}
+Finally, we removed duplicates of previously identified works (32 duplicates), such as \cite{smFaulconbridgeStepneyMillerEtAl2011} which is closely related to \cite{Faulconbridge2011, Faulconbridge2010}.
 
 \section{Results, and discussion}
 
 At the end of the exercise, our Systematic Map contained 12 new papers:
-\begin{itemize}
+\begin{enumerate}
 \item \cite{smAdamsLipson2003}
 \item \cite{smBobrikKvasnickaPospichal2008a}
 \item \cite{smBobrikKvasnickaPospichal2008}
@@ -380,7 +381,7 @@ At the end of the exercise, our Systematic Map contained 12 new papers:
 \item \cite{smBanzhafDittrichEller1999}--``survival strategies'' might involve replication
 \item \cite{smGordon-Smith2011}
 \item \cite{smGohEweGoh2014}
-\end{itemize}
+\end{enumerate}
 
 This review does have some limitations, of which the most serious are:
 \begin{itemize}

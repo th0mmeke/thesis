@@ -190,7 +190,7 @@ The model is parameterised to make it easy to describe different specific models
 		}
 		\Return $population_{new}$\;
 	}
-	\caption{Definitions for the functions Selection and Variation}\label{model-functions}
+	\caption{Definitions for the functions \emph{Selection} and \emph{Variation}}\label{model-functions}
 \end{algorithm}
 
 \section{Hypothesis}\label{h2}
@@ -313,7 +313,7 @@ This section describes two possible approaches to the implementation of the \emp
 		\BlankLine
 		\lIf{$population$ size is too small}{break}
 	}
-	\caption{Algorithm for the Model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
+	\caption{Algorithm for the model with an upper bound on population size. The \emph{Restriction} function is the only difference with the base model.}\label{upper-bound-model-algorithm}
 \end{algorithm}
 
 The first approach is to take a random sample of $n$ entities from the population, without regard for fitness (that is, fitness-independent sampling), while the other is to adopt the \emph{truncation} mechanism (described in \textcite[124]{DeJong2006} alongside others) as representative (although strongly elitist) of a fitness-based mechanism (henceforth called fitness-based selection).
@@ -335,7 +335,7 @@ The bound is implemented by a fitness-independent sampling of $n$ entities from 
 	\Def{Restriction(population,n)}{
 		\Return $\text{random sample of }n\text{ entities from }population$\;
 	}
-	\caption{Restriction (Fitness-independent sampling)()}
+	\caption{\emph{Restriction}: Fitness-independent sampling}
 \end{algorithm}
 
 %If we compare fitness-independent sampling to the control case without limits, we conclude that fitness independent sampling does indeed make a difference to the results, confirming the earlier visual assessment from the box and \gls{qq} plots (\cref{}.) This is somewhat unexpected as the average fitness before and after the application of the mechanism is, within sampling error, unchanged. It seems that the difference between limited and unlimited populations might come instead from the differences in population size in the selection and reproduction steps of the model rather than from any fitness-modifying actions of the restriction mechanism.
@@ -351,7 +351,7 @@ It also recognises that in both Evolutionary Computation and natural populations
 		$sortedPopulation\leftarrow$ sorted population by element fitness, in decreasing order \;
 		\Return $\text{first }n\text{ entities from }sortedPopulation$\;
 	}
-	\caption{Restriction (Fitness-based selection)()}
+	\caption{\emph{Restriction}: Fitness-based selection}
 \end{algorithm}
 
 \section{Experimental design}

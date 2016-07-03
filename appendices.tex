@@ -197,7 +197,7 @@ The purpose of this \namecref{systematic-map} is to provide a systematic summary
 	\item Possibly identify future research directions.
 \end{enumerate}
 
-The research method is a an informal Systematic Map, derived from evidence-based medicine \parencite{Cochrane:2011qy, CRD:2008fj}. The major difference to a standard expert review is in the pre-definition of a research protocol, search strategy, exclusion and inclusion criteria, and quality criteria. All of these are documented so the review may be repeated or, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
+The research method is an informal Systematic Map, derived from evidence-based medicine \parencite{Cochrane:2011qy, CRD:2008fj}. The major difference to a standard expert review is in the pre-definition of a research protocol, search strategy, exclusion and inclusion criteria, and quality criteria. All of these are documented so the review may be repeated or, given the difficulty of repeating a digital library search, at least evaluated by other researchers and practitioners.
 
 \section{Need for a review}
 
@@ -228,7 +228,7 @@ Note that both Reviews and Maps usually rely exclusively on Primary sources (ori
 \subsection{Stage 1--Source selection}
 The main conferences for \gls{alife} are Alife, the International Conference on the Synthesis and Simulation of Living Systems, and ECAL, the European Conference in Artificial Life, both published by MIT Press. The first in the Alife series, An Interdisciplinary Workshop on the Synthesis and Simulation of Living Systems, was held in 1987 at Los Alamos, New Mexico, and the $15^{th}$ is to be held in June 2016. Alife is now held biennially in even numbered years, although earlier conferences were more irregular. ECAL began  in 1991 with the $13^{th}$ and most recent held in 2015, and is also held biennially, in odd numbered years so as not to conflict with Alife.
 
-Other sources were identified by examining the publishers and publications of the primary sources previously discovered by an earlier standard literature review. The main publishers were MIT Press, and Springer (indexed by \emph{Web of Science} and \emph{SpringerLink}, respectively), with the most common sources being the conference proceedings of \emph{Alife} or the journals \emph{Artificial Life} and the \emph{Journal of Theoretical Biology}, all indexed by \emph{Web of Science}).
+Other sources are identified by examining the publishers and publications of the primary sources previously discovered by an earlier standard literature review. The main publishers are MIT Press, and Springer (indexed by \emph{Web of Science} and \emph{SpringerLink}, respectively), with the most common sources being the conference proceedings of \emph{Alife} or the journals \emph{Artificial Life} and the \emph{Journal of Theoretical Biology}, all indexed by \emph{Web of Science}).
 
 \begin{table}
 \footnotesize
@@ -248,13 +248,13 @@ Previously identified primary studies & Quality and consistency check\\
 \caption{Data sources}\label{map-data-sources}
 \end{table}
 
-No journals were directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
+No journals are directly included as these databases index all the journals identified during the earlier literature search. For example, the principal journals in the Artificial Life field, \emph{Artificial Life} and \emph{Adaptive Behaviour} \parencite{Aicardi2010}, are indexed by \textit{Web of Science}.
 
 \Cref{map-data-sources} lists the sources used.
 
 \subsection{Stage 2--Keywords}
 
-The keywords used were driven by the research question, expanded with common synonyms:
+The keywords used are driven by the research question, expanded with common synonyms:
 
 \texttt{"artificial chemistry" AND (inheritance OR replicator OR template OR holistic OR reproduction OR reproduce OR heredity OR composome)}
 
@@ -309,16 +309,16 @@ NAC \cite{Suzuki2006}    & No, but similar found.\\
 \caption{Rediscovery of existing key papers.}\label{map-existing}
 \end{table*}
 
-As a quality check, did we rediscover the papers we'd found earlier by expert search? And if not, why not? \Cref{map-existing} gives the results for this check. There are a variety of reasons why a number of previously-identified papers were not discovered, however the main cause is that some meta-information did not directly refer to replication or inheritance but rather implied it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
+As a quality check, have we rediscovered the papers found earlier by expert search? And if not, why not? \Cref{map-existing} gives the results for this check. There are a variety of reasons why a number of previously-identified papers are not included, however the main cause is that some meta-information does not directly refer to replication or inheritance but rather implies it through a more general concept such as emergence. This is difficult to resolve with a keyword search without increasing the number of false positives.
 
 \subsection{Stage 5--Screening on abstract}
-Difficult to be error-free; preference is therefore not to exclude based solely on abstract unless clear-cut.
+It is difficult to be error-free; the preference is therefore not to exclude based solely on abstract unless the decision is clear-cut.
 
 Issues specific to the abstracts:
 \begin{itemize}
-	\item Ambiguous terminology
-	\item Insufficient detail in abstract
-	\item Depth or degree--difficulty in determining the degree of focus on relevant ideas from the abstract. If a paper mentions generative ideas amongst other exclusion considerations, is the paper included or excluded? 
+	\item Ambiguous terminology.
+	\item Insufficient detail in abstract.
+	\item Depth or degree. General difficulty in determining the degree of focus on relevant ideas from the abstract.
 \end{itemize}
 
 %\cite{smDecraeneMcmullin2011}
@@ -357,17 +357,17 @@ Issues specific to the abstracts:
 
 \subsection{Stage 6--Removal of duplicates}
 
-Removal of exact duplicates--same publication source, title, authors. In practice performed during Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so doesn't detect some potential duplicates that were then identified in a follow-up by inspection.
+Removal of exact duplicates, with same publication source, title, and authors. In practice performed during Stage 4 using JabRef's duplicate feature to identify potential duplicates. Unfortunately the JabRef algorithm appears to be case-sensitive, and so doesn't detect some potential duplicates that must be identified in a follow-up by inspection.
 
 % sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" post5.bib > titles
 % sed -n "s/\stitle.*{\([^\}]*\)},/\1/p" ../mythesis.bib > fulltitles
 % diff -iw titles fulltitles | grep -e "^<" | wc
 
-Finally, we removed duplicates of previously identified works (32 duplicates), such as \cite{smFaulconbridgeStepneyMillerEtAl2011} which is closely related to \cite{Faulconbridge2011, Faulconbridge2010}.
+Finally, we remove duplicates of previously identified works (32 duplicates), such as \cite{smFaulconbridgeStepneyMillerEtAl2011} which is closely related to \cite{Faulconbridge2011, Faulconbridge2010}.
 
 \section{Results, and discussion}
 
-At the end of the exercise, our Systematic Map contained 12 new papers:
+At the end of the exercise, our Systematic Map contains 12 new papers:
 \begin{enumerate}
 \item \cite{smAdamsLipson2003}
 \item \cite{smBobrikKvasnickaPospichal2008a}
@@ -383,10 +383,10 @@ At the end of the exercise, our Systematic Map contained 12 new papers:
 \item \cite{smGohEweGoh2014}
 \end{enumerate}
 
-This review does have some limitations, of which the most serious are:
+This review does have some limitations, of which the following are the most serious:
 \begin{itemize}
 	\item Subjective assessment of papers from title and abstract may miss some relevant studies based solely on quality of description.
-	\item Sole researcher means no cross-checking of inclusions and exclusions.
+	\item Single researcher means no cross-checking of inclusions and exclusions.
 \end{itemize}
 
 \chapter{Applications of GRN in EAs}\label{applications-of-grn-in-eas}

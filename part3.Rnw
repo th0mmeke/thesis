@@ -177,20 +177,13 @@ Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries ha
 
 \section{Constructive chemistries}\label{constructive-chemistries}
 
-\quote{
-	A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
-{\cite{Benko2009}}
+%\quote{A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}
+{\parencite{Benko2009}}
+An \gls{achem} is \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties: \quote{construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.}{\parencite{Fontana1994}}
 
-An \gls{achem} is \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties. As defined in that text: \quote{construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.}{\cite{Fontana1994}}
+The definition provided is as follows: \quote{We refer to models in which new agents are constructed in an unspecific (essentially stochastic) fashion as \emph{weakly constructive}. This is to be contrasted with a situation in which the encounter of two agents \emph{implies} a \emph{specific} third one \ldots{} Models of this kind will be termed \emph{strongly constructive}. The prime example of a strongly constructive system is chemistry.}{\parencite{Fontana1994}}
 
-\quote{We refer to models in which new agents are constructed in an unspecific (essentially stochastic) fashion as \emph{weakly constructive}. This is to be contrasted with a situation in which the encounter of two agents \emph{implies} a \emph{specific} third one \ldots{} Models of this kind will be termed \emph{strongly constructive}. The prime example of a strongly constructive system is chemistry.}{\cite{Fontana1994}}
-
-The commentary that immediately follows in the reference is significant:
-
-\quote{A strongly constructive system that contains agent \emph{A} must cope with the network of its implications. But, then, it also must cope with the implications of the implications. And so on.}
-{\cite[217]{Fontana1994}}
-
-A strongly constructive system is one which maintains closure, and in which there is self-consistency and some form of logical structure (the ``implications''.) Both implicit laws and implicit molecule definitions are required for constructive chemistries. 
+A strongly constructive system is one which maintains closure\footnote{Or as stated by \textcite[217]{Fontana1994},``A strongly constructive system that contains agent \emph{A} must cope with the network of its implications. But, then, it also must cope with the implications of the implications. And so on.''}, and in which there is self-consistency and some form of logical structure. Both implicit laws and implicit molecule definitions are required for constructive chemistries. 
 
 \begin{itemize}
 \item Explicit reaction laws are independent of molecular structure, while implicit laws are structure-based.
@@ -743,7 +736,8 @@ The outcomes for each reaction alternative from an example collision are shown i
 			\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 			\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 		\end{tikzpicture}}%
-\end{figure}\begin{figure}
+%\end{figure}\begin{figure}
+
 \centering
 \subcaptionbox{O=C=O + C$\rightarrow$ [O] + C + [C]=O}[0.5\textwidth][l]{%
 	\begin{tikzpicture}[scale=3,tdplot_main_coords]
@@ -790,7 +784,8 @@ The outcomes for each reaction alternative from an example collision are shown i
 		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 	\end{tikzpicture}}%
-\end{figure}\begin{figure}
+%\end{figure}\begin{figure}
+
 \centering
 \subcaptionbox{O=C=O + C$\rightarrow$ [H] + [CH3] + O=C=O}[0.5\textwidth]{%
 	\begin{tikzpicture}[scale=3,tdplot_main_coords]
@@ -840,7 +835,9 @@ The outcomes for each reaction alternative from an example collision are shown i
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 		\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
 	\end{tikzpicture}}%
-\end{figure}\label{fig:collision_diagrams}
+\caption{Reaction alternatives generated by ToyWorld from a collision between $O=C=O$ and $C$ molecules. Each alternative generates a unique set of products, with corresponding velocities calculated by \cref{alg:post_collision_adjustments} so as to preserve energy and momentum.}
+\label{fig:collision_diagrams}
+\end{figure}
 
 \section{Model validation}\label{model-validation}
 
@@ -919,7 +916,7 @@ results between the reaction sets.
 
 \section{Conclusions}\label{conclusions}
 
-Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution. The model is simpler than comparable alternatives, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear if this is equally important in non-biological systems. We expect that experimental comparison between the aspatial and spatial approaches in the course of our exploratory experiments will help to clarify this.
+Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution. The model is simpler than comparable alternatives, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear if this is equally important in non-biological systems. An experimental comparison between the aspatial and spatial approaches in the experiments described in \cref{reactant-and-product-strategies} will help to clarify this.
 
 \chapter{Sensitivity to reactant and product strategies}\label{reactant-and-product-strategies}
 

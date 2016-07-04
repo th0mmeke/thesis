@@ -72,8 +72,8 @@
  \newcommand{\hairsp}{\hspace{1pt}}% hair space
  \newcommand{\hquad}{\hskip0.5em\relax}% half quad space
  \newcommand{\TODO}[1]{\textcolor{red}{\bf TODO #1}\xspace}
- \newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace}
- \newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace}
+ \newcommand{\ie}{\mbox{\textit{i.\hairsp{}e.} }}
+ \newcommand{\eg}{\mbox{\textit{e.\hairsp{}g.} }}
  \newcommand{\na}{\quad--}% used in tables for N/A cells
 
 \providecommand\newthought[1]{%
@@ -81,7 +81,7 @@
    \noindent\textbf{#1}%
 }
 
-\renewcommand{\quote}[2]{{\fontencoding{T1}\selectfont{``}#1{''}\footnote{#2}}}
+\renewcommand{\quote}[2]{{``}#1{''}{#2}}
 \newcommand\Small{\fontsize{9}{9.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\lsstyle}
 

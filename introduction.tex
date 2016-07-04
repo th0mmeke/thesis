@@ -251,7 +251,7 @@ As stated by many (\eg \textcite{Pascal2013, Malaterre2015}) a definition of lif
 \Textcite{Fernando:2007pf} presents a partial compendium of definitions which illustrates the range of opinion:
 
 \quote{
-...at least one of the following outcomes: ‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{\cite{Fernando:2007pf}}
+...at least one of the following outcomes: ‘open-ended evolution’ (Bedau et al., 2000); the origin of basic autonomy, i.e. a dissipative system capable of the recursive generation of functional constraints (Ruiz-Mirazo et al., 2004); a process ultimately capable of the production of nucleic acids or other modular replicators with unlimited heredity potential (Maynard-Smith and Szathmary, 1995; Szathmary, 2000); identification of ``the course of evolution by which the determinate order of biological metabolism developed out of the chaos of intercrossing reactions'' (Oparin, 1964); the coupled cycling of bioelements (Morowitz, 1968, 1971); the maximization of entropy production by a biosphere (Kleidon, 2004); the minimal unit of life (Ganti, 2003a, b); or an autopoetic unit (Maturana and Verela, 1992)?}{}
 
 One interesting distinction between living and non-living comes from \textcite{Rasmussen2004}--non-living systems explore a state-space through thermodynamics and so, in a sense, through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \textcite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things. Given the relationship between information and entropy, the statement in \textcite{Schrodinger1944}, that metabolism is how ``living matter evades the decay to equilibrium'', seems very similar.
 
@@ -330,10 +330,9 @@ The development of an organism from a zygote is thus controlled by a pattern of 
 
 As the regulatory mechanism is constructed from proteins and RNAs encoded in the genotype, and as the genotype is generally under the influence of natural selection, evolution also acts upon gene regulation, and hence upon development. The study of the evolution of the developmental mechanism itself is known as Evolutionary Development, or, more colloquially, EvoDevo.
 
-\parencite{Prudhomme:2007ax} believe that evolutionary novelties more commonly arise from changes or additions of regulatory \emph{connections} than from the development of \emph{new} genes or regulatory elements; that is, from changes to the network topology rather than from additions to the network elements. The underlying implication is that novelties are therefore new compositions of pre-existing elements, rather than being constructed ``\textit{de novo}'', and that production of novelties may be relatively rapid. Connection changes may happen quickly; by comparison, new genes may take many generations.
+\Textcite{Prudhomme:2007ax} believe that evolutionary novelties more commonly arise from changes or additions of regulatory \emph{connections} than from the development of \emph{new} genes or regulatory elements; that is, from changes to the network topology rather than from additions to the network elements. The underlying implication is that novelties are therefore new compositions of pre-existing elements, rather than being constructed ``\textit{de novo}'', and that production of novelties may be relatively rapid. Connection changes may happen quickly; by comparison, new genes may take many generations.
 
-\quote{
-According to the strictly structural concept, the genotype is considered as a mosaic of independent molecular blue-prints for the building of individual cellular constituents. In the execution of these plans, however, co-ordination is evidently of absolute survival value. The discovery of regulator and operator genes, and of repressive regulation of the activity of structural genes, reveals that the genotype contains not only a series of blue-prints, but a co-ordinated program of protein synthesis and the means of controlling its execution.}{}\cite[p354]{Jacob:1961ys}}
+\quote{According to the strictly structural concept, the genotype is considered as a mosaic of independent molecular blue-prints for the building of individual cellular constituents. In the execution of these plans, however, co-ordination is evidently of absolute survival value. The discovery of regulator and operator genes, and of repressive regulation of the activity of structural genes, reveals that the genotype contains not only a series of blue-prints, but a co-ordinated program of protein synthesis and the means of controlling its execution.}{\parencite[p354]{Jacob:1961ys}}
 
 A network formed by the regulatory interactions between genes and the transcriptional products of those genes (\glspl{tf}) is known as a Gene Regulatory Network, or \gls{grn}.
 
@@ -411,7 +410,7 @@ The first two of these differences are significant; \glspl{ea} are not capable o
 
 A summary of some relevant work in the application of \glspl{grn} to \glspl{ea} to improve the robustness and modularity of solutions can be found in \cref{applications-of-grn-in-eas}.
 
-A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \textcite{Paixao2015}, based on ``models in theoretical population genetics and in the theory of evolutionary computation.'' For example: ``Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.'' \parencite{Paixao2015}}
+A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \textcite{Paixao2015}, based on ``models in theoretical population genetics and in the theory of evolutionary computation.'' For example: ``Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.'' \parencite{Paixao2015}
 
 \subsection{Artificial Life}\label{alife}
 The well-known description of \gls{alife} by \textcite{Langton1989} is that it is ``life-as-it-could-be'', rather than ``life-as-we-know-it''. The main conference series in \gls{alife}, also called ``Alife'', uses as a tagline ``Synthesis and simulation of living systems'', which is closely related to the definition of \textcite{Bedau:2007ga} : ``an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesising simple forms of them.''
@@ -671,14 +670,11 @@ In this \namecref{methods} we explain the approach taken in the remainder of thi
 \section{Research questions}\label{research-questions}
 
 This work overall is motivated by the following two research questions:
-\vspace{0.3cm}
-\begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=RQ\arabic*:]
-		\item If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?
-		\item Can such a mechanism then be successfully demonstrated in an artificial system?
-	\end{enumerate}
-\end{minipage}
-\vspace{0.3cm}
+
+\begin{enumerate}[label=RQ\arabic*:]
+	\item If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?
+	\item Can such a mechanism then be successfully demonstrated in an artificial system?
+\end{enumerate}
 
 How then are we to approach these research questions? The field of artificial life is synonymous with simulation \parencite[chap.2]{Aicardi2010}. In other forms of science however practitioners make use of a number of other tools, including experiments and mathematical models. Each method is well suited to some types of questions, and inappropriate for others. Is the presumption of simulation justified for our research questions?
 

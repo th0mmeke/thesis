@@ -56,7 +56,7 @@ One advantage of \glspl{achem} as pointed out by \textcite[5]{Funes2001} is that
 \begin{mdframed}[style=box, frametitle={Review of relevant elements of Physical Chemistry}]
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
-A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(A_e\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
+A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(E_a\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
 
 The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\). The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order. (Example taken from \textcite{Kotz2006})
 
@@ -98,8 +98,7 @@ Autocatalysis, introduced by \textcite{Ostwald1890}, is a different approach to 
 energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
 reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
 characteristic rate acceleration over time given by the differential equation--
-\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where \(n\) is the order of the reaction \parencite{Plasson2010}. Example
-(indirect network autocatalysis) of glycolysis where pattern is ATP \(\rightarrow\) n.ATP--ATP initially consumed, but overall created.
+\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where \(n\) is the order of the reaction, and \[f(\mathbf{X})\] the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
 
 Autocatalysis may be realised by 1) either a single reaction (\eg A + X + Y \(\rightarrow\) 2A + Z) or a linear chain of reactions through
 intermediate products, called template autocatalysis, or 2) by a reaction network. Networks may be indirect through a series of
@@ -108,7 +107,7 @@ example in the replication of viroids where each RNA strand can catalyse the pro
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation \parencite{Plasson2010}.
 \end{mdframed}
 
-Artificial chemistries are regularly employed in three application areas: real-world chemistry emulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry \parencite{Fontana1994} is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
+Artificial chemistries are regularly employed in three application areas: real-world chemistry simulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry \parencite{Fontana1994} is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
 A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
 
@@ -120,7 +119,7 @@ The primary requirement in both cases is fidelity with real-world chemistry, whi
 
 The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The Chemical Abstract Service (CAS) database references approximately 34 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for \textit{de novo} drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approaches. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
-Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \textcite{Flamm2010,Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any (base- or acid) reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
+Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but highly simplified, approach in \textcite{Flamm2010,Ullrich2010}. The prediction of the shape and hence the function of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. Any acid-base reaction results from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
 	
 \section{Origins of life modelling with realistic artificial chemistries}
 
@@ -146,7 +145,7 @@ Some examples of artificial chemistries for the investigation of the origin of l
 
 \section{Artificial chemistries and Alife}\label{artificial-chemistries-and-alife}
 
-Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution (\eg \cref{tab1}). Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. StringMol \parencite{Hickinbotham2011}- a bacterial inspired microprogram chemistry--though does demonstrate a rich heredity for open-ended evolution using string-matching to model binding between sequences, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries have been used in the exploration of open-ended or creative evolution (\eg \cref{tab1}). Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. StringMol \parencite{Hickinbotham2011}, a bacterial inspired microprogram chemistry, though does demonstrate a rich inheritance mechanism using string-matching as a model for molecular binding, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \begin{table}
 	\scriptsize
@@ -198,31 +197,36 @@ An artificial chemistry with the ability to create reactions ``on-the-fly'' give
 
 \section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
-An \gls{achem} can be represented by \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} \parencite{Dittrich:2001zr}, where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature, \eg \cite{Lenaerts2009,Gardiner2007}.
-
-\Textcite{Dittrich:2001zr} goes on to use these three components to classify a number of the \glspl{achem} of the time of writing into a number of major types:
-
-\begin{enumerate}
-\item Rewriting or Production Systems (symbols and rewriting rules)--Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), Lambda-Calculus (AlChemy)
-\item Arithmetic Operations (molecules are natural numbers, operations are arithmetic operators)
-\item Autocatalytic Polymer Chemistries (polymers made from chains of monomer symbols, reactions are concatenation and cleavage)
-\item Abstract Automata
-\item Artificial Molecular Machines
-\item Assembler Automata
-\item Lattice Molecular Systems (molecules occupy positions on a fixed lattice structure)
-\end{enumerate}
-
-In practice \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification. Because the derived classification system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion. Some categories, such as Abstract Automata, are incompletely specified. Finally, applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry.
-
-Another scheme was presented by Nellis with \glspl{ea} categorised as world/chemistry/constraints \parencite[p.132]{Nellis2012}, with constraints being energy model/binding model. As an example, Nellis describes RBN-World \parencite{Faulconbridge2011} as a world where the elements are RBN networks.
-
-\Textcite{Faulconbridge2011} takes a different approach, based on the relationship between a molecule's representation and its properties:
+A straightforward means for classifying \glspl{achem} is given in \textcite{Faulconbridge2011}, based on the relationship between a molecule's representation and its properties:
 
 \begin{itemize}
 	\item \emph{Symbolic}. Symbols/molecules have no inherent meaning, so no ``implicit reactions'', only preprogrammed ones.	
-	\item \emph{Structured}. One or more atoms arranged in a structure (string, tree, graph..) with bonds within molecules - unlimited, but consequently computationally expensive.	
+	\item \emph{Structured}. One or more atoms arranged in a structure (such as a string, tree, or graph) with bonds within atoms to form molecules. This results in unlimited capability, but is computationally expensive.	
 	\item \emph{Sub-symbolic}. Emergence of properties from lower-levels (\eg real chemistry, also neural networks). The symbols (for example, atoms) have an internal structure which determines the macro-properties of the chemistry.
 \end{itemize}
+
+Another scheme was presented by \textcite[p.132]{Nellis2012} with \glspl{achem} categorised according to three factors:
+\begin{itemize}
+	\item \emph{World}. Physical elements such as molecules and atoms.
+	\item \emph{Chemistry}. The interactions between the elements.
+	\item \emph{Constraints}. Restrictions on how the world and chemistry interact. Nellis gives as an example a binding model that describes which interactions are possible between elements.
+\end{itemize}
+
+This is similar to an earlier categorisation by \textcite{Dittrich:2001zr}. Again an \gls{achem} is described in terms of three factors \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. This representation is commonly used in the literature (\eg in \cite{Lenaerts2009,Gardiner2007}), and is one we adopt for the description of our own \gls{achem} in the following \namecref{toyworld}.
+
+\Textcite{Dittrich:2001zr} goes on to identify a variety of major types when these three factors are applied to existing \glspl{achem}:
+
+\begin{enumerate}
+	\item \emph{Rewriting or Production Systems}. Symbols and rewriting rules, for example Chemical Abstract Machine (CHAM), Chemical Rewriting System on Multisets (ARMS), Chemical Casting Model (CCM), and Lambda-Calculus (AlChemy).
+	\item \emph{Arithmetic Operations}. Molecules are natural numbers, operations are arithmetic operators.
+	\item \emph{Autocatalytic Polymer Chemistries}. Polymers made from chains of monomer symbols, reactions are concatenation and cleavage.
+	\item \emph{Abstract Automata}.
+	\item \emph{Artificial Molecular Machines}.
+	\item \emph{Assembler Automata}.
+	\item \emph{Lattice Molecular Systems}. Molecules occupy positions on a fixed lattice structure.
+\end{enumerate}
+
+In practice \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} is more useful than this derived classification. Because the derived classification system is incomplete, based as it is on given examples rather than on a partitioning of the some \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} space, a new chemistry unrelated to any of the specific examples will either be classified in ``Other approaches'', or the scheme must be extended in an adhoc fashion. Some categories, such as Abstract Automata, are incompletely specified. Finally, applying the scheme to a new, unclassified, chemistry that does not exactly match one of the given examples requires a somewhat subjective judgement as to the similarity between the molecule and reactions of the new chemistry and those of each example chemistry.
 
 \subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
 
@@ -841,7 +845,7 @@ The outcomes for each reaction alternative from an example collision are shown i
 
 \section{Model validation}\label{model-validation}
 
-The design outlined in \cref{toyworld} leads to the following expectations:
+The design outlined in this \namecref{toyworld} leads to the following expectations:
 \begin{enumerate}
 	\item
  Given two reactants, changing the reaction energy should result in

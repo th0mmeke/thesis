@@ -559,7 +559,7 @@ The parameter $Reproduction$ describes the relationship between the properties o
 
 The factor \emph{Reproduction} from \cref{tbl:factor-levels-c6} describes two forms of relationship between parent and child entity. The first is ``correlated'' where the value of each child property has some significant relationship or correlation to the same property in the parent. A simple example of correlated properties from biology might be height: the height of a child at adulthood has a statistically significant correlation with the height of his or her parent. The second relationship is ``uncorrelated'' where the child property value is chosen independently of the parent's value. Our expectation is that the simulation model will prove sensitive to the choice of level for \emph{Reproduction} as ``uncorrelated'' levels are essentially un-evolutionary.
 
-From \cref{correlated-uncorrelated} it is clear that there is a significant difference for both $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ between the two levels of \emph{Reproduction}, as expected.
+From \cref{fig:correlated-uncorrelated} it is clear that there is a significant difference for both $\overline{fidelity}_{end}$ and $\overline{fitness}_{end}$ between the two levels of \emph{Reproduction}, as expected.
 
 The factor \emph{Distribution} describes a function to return a value in the range $[0,1]$ given two input values, also in the range $[0,1]$, where the first is for the expected value of the result, and the second describes a range. Obvious candidates for \emph{Distribution} include probability distributions, where the function samples a value from a distribution. If the distribution is normal, the two parameters to \emph{Distribution} equate to its mean and variance. For other probability distributions, the parameters are distribution specific. For example, for a uniform distribution, the parameters have no influence on the output; the output will be a value in the range $[0,1]$ drawn randomly with equal probability, regardless of input parameters.
 
@@ -693,7 +693,7 @@ We start with the following null and alternative hypotheses:
  $\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
-\subsection{Response variables}\label{response-variables}
+\subsection{Response variables}
 
 From the hypothesis the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we require $\overline{fidelity}_{start}$ and $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the beginning and end of each run.
 
@@ -725,7 +725,7 @@ dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp)
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<mean-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the mean fidelity (top) and mean fitness (bottom) for all levels of all factors. Lines that drop below zero are an artifact of the line smoothing algorithm used (local polynomial regression fitting).'>>=
+<<mean-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the mean fidelity (top) and mean fitness (bottom) for all levels of all factors.'>>=
 ap <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_cor,group=run)) + labs(x="Generation", y="Mean fidelity")
 bp <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_fit,group=run)) + labs(x="Generation", y="Mean fitness")
 grid.arrange(ap,bp,nrow=2,ncol=1)
@@ -744,7 +744,7 @@ The second prediction of the hypothesis is that the population variance for inhe
 	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
 \end{itemize}
 
-\subsection{Response variables}\label{response-variables}
+\subsection{Response variables}
 
 Once again, the main property of interest, and so our response variable, is \emph{fidelity}. From the hypothesis we require $\sigma_{fidelity_{end}}$ and $\sigma_{fidelity_{start}}$, the standard deviation of fidelity at the beginning of each run, and at the end.
 
@@ -757,7 +757,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 
 Data is all generations for those fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])}; \Sexpr{nrow(unique(df['run']))} runs out of the full dataset of \Sexpr{nrow(unique(df_full['run']))} runs.
 
-In a similar fashion to the procedure in \cref{does-average-inheritance-approach-perfect-inheritance}, by visual inspection of \cref{sd-fidelity-fitness}, the variance (square of the standard deviation) does decrease towards zero in all cases. Once again, the runs appear to fall into two distinct groups based on the speed of convergence towards zero, and as seen in \cref{}, these runs are exclusively associated with runs where both factors $p_{reproduction}$ and $p_{selection}$ are set to $0.66$. These levels are also responsible for the two uppermost groups of final standard deviation of fitness in the lower section of \cref{sd-fidelity-fitness}. The distinction between these two uppermost groups however is due to a third factor, \emph{Distribution}: the uppermost group has level ``Bounded'' and the lowermost (or the middle group of the three) has level ``Sampled.''
+In a similar fashion to the procedure in \cref{does-average-inheritance-approach-perfect-inheritance}, by visual inspection of \cref{fig:sd-fidelity-fitness}, the variance (square of the standard deviation) does decrease towards zero in all cases. Once again, the runs appear to fall into two distinct groups based on the speed of convergence towards zero, as seen in \cref{fig:sd-fidelity-fitness}. The upper group is exclusively associated with runs where both factors $p_{reproduction}$ and $p_{selection}$ are set to $0.66$; these levels are also responsible for the two uppermost groups of final standard deviation of fitness in the lower section of \cref{fig:sd-fidelity-fitness}. The distinction between these two uppermost groups however is due to a third factor, \emph{Distribution}: the uppermost group has level ``Bounded'' and the lowermost (or the middle group of the three) has level ``Sampled.''
 
 In conclusion, from visual inspection, the variance of fidelity does approach $0$, for all combinations of factor levels except where both $p_{reproduction}$ and $p_{selection}$ are set to $0.66$. Therefore H$_0$ is rejected and H$_1$ accepted.
 
@@ -1142,7 +1142,7 @@ cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x=
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
 @
 
-The corollary of this prediction is that the \gls{sd} of fidelity will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
+The corollary of this prediction is that the \gls{sd} of fidelity will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{environmental-model}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
 
 \begin{itemize}[label={}]
 	\item H$_0$:  $\sigma_{fidelity_{end}}$ is close to $0$, for all clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.

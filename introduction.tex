@@ -282,7 +282,7 @@ The origin of life can be seen as the transition from chemistry to biology, and 
 		\node (luca) at (7,0) {LUCA} edge [<-] (ida);
 		\end{tikzpicture}
 	\end{center}
-	\caption{Major stages in the evolution of early life.}
+	\caption{Major stages in the evolution of early life}
 	\label{major-stages-early-life}
 \end{figure}
 
@@ -425,7 +425,7 @@ Good summaries of the state of the field can be found in \textcite{Aicardi2010,A
 
 This work is structured in four logical parts. This introduction contains material general to the entire thesis and establishes the overall research context; the second block of material (the first formal part, labelled \cref{part2}) moves to theory, specifically the meaning of fidelity and inheritance, and an experimental investigation of a theory-based model; the third (labelled \cref{part3}) to consideration of how a system based on this model might be implemented in an artificial system, specifically our \gls{achem}, ToyWorld; and the final, fourth, part (in \cref{thesis-conclusions}) closes the work with conclusions, a general discussion, and some thoughts on future work.
 
-The first part begins with this introductory chapter to motivate the work and place it in context. The overall impetus for study of inheritance and heredity in artificial systems comes from the age-old dream of self-improving systems, more recently expressed in the research topic of \gls{oe}, as outlined in \cref{motivation}. \Gls{oe} increasingly is seen as an evolutionary, emergent, process and as such we can identify a set of fundamental elements considered either necessary or sufficient for \gls{oe} in artificial systems. One of those elements is replication, and establishing the means by which an evolutionary replicator can emerge in an artificial system drives the work described in this thesis.
+The first part begins with this introductory chapter to motivate the work and place it in context. The overall impetus for study of inheritance and heredity in artificial systems comes from the age-old dream of self-improving systems, more recently expressed in the research topic of \gls{oe}. \Gls{oe} increasingly is seen as an evolutionary, emergent, process and as such we can identify a set of fundamental elements considered either necessary or sufficient for \gls{oe} in artificial systems. One of those elements is replication, and establishing the means by which an evolutionary replicator can emerge in an artificial system drives the work described in this thesis.
 
 \Gls{oe} is in turn inspired and, in some sense, in competition with the achievements of evolution in living systems. \Cref{life} provides a broad but necessarily shallow overview of relevant ideas from modern biology, to explain this link with \gls{oe} and to give some sense of what might be possible should the goal be reached. Evolution in general and the specific evolutionary mechanism behind the richness of biology, \gls{ens}, are described in \cref{evolution-by-natural-selection} . As a second example of an evolutionary process that fits within the broad umbrella of evolution in general, compositional evolution is introduced in \cref{alternatives-to-evolution-by-natural-selection}, foreshadowing its importance to discussions of the origins of life and the evolution of technology.
 
@@ -453,11 +453,11 @@ This thesis makes the following novel contributions:
 
 \begin{compactenum}
 \item As far as is known, the first review of inheritance and heredity in artificial chemistries (in \cref{previous-work}.)
-\item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015} (\cref{part1}.)
-\item Experimental tests of the sensitivity of this model to the choice of parameter values (\cref(reducing-the-parameter-space-for-the-experiments).)
+\item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015} (\cref{part2}.)
+\item Experimental tests of the sensitivity of this model to the choice of parameter values (\cref{reducing-the-parameter-space-for-the-experiments}.)
 \item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
 \item Demonstration by simulation that \emph{erroneous copying} \parencite{Zachar2010}--variation plus inheritance--can result in informational replicators (\cref{part2}.)
-\item A new constructive\gls{achem}, ToyWorld, compatible with the model in \cref{part1}  (\cref{toyworld}.)
+\item A new constructive\gls{achem}, ToyWorld, compatible with the model in \cref{part2}  (\cref{toyworld}.)
 \item Comparison of four options for reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
 \end{compactenum}
 
@@ -637,8 +637,8 @@ $\text{i} \leftarrow \text{start(string B)}$\;
 	$\text{string A(i)} \leftarrow \text{char-copy(string B(i)))}$\;
     $\text{i} \leftarrow \text{next i}$\;
 }
+\caption[The algorithm for template copying used by StringMol and GraphMol]{The algorithm for template copying used by StringMol and GraphMol, taken from \textcite{Nellis2014}}
 \label{alg:stringmolgraphmol}
-\caption{The algorithm for template copying used by StringMol and GraphMol, taken from \textcite{Nellis2014}}
 \end{algorithm}
 
 Each of the four functions in \cref{alg:stringmolgraphmol}--\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}--can be either ``crisp'' (\ie perfect) or embodied (variable, and subject to evolution). As an example of an embodied function, StringMol's \emph{start} function uses pattern-matching to determine the binding region between the replicase and the other string where the replicase should begin copying. By changing the subsequences in either string the strength of bind can be varied, with a corresponding shift to the beginning of the copy region even though the pattern-matching algorithm itself does not change (it is a ``level-0'' component in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}). The same pattern-matching is used in StringMol's \emph{at-end} function to determine the end of the region to be copied.

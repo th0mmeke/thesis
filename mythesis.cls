@@ -33,6 +33,7 @@
 \newboolean{mylistoftables} \setboolean{mylistoftables}{true}
 \newboolean{mylistoffigures} \setboolean{mylistoffigures}{true}
 \newboolean{mylistofappendices} \setboolean{mylistofappendices}{false}
+\newboolean{mylistofalgorithms} \setboolean{mylistofalgorithms}{true}
 \newboolean{myhyperref} \setboolean{myhyperref}{true}
 \newboolean{myglossary} \setboolean{myglossary}{true}
 \newboolean{myindex} \setboolean{myindex}{false}
@@ -121,6 +122,7 @@
 	\tableofcontents
 	\insertlot
 	\insertlof
+	\insertloalg
   	\UCclearpage
   	\pagenumbering{arabic}
   	\pagestyle{fancy}
@@ -242,6 +244,7 @@ Copyright \copyright \the\year\ \theAuthor\\
 
 \newcommand{\insertlot}{\ifthenelse{\boolean{mylistoftables}}{\UCclearpage\listoftables}{}}
 \newcommand{\insertlof}{\ifthenelse{\boolean{mylistoftables}}{\UCclearpage\listoffigures}{}}
+\newcommand{\insertloalg}{\ifthenelse{\boolean{mylistofalgorithms}}{\UCclearpage\listofalgorithms}{}}
 
 \ifthenelse{\boolean{mylistofappendices}}
 {%
@@ -291,7 +294,7 @@ Copyright \copyright \the\year\ \theAuthor\\
 \ifx\empty\listofbibfiles
 \else
  %\clearpage\bibliography{\listofbibfiles}
- \UCclearpage\printbibliography%[title=\bibname]%Change for biblatex
+ \UCclearpage\printbibliography%Change for biblatex
  \addcontentsline{toc}{chapter}{\bibname}
 \fi
 }
@@ -327,10 +330,7 @@ Copyright \copyright \the\year\ \theAuthor\\
 \makeatother
 \bibliography{\listofbibfiles}
 }
-\newcommand{\usebibliography}{\renewcommand{\bibname}{Bibliography}}
 \newcommand{\usereferences}{\renewcommand{\bibname}{References}}
-\newcommand{\useendnotes}{\renewcommand{\bibname}{End Notes}}
-
 
 \AtEndOfClass{
 \onehalfspacing

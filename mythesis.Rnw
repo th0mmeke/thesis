@@ -84,24 +84,22 @@ ToyWorld is the second contribution of this thesis. Specifically, we show that T
 }
 
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
-
-\usereferences
 \addtoreferences{mythesis}
 \addtoreferences{SystematicMap/pre5}
 \biblatexstyle{authoryear}
+\usereferences
 
 \begin{document}
-\listofalgorithms
 \include{glossary}
 \include{introduction}
 \part{Modelling the emergence of heredity}\label{part2}
-%\include{part2}
+\include{part2}
 \part{An evolutionary mechanism for inheritance}\label{part3}
-%\include{part3}
+\include{part3}
 \include{conclusions}
-%\part{Appendices}
+\part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place
 \appendix{
-%\include{appendices}
+\include{appendices}
 }
 \end{document}

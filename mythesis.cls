@@ -294,8 +294,8 @@ Copyright \copyright \the\year\ \theAuthor\\
 \ifx\empty\listofbibfiles
 \else
  %\clearpage\bibliography{\listofbibfiles}
- \UCclearpage\printbibliography%Change for biblatex
- \addcontentsline{toc}{chapter}{\bibname}
+ \UCclearpage\printbibliography[title=References]%Change for biblatex
+ \addcontentsline{toc}{chapter}{References}
 \fi
 }
 

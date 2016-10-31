@@ -100,7 +100,7 @@ reactant and a product. In the standard definition, an autocatalytic reaction is
 characteristic rate acceleration over time given by the differential equation--
 \[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where \(n\) is the order of the reaction, and \[f(\mathbf{X})\] the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
 
-Autocatalysis may be realised by 1) either a single reaction (\eg A + X + Y \(\rightarrow\) 2A + Z) or a linear chain of reactions through
+Autocatalysis may be realised by 1) either a single reaction (\eg A + X \(\rightarrow\) nA + Y, where \(n\geq 2\) or a linear chain of reactions through
 intermediate products, called template autocatalysis, or 2) by a reaction network. Networks may be indirect through a series of
 intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for
 example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce

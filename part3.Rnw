@@ -31,29 +31,11 @@ By demonstrating the formulation of cycles, we suggest that ToyWorld, our \gls{a
 
 One advantage of \glspl{achem} as pointed out by \textcite[5]{Funes2001} is that it is easier to evaluate solutions in a domain close to the real world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant. \Glspl{achem} are a particular type of model, familiar from real world chemistry, for the simulation of reaction-based systems. Every \gls{achem} defines a set of constitutive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and order the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr} These components are described in more detail in \cref{classification-of-artificial-chemistries}; an introduction to the general uses and applications of \glspl{achem} is given immediately below, and a discussion of ToyWorld in \cref{toyworld}.
 
-%All \gls{achem} based on this model:
-%
-%\begin{figure}[t]
-%	\begin{center}
-%		\begin{tikzpicture}
-%			\node (silico) at (0,0) {\textit{In Silico}};
-%			\node (vitro) at (4,0) {\textit{In Vitro}};
-%			\node (vivo) at (8,0) {\textit{In Vivo}};
-%			\draw [<->] (silico) -- (vitro) node [midway,above] {validation};
-%			\draw [<->] (vitro) -- (vivo) node [midway,above] {validation};
-%		\end{tikzpicture}
-%	\end{center}
-%\end{figure}
-%
-%Or in other words, digital models (``in silicon''), wet-chemistry models (``in glass''), and life itself.
-%
-%In general, AChems for these problems are without grounding (so start from high-level). Grounding implies that there is a causal justification for the higher level chemistry, where that justification is based on fundamental supportable processes, rather than unique to particular problem.
-%
-%All four areas rely on a connection to real chemistries--Molecular synthesis and Molecular Programming require results to be transferable to In Vitro; other two expect results to shed light on In Vivo processes.
-%
-%Therefore expect that a grounded AChem for these should have a basis in real Chemistry.
+Artificial chemistries are regularly employed in three application areas: real-world chemistry simulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry \parencite{Fontana1994} is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
 
-\begin{mdframed}[style=box, frametitle={Review of relevant elements of Physical Chemistry}]
+A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
+
+\section{Review of relevant elements of Physical Chemistry}
 The richness of the real world is built on a substantial foundation of chemical and physical complexity.
 
 A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often represented by describing the quantities (or stoichiometry) of reactant and resulting  product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(E_a\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
@@ -105,12 +87,7 @@ intermediate products, called template autocatalysis, or 2) by a reaction networ
 intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for
 example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce
 to the defining X \(\rightarrow\) nX pattern described by Ostwald's differential equation \parencite{Plasson2010}.
-\end{mdframed}
-
-Artificial chemistries are regularly employed in three application areas: real-world chemistry simulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. However, the more limited objective of a less realistic, but still fully constructive chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.). A constructive chemistry \parencite{Fontana1994} is one where new components may be generated through the action of other components, and where those new components may themselves take part in new types of reactions, and so on. This appears fundamental to an open-ended representation.
-
-A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while a full taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}.
-
+	
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
 \Glspl{achem} may be used for backward chaining from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \cite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \cite{Faulon2001}). Finally, \glspl{achem} have been used in the modelling of biological phenomenon such as enzyme function (\eg \cite{Flamm2010}.)

@@ -255,7 +255,7 @@ As stated by many (\eg \textcite{Pascal2013, Malaterre2015}) a definition of lif
 
 One interesting distinction between living and non-living comes from \textcite{Rasmussen2004}--non-living systems explore a state-space through thermodynamics and so, in a sense, through a random ergodic search. Living systems however almost universally employ evolution. Another information-theoretic view, from \textcite{Adami2015}, is that living systems can preserve information on a much longer timescale than non-living things. Given the relationship between information and entropy, the statement in \textcite{Schrodinger1944}, that metabolism is how ``living matter evades the decay to equilibrium'', seems very similar.
 
-\begin{mdframed}[style=box, frametitle={The orgins of life}]
+\subsection{The origins of life}
 
 The evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspect, it is not possible to test hypotheses by falsification, and hence they can only be speculative.
 
@@ -270,7 +270,6 @@ Both competing models--replication-first or metabolism-first--build on that. Aut
 The main issues with the replicator-first model are the sizeable step required from abiotic compounds to template-based replication (although ribonucleotides conceivably could form in pre-life conditions \parencite{Powner2009}). Templates encode information in biology, so require a encode/decode mechanism as well as an information code to represent the product. This is a step more complex than simpler duplication. By contrast, the main issue with the metabolism-first model concerns the shift from composome\footnote{See discussion in \cref{variable-replicators}.} inheritance to template-based, and the ability of composomes to fulfil the heredity requirement for natural selection.
 
 The origin of life can be seen as the transition from chemistry to biology, and is analogous to our goal of transitioning from simple uninteresting systems to systems which evolve. However, the usefulness of the similarity is limited: the primary postulates of origins of life research are not our postulates. Some abiogenesis results fundamentally assume real-world chemistry and conditions, a constraint that doesn't apply to \gls{alife} or artificial \gls{oe}, and so is more restrictive than required. Other abiogenesis work such as on properties of autocatalytic sets, or the suitability of the genetic and catalytic properties of RNA for \gls{alife} \parencite{Cheng2010}, is broader in applicability.
-\end{mdframed}
 
 \begin{figure}
 	\begin{center}
@@ -285,63 +284,6 @@ The origin of life can be seen as the transition from chemistry to biology, and 
 	\caption{Major stages in the evolution of early life}
 	\label{major-stages-early-life}
 \end{figure}
-
-\paragraph{Living organisms are supremely well suited to their environments, and can adapt to environmental changes.}
-
-Adaptation of organisms to their environments occurs in the main on two different time-scales.
-
-Evolution by \gls{naturalselection} acts over a period of generations on populations of individual organisms. Changes are therefore relatively gradual, and many generations can pass before a change such as a beneficial mutation becomes ubiquitous in a population, for example the 300-500 generations observed for targeted modifications in lactose processing in \emph{E. coli} \parencite{Dekel:2005fk}. In contrast, gene regulatory effects act during the life cycle of a single individual, either during development to affect morphology, or during the adult lifespan in reaction to seasonal or other environmental cues. These regulation-driven changes are not in themselves heritable, but they can be assimilated back into the population by influencing the organisms fitness under natural selection (\eg,\cite{Baldwin:1896ly,Dennett:2003ve,Paenke:2009xe,Paenke:2007ve}).
-
-Similar effects can be seen by another adaptive mechanism that operates on individuals during their lifespan: learning, where behavioural adaptations can also lead to genetic change (\eg \cite{Hinton:1987vy}.)
-
-\paragraph{Natural selection, acting on populations, is the primary driver for long-term adaptation.}
-
-The year 2009 saw the celebration of the 150\textsuperscript{th} anniversary of the publication of \emph{On the Origin of Species}, the explanation of evolution by natural selection, with extensive coverage in scientific and popular media. The terms are therefore fairly well known to many people, but what exactly does \emph{natural selection} mean? To quote from \textcite{Futuyama:1979tg}, \gls{naturalselection} is the ``differential survival and reproduction of genotypes''.
-
-Let's examine each of the components in this idea in turn.
-
-\emph{Differential survival.} Living organisms are constantly engaged in an intimate relationship with their environments. Indeed, according to the theory of \emph{autopoiesis} \parencite{Varela:1974qd}, organisms are defined by this engagement: to be alive means maintaining oneself against the surrounding environment. In general the more effectively the organism is able to do this, the more likely it is to survive. However, in practice survival for an individual may be affected by random events. Scholarship winning students can be killed by drunk drivers. Sardines in shoals flash and turn, yet sharks still manage to grab one or two from the shoal effectively at random. Averaged over a population however these chance events balance out; a succession of random trials leads to a skewed distribution of fitness away from the less able.
-
-\emph{Reproduction.} In this sense, reproduction simply means inheritance. Only those characteristics that can be passed on from one generation to the next are relevant. One implication of this is that the only traits of an organism that matter to natural selection are those that are apparent while the organism can reproduce. Altruism and kin-selection, where an individual acts to increase the fitness of a related individual, are interesting for the light they shed on this implication.
-
-\emph{Genotypes.} An organism's \gls{genotype} is the heritable information that defines an individual, of which the great majority is encoded in DNA (some \emph{epigenetic} information is inherited through DNA-methylation, maternal protein concentrations and other mechanisms. However, generally DNA remains the primary source.)
-
-How then does natural selection unfold in practice? Although an organism is defined by its genotype, its survival is based not on the raw genotype, but on the expression of the genotype--called the \gls{phenotype}--that participates in the interaction with the environment. There is not necessarily a direct one-to-one mapping between genotype and phenotype; for example, environmental triggers during development can switch the phenotype in different directions (a phenomenon called \gls{polyphenism}.)
-
-This indirect mapping (the \gls{gpmap})enables a number of important mechanisms significant to the operation of natural selection: first, changes in the genotype (caused by mutations for example) may build up independent of phenotype changes--the idea of \emph{neutral mutations} \parencite{Ohta:1996vn,Ohta:2002ys,Ohta:1973kx}. Examples from studies of RNA secondary structures (the physical folding of RNA molecules) show that many closely-related RNA sequences can produce the same RNA folding \parencite{Fontana:1993zn}. Adjacent changes often have little effect on structure.
-
-Second, by extension, \textcite{Gavrilets:1997qt,Gravner:2007yd} have shown that in cases involving many gene loci under well-defined conditions there is a path between viable phenotypes that requires only neutral mutations.
-
-Third, behaviours such as learning, rather than purely genetic mechanisms, can influence the form of the mapping from genotype to phenotype in combination with natural selection, as illustrated by the Baldwin effect \parencite{Baldwin:1896ly} and other examples of genetic assimilation \parencite{Hinton:1987vy,Siegal:2002qn,Waddington:1942jb}.
-
-Finally, a \gls{grn} provides another mechanism to modify the \gls{gpmap} and hence to guide natural selection.
-
-\paragraph{Novelties often arise from new regulatory connections rather than changes to genes.}
-
-The phenotype in living organisms is many orders of magnitude more complex than the genotype, and the methods used during development to build this complexity are many and various.
-
-Cells call upon a complex of regulatory processes to regulate the expression of genes, and hence to control development and morphology (as well as to implement the cell's basic machinery.) The majority of these processes (at current understanding) use proteins to affect the initiation of transcription (the production of RNA from a segment of DNA, the first stage of gene expression); most commonly the presence of a specific protein promotes or inhibits the transcription of a related gene, and without transcription the gene is silenced.
-
-One step further along the protein production chain, editing and splicing of the RNA products of transcription in eukaryotes prior to translation (the production of a protein from mRNA) is also under regulatory control. Many alternative proteins from one transcript can be produced, triggered by environmental or other influencing factors; each alternative protein will have a different effect on cell function. As a result, in biological organisms, the phenotype is not uniquely determined by the genotype, and a genotype contains the potential for multiple different phenotypes under the influence of the environment (a phenomenon known as plasticity).
-
-Patterns of gene expression can also have an effect outside the originating cell, a phenomenon crucial for development. Signalling proteins produced by a cell act as regulators on the machinery of surrounding cells, and epigenetic mechanisms allow signal effects to be long-lived so that a pattern of expressions may be inherited by daughter cells without the continued presence of the original signals. These mechanisms determine the fate of new cells during development: a cell originating in an area bathed in a particular combination of signalling molecules will develop in a specific manner (such as into a skin cell); another cell in another area will receive different signals, and therefore develop in a different way.
-
-The development of an organism from a zygote is thus controlled by a pattern of gene expression under the combined influence of a regulatory mechanism and the environment.
-
-As the regulatory mechanism is constructed from proteins and RNAs encoded in the genotype, and as the genotype is generally under the influence of natural selection, evolution also acts upon gene regulation, and hence upon development. The study of the evolution of the developmental mechanism itself is known as Evolutionary Development, or, more colloquially, EvoDevo. Although development was overshadowed  in the public eye for many years by genetics, its origins go back to almost the beginning of the modern understanding of molecular biology as seen in this quotation:
-
-\quote{According to the strictly structural concept, the genotype is considered as a mosaic of independent molecular blue-prints for the building of individual cellular constituents. In the execution of these plans, however, co-ordination is evidently of absolute survival value. The discovery of regulator and operator genes, and of repressive regulation of the activity of structural genes, reveals that the genotype contains not only a series of blue-prints, but a co-ordinated program of protein synthesis and the means of controlling its execution.}{\parencite[p354]{Jacob:1961ys}}
-
-\Textcite{Prudhomme:2007ax} believe that evolutionary novelties more commonly arise from changes or additions of regulatory \emph{connections} than from the development of \emph{new} genes or regulatory elements; that is, from changes to the network topology rather than from additions to the network elements. The underlying implication is that novelties are therefore new compositions of pre-existing elements, rather than being constructed ``\textit{de novo}'', and that production of novelties may be relatively rapid. Connection changes may happen quickly; by comparison, new genes may take many generations.
-
-A network formed by the regulatory interactions between genes and the transcriptional products of those genes (\glspl{tf}) is known as a Gene Regulatory Network, or \gls{grn}.
-
-\paragraph{Modularity is an emergent property of GRNs.}
-Even a superficial look at a set of randomly sampled insects reveals a striking level of similarity between supposedly distantly related species. Mouthparts, segmented bodies, wings and halteres springing from body segments, antennae on head segments; common patterns abound. The explanation lies in the action of a group of homeotic (or body-patterning) genes, which act in concert to impose a structure on the developing body plan. These regulatory genes, amongst the first patterning genes to be identified and characterised, in fact appear in very similar forms across all animals and hence appear to share a common evolutionary origin, and to be highly conserved \parencite{Shubin:2009vw}. 
-
-As an example of their action, the gene \emph{Ubx}, or \emph{Ultrabithorax}, is involved in development of the \gls{metathorax}, one of the body segments, in \glspl{arthropod} \parencite[pg. 696-697]{Watson:2008fm}. Changes in \emph{Ubx} expression in combination with expression of a second homeotic gene, \emph{Scr}, are responsible for some of the differences in body plan between two arthropod groups--brachiopods, and isopods. In brachiopods, the expression of \emph{Ubx} suppresses \emph{Scr} in the leading thorax segment leading to development there of swimming legs. In isopods however, \emph{Ubx} expression has been lost in that segment, and instead a feeding appendage develops \parencite{Watson:2008fm}.
-
-The morphological patterns that result from changes in expression of the \emph{hox} homeotic genes are textbook examples of modularity caused by regulatory networks. These networks in general appear to take a characteristic form, sometimes called a `medusa' network \parencite{Kauffman:2004zi,Aldana:2007da} where a regulatory head controls the expression of many functional genes. For example, in \gls{drosophila}, the medusa has a head of around 80 genes \parencite{Aldana:2007da}. \Textcite{Davidson:2006wi}, using the well-characterised sea urchin genotype, identifies GRN `kernels' of interconnected and hence very robust regulatory genes that control essential functions such as heart development and the endoderm specification in sea urchins. 
 
 \subsection{Evolution by Natural Selection}\label{evolution-by-natural-selection}
 
@@ -536,7 +478,7 @@ Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant
 
 The model of \parencite{Vasas2015, Vasas2012, Vasas2012a}, based on GARD, tests the hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \textcite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
 
-\section{Informational replicators with shortcut replication mechanism}s
+\section{Informational replicators with shortcut replication mechanism}
 
 A \emph{shortcut} is one where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
 
@@ -691,7 +633,9 @@ Mathematical models, based on reduction, abstraction and simplifying assumptions
 
 Simulations by contrast are holistic and bottom-up, and encompass variability so that the diversity of the results is closer to that seen in real systems \parencite{Ferrer:2008hv}. They have a unique ability to explore systems encompassing emergence and self-organisation. Biology, and by plausible extension, biologically-based systems, stand alone in the pervasiveness of emergence \parencite{Bersini:2006ve}, and the interconnection of levels of analysis, \eg behaviour can influence gene expression, and genes can affect behaviour \parencite{Krakauer2011}.
 
-\section{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}. Simulations seem to fall somewhere in between thought experiments or abstract models, and experiments. They are also relatively novel; common use has only come with increased access to digital computers. Consequently the nature of simulation--what can be claimed as a result of simulation, and what role may be played legitimately by simulation in scientific discovery--is a hot topic for philosophers of science. As might not be unexpected, two opposing positions have been commonly taken, plus a synthesis that claims the middle ground.
+\section{The epistemological nature of simulations}\label{the-epistemological-nature-of-simulations}
+
+Simulations seem to fall somewhere in between thought experiments or abstract models, and experiments. They are also relatively novel; common use has only come with increased access to digital computers. Consequently the nature of simulation--what can be claimed as a result of simulation, and what role may be played legitimately by simulation in scientific discovery--is a hot topic for philosophers of science. As might not be unexpected, two opposing positions have been commonly taken, plus a synthesis that claims the middle ground.
 
 \emph{Simulations are only programs}. That is, a computational means to solve analytically intractable equations \parencite[31]{Winsberg2010}, ``...a high-speed generator of the consequences that some theory assigns various antecedent conditions'' \parencite[quoting from Dennett]{Eldridge}, producing nothing new (just consequences of what is ``fed in''\parencite{DiPaolo2000}). In this sense, simulations are not empirical.
 

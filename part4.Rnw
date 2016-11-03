@@ -1,0 +1,40 @@
+\documentclass[]{article}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+	
+
+
+<<setup, include=FALSE>>=
+library(knitr)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra) # grid layouts for ggplot2
+library(lattice) # needed for bwplot etc
+
+opts_chunk$set(fig.path='generated_figures/')
+knit_hooks$set(pdfcrop = hook_pdfcrop)
+
+a = read.csv('population-toyworld2.csv', header=FALSE)
+delta_c = a
+delta_p = data.frame(apply(a, 2, function(c) ifelse(c==0,0,1)))
+evolutionary_activity_p = cumsum(delta_p)
+evolutionary_activity_c = cumsum(delta_c)
+#
+diversity = apply(delta_p, 1, sum)
+mean_cumulative_evolutionary_activity_p = apply(evolutionary_activity_p, 1, sum) / diversity
+mean_cumulative_evolutionary_activity_c = apply(evolutionary_activity_c, 1, sum) / diversity
+
+@
+
+<<unboundedplot, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean cumulative evolutionary activity.'>>=
+ggplot(mean_cumulative_evolutionary_activity_c,aes(x=gen,y=pop)) + geom_point() 
+@
+
+\section{}
+
+\end{document}
+
+

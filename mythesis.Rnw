@@ -60,9 +60,8 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{The Emergence of\\Inheritance and\\Heredity in\\Artificial\\Chemistries}
-\degree{A thesis submitted for the degree of Doctor of Philosophy in Computer
-Science in the University of Canterbury}
+\title{Effects of Environmental Variability on Replication in\\Artificial\\Chemistries}
+\degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{
 It is generally accepted that all evolutionary systems are based on the same three elements: variation, inheritance and selection. This raises the question of what distinguishes the process of biological evolution by natural selection, which produces such impressive outcomes, from the relatively underwhelming mechanism of artificial evolution. The three elements can be usefully divided in two, where selection acts to reduce and trim each generation while variation and inheritance generate potential novelties and create new possibilities. For this reason, if we think that creativity is the missing factor from artificial evolution, it seems that a focus on variation and inheritance might be promising.
 
@@ -77,10 +76,6 @@ The first contribution of this thesis is therefore to show that the degree or qu
 Part II, the second body of work, describes progress towards a realisation of this mechanism in an artificial system, as an initial step towards answering the second research question. Part II is organized around ToyWorld, an artificial chemistry that implements the type of emergent, constructive system (providing unlimited capacity) needed to support the model from Part I. ToyWorld provides a fully constructive artificial chemistry, based on a representation of atoms that form molecules simplified from real-world chemistry. As such the form is familiar, to aid comprehension, but not intended to be realistic. ToyWorld includes an integrated energy model: atoms have an associated internal energy, while the bonds between atoms contribute to a molecule's potential energy, which can be exchanged for kinetic energy during reactions. New molecules are formed by reactions between two existing molecules, and products are determined ``on-the-fly'' solely by the properties of the reactants and the total available energy for the reaction.
 
 ToyWorld is the second contribution of this thesis. Specifically, we show that ToyWorld demonstrates emergent behaviour as required, although the demonstration of the full mechanism from Part I remains for future work. We test the influence of two strategies to select the reactants for a reaction--an equal-probability method and a spatial method--and two other strategies for selecting the resulting products post-reaction from the alternative product-sets: an energy-minimization method, and another equal-probability mechanism. We show that of the four possible combinations of strategies, the combination of spatial reactant selection and energy minimization product selection strategies maximizes the number and cycle-length of emergent reaction cycles. 
-
-%We conclude this work with the claim therefore that an artificial chemistry of this form provides a good foundation upon which to construct an open-ended evolutionary system based on our inheritance model.
-
-%Variation and inheritance together relate to the correlation between parent and child, and selection to the relationship between the entity and its surroundings.
 }
 
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
@@ -92,10 +87,8 @@ ToyWorld is the second contribution of this thesis. Specifically, we show that T
 \begin{document}
 \include{glossary}
 \include{introduction}
-\part{Modelling the emergence of heredity}\label{part2}
-\include{part2}
-\part{An evolutionary mechanism for inheritance}\label{part3}
-\include{part3}
+\include{toyworld}
+\include{model}
 \include{conclusions}
 \part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place

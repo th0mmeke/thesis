@@ -1,8 +1,6 @@
-"C:\Program Files\R\R-3.3.1/bin/Rscript.exe" -e "library(knitr); knit('mythesis.Rnw')"
-"C:\Program Files\R\R-3.3.1/bin/Rscript.exe" -e "library(knitr); knit('part2.Rnw')"
-"C:\Program Files\R\R-3.3.1/bin/Rscript.exe" -e "library(knitr); knit('part3.Rnw')"
+"C:\Program Files\R\R-3.3.2/bin/Rscript.exe" -e "library(knitr); knit('mythesis.Rnw')"
+"C:\Program Files\R\R-3.3.2/bin/Rscript.exe" -e "library(knitr); knit('toyworld.Rnw')"
+"C:\Program Files\R\R-3.3.2/bin/Rscript.exe" -e "library(knitr); knit('model.Rnw')"
+"C:\Program Files\R\R-3.3.2/bin/Rscript.exe" -e "library(knitr); knit('toyworld2.Rnw')"
 
 latexmk -pdf mythesis
-REM latexmk -c mythesis
-
-REM del part*.tex mythesis.tex tmp*.tex

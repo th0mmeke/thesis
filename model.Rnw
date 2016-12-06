@@ -36,15 +36,7 @@ command=c(
 }
 @
 
-% # Filter(Negate(is.factor),z[[gen]]) # quantile values for each combination of factor levels at gen
-% # levels <- unique(interaction(Filter(is.factor,y))) # all unique combinations of factor levels in y
-
 \chapter{Models of inheritance}\label{models-of-inheritance}
-
-%Models (not simulations) for the emergence of heredity, for the purpose of strengthening the theoretical basis for any simulation. Goal is a causal, rather than constitutive, model for the emergence of heredity from variation and inheritance.
-
-%		\item Can evolution act on the inheritance mechanism to tune it for varying environmental conditions?
-%		\item Does inheritance still emerge from variation when the fitness-environment relationship is not fixed?
 
 This part of the work addresses our first research question: ``If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?"
 
@@ -59,15 +51,6 @@ In comparison, little explicit modelling of inheritance has been done in \gls{al
 The evolutionary process is then a trajectory through a space of distributions; it can therefore be seen equally as a sequence of population transformations, and distribution transformations. When considered as a series of distribution transformations, \textcite{Paixao2015} sees a correspondence with Estimation Distribution Algorithms (EDA): ``In an Estimation Distribution Algorithm (EDA), the algorithm tries to determine the distribution of the solution features, e.g. probability of having a 1-bit at a particular position, at the optimum. Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.''
 
 \Textcite{Paixao2015} concludes by demonstrating how existing ``classical models in theoretical population genetics and in the theory of evolutionary computation'' can be mapped into the framework of classified and categorised operators. Most of the various population genetics models can be represented, with the exception of some topic-specific \gls{ea} models, while genetic programming models are omitted for reasons of balance between ``simplicity and inclusiveness.'' However, \textcite{Paixao2015} is of limited relevance for this work as it is in effect a constitutive framework, providing a series of tests to classify existing models based on a general meta-model of evolution, rather than a causative model which is where our interest lies. Variation, in the form of reproduction and mutation, is only one element of the framework, and \textcite{Paixao2015} does not specifically address the emergence of heredity from variation.
-
-%Most evolutionary models are seen to satisfy five mathematical properties:
-%\begin{itemize}
-%\item V1--variation (either mutation or recombination) is uniformity preserving: no change to distribution if uniformly distributed.
-%\item M1--mutation acts on individuals.
-%\item M2--mutation can generate the whole search space \ie an ergodic operator (the defining characteristic of mutations).
-%\item R1--recombination preserves allele frequencies (in expectation).
-%\item S1--selection doesn't change individuals.
-%\end{itemize}
 
 More specific models of inheritance and heredity can be found in three works comparing the adaptive value of acquired and non-acquired characteristics. In the first two works, \textcite{Jablonka1995,Paenke:2007ie}, the comparison is made with respect to an environment that alternates between two states, $E_0$ and $E_1$. Each environment is associated with a corresponding adapted phenotype $P_0$ and $P_1$, respectively.  In both works variation only affects the ratio of each phenotype in the population (directly in \textcite{Jablonka1995}, indirectly via a ``predisposition'' or tendency in \textcite{Paenke:2007ie}); no new phenotypes are created, and as inheritance is modelled only at a population level, that is without reproduction, we cannot use these models to investigate the emergence of heredity.
 
@@ -102,24 +85,12 @@ Second, while Model 5 has perfect inheritance on viability and demonstrates emer
 
 Finally, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
 
-\subsection{Methods}\label{methods-p2}
-
-The work of \textcite{Bourrat2015} partially addresses our second research question. However, Bourrat as identified in \cref{previous-work-p2}:
+The work of \textcite{Bourrat2015} partially addresses our second research question, with the following limitations:
 \begin{itemize}
-	\item Does not link heredity and fitness in his model.
+	\item Does not link heredity and fitness in the model.
 	\item Does not show the simultaneous emergence of inheritance of procreation and viability.
 	\item Most importantly, does not consider the effect of changing environments on inheritance.
 \end{itemize}
-
-Addressing these limitations becomes the driver for the work in this \namecref{models-of-inheritance}. The method follows that outlined in \cref{approach}: 
-
-\begin{enumerate}
-	\item Construction of a parameterised simulation model [\cref{base-model}]
-	\item Forming a hypothesis [\cref{h2}]
-	\item Characterising the sensitivity of the simulation model to parameter ranges [\cref{reducing-the-parameter-space-for-the-experiments}]
-	\item Testing the hypothesis under unchanging environmental conditions [\cref{experimental-test-of-h2-under-fixed-conditions}]
-	\item And finally, testing the same under changing environments [\cref{model-behaviour-in-changing-environments}]
-\end{enumerate}
 
 \subsection{Simulation model of variation and inheritance}\label{base-model}
 
@@ -280,18 +251,15 @@ The factors and levels along with their mapping to model parameters are given in
 
 Each combination of factor levels has 10 replicates, to give a total of $2x2x2x1x2x10$ or 160 experiment runs.
 
-
 \subsection{Sensitivity of the model to parameter values}\label{reducing-the-parameter-space-for-the-experiments}
 
 In the absence of any restrictions on population size there is nothing to prevent a growing population eventually exceeding the capacity of the simulation system. This is unfortunately an unavoidable difficulty in experiments with exponential growth systems rather than a limitation of the theoretical model. 
 
 The size of the population is determined by how population entities are introduced and removed. In standard Evolutionary Computation (\eg \textcite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New entities can be straight replacements, like-for-like, of their parent, or be placed in competition against entities in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-Similar considerations apply to our model. Because we observe that the population size increases exponentially in many experimental runs (\eg right-hand side of \cref{fig:unboundedplot}), some restriction on population size is needed, and it's important that we eliminate the possibility of introducing bias to the results from the mechanism used to control population size.
-
 In \textcite{Gaucherel2012} the approach is to remove individuals from the population stochastically, with probability related to $e$ to the negative power of the population size multiplied by a configurable parameter, $\mu$. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of entities are extracted from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \textcite[sect. 4.3.1]{DeJong2006} and \textcite[sect. 4.2]{Vose:1999di}.) Here though we separate the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
 
-Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels-c6}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
+Translating model parameters into factors in the experiment design results in the factors in the first column of \cref{tbl:factor-levels-c7}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
 The values of \emph{Distribution} and \emph{Reproduction} have a significant effect on $\overline{fidelity}_{end}$, while $\overline{fitness}_{end}$ is responsive to all parameter values with the exception of $n_{offspring}$. Therefore we can conclude that the model is sensitive to all parameters with the probable exception (see earlier discussion) of $n_{offspring}$, and that the response is driven by the values of \emph{Distribution} and \emph{Reproduction} and by the boundary between absolute and relative values for $p_{reproduction}$ and $p_{selection}$. This suggests that the sensitivity of the simulation model can in fact be described in simpler terms related to combinations of related values of these key drivers. As one example, models where \emph{Distribution} takes ``uniform'' form a single class of their own as the other factor levels are completely overridden by this level of this factor.
 

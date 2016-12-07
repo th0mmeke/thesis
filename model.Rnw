@@ -270,7 +270,7 @@ This has the following implications:
 	\item The model's response can be clustered according to the values of the key drivers, \emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$.
 \end{itemize}
 
-The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels, the basis for all remaining experiments:
+The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels which form the basis for all remaining experiments:
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c6b}
@@ -555,7 +555,7 @@ As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and 
 	\end{center}
 \end{figure}
 
-We create a set of independent datasets by sampling from different four parameter cubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a cube side) is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
+We create a set of independent datasets by sampling from four different parameter cubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a cube side) is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
 
 \begin{table}
 	\begin{center}

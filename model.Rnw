@@ -38,8 +38,6 @@ command=c(
 
 \chapter{Models of inheritance}\label{models-of-inheritance}
 
-This part of the work addresses our first research question: ``If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?"
-
 \subsection{Previous work}\label{previous-work-p2}
 
 Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying \parencite{Eigen1971}, and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 

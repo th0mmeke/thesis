@@ -60,23 +60,9 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Effects of Environmental Variability on Replication in\\Artificial\\Chemistries}
+\title{Effects of\\Environmental\\Variability on\\Hypercycle States\\in Artificial\\Chemistries}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
-\abstract{
-It is generally accepted that all evolutionary systems are based on the same three elements: variation, inheritance and selection. This raises the question of what distinguishes the process of biological evolution by natural selection, which produces such impressive outcomes, from the relatively underwhelming mechanism of artificial evolution. The three elements can be usefully divided in two, where selection acts to reduce and trim each generation while variation and inheritance generate potential novelties and create new possibilities. For this reason, if we think that creativity is the missing factor from artificial evolution, it seems that a focus on variation and inheritance might be promising.
-
-In this work we investigate two aspects of variation and inheritance in artificial evolution. First, if we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved? And second, can such a mechanism then be successfully demonstrated in an artificial system? We speculate that a system constructed around this mechanism, that meets the initial conditions for evolutionary inheritance and variation, might then be capable of ongoing, creative, evolution.
-
-In the introduction to this work we review the literature relating to inheritance and variation in artificial evolutionary systems to attempt some initial answers: previous work suggests a combination of an unlimited capacity; an endogenous mechanism combining variation and inheritance and capable of self-evolution; and an initial starting point of simple, exact, replication, might be sufficient.
-
-In Part I, we construct a minimally complex model of generalized evolution to answer the first research question; although minimal in description, this model over time shows complex and non-obvious emergent behaviour. We show by simulation that inheritance in this model is a target of evolution, and that it does evolve under a range of conditions. The degree of inheritance is related to the predictability of environmental change, and the degree of inheritance is tuned by evolution to balance fitness and robustness. Fitness is maximized in unchanging environments where there is little penalty to reduced diversity, while a more diverse population is maintained in changing environments to provide robustness to environmental change. This balance emerges unprogrammed from the underlying model.
-
-The first contribution of this thesis is therefore to show that the degree or quality of inheritance is emergent and is related to the predictability of the fitness-environment relationship. 
-
-Part II, the second body of work, describes progress towards a realisation of this mechanism in an artificial system, as an initial step towards answering the second research question. Part II is organized around ToyWorld, an artificial chemistry that implements the type of emergent, constructive system (providing unlimited capacity) needed to support the model from Part I. ToyWorld provides a fully constructive artificial chemistry, based on a representation of atoms that form molecules simplified from real-world chemistry. As such the form is familiar, to aid comprehension, but not intended to be realistic. ToyWorld includes an integrated energy model: atoms have an associated internal energy, while the bonds between atoms contribute to a molecule's potential energy, which can be exchanged for kinetic energy during reactions. New molecules are formed by reactions between two existing molecules, and products are determined ``on-the-fly'' solely by the properties of the reactants and the total available energy for the reaction.
-
-ToyWorld is the second contribution of this thesis. Specifically, we show that ToyWorld demonstrates emergent behaviour as required, although the demonstration of the full mechanism from Part I remains for future work. We test the influence of two strategies to select the reactants for a reaction--an equal-probability method and a spatial method--and two other strategies for selecting the resulting products post-reaction from the alternative product-sets: an energy-minimization method, and another equal-probability mechanism. We show that of the four possible combinations of strategies, the combination of spatial reactant selection and energy minimization product selection strategies maximizes the number and cycle-length of emergent reaction cycles. 
-}
+\abstract{}
 
 \acknowledgements{Dedicated to my family, and to all those who helped me.}
 \addtoreferences{mythesis}

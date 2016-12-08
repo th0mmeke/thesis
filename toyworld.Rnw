@@ -37,12 +37,7 @@ Reactions in theory can be decomposed to a chain of \emph{elementary steps}, wit
 In modelling, we can either represent reactions exactly as an atomic transformation from reactants to products with characteristics that can only be determined experimentally, or we can attempt to construct the reaction from a sequence of elementary steps with the properties of the reaction derived from the properties of the steps involved. This later approach is the only practical one when the reaction is novel, or when
 we lack experimental data. Several alternate sequences of steps, or \textit{reaction pathways}, may be possible between reactants and products. Each pathway will have a different activation energy, and hence reaction rate.
 
-The kinetics of elementary steps are defined by the stoichiometry of the step and are hence predictable. In theory you might expect to be able to
-predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact,
-when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the
-stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant
-has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of
-order 3. 
+The kinetics of elementary steps are defined by the stoichiometry. In theory you might expect to be able to predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact, when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of order 3. 
 
 Elementary steps are an abstraction, an aid to analysis, of the underlying molecular dynamics. At the molecular level, reactions can be
 modelled as a series of collisions between molecules. The reaction rate is then determined by the percentage of collisions (or in other words,

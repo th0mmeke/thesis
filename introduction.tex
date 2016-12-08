@@ -2,27 +2,11 @@
 
 Biological evolution has produced ecosystems of staggering variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every organism alive today.
 
-This is not a work about that evolution. Nor does this thesis directly address the artificial equivalent of that explosion through evolution by natural selection, the subject of creative \gls{oe}--a topic that has had steady attention, without notable success\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}. Instead, our focus is on one of the necessary elements for \gls{oe}, the mechanism for inheritance and variation within artificial evolutionary systems.
-
-\Gls{oe}, as a form of evolutionary system, requires three elements--variation, inheritance and selection\footnote{Other related formalisms exist--see \cref{evolution-by-natural-selection} for a discussion. None fundamentally replace these elements however.}. Selection is the mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, or the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas. 
-
-Novelty instead is the outcome  of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search--instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
-
-Creative \gls{oe} is motivated by the gap observed between the products of biological evolution, and those produced by artificial evolutionary systems. The term itself, originating with \textcite{Taylor2001}, captures the essential elements: first, the products of artificial evolution are missing ``impressiveness'' or the capacity to surprise; the most common reaction is that they lack creativity. A creative system is one that produces artefacts that are novel, surprising and valuable \parencite{Boden2004}; properties that are desirable not only in the ``creative'' fields of art, literature, music and the like, but also in more prosaic areas such as engineering and indeed artificial evolutionary systems. Second, artificial evolution lacks ``open-endedness'', or the capacity to continue to produce new variants.
-
-Thus we can draw a distinction between creative \gls{oe} and simple \gls{oe} (as suggested by \textcite{Taylor2001}) as the difference between endless uninteresting variation and something more distinctive, indeed surprising. \footnote{This has recently been nicely formalised by \textcite{BanzhafBaumgaertnerBeslonEtAl2016} in terms of models and meta-models, with a direct conceptual links to Boden.}
-
-We can now relate inheritance and variation to the requirements for creative \gls{oe}. As the model underlying a creative \gls{oe} system must be capable of change, so must the inheritance and variation mechanism that implements that model. In other words, the inheritance and variation mechanism must be endogenous, or inherent to the model, rather than separate and imposed from outside.
+This is not a work about that evolution. Nor does this thesis directly address the artificial equivalent of that explosion through evolution by natural selection, the subject of creative \gls{oe}--a topic that has had steady attention, without notable success\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}.
 
 \section{Background and context}\label{background-and-context}
 
 There has long been interest in understanding how biological evolution generates robust, novel, creative outcomes, unlike those seen in current artificial evolutionary systems. This has led to a drive towards understanding the fundamentals of biological evolution rather than in the historical inspiration of specific biological elements and structures, many of which are contingent and perhaps even arbitrary; certainly complex.
-	
-This \namecref{background-and-context} expands upon prior work that is relevant, but not specific, to our thesis to provide context and background.
-
-\subsection{Life}\label{life}
-
-Natural evolution is the best example we have today of a transformative, adaptive improvement process. Many fields would benefit from a robust general optimisation heuristic for use when exact methods are not possible, and the example of natural evolution is our current gold-standard. 
 
 As stated by many (\eg \textcite{Pascal2013, Malaterre2015}) a definition of life is elusive, and probably not useful. There is no definite boundary between the living and the non-living; as \textcite{Pascal2013} goes on to explain, the most likely scenario for the origin of life is that there was a series of intermediates, of increasing degrees of ``aliveness''. The corollary is that it is hard therefore to imagine a clear cut transition between non-living and living. Think of a present day virus--is it alive, or not? Reproduction is generally thought of as a requirement for life, yet viruses cannot reproduce without co-opting the necessary machinery from an independent host. 
 
@@ -35,7 +19,7 @@ One interesting distinction between living and non-living comes from \textcite{R
 
 \subsection{The origins of life}
 
-The evolution of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspects, it is not possible to test hypotheses by falsification and hence they can only be speculative.
+The origin of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There were many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history. So without evidence for historic aspects, it is not possible to test hypotheses by falsification and hence they can only be speculative.
 
 However, a consensus is forming that early life began with chemoautotrophs fuelled by energy from inorganic redox couples and biomass from CO\textsubscript{2}, and that innovations in carbon-fixation created the main branches in the tree-of-life \parencite{Braakman2012}. The initiation of selection is marked by the advent of the \gls{ida}, probably from an RNA world, followed substantially later by the so-called Last Universal Common Ancestor (LUCA) \parencite{Yarus2011}. It is important to note for clarity that LUCA was almost certainly not a single entity or even species, but rather is a construct of evolutionary genetics because of the likely predominance of Lateral Gene Transfer (LGT) in archaic biology\footnote{http://sandwalk.blogspot.ca/2007/03/web-of-life.html}. Lateral or Horizontal Gene Transfer is thought to have been so common in early life that there was no single common ancestor, but rather genes from multiple lineages intermixed during this early stage into all lineages today \parencite{Ragan2009}.
 
@@ -59,16 +43,13 @@ The origin of life can be seen as the transition from chemistry to biology, and 
 		\node (luca) at (7,0) {LUCA} edge [<-] (ida);
 		\end{tikzpicture}
 	\end{center}
-	\caption{Major stages in the evolution of early life}
+	\caption{Proposed stages in the evolution of early life}
 	\label{major-stages-early-life}
 \end{figure}
 
 \subsection{Evolution by Natural Selection}\label{evolution-by-natural-selection}
 
-\epigraph{%
-	Biological evolution consists of change in the hereditary characteristics of groups of organisms over the course of generations. Groups of organisms, termed populations and species, are formed by the division of ancestral populations or species, and the descendant groups then change independently. Hence, from a long-term perspective, evolution is the descent, with modification, of different lineages from common ancestors.}{\textit{``Evolution, Science, and Society: Evolutionary Biology and the National Research Agenda'', Working Draft, 28 September 1998}}
-
-``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \parencite{Watson2010}, and other forms of evolution have been proposed in artificial systems (\eg the compositional evolution of \textcite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined in the following \namecref{alternatives-to-evolution-by-natural-selection}, but here we concentrate on canonical \gls{ens}.
+As has been said before, ``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, so adaptation is possible without \gls{ens} \parencite{Watson2010}, and other forms of evolution have been proposed in artificial systems (\eg the compositional evolution of \textcite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined below, but first we concentrate on canonical \gls{ens}.
 
 \Textcite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} taken from the most influential items in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.'' Incidentally, as an illustration of the difficulty of definitions, although the usual aim for a summary is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring'', \textcite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or alteratively in providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \textcite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant''.
 
@@ -84,8 +65,6 @@ The main examples selected by \textcite{Godfrey-Smith2007} are:
 \Textcite{Godfrey-Smith2007} concludes that the core requirement for \gls{ens} is some ``combination of variation, heredity, and fitness differences'', although he identified a number of differences between the summaries. For example, the most commonly cited summary is \textcite{Lewontin:1970mc}, but unusually that formulation states that ``fitness is heritable'' whereas typically phenotypic heredity (as appears in Lewontin's later 1980 summary) is stated as sufficient for a trait to evolve. 
 
 These differences are also discussed in \textcite{Griesemer2001}, in particular with reference to the variations between the concept of inheritance in Darwin which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both \parencite{Griesemer2001}.
-
-\subsection{Extensions and alternatives to evolution by natural selection}\label{alternatives-to-evolution-by-natural-selection}
 
 Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \textcite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological. 
 
@@ -107,59 +86,7 @@ However, even Arthur in his rejection of ``Darwinian evolution'', describes a pr
 
 The fundamental insight in DaisyWorld is that individuals modify environments (that is, niche construction): the daisies adapt the planet (specifically the temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet; and in fact there's little benefit to adaptation by the daisies to the planetary conditions. As \textcite{Saunders1994} states, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.''
 
-\subsection{Evolutionary Algorithms}\label{ea}
-
-The field of \glspl{ea} originated in the exploration of abstract biological evolution, but rapidly diverged into problem-solving and optimisation \parencite{De-Jong:1993gy,DeJong2006}. The fundamental differences between the biological original and the modern canonical \gls{ea} include:
-
-\begin{compactitem}
-\item \Glspl{ea} search through a fixed space, and hence cannot surprise by 'kind', only by 'degree' (\eg \cite{Nellis2014})
-\item The evolutionary process in an \gls{ea} is not itself subject to evolution; it is designed, and a large body of literature exists to guide the implementer in the choice of algorithms to employ.
-\item Fitness in an \gls{ea} is measured by an explicit \emph{objective function} whereas in biology fitness \emph{emerges dynamically} through continuous interaction with the environment. ``The difference is that we require a system with the potential for a large degree of intrinsic adaptation for open-ended evolution, rather than a system where the selection of individuals is determined by an externally-defined fitness function'' \parencite{Taylor2001}.
-\item \Glspl{ea} conduct a series of discrete trials of fitness, rather than a continuous evaluation.
-\item Individuals in a \gls{ea} do not interact other than indirectly through a pre-designed selection mechanism.
-\item \Glspl{ea} are not dynamical systems unlike the biological original. Dynamics required for novelty-generation \parencite{Nellis2012}.
-\item Natural organisms must replicate themselves to pass on genetic information--``final arbiter of fitness'', and interaction with other organisms and with environment \parencite{Ofria2004}.
-\end{compactitem}
-
-The first two of these differences are significant; \glspl{ea} are not capable of open-ended, or evolutionary, evolution. However, recent research in biology continues to be applied to improve the performance of \glspl{ea} in their core function of optimisation:
-\begin{compactitem}
-	\item Redundancy and degeneracy--\eg \cite{Whitacre:2010qy}
-	\item Novelty--\eg novelty search \parencite{Lehman:2008cr}
-	\item EvoEvo, or the evolution of evolution--\eg the remainder of this work.
-\end{compactitem}
-
-A form of re-unification between biological evolution and artificial evolution has been attempted in works such as \textcite{Paixao2015}, based on ``models in theoretical population genetics and in the theory of evolutionary computation.'' For example: ``Some EDAs can be regarded as abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.'' \parencite{Paixao2015}
-
-\subsection{Artificial Life}\label{alife}
-The well-known description of \gls{alife} by \textcite{Langton1989} is that it is ``life-as-it-could-be'', rather than ``life-as-we-know-it''. The main conference series in \gls{alife}, also called ``Alife'', uses as a tagline ``Synthesis and simulation of living systems'', which is closely related to the definition of \textcite{Bedau:2007ga} : ``an interdisciplinary study of life and life-like processes, whose two most important qualities are that it focuses on the essential rather than the contingent features of living systems and that it attempts to understand living systems by artificially synthesising simple forms of them.''
-
-Interestingly, these later two definitions place the study of living things as a subfield within \gls{alife}, appropriately as many consider life to be the only working example we have of the most interesting ideas in \gls{alife}, including open-ended, or creative, evolution.
-
-Technological imperatives have driven the division of \gls{alife} overall into three largely independent subfields: \emph{hard}, \emph{soft} and \emph{wet} \gls{alife}, where hard \gls{alife} is implemented in physical hardware (made from atoms), soft \gls{alife} in computer software (from bits) and wet \gls{alife} from biological compounds. Soft \gls{alife} has the great advantages of relative cheapness and immediacy, and consequently is the basis for the majority of current research, including this work.
-
-Good summaries of the state of the field can be found in \textcite{Aicardi2010,Aguilar2014}; \textcite{Aguilar2014} also contains a comprehensive history from early (classical Greek) interest in automata, through the publication in 1818 of Mary Shelley's ``Frankenstein; or, The Modern Prometheus'', which revitalised interest in artificial creatures in modern times, to the consensus view of the birth of the modern field of \gls{alife} in 1987 with the first ``Workshop on the Synthesis and Simulation of Living Systems'' in Sante Fe, New Mexico.
-
-\section{Guide to this work}
-
-
-\section{Previous publications}\label{previous-publications}
-
-A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
-
-The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}).
-
-\section{Contributions}\label{contributions}
-
-This thesis makes the following novel contributions:
-
-\begin{compactenum}
-\item As far as is known, the first review of inheritance and heredity in artificial chemistries (in \cref{previous-work}.)
-\item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
-\item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
-\item Comparison of four options for reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
-\end{compactenum}
-
-\chapter{Previous work}\label{previous-work}
+\section{Motivation}\label{previous-work}
 
 Our focus in this work is on the nature of inheritance and heredity, specifically \emph{endogenous} inheritance mechanisms that can evolve. We’ve seen in \cref{evolution-by-natural-selection} that heredity is one of the foundational elements of \gls{ens}, the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a child) is called a \emph{replicator}. 
 
@@ -189,20 +116,7 @@ Relatively recently, \textcite{Zachar2010} saw a need to reexamine the definitio
 
 In the following \namecrefs{non-informational-exact-replicators} we review some pertinent previous work following the classification developed in \textcite{Zachar2010}\footnote{With the exception of \emph{reproducers}, replicators with a developmental component, as these build upon informational replicators and, as we shall see, we lack complete informational replicators.}.
 
-\begin{DRAFT}
-Initially replicate implicitly, rather than using some encoding of the replication process  \parencite{Taylor2001}
-Be constructed entirely of `material' components, allowing the possibility of different encodings of information. (\quote{the very stuff from which they are constructed is a valuable resource of matter and energy}{\textcite[s3.6]{Taylor2001}})
-Very rich combinatorial generative mechanism \eg organic chemistry \parencite{Vasas2015}
-
-``An important property of most strong AL systems is that they contain the ability for self-reference. For instance, Ray's Tierra organisms are able to read, copy, and modify their own code. In Fontana's algorithmic chemistry every object is a character string able to process other objects by using the lambda-calculus that maps the character string into an (active) function. The dualism inherent in those systems can be traced back to Godel who defined a mapping of mathematical statements into natural numbers `` that allowed self-reference, to Turing's universal machine, and to von Neumann's stored program computer .''\parencite{Dittrich1998}
-
-``We want to embody the copying program, implementing it as a phenomenon resulting from the interaction of multiple mechanisms in a world. This will allow the copied strings to vary and evolve, and will also allow the copying process to vary and evolve.'' \textcite{Nellis2014}
-
-Major transitions in evolution not possible without self-referentiality - unit of evolution must change between levels e.g., from molecules to cells. This was/is accomplished by changing the way that individuals interact, from competition to cooperation (fitness change) to form the next level,; independent replication before transition, must replicate as part of a larger whole afterwards. 
-Fundamental for complexity - complexity associated with levels  \parencite{Watson2015}
-\end{DRAFT}
-
-\section{Exact replicators}\label{non-informational-exact-replicators}
+\subsection{Exact replicators}\label{non-informational-exact-replicators}
 
 Autocatalysis by definition is replication; where the entities are molecules, the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ replicates the molecule $A$ (\eg \textcite{Lifson1997}). Evolutionary variation though is difficult as the exponential growth of the main autocatalytic product will generally overwhelm the molecules produced by any side reactions unless 1) they are also autocatalytic, and 2) the solution contains the molecules needed to initiate and maintain this alternate autocatalysis cycle.
 
@@ -219,12 +133,12 @@ The development of RBN-World involved many design choices, some essentially adho
 
 The model for \emph{Chemical Evolution by Natural Selection} in \textcite{Fernando:2008xy,Fernando:2007pf} is driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems''), and takes the form of a simulation of laboratory experiments of lipid aggregates (``phase separated ‘individuals’, e.g. liposomes'') in a reactor. The molecules and food molecules (that make up an autocatalytic cycle) share a common representation and underlying chemistry, while replication, unlike the (rare) autocatalytic cycles in \textcite{Faulconbridge2011}, is by `` division by externally imposed agitation, i.e. replication rather than self-replication.''. New molecular species (evolutionary variation), comes from chemical ``avalanches'' initiated when two existing species are chosen at random, tested to see if a reaction between them is possible by thermodynamics, and then the resulting products seeded in the reactor at low concentrations. These new reactions may be autocatalytic, or the products may complete a food-set for another autocatalytic reaction, or they may enable a side-reaction from an existing autocatalytic one. Introducing these new species into the reactor therefore can trigger the rapid formation of a series of novel products--a chemical avalanche.
 
-\section{Variable replicators}\label{variable-replicators}
+\subsection{Variable replicators}\label{variable-replicators}
 \Textcite{Ganti:2003hl} and  \textcite{Eigen1971} showed that distinct, organisationally different alternative autocatalytic networks in the same environment might compete, and the fittest would prevail. A number of models have been proposed since where autocatalytic networks form stable components that can be inherited in a modular fashion in a process called compositional inheritance. There are however some difficulties in establishing anything more than a ``variable replicator'' (in the term of \textcite{Zachar2010}) with these models, namely inconsistent inheritance and a limited potential for information transmission.
 
 %\emph{Reflexively Autocatalytic Polymer Networks} (RAPN) \parencite{Kauffman1986} are evolvable. First, likelihood of such networks higher than expected (Hordijk and Steel) and second, in \textcite{Vasas2012} putting these networks into compartments (so not well-stirred) then can do directional selection.
 
-In the most well-known of these models, the graded autocatalysis replication domain (\emph{GARD}) model \parencite{Segre1998}, highly catalytic molecules determine the properties of the compotype (compositional genotype), and these are not necessarily inherited equally. Instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent \parencite{Vasas2015, Vasas2012, Vasas2012a}. Information fidelity varies widely; the Eigen threshold \parencite{Eigen1971} applies, and mutation rates overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}.
+In the most well-known of these models, the Graded Autocatalysis Replication Domain (\emph{GARD}) model \parencite{Segre1998}, highly catalytic molecules determine the properties of the compotype (compositional genotype), and these are not necessarily inherited equally. Instead a child may or may not inherit one of these molecules and so its properties may be similar to or very different from its parent \parencite{Vasas2015, Vasas2012, Vasas2012a}. Information fidelity varies widely; the Eigen threshold \parencite{Eigen1971} applies, and mutation rates overwhelm selection \parencite{Vasas2015, Vasas2012, Vasas2012a}.
 
 Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant copies are rarely functional in autocatalysis. This makes mutation problematic as a source of variation in these autocatalytic systems; one alternative to mutations is avalanches, to form new cycles from the side-products of the base networks (as discussed in the previous \namecref{non-informational-exact-replicators})
 
@@ -232,7 +146,7 @@ Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant
 
 The model of \parencite{Vasas2015, Vasas2012, Vasas2012a}, based on GARD, tests the hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \textcite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
 
-\section{Informational replicators with shortcut replication mechanism}
+\subsection{Informational replicators with shortcut replication mechanism}
 
 A \emph{shortcut} is one where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
 
@@ -242,10 +156,10 @@ All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g.
 
 Individual entities in \textcite{Hutton2002} are simply single molecules. \Textcite{Hutton2007} introduces cells made up of a collection of molecules and bounded by a membrane of a particular atom type of limited reactivity; the membrane is intended to allow individuals to benefit from innovations by protecting their internal reactions from others. With a greatly increased set of predefined reaction rules (34 rules now for the cell replication shortcut, extended further again in \textcite{Lucht2012}), each cell has the capacity for division and mutation (through the stochastic application of equally applicable rules).  Selection is purely by indirect competition for the raw materials (atoms in the environment) required by the reactions in a cell; interactions between individuals are purely through this indirect competition (niche construction without direct interaction). Cells in \textcite{Hutton2007} are incapable of making use of resources from other cells (as they are effectively protected by non-reactant membranes) and so an intermittent exogenous mechanism (``floods'') is used to return the atoms in a number of randomly chosen cells to the environment.
 
-\section{Informational replicators or self-replicators}
+\subsection{Informational replicators or self-replicators}
 Replication in these systems emerges from the base (or in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}, level-0) rules without being directly specified by the experimenter or designer. However, even here most systems still shortcut this by providing a seed or universal ancestor (\eg \textcite{Ofria2004}) that contains a working module for replication that can be then modified (for good or ill) in each subsequent generation.
 
-\subsection{String-manipulation systems}
+\subsubsection{String-manipulation systems}
 
 A new object in Fontana's Algorithmic Chemistry, or \emph{AlChemy} \parencite{Fontana1992}, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
@@ -276,7 +190,7 @@ Clearly reproduction in AlChemy is self-referential--the process to construct a 
 %
 %As the rules for the combinations of two molecules are predetermined (the reaction mechanisms are described in \textcite{Fenizio2000}), this model is not by our definition open-ended.
 %\end{DRAFT}
-\subsection{Automata}
+\subsubsection{Automata}
 
 \emph{Coreworld} \parencite{Rasmussen1990}, inspired by the early computer game ``Core War''\footnote{See \url{corewar.co.uk}}, set segments of simplified assembly code into competition in core memory. The assembly command to copy values from one memory location to another can spontaneously introduce errors into the copying, and hence can introduce evolutionary variation. However, as reviewed by \textcite{Ofria2004}, the system ``collapsed into a non-living state'' perhaps because organisms could copy over each other in the shared system memory \parencite{Ofria2004}.
 
@@ -315,7 +229,7 @@ Inheritance in Amoeba-II is almost too effective. Fit organisms rapidly evolve i
 %
 %Passive self-replicators ($s1 + s2 \rightarrow s2$) are relatively common (approx. 30\% of randomly generated strings), while active self-replicators ($s1 + s2 \rightarrow s1$) are very rare (around 0.004\%).
 %\end{DRAFT}
-\subsection{StringMol and GraphMol}
+\subsubsection{StringMol and GraphMol}
 
 \emph{StringMol} \parencite{Hickinbotham2011} and the related \emph{GraphMol} \parencite{Nellis2012, Nellis2014} explore computational novelty through embodiment: ``Our aim is to improve novelty-generation algorithms by making their biological models richer.'' No measure is proposed for novelty--the author's state that they're not even sure it is possible, but an informal definition is used that sees novelty as the outcome of increasing embodiment \parencite[p.87]{Nellis2012}. 
 
@@ -326,13 +240,13 @@ GraphMol instead is graph based. ``The world defined by GraphMol contains chemic
 An underlying principle in both systems is that the mechanism of evolution must be itself evolvable; functions such as template copying must be embodied mechanisms in the world so that they can be affected by evolution, and so evolved.  Crucially therefore both StringMol and GraphMol have embodied template copying, where a ``replicase'' molecule can copy another following the algorithm in \cref{alg:stringmolgraphmol}.
 
 \begin{algorithm}[ht]
-$\text{i} \leftarrow \text{start(string B)}$\;
-\While{$\text{i not at-end(string B)}$}{
-	$\text{string A(i)} \leftarrow \text{char-copy(string B(i)))}$\;
-    $\text{i} \leftarrow \text{next i}$\;
-}
-\caption[The algorithm for template copying used by StringMol and GraphMol]{The algorithm for template copying used by StringMol and GraphMol, taken from \textcite{Nellis2014}}
-\label{alg:stringmolgraphmol}
+	$\text{i} \leftarrow \text{start(string B)}$\;
+	\While{$\text{i not at-end(string B)}$}{
+		$\text{string A(i)} \leftarrow \text{char-copy(string B(i)))}$\;
+		$\text{i} \leftarrow \text{next i}$\;
+	}
+	\caption[The algorithm for template copying used by StringMol and GraphMol]{The algorithm for template copying used by StringMol and GraphMol, taken from \textcite{Nellis2014}}
+	\label{alg:stringmolgraphmol}
 \end{algorithm}
 
 Each of the four functions in \cref{alg:stringmolgraphmol}--\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}--can be either ``crisp'' (\ie perfect) or embodied (variable, and subject to evolution). As an example of an embodied function, StringMol's \emph{start} function uses pattern-matching to determine the binding region between the replicase and the other string where the replicase should begin copying. By changing the subsequences in either string the strength of bind can be varied, with a corresponding shift to the beginning of the copy region even though the pattern-matching algorithm itself does not change (it is a ``level-0'' component in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}). The same pattern-matching is used in StringMol's \emph{at-end} function to determine the end of the region to be copied.
@@ -345,7 +259,7 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 
 %Runtimes for GraphMol are in weeks to months.
 
-\section{Discussion}
+\subsection{Discussion}
 
 Of the forms of replicator examined here, only full informational replicators provide both the representational range and the evolutionary flexibility to meet our requirements. Exact replicators lack heredity as they cannot pass on variability to their descendents; variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range; informational replicators based on shortcuts are evolutionarily restricted in that their inheritance/heredity mechanism is not evolvable. 
 
@@ -359,17 +273,17 @@ The informational replicator systems reviewed in this \namecref{previous-work} t
 %The EvoEvo project \footnote{\url{http://evoevo.liris.cnrs.fr/about-evoevo-project/})} an Information and Communication Technologies initiative funded by the European Commission, begins at a higher level biological starting point (genotype-phenotype mappings). The project presupposes microbial evolution, ``at the level of genomes, biological networks and populations'', with a focus on four specific properties of a genotype-phenotype mapping--Variability, Robustness, Evolvability and Open-endedness. Later work is planned to remove the biological specificity to provide a framework for applying EvoEvo to ICT problems. Along with development of a model founded on the ``genotype-to-phenotype mapping and the fitness landscape'', the project states that make use of \emph{Aevol} \parencite{Knibbe:2006vn,Knibbe:2007kx} to model developmental processes in micro-organisms
 %\end{DRAFT}
 
-\chapter{Approach}\label{methods}
+
+\section{Approach}\label{methods}
 
 In this \namecref{methods} we explain the approach taken in the remainder of this work: a summary of the motivating research questions, and a description of the specific methods to be used.
 
-\section{Research questions}\label{research-questions}
+\subsection{Research questions}\label{research-questions}
 
 This work overall is motivated by the following two research questions:
 
 \begin{enumerate}[label=RQ\arabic*:]
-	\item If we assume that for pragmatic reasons inheritance must itself be evolved from simple beginnings, rather than designed in, then what is the mechanism by which this might be achieved?
-	\item Can such a mechanism then be successfully demonstrated in an artificial system?
+	\item ...
 \end{enumerate}
 
 For each question we follow a common process:
@@ -389,3 +303,25 @@ Second, we use statistical ``design of experiments'' (\eg \cite{Montgomery2009})
 The usual alternative is some variant of a factorial design, where each parameter of interest is represented by a factor taking some small number of values, or levels (two levels being most common) and the analysis model constructed from runs that systematically work through a series of combinations of factors at different levels. The emphasis here is on the response given particular factor, and hence parameter, values. A further form of this is a fractional-factorial design, where we in effect take a well-defined sample of factor levels to further reduce the number of level combinations while still maintaining an acceptable level of experimental strength. However, in this work the relatively small number of representative levels required, combined with the reasonable speed of the simulation, is such that we can remain with the simpler full-factorial design.
 
 Note that there are some differences between the design of experiments in the physical world and in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explicitly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
+
+\section{Guide to this work}
+
+
+\section{Previous publications}\label{previous-publications}
+
+A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
+
+The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}).
+
+\section{Contributions}\label{contributions}
+
+This thesis makes the following novel contributions:
+
+\begin{compactenum}
+\item As far as is known, the first review of inheritance and heredity in artificial chemistries (in \cref{previous-work}.)
+\item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
+\item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
+\item Comparison of four options for reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
+\end{compactenum}
+
+

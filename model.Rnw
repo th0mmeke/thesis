@@ -38,15 +38,17 @@ command=c(
 
 \chapter{Models of inheritance}\label{models-of-inheritance}
 
+\section{Introduction}
+
 \subsection{Previous work}\label{previous-work-p2}
 
 Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying (\cite{Eigen1971} in biochemistry and Muller's Ratchet \cite{Muller1964} in population genetics, compared in \cite{Wagner1993}), and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
 
-In comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oe}. However, in relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed. These however are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
+By comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oe}. In relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed. These however are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
 
-\Textcite{Paixao2015} sought common principles between population genetics and evolutionary computation with the goal of unifying the two fields, starting from a broad description of evolutionary processes as a ``population undergoing changes over time based on some set of transformations''. A transformation can be decomposed into a collection of (stochastic) operators, with an operator being a probability distribution of potential outcomes; some operators act on phenotypes, others on genotypes. Various operators drawn from evolutionary computing are defined: for selection (uniform, proportional, tournament, truncation, cut, replace); variation from mutation (uniform, single-point), and variation from recombination (one-point crossover, k-point crossover, uniform crossover, unbiased variation).
+\Textcite{Paixao2015} sought common principles between population genetics and evolutionary computation with the goal of unifying the two fields, starting from a broad description of evolutionary processes as a ``population undergoing changes over time based on some set of transformations''. A transformation can be decomposed into a collection of (stochastic) operators, with an operator representing a probability distribution of potential outcomes; some operators act on phenotypes, others on genotypes. Various operators drawn from evolutionary computing are defined: for selection (uniform, proportional, tournament, truncation, cut, replace); variation from mutation (uniform, single-point), and variation from recombination (one-point crossover, k-point crossover, uniform crossover, unbiased variation).
 
-The evolutionary process is then a trajectory through a space of distributions; it can therefore be seen equally as a sequence of population transformations, and distribution transformations. When considered as a series of distribution transformations, \textcite{Paixao2015} sees a correspondence with Estimation Distribution Algorithms (EDA): ``In an Estimation Distribution Algorithm (EDA), the algorithm tries to determine the distribution of the solution features, e.g. probability of having a 1-bit at a particular position, at the optimum. Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.''
+Evolution is then a trajectory through a space of distributions; it can therefore be seen both as a sequence of population transformations and distribution transformations. When considered as a series of distribution transformations, \textcite{Paixao2015} sees a correspondence with the Estimation Distribution Algorithms (EDA): ``In an Estimation Distribution Algorithm (EDA), the algorithm tries to determine the distribution of the solution features, e.g. probability of having a 1-bit at a particular position, at the optimum. Some EDAs can be regarded abstractions of evolutionary processes: instead of generating new solutions through variation and then selecting from these, EDAs use a more direct approach to refine the underlying probability distribution. The perspective of updating a probability distribution is similar to the Wright--Fisher model.''
 
 \Textcite{Paixao2015} concludes by demonstrating how existing ``classical models in theoretical population genetics and in the theory of evolutionary computation'' can be mapped into the framework of classified and categorised operators. Most of the various population genetics models can be represented, with the exception of some topic-specific \gls{ea} models, while genetic programming models are omitted for reasons of balance between ``simplicity and inclusiveness.'' However, \textcite{Paixao2015} is of limited relevance for this work as it is in effect a constitutive framework, providing a series of tests to classify existing models based on a general meta-model of evolution, rather than a causative model which is where our interest lies. Variation, in the form of reproduction and mutation, is only one element of the framework, and \textcite{Paixao2015} does not specifically address the emergence of heredity from variation.
 
@@ -81,18 +83,18 @@ There are some limitations however in these otherwise insightful models. First, 
 
 Second, while Model 5 has perfect inheritance on viability and demonstrates emergent inheritance on procreation, Model 6 shows emergent inheritance on viability while beginning with perfect inheritance on procreation (as it begins with a shortcut population of entities assumed to have been produced by Model 5.) Thus Bourrat does not show in either model the simultaneous emergence of inheritance of both procreation and viability.
 
-Finally, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is capable of perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--if fitness represents (as it does) an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
+Finally, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is amenable to perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--as fitness represents an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
 
-The work of \textcite{Bourrat2015} partially addresses our second research question, with the following limitations:
+The work of \textcite{Bourrat2015} therefore has the following limitations:
 \begin{itemize}
-	\item Does not link heredity and fitness in the model.
-	\item Does not show the simultaneous emergence of inheritance of procreation and viability.
-	\item Most importantly, does not consider the effect of changing environments on inheritance.
+	\item Heredity and fitness are unconnected in the model.
+	\item The simultaneous emergence of inheritance of procreation and viability is not addressed.
+	\item Most importantly, the effect of changing environments on inheritance is unaddressed.
 \end{itemize}
 
 \subsection{Simulation model of variation and inheritance}\label{base-model}
 
-We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, such as fidelity and fitness, are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
+In an attempt to address the restrictions of Bouratt, we now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, such as fidelity and fitness, are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
 In other respects it resembles a fairly standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
 
@@ -230,7 +232,7 @@ df_full$Distribution = factor(df_full$Distribution, labels=c('Bounded','Sampled'
 df <- subset(df_full, gen==500)
 @
 
-The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}. They closely follow those given in \cref{tbl:factor-levels-c6b} with the exception that  $p_{reproduction}$ and $p_{selection}$ only have one absolute level--$0.66$--instead of three. As the results in the previous \namecref{reducing-the-parameter-space-for-the-experiments} were qualitatively similar for all three, to reduce the number of experiment runs required only $0.66$ is included.
+The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
@@ -267,25 +269,6 @@ This has the following implications:
 	\item All claims resulting from the simulation model must be prefixed by a description of the particular parameter settings under which the claim applies.
 	\item The model's response can be clustered according to the values of the key drivers, \emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$.
 \end{itemize}
-
-The factor levels used in this analysis, as mentioned earlier, include some values and combinations of values that are unlikely in practice, although they are still valuable in establishing the overall scope of the model. For example, all models where \emph{Reproduction} takes the value ``uncorrelated'' are, as described earlier, un-evolutionary and so of secondary interest in a work on evolutionary theory, as are models where \emph{Distribution} is ``uniform'' and models where $p_{selection}$ takes an absolute value. Eliminating these factor levels from the experiment leaves the following factors and levels which form the basis for all remaining experiments:
-
-\begin{table}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c6b}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
-		\toprule
-		Factor                 &Model parameter		&Number of Levels 	& Levels\\
-		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&4                	& 0.33 or 0.66 or 1.0 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&1                	& $fitness$\\
-		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&1					& Correlated\\
-		Distribution           &Reproduction		&2                	& Normal distribution ($\mathbb{N}$), either sampled or folded\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-Finally, from the discussion around the effect of $p_{reproduction}$, these factors and levels can be clustered into only two intra-related groups: group one where $p_{reproduction}$ takes the level ``$fitness$'' and group two where it takes any of the remaining, absolute, levels.
 
 \subsection{Does average inheritance approach perfect inheritance?}\label{does-average-inheritance-approach-perfect-inheritance}
 
@@ -572,7 +555,7 @@ We create a set of independent datasets by sampling from four different paramete
 	\end{center}
 \end{table}
 
-The other factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c8}. Once again, they are based on those in \cref{tbl:factor-levels-c6b} and identical to those in \cref{tbl:factor-levels-c7}.
+The other factors and levels along with their mapping to model parameters, presented earlier in \cref{tbl:factor-levels-c7}, are repeated for convenience in \cref{tbl:factor-levels-c8}.
 
 \begin{table}
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
@@ -583,8 +566,8 @@ The other factors and levels along with their mapping to model parameters are gi
 		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated and Uncorrelated\\
-		Distribution           &--					&2                	& Folded normal distribution or sampled normal distribution\\
+		Reproduction		   &Reproduction		&2				 	& Correlated\\
+		Distribution           &--					&2                	&Normal distribution ($\mathbb{N}$), either sampled or folded\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -849,36 +832,14 @@ Therefore we can conclude that there is no significant difference between these 
 %\end{DRAFT}
 
 
-\section{Conclusions}\label{part2-future-work}
-In this chapter we have shown by experiment that, as predicted, in stable environments our model of inheritance emerging from variation and selection results in:
-\begin{itemize}
-	\item Inheritance increasing towards an upper limit of $1.0$, or perfect inheritance.
-	\item The variance of inheritance decreases towards a lower limit of $0$.
-\end{itemize}
-
-This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. As hypothesised earlier in \cref{h2} though, this should be different in systems where the environment changes, and in the following \namecref{model-behaviour-in-changing-environments} we shall put this to the test.
-
-The previous \namecref{model-behaviour-in-changing-environments} has tested our hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two--$\Theta$ and $\delta$--are more discoverable by an evolutionary learner than the other, $\sigma_e$.
-
-\Cref{h2} made these predictions:
-
-\begin{enumerate}
-	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
-\end{enumerate}
-
-In \cref{mean-fidelity-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: fidelity in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
-
-The second prediction was also confirmed in similar fashion in \cref{sd-fidelity-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
-
-Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution to suit the population environment. This is a foundational requirement for a practical open-ended evolutionary system.
+\section{Future work}
 
 There are some obvious extensions of the model from \cref{base-model} that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
 
 Two other topics for possible future work are abrupt environmental change, and an information-based measure for change, as explained below.
 
 \subsection{Abrupt environmental change}\label{abrupt-environmental-change}
-	
+
 Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to co-opt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
 
 Stationarity is inherently a constraint for applying statistical methods to the analysis of evolutionary models, where almost by definition, the outcomes change over time. One common approach is be to assume approximate stationarity over short(ish) periods, along the lines of moving window or local kernel methods in time-series analysis. Alternatively, we could reformulate the problem so that out of all the possible message channels, we choose to investigate only those that meet the stationarity assumption. It's hard to see though how we can effectively examine an evolving system by discarding most of the relevant information.
@@ -900,3 +861,29 @@ The benefits of $C_{\mu}$ are that it matches our intuition of complexity (bette
 $C_{\mu}$ has been applied to a number of domains including random boolean networks \parencite{Gong2012}, spin \parencite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \parencite{Young2008}, autonomy of protocells \parencite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \parencite{Xiang2008}.
 
 The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \parencite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \parencite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \parencite[p.119]{Shalizi2001}. Note this issue with stationarity is similar to the difficulty identified in \cref{abrupt-environmental-change}, and a solution to one might be applicable to the other.
+
+\section{Conclusions}\label{part2-future-work}
+
+In this chapter we have shown by experiment that, as predicted, in stable environments:
+\begin{itemize}
+	\item Inheritance increases towards an upper limit of $1.0$, or perfect inheritance.
+	\item The variance of inheritance decreases towards a lower limit of $0$.
+\end{itemize}
+
+This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. As hypothesised earlier in \cref{h2} though, this should be different in systems where the environment changes, and in the following \namecref{model-behaviour-in-changing-environments} we shall put this to the test.
+
+The previous \namecref{model-behaviour-in-changing-environments} has tested our hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two--$\Theta$ and $\delta$--are more discoverable by an evolutionary learner than the other, $\sigma_e$.
+
+\Cref{h2} made these predictions:
+
+\begin{enumerate}
+	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+\end{enumerate}
+
+In \cref{mean-fidelity-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: fidelity in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
+
+The second prediction was also confirmed in similar fashion in \cref{sd-fidelity-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
+
+Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution to suit the population environment.
+

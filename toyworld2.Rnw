@@ -1,0 +1,50 @@
+\chapter{Toyworld2}
+
+\section{Introduction}
+\section{Hypothesis and Predictions}
+
+That the number of stable cycle states increases in proportion to the degree of environmental variability up until a point of variability beyond which it decreases
+
+\section{Experiment Design}
+
+\begin{algorithm}[ht]
+	\BlankLine
+	\While{generation $\leq$ generations}{
+		\BlankLine
+		\tcp{Selection of reactants}
+		\While{$\text{collision list}=\{\}$}{
+			Move all molecules by time increment $\tau$\;
+			$\text{collision list} \leftarrow \text{all collisions}$\;
+		}
+		reactants $\leftarrow$ Reactor.GetReactants(ReactantSelectionMethod)\;
+		\BlankLine
+		\tcp{Construction of reaction}
+		reactions $\leftarrow$ Chemistry.enumerate()\;
+		reaction $\leftarrow$ WeightedSelection(reactions, ProductSelectionMethod)\;
+		\BlankLine
+		\uIf{reaction is not Null}{
+			Reactor.PerformReaction(reaction)
+			}
+		}
+		\uElse{
+			No reaction possible -- so just bounce the molecules off each other (a collision)\;
+		}
+	}
+	\caption{The main simulation loop in ToyWorld2}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+	\tcp{Construct reaction graph}
+	\tcp{Find all shortest paths between a source and target in the reaction graph}
+	\tcp{Get all cycles for a particular reactant}
+	\tcp{Identify stable cycles}
+	\tcp{Stable cycles are those where there are a chain of two or more cycles...
+		- linked by a product in one cycle being a reactant in another
+		- and where the cycles have the same "form", or sequence of molecule species (smiles) in the cycle} 
+	\caption{Stable hypercycle state identification in ToyWorld2}
+\end{algorithm}
+
+\section{Results}
+\section{Discussion}
+\section{Conclusions}
+

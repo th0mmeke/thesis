@@ -60,7 +60,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Effects of\\Environmental\\Variability on\\Hypercycle States\\in Artificial\\Chemistries}
+\title{Effects of\\Environmental\\Variability on\Stable States\\in Artificial\\Chemistries}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 
@@ -75,6 +75,7 @@
 \include{introduction}
 \include{toyworld}
 \include{model}
+\include{toyworld2}
 \include{conclusions}
 \part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place

@@ -1,6 +1,27 @@
+<<setup, include=FALSE>>=
+library(knitr)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra) # grid layouts for ggplot2
+library(lattice) # needed for bwplot etc
+library(english) # convert numbers to words
+library(xtable) # required for print.xtable.bootabs function
+opts_chunk$set(fig.path='generated_figures/')
+knit_hooks$set(pdfcrop = hook_pdfcrop)
+df <- read.csv('results/stablestates.csv')
+@
 \chapter{Toyworld2}
 
 \section{Introduction}
+
+\vspace{0.3cm}
+\begin{minipage}[l]{0.95\textwidth}
+	\begin{enumerate}[label=RQ4.\arabic*:]
+		\item How does environmental variability affect the range of stable cycle states in a molecular artificial chemistry?
+		\item How significant is the form or character of variability to the range of stable cycle states?
+	\end{enumerate}
+\end{minipage}
+\vspace{0.3cm}
+
 \section{Hypothesis and Predictions}
 
 That the number of stable cycle states increases in proportion to the degree of environmental variability up until a point of variability beyond which it decreases
@@ -12,10 +33,6 @@ That the number of stable cycle states increases in proportion to the degree of 
 	\While{generation $\leq$ generations}{
 		\BlankLine
 		\tcp{Selection of reactants}
-		\While{$\text{collision list}=\{\}$}{
-			Move all molecules by time increment $\tau$\;
-			$\text{collision list} \leftarrow \text{all collisions}$\;
-		}
 		reactants $\leftarrow$ Reactor.GetReactants(ReactantSelectionMethod)\;
 		\BlankLine
 		\tcp{Construction of reaction}
@@ -23,28 +40,82 @@ That the number of stable cycle states increases in proportion to the degree of 
 		reaction $\leftarrow$ WeightedSelection(reactions, ProductSelectionMethod)\;
 		\BlankLine
 		\uIf{reaction is not Null}{
-			Reactor.PerformReaction(reaction)
-			}
+			Reactor.PerformReaction(reaction)\;
 		}
 		\uElse{
-			No reaction possible -- so just bounce the molecules off each other (a collision)\;
+			No reaction possible--just bounce the molecules off each other\;
 		}
 	}
 	\caption{The main simulation loop in ToyWorld2}
 \end{algorithm}
 
 \begin{algorithm}[ht]
-	\tcp{Construct reaction graph}
-	\tcp{Find all shortest paths between a source and target in the reaction graph}
-	\tcp{Get all cycles for a particular reactant}
-	\tcp{Identify stable cycles}
-	\tcp{Stable cycles are those where there are a chain of two or more cycles...
-		- linked by a product in one cycle being a reactant in another
-		- and where the cycles have the same "form", or sequence of molecule species (smiles) in the cycle} 
+	\tcp{Construct reaction graph from a list of $reactions$}
+	\For{each $reaction$ in $reactions$}{
+		Add a node for the reactant side of the reaction\;
+		Add a node for the product side of the reaction\;
+		Add an edge from reactant node to product node\;
+		\For{each $reactant$ in $reaction$}{
+			Add node for $reactant$, and edge from $reactant$ to node for reactant side of reaction\;
+		}
+		\For{each $product$ in $reaction$}{
+			Add node for $product$, and edge from $product$ to node for product side of reaction\;
+		}
+	}
+	\tcp{Get all cycles for each reactant in the graph}
+	\For{each $seed$ in $reactants$}{
+		\For{each $candidate$ in list of all molecules in the reaction graph of the same molecular species}{
+			\For{each $path$ in all shortest paths from $candidate$ to $seed$}{
+				\uIf{the stoichiometry for $seed$ in the cycle given by this $path\geq 2$}{
+					Add $path$ to the list of cycles\;
+				} 
+			}
+		}
+	}
+	\Return $cycles$
+	\caption{Identifying all autocatalytic cycles}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+	\tcp{Identify stable cycles from a list of $cycles$}
+	\tcp{Stable cycles are those where there are a chain of two or more cycles, that are linked by a product in one cycle being a reactant in another and where the cycles have the same "form", or sequence of molecule species (smiles) in the cycle}
+	\BlankLine
+	Sort $cycles$ into groups of equal length\;
+	Group all cycles of same length into subgroups of the same form\;
+	\BlankLine
+	\tcp{Now attempt to connect cycles of the same form through shared molecules into one or more clusters of connected cycles}
+	\For{each cycle form}{
+		$clusters\leftarrow$ set of molecules in the first cycle of this form\;
+		\For{all other $cycle$s of this form}{
+			\For{each $cluster$ in $clusters$}{
+				\uIf{$cycle$ shares molecules with $cluster$}{
+					Add the molecules in this $cycle$ to $cluster$\;
+				}
+			}
+		}
+		\uIf{more than one cluster discovered}{
+			$StableCycles[$ form of cycle $]\leftarrow$ size of longest cluster discovered\;
+		}
+	}
+	\Return $StableCycles$
 	\caption{Stable hypercycle state identification in ToyWorld2}
 \end{algorithm}
 
 \section{Results}
+
+
+<<anova, echo=FALSE, cache=TRUE, warning=FALSE>>=
+df_energy <- df[df$target=='ENERGY',]
+df_food <- df[df$target=='FOOD',]
+
+av_overall <- anova(lm(df$mean~df$dfa))
+av_energy <- anova(lm(df_energy$mean~df_energy$dfa))
+av_food <- anova(lm(df_food$mean~df_food$dfa))
+pr_av_overall <- av_overall$"Pr(>F)"[1]
+pr_av_energy <- av_energy$"Pr(>F)"[1]
+pr_av_food <- av_food$"Pr(>F)"[1]
+@
+
 \section{Discussion}
 \section{Conclusions}
 

@@ -60,7 +60,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Effects of\\Environmental\\Variability on\Stable States\\in Artificial\\Chemistries}
+\title{Effects of\\Environmental\\Variability on\\the Range of Cycle\\States in Artificial\\Chemistries}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 

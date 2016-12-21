@@ -192,7 +192,7 @@ If the reaction rules are analogous to chemistry, the reactor algorithm is analo
 	\emph{Mixed scale}. Hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelisation.
 \end{enumerate}
 
-\chapter{ToyWorld, a semi-realistic \gls{achem}}\label{toyworld}
+\chapter{Cycles in Molecular Artificial Chemistries}\label{toyworld}
 
 ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 

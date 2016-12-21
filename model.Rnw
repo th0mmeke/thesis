@@ -36,7 +36,7 @@ command=c(
 }
 @
 
-\chapter{Models of inheritance}\label{models-of-inheritance}
+\chapter{Modeling the Effects of Environmental Variability}\label{models-of-inheritance}
 
 \section{Introduction}
 

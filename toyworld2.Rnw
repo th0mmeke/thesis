@@ -9,7 +9,7 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 df <- read.csv('results/stablestates.csv')
 @
-\chapter{Toyworld2}
+\chapter{Environmental Effects on Replicator States}
 
 \section{Introduction}
 
@@ -22,11 +22,118 @@ df <- read.csv('results/stablestates.csv')
 \end{minipage}
 \vspace{0.3cm}
 
-\section{Hypothesis and Predictions}
+\section{Previous work}
 
+\Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+
+\section{Environmental model}
+
+Returning to first principles, any model must describe two particular elements of the environmental change: the \emph{scope} of the change, and the \emph{shape} of the change. First, we discuss the \emph{scope} of change. Our evolutionary model (\cref{base-model}) provides the scope to group entities at three different levels:
+\begin{enumerate}
+	\item The group of all entities.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
+	\item A single-member group for each entity.
+\end{enumerate}
+
+In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has a unique response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although biological mutations of the genome can sometimes cause significant phenotypical differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
+
+The \emph{shape} of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+Our chosen method is to represent environmental change as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I or ``Integrated'' component of the model provides the differencing. Seasonality, a particular form of recurring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
+
+Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change.
+
+Environmental change is modelled as an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+
+$x_t = \Theta x_{t-1} + e_t + \delta$ \label{ar-1-time-series}
+
+where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
+
+This series allows us to represent a broad range of environmental changes:
+
+\begin{itemize}
+	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
+	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
+	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the predictable and unpredictable we can examine the performance of the evolutionary algorithm on some continuum of predictability.
+	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
+	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
+\end{itemize}
+
+We claim that, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
+
+<<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
+library(reshape2)
+library(ggplot2)
+library(cowplot) # styling of plots, extension of ggplot2
+library(gridExtra)
+
+t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sigma", "delta")
+t2 <- melt(t1,id=c('run','theta','sigma','delta'))
+t2$theta <- round(t2$theta,3)
+t2$sigma <- round(t2$sigma,3)
+t2$delta <- round(t2$delta,3)
+
+for (r in unique(t2$run)) {
+t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+
+fitness <- 0.5
+for (t in 1:50) {
+fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+t2[t2$run==r & t2$t==t,'fitness'] = fitness
+}
+}
+ap <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
+t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
+t1$run <- 1:nrow(t1)
+names(t1)[1:3]<-c("theta", "sigma", "delta")
+t2 <- melt(t1,id=c('run','theta','sigma','delta'))
+t2$theta <- round(t2$theta,3)
+t2$sigma <- round(t2$sigma,3)
+t2$delta <- round(t2$delta,3)
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change")
+@
+
+
+<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
+ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
+bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
+
+
+% Needs sampleenvironment
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Cumulative time-series examples for samples of theta, sigma and delta.'>>=
+for (r in unique(t2$run)) {
+t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
+
+fitness <- 0.5
+for (t in 1:50) {
+fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
+t2[t2$run==r & t2$t==t,'fitness'] = fitness
+}
+}
+
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
+@
+
+\section{Hypothesis and predictions}
+
+\begin{hypothesis}
 That the number of stable cycle states increases in proportion to the degree of environmental variability up until a point of variability beyond which it decreases
+\end{hypothesis}
 
-\section{Experiment Design}
+\section{Experiment design}
 
 \begin{algorithm}[ht]
 	\BlankLine

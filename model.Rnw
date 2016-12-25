@@ -36,13 +36,15 @@ command=c(
 }
 @
 
-\chapter{Modeling the Effects of Environmental Variability}\label{models-of-inheritance}
+\chapter{Inheritance under Varying Environments}\label{models-of-inheritance}
 
 \section{Introduction}
 
 \subsection{Previous work}\label{previous-work-p2}
 
-Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying (\cite{Eigen1971} in biochemistry and Muller's Ratchet \cite{Muller1964} in population genetics, compared in \cite{Wagner1993}), and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
+Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. 
+
+Different forms of inheritance, such as acquired (or Lamarckian inheritance) characteristics have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck. Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying (\cite{Eigen1971} in biochemistry and Muller's Ratchet \cite{Muller1964} in population genetics, compared in \cite{Wagner1993}), and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
 
 By comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oe}. In relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed. These however are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
 
@@ -54,7 +56,9 @@ Evolution is then a trajectory through a space of distributions; it can therefor
 
 More specific models of inheritance and heredity can be found in three works comparing the adaptive value of acquired and non-acquired characteristics. In the first two works, \textcite{Jablonka1995,Paenke:2007ie}, the comparison is made with respect to an environment that alternates between two states, $E_0$ and $E_1$. Each environment is associated with a corresponding adapted phenotype $P_0$ and $P_1$, respectively.  In both works variation only affects the ratio of each phenotype in the population (directly in \textcite{Jablonka1995}, indirectly via a ``predisposition'' or tendency in \textcite{Paenke:2007ie}); no new phenotypes are created, and as inheritance is modelled only at a population level, that is without reproduction, we cannot use these models to investigate the emergence of heredity.
 
-Inheritance however is modelled in \textcite{Gaucherel2012}, the third work, in relationship to individuals. Two models are presented, the first and simplest describing a non-spatial scenario conceptually similar to that in \textcite{Jablonka1995} and \textcite{Paenke:2007ie}, while the second examines a spatial world based on DaisyWorld \parencite{LovelockMargulis2011}. Focussing on the first and most relevant of the two models, reproduction is the middle of three repeated stages--first ``annihilation'' where the population size is adjusted to some practical level, then reproduction, and finally development. Concentrating on the second, reproduction, stage, individuals, represented by a single trait, or phenotype, value, are chosen for reproduction with some probability (based on the trait value), and the child given a trait value that slightly varies from the parent's value to model mutation (paraphrasing \textcite{Gaucherel2012}, $trait_{child} = trait_{parent} + \delta$, where $\delta$ is described as taken from a uniform distribution of given range around the parent's trait value. \footnote{although this appears to be an error and instead it should centred on $0$.})
+Inheritance however is modelled in \textcite{Gaucherel2012}, the third work, in relationship to individuals. Two models are presented, the first and simplest describing a non-spatial scenario conceptually similar to that in \textcite{Jablonka1995} and \textcite{Paenke:2007ie}, while the second examines a spatial world based on DaisyWorld \parencite{LovelockMargulis2011}. Focussing on the first and most relevant of the two models, reproduction is the middle of three repeated stages--first ``annihilation'' where the population size is adjusted to some practical level, then reproduction, and finally development.
+
+In the second stage (reproduction), individuals, represented by a single trait, or phenotype, value, are chosen for reproduction with some probability (based on the trait value), and, to model mutation, the child given a trait value that slightly varies from the parent's value: $trait_{child} = trait_{parent} + \delta$, where $\delta$ is described as taken from a uniform distribution of given range around the parent's trait value. \footnote{although this appears to be an error;  $\delta$ should instead be centred on $0$.})
 
 The most relevant previous work is that of \textcite{Bourrat2015} who, in the course of examining the difference between evolution, natural selection and \gls{ens}, models the emergence of heredity in unchanging environments. \Textcite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants). The context is unequivocally related to biology; his examples involve genes, traits, phenotypes and drift.
 
@@ -92,24 +96,72 @@ The work of \textcite{Bourrat2015} therefore has the following limitations:
 	\item Most importantly, the effect of changing environments on inheritance is unaddressed.
 \end{itemize}
 
+\subsection{Hypothesis}\label{h2}
+
+Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. Heredity is related to variation: low variation implies high heredity and vice versa. There is a subtle difference between heredity and inheritance: inheritance is the process that results in heredity the measure (of correlation between entities in two generations.) As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).'' 
+
+For the single property case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance. Conversely, if there is no relationship there is no inheritance and the entities are unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties'.
+
+\Textcite{Bourrat2015} argues that heredity may in fact be a product of evolution rather than a precursor, or in other words, that the process of inheritance emerges from the action of selection and variation upon a population (\cref{previous-work-p2}.) In other words, \emph{variation and selection are sufficient for inheritance}.
+
+The reasoning is as follows: heredity describes the correlation along a lineage, so a high fitness entity with high heredity is likely to have more high fitness descendants than low fitness descendents. Higher fitness entities will survive longer and reproduce more, and so high fitness/high heredity entities will slowly invade the population.
+
+The degree of variation between generations is important; if there is no correlation it effectively means evolution is operating as an unguided, random, search while complete correlation means that each generation is a copy of the previous one, and there are no novelties.
+
+Interestingly, the optimal degree is unlikely to be fixed, but instead would be expected to vary depending on the predictability of the environment if we can extrapolate from the experiences of balancing exploration versus exploitation in \gls{ea} (\eg \cite{DeJong2006}.) The fundamental issue therefore is how to determine an appropriate degree of variation (or heredity) for each and all environments. We believe, and will show in the remainder of this \namecref{models-of-inheritance}, that an emergent inheritance mechanism can ``self-adjust'' to varying environmental conditions.
+
+Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
+
+This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbours about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
+
+The initial hypothesis of \textcite{Bourrat2015} assumes a perfectly predictable environment that can be exactly ``learned'' by an evolutionary algorithm. If we assume that learnabilty is related to predictability, then we can restate and expand the hypothesis in terms of predictability:
+
+\begin{hypothesis}
+Variation and selection are sufficient for inheritance, where the degree and variance of inheritance is proportional to the predictability of the environment.
+\end{hypothesis}\label{hypothesis-2} 
+
+\section{Predictions}\label{predictions}
+
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
+
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
+
+In a stable or unchanging environment our prediction is that:
+
+\begin{enumerate}
+\item Average inheritance will tend towards perfect inheritance,confirming a result of \textcite{Bourrat2015}.
+\item The population variance of inheritance will decrease more than would be expected by chance alone.
+\end{enumerate}
+
+Our predictions for changing environments are:
+
+\begin{enumerate}
+	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+\end{enumerate}
 \subsection{Simulation model of variation and inheritance}\label{base-model}
 
-In an attempt to address the restrictions of Bouratt, we now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, such as fidelity and fitness, are represented as explicit parameters. This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity by an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
+We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{fidelity} and \emph{fitness}, are represented as explicit parameters, defined as follows:
 
-In other respects it resembles a fairly standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
+\begin{enumerate}
+	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
+	\item \emph{Fidelity} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $fidelity = 1.0$ means the child's value will be identical to the parent's.
+\end{enumerate}
 
-Let's look at each element in turn.
+This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity as an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
+
+In other respects it resembles a standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each take a population as input and output a transformed population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
+
+Let's look at each of these remaining elements in turn:
 
 \begin{enumerate}
 	\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
 	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
-	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-	\item \emph{Fidelity} is the correlation between the child's and parent's values for a property. The range is $[0,1]$ where a value of $0$ means that the value for a child's property has no correlation with its parent's value for that property. High \emph{fidelity} values mean high correlation, and when $fidelity = 1.0$ the child's value is identical to the parent's.
 	\item \emph{Selection} forms a new population by selecting entities from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
 	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value and some degree of correlation captured by the value of the function $Range$.
 \end{enumerate}
 
-The model is parameterised to make it easy to describe different specific models within this general structure; these parameters are defined in \cref{tbl:parameter_definitions}. In later chapters describing the series of experiments that use this model, these parameters will be mapped to experiment factors, with specific parameter values becoming factor levels.
+The model is parameterised to make it easy to describe different specific models within this general structure; these parameters are defined in \cref{tbl:parameter_definitions}. In later sections describing the series of experiments that use this model, each parameter will be mapped to an experiment factor, with specific parameter values becoming factor levels.
 
 \begin{table}
 	\begin{center}
@@ -163,48 +215,6 @@ The model is parameterised to make it easy to describe different specific models
 	}
 	\caption{Definitions for the functions \emph{Selection} and \emph{Variation}}\label{model-functions}
 \end{algorithm}
-
-\subsection{Hypothesis}\label{h2}
-
-Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. Heredity is related to variation: low variation implies high heredity and vice versa. There is a subtle difference between heredity and inheritance: inheritance is the process that results in heredity the measure (of correlation between entities in two generations.) As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).'' 
-
-For the single property case, when the correlation between the value for a parent's property and an offspring's property approaches an upper limit of $1.0$ we say we have complete or full inheritance. Conversely, if there is no correlation (at or near the lower limit of $0$) there is no inheritance and the entities are unrelated. We can extend the measure to a group of properties simply by taking the average of the individual correlations.
-
-\Textcite{Bourrat2015} argues that heredity may in fact be a product of evolution rather than a precursor, or in other words, that the process of inheritance emerges from the action of selection and variation upon a population (\cref{previous-work-p2}.) In other words, \emph{variation and selection are sufficient for inheritance}.
-
-The reasoning is as follows: heredity describes the correlation along a lineage, so a high fitness entity with high heredity is likely to have more high fitness descendants than low fitness descendents. Higher fitness entities will survive longer and reproduce more, and so high fitness/high heredity entities will slowly invade the population.
-
-The degree of variation between generations is important; if there is no correlation it effectively means evolution is operating as an unguided, random, search while complete correlation means that each generation is a copy of the previous one, and there are no novelties. Interestingly, the optimal degree is unlikely to be fixed, but instead would be expected to vary depending on the predictability of the environment if we can extrapolate from the experiences of balancing exploration versus exploitation in \gls{ea} (\eg \cite{DeJong2006}.) The fundamental issue therefore is how to determine an appropriate degree of variation (or heredity) for each and all environments. We believe, and will show in the remainder of this \namecref{models-of-inheritance}, that an emergent inheritance mechanism can ``self-adjust'' to varying environmental conditions.
-
-Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
-
-This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbours about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
-
-The initial hypothesis of \textcite{Bourrat2015} assumes a perfectly predictable environment that can be exactly ``learned'' by an evolutionary algorithm. If we assume that learnabilty is related to predictability, then we can restate and expand the hypothesis in terms of predictability:
-
-\begin{hypothesis}
-Variation and selection are sufficient for inheritance, where the degree and variance of inheritance is proportional to the predictability of the environment.
-\end{hypothesis}\label{hypothesis-2} 
-
-\section{Predictions}\label{predictions}
-
-First we define the two distinct types of relationship between an entity and its environment--stable, and changing: 
-
-A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In our model the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
-
-In a stable or unchanging environment our prediction is that:
-
-\begin{enumerate}
-\item Average inheritance will tend towards perfect inheritance,confirming a result of \textcite{Bourrat2015}.
-\item The population variance of inheritance will decrease more than would be expected by chance alone.
-\end{enumerate}
-
-Our predictions for changing environments are:
-
-\begin{enumerate}
-	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
-\end{enumerate}
 
 \section[Model behaviour in stable conditions]{Experimental test of hypothesis under stable conditions}\label{experimental-test-of-h2-under-fixed-conditions}
 
@@ -351,7 +361,7 @@ In conclusion, from visual inspection, the variance of fidelity does approach $0
 
 \section{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
-In this chapter we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. The conceptual basis for these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
+In this \namecref{model-behaviour-in-changing-environments} we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. The conceptual basis for these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
 
 \begin{figure}
 	\begin{center}
@@ -387,122 +397,7 @@ In this chapter we describe an appropriate experimental design and model to desc
 
 Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
 
-What does it mean in the context of this hypothesis for an environment to be ``predictable''? \Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
-
-Returning to first principles, any model must describe two particular elements of the environmental change: the \emph{scope} of the change, and the \emph{shape} of the change. First, we discuss the \emph{scope} of change. Our evolutionary model (\cref{base-model}) provides the scope to group entities at three different levels:
-\begin{enumerate}
-	\item The group of all entities.
-	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
-	\item A single-member group for each entity.
-\end{enumerate}
-
-In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has a unique response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although biological mutations of the genome can sometimes cause significant phenotypical differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
-
-The \emph{shape} of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
-
-Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
-
-Our chosen method is to represent environmental change as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I or ``Integrated'' component of the model provides the differencing. Seasonality, a particular form of recurring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
-
-Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change.
-
-Environmental change is modelled as an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
-
-$x_t = \Theta x_{t-1} + e_t + \delta$ \label{ar-1-time-series}
-
-where $x_t$ is the change at timestep $t$, $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
-
-This series allows us to represent a broad range of environmental changes:
-
-\begin{itemize}
-	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
-	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
-	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the predictable and unpredictable we can examine the performance of the evolutionary algorithm on some continuum of predictability.
-	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
-	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
-\end{itemize}
-
-We claim that, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
-
-<<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
-library(reshape2)
-library(ggplot2)
-library(cowplot) # styling of plots, extension of ggplot2
-library(gridExtra)
-
-t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
-
-t1$run <- 1:nrow(t1)
-names(t1)[1:3]<-c("theta", "sigma", "delta")
-t2 <- melt(t1,id=c('run','theta','sigma','delta'))
-t2$theta <- round(t2$theta,3)
-t2$sigma <- round(t2$sigma,3)
-t2$delta <- round(t2$delta,3)
-
-for (r in unique(t2$run)) {
-t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
-
-fitness <- 0.5
-for (t in 1:50) {
-fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
-t2[t2$run==r & t2$t==t,'fitness'] = fitness
-}
-}
-ap <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
-<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
-ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
-<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
-t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
-t1$run <- 1:nrow(t1)
-names(t1)[1:3]<-c("theta", "sigma", "delta")
-t2 <- melt(t1,id=c('run','theta','sigma','delta'))
-t2$theta <- round(t2$theta,3)
-t2$sigma <- round(t2$sigma,3)
-t2$delta <- round(t2$delta,3)
-ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change")
-@
-
-% Needs sampleenvironment
-<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Cumulative time-series examples for samples of theta, sigma and delta.'>>=
-for (r in unique(t2$run)) {
-t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
-
-fitness <- 0.5
-for (t in 1:50) {
-fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
-t2[t2$run==r & t2$t==t,'fitness'] = fitness
-}
-}
-
-ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
-@
-
-%% Needs sampleenvironment
-%<<sampleentropy, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Approximate entropy of each example environment.'>>=
-%library(pracma)
-%library(ggplot2)
-%library(cowplot) # styling of plots, extension of ggplot2
-%
-%t2 <- t1[,1:3]
-%names(t2)[1]<-"theta"
-%names(t2)[2]<-"sd"
-%names(t2)[3]<-"delta"
-%for(n in 1:nrow(t1)) {t2[n,'sample_entropy'] <- sample_entropy(unlist(t1[n,4:52],use.names=FALSE))}
-%for(n in 1:nrow(t1)) {t2[n,'approx_entropy'] <- approx_entropy(unlist(t1[n,4:52],use.names=FALSE))}
-%
-%#summary(lm(sample_entropy~theta+sd,data=t2)) # can error as some sample_entropy values may be Inf
-%ggplot(t2, aes(sd,approx_entropy)) + geom_point() + geom_smooth(method='lm') # formula not required
-%
-%#summary(lm(approx_entropy~theta + sd, data = t2)) #  SIGNIFICANT
-%@
+What does it mean in the context of this hypothesis for an environment to be ``predictable''? 
 
 \subsection{Experimental design}
 

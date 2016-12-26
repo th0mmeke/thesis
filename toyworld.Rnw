@@ -978,7 +978,7 @@ plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Part
 
 <<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Reactant Strategy '>>=
 df <- subset(df,df$Partition.Start != "4750")
-par(mfrow=c(1,3),cex=0.5)
+par(mfrow=c(1,3),cex=0.4)
 boxplot(Number.of.cycles~Product.Strategy, data=df, main="Cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
 boxplot(Length.of.longest.cycle~Product.Strategy, data=df, main="Cycle length by Product Strategy", names=c("Uniform","Energy"), ylab="Length of longest cycle")
 boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
@@ -991,8 +991,8 @@ boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count 
 %\label{fig:reactant_strategy}
 %\end{figure}
 
-<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Product Strategy '>>=
-par(mfrow=c(1,3),cex=0.5)
+<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Product Strategy'>>=
+par(mfrow=c(1,3),cex=0.4)
 boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
 boxplot(Length.of.longest.cycle~Reactant.Strategy, data=df, main="Cycle length by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Length of longest cycle")
 boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
@@ -1010,7 +1010,8 @@ From visual inspection of \cref{fig:reactantstrategy}, there appears to be a sig
 
 We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model (degrees of freedom=1) with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
-<<reactantproductcombination, pdfcrop=TRUE, echo=FALSE, cache=TRUE, out.width='0.30\\linewidth', fig.height=4, fig.show='hold', fig.scap=NA, fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '>>=
+<<reactantproductcombination, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Effect of the combination of Reactant and Product Strategies on Response Variables '>>=
+par(mfrow=c(1,2),cex=0.4)
 boxplot(Number.of.cycles ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 boxplot(Length.of.longest.cycle ~ Reactant.Strategy+Product.Strategy, data=df,  log="y", ylim=c(1,6000),names=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))
 @

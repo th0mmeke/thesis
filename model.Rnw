@@ -741,22 +741,6 @@ Stationarity is inherently a constraint for applying statistical methods to the 
 
 Another broad approach might be to modify the method to reduce its dependence on stationarity. For example, taking one part of the problem, \textcite{LingFengLiu2014} develops a modification of the well-known Shannon entropy formula for non-stationary processes. The method though assumes that the process moves between a number of states with the series output following a known distribution in each state. Although this approach does provide an upper-bound to the information entropy of the process output, identifying the states and the accompanying distributions from a black-box process is likely to prove a challenge. Fundamentally, non-stationarity remains a problem for most methods.
 
-\subsection{An information-based measure}\label{information-based-measure}
-
-Predictability is related to information entropy, and to compression; a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
-
-In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity--the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterisation.
-
-\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \textcite{Prokopenko2009}, \textcite{Ladyman2011} and \textcite{Lloyd2001}.
-
-Statistical Complexity \parencite{Crutchfield1989}, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \textcite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \textcite{Young2005}.
-
-The benefits of $C_{\mu}$ are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \textcite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's Ph.D. thesis \textcite{Shalizi2001a} provides further context. 
-
-$C_{\mu}$ has been applied to a number of domains including random boolean networks \parencite{Gong2012}, spin \parencite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \parencite{Young2008}, autonomy of protocells \parencite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \parencite{Xiang2008}.
-
-The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \parencite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \parencite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \parencite[p.119]{Shalizi2001}. Note this issue with stationarity is similar to the difficulty identified in \cref{abrupt-environmental-change}, and a solution to one might be applicable to the other.
-
 \section{Conclusions}\label{part2-future-work}
 
 In this chapter we have shown by experiment that, as predicted, in stable environments:

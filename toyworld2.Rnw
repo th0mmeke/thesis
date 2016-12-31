@@ -172,9 +172,42 @@ That the number of stable cycle states increases in proportion to the degree of 
 	\caption{The main simulation loop in ToyWorld2}
 \end{algorithm}
 
+We test two forms of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
+
+\subsubsection{Available energy function}
+
+Incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
+
+\begin{displaymath}
+	e_i=
+	\begin{cases}
+		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
+		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
+		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
+	\end{cases}
+\end{displaymath}\label{environment-weighting-calculation}
+
+\subsubsection{Foodset size function}
+
+\begin{algorithm}[ht]
+	increment $\leftarrow$ newsize - |food set|
+	\uIf{increment $> 0$} {
+		\tcp{Add molecules to food set}
+		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
+		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
+	}
+	\uElse{
+		\tcp{Remove molecules from food set}
+		new size $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
+		$food set \leftarrow new size$ elements chosen with uniform probability from $food set$\;
+	}
+\end{algorithm}
+
 \subsection{Measures}
 
-The primary metric in the hypothesis is \emph{stable cycle states}. That is, cycle forms that repeat more than some number of times, with some continuity of components from cycle to successor cycle. If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
+The primary metric in the hypothesis is \emph{stable cycle states}. That is, cycle forms that repeat some number of times, with a degree of continuity of components from cycle to successor cycle. 
+
+If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
 \begin{algorithm}[ht]
 	\tcp{Construct reaction graph from a list of $reactions$}
@@ -230,6 +263,14 @@ The primary metric in the hypothesis is \emph{stable cycle states}. That is, cyc
 
 \subsection{Local Reactant Selection}
 
+Unless the total number of atoms in the reaction vessel can increase, to maintain a foodset level product molecules must be removed from the reactor at an equal rate. If there is a flow across the reaction vessel with new molecules (food set molecules) entering at one side and products be removed at the opposite side, then there is a maximum lifespan for any composome determined by how long it takes to traverse the vessel.
+
+Anchoring the composome would allow this limit to be extended. Some form of membrane or boundary (e.g., Chemoton or autopoeitic entity), open to food set molecules entering across the boundary, and waste product molecules exiting would identify the reactions in the composome so they could be logically anchored.
+
+Alternatively, the composome could be anchored by fixing product molecules in place while foodset molecules move freely in the vessel. This still leaves the problem of removing 'waste' (or else the vessel will be filled by product molecules). The LocalReactantSelection method models these fixed products.
+
+However to mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. For two molecules to react, if both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore if both of these chosen reactants is a non-foodset molecule, we must replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+
 \begin{algorithm}[ht]
 
      $reactants\leftarrow$ two molecules taken with uniform probability from the combined foodset and reaction vessel population\;
@@ -253,12 +294,36 @@ The primary metric in the hypothesis is \emph{stable cycle states}. That is, cyc
 	\caption{Local Reactant Selection}
 \end{algorithm}
 
-However to mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. For two molecules to react, if both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore if both of these chosen reactants is a non-foodset molecule, we must replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+
+\subsection{Limitations of the model}
+
+Long-chain construction by Polymerization
+
+Polymers formed by chains of monomers (molecules with particular structure allowing chains to form.) Can Toyworld2 produce polymers? Preferential product selection mechanism might do so, over least energy method. For example, C=CCl (Chloroethylene) doesn't naturally form chains (PVC) under least-energy; neither does C=C.
+
+Polymerization is not possible with a single-step reaction mechanism where the molecules are legal after the first step: it requires changing a double bond to a single bond (\eg C=C to CC) in each monomer and the simultaneous formation of a single CC bond between the two monomers.
 
 The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+](=O)[N+]([O-])=O, 10xN(=O)[O], and 20xO=C=O.
 
+\begin{table}
+	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
+	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
+		\toprule
+		Experiment                 &Form of variation		&Target of variation 	& No. environments	& No. repeats\\
+		\midrule
+		1480963448 & AR & Foodset & 50 & 1\\
+		1481665906 & AR & N/A & 1 & 10\\
+		1481670569 & AR & Energy & 10 & 1\\
+		1481939843/0 & AR & Foodset&5 & 3\\
+		1481939843/1 & AR & Energy &5 & 3\\
+		1481952255 & Bistate & Energy & 5 & 2\\
+		1481398302 & AR & Foodset &20 & 1\\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \section{Results}
+
 <<anova, echo=FALSE, cache=TRUE, warning=FALSE>>=
 df_energy <- df[df$target=='ENERGY',]
 df_food <- df[df$target=='FOOD',]

@@ -1,18 +1,63 @@
 \chapter{Introduction}\label{introduction}
 
-Biological evolution has produced ecosystems of staggering variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every organism alive today.
+Motivation: demonstrate capability for unbounded evolution in AChem
 
-This is not a work about that evolution. Nor does this thesis directly address the artificial equivalent of that explosion through evolution by natural selection, the subject of creative \gls{oe}--a topic that has had steady attention, without notable success\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}.
+Unbounded evolution requires informational replicator
+Evolution requires inheritance, variation, selection
+Simple in biology; harder in the abstract
+For unbounded, variation potential must be very high - must be able to represent large number of states without losing essence [Szathmary]
+Inheritance and variation implies replication; selection implies sorting
+Goal is informational replicator (replicator with high variation potential)
+Starting point is low-level elements plus emergence
+Emergence required [???]
+Some set of low-level elements capable of emergence; capable of replicators; capable of informational replicators
+
+Problem is how to get from starting point to goal? Want an informational replicator that has emerged from lower-level elements.
+
+
+Informational replicator hard to design in any given AChem
+Previous work has either:
+handbuilt replicators (so limited applicability) e.g., Squirm3, or
+provided specific, non-evolvable support in base AChem ruleset (e.g., copy operator in Avida)
+
+No generic approach known in literature.
+
+Motivation requires that informational replicators can be created in an AChem.
+Reactions -> .... -> informational replicators
+Experiments (and OOL) show straightforward pathway from reactions -> composomes (or compositional genomes [Segre] or variable replicators [Szathmary])
+But significant gap from composomes to informational replicators
+major differences:
+number of states in phenotype that can be represented (and causally connected to inheritance)
+separate genotype/phenotype - genotype -> development -> phenotype <- selection <- environment. -> .... -> informational replicators
+
+
+Problem: begs question - if can go from composomes to informational replicator, then qualitative not just quantitative change - which is the reason why we want an informational replicator...So still a gap. Show progress on possible path, not necessary path. Unless can show can progress from 10 or so states with composomes, interesting but not relevant to unbounded evolution. As p16[Meijenfeldt2013]:
+
+How does the system become evolvable in an open-ended manner? Obviously, a way of introducing and accumulating novel mutations must be implemented. Modelling has hardly been concerned with the question...
+
+
+
+%This is not a work about that evolution. Nor does this thesis directly address the artificial equivalent of that explosion through evolution by natural selection, the subject of creative \gls{oe}--a topic that has had steady attention, without notable success\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}.
 
 \section{Background and context}\label{background-and-context}
 
 \subsection{The origins of life}
 
+Biological evolution has produced ecosystems of staggering variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every organism alive today.
+
 The origin of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There are many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history.
 
 However, a consensus is forming that early life began with chemoautotrophs fuelled by energy from inorganic redox couples and biomass from CO\textsubscript{2}, and that innovations in carbon-fixation created the main branches in the tree-of-life \parencite{Braakman2012}. The initiation of selection is marked by the advent of the \gls{ida}, probably from an RNA world, followed substantially later by the so-called Last Universal Common Ancestor (LUCA) \parencite{Yarus2011}. It is important to note for clarity that LUCA was almost certainly not a single entity or even species, but rather is a construct of evolutionary genetics because of the likely predominance of Lateral Gene Transfer (LGT) in archaic biology\footnote{http://sandwalk.blogspot.ca/2007/03/web-of-life.html}. Lateral or Horizontal Gene Transfer is thought to have been so common in early life that there was no single common ancestor, but rather genes from multiple lineages intermixed during this early stage into all lineages today \parencite{Ragan2009}.
 
-Two alternative models exist for the step from the prebiotic world  to \gls{ida} (\cref{major-stages-early-life}): replication- or genes- or RNA-first, and metabolism- or protein-first. Both metabolism and replication were almost certainly required for \gls{ida} however. Self-replicating RNA enzymes are described in \textcite{Lincoln2009}, forming the basis of a selective system (also see \textcite{Cheng2010,Powner2009} for formation of RNA in prebiotic conditions). Some elements of \gls{ida}  are thought to still be with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \parencite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \parencite{Wilson2009}. The next major transition was to the Protein world, although predominance of RNA transcripts leads to suggestions that it should more accurately be called the RNA-Protein world \parencite{Altman2013}. 
+Two alternative models exist for the step from the prebiotic world  to \gls{ida} (\cref{major-stages-early-life}): replication- or genes- or RNA-first, and metabolism- or protein-first. Both metabolism and replication were almost certainly required for \gls{ida} however. Self-replicating RNA enzymes are described in \textcite{Lincoln2009}, forming the basis of a selective system (also see \textcite{Cheng2010,Powner2009} for formation of RNA in prebiotic conditions). 
+
+RNA hard [Mijenfeldt2013] so de novo RNA world "considered a myth by some" (all of which are not implausible in any semi-realistic AChem):
+
+thermodynamics to create RNA very specific
+unstable under all but a few conditions
+relies on supply of nucleotides; unstable without
+
+Some elements of \gls{ida}  are thought to still be with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \parencite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \parencite{Wilson2009}. The next major transition was to the Protein world, although predominance of RNA transcripts leads to suggestions that it should more accurately be called the RNA-Protein world \parencite{Altman2013}. 
 
 A self-sustaining autocatalytic network (in terms of a RAF set, specifically a ``set of molecules and reactions which is collectively autocatalytic in the sense that all molecules help in producing each other (through mutual catalysis, and supported by a food set)'' \parencite{Hordijk2011}) is generally considered essential \parencite{Pross2013}, but not sufficient \parencite{Hordijk2011}. Both competing models--replication-first and metabolism-first--build on this. In the case of replication-first, through autocatalysis, as expressed by self-replication of oligomeric compounds; by cycles and networks in metabolism-first. In the broadest sense life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities. From another perspective, metabolism-first privileges function, while replication-first privileges descent.
 
@@ -36,7 +81,7 @@ The origin of life can be seen as the transition from chemistry to biology, and 
 
 \subsection{Evolution by Natural Selection}\label{evolution-by-natural-selection}
 
-As has been said before, ``We take it as given that biology instantiates ENS'', but that doesn't mean that the algorithm of biology is in fact \gls{ens} \parencite{Watson2012}. Adaptation in biology appears to precede Natural Selection, reinforcing that adaptation is possible without \gls{ens} \parencite{Watson2010}, and other forms of evolution altogether have been proposed in artificial systems (\eg the compositional evolution of \textcite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined later, but first we concentrate on canonical \gls{ens}.
+As has been said before, ``We take it as given that biology instantiates ENS'' \parencite{Watson2012}, but that doesn't mean that the algorithm of biology is in fact \gls{ens}. Adaptation in biology appears to precede Natural Selection, reinforcing that adaptation is possible without \gls{ens} \parencite{Watson2010}, and other forms of evolution altogether have been proposed in artificial systems (\eg the compositional evolution of \textcite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined later, but first we concentrate on canonical \gls{ens}.
 
 \Textcite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} taken from the most influential items in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.'' Incidentally, as an illustration of the difficulty of definitions, although the usual aim for a summary is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring'', \textcite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or alteratively in providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \textcite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant''.
 
@@ -131,11 +176,11 @@ Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant
 
 % Any molecule in the core will produce the remaining species in both the core and periphery \parencite{Vasas2012a} and so reconstitute the core,
 
-The model of \parencite{Vasas2015, Vasas2012, Vasas2012a}, based on GARD, tests the hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \textcite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
+The model of \cite{Vasas2015, Vasas2012, Vasas2012a}, derived from GARD, tests the hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \textcite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
 
 \subsection{Informational replicators with shortcut replication mechanism}
 
-A \emph{shortcut} is one where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entities it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
+A \emph{shortcut} is where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entity it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
 
 \emph{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oe} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
 
@@ -260,6 +305,17 @@ The informational replicator systems reviewed in this \namecref{previous-work} t
 %The EvoEvo project \footnote{\url{http://evoevo.liris.cnrs.fr/about-evoevo-project/})} an Information and Communication Technologies initiative funded by the European Commission, begins at a higher level biological starting point (genotype-phenotype mappings). The project presupposes microbial evolution, ``at the level of genomes, biological networks and populations'', with a focus on four specific properties of a genotype-phenotype mapping--Variability, Robustness, Evolvability and Open-endedness. Later work is planned to remove the biological specificity to provide a framework for applying EvoEvo to ICT problems. Along with development of a model founded on the ``genotype-to-phenotype mapping and the fitness landscape'', the project states that make use of \emph{Aevol} \parencite{Knibbe:2006vn,Knibbe:2007kx} to model developmental processes in micro-organisms
 %\end{DRAFT}
 
+\section{Previous work}
+
+(composome OR "compositional genome" OR "compositional inheritance" OR "variable replicator") AND (("selection pressure" OR environment*) NEAR (variation OR varying OR changing))
+
+Autocatalytic sets/composomes: Extending states: Polymer-GARD (Shenhav et al 2005), Exchange Polymer-GARD (Shenhav et al 2007), Universe-GARD (Markovitch et al., 2012) explicitly addresses this.
+
+Reaction networks: Farmer et al 1986 in Vasas 2012 (compartmentalisation of networks) shows "first and only" [Meijen..., p17] demonstration of accumulating mutations in chemical networks. Polymers rather than monomers in GARD.
+
+Stadler1993 ODE modeling of well-mixed/continously stirred reactor deriving Replicator equation. Approach is to examine outcome of various models including elements such as complementary replication and mutation. Pertubation purely through modeling of mutation; internal rather than external factor. Because ODE based, cannot be applied to fully-constructive chemistry - "finiteness is required" (p6)
+
+Fontana1994a applied pertubations to well-mixed reaction vessel with objects taken from lambda-calculus. Organisations (entities) in all cases were observed to be self-maintaining but not self-reproducing (excluding cases that included a replication expression.) No locality or spatial effects; pertubations take the form of adding a small number of copies (10 or 50) of a random object every 30,000 or 50,000 collisions. Purpose of pertubations to assess sensitivity of model to change, rather than as a mechanism to induce change as in our case. 
 
 \section{Approach}\label{methods}
 

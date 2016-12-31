@@ -473,7 +473,7 @@ weighting. \cref{fig1} shows an example of the shift in products that occurs as 
 this weighting as the overall quantity of energy in the system is
 changed.
 
-Specifically, let $E_i$ denote the energy required for the bond change in the reaction option. If $E_i > 0$ the reaction is exothermic, or releases energy; otherwise it is endothermic, requiring energy to proceed.
+Specifically, let $E_i$ denote the energy required for the bond change in the reaction option $i$. If $E_i > 0$ the reaction is exothermic, or releases energy; otherwise it is endothermic, requiring energy to proceed.
 
 We calculate a weighted value, $e_i$, based on the combination of $E_i$ and the available energy for the reaction, $E_{avail} > 0$, as follows:
 
@@ -486,7 +486,7 @@ We calculate a weighted value, $e_i$, based on the combination of $E_i$ and the 
 	\end{cases}
 \end{displaymath}\label{weighting-calculation}
 
-Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
+Then, for reaction option $i$ of $n$ options, $p_i = e_i / \sum\limits_{i=1}^n e_i$, where $p_i$ is the probability of option $i$ being selected. A number is chosen from the uniform distribution $\mathcal{U}[0,1]$ and the selected reaction is found from the inverse of the CDF given by $p_i\text{ for all }i$ by searching for the reaction at that point in the CDF. This method has the property that the probability of a reaction being selected is proportional to its weight.
 
 As a result, for exothermic reactions, highly exothermic reactions are preferred to slightly exothermic ones. For endothermic reactions, the available energy must exceed the energy required by the reaction, and the reaction is preferred according to the degree of the surplus. Note that an option where the energy required exceeds that available ($E_{avail} < E_i$) will have $p_i = 0$, and hence can not be selected. This behaviour is shown in \cref{fig:reaction_selection_weights}.
 
@@ -496,8 +496,8 @@ As a result, for exothermic reactions, highly exothermic reactions are preferred
 			[enode/.style={circle,draw=gray!50,fill=white,radius=0.5cm}]
 			\pgftext[at=\pgfpoint{2cm}{0cm},left,base]{\pgfimage[width=0.5\linewidth]{figures/reaction_selection_weights}};
 			\node[enode] at (5.5,6) {1};
-			\node[enode] at (7,4) {2};
-			\node[enode] at (8,3.2) {3};
+			\node[enode] at (7,4) {3};
+			\node[enode] at (8,3.2) {2};
 		\end{tikzpicture}
 		\caption{Weighting calculation for reaction selection under a Least Energy Strategy. Numerical labels refer to cases in \cref{weighting-calculation}.}\label{fig:reaction_selection_weights}
 	\end{center}

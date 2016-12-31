@@ -975,12 +975,12 @@ plot(log(df$Count.of.most.common.cycle)~df$Partition.Start, main="Cycle count by
 \subsection{Analysis and Discussion}
 \Cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (\eg \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
-<<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Reactant Strategy '>>=
+<<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Reactant Strategy (y-axis scales vary)'>>=
 df <- subset(df,df$Partition.Start != "4750")
 par(mfrow=c(1,3),cex=0.4)
-boxplot(Number.of.cycles~Product.Strategy, data=df, main="Cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
+boxplot(log(Number.of.cycles)~Product.Strategy, data=df, main="Log cycle numbers by Product Strategy", names=c("Uniform","Energy"), ylab="Number of cycles")
 boxplot(Length.of.longest.cycle~Product.Strategy, data=df, main="Cycle length by Product Strategy", names=c("Uniform","Energy"), ylab="Length of longest cycle")
-boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
+boxplot(log(Count.of.most.common.cycle)~Product.Strategy, data=df, main="Log cycle count by Product Strategy",names=c("Uniform","Energy"), ylab="Count of most common cycle")
 @
 
 %\begin{figure}[t]
@@ -990,11 +990,11 @@ boxplot(Count.of.most.common.cycle~Product.Strategy, data=df, main="Cycle count 
 %\label{fig:reactant_strategy}
 %\end{figure}
 
-<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Product Strategy'>>=
+<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Response by Product Strategy (y-axis scales vary)'>>=
 par(mfrow=c(1,3),cex=0.4)
-boxplot(Number.of.cycles~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Number of cycles")
+boxplot(log(Number.of.cycles)~Reactant.Strategy, data=df, main="Cycle numbers by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Log number of cycles")
 boxplot(Length.of.longest.cycle~Reactant.Strategy, data=df, main="Cycle length by Reactant Strategy", names=c("Uniform","Kinetic"), ylab="Length of longest cycle")
-boxplot(Count.of.most.common.cycle~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Count of most common cycle")
+boxplot(log(Count.of.most.common.cycle)~Reactant.Strategy, data=df, main="Cycle count by Reactant Strategy",names=c("Uniform","Kinetic"), ylab="Log count of most common cycle")
 @
 
 %\begin{figure}[t]

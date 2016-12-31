@@ -295,7 +295,7 @@ Our model enforces conservation of mass so reactions can be represented solely b
 
 \begin{table}
 	\begin{center}
-		\caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The energies in this table are those used by default in ToyWorld, but may easily be changed. Source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}\label{default_bond_energies}
+		\caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies used in experiments. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The energies in this table are those used by default in ToyWorld, but may easily be changed. Source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}\label{default_bond_energies}
 		\begin{tabular}{@{}lp{1.5cm}p{1.5cm}p{4cm}@{}}
 			\toprule
 			Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (simulation units)\\
@@ -948,12 +948,12 @@ All replicates completed a set of 20,000 reactions; given the initial population
 
 A view of the results is given in \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
-<<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis)'>>=
+<<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis, y-axis scales vary)'>>=
 df<-load.toyworld("results/EvaluatorActualCycles.out")
 par(mfrow=c(1,3),cex=0.5)
-plot(df$Number.of.cycles~df$Partition.Start, main="Cycle numbers by Partition", ylab="Number of cycles")
-plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle")
-plot(df$Count.of.most.common.cycle~df$Partition.Start, main="Cycle count by Partition", ylab="Count of most common cycle")
+plot(log(df$Number.of.cycles)~df$Partition.Start, main="Cycle numbers by Partition", ylab="Log number of cycles", xlab="Start of partition")
+plot(df$Length.of.longest.cycle~df$Partition.Start, main="Cycle length by Partition", ylab="Length of longest cycle", xlab="Start of partition")
+plot(log(df$Count.of.most.common.cycle)~df$Partition.Start, main="Cycle count by Partition", ylab="Log count of most common cycle", xlab="Start of partition")
 @
 \label{fig:partitions}
 

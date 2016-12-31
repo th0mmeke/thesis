@@ -87,10 +87,17 @@ fitness <- max(0,min(1,fitness + t2[t2$run==r & t2$t==t,'value']))
 t2[t2$run==r & t2$t==t,'fitness'] = fitness
 }
 }
-ap <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")
+ap <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
+bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(theta~sigma, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
+
+<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
+ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
+bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
+grid.arrange(ap,bp,nrow=2,ncol=1)
+@
+
 
 <<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
 t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
@@ -100,16 +107,8 @@ t2 <- melt(t1,id=c('run','theta','sigma','delta'))
 t2$theta <- round(t2$theta,3)
 t2$sigma <- round(t2$sigma,3)
 t2$delta <- round(t2$delta,3)
-ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change")
+ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
 @
-
-
-<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
-ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
-bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")
-grid.arrange(ap,bp,nrow=2,ncol=1)
-@
-
 
 
 % Needs sampleenvironment
@@ -124,7 +123,7 @@ t2[t2$run==r & t2$t==t,'fitness'] = fitness
 }
 }
 
-ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + theme(strip.text.x = element_text(size = 6))
+ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change") + theme(strip.text = element_text(size = 8))
 @
 
 \subsection{An information-based measure}\label{information-based-measure}
@@ -306,7 +305,7 @@ Polymerization is not possible with a single-step reaction mechanism where the m
 The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+](=O)[N+]([O-])=O, 10xN(=O)[O], and 20xO=C=O.
 
 \begin{table}
-	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
+	\scriptsize
 	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
 		\toprule
 		Experiment                 &Form of variation		&Target of variation 	& No. environments	& No. repeats\\
@@ -320,6 +319,7 @@ The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+]
 		1481398302 & AR & Foodset &20 & 1\\
 		\bottomrule
 	\end{tabular}
+	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
 \end{table}
 
 \section{Results}

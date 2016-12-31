@@ -105,11 +105,9 @@ Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries ha
 	\caption{A sample of Artificial Chemistries for open-ended evolution}
 	\label{tab1}
 	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
-		\hline\noalign{\smallskip}
+		\toprule
 		Chemistry                                                          & Energy Model?                                                      & Constructive?                            \\ 
-		\\ \noalign{\smallskip}
-		\hline
-		\noalign{\smallskip}
+		\midrule
 		\cite{Ducharme2012}                                                & Yes                                                                & Yes                                      \\
 		StringMol \parencite{Hickinbotham2012}                             & No, global energy only, conservation of mass as proposed extension & Yes                                      \\
 		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                                                 & No                                       \\
@@ -123,7 +121,7 @@ Finally, as discussed earlier in \cref{previous-work}, Artificial Chemistries ha
 		GGL/ToyChem \parencite{Benko2005}                                  & Mass conservation only                                             & Yes                                      \\
 		Lattice \gls{achem} \parencite{Ono2000,Madina2003}        & No                                                                 & No                                       \\
 		GGL/ToyChem \parencite{Benko2003}                                  & Mass conservation only                                             & No - pre-defined reactions only          \\
-		\hline
+		\bottomrule
 	\end{tabular}
 \end{table}
 
@@ -271,12 +269,13 @@ Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$ where $m$ i
 \item
 Internal energy is an abstraction of vibrational energy or heat energy within a molecule. Internal energy, while incidentally consistent with real-world chemical models, is actually included in ToyWorld as a major mechanism to introduce stochasticity in reactions. Without internal energy, all excess energy following a reaction must be allocated to kinetic energy (following energy conservation), and so there is an iso-map between reaction and product kinetic energies. With internal energy, we can divert an arbitrary proportion into internal energy and therefore we have a stochastic multi-map.
 \item
-Potential energy is the energy associated with the bonds between Atoms. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energies of every bond in the molecule. The base state of no bonds is equal to $0$, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two Atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of standard values in \cref{default_bond_energies}, based upon real-world chemistry. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
+Potential energy is the energy associated with the bonds between Atoms. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energies of every bond in the molecule. The base state of no bonds is equal to $0$, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two Atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of relative values in \cref{default_bond_energies}, taken from real-world chemistry \footnote{Original source: Average Bond Dissociation Enthalpies \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
 Our model enforces conservation of mass so reactions can be represented solely by bond changes in RDKit. This follows the approach taken in graph-based chemistries such as GGL/ToyChem \parencite{Benko2003,Benko2005} where reactions are modelled as a series of changes to graph edges, or bonds, only.
 
 \begin{table}
+	\scriptsize
 	\begin{center}
 		\caption{Example potential energies calculated by the default Chemistry module using simplified bond energies}\label{example_potential_energies}
 		\begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
@@ -294,11 +293,12 @@ Our model enforces conservation of mass so reactions can be represented solely b
 \end{table}%
 
 \begin{table}
+	\scriptsize
 	\begin{center}
-		\caption[Average Bond Dissociation Enthalpies]{Average Bond Dissociation Enthalpies used in experiments. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The energies in this table are those used by default in ToyWorld, but may easily be changed. Source: \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}\label{default_bond_energies}
-		\begin{tabular}{@{}lp{1.5cm}p{1.5cm}p{4cm}@{}}
+		\caption[Bond energies in ToyWorld]{Relative energies required to break and/or form a bond. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The values in this table are those used in the experiments, and are those adopted by default in ToyWorld, but may easily be changed.}\label{default_bond_energies}
+		\begin{tabular}{@{}lp{2.5cm}p{2.5cm}p{4cm}@{}}
 			\toprule
-			Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (simulation units)\\
+			Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (in simulation units)\\
 			\midrule
 			Single    & H      & H      & 104.2                                                \\
 			Single    & C      & C      & 83                                                   \\
@@ -872,15 +872,15 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 	\scriptsize
 	\caption{Factors, or independent variables}\label{tbl:factors}
 	\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
-		\hline\noalign{\smallskip}
+		\toprule
 		Factor                & +1 value                          & -1 value                                                                                        & Description                                                    \\
-		\hline
+		\midrule
 		\noalign{\smallskip}
 		$S_\mathrm{Reactant}$ & Kinetic                           & Uniform                                                                                         & See Section \cref{reactant-selection-strategies}               \\
 		$S_\mathrm{Product}$  & LeastEnergy                       & Uniform                                                                                         & See Section \cref{product-selection-strategies}                \\
 		$E_\mathrm{Vessel}$   & 300                               & 100                                                                                             & Initial kinetic energy of each molecule in the reaction vessel \\
 		$E_\mathrm{Bonds}$    & Single=50, Double=100, Triple=200 & Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3 & Energy required to break a bond of the given type              \\
-		\hline
+		\bottomrule
 	\end{tabular}
 \end{table}
 
@@ -903,7 +903,7 @@ All replicates completed a set of 20,000 reactions; given the initial population
 	\caption{Summary of results}\label{tbl:results}
 	\begin{center}
 		\begin{tabular}{lrrr}
-			\hline\noalign{\smallskip}
+			\toprule
 			Statistic    & Number of cycles & Length of longest.cycle & Count of most common cycle \\
 			\hline\noalign{\smallskip}
 			\multicolumn{4}{c}{Reactions 4750 to 5000}\\
@@ -941,14 +941,14 @@ All replicates completed a set of 20,000 reactions; given the initial population
 			Mean         & 20.04            & 3.90                    & 14.62                      \\
 			3rd Quartile & 20.25            & 6.00                    & 13.25                      \\
 			Max.         & 199.00           & 12.00                   & 216.00                     \\
-			\hline
+			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}%
 
 A view of the results is given in \cref{tbl:results}: reaction networks built from the full dataset of 20,000 reactions can be too large for easy analysis. Instead, we choose to partition the reaction data into four equally spaced blocks of 250 reactions each and analyse each block independently.
 
-<<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis, y-axis scales vary)'>>=
+<<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis, y-axis scales vary)'>>=
 df<-load.toyworld("results/EvaluatorActualCycles.out")
 par(mfrow=c(1,3),cex=0.5)
 plot(log(df$Number.of.cycles)~df$Partition.Start, main="Cycle numbers by Partition", ylab="Log number of cycles", xlab="Start of partition")

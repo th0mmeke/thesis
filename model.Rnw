@@ -164,6 +164,7 @@ Let's look at each of these remaining elements in turn:
 The model is parameterised to make it easy to describe different specific models within this general structure; these parameters are defined in \cref{tbl:parameter_definitions}. In later sections describing the series of experiments that use this model, each parameter will be mapped to an experiment factor, with specific parameter values becoming factor levels.
 
 \begin{table}
+	\scriptsize
 	\begin{center}
 		\caption{Definitions for all parameters of the model}\label{tbl:parameter_definitions}
 		\begin{tabular}{@{}llp{8cm}@{}}
@@ -245,6 +246,7 @@ df <- subset(df_full, gen==500)
 The factors and levels along with their mapping to model parameters are given in \cref{tbl:factor-levels-c7}.
 
 \begin{table}
+	\scriptsize
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
 	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
 		\toprule
@@ -434,6 +436,7 @@ As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and 
 We create a set of independent datasets by sampling from four different parameter cubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a cube side) is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
 
 \begin{table}
+	\scriptsize
 	\begin{center}
 		\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
 		\label{tbl:range-of-independent-variables}
@@ -453,6 +456,7 @@ We create a set of independent datasets by sampling from four different paramete
 The other factors and levels along with their mapping to model parameters, presented earlier in \cref{tbl:factor-levels-c7}, are repeated for convenience in \cref{tbl:factor-levels-c8}.
 
 \begin{table}
+	\scriptsize
 	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
 	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
 		\toprule
@@ -533,6 +537,7 @@ grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 A summary of the results from each of the four datasets is given in \cref{tbl:summary-for-changing-datasets}, and a visualisation of all four datasets combined given in \cref{fig:figure23}. Note that the difference in the proportion of completed runs to total runs reflects the respective ranges of the independent variables (as seen in \cref{tbl:range-of-independent-variables}), shown graphically in \cref{fig:figure22}.
 
 \begin{table}
+	\scriptsize
 	\begin{center}
 		\caption{Summary of results for changing environments}
 		\label{tbl:summary-for-changing-datasets}

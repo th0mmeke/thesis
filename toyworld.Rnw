@@ -168,6 +168,7 @@ As introduced earlier in \cref{previous-work}, Artificial Chemistries have also 
 
 \begin{table}
 	\scriptsize
+	\begin{center}
 	\caption{A sample of Artificial Chemistries for open-ended evolution}
 	\label{tab1}
 	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
@@ -189,6 +190,7 @@ As introduced earlier in \cref{previous-work}, Artificial Chemistries have also 
 		GGL/ToyChem \parencite{Benko2003}                                  & Mass conservation only                                             & No - pre-defined reactions only          \\
 		\bottomrule
 	\end{tabular}
+	\end{center}
 \end{table}
 
 \chapter{Cycles in Molecular Artificial Chemistries}\label{toyworld}
@@ -278,52 +280,52 @@ Our model enforces conservation of mass so reactions can be represented solely b
 \begin{table}
 	\scriptsize
 	\begin{center}
-		\caption{Example potential energies calculated by the default Chemistry module using simplified bond energies}\label{example_potential_energies}
-		\begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
-			\toprule
-			Molecule   & SMILES                   & Potential Energy \\
-			\midrule
-			H$_2$O     & [H]O[H]                  & -222.0           \\
-			H$_2$      & [H][H]                   & -104.2           \\
-			O$_2$      & O=O                      & -119.0           \\
-			N$_2$O$_4$ & [O-][N+](=O)[N+]([O-])=O & -434.4           \\
-			NO$_2$     & N(=O)[O]                 & -198.0           \\
-			\bottomrule
-		\end{tabular}
+	\caption{Example potential energies calculated by the default Chemistry module using simplified bond energies}\label{example_potential_energies}
+	\begin{tabular}{@{}p{3cm}p{5cm}p{2.5cm}@{}}
+		\toprule
+		Molecule   & SMILES                   & Potential Energy \\
+		\midrule
+		H$_2$O     & [H]O[H]                  & -222.0           \\
+		H$_2$      & [H][H]                   & -104.2           \\
+		O$_2$      & O=O                      & -119.0           \\
+		N$_2$O$_4$ & [O-][N+](=O)[N+]([O-])=O & -434.4           \\
+		NO$_2$     & N(=O)[O]                 & -198.0           \\
+		\bottomrule
+	\end{tabular}
 	\end{center}
 \end{table}%
 
 \begin{table}
 	\scriptsize
 	\begin{center}
-		\caption[Bond energies in ToyWorld]{Relative energies required to break and/or form a bond. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The values in this table are those used in the experiments, and are those adopted by default in ToyWorld, but may easily be changed.}\label{default_bond_energies}
-		\begin{tabular}{@{}lp{2.5cm}p{2.5cm}p{4cm}@{}}
-			\toprule
-			Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (in simulation units)\\
-			\midrule
-			Single    & H      & H      & 104.2                                                \\
-			Single    & C      & C      & 83                                                   \\
-			Single    & N      & N      & 38.4                                                 \\
-			Single    & O      & O      & 35                                                   \\
-			Single    & H      & C      & 99                                                   \\
-			Single    & H      & N      & 93                                                   \\
-			Single    & H      & O      & 111                                                  \\
-			Single    & C      & N      & 73                                                   \\
-			Single    & C      & O      & 85.5                                                 \\
-			Single    & N      & O      & 55                                                   \\
-			Double    & C      & O      & 185                                                  \\
-			Double    & C      & C      & 146                                                  \\
-			Double    & N      & N      & 149                                                  \\
-			Double    & O      & O      & 119                                                  \\
-			Double    & C      & N      & 147                                                  \\
-			Double    & N      & O      & 143                                                  \\
-			Triple    & C      & O      & 258                                                  \\
-			Triple    & C      & C      & 200                                                  \\
-			Triple    & N      & N      & 226                                                  \\
-			Triple    & C      & N      & 213                                                  \\
-			Quadruple & C      & C      & 200                                                  \\
-			\bottomrule
-		\end{tabular}
+	\caption[Bond energies in ToyWorld]{Relative energies required to break and/or form a bond. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The values in this table are those used in the experiments, and are those adopted by default in ToyWorld, but may easily be changed.}\label{default_bond_energies}
+	\begin{tabular}{@{}lp{2.5cm}p{2.5cm}p{4cm}@{}}
+		\toprule
+		Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (in simulation units)\\
+		\midrule
+		Single    & H      & H      & 104.2                                                \\
+		Single    & C      & C      & 83                                                   \\
+		Single    & N      & N      & 38.4                                                 \\
+		Single    & O      & O      & 35                                                   \\
+		Single    & H      & C      & 99                                                   \\
+		Single    & H      & N      & 93                                                   \\
+		Single    & H      & O      & 111                                                  \\
+		Single    & C      & N      & 73                                                   \\
+		Single    & C      & O      & 85.5                                                 \\
+		Single    & N      & O      & 55                                                   \\
+		Double    & C      & O      & 185                                                  \\
+		Double    & C      & C      & 146                                                  \\
+		Double    & N      & N      & 149                                                  \\
+		Double    & O      & O      & 119                                                  \\
+		Double    & C      & N      & 147                                                  \\
+		Double    & N      & O      & 143                                                  \\
+		Triple    & C      & O      & 258                                                  \\
+		Triple    & C      & C      & 200                                                  \\
+		Triple    & N      & N      & 226                                                  \\
+		Triple    & C      & N      & 213                                                  \\
+		Quadruple & C      & C      & 200                                                  \\
+		\bottomrule
+	\end{tabular}
 	\end{center}
 \end{table}
 
@@ -868,6 +870,7 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 
 \begin{table}
 	\scriptsize
+	\begin{center}
 	\caption{Factors, or independent variables}\label{tbl:factors}
 	\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
 		\toprule
@@ -880,6 +883,7 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 		$E_\mathrm{Bonds}$    & Single=50, Double=100, Triple=200 & Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3 & Energy required to break a bond of the given type              \\
 		\bottomrule
 	\end{tabular}
+	\end{center}
 \end{table}
 
 We concentrate on three related response, or dependent, variables -- Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
@@ -898,49 +902,49 @@ All replicates completed a set of 20,000 reactions; given the initial population
 
 \begin{table}[htbp]
 	\scriptsize
-	\caption{Summary of results}\label{tbl:results}
 	\begin{center}
-		\begin{tabular}{lrrr}
-			\toprule
-			Statistic    & Number of cycles & Length of longest.cycle & Count of most common cycle \\
-			\hline\noalign{\smallskip}
-			\multicolumn{4}{c}{Reactions 4750 to 5000}\\
-			\hline\noalign{\smallskip}
-			Min.         & 0.00             & 0.00                    & 0.00                       \\
-			1st Quartile & 0.00             & 0.00                    & 0.00                       \\
-			Median       & 1.50             & 3.50                    & 2.50                       \\
-			Mean         & 219.06           & 5.04                    & 215.80                     \\
-			3rd Quartile & 91.25            & 7.75                    & 96.00                      \\
-			Max.         & 5704.00          & 20.00                   & 2728.00                    \\
-			\hline\noalign{\smallskip}
-			\multicolumn{4}{c}{Reactions 9750 to 10000}\\
-			\hline\noalign{\smallskip}
-			Min.         & 0.00             & 0.00                    & 0.00                       \\
-			1st Quartile & 0.00             & 0.00                    & 0.00                       \\
-			Median       & 6.00             & 4.00                    & 6.00                       \\
-			Mean         & 62.10            & 4.65                    & 169.21                     \\
-			3rd Quartile & 68.75            & 8.25                    & 27.75                      \\
-			Max.         & 526.00           & 13.00                   & 6684.00                    \\
-			\hline\noalign{\smallskip}
-			\multicolumn{4}{c}{Reactions 14750 to 15000}\\
-			\hline\noalign{\smallskip}
-			Min.         & 0.00             & 0.00                    & 0.00                       \\
-			1st Quartile & 1.00             & 3.00                    & 2.00                       \\
-			Median       & 5.00             & 4.50                    & 5.00                       \\
-			Mean         & 27.17            & 4.79                    & 42.27                      \\
-			3rd Quartile & 34.50            & 7.00                    & 16.25                      \\
-			Max.         & 237.00           & 12.00                   & 862.00                     \\
-			\hline\noalign{\smallskip}
-			\multicolumn{4}{c}{Reactions 19750 to 20000}\\
-			\hline\noalign{\smallskip}
-			Min.         & 0.00             & 0.00                    & 0.00                       \\
-			1st Quartile & 0.00             & 0.00                    & 0.00                       \\
-			Median       & 3.50             & 4.00                    & 4.00                       \\
-			Mean         & 20.04            & 3.90                    & 14.62                      \\
-			3rd Quartile & 20.25            & 6.00                    & 13.25                      \\
-			Max.         & 199.00           & 12.00                   & 216.00                     \\
-			\bottomrule
-		\end{tabular}
+	\caption{Summary of results}\label{tbl:results}
+	\begin{tabular}{lrrr}
+		\toprule
+		Statistic    & Number of cycles & Length of longest.cycle & Count of most common cycle \\
+		\hline\noalign{\smallskip}
+		\multicolumn{4}{c}{Reactions 4750 to 5000}\\
+		\hline\noalign{\smallskip}
+		Min.         & 0.00             & 0.00                    & 0.00                       \\
+		1st Quartile & 0.00             & 0.00                    & 0.00                       \\
+		Median       & 1.50             & 3.50                    & 2.50                       \\
+		Mean         & 219.06           & 5.04                    & 215.80                     \\
+		3rd Quartile & 91.25            & 7.75                    & 96.00                      \\
+		Max.         & 5704.00          & 20.00                   & 2728.00                    \\
+		\hline\noalign{\smallskip}
+		\multicolumn{4}{c}{Reactions 9750 to 10000}\\
+		\hline\noalign{\smallskip}
+		Min.         & 0.00             & 0.00                    & 0.00                       \\
+		1st Quartile & 0.00             & 0.00                    & 0.00                       \\
+		Median       & 6.00             & 4.00                    & 6.00                       \\
+		Mean         & 62.10            & 4.65                    & 169.21                     \\
+		3rd Quartile & 68.75            & 8.25                    & 27.75                      \\
+		Max.         & 526.00           & 13.00                   & 6684.00                    \\
+		\hline\noalign{\smallskip}
+		\multicolumn{4}{c}{Reactions 14750 to 15000}\\
+		\hline\noalign{\smallskip}
+		Min.         & 0.00             & 0.00                    & 0.00                       \\
+		1st Quartile & 1.00             & 3.00                    & 2.00                       \\
+		Median       & 5.00             & 4.50                    & 5.00                       \\
+		Mean         & 27.17            & 4.79                    & 42.27                      \\
+		3rd Quartile & 34.50            & 7.00                    & 16.25                      \\
+		Max.         & 237.00           & 12.00                   & 862.00                     \\
+		\hline\noalign{\smallskip}
+		\multicolumn{4}{c}{Reactions 19750 to 20000}\\
+		\hline\noalign{\smallskip}
+		Min.         & 0.00             & 0.00                    & 0.00                       \\
+		1st Quartile & 0.00             & 0.00                    & 0.00                       \\
+		Median       & 3.50             & 4.00                    & 4.00                       \\
+		Mean         & 20.04            & 3.90                    & 14.62                      \\
+		3rd Quartile & 20.25            & 6.00                    & 13.25                      \\
+		Max.         & 199.00           & 12.00                   & 216.00                     \\
+		\bottomrule
+	\end{tabular}
 	\end{center}
 \end{table}%
 

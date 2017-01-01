@@ -7,7 +7,6 @@ library(english) # convert numbers to words
 library(xtable) # required for print.xtable.bootabs function
 opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
-df <- read.csv('results/stablestates.csv')
 @
 \chapter{Environmental Effects on Replicator States}
 
@@ -306,6 +305,8 @@ The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+]
 
 \begin{table}
 	\scriptsize
+	\begin{center}
+	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
 	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
 		\toprule
 		Experiment                 &Form of variation		&Target of variation 	& No. environments	& No. repeats\\
@@ -319,10 +320,24 @@ The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+]
 		1481398302 & AR & Foodset &20 & 1\\
 		\bottomrule
 	\end{tabular}
-	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
+	\end{center}
 \end{table}
 
 \section{Results}
+
+<<summarytable, results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+df <- read.csv('results/stablestates.csv')
+
+df_len <- aggregate(min~datetime, data=df, FUN=length)
+df_max <- aggregate(max~datetime, data=df, FUN=max)
+df_min <- aggregate(min~datetime, data=df, FUN=min)
+df_mean <- aggregate(mean~datetime, data=df, FUN=mean)
+summary <- merge(merge(merge(df_len, df_min, by="datetime"),df_mean, by="datetime"), df_max, by="datetime")
+names(summary)<-c("Experiment", "Total runs", "Min. States", "Mean States", "Max. States")
+
+library(xtable)
+print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+@
 
 <<anova, echo=FALSE, cache=TRUE, warning=FALSE>>=
 df_energy <- df[df$target=='ENERGY',]

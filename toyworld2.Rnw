@@ -12,10 +12,6 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Introduction}
 
-\section{Previous work}
-
-\Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
-
 \section{Environmental model}
 
 Returning to first principles, any model must describe two particular elements of the environmental change: the \emph{scope} of the change, and the \emph{shape} of the change. First, we discuss the \emph{scope} of change. Our evolutionary model (\cref{base-model}) provides the scope to group entities at three different levels:
@@ -30,6 +26,8 @@ In this work environmental changes may be applied to either of the first two of 
 The \emph{shape} of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
 Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
 
 Our chosen method is to represent environmental change as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I or ``Integrated'' component of the model provides the differencing. Seasonality, a particular form of recurring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
 
@@ -341,6 +339,13 @@ pr_av_overall <- av_overall$"Pr(>F)"[1]
 pr_av_energy <- av_energy$"Pr(>F)"[1]
 pr_av_food <- av_food$"Pr(>F)"[1]
 @
+
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and  for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
+ap <- ggplot(df) + geom_point(aes(x=dfa, y=mean)) + labs(x='Hurst exponent', y='Mean number of stable states')
+bp <- ggplot(df) + geom_boxplot(aes(x=dfa>0, y=mean, group=dfa>0)) + labs(x='Environment state', y='Mean number of stable states') + scale_x_discrete(labels=c("Stable","Varying"))
+grid.arrange(ap,bp,nrow=1,ncol=2)
+@
+% States are by seed molecule
 
 \section{Discussion}
 \section{Conclusions}

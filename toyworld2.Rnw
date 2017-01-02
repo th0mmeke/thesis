@@ -281,16 +281,7 @@ However to mimic the effects of a membrane, all non-foodset reactants must be wi
 	\caption{Local Reactant Selection}
 \end{algorithm}
 
-
-\subsection{Limitations of the model}
-
-Long-chain construction by Polymerization
-
-Polymers formed by chains of monomers (molecules with particular structure allowing chains to form.) Can Toyworld2 produce polymers? Preferential product selection mechanism might do so, over least energy method. For example, C=CCl (Chloroethylene) doesn't naturally form chains (PVC) under least-energy; neither does C=C.
-
-Polymerization is not possible with a single-step reaction mechanism where the molecules are legal after the first step: it requires changing a double bond to a single bond (\eg C=C to CC) in each monomer and the simultaneous formation of a single CC bond between the two monomers.
-
-The initial population and foodset contained 10x[H][H], 10xFO, 20xO, 10x[O-][N+](=O)[N+]([O-])=O, 10xN(=O)[O], and 20xO=C=O.
+The foodset at the start of each experiment consisted of 10 [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
 
 \begin{table}
 	\scriptsize
@@ -332,6 +323,7 @@ print(xtable(summary, caption='Summary of experiment results', label='tbl:toywor
 df_energy <- df[df$target=='ENERGY',]
 df_food <- df[df$target=='FOOD',]
 
+
 av_overall <- anova(lm(df$mean~df$dfa))
 av_energy <- anova(lm(df_energy$mean~df_energy$dfa))
 av_food <- anova(lm(df_food$mean~df_food$dfa))
@@ -341,12 +333,25 @@ pr_av_food <- av_food$"Pr(>F)"[1]
 @
 
 <<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and  for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
-ap <- ggplot(df) + geom_point(aes(x=dfa, y=mean)) + labs(x='Hurst exponent', y='Mean number of stable states')
-bp <- ggplot(df) + geom_boxplot(aes(x=dfa>0, y=mean, group=dfa>0)) + labs(x='Environment state', y='Mean number of stable states') + scale_x_discrete(labels=c("Stable","Varying"))
-grid.arrange(ap,bp,nrow=1,ncol=2)
+df$state="Varying"
+df$state[df$dfa==0] = "Stable"
+df$state[df$datetime==1481952255] = "Bistate"
+ap <- ggplot(df) + geom_point(aes(x=dfa, y=mean, color=state)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+bp <-ggplot(df) + geom_boxplot(aes(x=state, y=mean, group=state)) + labs(x='Environment state', y='Mean number of stable states')
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 % States are by seed molecule
 
 \section{Discussion}
+
+Long-chain construction by Polymerization
+
+Polymers formed by chains of monomers (molecules with particular structure allowing chains to form.) Can Toyworld2 produce polymers? Preferential product selection mechanism might do so, over least energy method. For example, C=CCl (Chloroethylene) doesn't naturally form chains (PVC) under least-energy; neither does C=C.
+
+Polymerization is not possible with a single-step reaction mechanism where the molecules are legal after the first step: it requires changing a double bond to a single bond (\eg C=C to CC) in each monomer and the simultaneous formation of a single CC bond between the two monomers.
+
 \section{Conclusions}
+
+
+
 

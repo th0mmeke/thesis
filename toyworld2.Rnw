@@ -8,18 +8,9 @@ library(xtable) # required for print.xtable.bootabs function
 opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
-\chapter{Environmental Effects on Replicator States}
+\chapter{Environmental Effects on Replicator States}\label{toyworld2}
 
 \section{Introduction}
-
-\vspace{0.3cm}
-\begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=RQ4.\arabic*:]
-		\item How does environmental variability affect the range of stable cycle states in a molecular artificial chemistry?
-		\item How significant is the form or character of variability to the range of stable cycle states?
-	\end{enumerate}
-\end{minipage}
-\vspace{0.3cm}
 
 \section{Previous work}
 

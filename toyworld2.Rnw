@@ -161,7 +161,7 @@ That the number of stable cycle states increases in proportion to the degree of 
 
 We test two forms of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
 
-\subsubsection{Available energy function}
+\subsubsection{Product selection strategy}
 
 Incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
 
@@ -281,7 +281,7 @@ However to mimic the effects of a membrane, all non-foodset reactants must be wi
 	\caption{Local Reactant Selection}
 \end{algorithm}
 
-The foodset at the start of each experiment consisted of 10 [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
+The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
 
 \begin{table}
 	\scriptsize
@@ -332,7 +332,7 @@ pr_av_energy <- av_energy$"Pr(>F)"[1]
 pr_av_food <- av_food$"Pr(>F)"[1]
 @
 
-<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and  for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
 df$state="Varying"
 df$state[df$dfa==0] = "Stable"
 df$state[df$datetime==1481952255] = "Bistate"
@@ -340,15 +340,14 @@ ap <- ggplot(df) + geom_point(aes(x=dfa, y=mean, color=state)) + labs(x='Hurst e
 bp <-ggplot(df) + geom_boxplot(aes(x=state, y=mean, group=state)) + labs(x='Environment state', y='Mean number of stable states')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
+
+<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
+ggplot(df) + geom_boxplot(aes(x=target, y=mean, group=target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
+@
+
 % States are by seed molecule
 
 \section{Discussion}
-
-Long-chain construction by Polymerization
-
-Polymers formed by chains of monomers (molecules with particular structure allowing chains to form.) Can Toyworld2 produce polymers? Preferential product selection mechanism might do so, over least energy method. For example, C=CCl (Chloroethylene) doesn't naturally form chains (PVC) under least-energy; neither does C=C.
-
-Polymerization is not possible with a single-step reaction mechanism where the molecules are legal after the first step: it requires changing a double bond to a single bond (\eg C=C to CC) in each monomer and the simultaneous formation of a single CC bond between the two monomers.
 
 \section{Conclusions}
 

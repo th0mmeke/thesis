@@ -19,21 +19,6 @@ df <- read.csv(t, colClasses=colClasses)
 df$ecf <- factor(df$ecf,levels=c(0,1,5,10)) # place into natural order
 df
 }
-
-# http://tex.stackexchange.com/questions/25575/how-can-i-use-a-table-generated-by-r-in-latex
-
-print.xtable.booktabs <- function(x){
-
-print(xtable(x),
-floating=F,
-hline.after=NULL,
-add.to.row=list(pos=list(-1,0, nrow(x)),
-command=c(
-'\\toprule\n',
-'\\midrule\n',
-'\\bottomrule\n')))
-
-}
 @
 
 \chapter{Inheritance under Varying Environments}\label{models-of-inheritance}
@@ -301,12 +286,6 @@ From the hypothesis the main property of interest is \emph{fidelity}, or the cor
 
 \subsubsection{Results and discussion}
 
-%df <- subset(load.results.simple('results/results-53f6b74.data'), environment_change_frequency == 0 & truncate==0)
-%<<popoverall, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Not all runs in stable environments can maintain a substantial population size over time. The horizontal line at the top of the figure is from runs that were capped by the population upper-bound. The extreme case represented by the almost vertical set of points to the far left followed by steady increases is discussed in the text.'>>=
-%ggplot(df_full) + geom_point(aes(x=gen,y=pop),size=0.25) + labs(x="Generation", y="Population size")
-%@
-
-% \Sexpr{nrow(subset(df_full, gen==max(df_full['gen'])))}
 Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. 
 
 Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of each run, unless otherwise noted.
@@ -365,37 +344,7 @@ In conclusion, from visual inspection, the variance of fidelity does approach $0
 
 \section{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
-In this \namecref{model-behaviour-in-changing-environments} we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. The conceptual basis for these steps is shown in \cref{fig:conceptual-model-for-environmental-change}. 
-
-\begin{figure}
-	\begin{center}
-	\resizebox{0.8\textwidth}{!}{
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
-		main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
-		\node[main node] (evo) at (0,10) {Evolutionary model};
-		\node[main node] (env) at (0,0) {Environmental model};
-		\node[main node] (pop) at (6,10) {Population};
-		\node[main node] (ts) at (6,0) {Time series of fitness changes};
-		\node[main node] (r1) at (12,10) {Metrics};
-		\node[main node] (r2) at (12,0) {Metrics};
-		\node[main node] (test) at (12,5) {Hypothesis test};
-		\node at (4,14) {Simulation};
-		
-		\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
-		(env) edge [->] (ts)
-		(evo) edge [->] (pop)
-		(pop) edge [->] (r1)
-		(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
-		(r1) edge [->] (test)
-		(r2) edge [->] (test)
-		(ts) edge [->] (r2);
-		\draw [every node] (3,13) rectangle (9,-3);
-		\end{tikzpicture}
-	}
-	\caption{Conceptual model for experiments incorporating environmental change}
-	\label{fig:conceptual-model-for-environmental-change}
-	\end{center}
-\end{figure}
+In this \namecref{model-behaviour-in-changing-environments} we describe an appropriate experimental design and model to describe environmental changes; test the predictions of \cref{hypothesis-2} using the model; and finally discuss the results of the experiment. 
 
 \subsection{Environmental model}\label{environmental-model}
 
@@ -511,10 +460,6 @@ ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x
 bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x='delta parameter to environmental model', y='Final mean fidelity') 
 cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x='theta parameter to environmental model', y='Final mean fidelity')
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
-
-#anova(lm(ave_fid ~ theta*sigma*delta, data=subset(results,gen==500))) # theta not significant
-#anova(lm(ave_fid ~ sigma*delta, data=subset(results,gen==500))) # bias and sd:bias most important, then sd
-#anova(lm(sd_fid ~ sigma*delta, data=subset(results,gen==500 & -0.001<delta & delta<0.001))) # Remove effect of bias, then sigma 0.001
 @
 
 <<figure22, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Distribution of maximum generation reached for all runs for dataset no.1 (top) through dataset no.4 (bottom). Axes are to the same scale. Runs (along the x-axis) are ordered by final generation reached.'>>=
@@ -578,7 +523,7 @@ colnames(temp)[10] <- "mean_fidelity"
 a <- with(temp,anova(lm(mean_fidelity~sigma+delta+theta)))
 
 library(xtable)
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{fidelity}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{fidelity}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
 As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to the predictability of the environment (as measured by some function $f(\Theta,\delta)$.)
@@ -613,7 +558,7 @@ colnames(temp)[16] <- "sd_fidelity"
 a <- with(temp,anova(lm(sd_fidelity~sigma+delta+theta)))
 
 library(xtable)
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{fidelity_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{fidelity_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
 <<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
@@ -631,16 +576,6 @@ The corollary of this prediction is that the \gls{sd} of fidelity will be greate
 \end{itemize}
 
 It is clear from a visual inspection of \cref{fig:sd-fidelity} that we can reject H$_0$ in favour of H$_1$: $\sigma_{fidelity_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
-
-This could be greatly strengthened if we had a single measure of predictability (but see suggestion in \cref{information-based-measure}): our conjecture is that the \gls{sd} of fidelity is related also to the degree of predictability, that is $\sigma_{fidelity_{end}} \approx $predictability$^{-1}$. 
-
-Unfortunately, we require a consistent ordering from ``least'' to ``most'' predictable across the three parameters $\Theta$,$\delta$ and $\sigma_e$, although we could:
-\begin{itemize}
-\item Empirically construct a linear regression model relating $\Theta$,$\delta$ and $\sigma_e$ to $\sigma_{fidelity_{end}}$ but this would not provide a measure of predictability (other than a circular one derived from fidelity.) 
-\item Use $\sigma_e$, which is inherently unpredictable, as a proxy however this would ignore the contributions of $\Theta$ and $\delta$ to overall unpredictability.
-\end{itemize}
-
-Instead a better approach would be to extend our environmental model to map $\Theta$,$\delta$ and $\sigma_e$ to predictability and to then use that to confirm this conjecture, as suggested in \cref{information-based-measure}).
 
 %<<echo=FALSE>>=
 %a<-with(temp,lm(sd_fidelity~sigma*theta*delta))['coefficients']
@@ -667,21 +602,22 @@ temp <- subset(results,gen==500)
 colnames(temp)[10] <- "mean_fidelity"
 colnames(temp)[16] <- "sd_fidelity"
 colnames(temp)[1] <- "Scope"
-
-a <- with(temp,anova(lm(mean_fidelity~Scope)))
-b <- with(temp,anova(lm(sd_fidelity~Scope)))
 @
 <<results='asis',echo=FALSE>>=
-print.xtable.booktabs(a)
+library(xtable)
+a <- with(temp,anova(lm(mean_fidelity~Scope)))
+print(xtable(a, caption='ANOVA analysis: is mean fidelity related to scope of environmental change?', label='tbl:model-sd-anova2'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
 Applying a unique change to each lineage as opposed to the entire population is only weakly significant (0.05\textless p\textless 0.1) with respect to final mean fidelity, and not significant (p\textgreater 0.1) with regards to final standard deviation of fidelity:
 
 <<results='asis',echo=FALSE>>=
-print.xtable.booktabs(b)
+library(xtable)
+a <- with(temp,anova(lm(sd_fidelity~Scope)))
+print(xtable(a, caption='ANOVA analysis: is standard deviation of fidelity related to scope of environmental change?', label='tbl:model-sd-anova3'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-Therefore we can conclude that there is no significant difference between these two options for the scope of environmental change.
+Therefore we conclude that there is no significant difference between these two options for the scope of environmental change.
 
 %<<figure26, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Subset of results where $\\lvert delta\\rvert > 0.002$, showing the effect of lineage. Final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter. Very little difference is observed between applying an environmental change uniformly across all entities, or applying different changes to each lineage.'>>=
 %ap <- ggplot(subset(results,gen==500 & -0.002<delta & delta<0.002),aes(sigma,ave_fid)) + geom_point()  + geom_smooth(method='lm')  + facet_wrap(~BY_LINEAGE)+ labs(x='sigma parameter to environmental model', y='Final mean fidelity')

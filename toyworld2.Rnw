@@ -12,23 +12,154 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Introduction}
 
-\section{Environmental model}
+If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
-Returning to first principles, any model must describe two particular elements of the environmental change: the \emph{scope} of the change, and the \emph{shape} of the change. First, we discuss the \emph{scope} of change. Our evolutionary model (\cref{base-model}) provides the scope to group entities at three different levels:
+\section{Environmental models}
+
+An environmental model must describe three particular components of environmental change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope; how each change is experienced by the entities in the population. We can consider three different levels of scope, from most homogeneous to least:
 \begin{enumerate}
 	\item The group of all entities.
 	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
 	\item A single-member group for each entity.
 \end{enumerate}
 
-In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has a unique response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although biological mutations of the genome can sometimes cause significant phenotypical differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
+In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
 
-The \emph{shape} of change is less constrained, and the space of all potential changes at any timestep effectively limitless: in fact, the potential change $\delta$ at timestep $t$ is $\delta_t\in R$. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. 
+
+The \emph{shape} of change over time is less constrained. In fact, as the change $\delta$ at timestep $t$ is $\delta_t\in R$, the space of all potential changes at any timestep is effectively limitless. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
 Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
-In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with abrupt switches between two defined environments, with the time between switches either being fixed or stochastic according to some probability. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
 
+
+\section{Hypothesis and predictions}
+
+\begin{hypothesis}
+That the number of stable cycle states increases in proportion to the degree of environmental variability up until some point of maximum variability.
+\end{hypothesis}
+
+\section{Model}
+
+The conceptual basis for these experiments is shown in \cref{fig:conceptual-model-for-environmental-change}. 
+
+\begin{figure}
+	\begin{center}
+		\resizebox{0.8\textwidth}{!}{
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
+			main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
+			\node[main node] (evo) at (0,10) {Evolutionary model};
+			\node[main node] (env) at (0,0) {Environmental model};
+			\node[main node] (pop) at (6,10) {Population};
+			\node[main node] (ts) at (6,0) {Time series of fitness changes};
+			\node[main node] (r1) at (12,10) {Metrics};
+			\node[main node] (r2) at (12,0) {Metrics};
+			\node[main node] (test) at (12,5) {Hypothesis test};
+			\node at (4,14) {Simulation};
+			
+			\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
+			(env) edge [->] (ts)
+			(evo) edge [->] (pop)
+			(pop) edge [->] (r1)
+			(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
+			(r1) edge [->] (test)
+			(r2) edge [->] (test)
+			(ts) edge [->] (r2);
+			\draw [every node] (3,13) rectangle (9,-3);
+			\end{tikzpicture}
+		}
+		\caption{Conceptual model for experiments incorporating environmental change}
+		\label{fig:conceptual-model-for-environmental-change}
+	\end{center}
+\end{figure}
+
+\begin{algorithm}[ht]
+	\BlankLine
+	\While{generation $\leq$ generations}{
+		\BlankLine
+		\tcp{Selection of reactants}
+		reactants $\leftarrow$ Reactor.GetReactants(ReactantSelectionMethod)\;
+		\BlankLine
+		\tcp{Construction of reaction}
+		reactions $\leftarrow$ Chemistry.enumerate()\;
+		reaction $\leftarrow$ WeightedSelection(reactions, ProductSelectionMethod)\;
+		\BlankLine
+		\uIf{reaction is not Null}{
+			Reactor.PerformReaction(reaction)\;
+		}
+		\uElse{
+			No reaction possible--just bounce the molecules off each other\;
+		}
+	}
+	\caption{The main simulation loop in ToyWorld2}
+\end{algorithm}
+
+We test two targets of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
+
+\subsubsection{Product selection strategy}
+
+Incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
+
+\begin{displaymath}
+	e_i=
+	\begin{cases}
+		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
+		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
+		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
+	\end{cases}
+\end{displaymath}\label{environment-weighting-calculation}
+
+\subsubsection{Foodset size function}
+
+\begin{algorithm}[ht]
+	increment $\leftarrow$ newsize - |food set|
+	\uIf{increment $> 0$} {
+		\tcp{Add molecules to food set}
+		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
+		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
+	}
+	\uElse{
+		\tcp{Remove molecules from food set}
+		new size $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
+		$food set \leftarrow new size$ elements chosen with uniform probability from $food set$\;
+	}
+\end{algorithm}
+
+\subsection{Local Reactant Selection}
+
+Unless the total number of atoms in the reaction vessel can increase, to maintain a foodset level product molecules must be removed from the reactor at an equal rate. If there is a flow across the reaction vessel with new molecules (food set molecules) entering at one side and products be removed at the opposite side, then there is a maximum lifespan for any composome determined by how long it takes to traverse the vessel.
+
+Anchoring the composome would allow this limit to be extended. Some form of membrane or boundary (e.g., Chemoton or autopoeitic entity), open to food set molecules entering across the boundary, and waste product molecules exiting would identify the reactions in the composome so they could be logically anchored.
+
+Alternatively, the composome could be anchored by fixing product molecules in place while foodset molecules move freely in the vessel. This still leaves the problem of removing 'waste' (or else the vessel will be filled by product molecules). The LocalReactantSelection method models these fixed products.
+
+However to mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. For two molecules to react, if both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore if both of these chosen reactants is a non-foodset molecule, we must replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+
+\begin{algorithm}[ht]
+	
+	$reactants\leftarrow$ two molecules taken with uniform probability from the combined foodset and reaction vessel population\;
+	\BlankLine
+	\uIf{both reactants are not in the food set}{
+		$n\leftarrow |\text{food set}| / (|\text{food set}| + |\text{population}|)$\;
+		Choose some $p \in \mathcal{U}[0,1]$\;
+		\uIf{$p\leq n$}{
+			sample population $\leftarrow$ food set\;
+		}
+		\uElse{
+			sample population $\leftarrow$ all molecules within a given distance of the first reactant in the reaction vessel\;
+			\uIf{the sample population is empty}{
+				\tcp{Nothing in the same area...}
+				sample population $\leftarrow$ food set\;
+			}
+		}
+		Let the second reactant be a molecule chosen (with uniform probability) from the sample population\;
+	}
+	\Return reactants
+	\caption{Local ReactantSelectionMethod. All non-food set reactants must come from the same region of the reactant vessel.}
+\end{algorithm}
+
+\subsection{Source of variation}
 Our chosen method is to represent environmental change as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I or ``Integrated'' component of the model provides the differencing. Seasonality, a particular form of recurring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
 
 Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change.
@@ -48,8 +179,6 @@ This series allows us to represent a broad range of environmental changes:
 	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
 	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
-
-We claim that, for an environmental model defined according to \cref{ar-1-time-series}, the combination of $\Theta$, $\sigma_e$ and $\delta$ provides one measure of \emph{environmental predictability}.
 
 <<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
@@ -114,87 +243,34 @@ t2[t2$run==r & t2$t==t,'fitness'] = fitness
 ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change") + theme(strip.text = element_text(size = 8))
 @
 
-\subsection{An information-based measure}\label{information-based-measure}
+
+\section{Experiment design}
+
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Factors, or independent variables}\label{tbl:toyworld2-factors}
+		\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
+			\toprule
+			Factor          & +1 value                          & -1 value		& Description\\
+			\midrule
+			$Target$ 		& Kinetic							& Uniform		& \\
+			$Shape$  		& LeastEnergy                       & Uniform		& \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsection{Measures}
+
+The primary metric in the hypothesis is \emph{stable cycle states}. That is, a chain of two or more cycles linked by a product in one cycle being a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
 
 Predictability is related to information entropy, and to compression; a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
 
 In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity--the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterisation.
 
-\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently see \textcite{Prokopenko2009}, \textcite{Ladyman2011} and \textcite{Lloyd2001}.
+\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
-Statistical Complexity \parencite{Crutchfield1989}, or $C_\mu$, based on causality, is fundamentally time-dependent: one dimension plus time, although an extension to two spatial dimensions has been done by Shalizi with a more general extension to multi-dimensions still open although a mapping method for multi-dimensional data has been proposed by \textcite{Nerukh2002}, and a dimension reduction approach by fuzzy-clustering can be found in \textcite{Young2005}.
-
-The benefits of $C_{\mu}$ are that it matches our intuition of complexity (better than most alternatives), it has strong theoretical support, and it makes no major assumptions about the underlying data other than stationarity - it is domain agnostic. \textcite{Shalizi2001} provides the best theoretical explanation of $C_{\mu}$ and epsilon-machines; Shalizi's Ph.D. thesis \textcite{Shalizi2001a} provides further context. 
-
-$C_{\mu}$ has been applied to a number of domains including random boolean networks \parencite{Gong2012}, spin \parencite{Vrabic2012,Shalizi2007,Nerukh2002,Feldman1998}, estimation of cortical thinning from brain MRI data \parencite{Young2008}, autonomy of protocells \parencite{Krakauer2008} and detection of anomalies (such as imminent crankshaft failure) directly from the causal states \parencite{Xiang2008}.
-
-The canonical formulation of $C_{\mu}$ depends on two assumptions--discrete values and discrete time \parencite[p.24]{Shalizi2001}, and exact joint probabilities--which are unproblematic in our domain, and another, conditional stationarity, which poses a problem. Conditional stationarity, or time-invariant transition probabilities \parencite[p.25]{Shalizi2001} means $P(\overrightarrow{S}_t^L = s^L) = P(\overrightarrow{S}_0^L = s^L)$ for all $t \in \mathbb{Z}$ or ``the distribution of futures, conditional on histories, must be independent of when the history comes to an end'' \parencite[p.119]{Shalizi2001}. Note this issue with stationarity is similar to the difficulty identified in \cref{abrupt-environmental-change}, and a solution to one might be applicable to the other.
-
-\section{Hypothesis and predictions}
-
-\begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability up until some point of maximum variability.
-\end{hypothesis}
-
-\section{Experiment design}
-
-\begin{algorithm}[ht]
-	\BlankLine
-	\While{generation $\leq$ generations}{
-		\BlankLine
-		\tcp{Selection of reactants}
-		reactants $\leftarrow$ Reactor.GetReactants(ReactantSelectionMethod)\;
-		\BlankLine
-		\tcp{Construction of reaction}
-		reactions $\leftarrow$ Chemistry.enumerate()\;
-		reaction $\leftarrow$ WeightedSelection(reactions, ProductSelectionMethod)\;
-		\BlankLine
-		\uIf{reaction is not Null}{
-			Reactor.PerformReaction(reaction)\;
-		}
-		\uElse{
-			No reaction possible--just bounce the molecules off each other\;
-		}
-	}
-	\caption{The main simulation loop in ToyWorld2}
-\end{algorithm}
-
-We test two forms of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
-
-\subsubsection{Product selection strategy}
-
-Incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
-
-\begin{displaymath}
-	e_i=
-	\begin{cases}
-		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
-		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
-		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
-	\end{cases}
-\end{displaymath}\label{environment-weighting-calculation}
-
-\subsubsection{Foodset size function}
-
-\begin{algorithm}[ht]
-	increment $\leftarrow$ newsize - |food set|
-	\uIf{increment $> 0$} {
-		\tcp{Add molecules to food set}
-		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
-		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
-	}
-	\uElse{
-		\tcp{Remove molecules from food set}
-		new size $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
-		$food set \leftarrow new size$ elements chosen with uniform probability from $food set$\;
-	}
-\end{algorithm}
-
-\subsection{Measures}
-
-The primary metric in the hypothesis is \emph{stable cycle states}. That is, cycle forms that repeat some number of times, with a degree of continuity of components from cycle to successor cycle. 
-
-If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
 \begin{algorithm}[ht]
 	\tcp{Construct reaction graph from a list of $reactions$}
@@ -209,6 +285,7 @@ If cycles are to hold genetic information in a replicator, they must be capable 
 			Add node for $product$, and edge from $product$ to node for product side of reaction\;
 		}
 	}
+	\BlankLine
 	\tcp{Get all cycles for each reactant in the graph}
 	\For{each $seed$ in $reactants$}{
 		\For{each $candidate$ in list of all molecules in the reaction graph of the same molecular species}{
@@ -219,13 +296,8 @@ If cycles are to hold genetic information in a replicator, they must be capable 
 			}
 		}
 	}
-	\Return $cycles$
-	\caption{Identifying all autocatalytic cycles}
-\end{algorithm}
-
-\begin{algorithm}[ht]
+	\BlankLine
 	\tcp{Identify stable cycles from a list of $cycles$}
-	\tcp{Stable cycles are those where there are a chain of two or more cycles, that are linked by a product in one cycle being a reactant in another and where the cycles have the same "form", or sequence of molecule species (smiles) in the cycle}
 	\BlankLine
 	Sort $cycles$ into groups of equal length\;
 	Group all cycles of same length into subgroups of the same form\;
@@ -245,40 +317,7 @@ If cycles are to hold genetic information in a replicator, they must be capable 
 		}
 	}
 	\Return $StableCycles$
-	\caption{Stable hypercycle state identification in ToyWorld2}
-\end{algorithm}
-
-\subsection{Local Reactant Selection}
-
-Unless the total number of atoms in the reaction vessel can increase, to maintain a foodset level product molecules must be removed from the reactor at an equal rate. If there is a flow across the reaction vessel with new molecules (food set molecules) entering at one side and products be removed at the opposite side, then there is a maximum lifespan for any composome determined by how long it takes to traverse the vessel.
-
-Anchoring the composome would allow this limit to be extended. Some form of membrane or boundary (e.g., Chemoton or autopoeitic entity), open to food set molecules entering across the boundary, and waste product molecules exiting would identify the reactions in the composome so they could be logically anchored.
-
-Alternatively, the composome could be anchored by fixing product molecules in place while foodset molecules move freely in the vessel. This still leaves the problem of removing 'waste' (or else the vessel will be filled by product molecules). The LocalReactantSelection method models these fixed products.
-
-However to mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. For two molecules to react, if both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore if both of these chosen reactants is a non-foodset molecule, we must replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
-
-\begin{algorithm}[ht]
-
-     $reactants\leftarrow$ two molecules taken with uniform probability from the combined foodset and reaction vessel population\;
-	\BlankLine
-     \uIf{both reactants are not in the food set}{
-		$n\leftarrow |\text{food set}| / (|\text{food set}| + |\text{population}|)$\;
-		Choose some $p \in \mathcal{U}[0,1]$\;
-           \uIf{$p\leq n$}{
-                sample population $\leftarrow$ food set\;
-           }
-		\uElse{
-			sample population $\leftarrow$ all molecules within a given distance of the first reactant in the reaction vessel\;
-			\uIf{the sample population is empty}{
-				\tcp{Nothing in the same area...}
-				sample population $\leftarrow$ food set\;
-			}
-		}
-		Let the second reactant be a molecule chosen (with uniform probability) from the sample population\;
-	}
-	\Return reactants
-	\caption{Local Reactant Selection}
+	\caption{Stable state identification in ToyWorld2. We first construct a reaction graph, and then scan the graph for reaction cycles. Finally, we construct the list of stable states by grouping reaction cycles of the same form that share molecules.}
 \end{algorithm}
 
 The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
@@ -289,7 +328,7 @@ The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 
 	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
 	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
 		\toprule
-		Experiment                 &Form of variation		&Target of variation 	& No. environments	& No. repeats\\
+		Experiment                 &Shape of variation		&Target of variation 	& No. environments	& No. repeats\\
 		\midrule
 		1480963448 & AR & Foodset & 50 & 1\\
 		1481665906 & AR & N/A & 1 & 10\\
@@ -331,16 +370,16 @@ df$state<-as.factor(df$state)
 
 names(df)[4] <- "Hurst"
 names(df)[10] <- "Target"
-names(df)[11] <- "State"
+names(df)[11] <- "Shape"
 with(df, {
-	av <- anova(lm(mean~Target*State*Hurst))
+	av <- anova(lm(mean~Target*Shape*Hurst))
 	print(xtable(av, caption='ANOVA', label='tbl:toyworld2-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 })
 @
 
 <<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
-ap <- ggplot(df) + geom_point(aes(x=Hurst, y=mean, color=State)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
-bp <-ggplot(df) + geom_boxplot(aes(x=State, y=mean, group=State)) + labs(x='Environment state', y='Mean number of stable states')
+ap <- ggplot(df) + geom_point(aes(x=Hurst, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+bp <-ggplot(df) + geom_boxplot(aes(x=Shape, y=mean, group=Shape)) + labs(x='Environment shape', y='Mean number of stable states')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 

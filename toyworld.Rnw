@@ -196,11 +196,11 @@ As introduced earlier in \cref{previous-work}, Artificial Chemistries have also 
 
 \chapter{Cycles in Molecular Artificial Chemistries}\label{toyworld}
 
-ToyWorld, our \gls{achem} for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
+ToyWorld, our first \gls{achem} model for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
-Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results--our model cannot be used to investigate real-world chemical behaviours. There is another reason why familiarity may be important: following our earlier proposal that a replicase-like mechanism would fulfil the requirements for a self-referential copying mechanism, it might be fruitful to base any implementation in ToyWorld on a simplified version of a real biological replicase. Clearly, a simple mapping from real-world chemistry to the rules in our \gls{achem} would improve the feasibility of this idea.
+Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results, and so our model cannot be used to investigate real-world chemical behaviours. 
 
-There is also yet another reason. The model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values -- real-world chemistry.
+The ToyWorld model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values -- real-world chemistry.
 
 The name has been chosen as both an acknowledgement of ToyChem \parencite{Benko2003}, and as a hint at the simulation's purpose: creating an artificial world for exploration. That world, the ToyWorld model, consists of:
 
@@ -230,7 +230,7 @@ RDKit also provides a number of handy functions to the ToyWorld Chemical Model:
 
 These are so standard that it isn't worth our while to replace them with anything specific to ToyWorld.
 
-PyMunk is used extensively for 2D Physics calculations, for example:
+PyMunk is used extensively in ToyWorld for 2D Physics calculations, for example:
 
 \begin{enumerate}
 	\item Calculating the future position of a molecule inside a reaction vessel based on the molecules velocity and current position.
@@ -304,34 +304,13 @@ PyMunk is used extensively for 2D Physics calculations, for example:
 	\label{tbl:simulation_parameters}
 \end{sidewaystable}
 
-The overall sequence of experiments to run is defined by an experiment design. The experiments are run in the order they are defined, with all replicates of an experiment being completed before we move to the replicates of the next experiment in the sequence.
-
-All replicates of an experiment are run with the same set of parameters with the exception of a random seed which varies between replicates in a predictable way. The reactions in the replicate are grouped into fixed-size blocks and run in sequence with results saved incrementally between each block. By writing incrementally we attempt to make sure that a record of at least a partial set of reactions is recoverable should the experiment come to a premature end.
-
 \section{Atoms and molecules}\label{atoms-and-molecules}
 
-ToyWorld is based on RDKit \parencite{rdkit}, open-source software for
-cheminformatics. RDKit provides a number of useful capabilities
-including format conversions to and from SMILES \parencite{smiles} and
-graphical forms of molecules; standard sanity checks for molecular
-structure, and molecular manipulations, but most importantly, is
-well-tested and optimised for performance.
+Molecules are modelled as an extension of standard RDKit \emph{Mol} objects, constructed from RDKit \emph{Atoms} connected with \emph{Bonds}. Standard Lewis dot structures built on the inherited atomic properties are used to identify possible bonds, and a formal charge model is used to record the charge changes associated with modifications to the molecular structure caused by reactions.
 
-Molecules are modelled as an extension of standard RDKit \emph{Mol}
-objects, constructed from RDKit \emph{Atoms} connected with
-\emph{Bonds}. Standard Lewis dot structures built on the inherited
-atomic properties are used to identify possible bonds, and a formal
-charge model is used to record the charge changes associated with
-modifications to the molecular structure caused by reactions.
+The lowest level component in the ToyWorld model is the atom, and atoms can be joined by bonds to form molecules. Reactions between molecules are the only mechanism to modify molecules provided by the model; a reaction is simply the addition or subtraction of a single bond between any two atoms in two molecules. 
 
-The lowest level component in the ToyWorld model is the atom, and atoms
-can be joined by bonds to form molecules. Reactions between molecules
-are the only mechanism to modify molecules provided by the model; a
-reaction is simply the addition or subtraction of a single bond between
-any two atoms in two molecules. ToyWorld provides a strongly
-constructive chemistry \parencite{Fontana1994} where completely new forms
-of molecules may be generated by reactions, and where the new molecules
-may in turn take part in further reactions: the chemistry emerges from
+ToyWorld provides a strongly constructive chemistry \parencite{Fontana1994} where completely new forms of molecules may be generated by reactions, and where the new molecules may in turn take part in further reactions: the chemistry emerges from
 the lower level atomic properties.
 
 Some examples of molecules created by ToyWorld are shown in \cref{fig:toyworld-example-molecules}.
@@ -351,14 +330,14 @@ Energy within ToyWorld is modeled in three forms -- kinetic, internal and potent
 
 \begin{itemize}
 \item
-Kinetic energy is the energy of motion, and equals $\frac{1}{2}mv^2$ where $m$ is the mass of a molecule and $v$ its velocity.
+Kinetic energy is the energy associated with the motion of a molecule, and equals $\frac{1}{2}mv^2$ where $m$ is the mass of a molecule and $v$ its velocity.
 \item
 Internal energy is an abstraction of vibrational energy or heat energy within a molecule. Internal energy, while incidentally consistent with real-world chemical models, is actually included in ToyWorld as a major mechanism to introduce stochasticity in reactions. Without internal energy, all excess energy following a reaction must be allocated to kinetic energy (following energy conservation), and so there is an iso-map between reaction and product kinetic energies. With internal energy, we can divert an arbitrary proportion into internal energy and therefore we have a stochastic multi-map.
 \item
-Potential energy is the energy associated with the bonds between Atoms. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energies of every bond in the molecule. The base state of no bonds is equal to $0$, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two Atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of relative values in \cref{default_bond_energies}, taken from real-world chemistry \footnote{Original source: Average Bond Dissociation Enthalpies \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
+Potential energy is the energy associated with the bonds between atoms in a molecule. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energy of each bond in the molecule. The state without bonds is defined as having zero potential energy, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of relative values in \cref{default_bond_energies}, taken from real-world chemistry \footnote{Original source: Average Bond Dissociation Enthalpies \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
-Our model enforces conservation of mass so reactions can be represented solely by bond changes in RDKit. This follows the approach taken in graph-based chemistries such as GGL/ToyChem \parencite{Benko2003,Benko2005} where reactions are modelled as a series of changes to graph edges, or bonds, only.
+As the model enforces conservation of mass, reactions can be represented solely by bond changes. This follows the approach taken in graph-based chemistries such as GGL/ToyChem \parencite{Benko2003,Benko2005} where reactions are modelled as a series of changes to graph edges, or bonds, only.
 
 \begin{table}
 	\scriptsize
@@ -689,7 +668,6 @@ extension, for four products, a square and so on.
 	\caption{Algorithm to set post-collision velocities and internal energies}\label{alg:post_collision_adjustments}
 \end{algorithm}
 
-
 Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \ref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognise that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
 
 We then choose, from a uniform distribution, the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
@@ -922,9 +900,7 @@ which can proceed without free kinetic energy. This then releases a
 product which can also react, and so on, thus explaining the different
 results between the reaction sets.
 
-\subsection{Conclusions}\label{conclusions}
-
-Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution. The model is simpler than comparable alternatives, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear if this is equally important in non-biological systems. An experimental comparison between the aspatial and spatial approaches in the experiments described in the next section will help to clarify this.
+Our base artificial chemistry appears to be at least compatible with the requirements for the future exploration of open-ended evolution, and the energy and reaction models produce results consistent with our predictions for the system's behaviour (with the exception of achieving equilibrium with the N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} reactant set). An aspatial approach does however come with restrictions. Most obviously, as there is no concept of proximity in the chemistry, there can be no boundaries or membranes or even basic distinctions between \emph{inside} and \emph{outside}. This is critical in biology but it is unclear at this point if this is equally important in non-biological systems. An experimental comparison between the aspatial and spatial approaches in the experiments described in the next section will help to clarify this.
 
 \section{Sensitivity of the model to reactant and product strategies}\label{reactant-and-product-strategies}
 
@@ -974,9 +950,10 @@ The experiments follow a full factorial design over four factors ($S_\mathrm{Rea
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
-For details of the \gls{achem}, see \textcite{Young2013}. As previously mentioned, the chemistry makes use of some low-level components from RDKit \parencite{rdkit}, open-source software for cheminformatics. RDKit provides a number of useful capabilities, including format conversions to and from SMILES and graphical forms of molecules; standard sanity checks for molecular structure, and molecular manipulations. In ToyWorld, atoms are closely based on real-world chemistry atoms, and in fact are implemented as wrappers around the Atom definitions provided by RDKit; we allow any atom type provided by RDKit. Bonds in ToyWorld are represented by RDKit bonds, but the addition or subtraction mechanism makes use of the parameterised ToyWorld energy model.
-
 \section{Results}
+
+The overall sequence of experiments to run was defined by an experiment design. The experiments were run in the order they were defined, with all replicates of an experiment being completed before moving to the replicates of the next experiment in the sequence. All replicates of an experiment were run with the same set of parameters with the exception of a random seed which varied between replicates in a predictable way. The reactions in the replicate were grouped into fixed-size blocks and run in sequence with results saved incrementally between each block.
+
 All replicates completed a set of 20,000 reactions; given the initial population size of 800 molecules, and from the summary of results below, we believe that this captures a representative set of reactions. This also simplifies the analysis as we can assume a balanced set of treatments in the statistical sense (that is, the sample sizes for all treatments are equal).
 
 \begin{table}[htbp]

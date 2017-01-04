@@ -319,30 +319,33 @@ library(xtable)
 print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-<<anova, echo=FALSE, cache=TRUE, warning=FALSE>>=
-df_energy <- df[df$target=='ENERGY',]
-df_food <- df[df$target=='FOOD',]
+<<anova, results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 
-
-av_overall <- anova(lm(df$mean~df$dfa))
-av_energy <- anova(lm(df_energy$mean~df_energy$dfa))
-av_food <- anova(lm(df_food$mean~df_food$dfa))
-pr_av_overall <- av_overall$"Pr(>F)"[1]
-pr_av_energy <- av_energy$"Pr(>F)"[1]
-pr_av_food <- av_food$"Pr(>F)"[1]
-@
-
-<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
+# target, state, target:state
+#pr_av_energy <- av_energy$"Pr(>F)"[1]
+#pr_av_food <- av_food$"Pr(>F)"[1]
 df$state="Varying"
 df$state[df$dfa==0] = "Stable"
 df$state[df$datetime==1481952255] = "Bistate"
-ap <- ggplot(df) + geom_point(aes(x=dfa, y=mean, color=state)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
-bp <-ggplot(df) + geom_boxplot(aes(x=state, y=mean, group=state)) + labs(x='Environment state', y='Mean number of stable states')
+df$state<-as.factor(df$state)
+
+names(df)[4] <- "Hurst"
+names(df)[10] <- "Target"
+names(df)[11] <- "State"
+with(df, {
+	av <- anova(lm(mean~Target*State*Hurst))
+	print(xtable(av, caption='ANOVA', label='tbl:toyworld2-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+})
+@
+
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
+ap <- ggplot(df) + geom_point(aes(x=Hurst, y=mean, color=State)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+bp <-ggplot(df) + geom_boxplot(aes(x=State, y=mean, group=State)) + labs(x='Environment state', y='Mean number of stable states')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 <<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
-ggplot(df) + geom_boxplot(aes(x=target, y=mean, group=target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
+ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
 @
 
 % States are by seed molecule

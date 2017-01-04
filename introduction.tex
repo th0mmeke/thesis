@@ -2,26 +2,17 @@
 
 This work is motivated by the objective of unbounded artificial evolution.
 
+Open-ended evolution or evolution without limits, as a form of evolutionary system, requires three elements–-variation, inheritance and selection. Selection is the sorting mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas.
+
+Novelty instead is the outcome of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search–instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
+
+Although this is so commonplace as to be unremarkable in biology, it is quite the opposite in artificial systems. Here the goal of open-ended artificial systems emphatically remains a work-in-progress, and an open problem in artificial life. Creative open-ended artificial evolution is motivated by the gap observed between the products of biological evolution, and those produced by artificial evolutionary systems. The term itself, originating with \textcite{Taylor2001}, captures the essential elements: first, the products of artificial evolution are missing “impressiveness” or the capacity to surprise; the most common reaction is that they lack creativity. A creative system is one that produces artefacts that are novel, surprising and valuable (Boden 2004); properties that are desirable not only in the “creative” fields of art, literature, music and the like, but also in more prosaic areas such as engineering and indeed artificial evolutionary systems. Second, artificial evolution lacks “open-endedness”, or the capacity to continue to produce new variants. 
+
+In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements--a step in the transition from undifferentiated entities to entities constructed from inherited rules or information. The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}). For open-ended evolution, that is evolution which can continue without exhausting its capacity for variation, the potential for variation must be very high: the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In the terms of biological theory, unbounded evolution requires an informational replicator.
+
+Unfortunately, an emergent informational replicator from low-level elements has proved extremely hard to achieve in artificial systems. Previous work has either handbuilt replicators (\eg \cite{Hutton2003}), or relied upon provided specific, non-evolvable support in the base system (\eg the h-copy operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
 
 \begin{itemize}
-\item Evolution requires inheritance, variation, selection
-\item Simple in biology; harder in the abstract
-\item For unbounded, variation potential must be very high - must be able to represent large number of states without losing essence [Szathmary]
-\item Inheritance and variation implies replication; selection implies sorting
-\item Goal is informational replicator (replicator with high variation potential). Unbounded evolution requires informational replicator; informational replicator is by definition capable of self-evolution.
-
-\item Starting point is low-level elements plus emergence plus self-evolution.
-
-\item Problem is how to get from starting point to goal? Goal is an informational replicator that has emerged from lower-level elements.
-
-
-\item Informational replicator hard to design in any given AChem
-\item Previous work has either:
-\item handbuilt replicators (so limited applicability) e.g., Squirm3, or
-\item provided specific, non-evolvable support in base AChem ruleset (e.g., copy operator in Avida)
-
-\item No generic approach known in literature.
-
 \item Motivation requires that informational replicators can be created in an AChem.
 \item Reactions -> .... -> informational replicators
 \item Experiments (and OOL) show straightforward pathway from reactions -> composomes (or compositional genomes [Segre] or variable replicators [Szathmary])
@@ -29,19 +20,13 @@ This work is motivated by the objective of unbounded artificial evolution.
 \item major differences:
 \item number of states in phenotype that can be represented (and causally connected to inheritance)
 \item separate genotype/phenotype - genotype -> development -> phenotype <- selection <- environment. -> .... -> informational replicators
-
-
 \item Problem: begs question - if can go from composomes to informational replicator, then qualitative not just quantitative change - which is the reason why we want an informational replicator...So still a gap. Show progress on possible path, not necessary path. Unless can show can progress from 10 or so states with composomes, interesting but not relevant to unbounded evolution. 
 \end{itemize} 
 
-Open-ended evolution, as a form of evolutionary system, requires three elements–-variation, inheritance and selection. Selection is the mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas.
 
-Novelty instead is the outcome of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search–instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
 
-Creative open-ended evolution is motivated by the gap observed between the products of biological evolution, and those produced by artificial evolutionary systems. The term itself, originating with \cite{Taylor2001}, captures the essential elements: first, the products of artificial evolution are missing “impressiveness” or the capacity to surprise; the most common reaction is that they lack creativity. A creative system is one that produces artefacts that are novel, surprising and valuable (Boden 2004); properties that are desirable not only in the “creative” fields of art, literature, music and the like, but also in more prosaic areas such as engineering and indeed artificial evolutionary systems. Second, artificial evolution lacks “open-endedness”, or the capacity to continue to produce new variants. Thus we can draw a distinction between creative open-ended evolution and simple open-ended evolution (as suggested by Taylor (2001)) as the difference between endless uninteresting variation and something more distinctive, indeed surprising.
 
-We can now relate inheritance and variation to the requirements for creative openended evolution. As the model underlying a creative open-ended evolution system must be capable of change, so must the inheritance and variation mechanism that implements that model. It cannot be static and predefined, but must evolve itself. In fact, the mechanism must be a target of evolution just as the broader organism is; instead of two systems–-the organism as a whole and the evolutionary system–-there must be one. In other words, the inheritance and variation mechanism must be endogenous, or inherent to the model, rather than separate and imposed from outside.
-
+We can now relate inheritance and variation to the requirements for creative openended evolution. As the model underlying a creative open-ended evolution system must be capable of change, so must the inheritance and variation mechanism that implements that model. It cannot be static and predefined, but must be a target of evolution just as is the broader organism. In other words, the inheritance and variation mechanisms must be endogenous, or inherent to the model, rather than separate and imposed from outside.
 
 \section{Background and context}\label{background-and-context}
 

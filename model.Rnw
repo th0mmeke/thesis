@@ -122,7 +122,7 @@ Our predictions for changing environments are:
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 \subsection{Simulation model of variation and inheritance}\label{base-model}
 
@@ -301,8 +301,8 @@ grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 <<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Summary results, this time averaged across all replicates of each unique combination of factor levels (that is, grouped by factor level). Dark-coloured points represent values at end of run; light-coloured points in a horizontal line are for initial values, reflecting averaged initial conditions.'>>=
 ap <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 bp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='Standard deviation of fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y='Standard deviation of fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+cp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y=expression(paste(sigma," fidelity"))) + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y=expression(paste(sigma," fitness"))) + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
@@ -331,8 +331,8 @@ Once again, the main property of interest, and so our response variable, is \emp
 
 \subsubsection{Results and discussion}
 <<sd-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the standard deviation of fidelity on the top row, and standard deviation of fitness below.'>>=
-ap <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_cor,group=run)) + labs(x="Generation", y="Standard deviation of fidelity")
-bp <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_fit,group=run)) + labs(x="Generation", y="Standard deviation of fitness")
+ap <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_cor,group=run)) + labs(x="Generation", y=expression(paste(sigma," fidelity")))
+bp <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_fit,group=run)) + labs(x="Generation", y=expression(paste(sigma," fitness")))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
@@ -358,7 +358,7 @@ What does it mean in the context of this hypothesis for an environment to be ``p
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
 As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The independent variables in each run are the parameters to the environmental model, with values taken from a uniform random sample from their range. Or in other words, a series of random samples with uniform probability from a cube formed by a parameter on each of the three axes (see \cref{fig:cube}.)
@@ -456,9 +456,9 @@ colnames(results)[c(7,8,9)] <- c("delta","sigma","theta")
 
 results$BY_LINEAGE = factor(results$BY_LINEAGE, labels=c("By Population","By Lineage"))
 
-ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x='sigma parameter to environmental model', y='Final mean fidelity')
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x='delta parameter to environmental model', y='Final mean fidelity') 
-cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x='theta parameter to environmental model', y='Final mean fidelity')
+ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x=expression(paste(sigma, ' parameter to environmental model')), y='Final mean fidelity')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x=expression(paste(delta, ' parameter to environmental model')), y='Final mean fidelity') 
+cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x=expression(paste(theta, ' parameter to environmental model')), y='Final mean fidelity')
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
 @
 
@@ -549,7 +549,7 @@ As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to t
 	\item H$_1$:  $\sigma_{fidelity_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
-An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the \gls{sd} of fidelity, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-fidelity-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of fidelity.
+An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the $\sigma_{fidelity}$, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-fidelity-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of fidelity.
 
 <<anova-sd-fidelity, results='asis',echo=FALSE>>=
 temp <- subset(results,gen==500)
@@ -562,13 +562,13 @@ print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{fidelity_{end}}$ is
 @
 
 <<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
-ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x='sigma parameter to environmental model', y='Final sd of fidelity')
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x='delta parameter to environmental model', y='Final sd of fidelity') 
-cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x='theta parameter to environmental model', y='Final sd of fidelity')
+ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x=expression(paste(sigma, ' parameter to environmental model')), y=expression(sigma))
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x=expression(paste(delta, ' parameter to environmental model')), y=expression(sigma)) 
+cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x=expression(paste(theta, ' parameter to environmental model')), y=expression(sigma))
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
 @
 
-The corollary of this prediction is that the \gls{sd} of fidelity will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{environmental-model}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
+The corollary of this prediction is that $\sigma_{fidelity}$ will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{environmental-model}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
 
 \begin{itemize}[label={}]
 	\item H$_0$:  $\sigma_{fidelity_{end}}$ is close to $0$, for all clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
@@ -701,7 +701,7 @@ The previous \namecref{model-behaviour-in-changing-environments} has tested our 
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the \gls{sd} of heredity. As a corollary, the \gls{sd} of heredity under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, the $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
 In \cref{mean-fidelity-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: fidelity in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.

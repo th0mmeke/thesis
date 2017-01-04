@@ -16,14 +16,14 @@ If cycles are to hold genetic information in a replicator, they must be capable 
 
 \section{Environmental models}
 
-An environmental model must describe three particular components of environmental change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope; how each change is experienced by the entities in the population. We can consider three different levels of scope, from most homogeneous to least:
+An environmental model must describe three particular components of environmental change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope: the number of entities in the population who receive a set of changes. We can consider three different levels of scope, from most homogeneous to least:
 \begin{enumerate}
-	\item The group of all entities.
-	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}.
-	\item A single-member group for each entity.
+	\item The group of all entities. All entities receive the same set of changes.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
+	\item A single-member group for each entity. Each entity receives a unique set of changes.
 \end{enumerate}
 
-In this work environmental changes may be applied to either of the first two of these three levels, with a consistent level applying throughout a run; the first level because it is the simplest application of environmental change, and the second as it represents the familiar scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
+The first level is the simplest application of environmental change, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
 
 The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. 
 
@@ -32,7 +32,6 @@ The \emph{shape} of change over time is less constrained. In fact, as the change
 Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
 In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
-
 
 \section{Hypothesis and predictions}
 
@@ -73,27 +72,6 @@ The conceptual basis for these experiments is shown in \cref{fig:conceptual-mode
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}
-
-\begin{algorithm}[ht]
-	\BlankLine
-	\While{generation $\leq$ generations}{
-		\BlankLine
-		\tcp{Selection of reactants}
-		reactants $\leftarrow$ Reactor.GetReactants(ReactantSelectionMethod)\;
-		\BlankLine
-		\tcp{Construction of reaction}
-		reactions $\leftarrow$ Chemistry.enumerate()\;
-		reaction $\leftarrow$ WeightedSelection(reactions, ProductSelectionMethod)\;
-		\BlankLine
-		\uIf{reaction is not Null}{
-			Reactor.PerformReaction(reaction)\;
-		}
-		\uElse{
-			No reaction possible--just bounce the molecules off each other\;
-		}
-	}
-	\caption{The main simulation loop in ToyWorld2}
-\end{algorithm}
 
 We test two targets of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
 
@@ -180,7 +158,7 @@ This series allows us to represent a broad range of environmental changes:
 	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
-<<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
+<<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='ht', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
 library(reshape2)
 library(ggplot2)
 library(cowplot) # styling of plots, extension of ggplot2
@@ -209,14 +187,14 @@ bp <- ggplot(subset(t2,delta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(t
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
+<<factorialsigmadelta, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='ht', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) for theta=0 with three values of delta (columns), and two values of sigma (each facet row.)'>>=
 ap <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
 bp <- ggplot(subset(t2,theta==0)) + geom_line(aes(x=t,y=fitness)) + facet_grid(sigma~delta, labeller='label_both') + labs(x="t", y="Fitness change")  + theme(strip.text = element_text(size = 8))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 
-<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
+<<sampleenvironment, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='ht', fig.scap=NA, fig.cap='Example time-series produced by our environmental model for a sample of theta, sigma and delta values. These are incremental fitness changes, rather than cumulative ones.'>>=
 t1 <- read.csv('results/environments.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 t1$run <- 1:nrow(t1)
 names(t1)[1:3]<-c("theta", "sigma", "delta")
@@ -229,7 +207,7 @@ ggplot(t2) + geom_line(aes(x=as.numeric(variable),y=value)) + facet_wrap(~theta+
 
 
 % Needs sampleenvironment
-<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Cumulative time-series examples for samples of theta, sigma and delta.'>>=
+<<cumulativefitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Cumulative time-series examples for samples of theta, sigma and delta.'>>=
 for (r in unique(t2$run)) {
 t2[t2$run==r,'t'] <- 1:50 # tag with timestamp
 
@@ -265,8 +243,6 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 
 The primary metric in the hypothesis is \emph{stable cycle states}. That is, a chain of two or more cycles linked by a product in one cycle being a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
 
-Predictability is related to information entropy, and to compression; a mechanism for pattern-discovery.  \textcite{Shalizi2001} identifies patterns (pattern $P$ of an object $O$) with the ability to predict (given $P$, can infer $O$) or compress (given $O$, can compress to $P$). Compression doesn't imply Prediction. There is a related concept in algorithmic complexity theory--the difference between easily solvable (P) (prediction) and easily verifiable (NP) (compression). A problem may be decidable without being easily solvable. 
-
 In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity--the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterisation.
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
@@ -285,7 +261,6 @@ In a time-independent way we can identify patterns in an image, for example, tha
 			Add node for $product$, and edge from $product$ to node for product side of reaction\;
 		}
 	}
-	\BlankLine
 	\tcp{Get all cycles for each reactant in the graph}
 	\For{each $seed$ in $reactants$}{
 		\For{each $candidate$ in list of all molecules in the reaction graph of the same molecular species}{
@@ -297,11 +272,8 @@ In a time-independent way we can identify patterns in an image, for example, tha
 		}
 	}
 	\BlankLine
-	\tcp{Identify stable cycles from a list of $cycles$}
-	\BlankLine
 	Sort $cycles$ into groups of equal length\;
 	Group all cycles of same length into subgroups of the same form\;
-	\BlankLine
 	\tcp{Now attempt to connect cycles of the same form through shared molecules into one or more clusters of connected cycles}
 	\For{each cycle form}{
 		$clusters\leftarrow$ set of molecules in the first cycle of this form\;
@@ -344,7 +316,7 @@ The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 
 
 \section{Results}
 
-<<summarytable, results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+<<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 df <- read.csv('results/stablestates.csv')
 
 df_len <- aggregate(min~datetime, data=df, FUN=length)
@@ -358,7 +330,7 @@ library(xtable)
 print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-<<anova, results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+<<anova, fig.pos='ht',results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 
 # target, state, target:state
 #pr_av_energy <- av_energy$"Pr(>F)"[1]
@@ -377,13 +349,13 @@ with(df, {
 })
 @
 
-<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
 ap <- ggplot(df) + geom_point(aes(x=Hurst, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
 bp <-ggplot(df) + geom_boxplot(aes(x=Shape, y=mean, group=Shape)) + labs(x='Environment shape', y='Mean number of stable states')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='htp', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
+<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
 ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
 @
 

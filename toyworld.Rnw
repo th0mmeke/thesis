@@ -230,7 +230,7 @@ RDKit also provides a number of handy functions to the ToyWorld Chemical Model:
 
 These are so standard that it isn't worth our while to replace them with anything specific to ToyWorld.
 
-PyMunk is used extensively in ToyWorld for 2D Physics calculations, for example:
+PyMunk is used extensively in ToyWorld for 2D physics calculations, for example:
 
 \begin{enumerate}
 	\item Calculating the future position of a molecule inside a reaction vessel based on the molecules velocity and current position.
@@ -240,30 +240,21 @@ PyMunk is used extensively in ToyWorld for 2D Physics calculations, for example:
 \end{enumerate}
 
 \begin{algorithm}[ht]
-	$\text{collision list}=\{\}$\;
 	\BlankLine
-	\While{not finished}{
+	\While{generation $\leq$ generations}{
 		\BlankLine
 		\tcp{Selection of reactants}
-		\While{$\text{collision list}=\{\}$}{
-			Move all molecules by time increment $\tau$\;
-			$\text{collision list} \leftarrow \text{all collisions}$\;
-		}
-		reactants $\leftarrow$ select two colliding molecules from collision list\;
+		reactants $\leftarrow$ outcome of the reactant selection strategy\;
 		\BlankLine
 		\tcp{Construction of reaction}
-		Discover all possible reactions that could occur between reactants\;
-		Determine the available energy to drive the reaction\;
+		reactions $\leftarrow$ enumerate all possible reaction options\;
+		reaction $\leftarrow$ choose from $reactions$ according to the [roduct selection strategy\;
 		\BlankLine
-		\uIf{$\exists$ a reaction option that is possible with the available energy}{
-			Determine chemical products of the reaction\;
-			Transform chemical products into physical molecules with kinetic and internal energy\;
-			\uIf{a change in maximum or minimum molecular velocities}{\label{alg:adjust_tau}
-				Adjust time step increment $\tau$\;
-			}
+		\uIf{reaction is not Null}{
+			Update the reactor with the results of carrying out the $reaction$\;
 		}
 		\uElse{
-			No reaction possible -- so just bounce the molecules off each other (a collision)\;
+			No reaction possible--just bounce the molecules off each other\;
 		}
 	}
 	\caption{The main simulation loop in ToyWorld}
@@ -828,37 +819,22 @@ The outcomes for each reaction alternative from an example collision are shown i
 \label{fig:collision_diagrams}
 \end{figure}
 
-\section{Model validation}\label{model-validation}
+\section{Validation of the energy model}\label{model-validation}
 
-The design outlined in this \namecref{toyworld} leads to the following expectations:
+The energy-model presented in this \namecref{toyworld} leads to some particular expectations for the model's behaviour:
+
 \begin{enumerate}
-	\item
- Given two reactants, changing the reaction energy should result in
- different sets of reaction products.
-	\item
- Molecular quantities reach equilibrium -- that is, the set of
- interacting molecules is constant, with fluctuations expected in
- quantities. We expect molecular concentrations to stabilise at
- non-extreme values (equilibrium rather than driven to an extreme)
- after some transition period from the initial conditions.
-	\item
- The equilibrium point depends on the energy of the system. Our energy
- model preferentially forms bonds at low energies, and breaks bonds at
- high. We expect the average length of molecules in the artificial
- chemistry to be greater at low energies than at high energies.
+\item Given two reactants, changing the reaction energy should result in different sets of reaction products.
+\item Molecular quantities should reach equilibrium -- that is, the set of interacting molecules is constant, with fluctuations expected in quantities. We expect molecular concentrations to stabilise at non-extreme values (equilibrium rather than driven to an extreme) after some transition period from the initial conditions.
+\item The equilibrium point should depend on the energy of the system. Our energy model preferentially forms bonds at low energies, and breaks bonds at high. We expect the average length of molecules in the artificial chemistry to be greater at low energies than at high energies.
 \end{enumerate}
 
-These predictions were tested by two experiments: first, we examined the
-reaction products produced at a range of reaction energies for four sets
-of reactants. Second, for a given set of reactants, we ran the
-simulation for 10,000 iterations at four successive initial average
-kinetic energy levels -- 0, 67, 133, and 200 units per molecule. The experiment was run first
-with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
+These predictions were tested by two experiments: first, we examined the reaction products produced at a range of reaction energies for four sets of reactants. Second, for a given set of reactants, we ran the simulation for 10,000 iterations at four successive initial average kinetic energy levels -- 0, 67, 133, and 200 units per molecule. The experiment was run first with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
 
 \begin{figure}
 	\begin{center}
 		\caption{Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} with initial average KE ranging from 0 to 200 units (only molecules with significant quantities are labelled; remainder appear as light-grey lines). Molecules represented in SMILES notation.}
-		\includegraphics[width=\linewidth]{figures/results-test-N2O4a}
+		\includegraphics[width=\linewidth]{figures/results-test-N2O4a}s
 		\label{fig1}
 	\end{center}
 \end{figure}
@@ -904,7 +880,7 @@ Our base artificial chemistry appears to be at least compatible with the require
 
 \section{Sensitivity of the model to reactant and product strategies}\label{reactant-and-product-strategies}
 
-In this section we explore the following questions:
+The model as presented has a number of parameters that might conceivably affect its response; as the results of any experiment, and hence the conclusions drawn, are causally related to the experimental parameters used, it's important to characterize the influence of parameters on the results. In this section we explore the following questions:
 
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}

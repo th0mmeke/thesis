@@ -16,18 +16,23 @@ If cycles are to hold genetic information in a replicator, they must be capable 
 
 \section{Environmental models}
 
-An environmental model must describe three particular components of environmental change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope: the number of entities in the population who receive a set of changes. We can consider three different levels of scope, from most homogeneous to least:
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
+
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
+
+A model for changing environments must describe three particular components of change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope: the proportion of entities in the population to receive a particular set of changes. We consider three different levels of scope, from most homogeneous to least:
+
 \begin{enumerate}
 	\item The group of all entities. All entities receive the same set of changes.
 	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
 	\item A single-member group for each entity. Each entity receives a unique set of changes.
 \end{enumerate}
 
-The first level is the simplest application of environmental change, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups, or in other words, the second level.
+The first level is the simplest application of environmental change while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third scope possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
 
 The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. 
 
-The \emph{shape} of change over time is less constrained. In fact, as the change $\delta$ at timestep $t$ is $\delta_t\in R$, the space of all potential changes at any timestep is effectively limitless. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+The \emph{shape} of change over time is given by $\delta$ at timestep $t$, where $\delta_t\in R$; the space of all potential changes at any timestep is effectively limitless. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
 
 Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
 
@@ -36,7 +41,7 @@ In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a s
 \section{Hypothesis and predictions}
 
 \begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability up until some point of maximum variability.
+That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
 \end{hypothesis}
 
 \section{Model}
@@ -73,7 +78,7 @@ The conceptual basis for these experiments is shown in \cref{fig:conceptual-mode
 	\end{center}
 \end{figure}
 
-We test two targets of environmental variability: changes to the size of the foodset, and changes to the available energy for reactions.
+We test two targets of environmental variability: changes to the size of the foodset, and changes to the product selection strategy.
 
 \subsubsection{Product selection strategy}
 
@@ -91,7 +96,7 @@ Incorporating an environmental factor ($X_t$) into the least energy selection me
 \subsubsection{Foodset size function}
 
 \begin{algorithm}[ht]
-	increment $\leftarrow$ newsize - |food set|
+	increment $\leftarrow$ newsize - |food set|\;
 	\uIf{increment $> 0$} {
 		\tcp{Add molecules to food set}
 		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
@@ -99,8 +104,8 @@ Incorporating an environmental factor ($X_t$) into the least energy selection me
 	}
 	\uElse{
 		\tcp{Remove molecules from food set}
-		new size $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
-		$food set \leftarrow new size$ elements chosen with uniform probability from $food set$\;
+		samplesize $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
+		$food set \leftarrow samplesizee$ elements chosen with uniform probability from $food set$\;
 	}
 \end{algorithm}
 
@@ -112,7 +117,7 @@ Anchoring the composome would allow this limit to be extended. Some form of memb
 
 Alternatively, the composome could be anchored by fixing product molecules in place while foodset molecules move freely in the vessel. This still leaves the problem of removing 'waste' (or else the vessel will be filled by product molecules). The LocalReactantSelection method models these fixed products.
 
-However to mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. For two molecules to react, if both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore if both of these chosen reactants is a non-foodset molecule, we must replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+To mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. If both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
 
 \begin{algorithm}[ht]
 	
@@ -137,12 +142,15 @@ However to mimic the effects of a membrane, all non-foodset reactants must be wi
 	\caption{Local ReactantSelectionMethod. All non-food set reactants must come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\subsection{Source of variation}
-Our chosen method is to represent environmental change as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ \textcite{Brockwell:2002dq} where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$.} of particular form. Statistical techniques are commonplace for time-series predictions \textcite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series. The I or ``Integrated'' component of the model provides the differencing. Seasonality, a particular form of recurring concept drift, may be modelled with both ARMA and ARIMA models by incorporating a seasonality component in the model (\eg \cite{Brockwell:2002dq}.)
+\subsection{Environmental model}
 
-Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series from the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our summary measure for environmental change.
+Environmental change may be represented as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$ \parencite{Brockwell:2002dq}.} of particular form. 
 
-Environmental change is modelled as an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we can describe the evolutionary change at each timestep as a function of the previous timestep:
+Statistical techniques are commonplace for time-series predictions \parencite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series--the I or ``Integrated'' component of the model provides the differencing.
+
+Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series \textit{from} the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our headline measure for environmental change.
+
+Our environmental model provides an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we describe the evolutionary change at each timestep as a function of the previous timestep:
 
 $x_t = \Theta x_{t-1} + e_t + \delta$ \label{ar-1-time-series}
 
@@ -221,32 +229,11 @@ t2[t2$run==r & t2$t==t,'fitness'] = fitness
 ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labeller='label_both') + labs(x="t", y="Fitness change") + theme(strip.text = element_text(size = 8))
 @
 
+\section{Response variables}
 
-\section{Experiment design}
-
-\begin{table}
-	\scriptsize
-	\begin{center}
-		\caption{Factors, or independent variables}\label{tbl:toyworld2-factors}
-		\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
-			\toprule
-			Factor          & +1 value                          & -1 value		& Description\\
-			\midrule
-			$Target$ 		& Kinetic							& Uniform		& \\
-			$Shape$  		& LeastEnergy                       & Uniform		& \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
-
-\subsection{Measures}
-
-The primary metric in the hypothesis is \emph{stable cycle states}. That is, a chain of two or more cycles linked by a product in one cycle being a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
-
-In a time-independent way we can identify patterns in an image, for example, that allows us to substitute the pattern for the raw data. It is thus related to algorithms - compression is the discovery of a specific algorithm to take raw data and produce patterned data, with the goal of increasing the information content and reducing the information entropy of the patterned data. The algorithm is the patterned data. Information entropy can then, in theory at least, be measured by the Kolmogorov entropy or algorithmic complexity--the length of the algorithm. In practice various other entropy measures, such as Shannon, sample, and approximate entropy, are commonly used for time-series characterisation.
+The primary metric in the hypothesis is \emph{stable cycle states}. A stable cycle state is a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
-
 
 \begin{algorithm}[ht]
 	\tcp{Construct reaction graph from a list of $reactions$}
@@ -261,7 +248,7 @@ In a time-independent way we can identify patterns in an image, for example, tha
 			Add node for $product$, and edge from $product$ to node for product side of reaction\;
 		}
 	}
-	\tcp{Get all cycles for each reactant in the graph}
+	\tcp{Find all cycles for each reactant in the graph}
 	\For{each $seed$ in $reactants$}{
 		\For{each $candidate$ in list of all molecules in the reaction graph of the same molecular species}{
 			\For{each $path$ in all shortest paths from $candidate$ to $seed$}{
@@ -272,9 +259,9 @@ In a time-independent way we can identify patterns in an image, for example, tha
 		}
 	}
 	\BlankLine
+	\tcp{Now identify stable cycle staes}
 	Sort $cycles$ into groups of equal length\;
 	Group all cycles of same length into subgroups of the same form\;
-	\tcp{Now attempt to connect cycles of the same form through shared molecules into one or more clusters of connected cycles}
 	\For{each cycle form}{
 		$clusters\leftarrow$ set of molecules in the first cycle of this form\;
 		\For{all other $cycle$s of this form}{
@@ -291,6 +278,23 @@ In a time-independent way we can identify patterns in an image, for example, tha
 	\Return $StableCycles$
 	\caption{Stable state identification in ToyWorld2. We first construct a reaction graph, and then scan the graph for reaction cycles. Finally, we construct the list of stable states by grouping reaction cycles of the same form that share molecules.}
 \end{algorithm}
+
+\section{Experiment design}
+
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Factors, or independent variables}\label{tbl:toyworld2-factors}
+		\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
+			\toprule
+			Factor          & +1 value		& -1 value						& Description\\
+			\midrule
+			$Target$ 		& Food set		& Product selection strategy 	& \\
+			$Shape$  		& AR(1)			& Bistate						& \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
 
 The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
 

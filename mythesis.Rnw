@@ -21,6 +21,10 @@
 \numberwithin{equation}{section} % amsmath - numbering scheme two deep for equations
 \setcounter{tocdepth}{1}
 
+
+\usepackage{refcheck}
+
+
 % Options for framed
 \setlength\FrameSep{0.5cm}
 \setlength\FrameRule{0.1pt}

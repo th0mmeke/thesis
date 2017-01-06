@@ -25,6 +25,10 @@ df
 
 \section{Introduction}
 
+Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
+
+Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and the heritability of the trait or property is $1$. Conversely, if there is no relationship there is no heritability and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
+
 \subsection{Previous work}\label{previous-work-p2}
 
 Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. 
@@ -74,7 +78,7 @@ There are some limitations however in these otherwise insightful models. First, 
 
 Second, while Model 5 has perfect inheritance on viability and demonstrates emergent inheritance on procreation, Model 6 shows emergent inheritance on viability while beginning with perfect inheritance on procreation (as it begins with a shortcut population of entities assumed to have been produced by Model 5.) Thus Bourrat does not show in either model the simultaneous emergence of inheritance of both procreation and viability.
 
-Finally, as seen by the trend of trait values towards the limit of $1.0$, the model assumes that the problem learnt by evolution is amenable to perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--as fitness represents an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
+Finally, the model assumes that the problem learnt by evolution is amenable to perfect understanding, and that there is one and only one optimal solution. This is a corollary of the model design where fitness is absolute and unchanging--as fitness represents an implicit relationship between an entity and its environment, then in Bourrat's model this relationship is also fixed and unchanging. Evolution is omniscient with full visibility into the world. However, in the real world and in the artificial domains of interest, the relationship between entity and environment is less sure. The environment itself may either change, or be uncertain. Under these conditions it is unlikely that values of $1.0$ would be possible, or indeed helpful, as a perfect bias value effectively is removing any source of variation from the population. This is unexplored by Bourrat.
 
 The work of \textcite{Bourrat2015} therefore has the following limitations:
 \begin{itemize}
@@ -85,19 +89,11 @@ The work of \textcite{Bourrat2015} therefore has the following limitations:
 
 \subsection{Hypothesis}\label{h2}
 
-Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. Heredity is related to variation: low variation implies high heredity and vice versa. There is a subtle difference between heredity and inheritance: inheritance is the process, while heredity is a measure, specifically of the correlation or relationship between entities in two generations. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).'' 
-
-For the single property case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance. Conversely, if there is no relationship there is no inheritance and the entities are unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties'.
-
 \Textcite{Bourrat2015} argues that heredity may in fact be a product of evolution rather than a precursor, or in other words, that the process of inheritance emerges from the action of selection and variation upon a population (\cref{previous-work-p2}.) In other words, \emph{variation and selection are sufficient for inheritance}.
-
-The reasoning is as follows: heredity describes the correlation along a lineage, so a high fitness entity with high heredity is likely to have more high fitness descendants than low fitness descendents. Higher fitness entities will survive longer and reproduce more, and so high fitness/high heredity entities will slowly invade the population.
 
 The degree of variation between generations is important; if there is no correlation it effectively means evolution is operating as an unguided, random, search while complete correlation means that each generation is a copy of the previous one, and there are no novelties.
 
-Interestingly, the optimal degree is unlikely to be fixed, but instead would be expected to vary depending on the predictability of the environment if we can extrapolate from the experiences of balancing exploration versus exploitation in \gls{ea} (\eg \cite{DeJong2006}.) The fundamental issue therefore is how to determine an appropriate degree of variation (or heredity) for each and all environments. We believe, and will show in the remainder of this \namecref{models-of-inheritance}, that an emergent inheritance mechanism can ``self-adjust'' to varying environmental conditions.
-
-Our intuition is that the average fidelity of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
+Our intuition is that the average heritability of the population will be inversely related to the degree of environmental change. More specifically, if we consider evolution to be a means by which a population learns how to adapt to an environment, the degree of environmental change can be described as the degree to which it's possible to learn the environment. We intuit that this is related to predictability, and also to complexity. 
 
 This seems a reasonable supposition. \textcite{Adami2002} recasts population fitness in terms of complexity, specifically his physical complexity measure: ``It is probably more appropriate to say that evolution increases the amount of information a population harbours about its niche (and therefore, its physical complexity)'' \textcite{Adami2002}. \textcite{Prokopenko2009} discusses the information-theoretic view of the benefits of complexity.
 
@@ -120,24 +116,24 @@ Our predictions for changing environments are:
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 \subsection{Simulation model of variation and inheritance}\label{base-model}
 
-We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{fidelity} and \emph{fitness}, are represented as explicit parameters:
+We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{heritability} and \emph{fitness}, are represented as explicit parameters:
 
 \begin{enumerate}
+	\item \emph{Fidelity} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-	\item \emph{Fidelity} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $fidelity = 1$ means the child's value will be identical to the parent's.
 \end{enumerate}
 
-This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of fidelity as an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
+This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of heritability as an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
 In other respects, however, it resembles a standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each transform the population. Other elements of the model are as follows:
 
 \begin{enumerate}
 	\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
-	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{fidelity}.
+	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{heritability}.
 	\item \emph{Selection} forms a new population by selecting entities from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
 	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value and some degree of correlation captured by the value of the function $Range$.
 \end{enumerate}
@@ -184,7 +180,7 @@ The model is parameterised to make it easy to describe different specific models
 	\BlankLine
 	\Def{Variation(population)}{
 		$population_{new}\leftarrow \{\}$\;
-		\For{each $entity$ with $fitness$ and $fidelity$ in $population$}{
+		\For{each $entity$ with $fitness$ and $heritability$ in $population$}{
 			\BlankLine
 			\Prob($p_{reproduction}$:){
 				\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
@@ -209,7 +205,7 @@ Returning to the overall goals for these experiments, \cref{hypothesis-2} makes 
 	\item The population variance of inheritance will decrease more than would be expected by chance alone.
 \end{enumerate}
 
-The first test therefore is to examine if inheritance emerges from low-fidelity and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of fidelity, and that fidelity ranges between $0$, for no correlation between parent and child, and $1.0$ for perfect correlation.
+The first test therefore is to examine if inheritance emerges from low-heritability and low-fitness initial conditions, and then the second test is whether the population variance for inheritance decreases as predicted. Remember that as discussed earlier, inheritance is the outcome of the relationship between parent and child traits, as represented by the measure of heritability, and that heritability ranges between $0$, for no correlation between parent and child, and $1.0$ for perfect correlation.
 
 \subsection{Experimental design}\label{design}
 <<pdfcrop=TRUE, echo=FALSE, cache=TRUE>>=
@@ -265,73 +261,75 @@ From the results of earlier parameter selection experiments, we discovered that 
 We start with the following null and alternative hypotheses:
 
 \begin{itemize}[label={}]
-	\item H$_0$: fidelity does not approach 1.0 during a run, irrespective of factor values, or \newline
- $\vert \overline{fidelity}_{end}-\overline{fidelity}_{start} \vert = 0$
-	\item H$_1$: fidelity increases to near 1.0 during a run, for some factor values, or \newline
- $\overline{fidelity}_{end}-\overline{fidelity}_{start} > 0$ and $1.0-\overline{fidelity}_{end} < \delta$ for some $\delta$ and for some factor values.
+	\item H$_0$: heritability does not approach 1.0 during a run, irrespective of factor values, or \newline
+ $\vert \overline{heritability}_{end}-\overline{heritability}_{start} \vert = 0$
+	\item H$_1$: heritability increases to near 1.0 during a run, for some factor values, or \newline
+ $\overline{heritability}_{end}-\overline{heritability}_{start} > 0$ and $1.0-\overline{heritability}_{end} < \delta$ for some $\delta$ and for some factor values.
 \end{itemize}
 
 \subsubsection{Response variables}
 
-From the hypothesis the main property of interest is \emph{fidelity}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we require $\overline{fidelity}_{start}$ and $\overline{fidelity}_{end}$, or the mean value for \emph{fidelity} (across all replicates) at the beginning and end of each run.
+From the hypothesis the main property of interest is \emph{heritability}, or the correlation between parent and child property values. \emph{Fidelity} therefore is our response variable. Specifically we require $\overline{heritability}_{start}$ and $\overline{heritability}_{end}$, or the mean value for \emph{heritability} (across all replicates) at the beginning and end of each run.
 
 \subsubsection{Results and discussion}
 
 Of the \Sexpr{nrow(subset(df_full,gen==0))} experiment runs, all reached the experiment limit of \Sexpr{max(df_full['gen'])} generations. 
 
-Our interest is in the final values for fidelity under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of each run, unless otherwise noted.
+Our interest is in the final values for heritability under fixed-environment conditions. Therefore, the data in the following analysis is from the final generation of each run, unless otherwise noted.
 
-<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Summary results, showing on the left-hand side an overview for the final mean fidelity ($\\overline{fidelity}_{end}$) for each run and a density plot showing the distribution of $\\overline{fidelity}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
-ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean fidelity") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
+<<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Summary results, showing on the left-hand side an overview for the final mean heritability ($\\overline{heritability}_{end}$) for each run and a density plot showing the distribution of $\\overline{heritability}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
+ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean heritability") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-cp <- qplot(ave_cor, geom="density", data=df, xlab="Final mean fidelity",ylab="")
+cp <- qplot(ave_cor, geom="density", data=df, xlab="Final mean heritability",ylab="")
 dp <- qplot(ave_fit, geom="density", data=df, xlab="Final mean fitness",ylab="")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
 <<lowstartbyfactor, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Summary results, this time averaged across all replicates of each unique combination of factor levels (that is, grouped by factor level). Dark-coloured points represent values at end of run; light-coloured points in a horizontal line are for initial values, reflecting averaged initial conditions.'>>=
-ap <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fidelity') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+ap <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean heritability') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 bp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=ave_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='Factor combination', y='Mean fitness') + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
-cp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y=expression(paste(sigma," fidelity"))) + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
+cp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_cor, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y=expression(paste(sigma," heritability"))) + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 dp <- ggplot(subset(df_full,gen==0 | gen==500)) + geom_boxplot(aes(x=factor(exp),y=sd_fit, colour=factor(gen))) + scale_colour_manual(name="", values=c("grey80", "grey10")) + labs(x='', y=expression(paste(sigma," fitness"))) + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank(), legend.position='none')
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 
-<<mean-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the mean fidelity (top) and mean fitness (bottom) for all levels of all factors.'>>=
-ap <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_cor,group=run)) + labs(x="Generation", y="Mean fidelity")
+<<mean-heritability-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the mean heritability (top) and mean fitness (bottom) for all levels of all factors.'>>=
+ap <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_cor,group=run)) + labs(x="Generation", y="Mean heritability")
 bp <- ggplot(df_full) + geom_line(aes(x=gen,y=ave_fit,group=run)) + labs(x="Generation", y="Mean fitness")
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-The first hypothesis prediction is that average fidelity will tend towards exact inheritance, or $1.0$. A simple visual inspection of this data in \cref{fig:lowstart} reveals that the fidelity measure has a strong peak as predicted at $1.0$, with final mean fidelity greater than approximately $0.96$ for all remaining runs. Fitness is bimodal, with peaks around final mean fitness values of approximately $0.45-0.55$ and $1.0$. From \cref{fig:lowstartbyfactor,fig:mean-fidelity-fitness} it seems that the initial peak in fitness is associated with a subset of factor-levels. Closer examination shows that these runs, and only these runs, have the level $0.66$ for both factors $p_{reproduction}$ and $p_{selection}$. This supports the earlier observation in \cref{reducing-the-parameter-space-for-the-experiments} concerning the importance of the distinction between absolute and relative (\eg fitness-based) values for these two factors.
+The first hypothesis prediction is that average heritability will tend towards exact inheritance, or $1.0$. The reasoning is as follows: heredity describes the correlation along a lineage, so a high fitness entity with high heredity is likely to have more high fitness descendants than low fitness descendents. Higher fitness entities will survive longer and reproduce more, and so high fitness/high heredity entities will slowly invade the population.
 
-From inspection it seems clear that fidelity does approach $1.0$ as predicted by the hypothesis. In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design.
+A simple visual inspection of this data in \cref{fig:lowstart} reveals that the heritability measure has a strong peak as predicted at $1.0$, with final mean heritability greater than approximately $0.96$ for all remaining runs. Fitness is bimodal, with peaks around final mean fitness values of approximately $0.45-0.55$ and $1.0$. From \cref{fig:lowstartbyfactor,fig:mean-heritability-fitness} it seems that the initial peak in fitness is associated with a subset of factor-levels. Closer examination shows that these runs, and only these runs, have the level $0.66$ for both factors $p_{reproduction}$ and $p_{selection}$. This supports the earlier observation in \cref{reducing-the-parameter-space-for-the-experiments} concerning the importance of the distinction between absolute and relative (\eg fitness-based) values for these two factors.
+
+From inspection it seems clear that heritability does approach $1.0$ as predicted by the hypothesis. In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design.
 
 \subsection{Does the variance of inheritance decrease over time in the population?}\label{variance-of-inheritance-stable}
 
-The second prediction of the hypothesis is that the population variance for inheritance ($\sigma_{fidelity}$) should decrease over time towards a limit of $0$ in fixed environments.
+The second prediction of the hypothesis is that the population variance for inheritance ($\sigma_{heritability}$) should decrease over time towards a limit of $0$ in fixed environments.
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} >= 0$, for all factor values.
-	\item H$_1$: $\sigma_{fidelity_{end}}-\sigma_{fidelity_{start}} < 0$, for some factor values.
+	\item H$_0$: $\sigma_{heritability_{end}}-\sigma_{heritability_{start}} >= 0$, for all factor values.
+	\item H$_1$: $\sigma_{heritability_{end}}-\sigma_{heritability_{start}} < 0$, for some factor values.
 \end{itemize}
 
 \subsubsection{Response variables}
 
-Once again, the main property of interest, and so our response variable, is \emph{fidelity}. From the hypothesis we require $\sigma_{fidelity_{end}}$ and $\sigma_{fidelity_{start}}$, the standard deviation of fidelity at the beginning of each run, and at the end.
+Once again, the main property of interest, and so our response variable, is \emph{heritability}. From the hypothesis we require $\sigma_{heritability_{end}}$ and $\sigma_{heritability_{start}}$, the standard deviation of heritability at the beginning of each run, and at the end.
 
 \subsubsection{Results and discussion}
-<<sd-fidelity-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the standard deviation of fidelity on the top row, and standard deviation of fitness below.'>>=
-ap <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_cor,group=run)) + labs(x="Generation", y=expression(paste(sigma," fidelity")))
+<<sd-heritability-fitness, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Ranges by generation of the standard deviation of heritability on the top row, and standard deviation of fitness below.'>>=
+ap <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_cor,group=run)) + labs(x="Generation", y=expression(paste(sigma," heritability")))
 bp <- ggplot(df_full) + geom_line(aes(x=gen,y=sd_fit,group=run)) + labs(x="Generation", y=expression(paste(sigma," fitness")))
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 Data is all generations for all \Sexpr{nrow(unique(df['run']))} fixed-environment runs that reached completion at generation \Sexpr{max(df['gen'])}.
 
-In a similar fashion to the procedure in \cref{does-average-inheritance-approach-perfect-inheritance}, by visual inspection of \cref{fig:sd-fidelity-fitness}, the variance (square of the standard deviation) does decrease towards zero in all cases. Once again, the runs appear to fall into two distinct groups based on the speed of convergence towards zero, as seen in \cref{fig:sd-fidelity-fitness}. The upper group is exclusively associated with runs where both factors $p_{reproduction}$ and $p_{selection}$ are set to $0.66$; these levels are also responsible for the two uppermost groups of final standard deviation of fitness in the lower section of \cref{fig:sd-fidelity-fitness}. The distinction between these two uppermost groups however is due to a third factor, \emph{Distribution}: the uppermost group has level ``Bounded'' and the lowermost (or the middle group of the three) has level ``Sampled.''
+In a similar fashion to the procedure in \cref{does-average-inheritance-approach-perfect-inheritance}, by visual inspection of \cref{fig:sd-heritability-fitness}, the variance (square of the standard deviation) does decrease towards zero in all cases. Once again, the runs appear to fall into two distinct groups based on the speed of convergence towards zero, as seen in \cref{fig:sd-heritability-fitness}. The upper group is exclusively associated with runs where both factors $p_{reproduction}$ and $p_{selection}$ are set to $0.66$; these levels are also responsible for the two uppermost groups of final standard deviation of fitness in the lower section of \cref{fig:sd-heritability-fitness}. The distinction between these two uppermost groups however is due to a third factor, \emph{Distribution}: the uppermost group has level ``Bounded'' and the lowermost (or the middle group of the three) has level ``Sampled.''
 
-In conclusion, from visual inspection, the variance of fidelity does approach $0$, for all combinations of factor levels except where both $p_{reproduction}$ and $p_{selection}$ are set to $0.66$. Therefore H$_0$ is rejected and H$_1$ accepted.
+In conclusion, from visual inspection, the variance of heritability does approach $0$, for all combinations of factor levels except where both $p_{reproduction}$ and $p_{selection}$ are set to $0.66$. Therefore H$_0$ is rejected and H$_1$ accepted.
 
 \section{Model behaviour in changing environments}\label{model-behaviour-in-changing-environments}
 
@@ -438,10 +436,10 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
-As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of fidelity across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The independent variables in each run are the parameters to the environmental model, with values taken from a uniform random sample from their range. Or in other words, a series of random samples with uniform probability from a cube formed by a parameter on each of the three axes (see \cref{fig:cube}.)
+As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of heritability across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The independent variables in each run are the parameters to the environmental model, with values taken from a uniform random sample from their range. Or in other words, a series of random samples with uniform probability from a cube formed by a parameter on each of the three axes (see \cref{fig:cube}.)
 
 \begin{figure}
 	\begin{center}
@@ -504,7 +502,7 @@ The other factors and levels along with their mapping to model parameters, prese
 	\end{center}
 \end{table}
 
-Finally, the dependent or response variables, driven by the hypothesis predictions, are mean population fidelity and mean population fitness.
+Finally, the dependent or response variables, driven by the hypothesis predictions, are mean population heritability and mean population fitness.
 
 %\begin{table}\label{reproduction-distribution-factors-c8}
 %	\caption{Levels for the factor \emph{Reproduction}}
@@ -512,11 +510,11 @@ Finally, the dependent or response variables, driven by the hypothesis predictio
 %		\toprule
 %		Reproduction&Child entity parameter					&Distribution shape\\
 %		\midrule
-%		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=1-fidelity$\\
+%		\multirow{2}{*}{Correlated}		&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-heritability$\\
+%										&$heritability_{new}$	&$\mu=heritability$ and $\sigma=1-heritability$\\
 %		
-%		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-fidelity$\\
-%										&$fidelity_{new}$	&$\mu=fidelity$ and $\sigma=\mathcal{U}[0, 1.0]$\\
+%		\multirow{2}{*}{Uncorrelated}	&$fitness_{new}$	&$\mu=fitness$ and $\sigma=1-heritability$\\
+%										&$heritability_{new}$	&$\mu=heritability$ and $\sigma=\mathcal{U}[0, 1.0]$\\
 %		\bottomrule
 %	\end{tabular}
 %\end{table}
@@ -524,7 +522,7 @@ Finally, the dependent or response variables, driven by the hypothesis predictio
 
 \subsection{Results}
 
-<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final mean fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
+<<figure23, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final mean heritability against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
 # BY_LINEAGE	CORRELATED	N_OFFSPRING	P_REPRODUCE	P_SELECTION	RESTRICTION	delta	sigma	theta	ave_fid	ave_fit	experiment	gen	pop	run	sd_fid	sd_fit
 colClasses <- c("factor","factor","factor","factor","factor","factor","numeric","numeric","numeric","numeric","numeric","factor","integer","numeric","integer","numeric","numeric")
 r1 <- read.csv('results/results-0c267bcd2-a.csv', colClasses=colClasses)
@@ -536,9 +534,9 @@ colnames(results)[c(7,8,9)] <- c("delta","sigma","theta")
 
 results$BY_LINEAGE = factor(results$BY_LINEAGE, labels=c("By Population","By Lineage"))
 
-ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x=expression(paste(sigma, ' parameter to environmental model')), y='Final mean fidelity')
-bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x=expression(paste(delta, ' parameter to environmental model')), y='Final mean fidelity') 
-cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x=expression(paste(theta, ' parameter to environmental model')), y='Final mean fidelity')
+ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,ave_fid)) + labs(x=expression(paste(sigma, ' parameter to environmental model')), y='Final mean heritability')
+bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,ave_fid)) + labs(x=expression(paste(delta, ' parameter to environmental model')), y='Final mean heritability') 
+cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,ave_fid)) + labs(x=expression(paste(theta, ' parameter to environmental model')), y='Final mean heritability')
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
 @
 
@@ -555,10 +553,10 @@ dp <- ggplot(t4,aes(1:nrow(t4),t4[order(t4[,2],decreasing=TRUE),2]))+geom_bar(st
 grid.arrange(ap,bp,cp,dp,nrow=4,ncol=1)
 @
 
-%<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Final mean fidelity against final mean fitness (top) and final mean fidelity against final standard deviation of fidelity (bottom).'>>=
-%ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='Final mean fitness',y='Final mean fidelity')# and relationship between these two
+%<<figure25, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Final mean heritability against final mean fitness (top) and final mean heritability against final standard deviation of heritability (bottom).'>>=
+%ap <- ggplot(subset(results,gen==500),aes(ave_fit,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='Final mean fitness',y='Final mean heritability')# and relationship between these two
 %# Relationship between sd_fid and ave_fid!
-%bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid)) + labs(x='Final standard deviation of fidelity',y='Final mean fidelity')
+%bp <- ggplot(subset(results,gen==500)) + geom_point(aes(sd_fid,ave_fid)) + labs(x='Final standard deviation of heritability',y='Final mean heritability')
 %grid.arrange(ap,bp,nrow=2,ncol=1)
 %#anova(lm(sd_fid~ave_fid, data=subset(results, gen==500))) # 0.001
 %@
@@ -583,82 +581,82 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 	\end{center}
 \end{table}
 
-\subsection{Is fidelity proportional to the predictability of the environment?}\label{mean-fidelity-predictability}
+\subsection{Is heritability proportional to the predictability of the environment?}\label{mean-heritability-predictability}
 
 Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a measure of environmental predictability, our null and alternate hypotheses are:
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\overline{fidelity}_{end}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
-	\item H$_1$: $\overline{fidelity}_{end}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
+	\item H$_0$: $\overline{heritability}_{end}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
+	\item H$_1$: $\overline{heritability}_{end}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
 Because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma_e$ as a parameter to any $f().$ 
 
-By visual inspection of \cref{fig:figure23}, $\overline{fidelity}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{fidelity}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma_e$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
+By visual inspection of \cref{fig:figure23}, $\overline{heritability}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{heritability}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma_e$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
 
-<<anova-mean-fidelity, results='asis',echo=FALSE>>=
+<<anova-mean-heritability, results='asis',echo=FALSE>>=
 temp <- subset(results,gen==500)
-colnames(temp)[10] <- "mean_fidelity"
+colnames(temp)[10] <- "mean_heritability"
 
-a <- with(temp,anova(lm(mean_fidelity~sigma+delta+theta)))
+a <- with(temp,anova(lm(mean_heritability~sigma+delta+theta)))
 
 library(xtable)
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{fidelity}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{heritability}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-As a result, we can reject H$_0$ and accept H$_1$: fidelity is proportional to the predictability of the environment (as measured by some function $f(\Theta,\delta)$.)
+As a result, we can reject H$_0$ and accept H$_1$: heritability is proportional to the predictability of the environment (as measured by some function $f(\Theta,\delta)$.)
 
-%<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter.'>>=
+%<<figure24, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean heritability (top) and final standard deviation of heritability (bottom) against sigma parameter.'>>=
 %results_low_bias <- subset(results, -0.002<delta & delta<0.002)
-%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final mean fidelity')
-%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final mean fidelity')
+%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final mean heritability')
+%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,ave_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final mean heritability')
 %grid.arrange(ap,bp,nrow=2,ncol=1)
 %@
 %
-%<<figure24a, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean fidelity (top) and final standard deviation of fidelity (bottom) against sigma parameter.'>>=
+%<<figure24a, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE,fig.pos='htp', fig.scap=NA, fig.cap='Subset of results where $0.002 < \\lvert delta\\rvert$, again showing final mean heritability (top) and final standard deviation of heritability (bottom) against sigma parameter.'>>=
 %results_low_bias <- subset(results, -0.002<delta & delta<0.002)
-%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final standard deviation of fidelity')
-%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final standard deviation of fidelity')
+%ap <- ggplot(subset(results_low_bias,gen==500),aes(sigma,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='sigma parameter to environmental model', y='Final standard deviation of heritability')
+%bp <- ggplot(subset(results_low_bias,gen==500),aes(theta,sd_fid)) + geom_point() + geom_smooth(method='lm') + labs(x='theta parameter to environmental model', y='Final standard deviation of heritability')
 %grid.arrange(ap,bp,nrow=2,ncol=1)
 %@
 
-\subsection{Does the standard deviation of fidelity vary in proportion to the variability in the environment?}\label{sd-fidelity-predictability}
+\subsection{Does the standard deviation of heritability vary in proportion to the variability in the environment?}\label{sd-heritability-predictability}
 
 \begin{itemize}[label={}]
-	\item H$_0$:  $\sigma_{fidelity_{end}}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
-	\item H$_1$:  $\sigma_{fidelity_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
+	\item H$_0$:  $\sigma_{heritability_{end}}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
+	\item H$_1$:  $\sigma_{heritability_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
-An \gls{anova} model evaluating a linear relationship between the standard deviation of fidelity, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the $\sigma_{fidelity}$, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-fidelity-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of fidelity.
+An \gls{anova} model evaluating a linear relationship between the standard deviation of heritability, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the $\sigma_{heritability}$, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-heritability-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of heritability.
 
-<<anova-sd-fidelity, results='asis',echo=FALSE>>=
+<<anova-sd-heritability, results='asis',echo=FALSE>>=
 temp <- subset(results,gen==500)
-colnames(temp)[16] <- "sd_fidelity"
+colnames(temp)[16] <- "sd_heritability"
 
-a <- with(temp,anova(lm(sd_fidelity~sigma+delta+theta)))
+a <- with(temp,anova(lm(sd_heritability~sigma+delta+theta)))
 
 library(xtable)
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{fidelity_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{heritability_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-<<sd-fidelity, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final standard deviation of fidelity against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
+<<sd-heritability, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final standard deviation of heritability against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=
 ap <- ggplot(subset(results,gen==500)) + geom_point(aes(sigma,sd_fid)) + labs(x=expression(paste(sigma, ' parameter to environmental model')), y=expression(sigma))
 bp <- ggplot(subset(results,gen==500)) + geom_point(aes(delta,sd_fid)) + labs(x=expression(paste(delta, ' parameter to environmental model')), y=expression(sigma)) 
 cp <- ggplot(subset(results,gen==500)) + geom_point(aes(theta,sd_fid)) + labs(x=expression(paste(theta, ' parameter to environmental model')), y=expression(sigma))
 grid.arrange(ap,bp,cp,nrow=3,ncol=1)
 @
 
-The corollary of this prediction is that $\sigma_{fidelity}$ will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{environmental-model}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
+The corollary of this prediction is that $\sigma_{heritability}$ will be greater in unpredictable environments than in stable environments (when all three parameters are near zero). As a first approach, we note that in \cref{variance-of-inheritance-stable} we showed that in stable environments the variance of inheritance tended towards zero. As $\sigma_e$ is by definition unpredictable (see \cref{environmental-model}) we can provide some support for the corollary if we can show that variance remains above zero for all $\sigma_e>0$ (incorporating all necessary uncertainties): 
 
 \begin{itemize}[label={}]
-	\item H$_0$:  $\sigma_{fidelity_{end}}$ is close to $0$, for all clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
-	\item H$_1$:  $\sigma_{fidelity_{end}}$ is not close to $0$, for some clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
+	\item H$_0$:  $\sigma_{heritability_{end}}$ is close to $0$, for all clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
+	\item H$_1$:  $\sigma_{heritability_{end}}$ is not close to $0$, for some clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
 \end{itemize}
 
-It is clear from a visual inspection of \cref{fig:sd-fidelity} that we can reject H$_0$ in favour of H$_1$: $\sigma_{fidelity_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
+It is clear from a visual inspection of \cref{fig:sd-heritability} that we can reject H$_0$ in favour of H$_1$: $\sigma_{heritability_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
 
 %<<echo=FALSE>>=
-%a<-with(temp,lm(sd_fidelity~sigma*theta*delta))['coefficients']
+%a<-with(temp,lm(sd_heritability~sigma*theta*delta))['coefficients']
 %t1 <- read.csv('results/environments-factorial.csv', header=FALSE, colClasses=c("numeric","numeric","numeric"))
 %
 %t1$run <- 1:nrow(t1)
@@ -671,7 +669,7 @@ It is clear from a visual inspection of \cref{fig:sd-fidelity} that we can rejec
 %predictions <- cbind(t3,sd=predict(a,newdata=t3))
 %predictions[order(predictions$sd),]
 %
-%with(temp,temp[order(sd_fidelity),c("sd_fidelity","delta","sigma","theta")])
+%with(temp,temp[order(sd_heritability),c("sd_heritability","delta","sigma","theta")])
 %@
 
 \section{Future work}
@@ -694,12 +692,12 @@ The previous \namecref{model-behaviour-in-changing-environments} has tested our 
 
 \begin{enumerate}
 	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the $\sigma_{fidelity}$. As a corollary, the $\sigma_{fidelity}$ under changing conditions will be greater than that under stable conditions.
+	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, the $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
-In \cref{mean-fidelity-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: fidelity in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
+In \cref{mean-heritability-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: heritability in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
 
-The second prediction was also confirmed in similar fashion in \cref{sd-fidelity-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
+The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
 
 Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution to suit the population environment.
 

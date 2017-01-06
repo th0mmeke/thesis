@@ -20,7 +20,7 @@ df
 
 Artificial Chemistries provide an interesting testbed for investigating various evolutionary phenomena. This \namecref{introduction-to-achems} provides background material to aid in understanding how \glspl{achem} are almost uniquely suited to the exploration of our research questions. We review previous uses of \glspl{achem}, and given the wide range of systems described in previous work, discuss some frameworks for their description and categorisation, which incidentally help in identifying elements common to all \glspl{achem}. Finally we briefly review relevant previous work in applying \glspl{achem} to the problems of \gls{oe} and the origin of life.
 
-Fundamentally, \glspl{achem} provide a tunable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms -- molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns -- reactions.
+Fundamentally, \glspl{achem} provide a tunable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms--molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns--reactions.
 
 Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence of reactions eventually returns to an earlier state. Cycles in particular are interesting as many biological processes are cyclical\footnote{In the broadest sense life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities.}. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in \gls{achem} evolution and biology, we believe like others (\eg \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in \glspl{achem}.
 
@@ -54,7 +54,6 @@ This taxonomy is commonly used in the literature (\eg in \cite{Lenaerts2009,Gard
 \subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
 
 This element describes how molecules are represented in the \gls{achem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, such as bond energy calculations by Extended Huckel Theory (EHT) (\eg textcite{Benko2003}.)
-
 
 \subsection{Reaction rules (\textless{}\emph{R}\textgreater{})}
 
@@ -220,7 +219,7 @@ ToyWorld, our first \gls{achem} model for the exploration of emergent behaviours
 
 Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results, and so our model cannot be used to investigate real-world chemical behaviours. 
 
-The ToyWorld model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values -- real-world chemistry.
+The ToyWorld model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values--real-world chemistry.
 
 The name has been chosen as both an acknowledgement of ToyChem \parencite{Benko2003}, and as a hint at the simulation's purpose: creating an artificial world for exploration. That world, the ToyWorld model, consists of:
 
@@ -260,56 +259,18 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, for example:
 	\While{generation $\leq$ generations}{
 		\BlankLine
 		\tcp{Selection of reactants}
-		reactants $\leftarrow$ outcome of the reactant selection strategy\;
+		reactants $\leftarrow$ outcome of the Reactant selection strategy\;
 		\BlankLine
 		\tcp{Construction of reaction}
 		reactions $\leftarrow$ enumerate all possible reaction options\;
-		reaction $\leftarrow$ choose from $reactions$ according to the [roduct selection strategy\;
+		reaction $\leftarrow$ choose from $reactions$ according to the Product selection strategy\;
 		\BlankLine
-		\uIf{reaction is not Null}{
+		\uIf{reaction is possible}{
 			Update the reactor with the results of carrying out the $reaction$\;
 		}
-		\uElse{
-			No reaction possible--just bounce the molecules off each other\;
-		}
 	}
-	\caption{The main simulation loop in ToyWorld}
+	\caption{The main simulation loop in ToyWorld}\label{alg:toyworld-main-loop}
 \end{algorithm}
-
-\begin{sidewaystable}
-	\begin{center}
-		\tiny
-		\begin{tabular}{@{}lllp{10cm}@{}}
-			\toprule
-			Parameter & Default value & Possible values & Description \\
-			\midrule
-			Energy&300&Int&The initial average kinetic energy (KE) for each molecule in the reaction vessel\\
-			EnergyModel&\url{DefaultEnergyModel}&Subclass of \url{DefaultEnergyModel}&More sophisticated model of energy inflow and outflow from the reaction vessel\\
-			RadiationRate&0.0&Float&Proportion of kinetic energy lost (apparently by radiation) each unit time interval from the reaction vessel\\
-			EnergyInput&0.0&Float&Absolute energy added to reaction vessel each unit time interval\\
-			Reactions&\url{EmergentReactions}&Subclass of \url{Reactions}&Reaction mechanism--EmergentReactions provides a fully constructive reaction chemistry\\
-			ProductSelectionStrategy&"energy"&String&See Section \cref{product-selection-strategies}\\
-			Molecule&molecule.Molecule&Subclass of Molecule&Model of a molecule\\
-			Vessel&\url{ReactionVessel}&Subclass of \url{ReactionVessel}&Model of the container in which the simulation proceeds\\
-			DipoleForceConstant&0.01&Float&Multiplier for the electro-magnetic force acting between two \url{ChargedMolecule}s\\
-			\midrule
-			name&<None>&String&Name of the experiment--primarily used to identify the output data files for the experiment\\
-			PopulationFilename&None&Filename&Name of the XML file defining the initial set of molecules to be placed in the reaction vessel\\
-			Iterations&10000&Int&Number of reactions before finishing\\
-			recover&True&Boolean&If True then do not redo completed repeats if the simulation is restarted, say after a machine reboot\\
-			repeats&1&Int&Number of replicates to run for this experiment\\
-			seed&None&Anything&Initial seed for the random number generation at the beginning of the experiment\\
-			DeltaT&1&Float&Size of a time-step in the simulation\\
-			StateRecordRate&0.01&Float&Recording interval for snapshots of \url{ReactionVessel} state information (e.g., molecule positions)\\
-			Visualize&False&Boolean&If \url{True} then display a PyMunk display of molecules, updated each DeltaT\\
-			ShowForceVectors&False&Boolean&If \url{Visualize} is \url{True} then show lines representing the electro-magnetic forces between \url{ChargedMolecule}s\\
-			ShowOrientation&True&Boolean&If \url{Visualize} is \url{True} then show a line representing a molecule's orientation\\
-			\bottomrule
-		\end{tabular}
-	\end{center}
-	\caption{Simulation Parameters in the Experiment Design XML file}
-	\label{tbl:simulation_parameters}
-\end{sidewaystable}
 
 \section{Atoms and molecules}\label{atoms-and-molecules}
 
@@ -333,12 +294,12 @@ Some examples of molecules created by ToyWorld are shown in \cref{fig:toyworld-e
 
 \section{Mass/Energy Model and Energy Transformations in ToyWorld}\label{energy-model}
 
-Energy within ToyWorld is modeled in three forms -- kinetic, internal and potential.
+Energy within ToyWorld is modeled in three forms--kinetic, internal and potential.
 
 \begin{itemize}
 \item Kinetic energy is the energy associated with the motion of a molecule, and equals $\frac{1}{2}mv^2$ where $m$ is the mass of a molecule and $v$ its velocity.
 \item Internal energy is an abstraction of vibrational energy or heat energy within a molecule. Internal energy, while incidentally consistent with real-world chemical models, is actually included in ToyWorld as a major mechanism to introduce stochasticity in reactions. Without internal energy, all excess energy following a reaction must be allocated to kinetic energy (following energy conservation), and so there is an iso-map between reaction and product kinetic energies. With internal energy, we can divert an arbitrary proportion into internal energy and therefore we have a stochastic multi-map.
-\item Potential energy is the energy associated with the bonds between atoms in a molecule. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energy of each bond in the molecule. The state without bonds is defined as having zero potential energy, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two atoms at either end of the bond, and the type of bond itself -- single, double or triple. ToyWorld provides a table of relative bond values in \cref{default_bond_energies}, taken from real-world chemistry \footnote{Original source: Average Bond Dissociation Enthalpies \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
+\item Potential energy is the energy associated with the bonds between atoms in a molecule. Creating a bond reduces the potential energy of a molecule; breaking a bond increases it. The potential energy of a molecule is the sum of the potential energy of each bond in the molecule. The state without bonds is defined as having zero potential energy, and so molecules with bonds have negative potential energy. The specific value of each bond is absolutely determined by the atomic number of the two atoms at either end of the bond, and the type of bond itself--single, double or triple. ToyWorld provides a table of relative bond values in \cref{default_bond_energies}, taken from real-world chemistry \footnote{Original source: Average Bond Dissociation Enthalpies \url{http://www.cem.msu.edu/~reusch/OrgPage/bndenrgy.htm}}. Unspecified bonds are given the average energy of specified bonds of the same bond type. Examples of molecules with associated potential energies are given in \cref{example_potential_energies}.
 \end{itemize}
 
 As the model enforces conservation of mass, reactions can be represented solely by bond changes. This follows the approach taken in graph-based chemistries such as GGL/ToyChem \parencite{Benko2003,Benko2005} where reactions are modelled as a series of changes to graph edges, or bonds, only.
@@ -455,7 +416,7 @@ A reaction may be seen as two stages in sequence: first, the choice of reactants
 
 \section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies}
 
-\Textcite{Faulconbridge2011} describes two generic strategies for the selection of reactants -- spatial and aspatial -- where the primary difference is whether molecular position is a factor in reactant selection. It is possible to further generalise this scheme by considering other differentiating factors. Analogous with real-world chemistry, a cumulative scheme presents itself starting with the pure aspatial, or uniform probability strategy, and then proceeding through a spatial strategy, based on molecular kinetics, to strategies built on kinetics plus intra-molecular and external forces such as electromagnetism. 
+\Textcite{Faulconbridge2011} describes two generic strategies for the selection of reactants--spatial and aspatial--where the primary difference is whether molecular position is a factor in reactant selection. It is possible to further generalise this scheme by considering other differentiating factors. Analogous with real-world chemistry, a cumulative scheme presents itself starting with the pure aspatial, or uniform probability strategy, and then proceeding through a spatial strategy, based on molecular kinetics, to strategies built on kinetics plus intra-molecular and external forces such as electromagnetism. 
 
 These strategies are based on a sequence of increasing derivatives of position or location in the reaction vessel; from no position (uniform selection), through fixed position (uninteresting as we cannot have a sequence of reactions without motion) to the first derivative (velocity or kinetic selection) and finally to the second derivative (acceleration, or force selection.) 
 
@@ -467,7 +428,7 @@ In a uniform selection strategy ($S_\mathrm{Reactant} = \mathrm{Uniform}$), reac
 
 \subsection{Kinetic selection.}\label{kinetic-selection.}
 
-By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position -- molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula.
+By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position--molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula.
 
 \subsection{Intra-molecular selection and external force selection}\label{intra-molecular-selection-and-external-force-selection}
 
@@ -642,7 +603,7 @@ extension, for four products, a square and so on.
 
 Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \ref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognise that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
 
-We then choose, from a uniform distribution, the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 * velocity * momentum$, and arrange the vector momentums according to the geometry described earlier.
+We then choose, from a uniform distribution, the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 x velocity x momentum$, and arrange the vector momentums according to the geometry described earlier.
 
 Finally, we convert from the CoM reference frame to the initial frame by adding back the velocity of the CoM (line \ref{alg:CoM_to_lab_frame}).  This method satisfies our requirements of conservation of momentum and energy for arbitrary numbers of reactants and products while being computationally straightforward. The limitation is that product vectors are arranged in regular and consistent, although reasonably realistic, configurations. An improvement would be to perturb the geometry of the vectors in the CoM frame to remove the regularity.
 
@@ -806,11 +767,11 @@ The energy-model presented in this \namecref{toyworld} leads to some particular 
 
 \begin{enumerate}
 \item Given two reactants, changing the reaction energy should result in different sets of reaction products.
-\item Molecular quantities should reach equilibrium -- that is, the set of interacting molecules is constant, with fluctuations expected in quantities. We expect molecular concentrations to stabilise at non-extreme values (equilibrium rather than driven to an extreme) after some transition period from the initial conditions.
+\item Molecular quantities should reach equilibrium--that is, the set of interacting molecules is constant, with fluctuations expected in quantities. We expect molecular concentrations to stabilise at non-extreme values (equilibrium rather than driven to an extreme) after some transition period from the initial conditions.
 \item The equilibrium point should depend on the energy of the system. Our energy model preferentially forms bonds at low energies, and breaks bonds at high. We expect the average length of molecules in the artificial chemistry to be greater at low energies than at high energies.
 \end{enumerate}
 
-These predictions were tested by two experiments: first, we examined the reaction products produced at a range of reaction energies for four sets of reactants. Second, for a given set of reactants, we ran the simulation for 10,000 iterations at four successive initial average kinetic energy levels -- 0, 67, 133, and 200 units per molecule. The experiment was run first with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
+These predictions were tested by two experiments: first, we examined the reaction products produced at a range of reaction energies for four sets of reactants. Second, for a given set of reactants, we ran the simulation for 10,000 iterations at four successive initial average kinetic energy levels--0, 67, 133, and 200 units per molecule. The experiment was run first with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
 
 \begin{figure}
 	\begin{center}
@@ -837,8 +798,8 @@ With both reactant sets the model produced a significant number of
 molecules which would be considered unstable in real-world chemistry
 (such as O\textsuperscript{-} and O.) This is likely an artefact of the method
 we use to generate reaction options, where a bond-break plus
-bond-formation reaction -- moving through an intermediate unstable
-ion -- occurs in our model as two separate reactions. As all molecules
+bond-formation reaction--moving through an intermediate unstable
+ion--occurs in our model as two separate reactions. As all molecules
 currently react with equal likelihood, significant time can elapse
 before the intermediate product reacts to form a stable product.
 
@@ -898,7 +859,7 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 	\end{center}
 \end{table}
 
-We concentrate on three related response, or dependent, variables -- Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
+We concentrate on three related response, or dependent, variables--Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
 
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 

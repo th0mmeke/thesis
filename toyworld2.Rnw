@@ -14,39 +14,8 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
-\section{Environmental models}
 
-First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
-
-A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
-
-A model for changing environments must describe three particular components of change: the \emph{scope} of the change, the \emph{target} of the change, and the \emph{shape} of the change. First, we discuss scope: the proportion of entities in the population to receive a particular set of changes. We consider three different levels of scope, from most homogeneous to least:
-
-\begin{enumerate}
-	\item The group of all entities. All entities receive the same set of changes.
-	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
-	\item A single-member group for each entity. Each entity receives a unique set of changes.
-\end{enumerate}
-
-The first level is the simplest application of environmental change while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. We do not address the third scope possibility in this work as it implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
-
-The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. 
-
-The \emph{shape} of change over time is given by $\delta$ at timestep $t$, where $\delta_t\in R$; the space of all potential changes at any timestep is effectively limitless. Simply taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
-
-Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
-
-In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
-
-\section{Hypothesis and predictions}
-
-\begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
-\end{hypothesis}
-
-\section{Model}
-
-The conceptual basis for these experiments is shown in \cref{fig:conceptual-model-for-environmental-change}. 
+The conceptual basis for the experiments in this \namecref{toyworld2} is outlined in \cref{fig:conceptual-model-for-environmental-change}. 
 
 \begin{figure}
 	\begin{center}
@@ -78,22 +47,36 @@ The conceptual basis for these experiments is shown in \cref{fig:conceptual-mode
 	\end{center}
 \end{figure}
 
-We test two targets of environmental variability: changes to the size of the foodset, and changes to the product selection strategy.
+\section{Environmental models}
 
-\subsubsection{Product selection strategy}
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
 
-Incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
-\begin{displaymath}
-	e_i=
-	\begin{cases}
-		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
-		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
-		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
-	\end{cases}
-\end{displaymath}\label{environment-weighting-calculation}
+A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change. 
 
-\subsubsection{Foodset size function}
+The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{toyworld2}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
+
+The \emph{shape} of change describes the way change varies over time, and is given by $\delta$ at timestep $t$, where $\delta_t\in R$; the space of all potential changes at any timestep is effectively limitless. Taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+
+\section{Hypothesis and predictions}
+
+\begin{hypothesis}
+That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
+\end{hypothesis}
+
+\section{Factors}
+
+Recall that for an environmental change we distinguish two components: target and shape. Each component becomes a factor in a full-factorial experiment design (see \cref{tbl:toyworld2-factors}.)
+
+\subsection{Target factor}
+This factor has two levels: changes to the size of the foodset, and changes to the product selection strategy.
+
+\subsubsection{Foodset size}
 
 \begin{algorithm}[ht]
 	increment $\leftarrow$ newsize - |food set|\;
@@ -108,14 +91,6 @@ Incorporating an environmental factor ($X_t$) into the least energy selection me
 		$food set \leftarrow samplesizee$ elements chosen with uniform probability from $food set$\;
 	}
 \end{algorithm}
-
-\subsection{Local Reactant Selection}
-
-Unless the total number of atoms in the reaction vessel can increase, to maintain a foodset level product molecules must be removed from the reactor at an equal rate. If there is a flow across the reaction vessel with new molecules (food set molecules) entering at one side and products be removed at the opposite side, then there is a maximum lifespan for any composome determined by how long it takes to traverse the vessel.
-
-Anchoring the composome would allow this limit to be extended. Some form of membrane or boundary (e.g., Chemoton or autopoeitic entity), open to food set molecules entering across the boundary, and waste product molecules exiting would identify the reactions in the composome so they could be logically anchored.
-
-Alternatively, the composome could be anchored by fixing product molecules in place while foodset molecules move freely in the vessel. This still leaves the problem of removing 'waste' (or else the vessel will be filled by product molecules). The LocalReactantSelection method models these fixed products.
 
 To mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. If both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
 
@@ -139,10 +114,33 @@ To mimic the effects of a membrane, all non-foodset reactants must be within a g
 		Let the second reactant be a molecule chosen (with uniform probability) from the sample population\;
 	}
 	\Return reactants
-	\caption{Local ReactantSelectionMethod. All non-food set reactants must come from the same region of the reactant vessel.}
+	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\section{Response variables}
+\subsubsection{Product selection strategy}
+
+Our approach to incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
+
+\begin{displaymath}
+	e_i=
+	\begin{cases}
+		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
+		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
+		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
+	\end{cases}
+\end{displaymath}\label{environment-weighting-calculation}
+
+The effect of the environmental change is make a consistent increase or decrease to the energy required for each bond change in a reaction. 
+
+\subsection{Shape factor}
+
+The factor, shape of environmental change, has two levels: AR(1)-timeseries, and bistate.
+
+\subsubsection{AR(1) timeseries}
+
+\subsubsection{Bistate}
+
+\section{Response variable}
 
 The primary metric in the hypothesis is \emph{stable cycle states}. A stable cycle state is a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
 
@@ -279,6 +277,20 @@ ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target 
 % States are by seed molecule
 
 \section{Discussion}
+
+\section{Future work}
+
+We have assumed that each environmental change affected all entities equally; however, this isn't necessarily the only option. We can identify three levels of scope, or the proportion of entities in the population to receive a particular set of changes, from most homogeneous to least:
+
+\begin{enumerate}
+	\item The group of all entities. All entities receive the same set of changes.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
+	\item A single-member group for each entity. Each entity receives a unique set of changes.
+\end{enumerate}
+
+The first level is the simplest application of environmental change, and the one adopted earlier in this \namecref{toyworld2}, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. 
+
+The third scope level implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
 
 \section{Conclusions}
 

@@ -305,7 +305,7 @@ A simple visual inspection of this data in \cref{fig:lowstart} reveals that the 
 
 From inspection it seems clear that heritability does approach $1.0$ as predicted by the hypothesis. In conclusion, H$_0$ can be rejected, and H$_1$ accepted. Inheritance increases regardless of the model design.
 
-\subsection{Does the variance of inheritance decrease over time in the population?}\label{variance-of-inheritance-stable}
+\subsection{Does the standard deviation of inheritance decrease over time in the population?}\label{variance-of-inheritance-stable}
 
 The second prediction of the hypothesis is that the population variance for inheritance ($\sigma_{heritability}$) should decrease over time towards a limit of $0$ in fixed environments.
 
@@ -627,7 +627,7 @@ As a result, we can reject H$_0$ and accept H$_1$: heritability is proportional 
 	\item H$_1$:  $\sigma_{heritability_{end}}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
 \end{itemize}
 
-An \gls{anova} model evaluating a linear relationship between the standard deviation of heritability, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the $\sigma_{heritability}$, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-heritability-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it does not contribute to predictability but it does affect unpredictability. Therefore it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of heritability.
+An \gls{anova} model evaluating a linear relationship between the standard deviation of heritability, and the parameters $\delta$, $\sigma_e$ and $\Theta$ to the environmental model suggests that all three parameters have some effect on the $\sigma_{heritability}$, with the influence of $\delta$ and $\Theta$ being highly significant (p\textless 0.001) and that of $\sigma_e$ significant (p\textless 0.01).  Unlike in the previous \namecref{mean-heritability-predictability}, here we are interested in the variability, or unpredictability, of the environment. As $\sigma_e$ is fundamentally unpredictable, it is not unexpected that it contributes to the relationship between the unpredictability of the environment and the variance of heritability.
 
 <<anova-sd-heritability, results='asis',echo=FALSE>>=
 temp <- subset(results,gen==500)
@@ -653,7 +653,7 @@ The corollary of this prediction is that $\sigma_{heritability}$ will be greater
 	\item H$_1$:  $\sigma_{heritability_{end}}$ is not close to $0$, for some clearly non-zero combinations of $\Theta$,$\delta$ and $\sigma_e$.
 \end{itemize}
 
-It is clear from a visual inspection of \cref{fig:sd-heritability} that we can reject H$_0$ in favour of H$_1$: $\sigma_{heritability_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
+From a visual inspection of \cref{fig:sd-heritability} we can reject H$_0$ in favour of H$_1$: $\sigma_{heritability_{end}}$ is greater under unpredictable conditions than it is under stable environmental conditions.
 
 %<<echo=FALSE>>=
 %a<-with(temp,lm(sd_heritability~sigma*theta*delta))['coefficients']

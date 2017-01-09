@@ -12,8 +12,7 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Introduction}
 
-If cycles are to hold genetic information in a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
-
+If cycles are to be a store of information for a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
 The conceptual basis for the experiments in this \namecref{toyworld2} is outlined in \cref{fig:conceptual-model-for-environmental-change}. 
 
@@ -25,7 +24,7 @@ The conceptual basis for the experiments in this \namecref{toyworld2} is outline
 			\node[main node] (evo) at (0,10) {Evolutionary model};
 			\node[main node] (env) at (0,0) {Environmental model};
 			\node[main node] (pop) at (6,10) {Population};
-			\node[main node] (ts) at (6,0) {Time series of fitness changes};
+			\node[main node] (ts) at (6,0) {Time series of environmental changes};
 			\node[main node] (r1) at (12,10) {Metrics};
 			\node[main node] (r2) at (12,0) {Metrics};
 			\node[main node] (test) at (12,5) {Hypothesis test};
@@ -92,7 +91,9 @@ This factor has two levels: changes to the size of the foodset, and changes to t
 	}
 \end{algorithm}
 
-To mimic the effects of a membrane, all non-foodset reactants must be within a given distance of each other. We do this by first selecting two molecules from the combined foodset and reaction vessel population. If both are non-foodset molecules they must be physically co-located within the reaction vessel. Therefore we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+In the Local reactant selection strategy, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, but they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+
+The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, regardless.
 
 \begin{algorithm}[ht]
 	
@@ -117,7 +118,7 @@ To mimic the effects of a membrane, all non-foodset reactants must be within a g
 	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\subsubsection{Product selection strategy}
+\subsubsection{BiasedLeastEnergy product selection strategy}
 
 Our approach to incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
 
@@ -130,7 +131,7 @@ Our approach to incorporating an environmental factor ($X_t$) into the least ene
 	\end{cases}
 \end{displaymath}\label{environment-weighting-calculation}
 
-The effect of the environmental change is make a consistent increase or decrease to the energy required for each bond change in a reaction. 
+The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
 
 \subsection{Shape factor}
 
@@ -142,7 +143,7 @@ The factor, shape of environmental change, has two levels: AR(1)-timeseries, and
 
 \section{Response variable}
 
-The primary metric in the hypothesis is \emph{stable cycle states}. A stable cycle state is a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form", or sequence of molecule species.
+The primary measure from the hypothesis is \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
@@ -196,76 +197,81 @@ The primary metric in the hypothesis is \emph{stable cycle states}. A stable cyc
 	\scriptsize
 	\begin{center}
 		\caption{Factors, or independent variables}\label{tbl:toyworld2-factors}
-		\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
+		\begin{tabular}{p{2cm}p{7cm}}
 			\toprule
-			Factor          & +1 value		& -1 value						& Description\\
+			Factor          & Levels\\
 			\midrule
-			$Target$ 		& Food set		& Product selection strategy 	& \\
-			$Shape$  		& AR(1)			& Bistate						& \\
+			$Target$ 		& Food set or Product selection strategy \\
+			$Shape$  		& Stable or AR or Bistate \\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
+The experiments follow a modified full factorial-design over two factors (shown in \cref{toyworld2}): factor \emph{Target} has two levels, and factor \emph{Shape} with three levels. Other model parameters (defined in \cref{reactant-and-product-strategies}) were as follows:
+
+\begin{itemize}
+\item $S_{reactant} = Local$.
+\item $S_{product}=BiasedLeastEnergy$ (\cref{environment-weighting-calculation}) when $Target = -1$ and LeastEnergy (\cref{least-energy-strategy}) otherwise.
+\item $E_{vessel}=100$.
+\item $E_{Bonds}$ followed the simplified real-world chemistry summarized in \cref{default_bond_energies}.
+\end{itemize}
+
 The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
+
+\section{Results}
 
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{Experiment runs}\label{tbl:toyworld2-experiments}
-	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
-		\toprule
-		Experiment                 &Shape of variation		&Target of variation 	& No. environments	& No. repeats\\
-		\midrule
-		1480963448 & AR & Foodset & 50 & 1\\
-		1481665906 & AR & N/A & 1 & 10\\
-		1481670569 & AR & Energy & 10 & 1\\
-		1481939843/0 & AR & Foodset&5 & 3\\
-		1481939843/1 & AR & Energy &5 & 3\\
-		1481952255 & Bistate & Energy & 5 & 2\\
-		1481398302 & AR & Foodset &20 & 1\\
-		\bottomrule
-	\end{tabular}
+		\caption{Experiment runs}\label{tbl:toyworld2-experiments}
+		\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
+			\toprule
+			Experiment                 &Shape of variation		&Target of variation 	& No. environments	& No. replicates\\
+			\midrule
+			1480963448 & AR & Foodset & 50 & 1\\
+			1481665906 & AR & N/A (stable environment only) & 10 & 1\\
+			1481670569 & AR & Energy & 10 & 1\\
+			1481939843/0 & AR & Foodset&5 & 3\\
+			1481939843/1 & AR & Energy &5 & 3\\
+			1481952255 & Bistate & Energy & 5 & 2\\
+			\bottomrule
+		\end{tabular}
 	\end{center}
 \end{table}
 
-\section{Results}
+For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This results in an unbalanced dataset for analysis, with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
 
 <<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 df <- read.csv('results/stablestates.csv')
 
-df_len <- aggregate(min~datetime, data=df, FUN=length)
-df_max <- aggregate(max~datetime, data=df, FUN=max)
-df_min <- aggregate(min~datetime, data=df, FUN=min)
-df_mean <- aggregate(mean~datetime, data=df, FUN=mean)
-summary <- merge(merge(merge(df_len, df_min, by="datetime"),df_mean, by="datetime"), df_max, by="datetime")
-names(summary)<-c("Experiment", "Total runs", "Min. States", "Mean States", "Max. States")
-
-library(xtable)
-print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
-@
-
-<<anova, fig.pos='ht',results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
-
-# target, state, target:state
-#pr_av_energy <- av_energy$"Pr(>F)"[1]
-#pr_av_food <- av_food$"Pr(>F)"[1]
 df$state="Varying"
 df$state[df$dfa==0] = "Stable"
 df$state[df$datetime==1481952255] = "Bistate"
 df$state<-as.factor(df$state)
-
-names(df)[4] <- "Hurst"
-names(df)[10] <- "Target"
 names(df)[11] <- "Shape"
-with(df, {
-	av <- anova(lm(mean~Target*Shape*Hurst))
-	print(xtable(av, caption='ANOVA', label='tbl:toyworld2-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
-})
+
+names(df)[4] <- "H"
+names(df)[10] <- "Target"
+levels(df$Target) <- list("Product selection strategy" = "ENERGY", "Food set" = "FOOD")
+
+library(plyr)
+library(xtable)
+print(xtable(count(df,c('Shape','Target')), caption='Cell frequencies for consolidated dataset', label='tbl:toyworld2-cell-frequencies'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+
+#df_len <- aggregate(min~datetime, data=df, FUN=length)
+#df_max <- aggregate(max~datetime, data=df, FUN=max)
+#df_min <- aggregate(min~datetime, data=df, FUN=min)
+#df_mean <- aggregate(mean~datetime, data=df, FUN=mean)
+#summary <- merge(merge(merge(df_len, df_min, by="datetime"),df_mean, by="datetime"), df_max, by="datetime")
+#names(summary)<-c("Experiment", "Total runs", "Min. Stable States", "Mean Stable States", "Max. Stable States")
+
+#library(xtable)
+#print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (left panel) and for stable (Hurst=0) and varying (Hurst>0) environments (right).'>>=
-ap <- ggplot(df) + geom_point(aes(x=Hurst, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (H) (top panel) and for stable (H=0) and varying (H>0) environments (bottom).'>>=
+ap <- ggplot(df) + geom_point(aes(x=H, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
 bp <-ggplot(df) + geom_boxplot(aes(x=Shape, y=mean, group=Shape)) + labs(x='Environment shape', y='Mean number of stable states')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
@@ -277,6 +283,18 @@ ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target 
 % States are by seed molecule
 
 \section{Discussion}
+
+<<anova, fig.pos='ht',results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+
+# target, state, target:state
+#pr_av_energy <- av_energy$"Pr(>F)"[1]
+#pr_av_food <- av_food$"Pr(>F)"[1]
+
+with(df, {
+av <- anova(lm(mean~Target*Shape*H))
+print(xtable(av, caption='ANOVA', label='tbl:toyworld2-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+})
+@
 
 \section{Future work}
 

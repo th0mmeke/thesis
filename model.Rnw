@@ -601,6 +601,7 @@ colnames(temp)[10] <- "mean_heritability"
 a <- with(temp,anova(lm(mean_heritability~sigma+delta+theta)))
 
 library(xtable)
+
 print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{heritability}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 

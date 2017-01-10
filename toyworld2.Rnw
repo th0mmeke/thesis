@@ -9,9 +9,7 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
-\chapter{Emergent variable replicators}
-
-\section{Introduction}
+\chapter{The Emergence of Variable Replicators}
 
 \section{Evolutionary model}
 
@@ -102,9 +100,7 @@ The foodset consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=
 Core species
 
 
-\chapter{The effect of Environment on Heritable Information}\label{toyworld2}
-
-\section{Introduction}
+\chapter{The Effect of Environment on Heritable Information}\label{toyworld2}
 
 If cycles are to be a store of information for a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
 
@@ -135,7 +131,7 @@ The conceptual basis for the experiments in this \namecref{toyworld2} is outline
 			\draw [every node] (3,13) rectangle (9,-3);
 			\end{tikzpicture}
 		}
-		\caption{Conceptual model for experiments incorporating environmental change. The \\emph{Target} experimental factor affects the Evolutionary model; the \\emph{Shape} factor modifies the Environmental model.}
+		\caption{Conceptual model for experiments incorporating environmental change. The \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}

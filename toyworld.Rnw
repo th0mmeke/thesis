@@ -215,7 +215,7 @@ In this \namecref{introduction-to-achems}, we have:
 
 From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld, that lies closer to the chemically-realistic end than to the abstract end of the \gls{achem} continuum.
 
-\chapter{Reaction Networks and Cycles in a Molecular Artificial Chemistry}\label{toyworld}
+\chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{toyworld}
 
 Our chosen method for the exploration of states in variable replicators is a new molecular \gls{achem}. There is no shortage of existing \glspl{achem}; why yet another one? The primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally, the understanding that comes from designing and building a system from the beginning.
 
@@ -229,9 +229,9 @@ Therefore, our principle is that only the ``core'' elements of real-world chemis
 
 \section{The ToyWorld artificial chemistry}
 
-ToyWorld, our first \gls{achem} model for the exploration of emergent behaviours, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
+ToyWorld, our \gls{achem} model for the exploration of emergent replicators, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
 
-Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we endeavour to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results, and so our model cannot be used to investigate real-world chemical behaviours. 
+Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we attempt to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results, and so our model cannot be used to investigate real-world chemical behaviours. 
 
 The ToyWorld model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values--real-world chemistry.
 

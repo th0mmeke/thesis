@@ -21,10 +21,6 @@
 \numberwithin{equation}{section} % amsmath - numbering scheme two deep for equations
 \setcounter{tocdepth}{1}
 
-
-\usepackage{refcheck}
-
-
 % Options for framed
 \setlength\FrameSep{0.5cm}
 \setlength\FrameRule{0.1pt}
@@ -64,7 +60,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Emergent\\Replicators\\under Variable\\Environments\\in Artificial\\Chemistries}
+\title{Emergent\\Replicators\\and Variable\\Environments\\in Artificial\\Chemistries}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 

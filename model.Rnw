@@ -23,8 +23,6 @@ df
 
 \chapter{Inheritance under Varying Environments}\label{models-of-inheritance}
 
-\section{Introduction}
-
 Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
 
 Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and the heritability of the trait or property is $1$. Conversely, if there is no relationship there is no heritability and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
@@ -485,7 +483,7 @@ As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and 
 
 \begin{figure}
 	\begin{center}
-	\resizebox{0.7\textwidth}{!}{
+	\resizebox{0.35\textwidth}{!}{
 		\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm, thick,font=\LARGE]
 		\draw (-4,3) rectangle (4,-5);
 		\draw (-4,3) -- (-1,6) -- (7,6) -- (7,-2) -- (4,-5);

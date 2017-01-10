@@ -29,7 +29,46 @@ Heredity describes the similarity of an offspring to its parent, and depending o
 
 Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and the heritability of the trait or property is $1$. Conversely, if there is no relationship there is no heritability and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
 
-\subsection{Previous work}\label{previous-work-p2}
+\section{Evolution by Natural Selection}\label{evolution-by-natural-selection}
+
+As has been said before, ``[w]e take it as given that biology instantiates ENS'' \parencite{Watson2012}, but that doesn't mean that the algorithm of biology is in fact \gls{ens}. Adaptation in biology appears to precede Natural Selection, reinforcing that adaptation is possible without \gls{ens} \parencite{Watson2010}, and other forms of evolution altogether have been proposed in artificial systems (\eg the compositional evolution of \textcite{Arthur2009}), and on the boundaries of \gls{ens} in the domain of living systems (\eg composomal inheritance and \gls{hgt}). These variants are examined later, but first we concentrate on canonical \gls{ens}.
+
+\Textcite{Godfrey-Smith2007} examined a number of summaries of \gls{ens} taken from the most influential items in the literature. The purposes of the summaries varied, but have interest for us ``as attempts to capture some core principles of evolutionary theory in a highly concise way.'' Incidentally, as an illustration of the difficulty of definitions, although the usual aim for a summary is to ``give conditions that are sufficient ceteris paribus for a certain kind of change occurring'', \textcite{Godfrey-Smith2007} notes that the scope of most summaries is somewhat ambiguous. They can be read as either being discriminatory--``this process is ENS''-- or alteratively in providing conditions that will result in \gls{ens} when it is assumed that the meaning of \gls{ens} is clear. In other words, these are alternative \emph{constitutive} or \emph{causal} readings; in the example of \textcite{Godfrey-Smith2007}, ``becoming pregnant\ldots{}{[}versus{]} being pregnant''.
+
+The main examples selected by \textcite{Godfrey-Smith2007} are:
+
+\begin{enumerate}
+	\item ``Owing to this struggle for life, any variation, however slight and from whatever cause proceeding, if it be in any degree profitable to an individual of any species, in its infinitely complex relations to other organic beings and to external nature, will tend to the preservation of that individual, and will generally be inherited by its offspring. The offspring, also, will thus have a better chance of surviving, for, of the many individuals of any species which are periodically born, but a small number can survive. I have called this principle, by which each slight variation, if useful, is preserved, by the term of Natural Selection, in order to mark its relation to man's power of selection.'' \parencite{Darwin1859}
+	\item ``If there is a population of entities with multiplication, variation and heredity, and if some of the variations alter the probability of multiplying, then the population will evolve. Further, it will evolve so that the entities come to have adaptations....'' (Maynard-Smith, in \textcite{Griesemer2001})
+	\item ``Any entities in nature that have variation, reproduction and heritability may evolve'' \parencite{Lewontin:1970mc} and ``1. Different individuals in a population have different morphologies, physiologies, and behaviors (phenotypic variation). 2. Different phenotypes have different rates of survival and reproduction in different environments (differential fitness). 3. There is a correlation between parents and offspring in the contribution of each to future generations (fitness is heritable).'' \parencite{Lewontin:1970mc}
+	\item ``...evolution will occur whenever and wherever three conditions are met: replication, variation (mutation), and differential fitness (competition)'' \parencite[quoting Daniel Dennett]{Ofria2004}
+\end{enumerate}
+
+\Textcite{Godfrey-Smith2007} concludes that the core requirement for \gls{ens} is some ``combination of variation, heredity, and fitness differences'', although he identified a number of differences between the summaries. For example, the most commonly cited summary is \textcite{Lewontin:1970mc}, but unusually that formulation states that ``fitness is heritable'' whereas typically phenotypic heredity (as appears in Lewontin's later 1980 summary) is stated as sufficient for a trait to evolve. 
+
+These differences are also discussed in \textcite{Griesemer2001}, in particular with reference to the variations between the concept of inheritance in Darwin which includes both heritability (a capacity) and inheritance (a process carrying the capacity); Lewontin, which stresses the heritability while assuming inheritance, and Maynard Smith's multiplication which is actually about inheritance; his heredity is both \parencite{Griesemer2001}.
+
+Quite apart from these differences in interpretation, the major theoretical difficulty in a literal application of \gls{ens} to artificial systems is captured succinctly by \textcite{Griesemer2005}: ``Darwin's theory of evolution by natural selection is restricted in scope. One sense in which it is restricted is that it refers to organisms.'' Organisms are not defined, but the context and scope is clearly biological. 
+
+Although \gls{ens} is usually only discussed within the context of modern day biology, as we've seen when examining the definition of \gls{ens} there is nothing exclusively biological about the standard formulations. By abstracting the concepts of variation, selection, and in particular inheritance or heredity, a generalised form of \gls{ens} can be developed that goes beyond the usual biological readings. 
+
+A specific example lies in the transition from non-living to living things. One of the main problems (of several) in extending \gls{ens} to prebiotic entities is that the meaning of the foundational elements--such as variation, selection, heredity, multiplication--are generally couched in biological terminology. For example, heredity is often discussed in terms of alleles, or traits, rather than in more general ways. However, there must have been some point at which the prebiotic processes transitioned to \gls{ens}, and it is clear that this transition did not happen abruptly in a population of fully-fledged modern organisms. The pathway to \gls{ens}, the evolution of evolution itself, is one of the main open problems in origins-of-life research, and it involves an extension of those foundational elements back into the prebiotic world.
+
+This example of the transition to life is an example of \emph{extending} \gls{ens}; two further examples are now presented that are \emph{alternatives} to \gls{ens}: DaisyWorld, or regulation without selection, and evolution in an entirely non-living domain--the evolution of technology. 
+
+\Textcite{Arthur2009} describes a mechanism for the evolution of technology, where evolution is used in the sense of ``all objects of some class are related by ties of common descent from the collection of earlier objects''. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lineage and provides new raw components for inclusion in later technologies. \Textcite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's answer is that novelty comes from this incorporation of new phenomena from the source, the natural world.
+
+Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise as the result of an evolutionary process, rather than \textit{de novo} from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' to illustrate the impossibility of the slavish adoption of biological models: ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}''.
+
+The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
+
+However, even Arthur in his rejection of ``Darwinian evolution'', describes a process that still relies on selection, variation and inheritance. This is not the case in our final example, DaisyWorld.
+
+\Textcite{LovelockMargulis2011} propose DaisyWorld as a example of an alternative to selection for regulation, based on two feedback loops. \Textcite{Saunders1994} explains how regulation can emerge in DaisyWorld without selection--the planet's temperature is adjusted to meet the conditions for maximum growth of the daisies without the daisies adapting to the planet. ``As a result, regulation, one of the most fundamental and necessary properties of organisms, appears without being selected for. What is more, it appears as a property not of the daisies, on which natural selection may have acted, but of the planet, on which, as Dawkins rightly points out, it could not'' \parencite{Saunders1994}.
+
+The fundamental insight in DaisyWorld is that individuals modify environments (that is, niche construction): the daisies adapt the planet (specifically the temperature for maximum growth) to suit themselves, rather than adapting themselves to the planet; and in fact there's little benefit to adaptation by the daisies to the planetary conditions. As \textcite{Saunders1994} states, ``the ability to withstand a greater variability is not the result of Darwinian adaptation. On the contrary, it exists because of the absence of Darwinian adaptation.''
+
+\section{Previous work}\label{previous-work-p2}
 
 Over the years a significant body of literature has accumulated on models of biological inheritance. While standard population genetics describes the dynamics over time of genotype frequencies, it remains deeply rooted in the biology of genotypes and alleles. 
 
@@ -53,6 +92,8 @@ In the second stage (reproduction), individuals, represented by a single trait, 
 
 The most relevant previous work is that of \textcite{Bourrat2015} who, in the course of examining the difference between evolution, natural selection and \gls{ens}, models the emergence of heredity in unchanging environments. \Textcite{Bourrat2015} demonstrates that imperfect inheritance is not compatible with \gls{ens} using an argument by contradiction \parencite[p.96]{Bourrat2015}: he lists the three conditions for a population to evolve solely by \gls{ens}, and then continues on to show that at least one of those conditions is incompatible with imperfect inheritance (as it happens, no production of new variants). The context is unequivocally related to biology; his examples involve genes, traits, phenotypes and drift.
 
+\subsection{Bourrat's model of biased inheritance}
+
 The six applicable models in \textcite[chap.3]{Bourrat2015} are designed to explore the implications of bias on inheritance, where \emph{unbiased} means a trait is uncorrelated between child and parent, in practice it means that trait is taken as a random choice between some lower and upper bounds \parencite[p.153]{Bourrat2015}. \emph{Biased} inheritance is naturally the opposite: there is some correlation between parent and child values for a trait, and so some prediction of traits is possible--a parent can ``pass it on''. Note that \textcite[p.173]{Bourrat2015} expressly notes that his ``biased inheritance'' is not the ``transmission bias'' of the second term in the Price equation: ``The bias in ‘biased inheritance’ is in reference to the type of the parent(s) (biased toward the type of the parent), while the bias in ‘transmission bias’ refers to a departure from an event of perfect transmission.'' Bourrat unfortunately doesn't formalise his model descriptions; instead there is a reference \parencite[p.129]{Bourrat2015} to a NETLOGO 5.02 implementation, and textual narrative descriptions of each model and the results.
 
 %\Textcite{Bourrat2015}
@@ -73,6 +114,8 @@ Biased (in fact, perfect) inheritance of viability is introduced in Model 4; the
 The most significant model is Model 5 which adds a variable ability to procreate to Model 4, while viability remains inherited with perfect fidelity from the parent. The variation is provided by the addition of a \emph{mutation} stage so that the model now consists of these stages at each timestep: \emph{mutation} $\rightarrow$ \emph{selection} $\rightarrow$ \emph{reproduction} $\rightarrow$ \emph{check-for-overcrowding} \parencite[p.153]{Bourrat2015}. At each mutation stage, there can be an increase or decrease in both the ability to transmit the ability to procreate, and in degree of bias (that is, relationship to parent's ability) in the ability to procreate. The first defines the proportion of offspring of the parent who are themselves able to procreate; a low trait value for the parent means a low proportion of siblings can procreate, while bias represents the correlation between the parent and offspring's abilities to transmit procreation--low bias means the offspring's ability is only weakly correlated with parents ability. The initial population contains entities with viability in the full range $[0,1)$, an ability to procreate in $[0,0.2)$ and initial bias of $0$. Both the ability to procreate and the bias \emph{increase} over time in the population towards the upper limit of $1.0$. The model is asymmetric with respect to the change of inheritance of ability to procreate: reductions lead to extinction of a line, while increases lead to increased population. Bourrat's conclusion is that an initial population of unreliable reproducers (a low proportion of procreating offspring, no bias) will evolve into one of reliable reproducers--that is, inheritance can emerge.
 
 This is extended in the final Model 6, where Bourrat demonstrates the combination of inheritance of procreation with that of another trait, viability. The model begins with a population produced by the end of Model 5 - a set of entities that can reliably transmit the ability to procreate to their offspring. Using the same structure for trait inheritance as in Model 5, Model 6 shows that inheritance of viability or fitness can also emerge. In total then, the entities at the conclusion of Model 6 have full inheritance of multiple traits.
+
+\subsection{Limitations to the model presented by Bourrat}
 
 There are some limitations however in these otherwise insightful models. First, heredity and fitness (viability) are treated as independent traits. But the mechanism for heredity is the thing that copies the information that generates an offspring's traits, so in practice they are not independent.
 
@@ -102,6 +145,7 @@ The initial hypothesis of \textcite{Bourrat2015} assumes a perfectly predictable
 \begin{hypothesis}
 Variation and selection are sufficient for inheritance, where the degree and variance of inheritance is proportional to the predictability of the environment.
 \end{hypothesis}\label{hypothesis-2} 
+
 
 \section{Predictions}\label{predictions}
 
@@ -227,7 +271,7 @@ The factors and levels along with their mapping to model parameters are given in
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c7}
+	\caption{Factors mapped to model parameters, plus factor levels, for the initial investigation into model sensitivity to parameter settings.}\label{tbl:factor-levels-c7}
 	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
@@ -235,8 +279,6 @@ The factors and levels along with their mapping to model parameters are given in
 		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
 		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
 		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&1					& Correlated\\
-		Distribution           &Reproduction		&2                	& Normal distribution ($\mathbb{N}$), either sampled or folded\\
 		\bottomrule
 	\end{tabular}
 	\end{center}
@@ -361,10 +403,10 @@ This series allows us to represent a broad range of environmental changes:
 
 \begin{itemize}
 	\item Each time-series is completely specified by three parameters, $\Theta$, $\sigma_e$ and $\delta$.
-	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the environment time-series itself would show a trend.
+	\item $\Theta$ in an autoregressive time-series can be interpreted as specifying stability or smoothness, while $\delta$ is a fixed change. We use $\delta$ to model a fitness trend - environments with a positive $\delta$ will see the fitness of each entity improved at each generation, with the opposite of course true of negative $\delta$. Note that with this formulation we can model linear trends in fitness from a fixed bias in the environment produced by the $\delta$ term. This is not the same as a ARI model where the deltas of the environment time-series itself would follow a trend.
+	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady change in fitness.
+	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required.
 	\item The time-series is defined by three independent elements, two predictable (driven by $\Theta$ and $\delta$) and the other ($\sigma_e$) random and unlearnable. By changing the ratio between the predictable and unpredictable we can examine the performance of the evolutionary algorithm on some continuum of predictability.
-	\item An AR time-series has the property of stationarity, with the implication that the mean of the series is constant through time. However, as we apply the series values as deltas to element fitness, fitness can be non-stationary, and so may show a long term trend. This allows a simple non-differencing time-series to describe a steady improvement, or worsening, in fitness.
-	\item As a corollary of stationarity, the range of the series is determined by the initial parameters. This is a useful property as it means that with appropriate parameter choices no scaling of the range is required. 
 \end{itemize}
 
 <<factorialthetasigma, pdfcrop=TRUE, echo=FALSE, warning=FALSE, cache=TRUE, fig.pos='ht', fig.scap=NA, fig.cap='Visualisation of the fitness changes at each time interval (top facet) and cumulative fitness change (bottom facet) that result from our environmental model for delta=0 with two values of sigma (left and right), and three values of theta (each facet row.)'>>=
@@ -482,25 +524,12 @@ We create a set of independent datasets by sampling from four different paramete
 	\end{center}
 \end{table}
 
-The other factors and levels along with their mapping to model parameters, presented earlier in \cref{tbl:factor-levels-c7}, are repeated for convenience in \cref{tbl:factor-levels-c8}.
-
-\begin{table}
-	\scriptsize
-	\begin{center}
-	\caption{Factors mapped to model parameters, plus factor levels}\label{tbl:factor-levels-c8}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
-		\toprule
-		Factor                 &Model parameter		&Number of Levels 	& Levels\\
-		\midrule
-		$p_{reproduction}$     &$p_{reproduction}$	&2                	& 0.66 or $fitness$\\
-		$p_{selection}$        &$p_{selection}$		&2                	& 0.66 or $fitness$\\
-		$n_{children}$         &$n_{children}$ 		&2                	& 2 or 5\\
-		Reproduction		   &Reproduction		&2				 	& Correlated\\
-		Distribution           &--					&2                	&Normal distribution ($\mathbb{N}$), either sampled or folded\\
-		\bottomrule
-	\end{tabular}
-	\end{center}
-\end{table}
+The other factors and levels along with their mapping to model parameters, are shown below:
+\begin{itemize}
+	\item$p_{reproduction}$ = fitness.
+	\item $p_{selection}$ = fitness.
+	\item $n_{children}=2$.
+\end{itemize}
 
 Finally, the dependent or response variables, driven by the hypothesis predictions, are mean population heritability and mean population fitness.
 

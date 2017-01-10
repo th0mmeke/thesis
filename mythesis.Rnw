@@ -64,7 +64,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Effects of\\Environmental\\Variability on\\Replicator States\\in Artificial\\Chemistries}
+\title{Emergent\\Replicators\\under Variable\\Environments\\in Artificial\\Chemistries}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 

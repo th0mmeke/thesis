@@ -8,88 +8,12 @@ library(xtable) # required for print.xtable.bootabs function
 opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
-\chapter{Environmental Effects on Replicator States}\label{toyworld2}
+
+\chapter{Emergent variable replicators}
 
 \section{Introduction}
 
-If cycles are to be a store of information for a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
-
-The conceptual basis for the experiments in this \namecref{toyworld2} is outlined in \cref{fig:conceptual-model-for-environmental-change}. 
-
-\begin{figure}
-	\begin{center}
-		\resizebox{0.8\textwidth}{!}{
-			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
-			main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
-			\node[main node] (evo) at (0,10) {Evolutionary model};
-			\node[main node] (env) at (0,0) {Environmental model};
-			\node[main node] (pop) at (6,10) {Population};
-			\node[main node] (ts) at (6,0) {Time series of environmental changes};
-			\node[main node] (r1) at (12,10) {Metrics};
-			\node[main node] (r2) at (12,0) {Metrics};
-			\node[main node] (test) at (12,5) {Hypothesis test};
-			\node at (4,14) {Simulation};
-			
-			\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
-			(env) edge [->] (ts)
-			(evo) edge [->] (pop)
-			(pop) edge [->] (r1)
-			(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
-			(r1) edge [->] (test)
-			(r2) edge [->] (test)
-			(ts) edge [->] (r2);
-			\draw [every node] (3,13) rectangle (9,-3);
-			\end{tikzpicture}
-		}
-		\caption{Conceptual model for experiments incorporating environmental change}
-		\label{fig:conceptual-model-for-environmental-change}
-	\end{center}
-\end{figure}
-
-\section{Environmental models}
-
-First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
-
-A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
-
-A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change. 
-
-The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{toyworld2}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
-
-The \emph{shape} of change describes the way change varies over time, and is given by $\delta$ at timestep $t$, where $\delta_t\in R$; the space of all potential changes at any timestep is effectively limitless. Taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
-
-Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
-
-In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
-
-\section{Hypothesis and predictions}
-
-\begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
-\end{hypothesis}
-
-\section{Factors}
-
-Recall that for an environmental change we distinguish two components: target and shape. Each component becomes a factor in a full-factorial experiment design (see \cref{tbl:toyworld2-factors}.)
-
-\subsection{Target factor}
-This factor has two levels: changes to the size of the foodset, and changes to the product selection strategy.
-
-\subsubsection{Foodset size}
-
-\begin{algorithm}[ht]
-	increment $\leftarrow$ newsize - |food set|\;
-	\uIf{increment $> 0$} {
-		\tcp{Add molecules to food set}
-		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
-		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
-	}
-	\uElse{
-		\tcp{Remove molecules from food set}
-		samplesize $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
-		$food set \leftarrow samplesizee$ elements chosen with uniform probability from $food set$\;
-	}
-\end{algorithm}
+\section{Evolutionary model}
 
 In the Local reactant selection strategy, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, but they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
 
@@ -118,32 +42,9 @@ The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, re
 	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\subsubsection{BiasedLeastEnergy product selection strategy}
+\section{Measure}\label{emergent-measure}
 
-Our approach to incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
-
-\begin{displaymath}
-	e_i=
-	\begin{cases}
-		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
-		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
-		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
-	\end{cases}
-\end{displaymath}\label{environment-weighting-calculation}
-
-The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
-
-\subsection{Shape factor}
-
-The factor, shape of environmental change, has two levels: AR(1)-timeseries, and bistate.
-
-\subsubsection{AR(1) timeseries}
-
-\subsubsection{Bistate}
-
-\section{Response variable}
-
-The primary measure from the hypothesis is \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
+The primary measure is \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
 
 \textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
@@ -190,6 +91,134 @@ The primary measure from the hypothesis is \emph{stable cycle states}. We define
 	\Return $StableCycles$
 	\caption{Stable state identification in ToyWorld2. We first construct a reaction graph, and then scan the graph for reaction cycles. Finally, we construct the list of stable states by grouping reaction cycles of the same form that share molecules.}
 \end{algorithm}
+
+\section{Initial conditions}
+
+The foodset consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
+
+
+\section{Results}
+
+Core species
+
+
+\chapter{The effect of Environment on Heritable Information}\label{toyworld2}
+
+\section{Introduction}
+
+If cycles are to be a store of information for a replicator, they must be capable of maintaining information from generation to generation. The number of alternative stable cycle forms forms an upper bound on the total information held by a variable replicator.
+
+The conceptual basis for the experiments in this \namecref{toyworld2} is outlined in \cref{fig:conceptual-model-for-environmental-change}. 
+
+\begin{figure}
+	\begin{center}
+		\resizebox{0.8\textwidth}{!}{
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
+			main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
+			\node[main node] (evo) at (0,10) {Evolutionary model};
+			\node[main node] (env) at (0,0) {Environmental model};
+			\node[main node] (pop) at (6,10) {Population};
+			\node[main node] (ts) at (6,0) {Time series of environmental changes};
+			\node[main node] (r1) at (12,10) {Metrics};
+			\node[main node] (r2) at (12,0) {Metrics};
+			\node[main node] (test) at (12,5) {Hypothesis test};
+			\node at (4,14) {Simulation};
+			
+			\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
+			(env) edge [->] (ts)
+			(evo) edge [->] (pop)
+			(pop) edge [->] (r1)
+			(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
+			(r1) edge [->] (test)
+			(r2) edge [->] (test)
+			(ts) edge [->] (r2);
+			\draw [every node] (3,13) rectangle (9,-3);
+			\end{tikzpicture}
+		}
+		\caption{Conceptual model for experiments incorporating environmental change. The \\emph{Target} experimental factor affects the Evolutionary model; the \\emph{Shape} factor modifies the Environmental model.}
+		\label{fig:conceptual-model-for-environmental-change}
+	\end{center}
+\end{figure}
+
+\section{Previous work}
+
+Pertubations were applied to a well-mixed reaction vessel by \textcite{Fontana1994a} with objects taken from lambda-calculus. Organisations (entities, \glspl{hypercycle}) in all cases were observed to be self-maintaining but not self-reproducing (excluding cases that included an explicit replication expression.) The model is without locality or spatial effects; pertubations take the form of adding a small number of copies (10 or 50) of a random object every 30,000 or 50,000 collisions. Purpose of pertubations to assess sensitivity of model to change, rather than as a mechanism to induce change. 
+
+A series of successively enhanced models--Polymer-GARD (P-GARD) \parencite{Shenhav2005}, Environment Exchange Polymer-GARD (EE-GARD) \parencite{Shenhav2007}, and Universe-GARD, proposed in \cite{Markovitch2012}--address extending the range of composomal inheritance. P-GARD lacks a mechanism for environmental variation, although EE-GARD, which builds upon P-GARD, moves towards such a mechanism by allowing the composome split or fission events result in half of the composome molecules being returned to the environment. This return mechanism is the enabler for the claim in \textcite[p1819]{Shenhav2007} that the composomes and environment coevolve. Universe-GARD further extends the importance of variation of environment; the population of the main GARD environment is continually exchanged with that of an enveloping ``universe'' that contains significantly more molecular species. No results have yet been reported however.
+
+Regular pertubations are at the core of the liposome model of \textcite{Fernando:2007pf}, where periodic ``avalanches'' of novel side-reactions result in new and rare reaction products which inject variation into the simulation, either by making new reactions possible, or shifting the balance between competing reactions, or by perhaps altering the reaction rates through changes to catalysis. Avalanches are described as an exploration mechanism, extending the range of the simulation into otherwise unlikely regions, although no experimental assessment of their effectiveness was performed.
+
+\section{Environmental models}
+
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
+
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
+
+A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change. 
+
+The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{toyworld2}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
+
+The \emph{shape} of change describes the way change varies over time, and is given by $\delta$ at timestep $t$, where $\delta_t\in R$; the space of all potential changes at any timestep is effectively limitless. Taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
+
+Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
+
+In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+
+\section{Hypothesis and predictions}
+
+\begin{hypothesis}
+That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
+\end{hypothesis}
+
+\section{Factors}
+
+Recall that for an environmental change we distinguish two components: target and shape. Each component becomes a factor in a full-factorial experiment design (see \cref{tbl:toyworld2-factors}.)
+
+\subsection{Target factor}
+This factor has two levels: changes to the size of the foodset, and changes to the product selection strategy.
+
+\subsubsection{Foodset size}
+
+\begin{algorithm}[ht]
+	increment $\leftarrow$ newsize - |food set|\;
+	\uIf{increment $> 0$} {
+		\tcp{Add molecules to food set}
+		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
+		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
+	}
+	\uElse{
+		\tcp{Remove molecules from food set}
+		samplesize $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
+		$food set \leftarrow samplesizee$ elements chosen with uniform probability from $food set$\;
+	}
+\end{algorithm}
+
+\subsubsection{BiasedLeastEnergy product selection strategy}
+
+Our approach to incorporating an environmental factor ($X_t$) into the least energy selection mechanism from \cref{weighting-calculation} is shown below:
+
+\begin{displaymath}
+	e_i=
+	\begin{cases}
+		\lvert E_i\rvert, & (1) \text{  if $E_i < 0$;}         \\
+		0,                & (2) \text{  if $E_{avail} < E_i - X_t$;} \\
+		E_{avail}-E_i+X_t,& (3) \text{  otherwise.}            
+	\end{cases}
+\end{displaymath}\label{environment-weighting-calculation}
+
+The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
+
+\subsection{Shape factor}
+
+The factor, shape of environmental change, has two levels: AR(1)-timeseries, and bistate.
+
+\subsubsection{AR(1) timeseries}
+
+\subsubsection{Bistate}
+
+\section{Response variable}
+
+The response variable for the experiments is mean number of stable cycle states, as defined earlier in \namecref{emergent-measure}. 
 
 \section{Experiment design}
 

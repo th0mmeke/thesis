@@ -92,7 +92,7 @@
 \subsubsectionfont{\color{darkgray}\selectfont\normalsize}
 
 \titleformat{\chapter}[block]
-{\fontsize{60}{62}\selectfont}
+{\fontsize{50}{52}\selectfont}
 {\thechapter}
 {5pt}
 {\Large}

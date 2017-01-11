@@ -6,9 +6,11 @@ In this work, we examine one aspect of the emergence of open-ended evolution fro
 
 The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
 
-The informational replicator terminology might be biological, but the concept is just as valid in artificial evolutionary systems--the problem is one of stable informational storage. There is another, simpler, form of biological replicator that also can store information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
+The informational replicator terminology might be biological, but the concept is just as valid in artificial evolutionary systems--the common problem is one of stable informational storage. 
 
 Unfortunately, the emergence of an informational replicator from low-level elements has been extremely hard to achieve in artificial systems, and remains an open problem. Previous work has either introduced handbuilt replicators (\eg \cite{Hutton2003}), or relied upon specific, non-evolvable scaffolding in the base system (\eg the h-copy operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
+
+However, there is another, simpler, form of biological replicator that also can maintain information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
 
 Although the gap from variable replicators to informational replicators seems large and the pathway from one to the other poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without showing their emergence--in this work we demonstrate this in a molecular \gls{achem}.
 
@@ -16,9 +18,7 @@ Furthermore, although variable replicators have well-established limitations as 
 
 \section{Motivation and context}
 
-Biological evolution has produced ecosystems of staggering variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every descendent organism alive today.
-
-Although biological evolution has historically been a huge source of inspiration for artificial evolutionary systems, there are limits to their direct correspondence. 
+Biological evolution has produced ecosystems of astonishing variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every descendent organism alive today.
 
 The origin of life was almost certainly contingent, and there is an absence of evidence from early stages \parencite{Pross2013}. There are many possible pathways, and unless some record remains somewhere (either geological or phylogenetic), the actual path is essentially lost to history.
 
@@ -51,7 +51,6 @@ The origin of life can be seen as the transition from chemistry to biology, and 
 	\caption{Some of the stages proposed in the evolution of early life}
 	\label{major-stages-early-life}
 \end{figure}
-
 
 \section{Previous work}\label{previous-work}
 
@@ -240,9 +239,9 @@ The work overall is motivated by the following research questions:
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
 	\begin{enumerate}[label=RQ\arabic*:]
-		\item Can we demonstrate the emergence of variable replicators in an \gls{achem}?
-		\item Can environmental variability increase the capacity for information storage in variable replicators?
-		\item How significant is the affect of the shape or character of environmental variability on information storage capacity?
+		\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
+		\item \emph{Can environmental variability increase the capacity for information storage in variable replicators?} Increasing the information storage capacity of variable replicators is interesting both in itself (to increase the utility of the replicator) and as a possible step towards a full informational replicator. Environmental variability is well known as a mechanism for increasing the range of phenotypes in organisms, and yet has been little studied in simpler replicators. Might environmental variability increase the range of a variable replicator also? In \cref{toyworld2} we introduce a model for environmental change, and examine the effects of change on storage capacity. Then in \cref{models-of-inheritance} we confirm that environmental change is not incompatible with the emergence of heredity from simple systems; increasing storage capacity cannot come at the expense of long-term evolvability.
+		\item \emph{How significant is the affect of the shape or character of environmental variability on the information storage capacity of a variable replicator?} Variability can come in many forms, from monotonic trends to chaotic surges. Does the form of change affect information storage capacity in a variable replicator? We address this in the course of our investigation into environmental variability in \cref{toyworld2}.
 	\end{enumerate}
 \end{minipage}
 \vspace{0.3cm}
@@ -273,9 +272,6 @@ Response-surface methods are another commonly used technique, sampling from the 
 
 Note that there are some differences between the design of experiments in the physical world and in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explicitly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
-\section{Guide to this work}
-
-
 \section{Previous publications}\label{previous-publications}
 
 A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
@@ -288,9 +284,12 @@ This thesis makes the following novel contributions:
 
 \begin{compactenum}
 \item As far as is known, the first review of inheritance and heredity in artificial chemistries (in \cref{previous-work}.)
+\item A new classification taxonomy for artificial chemistries based on reaction and product selection strategies (\cref{reactant-selection-strategies}.)
+\item A modular \gls{achem}, ToyWorld, structured according to this scheme, for the evaluation of various strategies, and for the exploration of replication in glspl{achem} (\cref{toyworld}.)
+\item Evaluation of reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
+\item Demonstration of the emergence of Variable Replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
 \item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
 \item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
-\item Comparison of four options for reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
 \end{compactenum}
 
 

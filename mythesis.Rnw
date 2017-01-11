@@ -60,7 +60,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Emergent\\Replicators\\and Variable\\Environments\\in Artificial\\Chemistries}
+\title{Emergent Variable\\Replicators\\in an Artificial\\Chemistry}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 

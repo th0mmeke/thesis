@@ -9,7 +9,7 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
-\chapter{The Emergence of Variable Replicators}
+\chapter{The Emergence of Variable Replicators}\label{emergence-of-variable-replicators}
 
 \section{Evolutionary model}
 

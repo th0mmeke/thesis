@@ -268,16 +268,22 @@ The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 
 For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This results in an unbalanced dataset for analysis, with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
 
 <<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
-df <- read.csv('results/stablestates.csv')
+df_1 <- read.csv('results/stablestates.csv')
+names(df_1)[9]<-"dataset"
+df_1[,"dfa"] <- NULL # use correct dfa value from summary-metrics
+df_2 <- read.csv('results/summary-metrics.csv')
+df <- merge(df_1,df_2, by=c('experiment','environment','dataset'), all.x=TRUE)
 
-df$state="Varying"
-df$state[df$dfa==0] = "Stable"
-df$state[df$datetime==1481952255] = "Bistate"
-df$state<-as.factor(df$state)
-names(df)[11] <- "Shape"
+df[is.na(df)] <- 0 # NA used for 1) when cycle numbers = 0 (should be 0) and 2) when DFA or Sample Entropy can't be calculated (tag as 0)
 
-names(df)[4] <- "H"
-names(df)[10] <- "Target"
+df$Shape <- "Varying"
+df$Shape[is.na(df$dfa)] <- "Stable"
+df$Shape[df$dataset==1481952255] <- "Bistate"
+df$Shape<-as.factor(df$Shape)
+
+names(df)[names(df)=="dfa"] <- "H"
+names(df)[names(df)=="sampen"] <- "Sample Entropy"
+names(df)[names(df)=="target"] <- "Target"
 levels(df$Target) <- list("Product selection strategy" = "ENERGY", "Food set" = "FOOD")
 
 library(plyr)
@@ -303,6 +309,11 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 
 <<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
 ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
+@
+<<>>=
+ggplot(df) + geom_point(aes(x=H, y=mean))
+ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=mean))
+ggplot(df) + geom_point(aes(x=seeds, y=mean))
 @
 
 % States are by seed molecule

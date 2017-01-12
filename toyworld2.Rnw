@@ -13,7 +13,7 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Evolutionary model}
 
-In the Local reactant selection strategy, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, but they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+In the Local reactant selection strategy, we implement a form of spatial constraint (following \cite{Segre1998}). Specifically, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, but they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
 
 The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, regardless.
 

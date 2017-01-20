@@ -272,12 +272,6 @@ Response-surface methods are another commonly used technique, sampling from the 
 
 Note that there are some differences between the design of experiments in the physical world and in simulations, with the most significant being the sources and understanding of experimental errors. In simulation, experimental runs are exactly reproduceable, absent any dependency on factors external to the simulation. Variation is explicitly introduced usually through a random number generator, which can be seeded to produce the same sequence of numbers again and again. This means that the practice in real-world experiments of ``blocking'' to control external variation is not required in simulation experiments. However, \gls{replicate}s where the same combination of factor values is run several times each with a different random seed value, remains valuable, but in this case less to control for experimental error and more to record the variation across a series of runs and the sensitivity of the model to parameter settings.
 
-\section{Previous publications}\label{previous-publications}
-
-A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
-
-The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (\cref{toyworld2}) is also available under GNU GPL v2 from GitHub at \url{http://github.com/th0mmeke/toyworld2.git}.
-
 \section{Contributions}\label{contributions}
 
 This thesis makes the following novel contributions:
@@ -291,5 +285,9 @@ This thesis makes the following novel contributions:
 \item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
 \item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
 \end{compactenum}
+
+A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
+
+The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (\cref{toyworld2}) is also available under GNU GPL v2 from GitHub at \url{http://github.com/th0mmeke/toyworld2.git}.
 
 

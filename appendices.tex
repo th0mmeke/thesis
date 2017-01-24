@@ -1,188 +1,41 @@
-\chapter{ToyWorld implementation}\label{toyworld-implementation}
+\chapter{Experimental datasets}\label{datasets}
 
-ToyWorld is custom Python code that uses third-party packages and
-libraries for certain functions. The most significant chunks of external
-functionality come from RDKit, an open-source toolkit for
-ChemInformatics, and PyMunk, a physics toolkit. Additionally, we use the
-NetworkX package for Python for network graph manipulations (mainly in
-the cycle evaluators) and in \url{Molecule} to determine the individual
-molecules within an aggregation, and we use arrays from the Numpy
-package for Python to record the molecular populations.
 
-\section{RDKit}\label{rdkit}
 
-RDKit provides a number of useful capabilities including format
-conversions to and from SMILES \autocite{smiles}, a standard language
-for representing molecules; simple visualisations of molecule structure;
-standard sanity checks for molecular structure; and molecular
-manipulations. RDKit is also well-tested, and keenly optimised for
-performance.
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Analysis pipelines to transform input data of one form, such as raw reaction data or cycle data into another form.}\label{tbl:datasets}
+		\begin{tabular}{p{3cm}p{3cm}p{3cm}}
+			\toprule
+			Input         	& Transformation		& Output\\
+			\midrule
+			Reaction data 									& analyse_cycles.py							& Cycles by species and by molecule \\
+			Reaction data									& analyse_irrfgenerated.py					& All irreduceable f-generated sets in the reaction data\\
+			\midrule
+			Cycles by molecule								& analyse_stable_cycles_selection.py		& All stable cycles (contiguous series of cycles of the same form)\\
+			Cycles by molecule								& analyse_overlapping_species.py			& All clusters of stable cycles connected by shared molecules\\
+			Environmental metadata and Cycles by molecule	& analyse_stable_cycles_by_environment.py	& Table by stable cycle of H, and min, mean, max counts for contiguous generations of stable cycles\\
+%			Environment metadata and Cycles by species		& analyse_cycles_by_environment.py			& Table by cycle of H, number of cycles  \\			
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
 
-The ToyWorld \url{Molecule} is a subclass of a RDKit \url{AllChem.Mol}.
-Molecules in ToyWorld are therefore built from RDKit \url{Atoms} and
-\url{Bonds}, although all manipulations and transformations of these
-elements are written in our own code.
 
-RDKit also provides a number of handy functions to the ToyWorld Chemical
-Model:
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Details for the datasets associated with the experiments in this work.}\label{tbl:datasets}
+		\begin{tabular}{p{2cm}p{7cm}}
+			\toprule
+			Dataset         & Experiment\\
+			\midrule
+			1484540618 		& main_bistate.py \\  % MyReactantSelection, fixed ke=50, bistate environment over more generations
+			%1484471660		& main_my.py \\  % Various ke, MyReactantSelection, environment=0 unchanging
+			all others		& main.py \\  % AR and bistate timeseries environments
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
 
-\begin{enumerate}
-\item
-  Format conversions between RDKit molecules and a string representation
-  of a molecule (SMILES); conversion from the representation of a
-  molecule into a canonical form; and representation as a 2D graphical
-  form
-\item
-  Reference information: for example, the mass of an atom and number of
-  outer electrons for an atom
-\item
-  Molecular structure manipulation: iteration over the atoms or bonds in
-  a molecule; addition, modification and deletions of bonds and atoms
-\item
-  Utility functions: combining two representations, each of one
-  molecule, into one representation of two molecules, and vice versa;
-  sanitising the representation of a molecule by checking for molecular
-  validity
-\end{enumerate}
-
-These are so standard that it isn't worth our while to replace them with
-anything specific to ToyWorld.
-
-\section{PyMunk}\label{pymunk}
-
-PyMunk is used extensively for 2D Physics calculations, for example:
-
-\begin{enumerate}
-\item
-  Calculating the future position of a molecule inside a reaction vessel
-  based on the molecules velocity and current position
-\item
-  Collision detection between two (or more) molecules
-\item
-  Summing the forces acting on a molecule and adjusting the molecule's
-  acceleration
-\item
-  Simple visualisation of the molecules within the reaction vessel as
-  shapes on a 2D plane
-\end{enumerate}
-
-\begin{algorithm}[ht]
-$\text{collision list}=\{\}$\;
-\BlankLine
-\While{not finished}{
-    \BlankLine
-    \tcp{Selection of reactants}
-    \While{$\text{collision list}=\{\}$}{
-        Move all molecules by time increment $\tau$\;
-        $\text{collision list} \leftarrow \text{all collisions}$\;
-    }
-    reactants $\leftarrow$ select two colliding molecules from collision list\;
-    \BlankLine
-    \tcp{Construction of reaction}
-    Discover all possible reactions that could occur between reactants\;
-    Determine the available energy to drive the reaction\;
-    \BlankLine
-    \uIf{$\exists$ a reaction option that is possible with the available energy}{
-        Determine chemical products of the reaction\;
-        Transform chemical products into physical molecules with kinetic and internal energy\;
-        \uIf{a change in maximum or minimum molecular velocities}{\label{alg:adjust_tau}
-            Adjust time step increment $\tau$\;
-        }
-    }
-    \uElse{
-        No reaction possible -- so just bounce the molecules off each other (a collision)\;
-    }
-}
-\caption{The main simulation loop in ToyWorld}
-\end{algorithm}
-
-\begin{sidewaystable}
-\begin{center}
-\tiny
-\begin{tabular}{@{}lllp{10cm}@{}}
-\toprule
-Parameter & Default value & Possible values & Description \\
-\midrule
-Energy&300&Int&The initial average kinetic energy (KE) for each molecule in the reaction vessel\\
-EnergyModel&\url{DefaultEnergyModel}&Subclass of \url{DefaultEnergyModel}&More sophisticated model of energy inflow and outflow from the reaction vessel\\
-RadiationRate&0.0&Float&Proportion of kinetic energy lost (apparently by radiation) each unit time interval from the reaction vessel\\
-EnergyInput&0.0&Float&Absolute energy added to reaction vessel each unit time interval\\
-Reactions&\url{EmergentReactions}&Subclass of \url{Reactions}&Reaction mechanism--EmergentReactions provides a fully constructive reaction chemistry\\
-ProductSelectionStrategy&"energy"&String&See Section \cref{product-selection-strategies}\\
-Molecule&molecule.Molecule&Subclass of Molecule&Model of a molecule\\
-Vessel&\url{ReactionVessel}&Subclass of \url{ReactionVessel}&Model of the container in which the simulation proceeds\\
-DipoleForceConstant&0.01&Float&Multiplier for the electro-magnetic force acting between two \url{ChargedMolecule}s\\
-\midrule
-name&<None>&String&Name of the experiment--primarily used to identify the output data files for the experiment\\
-PopulationFilename&None&Filename&Name of the XML file defining the initial set of molecules to be placed in the reaction vessel\\
-Iterations&10000&Int&Number of reactions before finishing\\
-recover&True&Boolean&If True then do not redo completed repeats if the simulation is restarted, say after a machine reboot\\
-repeats&1&Int&Number of replicates to run for this experiment\\
-seed&None&Anything&Initial seed for the random number generation at the beginning of the experiment\\
-DeltaT&1&Float&Size of a time-step in the simulation\\
-StateRecordRate&0.01&Float&Recording interval for snapshots of \url{ReactionVessel} state information (e.g., molecule positions)\\
-Visualize&False&Boolean&If \url{True} then display a PyMunk display of molecules, updated each DeltaT\\
-ShowForceVectors&False&Boolean&If \url{Visualize} is \url{True} then show lines representing the electro-magnetic forces between \url{ChargedMolecule}s\\
-ShowOrientation&True&Boolean&If \url{Visualize} is \url{True} then show a line representing a molecule's orientation\\
-\bottomrule
-\end{tabular}
-\end{center}
-\caption{Simulation Parameters in the Experiment Design XML file}
-\label{tbl:simulation_parameters}
-\end{sidewaystable}
-
-\section{Workflow}\label{workflow}
-
-Each run of an experiment in ToyWorld is usually split into three
-stages:
-
-\begin{enumerate}
-\item
-  Create the overall experiment design in XML--either manually, or by
-  modifying an existing design, or by running \url{doe.py} which will
-  generate an experiment design from a set of inputs.
-\item
-  Run the experiments with \url{main.py}, which takes an experiment
-  design and executes it with optional logging, saving the data
-  generated by each experiment repeat to a separate datafile for later
-  analysis.
-\item
-  Analyse the resulting data either through \url{evaluate.py} or some
-  other tool. \url{Evaluate.py} performs the evaluations defined in the
-  experiment design, again with options for logging, saving the raw
-  analysis output as text files for graphing or further statistical
-  examination.
-\end{enumerate}
-
-The overall sequence of experiments to run is defined by an experiment
-design. The experiments are run in the order they are defined, with all
-replicates of an experiment being completed before we move to the
-replicates of the next experiment in the sequence.
-
-All replicates of an experiment are run with the same set of parameters
-with the exception of a random seed which varies between replicates in a
-predictable way. The reactions in the replicate are grouped into
-fixed-size blocks and run in sequence with results saved incrementally
-between each block. By writing incrementally we attempt to make sure
-that a record of at least a partial set of reactions is recoverable
-should the experiment come to a premature end.
-
-\section{Evaluation and Analysis module}\label{evaluation-and-analysis-module}
-
-ToyWorld provides a number of Evaluators, both numerical and graphical,
-that can be used to analyse the results from each repeat of each
-experiment.
-
-The evaluations to perform are listed in the Evaluation section of the
-experiment design, for example:
-
-\begin{verbatim}
-<Evaluation>
-    <Method>evaluators.evaluator_summary.EvaluatorSummary</Method>
-        <<Method>evaluators.plot_new_molecule_types.PlotNewMoleculeTypes</Method>
-        <Method>evaluators.plot_new_cycle_types.PlotNewCycleTypes</Method>
-        <Method partition="False">evaluators.evaluator_spatial_correlation.EvaluatorSpatialCorrelation</Method>
-        <Method partition="True">evaluators.evaluator_cycles.EvaluatorActualCycles</Method>
-        <Method>evaluators.evaluator_iterations.EvaluatorIterations</Method>
-</Evaluation>
-\end{verbatim}

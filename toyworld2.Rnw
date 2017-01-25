@@ -265,7 +265,7 @@ The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 
 	\end{center}
 \end{table}
 
-For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This results in an unbalanced dataset for analysis, with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
+For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, with each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This combined dataset is unbalanced (in the statistical sense), with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
 
 <<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 df_1 <- read.csv('results/stablestates.csv')

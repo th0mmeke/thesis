@@ -5,37 +5,39 @@
 \begin{table}
 	\scriptsize
 	\begin{center}
-		\caption{Analysis pipelines to transform input data of one form, such as raw reaction data or cycle data into another form.}\label{tbl:datasets}
-		\begin{tabular}{p{3cm}p{3cm}p{3cm}}
+		\caption{Pipelines used in this work to transform input data of one form, such as raw reaction data or cycle data into another form for analysis.}\label{tbl:datasets}
+		\begin{tabular}{p{4cm}p{4cm}p{5cm}}
 			\toprule
-			Input         	& Transformation		& Output\\
+			Input & Analysis script (see \cite{toyworld2}) & Output\\
 			\midrule
-			Reaction data 									& analyse_cycles.py							& Cycles by species and by molecule \\
-			Reaction data									& analyse_irrfgenerated.py					& All irreduceable f-generated sets in the reaction data\\
+			Reaction data 									& \url{analyse_cycles.py}						& Cycles by species and by molecule \\
+			Reaction data									& \url{analyse_irrfgenerated.py}				& All irreduceable f-generated sets in the reaction data\\
 			\midrule
-			Cycles by molecule								& analyse_stable_cycles_selection.py		& All stable cycles (contiguous series of cycles of the same form)\\
-			Cycles by molecule								& analyse_overlapping_species.py			& All clusters of stable cycles connected by shared molecules\\
-			Environmental metadata and Cycles by molecule	& analyse_stable_cycles_by_environment.py	& Table by stable cycle of H, and min, mean, max counts for contiguous generations of stable cycles\\
-%			Environment metadata and Cycles by species		& analyse_cycles_by_environment.py			& Table by cycle of H, number of cycles  \\			
+			Cycles by molecule								& \url{analyse_stable_cycles_selection.py}		& All stable cycles (contiguous series of cycles of the same form)\\
+			Cycles by molecule								& \url{analyse_overlapping_species.py}			& All clusters of stable cycles connected by shared molecules\\
+			Environmental metadata and Cycles by molecule	& \url{analyse_stable_cycles_by_environment.py}	& Table by stable cycle of H, and min, mean, max counts for contiguous generations of stable cycles\\
+%			Environment metadata and Cycles by species		& \url{analyse_cycles_by_environment.py}		& Table by cycle of H, number of cycles  \\			
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
 
-\begin{table}
-	\scriptsize
-	\begin{center}
-		\caption{Details for the datasets associated with the experiments in this work.}\label{tbl:datasets}
-		\begin{tabular}{p{2cm}p{7cm}}
-			\toprule
-			Dataset         & Experiment\\
-			\midrule
-			1484540618 		& main_bistate.py \\  % MyReactantSelection, fixed ke=50, bistate environment over more generations
-			%1484471660		& main_my.py \\  % Various ke, MyReactantSelection, environment=0 unchanging
-			all others		& main.py \\  % AR and bistate timeseries environments
-			\bottomrule
-		\end{tabular}
-	\end{center}
-\end{table}
+%\begin{table}
+%	\scriptsize
+%	\begin{center}
+%		\caption{Reaction datasets associated with the experiments in this work.}\label{tbl:datasets}
+%		\begin{tabular}{p{2cm}p{2cm}p{5cm}}
+%			\toprule
+%			Dataset         	& Used in Chapter	& Generator\\
+%			\midrule
+%			1484540618 			& \cref{emergence-of-variable-replicators}	& main_bistate.py \\  % MyReactantSelection, fixed ke=50, bistate environment over more generations
+%			%1484471660			& main_my.py \\  % Various ke, MyReactantSelection, environment=0 unchanging
+%			1480963448, 1481665906, 1481670569, 1481939843, 1481952255 & \cref{toyworld2}							& main.py \\  % AR and bistate timeseries environments
+%			stablestates.csv	& Join of Table of stable cycles (analyse_stable_cycles_by_environment), dataset ID, and target of environmental variation (FOOD or ENERGY) \\
+%			summary-metrics.csv	& Table of experiment by environmental metrics (theta, sd, dfa, sample entropy)\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{table}
 

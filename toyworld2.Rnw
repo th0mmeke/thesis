@@ -11,6 +11,9 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \chapter{The Emergence of Variable Replicators}\label{emergence-of-variable-replicators}
 
+For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (that can then take part in other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction--for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
+
+Concentrations may also be driven by the presence of catalysts. A catalyst in the most usual form is a molecule that is not consumed in a reaction (and hence is not a reactant) but has the effect of making a reaction more likely and so has the effect of increasing the concentration of the reaction products at a greater rate than would occur without the action of the catalyst.
 
 
 \section{Measure}\label{emergent-measure}

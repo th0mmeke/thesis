@@ -15,14 +15,54 @@ For an entity to emerge from a network of reactions, the core problem is how to 
 
 Concentrations may also be driven by the presence of catalysts. A catalyst in the most usual form is a molecule that is not consumed in a reaction (and hence is not a reactant) but has the effect of making a reaction more likely and so has the effect of increasing the concentration of the reaction products at a greater rate than would occur without the action of the catalyst.
 
-
 \section{Measure}\label{emergent-measure}
 
-The primary measure is \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
+Question: at what point does an autocatalytic set become probable?
+Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
 
-%\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
+Static analysis of reaction graphs.
 
-\begin{algorithm}[ht]
+Relationship suggested between P and probability of formation of a RAF set in \cite{Hordijk2004} 
+RA means reflexively , F for food generated.
+Requires a way to determine if a given reaction network contains a RAF set - described a polynomial time algorithm
+Model later optimized in 2015, not just positive but negative or inhibitory catalysis
+Predictions tested against binary polymer model, but algorithm not specific to that model.
+Algorithm not specific to RAF, also works for F by saying no RA
+
+Lower-bound established for levels of catalysis required for a RAF set in \cite{Hordijk2011}, but restricted to RAF not F.
+Related probability of all-molecule RAF (RAF that includes all molecules in reaction network, but not necessarily all reactions) \cite[sect. 4]{Hordijk2011} formation to catalysis reviewed in \cite[sect. 6.1]{Hordijk2011}
+Derivation based on binary polymer model, includes terms for length of polymer and alphabet size
+Each molecule catalyses on average ${\lambda}n$ for polymers up to length $n$, provided $\lambda>log_e(K)$ for alphabet of size $K$.
+Assumption in derivation doesn't hold if no catalysis, that is $\lambda=0$. Come back to this.
+
+Finding all irrRAF (cores in \cite{Vasas2012}) in reaction network NP-hard problem \parencite{Steel2013}
+But sampling algorithm can 
+\begin{itemize}
+	\item find a sample set of irrRAFS, and
+	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
+\end{itemize}
+
+Again, algorithm also applicable to F not just RAF - subset, simpler case.
+
+But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
+Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
+RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
+Fuschslin describes two approaches to analysis - static (as above) and dynamic
+
+Trace dynamic approach back to concerns in \cite{Bagley1991}
+Interested in concentrations over time - introduction of time dimension - dynamics
+Although took an ODE approach based on reaction rates, rather than in simulation.
+
+Summary:
+
+\begin{enumerate}
+	\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
+	\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
+	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
+\end{enumerate}
+
+
+\begin{algorithm}
 	\tcp{Construct reaction graph from a list of $reactions$}
 	\For{each $reaction$ in $reactions$}{
 		Add a node for the reactant side of the reaction\;
@@ -45,25 +85,8 @@ The primary measure is \emph{stable cycle states}. We define a stable cycle stat
 			}
 		}
 	}
-	\BlankLine
-	\tcp{Now identify stable cycle states}
-	Sort $cycles$ into groups of equal length\;
-	Group all cycles of same length into subgroups of the same form\;
-	\For{each cycle form}{
-		$clusters\leftarrow$ set of molecules in the first cycle of this form\;
-		\For{all other $cycle$s of this form}{
-			\For{each $cluster$ in $clusters$}{
-				\uIf{$cycle$ shares molecules with $cluster$}{
-					Add the molecules in this $cycle$ to $cluster$\;
-				}
-			}
-		}
-		\uIf{more than one cluster discovered}{
-			$StableCycles[$ form of cycle $]\leftarrow$ size of longest cluster discovered\;
-		}
-	}
-	\Return $StableCycles$
-	\caption{Stable state identification in ToyWorld2. We first construct a reaction graph, and then scan the graph for reaction cycles. Finally, we construct the list of stable states by grouping reaction cycles of the same form that share molecules.}
+	\Return list of cycles\;
+	\caption{Algorithm to identify all potentially autocatalytic cycles within a reaction network. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than in consumes.}
 \end{algorithm}
 
 %# now look for cycle that is upstream of two or more other cycles
@@ -74,23 +97,59 @@ The primary measure is \emph{stable cycle states}. We define a stable cycle stat
 %#   linkage molecule appears as product, not reactant in upstream cycle
 %# That is, all cycles with two or more linkage molecules, as products, to different cycles
 
-\begin{algorithm}{ht}
-	Autocatalytic$\leftarrow\emptyset$\;
-    \For{Cycles in MolecularCyclesBySpecies}{
-		Clusters$\leftarrow$all clusters in cycles\;
+\begin{algorithm}
+	Clusters$\leftarrow\emptyset$\;
+	Unclustereds$\leftarrow\emptyset$\;
+	
+	\For{CycleMolecules in MolecularCycles}{
+	
+		CanCluster$\leftarrow$False\;
+		
+		\tcp{First check if part of any existing cluster}
 		\For{Cluster in Clusters}{
-			Products$\leftarrow$\{all products generated by every cycle in Cluster\}\;
+			\uIf{Cluster $\cap$ CycleMolecules}{
+				Cluster$\leftarrow$Cluster $\cup$ CycleMolecules\;
+				CanCluster$\leftarrow$True\;
+				break
+			}
+		}
+		
+		\tcp{Otherwise see if can form a new cluster with a previously unclustered cycle}
+		\uIf{$\neg$CanCluster}{
+			\For{Unclustered in Unclustereds}{
+				\uIf{Unclustered $\cap$ CycleMolecules}{
+					Clusters$\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
+					Unclustereds$\leftarrow$Unclustereds-Unclustered\;
+					CanCluster$\leftarrow$True\;
+				}
+			}
+		}
+		\tcp{If still can't cluster, then add to Unclustereds}
+		\uIf{$\neg$CanCluster}{
+			Unclustereds$\leftarrow$Unclustereds $\cup$ Cycle\;
+		}
+	}
+	
+	\Return Clusters
+	\caption{Cluster identification by grouping reaction cycles of the same form that share molecules.}
+\end{algorithm}
+
+\begin{algorithm}
+	Autocatalytic$\leftarrow\emptyset$\;
+    \For{CyclesForSpecies in MolecularCyclesBySpecies}{
+		Clusters$\leftarrow$IdentifyCluster(CyclesForSpecies)\;
+		\For{Cluster in Clusters}{
+			Products$\leftarrow$\{all products generated by cycles in Cluster\}\;
 			Reactants$\leftarrow$\{all reactants for every cycle in Cluster\}\;
-			Linkages$\leftarrow$Products$\cap$Reactants\;
+			Linkages$\leftarrow$Products $\cap$ Reactants\;
 			\uIf{Linkages}{
-				ProductLinkageMoleculesByCycle$\leftarrow$\{products for cycle$\cap$(Reactants) for every cycle in cluster\}\;
+				ProductLinkageMoleculesByCycle$\leftarrow$\{products for cycle $\cap$ Reactants for every cycle in cluster\}\;
 				\For{LinkageMoleculesInCycle in ProductLinkageMoleculesByCycle}{
-					ReactantLinkages$\leftarrow$\{reactants for cycle$\cap$LinkageMoleculesInCycle for every cycle in cluster\}\;
+					ReactantLinkages$\leftarrow$\{reactants for cycle $\cap$ LinkageMoleculesInCycle for every cycle in cluster\}\;
 					NumberDownstreamCycles$\leftarrow$count of items in ReactantLinkages with a value greater than zero\;
 	
 					\uIf{NumberDownstreamCycles > 1}{ 
-						\tcp{Two or more downstream cycles for single upstream cycle of same species}
-						Autocatalytic$\leftarrow$Autocatalytic$\cup$ReactantLinkages\;
+						Autocatalytic$\leftarrow$Autocatalytic $\cup$ ReactantLinkages\;
 					}
 				}
 			}
@@ -142,7 +201,7 @@ The conceptual basis for the experiments in this \namecref{toyworld2} is outline
 			\draw [every node] (3,13) rectangle (9,-3);
 			\end{tikzpicture}
 		}
-		\caption{Conceptual model for experiments incorporating environmental change. The \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
+		\caption{Conceptual model for experiments incorporating environmental change. As described in \cref{environmental-models}, the \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}
@@ -155,13 +214,13 @@ A series of successively enhanced models--Polymer-GARD (P-GARD) \parencite{Shenh
 
 Regular pertubations are at the core of the liposome model of \textcite{Fernando:2007pf}, where periodic ``avalanches'' of novel side-reactions result in new and rare reaction products which inject variation into the simulation, either by making new reactions possible, or shifting the balance between competing reactions, or by perhaps altering the reaction rates through changes to catalysis. Avalanches are described as an exploration mechanism, extending the range of the simulation into otherwise unlikely regions, although no experimental assessment of their effectiveness was performed.
 
-\section{Environmental models}
+\section{Environmental models}\label{environmental-models}
 
-First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing.
 
 A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
-A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change. 
+A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change, as outlined in \cref{fig:conceptual-model-for-environmental-change}. 
 
 The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{toyworld2}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
 
@@ -200,19 +259,6 @@ The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, re
 	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\section{Hypothesis and predictions}
-
-\begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
-\end{hypothesis}
-
-\section{Factors}
-
-Recall that for an environmental change we distinguish two components: target and shape. Each component becomes a factor in a full-factorial experiment design (see \cref{tbl:toyworld2-factors}.)
-
-\subsection{Target factor}
-This factor has two levels: changes to the size of the foodset, and changes to the product selection strategy.
-
 \subsubsection{Foodset size}
 
 \begin{algorithm}[ht]
@@ -244,17 +290,17 @@ Our approach to incorporating an environmental factor ($X_t$) into the least ene
 
 The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
 
-\subsection{Shape factor}
+\section{Hypothesis and predictions}
 
-The factor, shape of environmental change, has two levels: AR(1)-timeseries, and bistate.
+\begin{hypothesis}
+That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
+\end{hypothesis}
 
-\subsubsection{AR(1) timeseries}
+We define a \emph{stable cycle state} as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
 
-\subsubsection{Bistate}
+Environmental variability is approximated by sample entropy, a metric of predictability.
 
-\section{Response variable}
-
-The response variable for the experiments is mean number of stable cycle states, as defined earlier in \namecref{emergent-measure}. 
+%\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
 \section{Experiment design}
 
@@ -273,7 +319,9 @@ The response variable for the experiments is mean number of stable cycle states,
 	\end{center}
 \end{table}
 
-The experiments follow a modified full factorial-design over two factors (shown in \cref{toyworld2}): factor \emph{Target} has two levels, and factor \emph{Shape} with three levels. Other model parameters (defined in \cref{reactant-and-product-strategies}) were as follows:
+The experiments follow a modified full factorial-design over two factors (shown in \cref{toyworld2}): factor \emph{Target} has two levels, and factor \emph{Shape} with three levels. Environmental variability is approximated by the sample entropy of the sequence of changes generated by an environmental model determined the value of the \emph{Shape} factor.
+
+Other model parameters (defined in \cref{reactant-and-product-strategies}) were as follows:
 
 \begin{itemize}
 \item $S_{reactant} = Local$.
@@ -283,6 +331,8 @@ The experiments follow a modified full factorial-design over two factors (shown 
 \end{itemize}
 
 The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
+
+The response variable for the experiments is the mean number of \emph{stable cycle states}. 
 
 \section{Results}
 

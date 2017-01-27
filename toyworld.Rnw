@@ -136,6 +136,11 @@ Autocatalysis may be realised by \begin{inparaenum}
 	\item by a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
 \end{inparaenum}
 
+Virgo2013 points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
+Origin in branching chain reactions or autocatalytic sets (both King1978).
+No catalysis required
+Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
+
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
 \Glspl{achem} may be applied to backward-chain from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \cite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \cite{Faulon2001}). Finally, \glspl{achem} can be used in the modelling of biological phenomenon such as enzyme function (\eg \cite{Flamm2010}.)
@@ -229,9 +234,7 @@ Therefore, our principle is that only the ``core'' elements of real-world chemis
 
 \section{The ToyWorld artificial chemistry}
 
-ToyWorld, our \gls{achem} model for the exploration of emergent replicators, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms.
-
-Although there is no need for ToyWorld to be faithful to standard Chemistry, a degree of familiarity helps--but only in so far as the analogy is consistent. Therefore we attempt to maintain a basic correspondence wherever possible. However, there is no requirement to provide chemically-realistic results, and so our model cannot be used to investigate real-world chemical behaviours. 
+ToyWorld, our \gls{achem} for the exploration of emergent replicators, was first introduced in \textcite{Young2013}. The main elements of the model--Atoms, Molecules, Reactions, a Reaction Vessel--are recognisable from real-world chemistry, but in highly simplified forms. The most pertinent divergence is that we do not model catalytic reactions--remember that our thesis is that autocatalytic sets based on stoichiometry alone can give rise to variable replicators. 
 
 The ToyWorld model has many degrees-of-freedom, and these must be constrained by parameter choice before the model can be used in simulation. Some values are important to our thesis, and so are considered true independent variables in our investigation. These are examined fully. The remainder however are those to which the simulation is insensitive, but still must be specified. For these we prefer real-world values rather than arbitrary artificial values. In short, where we consider something important, we investigate. Where we think it less important, we use a consistent set of pre-existing values--real-world chemistry.
 

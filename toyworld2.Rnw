@@ -198,7 +198,7 @@ The conceptual basis for the experiments in this \namecref{toyworld2} is outline
 			\draw [every node] (3,13) rectangle (9,-3);
 			\end{tikzpicture}
 		}
-		\caption{Conceptual model for experiments incorporating environmental change. The \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
+		\caption{Conceptual model for experiments incorporating environmental change. As described in \cref{environmental-models}, the \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}
@@ -211,13 +211,13 @@ A series of successively enhanced models--Polymer-GARD (P-GARD) \parencite{Shenh
 
 Regular pertubations are at the core of the liposome model of \textcite{Fernando:2007pf}, where periodic ``avalanches'' of novel side-reactions result in new and rare reaction products which inject variation into the simulation, either by making new reactions possible, or shifting the balance between competing reactions, or by perhaps altering the reaction rates through changes to catalysis. Avalanches are described as an exploration mechanism, extending the range of the simulation into otherwise unlikely regions, although no experimental assessment of their effectiveness was performed.
 
-\section{Environmental models}
+\section{Environmental models}\label{environmental-models}
 
-First we describe the two distinct types of relationship between an entity and its environment--stable, and changing: 
+First we describe the two distinct types of relationship between an entity and its environment--stable, and changing.
 
 A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
-A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change. 
+A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change, as outlined in \cref{fig:conceptual-model-for-environmental-change}. 
 
 The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{toyworld2}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
 
@@ -256,19 +256,6 @@ The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, re
 	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
-\section{Hypothesis and predictions}
-
-\begin{hypothesis}
-That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
-\end{hypothesis}
-
-\section{Factors}
-
-Recall that for an environmental change we distinguish two components: target and shape. Each component becomes a factor in a full-factorial experiment design (see \cref{tbl:toyworld2-factors}.)
-
-\subsection{Target factor}
-This factor has two levels: changes to the size of the foodset, and changes to the product selection strategy.
-
 \subsubsection{Foodset size}
 
 \begin{algorithm}[ht]
@@ -300,17 +287,15 @@ Our approach to incorporating an environmental factor ($X_t$) into the least ene
 
 The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
 
-\subsection{Shape factor}
+\section{Hypothesis and predictions}
 
-The factor, shape of environmental change, has two levels: AR(1)-timeseries, and bistate.
+\begin{hypothesis}
+That the number of stable cycle states increases in proportion to the degree of environmental variability, up to some point.
+\end{hypothesis}
 
-\subsubsection{AR(1) timeseries}
+We define a \emph{stable cycle state} as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
 
-\subsubsection{Bistate}
-
-\section{Response variable}
-
-The response variable for the experiments is mean number of \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
+Environmental variability is approximated by sample entropy, a metric of predictability.
 
 %\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
@@ -331,7 +316,9 @@ The response variable for the experiments is mean number of \emph{stable cycle s
 	\end{center}
 \end{table}
 
-The experiments follow a modified full factorial-design over two factors (shown in \cref{toyworld2}): factor \emph{Target} has two levels, and factor \emph{Shape} with three levels. Other model parameters (defined in \cref{reactant-and-product-strategies}) were as follows:
+The experiments follow a modified full factorial-design over two factors (shown in \cref{toyworld2}): factor \emph{Target} has two levels, and factor \emph{Shape} with three levels. Environmental variability is approximated by the sample entropy of the sequence of changes generated by an environmental model determined the value of the \emph{Shape} factor.
+
+Other model parameters (defined in \cref{reactant-and-product-strategies}) were as follows:
 
 \begin{itemize}
 \item $S_{reactant} = Local$.
@@ -341,6 +328,8 @@ The experiments follow a modified full factorial-design over two factors (shown 
 \end{itemize}
 
 The foodset at the start of each experiment consisted of 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O.
+
+The response variable for the experiments is the mean number of \emph{stable cycle states}. 
 
 \section{Results}
 

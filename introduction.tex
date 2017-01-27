@@ -1,20 +1,16 @@
 \chapter{Introduction}
 
-Creative open-ended evolution in artificial systems \parencite{Taylor2001} is motivated by the gap observed between the products of biological evolution, and those produced by artificial evolutionary systems. The goal is to address two shortcomings of current systems: first, the products of artificial evolution are missing “impressiveness” or the capacity to surprise; the most common reaction is that they lack creativity.\footnote{A creative system is one that produces artefacts that are novel, surprising and valuable (Boden 2004); properties that are desirable not only in the “creative” fields of art, literature, music and the like, but also in more prosaic areas such as engineering and indeed artificial evolutionary systems.} Second, artificial evolution today lacks “open-endedness”, or the capacity to continue to produce new variants. 
-
-In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements--a step in the transition from undifferentiated entities to entities constructed from inherited rules or information. 
-
-The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
-
-The informational replicator terminology might be biological, but the concept is just as valid in artificial evolutionary systems--the common problem is one of stable informational storage. 
+In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements. The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
 
 Unfortunately, the emergence of an informational replicator from low-level elements has been extremely hard to achieve in artificial systems, and remains an open problem. Previous work has either introduced handbuilt replicators (\eg \cite{Hutton2003}), or relied upon specific, non-evolvable scaffolding in the base system (\eg the h-copy operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
 
 However, there is another, simpler, form of biological replicator that also can maintain information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
 
-Although the gap from variable replicators to informational replicators seems large and the pathway from one to the other poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without showing their emergence--in this work we demonstrate this in a molecular \gls{achem}.
+Although the gap from variable to informational replicators seems large, and the pathway that leads from a variable repliactor to an informational one poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. 
 
-Furthermore, although variable replicators have well-established limitations as to the quantity of information that can be stored, we observe that previous work has generally modeled their behaviour in stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
+Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without demonstrating their emergence from lower-level elements. Almost all prevous work though has been concerned with the pathway to a variable replicator in a chemically and biologically plausible system. One major assumption of this work is that real-world molecular biology relies upon catalysed reactions, and therefore any pathway should also be catalytic in nature. However, if the goal is any type of variable replicator rather than biologically plausible variable replicators, non-catalytic pathways become a valid option.
+
+Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
 
 \section{Motivation and context}
 
@@ -34,9 +30,22 @@ Some elements of \gls{ida}  are thought to still be with us in lineages of infor
 
 A self-sustaining autocatalytic network (perhaps in the form of a \gls{raf} set, a ``set of molecules and reactions which is collectively autocatalytic in the sense that all molecules help in producing each other (through mutual catalysis, and supported by a food set)'' \parencite{Hordijk2011}) is generally considered essential \parencite{Pross2013}, but not sufficient \parencite{Hordijk2011}. Both competing models--replication-first and metabolism-first--build on this. In the case of replication-first, through autocatalysis as expressed by self-replication of oligomeric compounds; in metabolism-first, by cycles and networks. From another perspective, metabolism-first privileges function, while replication-first privileges descent.
 
-The main difficulty with the replication-first model concerns the sizeable step required from abiotic compounds to template-based, or information-based, replication (although ribonucleotides conceivably could form in pre-life conditions \parencite{Powner2009}). Templates encode information in biology, so template-based replication requires an encode/decode mechanism as well as an information code. This is significantly more complex than simple duplication. By contrast, the main issue with the metabolism-first model concerns the necessary shift from composomal or holistic\footnote{See discussion in \cref{variable-replicators}.} inheritance to template-based, and the ability of holistic systems to represent a sufficient range of stable states for unrestricted evolution \parencite{Vasas2010}.
+Two starting points - Kauffman1986, and Bagley1991.
 
-The origin of life can be seen as the transition from chemistry to biology, and seems tantalizingly close to the artificial evolutionary goal of moving from simple, uninteresting, systems to creative systems which evolve. However, the usefulness of the similarity is limited: the primary postulates of origins of life research are not our postulates. Most abiogenesis resarch assumes real-world chemistry and conditions, a constraint that doesn't apply to \gls{alife} or artificial \gls{oe}, and so is far more restrictive than required. 
+Kauffman1986, Kauffman1993
+- binary polymer model
+- polymers are strings of binary digits of maximum length, n
+- molecules catalyse randomly chosen reactions for ligation or cleavage
+- constant probability P that a molecule will catalyse any given reaction
+
+Bagley1991 - ACM or Auto-Catalytic Metabolism
+Catalysts included as mechanism to provide the permanently elevated concentrations required
+
+The main difficulty with the replication-first model concerns the sizeable step required from abiotic compounds to template-based, or information-based, replication (although ribonucleotides conceivably could form in pre-life conditions \parencite{Powner2009}). Templates encode information in biology, so template-based replication requires an encode/decode mechanism to store information in the template and to later retrieve it, as well as an information code. This is significantly more complex than simple duplication. By contrast, the main issue with the metabolism-first model concerns the necessary shift from composomal or holistic\footnote{See discussion in \cref{variable-replicators}.} inheritance to template-based, and the ability of holistic systems to represent a sufficient range of stable states for unrestricted evolution \parencite{Vasas2010}.
+
+The origin of life can be seen as the transition from chemistry to biology, and seems tantalizingly close to the artificial evolutionary goal of moving from simple, uninteresting, systems to creative systems which evolve. 
+
+However, the primary postulates of origins of life research are not our postulates. Most abiogenesis resarch assumes real-world chemistry and conditions, a constraint that doesn't apply to \gls{alife}. 
 
 \begin{figure}
 	\begin{center}
@@ -58,12 +67,6 @@ Heredity is one of the foundational elements of \gls{ens}, the means by which in
 
 In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
 
-This progression is comprehensively explored in \textcite{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}: 
-
-''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
-
-First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}
-
 But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator\footnote{In \textcite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness}? Is a set of autocatalytic reactions that splits into two replicating? \Textcite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. 
 
 %\textcite{Hogeweg1998} describes attractor-based heredity (inheritance of state) and storage-based. 
@@ -78,7 +81,11 @@ Relatively recently, \textcite{Zachar2010} saw a need to reexamine the definitio
 
 \Textcite{Zachar2010} conclude that a replicator is ``any autocatalytic entity for which there is a selection process defined'', using autocatalysis in the general sense of a cyclical process that increases $A$ by $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$), and where selection has the fairly standard definition of ``a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010}
 
-In the following \namecrefs{non-informational-exact-replicators} we review some pertinent previous work following the classification developed in \textcite{Zachar2010}\footnote{With the exception of \emph{reproducers} (replicators with a developmental component) as these extend informational replicators.}.
+In the following \namecrefs{non-informational-exact-replicators} we review some pertinent previous work following the classification\footnote{With the exception of \emph{reproducers} (replicators with a developmental component) as these extend informational replicators.} presented in \textcite{Zachar2010} and extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}: 
+
+''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
+	
+	First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}
 
 \subsection{Exact replicators}\label{non-informational-exact-replicators}
 
@@ -228,7 +235,11 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 
 Of the forms of replicator examined here, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution. 
 
-Exact replicators lack heredity as they cannot pass on variability to their descendents; variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range; informational replicators based on shortcuts are evolutionarily restricted in that their inheritance/heredity mechanism is not evolvable. 
+\begin{itemize}
+	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.
+	\item Variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
+	\item Informational replicators based on shortcuts are evolutionarily restricted as their inheritance/heredity mechanism is not evolvable.
+\end{itemize} 
 
 The systems reviewed in this \namecref{previous-work} follow different approaches, but none reach the goal of informational replication. 
 
@@ -239,14 +250,14 @@ The work overall is motivated by the following research questions:
 \vspace{0.3cm}
 \begin{minipage}[l]{0.95\textwidth}
 	\begin{enumerate}[label=RQ\arabic*:]
-		\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
+		\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, previous models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and then conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
 		\item \emph{Can environmental variability increase the capacity for information storage in variable replicators?} Increasing the information storage capacity of variable replicators is interesting both in itself (to increase the utility of the replicator) and as a possible step towards a full informational replicator. Environmental variability is well known as a mechanism for increasing the range of phenotypes in organisms, and yet has been little studied in simpler replicators. Might environmental variability increase the range of a variable replicator also? In \cref{toyworld2} we introduce a model for environmental change, and examine the effects of change on storage capacity. Then in \cref{models-of-inheritance} we confirm that environmental change is not incompatible with the emergence of heredity from simple systems; increasing storage capacity cannot come at the expense of long-term evolvability.
-		\item \emph{How significant is the affect of the shape or character of environmental variability on the information storage capacity of a variable replicator?} Variability can come in many forms, from monotonic trends to chaotic surges. Does the form of change affect information storage capacity in a variable replicator? We address this in the course of our investigation into environmental variability in \cref{toyworld2}.
+		\item \emph{Can heredity improve under selection pressure?} Any simple variable replicator has an imperfect mechanism for transmitting heritable information from one generation to the next. Can we show that a pathway from a variable replicator to an informational replicator with an improved capacity for heredity is at least plausible under variable selective pressure?
 	\end{enumerate}
 \end{minipage}
 \vspace{0.3cm}
 
-\section{Approach}\label{methods}
+\section{Methods}\label{methods}
 
 In this \namecref{methods} we explain the methods used in the remainder of this work. For each research question we follow a common process:
 \begin{enumerate}

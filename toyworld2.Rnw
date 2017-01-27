@@ -12,12 +12,52 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 \chapter{The Emergence of Variable Replicators}\label{emergence-of-variable-replicators}
 
 
-
 \section{Measure}\label{emergent-measure}
 
-The primary measure is \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
+Question: at what point does an autocatalytic set become probable?
+Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
 
-%\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
+Static analysis of reaction graphs.
+
+Relationship suggested between P and probability of formation of a RAF set in \cite{Hordijk2004} 
+RA means reflexively , F for food generated.
+Requires a way to determine if a given reaction network contains a RAF set - described a polynomial time algorithm
+Model later optimized in 2015, not just positive but negative or inhibitory catalysis
+Predictions tested against binary polymer model, but algorithm not specific to that model.
+Algorithm not specific to RAF, also works for F by saying no RA
+
+Lower-bound established for levels of catalysis required for a RAF set in \cite{Hordijk2011}, but restricted to RAF not F.
+Related probability of all-molecule RAF (RAF that includes all molecules in reaction network, but not necessarily all reactions) \cite[sect. 4]{Hordijk2011} formation to catalysis reviewed in \cite[sect. 6.1]{Hordijk2011}
+Derivation based on binary polymer model, includes terms for length of polymer and alphabet size
+Each molecule catalyses on average ${\lambda}n$ for polymers up to length $n$, provided $\lambda>log_e(K)$ for alphabet of size $K$.
+Assumption in derivation doesn't hold if no catalysis, that is $\lambda=0$. Come back to this.
+
+Finding all irrRAF (cores in \cite{Vasas2012}) in reaction network NP-hard problem \parencite{Steel2013}
+But sampling algorithm can 
+\begin{itemize}
+	\item find a sample set of irrRAFS, and
+	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
+\end{itemize}
+
+Again, algorithm also applicable to F not just RAF - subset, simpler case.
+
+But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
+Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
+RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
+Fuschslin describes two approaches to analysis - static (as above) and dynamic
+
+Trace dynamic approach back to concerns in \cite{Bagley1991}
+Interested in concentrations over time - introduction of time dimension - dynamics
+Although took an ODE approach based on reaction rates, rather than in simulation.
+
+Summary:
+
+\begin{enumerate}
+	\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
+	\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
+	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
+\end{enumerate}
+
 
 \begin{algorithm}
 	\tcp{Construct reaction graph from a list of $reactions$}
@@ -270,7 +310,9 @@ The factor, shape of environmental change, has two levels: AR(1)-timeseries, and
 
 \section{Response variable}
 
-The response variable for the experiments is mean number of stable cycle states, as defined earlier in \namecref{emergent-measure}. 
+The response variable for the experiments is mean number of \emph{stable cycle states}. We define a stable cycle state as a chain of two or more cycles linked by a product in one cycle that is also a reactant in the following cycle, and where the cycles have the same "form" (or sequence of molecule species.)
+
+%\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
 
 \section{Experiment design}
 

@@ -12,7 +12,54 @@ Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) wi
 
 Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
 
-\section{Motivation and context}
+\section{Context}
+
+\Glspl{achem} are not necessarily models of real-world physical chemistry but most \glspl{achem} borrow, at least, from the language of real-world chemistry. An understanding of the key concepts in physical chemistry is therefore useful in appreciating \glspl{achem}.
+
+The richness of the physical world is built on a substantial foundation of chemical complexity. A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often described by the quantities (or stoichiometry) of the reactants and resulting product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(E_a\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
+
+The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\) ($R$ is the universal gas constant.) The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order (example taken from \textcite{Kotz2006}.)
+
+Reactions can generally be decomposed to a chain of \emph{elementary steps}, with each step resulting in a single change, such as bond formation or cleavage, to the reacting molecules. Elementary steps are somewhat predictable, practical reactions somewhat less so. Generally in experimental chemistry we know the reactants and products and can sometimes deduce the sequence of elementary steps.
+
+In modelling, we can either represent reactions exactly as an atomic transformation from reactants to products with characteristics that can only be determined experimentally, or we can attempt to construct the reaction from a sequence of elementary steps with the properties of the reaction derived from the properties of the steps involved. This later approach is the only practical one when the reaction is novel, or when we lack experimental data. Several alternate sequences of steps, or \textit{reaction pathways}, may be possible between reactants and products. Each pathway will have a different activation energy, and hence reaction rate.
+
+The kinetics of elementary steps are defined by the \emph{stoichiometry}. In theory you might expect to be able to predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact, when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of order 3. 
+
+Elementary steps are an abstraction, an aid to analysis, of the underlying molecular dynamics. At the molecular level, reactions can be
+modelled as a series of collisions between molecules. The reaction rate is then determined by the percentage of collisions (or in other words,
+the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
+structure or shape (in other words, the activation energy).
+
+Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
+activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
+reactants. There are therefore two clear mechanisms to alter the rate for a reaction: either reduce activation energy, or increase
+concentrations. A catalyst does precisely the first, and autocatalysis is one method for the second.
+
+A \emph{catalyst} is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
+affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
+The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
+orders of magnitude over the uncatalysed reaction, enabling reactions fundamental to life that would be effectively impossible in an
+uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
+the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
+
+\emph{Autocatalysis}, introduced by \textcite{Ostwald1890}, is a different approach to catalysis. Rather than reducing the required activation
+energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
+reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
+characteristic rate acceleration over time given by the differential equation--
+\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
+
+Autocatalysis may be realised by \begin{inparaenum}
+	\item either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, or 
+	\item by a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
+\end{inparaenum}
+
+Virgo2013 points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
+Origin in branching chain reactions or autocatalytic sets (both King1978).
+No catalysis required
+Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
+
+\subsection{The emergence of biological replicators}
 
 Biological evolution has produced ecosystems of astonishing variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every descendent organism alive today.
 
@@ -235,7 +282,7 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 
 Of the forms of replicator examined here, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution. 
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.
 	\item Variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
 	\item Informational replicators based on shortcuts are evolutionarily restricted as their inheritance/heredity mechanism is not evolvable.
@@ -247,15 +294,11 @@ The systems reviewed in this \namecref{previous-work} follow different approache
 
 The work overall is motivated by the following research questions:
 
-\vspace{0.3cm}
-\begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=RQ\arabic*:]
-		\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, previous models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and then conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
-		\item \emph{Can environmental variability increase the capacity for information storage in variable replicators?} Increasing the information storage capacity of variable replicators is interesting both in itself (to increase the utility of the replicator) and as a possible step towards a full informational replicator. Environmental variability is well known as a mechanism for increasing the range of phenotypes in organisms, and yet has been little studied in simpler replicators. Might environmental variability increase the range of a variable replicator also? In \cref{toyworld2} we introduce a model for environmental change, and examine the effects of change on storage capacity. Then in \cref{models-of-inheritance} we confirm that environmental change is not incompatible with the emergence of heredity from simple systems; increasing storage capacity cannot come at the expense of long-term evolvability.
-		\item \emph{Can heredity improve under selection pressure?} Any simple variable replicator has an imperfect mechanism for transmitting heritable information from one generation to the next. Can we show that a pathway from a variable replicator to an informational replicator with an improved capacity for heredity is at least plausible under variable selective pressure?
-	\end{enumerate}
-\end{minipage}
-\vspace{0.3cm}
+\begin{enumerate}[label=RQ\arabic*:]
+	\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, previous models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and then conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
+	\item \emph{Can environmental variability increase the capacity for information storage in variable replicators?} Increasing the information storage capacity of variable replicators is interesting both in itself (to increase the utility of the replicator) and as a possible step towards a full informational replicator. Environmental variability is well known as a mechanism for increasing the range of phenotypes in organisms, and yet has been little studied in simpler replicators. Might environmental variability increase the range of a variable replicator also? In \cref{toyworld2} we introduce a model for environmental change, and examine the effects of change on storage capacity. Then in \cref{models-of-inheritance} we confirm that environmental change is not incompatible with the emergence of heredity from simple systems; increasing storage capacity cannot come at the expense of long-term evolvability.
+	\item \emph{Can heredity improve under selection pressure?} Any simple variable replicator has an imperfect mechanism for transmitting heritable information from one generation to the next. Can we show that a pathway from a variable replicator to an informational replicator with an improved capacity for heredity is at least plausible under variable selective pressure?
+\end{enumerate}
 
 \section{Methods}\label{methods}
 
@@ -288,11 +331,10 @@ Note that there are some differences between the design of experiments in the ph
 This thesis makes the following novel contributions:
 
 \begin{compactenum}
-\item As far as is known, the first review of inheritance and heredity in artificial chemistries (in \cref{previous-work}.)
+\item Demonstration of the emergence of Variable Replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
 \item A new classification taxonomy for artificial chemistries based on reaction and product selection strategies (\cref{reactant-selection-strategies}.)
 \item A modular \gls{achem}, ToyWorld, structured according to this scheme, for the evaluation of various strategies, and for the exploration of replication in glspl{achem} (\cref{toyworld}.)
 \item Evaluation of reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
-\item Demonstration of the emergence of Variable Replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
 \item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
 \item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
 \end{compactenum}

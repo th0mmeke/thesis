@@ -18,7 +18,7 @@ df
 
 \chapter{Introduction to Artificial Chemistries}\label{introduction-to-achems}
 
-Artificial Chemistries provide an interesting testbed for investigating various evolutionary phenomena. This \namecref{introduction-to-achems} provides background material to aid in understanding how \glspl{achem} are almost uniquely suited to the exploration of our research questions. We review previous uses of \glspl{achem}, and given the wide range of systems described in previous work, discuss some frameworks for their description and categorisation, which incidentally help in identifying elements common to all \glspl{achem}. Finally we briefly review relevant previous work in applying \glspl{achem} to the problems of \gls{oe} and the origin of life.
+Artificial Chemistries provide an interesting testbed for investigating various evolutionary phenomena. This \namecref{introduction-to-achems} provides background material to aid in understanding how \glspl{achem} are almost uniquely suited to the exploration of our research questions.
 
 Fundamentally, \glspl{achem} provide a tunable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (real-world chemistry, and potentially biology). A set of rules describing how atoms interact gives rise to emergent forms--molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns--reactions.
 
@@ -28,7 +28,7 @@ Artificial chemistries are regularly employed in three application areas: real-w
 
 However, the more limited objective of a less realistic, but still unbounded chemistry, has been achieved (see \cref{classification-of-artificial-chemistries} for examples.) One advantage of semi-realistic \glspl{achem}, as pointed out by \textcite[5]{Funes2001}, is that it is easier to evaluate solutions in a domain close to the real world as opposed to a purely symbolic or abstract domain such as a lambda-calculus, or a programmatic environment like Tierra. When contemplating difficult problems such as complexity our intuition can be helpful, but only in situations close enough to our normal experience for it to be relevant. \Glspl{achem} are a particular type of model, familiar from real world chemistry, for the simulation of reaction-based systems. 
 
-A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while an influential taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}. Every \gls{achem} defines a set of constitutive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and ordering the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr}. These components and taxonomies are described in more detail in the next \namecref{classification-of-artificial-chemistries}, followed by a brief detour through a review of relevant aspects of real-world chemistry. Finally we provide an introduction to the general uses and applications of \glspl{achem} concluding with mini-reviews of \glspl{achem} for origins of life and \gls{alife}.
+A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while an influential taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}. Every \gls{achem} defines a set of constitutive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and ordering the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr}. These components and taxonomies are described in more detail in the next \namecref{classification-of-artificial-chemistries}.
 
 \section{Classification of Artificial Chemistries}\label{classification-of-artificial-chemistries}
 
@@ -94,53 +94,6 @@ If the reaction rules are analogous to chemistry, the reactor algorithm is analo
 	\emph{Mixed scale}. Hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelisation.
 \end{enumerate}
 
-\section{Review of relevant elements of physical chemistry}
-
-\Glspl{achem} are not necessarily models of real-world physical chemistry, but as seen in the previous classification schemes (and in the name \gls{achem} itself), most \glspl{achem} borrow, at least, from the language of real-world chemistry. An understanding of the key concepts in physical chemistry is therefore useful in appreciating \glspl{achem}.
-
-The richness of the physical world is built on a substantial foundation of chemical complexity. A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often described by the quantities (or stoichiometry) of the reactants and resulting product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(E_a\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
-
-The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\) ($R$ is the universal gas constant.) The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order (example taken from \textcite{Kotz2006}.)
-
-Reactions can generally be decomposed to a chain of \emph{elementary steps}, with each step resulting in a single change, such as bond formation or cleavage, to the reacting molecules. Elementary steps are somewhat predictable, practical reactions somewhat less so. Generally in experimental chemistry we know the reactants and products and can sometimes deduce the sequence of elementary steps.
-
-In modelling, we can either represent reactions exactly as an atomic transformation from reactants to products with characteristics that can only be determined experimentally, or we can attempt to construct the reaction from a sequence of elementary steps with the properties of the reaction derived from the properties of the steps involved. This later approach is the only practical one when the reaction is novel, or when we lack experimental data. Several alternate sequences of steps, or \textit{reaction pathways}, may be possible between reactants and products. Each pathway will have a different activation energy, and hence reaction rate.
-
-The kinetics of elementary steps are defined by the \emph{stoichiometry}. In theory you might expect to be able to predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact, when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of order 3. 
-
-Elementary steps are an abstraction, an aid to analysis, of the underlying molecular dynamics. At the molecular level, reactions can be
-modelled as a series of collisions between molecules. The reaction rate is then determined by the percentage of collisions (or in other words,
-the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
-structure or shape (in other words, the activation energy).
-
-Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
-activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
-reactants. There are therefore two clear mechanisms to alter the rate for a reaction: either reduce activation energy, or increase
-concentrations. A catalyst does precisely the first, and autocatalysis is one method for the second.
-
-A \emph{catalyst} is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
-affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
-The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
-orders of magnitude over the uncatalysed reaction, enabling reactions fundamental to life that would be effectively impossible in an
-uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
-the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
-
-\emph{Autocatalysis}, introduced by \textcite{Ostwald1890}, is a different approach to catalysis. Rather than reducing the required activation
-energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
-reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
-characteristic rate acceleration over time given by the differential equation--
-\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
-
-Autocatalysis may be realised by \begin{inparaenum}
-	\item either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, or 
-	\item by a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
-\end{inparaenum}
-
-Virgo2013 points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
-Origin in branching chain reactions or autocatalytic sets (both King1978).
-No catalysis required
-Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
-
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
 \Glspl{achem} may be applied to backward-chain from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \cite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \cite{Faulon2001}). Finally, \glspl{achem} can be used in the modelling of biological phenomenon such as enzyme function (\eg \cite{Flamm2010}.)
@@ -177,7 +130,7 @@ Some other examples of artificial chemistries for the investigation of the origi
 
 \section{Artificial chemistries and Alife}\label{artificial-chemistries-and-alife}
 
-As introduced earlier in \cref{previous-work}, Artificial Chemistries have also been used in the exploration of open-ended or creative evolution (\eg \cref{tab1}). Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. StringMol \parencite{Hickinbotham2011}, a bacterial inspired microprogram chemistry, demonstrates a rich inheritance mechanism using string-matching as a model for molecular binding, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
+Artificial Chemistries have also been used in the exploration of open-ended or creative evolution (\eg \cref{tab1}). Squirm3 \parencite{Hutton2009,Lucht2012,Hutton2002} adopts fixed molecule types, and pre-defined reactions for replication and gene-sequence transcription, and so although capable of interesting behaviour is not capable of unlimited extension. StringMol \parencite{Hickinbotham2011}, a bacterial inspired microprogram chemistry, demonstrates a rich inheritance mechanism using string-matching as a model for molecular binding, and RBN-World \parencite{Faulconbridge2011} shows that a form of Random Boolean Network, with the addition of a bonding mechanisms to allow for composition and decomposition of RBNs, can be used to build a chemistry capable of almost limitless extension out of non-traditional components.
 
 \begin{table}
 	\scriptsize

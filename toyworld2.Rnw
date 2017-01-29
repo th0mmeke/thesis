@@ -449,7 +449,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 
 % States are by seed molecule
 
-<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable cycle forms (left) and instances of autocatalytic cycles (right) for each environment against variation in the environment measured by sample entropy.'>>=
+<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable cycle forms (top) and instances of autocatalytic cycles (bottom) for each environment against variation in the environment measured by sample entropy.'>>=
 
 ap <- ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=df$mean, color=Shape)) + labs(x='Sample Entropy', y='Mean number of stable cycle forms', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
 bp <- ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=df$Replicators, color=Shape)) + labs(x='Sample Entropy', y='Instances of autocatalytic cycles', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))

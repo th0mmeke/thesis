@@ -185,7 +185,7 @@ The model is parameterised to make it easy to describe different specific models
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{Definitions for all parameters of the model}\label{tbl:parameter_definitions}
+	\caption{Definitions for all parameters of the model.}\label{tbl:parameter_definitions}
 	\begin{tabular}{@{}llp{8cm}@{}}
 		\toprule
 		Parameter          	& Value                                	& Description\\
@@ -200,40 +200,40 @@ The model is parameterised to make it easy to describe different specific models
 \end{table}
 
 \begin{algorithm}
-	\For{each generation $\in [1\dots$number of generations]}{
-		$population\leftarrow Selection(population)$\;
-		$population\leftarrow population \cup Variation(population)$\;
-		\BlankLine
-		\lIf{$population$ size is too small}{break}
-	}
-	\caption{Algorithm for the inheritance and variation model}\label{base-model-algorithm}
+\For{each generation $\in [1\dots$number of generations]}{
+	$population\leftarrow Selection(population)$\;
+	$population\leftarrow population \cup Variation(population)$\;
+	\BlankLine
+	\lIf{$population$ size is too small}{break}
+}
+\caption{Algorithm for the inheritance and variation model.}\label{base-model-algorithm}
 \end{algorithm}
 
 \begin{algorithm}
-	\Def{Selection(population)}{
-		$population_{new}\leftarrow \{\}$\;
-		\For{each $entity \in population$} {
-			\Prob($p_{selection}$:){
-				Add $entity$ to $population_{new}$\;
+\Def{Selection(population)}{
+	$population_{new}\leftarrow \{\}$\;
+	\For{each $entity \in population$} {
+		\Prob($p_{selection}$:){
+			Add $entity$ to $population_{new}$\;
+		}
+	}
+	\Return $population_{new}$\;
+}
+\BlankLine
+\Def{Variation(population)}{
+	$population_{new}\leftarrow \{\}$\;
+	\For{each $entity$ with $fitness$ and $heritability$ in $population$}{
+		\BlankLine
+		\Prob($p_{reproduction}$:){
+			\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
+				$child\leftarrow$ Reproduce($entity$)\;
+				Add $child$ to $population_{new}$\;
 			}
 		}
-		\Return $population_{new}$\;
 	}
-	\BlankLine
-	\Def{Variation(population)}{
-		$population_{new}\leftarrow \{\}$\;
-		\For{each $entity$ with $fitness$ and $heritability$ in $population$}{
-			\BlankLine
-			\Prob($p_{reproduction}$:){
-				\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
-					$child\leftarrow$ Reproduce($entity$)\;
-					Add $child$ to $population_{new}$\;
-				}
-			}
-		}
-		\Return $population_{new}$\;
-	}
-	\caption{Definitions for the functions \emph{Selection} and \emph{Variation}}\label{model-functions}
+	\Return $population_{new}$\;
+}
+\caption{Definitions for the functions \emph{Selection} and \emph{Variation}.}\label{model-functions}
 \end{algorithm}
 
 Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
@@ -507,7 +507,7 @@ We create a set of independent datasets by sampling from four different paramete
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$}
+	\caption{Range of independent variables $\Theta$, $\sigma_e$ and $\delta$.}
 	\label{tbl:range-of-independent-variables}
 	\begin{tabular}{@{}llll@{}}
 		\toprule
@@ -593,7 +593,7 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{Summary of results for changing environments}
+	\caption{Summary of results for changing environments.}
 	\label{tbl:summary-for-changing-datasets}
 	\begin{tabular}{@{}lll@{}}
 		\toprule
@@ -629,7 +629,7 @@ a <- with(temp,anova(lm(mean_heritability~sigma+delta+theta)))
 
 library(xtable)
 
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{heritability}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\overline{heritability}_{end}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$.', label='tbl:model-mean-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
 As a result, we can reject H$_0$ and accept H$_1$: heritability is proportional to the predictability of the environment (as measured by some function $f(\Theta,\delta)$.)
@@ -664,7 +664,7 @@ colnames(temp)[16] <- "sd_heritability"
 a <- with(temp,anova(lm(sd_heritability~sigma+delta+theta)))
 
 library(xtable)
-print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{heritability_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
+print(xtable(a, caption='ANOVA analysis for H$_1$: $\\sigma_{heritability_{end}}$ is proportional to $f(\\Theta,\\sigma_e,\\delta)$.', label='tbl:model-sd-anova'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
 <<sd-heritability, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='htp', fig.scap=NA, fig.cap='Final standard deviation of heritability against the environmental model\'s sigma parameter (top), delta parameter (middle) and theta parameter (bottom) for all experimental runs.'>>=

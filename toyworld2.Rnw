@@ -18,6 +18,7 @@ Concentrations may also be driven by the presence of catalysts. A catalyst in th
 \section{Evolutionary model}
 
 \begin{algorithm}
+\Def{FlowReactantSelection(population, foodset)}{
 	\uIf{|population| < 2}{
 		\Return $\emptyset$
 	}
@@ -64,7 +65,8 @@ Concentrations may also be driven by the presence of catalysts. A catalyst in th
 		\Return Reaction(Reactants, energy=ReactionEnergy)\;
 	}
 	\Return $\emptyset$
-	\caption{Flow selection strategy}\label{alg:flow-selection}
+}
+\caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
 \end{algorithm}
 	
 \section{Measure}\label{emergent-measure}
@@ -115,30 +117,32 @@ Summary:
 
 
 \begin{algorithm}
-	\tcp{Construct reaction graph from a list of $reactions$}
-	\For{each $reaction$ in $reactions$}{
-		Add a node for the reactant side of the reaction\;
-		Add a node for the product side of the reaction\;
+\Def{IdentifyCycles(Reactions)}{
+	\tcp{Construct reaction graph from a list of $Reactions$}
+	\For{each $Reaction$ in $Reactions$}{
+		Add a node for the reactant side of Reaction\;
+		Add a node for the product side of Reaction\;
 		Add an edge from reactant node to product node\;
-		\For{each $reactant$ in $reaction$}{
-			Add node for $reactant$, and edge from $reactant$ to node for reactant side of reaction\;
+		\For{each $Reactant$ in $Reaction$}{
+			Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
 		}
-		\For{each $product$ in $reaction$}{
-			Add node for $product$, and edge from $product$ to node for product side of reaction\;
+		\For{each $Product$ in $Reaction$}{
+			Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
 		}
 	}
 	\tcp{Find all cycles for each reactant in the graph}
-	\For{each $seed$ in $reactants$}{
-		\For{each $candidate$ in list of all molecules in the reaction graph of the same molecular species}{
-			\For{each $path$ in all shortest paths from $candidate$ to $seed$}{
-				\uIf{the stoichiometry for $seed$ in the cycle given by this $path\geq 2$}{
-					Add $path$ to the list of cycles\;
+	\For{each $Seed$ in $Reactants$}{
+		\For{each $Candidate$ in list of all molecules in the reaction graph of the same molecular species}{
+			\For{each $Path$ in all shortest paths from $Candidate$ to $Seed$}{
+				\uIf{the stoichiometry for $Seed$ in the cycle given by this $Path\geq 2$}{
+					Add $Path$ to the list of cycles\;
 				} 
 			}
 		}
 	}
 	\Return list of cycles\;
-	\caption{Algorithm to identify all potentially autocatalytic cycles within a reaction network. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than in consumes.}
+}
+\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed.}
 \end{algorithm}
 
 %# now look for cycle that is upstream of two or more other cycles
@@ -150,10 +154,11 @@ Summary:
 %# That is, all cycles with two or more linkage molecules, as products, to different cycles
 
 \begin{algorithm}
+\Def{IdentifyClusters(MolecularCyclesForSpecies)}{
 	Clusters$\leftarrow\emptyset$\;
 	Unclustereds$\leftarrow\emptyset$\;
 	
-	\For{CycleMolecules in MolecularCycles}{
+	\For{CycleMolecules in MolecularCyclesForSpecies}{
 	
 		CanCluster$\leftarrow$False\;
 		
@@ -183,13 +188,15 @@ Summary:
 	}
 	
 	\Return Clusters
-	\caption{Cluster identification by grouping reaction cycles of the same form that share molecules.}
+}
+\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}
 \end{algorithm}
 
 \begin{algorithm}
+\Def{IdentifyAutocatalyticCycles(MolecularCyclesBySpecies)}{
 	Autocatalytic$\leftarrow\emptyset$\;
     \For{CyclesForSpecies in MolecularCyclesBySpecies}{
-		Clusters$\leftarrow$IdentifyCluster(CyclesForSpecies)\;
+		Clusters$\leftarrow$IdentifyClusters(CyclesForSpecies)\;
 		\For{Cluster in Clusters}{
 			Products$\leftarrow$\{all products generated by cycles in Cluster\}\;
 			Reactants$\leftarrow$\{all reactants for every cycle in Cluster\}\;
@@ -208,7 +215,8 @@ Summary:
 		}
 	}
 	\Return $Autocatalytic$
-	\caption{Autocatalytic set detection.}
+}
+\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to SMILES (species) form.}
 \end{algorithm}
 
 
@@ -253,7 +261,7 @@ The conceptual basis for the experiments in this \namecref{toyworld2} is outline
 			\draw [every node] (3,13) rectangle (9,-3);
 			\end{tikzpicture}
 		}
-		\caption{Conceptual model for experiments incorporating environmental change. As described in \cref{environmental-models}, the \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
+		\caption[Conceptual model for experiments incorporating environmental change.]{Conceptual model for experiments incorporating environmental change. As described in \cref{environmental-models}, the \emph{Target} experimental factor affects the Evolutionary model; the \emph{Shape} factor modifies the Environmental model.}
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}
@@ -289,42 +297,47 @@ In the Local reactant selection strategy, we implement a form of spatial constra
 The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, regardless.
 
 \begin{algorithm}[ht]
-	
-	$reactants\leftarrow$ two molecules taken with uniform probability from the combined foodset and reaction vessel population\;
+\Def{LocalReactantSelection(Population, Foodset)}{
+	$Reactants\leftarrow$ two molecules taken with uniform probability from the combined Foodset and reaction vessel population\;
 	\BlankLine
-	\uIf{both reactants are not in the food set}{
-		$n\leftarrow |\text{food set}| / (|\text{food set}| + |\text{population}|)$\;
+	\uIf{both reactants are not in the Foodset}{
+		$n\leftarrow |\text{Foodset}| / (|\text{Foodset}| + |\text{Population}|)$\;
 		Choose some $p \in \mathcal{U}[0,1]$\;
 		\uIf{$p\leq n$}{
-			sample population $\leftarrow$ food set\;
+			SamplePopulation $\leftarrow$ Foodset\;
 		}
 		\uElse{
-			sample population $\leftarrow$ all molecules within a given distance of the first reactant in the reaction vessel\;
-			\uIf{the sample population is empty}{
+			SamplePopulation $\leftarrow$ all molecules within a given distance of the first reactant in the reaction vessel\;
+			\uIf{SamplePopulation=$\emptyset$}{
 				\tcp{Nothing in the same area...}
-				sample population $\leftarrow$ food set\;
+				SamplePopulation $\leftarrow$ Foodset\;
 			}
 		}
-		Let the second reactant be a molecule chosen (with uniform probability) from the sample population\;
+		Let the second reactant be a molecule chosen (with uniform probability) from SamplePopulation\;
 	}
-	\Return reactants
-	\caption{Local reactant selection strategy. All non-food set reactants for a given reaction come from the same region of the reactant vessel.}
+	\Return Reactants
+}
+\caption{\emph{LocalReactantSelection}. Reactant selection strategy where all non-foodset reactants for a given reaction come from the same region of the reactant vessel.}
 \end{algorithm}
 
 \subsubsection{Foodset size}
 
 \begin{algorithm}[ht]
-	increment $\leftarrow$ newsize - |food set|\;
-	\uIf{increment $> 0$} {
-		\tcp{Add molecules to food set}
-		samplesize $\leftarrow$ increment, bounded to $[0,|food set|]$\;
-		Extend $food set$ by $samplesize$ elements chosen with uniform probability from $food set$\;
+\Def{AdjustFoodsetSize(Foodset, NewSize)}{
+	Increment $\leftarrow$ NewSize - |Foodset|\;
+	\uIf{Increment $> 0$} {
+		\tcp{Add molecules to Foodset}
+		SampleSize $\leftarrow$ Increment, bounded to $[0,|Foodset|]$\;
+		Extend $Foodset$ by $SampleSize$ elements chosen with uniform probability from $Foodset$\;
 	}
 	\uElse{
-		\tcp{Remove molecules from food set}
-		samplesize $\leftarrow$ newsize, bounded to $[0,|food set|]$\;
-		$food set \leftarrow samplesizee$ elements chosen with uniform probability from $food set$\;
+		\tcp{Remove molecules from Foodset}
+		SampleSize $\leftarrow$ NewSize, bounded to $[0,|Foodset|]$\;
+		$Foodset \leftarrow samplesize$ elements chosen with uniform probability from $Foodset$\;
 	}
+	\Return Foodset
+}
+\caption{\emph{AdjustFoodsetSize}.}
 \end{algorithm}
 
 \subsubsection{BiasedLeastEnergy product selection strategy}

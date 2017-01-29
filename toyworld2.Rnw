@@ -11,7 +11,58 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \chapter{The Emergence of Variable Replicators}\label{emergence-of-variable-replicators}
 
+\section{Evolutionary model}
 
+\begin{algorithm}
+	\uIf{|population| < 2}{
+		\Return $\emptyset$
+	}
+	
+	i$\leftarrow$0\;
+	\While{|ReactantList| = 0}{
+		i $\leftarrow$ i + 1\;
+		
+		Remove TURNOVER molecules from the reaction vessel\;
+		
+		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same ke as the initial set of molecules\;
+		
+		\For{Molecule in AddList}{
+			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
+			Velocity.Angle$\leftarrow$ chosen with uniform probability from [$0, 2\pi$)\;
+			
+			\uIf{$\frac{1}{4}\pi < velocity.angle \leq \frac{3}{4}\pi$}{
+				Location$\leftarrow$ some point along the bottom wall\;
+			}
+			\uElseIf{$\frac{3}{4}\pi < velocity.angle \leq \frac{5}{4}\pi$}{
+				Location$\leftarrow$ some point along the left wall\;
+			}
+			\uElseIf{$\frac{5}{4}\pi < velocity.angle \leq \frac{7}{4}\pi$}{
+				Location$\leftarrow$ some point along the top wall\;
+			}
+			\Else{
+				Location$\leftarrow$ some point along the right wall\;
+			}
+			AddMolecule(Molecule, location=Location, velocity=Velocity)\;
+		}
+		
+		Advance the position of all molecules by $\Delta$t\;
+		\tcp{Check that $\Delta$t is neither too small nor too large}
+		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
+			Adjust $\Delta$t\;
+			i$\leftarrow$0\;
+		}
+	}
+	\tcp{Construct reactant portion of reaction}
+	\While{|ReactantList| > 0}{
+		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
+		InitialKE$\leftarrow \sum{ke_{i}}, \forall i \in$ Reactants\;
+		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
+		\Return Reaction(Reactants, energy=ReactionEnergy)\;
+	}
+	\Return $\emptyset$
+	\caption{Flow selection strategy}\label{alg:flow-selection}
+\end{algorithm}
+	
 \section{Measure}\label{emergent-measure}
 
 Question: at what point does an autocatalytic set become probable?
@@ -160,7 +211,7 @@ Summary:
 \section{Initial conditions}
 
 The foodset contains 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O. Each replicate (run) of the experiment was for 
-100,000 generations, with an initial ke for the reactor vessel of 50 units, switching every 10000 generations alternately between ke=140 and ke=50.
+100,000 generations, with an initial ke for the reactor vessel of 50 units, switching every 10000 generations alternately between ke=140 and ke=50. At every step, 5 molecules randomly chosen molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
 \section{Results}
 
@@ -355,17 +406,23 @@ The response variable for the experiments is the mean number of \emph{stable cyc
 For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, with each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This combined dataset is unbalanced (in the statistical sense), with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
 
 <<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
-df_1 <- read.csv('results/stablestates.csv')
-names(df_1)[9]<-"dataset"
-df_1[,"dfa"] <- NULL # use correct dfa value from summary-metrics
-df_2 <- read.csv('results/summary-metrics.csv')
-df <- merge(df_1,df_2, by=c('experiment','environment','dataset'), all.x=TRUE)
+csv_stablestates <- read.csv('results/stablestates.csv')
+names(csv_stablestates)[names(csv_stablestates)=="datetime"]<-"Dataset"
+names(csv_stablestates)[names(csv_stablestates)=="experiment"] <- "Experiment"
+names(csv_stablestates)[names(csv_stablestates)=="environment"] <- "Environment"
+csv_stablestates[,"dfa"] <- NULL # use correct dfa value from summary-metrics
+
+csv_metrics <- read.csv('results/summary-metrics.csv')
+names(csv_metrics)[names(csv_metrics)=="dataset"] <- "Dataset"
+names(csv_metrics)[names(csv_metrics)=="experiment"] <- "Experiment"
+names(csv_metrics)[names(csv_metrics)=="environment"] <- "Environment"
+df <- merge(csv_stablestates,csv_metrics, by=c('Experiment','Environment','Dataset'), all.x=TRUE)
 
 df[is.na(df)] <- 0 # NA used for 1) when cycle numbers = 0 (should be 0) and 2) when DFA or Sample Entropy can't be calculated (tag as 0)
 
 df$Shape <- "Varying"
-df$Shape[is.na(df$dfa)] <- "Stable"
-df$Shape[df$dataset==1481952255] <- "Bistate"
+df$Shape[df$dfa==0] <- "Stable"
+df$Shape[df$Dataset==1481952255] <- "Bistate"
 df$Shape<-as.factor(df$Shape)
 
 names(df)[names(df)=="dfa"] <- "H"
@@ -373,37 +430,32 @@ names(df)[names(df)=="sampen"] <- "Sample Entropy"
 names(df)[names(df)=="target"] <- "Target"
 levels(df$Target) <- list("Product selection strategy" = "ENERGY", "Food set" = "FOOD")
 
+
+csv_replicators <- read.csv('results/replicators.csv')
+names(csv_replicators)[names(csv_replicators)=="Datetime"] <- "Dataset"
+df <- merge(df,csv_replicators, by=c('Experiment','Environment','Dataset'))
+
+
 library(plyr)
 library(xtable)
 print(xtable(count(df,c('Shape','Target')), caption='Cell frequencies for consolidated dataset', label='tbl:toyworld2-cell-frequencies'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
-
-#df_len <- aggregate(min~datetime, data=df, FUN=length)
-#df_max <- aggregate(max~datetime, data=df, FUN=max)
-#df_min <- aggregate(min~datetime, data=df, FUN=min)
-#df_mean <- aggregate(mean~datetime, data=df, FUN=mean)
-#summary <- merge(merge(merge(df_len, df_min, by="datetime"),df_mean, by="datetime"), df_max, by="datetime")
-#names(summary)<-c("Experiment", "Total runs", "Min. Stable States", "Mean Stable States", "Max. Stable States")
-
-#library(xtable)
-#print(xtable(summary, caption='Summary of experiment results', label='tbl:toyworld2-results-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment against variability measured by the Hurst exponent (H) (top panel) and for stable (H=0) and varying (H>0) environments (bottom).'>>=
-ap <- ggplot(df) + geom_point(aes(x=H, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable states', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
-bp <-ggplot(df) + geom_boxplot(aes(x=Shape, y=mean, group=Shape)) + labs(x='Environment shape', y='Mean number of stable states')
+<<toyworld2-results, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable cycle forms for each environment against variability measured by the Hurst exponent (H) (top panel) and for stable (H=0) and varying (H>0) environments (bottom).'>>=
+ap <- ggplot(df) + geom_point(aes(x=H, y=mean, color=Shape)) + labs(x='Hurst exponent', y='Mean number of stable cycle forms', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+bp <-ggplot(df) + geom_boxplot(aes(x=Shape, y=mean, group=Shape)) + labs(x='Environment shape', y='Mean number of stable cycle forms')
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.height=3.5, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable states for each environment for variation applied to the food set population (left) and to the product selection strategy (right).'>>=
-ggplot(df) + geom_boxplot(aes(x=Target, y=mean, group=Target)) + labs(x='Target of variation', y='Mean number of stable states') + scale_x_discrete(labels=c("Product selection strategy", "Food set"))
-@
-<<>>=
-ggplot(df) + geom_point(aes(x=H, y=mean))
-ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=mean))
-ggplot(df) + geom_point(aes(x=seeds, y=mean))
+% States are by seed molecule
+
+<<toyworld2-results-by-target, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.pos='ht', fig.scap=NA, fig.cap='Mean number of stable cycle forms (left) and instances of autocatalytic cycles (right) for each environment against variation in the environment measured by sample entropy.'>>=
+
+ap <- ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=df$mean, color=Shape)) + labs(x='Sample Entropy', y='Mean number of stable cycle forms', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+bp <- ggplot(df) + geom_point(aes(x=df$"Sample Entropy", y=df$Replicators, color=Shape)) + labs(x='Sample Entropy', y='Instances of autocatalytic cycles', color='Environment') + scale_colour_manual(name="",  values=c("grey80", "grey50", "black"))
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-% States are by seed molecule
 
 \section{Discussion}
 

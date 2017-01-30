@@ -700,10 +700,6 @@ From a visual inspection of \cref{fig:sd-heritability} we can reject H$_0$ in fa
 %with(temp,temp[order(sd_heritability),c("sd_heritability","delta","sigma","theta")])
 %@
 
-\section{Future work}
-
-There are some obvious extensions of the model from \cref{base-model} that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
-
 \section{Conclusions}\label{part2-future-work}
 
 In this chapter we have shown by experiment that, as predicted, in stable environments:

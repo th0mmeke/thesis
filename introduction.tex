@@ -31,6 +31,8 @@ modelled as a series of collisions between molecules. The reaction rate is then 
 the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
 structure or shape (in other words, the activation energy).
 
+For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (ones that can enter into other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction--for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
+
 Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
 activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
 reactants. There are therefore two clear mechanisms to alter the rate for a reaction: either reduce activation energy, or increase
@@ -43,21 +45,18 @@ orders of magnitude over the uncatalysed reaction, enabling reactions fundamenta
 uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
 the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
 
-\emph{Autocatalysis}, introduced by \textcite{Ostwald1890}, is a different approach to catalysis. Rather than reducing the required activation
+In \emph{Autocatalysis}, introduced by \textcite{Ostwald1890}, rather than reducing the required activation
 energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
 reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
 characteristic rate acceleration over time given by the differential equation--
 \[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
 
 Autocatalysis may be realised by \begin{inparaenum}
-	\item Either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, or 
-	\item By a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other. However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
+	\item Either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, branching chain reactions or autocatalytic sets \parencite{King1978}.
+	\item By a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other.
 \end{inparaenum}
 
-\Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
-Origin in branching chain reactions or autocatalytic sets (both \cite{King1978}).
-No catalysis required
-Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
+However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
 
 \subsection{The emergence of biological replicators}
 
@@ -283,6 +282,8 @@ These mechanism differences (the choices of which functions are crisp and which 
 Despite the use of the term ``embodied'', those functions that aren't ``crisp'' are not in fact fully self-referential as the pattern-matching algorithm itself remains unaffected by evolution. There is also a disconnect between the properties of the targets of the matches and the functioning of the algorithm. The algorithm matches on the symbol, and is completely unaffected by the meaning or properties of those symbols, the underlying microcode. In this it differs significantly from a completely endogenous system such as a biological replicase, where the match or bind is actioned by the same chemical rules that construct and maintain the replicase from component atoms.
 
 \subsection{Discussion}
+\Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
+Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
 
 Of the forms of replicator examined here, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution. 
 

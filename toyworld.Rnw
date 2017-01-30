@@ -51,7 +51,7 @@ However, there is an earlier, and more influential, categorisation by \textcite{
 
 This taxonomy is commonly used in the literature (\eg in \cite{Lenaerts2009,Gardiner2007}). In more detail, the three elements are:
 
-\subsection{Set of Molecules (\textless{}\emph{S}\textgreater{})}
+\subsection{Set of molecules (\textless{}\emph{S}\textgreater{})}
 
 This element describes how molecules are represented in the \gls{achem} (\eg labelled graphs \parencite{Faulconbridge2011} or binary strings \parencite{Banzhaf94}), and how any implicit properties of molecules may be derived, such as bond energy calculations by Extended Huckel Theory (EHT) (\eg textcite{Benko2003}.)
 
@@ -78,7 +78,7 @@ Pre-specification is well suited to simulating real chemistry as it allows prope
 
 An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
 
-\subsection{Reactor Algorithm (\textless{}\emph{A}\textgreater{})}
+\subsection{Reactor algorithm (\textless{}\emph{A}\textgreater{})}
 
 The reactor algorithm provides the mechanism to select (in effect, to order) reactions, or in the words of \textcite[sect. 4.1.3]{Faulconbridge2011}, the ``...algorithm which describes the order of and intervals between reactions, starting from an initial collection of molecules...''
 

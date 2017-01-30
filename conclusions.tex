@@ -1,3 +1,20 @@
 \chapter{Conclusions}\label{thesis-conclusions}
 
+\section{Future work}
+
+In \cref{toyworld2} we have assumed that each environmental change affected all entities equally; however, this isn't necessarily the only option. We can identify three levels of scope, or the proportion of entities in the population to receive a particular set of changes, from most homogeneous to least:
+
+\begin{enumerate}
+	\item The group of all entities. All entities receive the same set of changes.
+	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
+	\item A single-member group for each entity. Each entity receives a unique set of changes.
+\end{enumerate}
+
+The first level is the simplest application of environmental change, and the one adopted earlier in this \namecref{toyworld2}, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. 
+
+The third scope level implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
+
+There are some obvious extensions of the model from \cref{base-model} that for reasons of scope have been left for future work. First, the model currently assumes only single-parent inheritance, whereas many biological species have two parents. Extending to two parents would be a useful enhancement to increase the model's scope. Second, the model does not include any influence from development (the production of the phenome from the genome). However, it is unclear at this stage what effect development would have on the model as its effects are bundled into the overall \emph{fitness} parameter. Finally, although outside of the overall scope of this work in evolutionary systems, the effect of acquired characteristics would be interesting to explore. Others (\eg \textcite{Gaucherel2012,Paenke:2007ie,Sasaki:2000dq}) have studied the differences between general models based on acquired and non-acquired characteristics, finding a difference between models in changing environments. This would be another area of exploration for the future.
+
+\section{Conclusions}
 

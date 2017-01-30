@@ -11,11 +11,12 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \chapter{The Emergence of Variable Replicators}\label{emergence-of-variable-replicators}
 
-For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (that can then take part in other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction--for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
 
-Concentrations may also be driven by the presence of catalysts. A catalyst in the most usual form is a molecule that is not consumed in a reaction (and hence is not a reactant) but has the effect of making a reaction more likely and so has the effect of increasing the concentration of the reaction products at a greater rate than would occur without the action of the catalyst.
 
 \section{Evolutionary model}
+
+See \cref{alg:flow-selection}.
+
 
 \begin{algorithm}
 \Def{FlowReactantSelection(population, foodset)}{
@@ -69,10 +70,12 @@ Concentrations may also be driven by the presence of catalysts. A catalyst in th
 \caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
 \end{algorithm}
 	
-\section{Measure}\label{emergent-measure}
+\section{Measures}\label{emergent-measure}
+
+Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
 
 Question: at what point does an autocatalytic set become probable?
-Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
+
 
 Static analysis of reaction graphs.
 
@@ -96,7 +99,7 @@ But sampling algorithm can
 	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
 \end{itemize}
 
-Again, algorithm also applicable to F not just RAF - subset, simpler case.
+However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
 
 But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
 Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
@@ -107,13 +110,18 @@ Trace dynamic approach back to concerns in \cite{Bagley1991}
 Interested in concentrations over time - introduction of time dimension - dynamics
 Although took an ODE approach based on reaction rates, rather than in simulation.
 
-Summary:
-
 \begin{enumerate}
 	\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
+	\item But this algorithm cannot be applied to non-catalytic F-generated sets.
 	\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
 	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
 \end{enumerate}
+
+
+From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the form of a reaction cycle can also be considered the species of the reaction cycle, and it is this nomenclature that we shall adopt from here onwards.
+
+Therefore we seek reaction cycles of the same species where one cycle gives rise ($\rightarrow$) to two or more cycles of the same species. What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared simulation molecules (individual molecules, not species.)
+
 
 
 \begin{algorithm}
@@ -216,19 +224,26 @@ Summary:
 	}
 	\Return $Autocatalytic$
 }
-\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to SMILES (species) form.}
+\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}
 \end{algorithm}
-
 
 \section{Initial conditions}
 
 The foodset contains 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O. Each replicate (run) of the experiment was for 
 100,000 generations, with an initial ke for the reactor vessel of 50 units, switching every 10000 generations alternately between ke=140 and ke=50. At every step, 5 molecules randomly chosen molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
-\section{Results}
+\section{Results and discussion}
 
-Core species
+<<toyworld2-replicator-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+csv_replicators <- read.csv('results/replicators.csv')
+names(csv_replicators)[names(csv_replicators)=="Datetime"] <- "Dataset"
 
+r <- csv_replicators[csv_replicators$Dataset=='1484540618',]
+
+library(plyr)
+library(xtable)
+print(xtable(r, caption='Summary results for variable replicator detection.', label='tbl:toyworld2-replicator-results'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+@
 
 \chapter{The Effect of Environment on Heritable Information}\label{toyworld2}
 
@@ -447,11 +462,10 @@ names(df)[names(df)=="sampen"] <- "Sample Entropy"
 names(df)[names(df)=="target"] <- "Target"
 levels(df$Target) <- list("Product selection strategy" = "ENERGY", "Food set" = "FOOD")
 
-
 csv_replicators <- read.csv('results/replicators.csv')
 names(csv_replicators)[names(csv_replicators)=="Datetime"] <- "Dataset"
-df <- merge(df,csv_replicators, by=c('Experiment','Environment','Dataset'))
 
+df <- merge(df,csv_replicators, by=c('Experiment','Environment','Dataset'))
 
 library(plyr)
 library(xtable)
@@ -488,19 +502,6 @@ print(xtable(av, caption='ANOVA', label='tbl:toyworld2-anova'), booktabs=TRUE, i
 })
 @
 
-\section{Future work}
-
-We have assumed that each environmental change affected all entities equally; however, this isn't necessarily the only option. We can identify three levels of scope, or the proportion of entities in the population to receive a particular set of changes, from most homogeneous to least:
-
-\begin{enumerate}
-	\item The group of all entities. All entities receive the same set of changes.
-	\item A group for each set of ``related'' entities, where the most natural and obvious relation is that between parent and child; this is unambiguous and straightforward in our model where each entity has only one parent. We refer to a group of entities related by inheritance as a \emph{lineage}. A separate set of changes is provided for each lineage.
-	\item A single-member group for each entity. Each entity receives a unique set of changes.
-\end{enumerate}
-
-The first level is the simplest application of environmental change, and the one adopted earlier in this \namecref{toyworld2}, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. 
-
-The third scope level implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
 
 \section{Conclusions}
 

@@ -113,6 +113,7 @@ Although artificial systems are the main focus of this thesis, there is a natura
 
 In this particular \namecref{previous-work} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with artificial systems. 
 
+\subsection{Replicators in evolutionary theory}\cref{replicators-in-evolutionary-theory}
 We begin by introducing the concept of a replicator in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}. 
 
 In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
@@ -281,11 +282,9 @@ These mechanism differences (the choices of which functions are crisp and which 
 
 Despite the use of the term ``embodied'', those functions that aren't ``crisp'' are not in fact fully self-referential as the pattern-matching algorithm itself remains unaffected by evolution. There is also a disconnect between the properties of the targets of the matches and the functioning of the algorithm. The algorithm matches on the symbol, and is completely unaffected by the meaning or properties of those symbols, the underlying microcode. In this it differs significantly from a completely endogenous system such as a biological replicase, where the match or bind is actioned by the same chemical rules that construct and maintain the replicase from component atoms.
 
-\subsection{Discussion}
-\Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
-Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
+\section{Research questions}\label{research-questions}
 
-Of the forms of replicator examined here, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution. 
+Of the forms of replicators defined by \textcite{Zachar2010} and described in \cref{replicators-in-evolutionary-theory}, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution:
 
 \begin{itemize}[noitemsep]
 	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.
@@ -293,14 +292,16 @@ Of the forms of replicator examined here, only full informational replicators pr
 	\item Informational replicators based on shortcuts are evolutionarily restricted as their inheritance/heredity mechanism is not evolvable.
 \end{itemize} 
 
-The systems reviewed in this \namecref{previous-work} follow different approaches, but none reach the goal of informational replication. 
+None of the artificial systems reviewed in \cref{previous-work} reach the goal of a full informational replicator, but it is apparent that this is a non-trivial objective.
 
-\section{Research questions}\label{research-questions}
+\Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
+Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
 
-The work overall is motivated by the following research questions:
+
+This thesis is therefore motivated by the following research questions:
 
 \begin{enumerate}[label=RQ\arabic*:]
-	\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, previous models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a representative modular \gls{achem}, and then conclude with an investigation into the emergence of variable replication in \cref{emergence-of-variable-replicators}.
+	\item \emph{Can we demonstrate the emergence of variable replicators in an \gls{achem}?} Although variable replicators have been studied extensively, previous models have been analytical not emergent. We would like to show that variable replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the first three chapters of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a modular \gls{achem} that embodies a new structure for \glspl{achem}, and show that it is capable of reaction cycles. We then conclude with an investigation into the emergence of variable replication based on these cycles in \cref{emergence-of-variable-replicators}.
 	\item \emph{Can environmental variability increase the capacity for information storage in variable replicators?} Increasing the information storage capacity of variable replicators is interesting both in itself (to increase the utility of the replicator) and as a possible step towards a full informational replicator. Environmental variability is well known as a mechanism for increasing the range of phenotypes in organisms, and yet has been little studied in simpler replicators. Might environmental variability increase the range of a variable replicator also? In \cref{toyworld2} we introduce a model for environmental change, and examine the effects of change on storage capacity. Then in \cref{models-of-inheritance} we confirm that environmental change is not incompatible with the emergence of heredity from simple systems; increasing storage capacity cannot come at the expense of long-term evolvability.
 	\item \emph{Can heredity improve under selection pressure?} Any simple variable replicator has an imperfect mechanism for transmitting heritable information from one generation to the next. Can we show that a pathway from a variable replicator to an informational replicator with an improved capacity for heredity is at least plausible under variable selective pressure?
 \end{enumerate}
@@ -337,7 +338,6 @@ This thesis makes the following novel contributions:
 
 \begin{compactenum}
 \item Demonstration of the emergence of Variable Replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
-\item A new classification taxonomy for artificial chemistries based on reaction and product selection strategies (\cref{reactant-selection-strategies}.)
 \item A modular \gls{achem}, ToyWorld, structured according to this scheme, for the evaluation of various strategies, and for the exploration of replication in glspl{achem} (\cref{toyworld}.)
 \item Evaluation of reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
 \item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.

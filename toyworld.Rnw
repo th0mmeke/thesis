@@ -47,9 +47,11 @@ Another system was presented by \textcite[p.132]{Nellis2012} with \glspl{achem} 
 	\item \emph{Constraints}. Restrictions on how the world and chemistry interact. Nellis gives as an example a binding model that describes which interactions are possible between elements.
 \end{itemize}
 
-However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also categorises \glspl{achem} against three factors: in this case, \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. 
+However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also coincidentally categorises \glspl{achem} against three factors, and which is commonly used in the literature (\eg \cite{Lenaerts2009,Gardiner2007}). This taxonomy is described in more detail in the \namecref{alg:2products} below.
 
-This taxonomy is commonly used in the literature (\eg in \cite{Lenaerts2009,Gardiner2007}). In more detail, the three elements are:
+\section{\textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme of Dittrich et al.}\label{dittrich}
+
+In \textcite{Dittrich:2001zr}, \glspl{achem} are classified according to the tuple \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. 
 
 \subsection{Set of molecules (\textless{}\emph{S}\textgreater{})}
 
@@ -175,9 +177,11 @@ From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploratio
 
 \chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{toyworld}
 
-Our chosen method for the exploration of states in variable replicators is a new molecular \gls{achem}. There is no shortage of existing \glspl{achem}; why yet another one? The primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally, the understanding that comes from designing and building a system from the beginning.
+The first of our research questions concerns the emergence of variable replicators in an \gls{achem} from the interaction of molecules through reactions. 
 
-The experimental requirements are however the primary driver. Our need is for a chemistry that is parameterised in all important aspects, so that experimental factors may be easily transformed into model parameters, and that is semi-realistic; a chemistry that shares a common language and ideally behaviour with real-world chemistry.
+In this \namecref{toyworld} we introduce a new molecular \gls{achem}. There is no shortage of existing \glspl{achem} so it is natural to ask why we introduce yet another: the primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally from an engineering viewpoint, the understanding that comes from designing and building a system from the beginning.
+
+The experimental requirements are however the primary driver. Our need is for a chemistry that is parameterised in all important aspects, so that experimental factors may be easily transformed into model parameters.
 
 Other types of chemistry are likely equally suitable. But there are pragmatic reasons why a semi-realistic chemistry is appropriate. First, as previously mentioned, familiarity. Second, we can leverage existing chemical concepts--reactions, bonds, energy transformations--without needing to invent and justify a new model. Third, the most relevant previous work is from the related field of origins of life research, and this of course assumes real world chemistry. It is more likely we shall be successful in using this material to influence and inform if we adopt a closely aligned chemistry rather than something tangential. Finally, the overall argument for self-evolving evolutionary systems is postulated on emergence from low-level elements; a clear pathway exists to real-world chemistry from physics, and by analogy we can carry this correspondence through into our \gls{achem}. For example, reactants may be chosen based upon physical locations; possible reactions are driven by the energy of molecular collisions. These aspects follow naturally if we adopt a semi-realistic chemistry. 
 
@@ -383,13 +387,13 @@ hence all reaction activity ceases.
 
 A reaction may be seen as two stages in sequence: first, the choice of reactants from a population of possible reactant molecules (the Reactant selection strategy, denoted here by $S_\mathrm{Reactant}$), and second, the determination of products given that set of reactants (Product selection strategy, denoted $S_\mathrm{Product}$). The total energy (that is, potential + kinetic + internal) of the system is maintained, as is the total momentum of the molecules.
 
+In the taxonomy of \textcite{Dittrich:2001zr}, introduced in \cref{dittrich}, \glspl{achem} are classified along three axis: molecules, reaction rules, and the reactor algorithm. Our terminology, used in the remainder of this work, substitutes Reactant selection strategy ($S_\mathrm{Reactant}$) for the Reactor Algorthm of \textcite{Dittrich:2001zr}, and Product selection strategy ($S_\mathrm{Product}$) for Reaction rules. 
+
 \section{Reactant selection strategies: selecting reactants for a reaction}\label{reactant-selection-strategies}
 
 \Textcite{Faulconbridge2011} describes two generic strategies for the selection of reactants--spatial and aspatial--where the primary difference is whether molecular position is a factor in reactant selection. It is possible to further generalise this scheme by considering other differentiating factors. Analogous with real-world chemistry, a cumulative scheme presents itself starting with the pure aspatial, or uniform probability strategy, and then proceeding through a spatial strategy, based on molecular kinetics, to strategies built on kinetics plus intra-molecular and external forces such as electromagnetism. 
 
 These strategies are based on a sequence of increasing derivatives of position or location in the reaction vessel; from no position (uniform selection), through fixed position (uninteresting as we cannot have a sequence of reactions without motion) to the first derivative (velocity or kinetic selection) and finally to the second derivative (acceleration, or force selection.) 
-
-Accordingly we adopt this novel and more detailed classification in the strategy descriptions below.
 
 \subsection{Uniform selection}\label{uniform-selection}
 

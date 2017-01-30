@@ -30,7 +30,7 @@ See \cref{alg:flow-selection}.
 		
 		Remove TURNOVER molecules from the reaction vessel\;
 		
-		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same ke as the initial set of molecules\;
+		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same \gls{ke} as the initial set of molecules\;
 		
 		\For{Molecule in AddList}{
 			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
@@ -229,8 +229,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 
 \section{Initial conditions}
 
-The foodset contains 10 x [H][H] molecules, 10 x FO, 20 x O, 10 x [O-][N+](=O)[N+]([O-])=O, 10 x N(=O)[O], and 20 x O=C=O. Each replicate (run) of the experiment was for 
-100,000 generations, with an initial ke for the reactor vessel of 50 units, switching every 10000 generations alternately between ke=140 and ke=50. At every step, 5 molecules randomly chosen molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
+The foodset contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O. Each replicate (run) of the experiment was for 100,000 generations, with an initial \gls{ke} for the reactor vessel of 50 units, switching every 10,000 generations alternately between \gls{ke}=140 and \gls{ke}=50. At every step, 5 molecules randomly chosen molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
 \section{Results and discussion}
 

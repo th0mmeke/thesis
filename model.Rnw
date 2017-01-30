@@ -282,7 +282,7 @@ The factors and levels along with their mapping to model parameters are given in
 	\end{center}
 \end{table}
 
-Each combination of factor levels has 10 replicates, to give a total of $2x2x2x1x2x10$ or 160 experiment runs.
+Each combination of factor levels has 10 replicates, to give a total of $2\times2\times2\times1\times2\times10$ or 160 experiment runs.
 
 \subsection{Sensitivity of the model to parameter values}\label{reducing-the-parameter-space-for-the-experiments}
 

@@ -20,7 +20,7 @@ See \cref{alg:flow-selection}.
 
 \begin{algorithm}
 \Def{FlowReactantSelection(population, foodset)}{
-	\uIf{|population| < 2}{
+\label{key}	\uIf{|population| < 2}{
 		\Return $\emptyset$
 	}
 	

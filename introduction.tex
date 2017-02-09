@@ -113,8 +113,8 @@ Although artificial systems are the main focus of this thesis, there is a natura
 
 In this particular \namecref{previous-work} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with artificial systems. 
 
-\subsection{Replicators in evolutionary theory}\cref{replicators-in-evolutionary-theory}
-We begin by introducing the concept of a replicator in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}. 
+\subsection{Replicators in evolutionary theory}\label{replicators-in-evolutionary-theory}
+We begin by reviewing the concept of replicators in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}. 
 
 In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
 
@@ -134,7 +134,9 @@ They conclude that a replicator is ``any autocatalytic entity for which there is
 
 In the following \namecrefs{non-informational-exact-replicators} we review some pertinent previous work following the classification\footnote{With the exception of \emph{reproducers} (replicators with a developmental component) as these extend informational replicators.} presented in \textcite{Zachar2010} and extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}: 
 
-''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
+''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
+
+	\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
 	
 	First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}
 
@@ -155,7 +157,7 @@ The development of RBN-World involved many design choices, some essentially adho
 
 The model for \emph{Chemical Evolution by Natural Selection} in \textcite{Fernando:2008xy,Fernando:2007pf} is driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems''), and takes the form of a simulation of laboratory experiments of lipid aggregates (``phase separated ‘individuals’, e.g. liposomes'') in a reactor. The molecules and food molecules (that make up an autocatalytic cycle) share a common representation and underlying chemistry, while replication, unlike the (rare) autocatalytic cycles in \textcite{Faulconbridge2011}, is by `` division by externally imposed agitation, i.e. replication rather than self-replication.''. New molecular species (evolutionary variation), comes from chemical ``avalanches'' initiated when two existing species are chosen at random, tested to see if a reaction between them is possible by thermodynamics, and then the resulting products seeded in the reactor at low concentrations. These new reactions may be autocatalytic, or the products may complete a food-set for another autocatalytic reaction, or they may enable a side-reaction from an existing autocatalytic one. Introducing these new species into the reactor therefore can trigger the rapid formation of a series of novel products--a chemical avalanche.
 
-\subsection{Variable replicators}\label{variable-replicators}
+\subsection{Limited heredity replicators}\label{variable-replicators}
 
 \Textcite{Ganti:2003hl} and  \textcite{Eigen1971} showed that distinct, organisationally different alternative autocatalytic networks in the same environment might compete, and the fittest would prevail. A number of models have been proposed since where autocatalytic networks form stable components that can be inherited in a modular fashion in a process called compositional inheritance. All these models are analytical in nature, in many cases based on the \gls{ode} model of \cite{Farmer1986}.
 
@@ -169,7 +171,7 @@ Mutations in cycles \parencite{Vasas2012a} are generally not heritable as mutant
 
 The model of \cite{Vasas2015, Vasas2012, Vasas2012a}, derived from \cite{Farmer1986}, tests the GARD hypothesis that compositional inheritance is possible where there is a parent-offspring correlation in molecular composition. The mechanism is autocatalytic cores made up of one or more linked autocatalytic loops to provide the compotype. The core forms an attractor, where one core equals one attractor, but multiple cores are required of course for selection. Multiple cores (produced by inhibition \textcite{Vasas2012a}) provide multiple attractors, but the attractors must be stable for selection to be stable and meaningful. Unlike GARD, which generates only single-core networks, the model in Vasas is capable of multiple cores, but as cores are the equivalent of a single bit of heritable information, it's hard to see core-based inheritance being capable of unrestricted heredity--there are practical limits to the number of stable cores that can co-exist in a system. 
 
-\subsection{Informational replicators with shortcut replication mechanism}
+\subsection{Unlimited heredity replicators with shortcut replication mechanism}
 
 A \emph{shortcut} is where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entity it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
 
@@ -181,7 +183,7 @@ Individual entities in \textcite{Hutton2002} are simply single molecules. \Textc
 
 There are however some difficulties in establishing anything more than a ``variable replicator'' (in the term of \textcite{Zachar2010}), namely inconsistent inheritance and a limited potential for information transmission. For this, we turn to informational replicators.
 
-\subsection{Informational replicators or self-replicators}
+\subsection{Unlimited heredity replicators or self-replicators}
 Replication in these systems emerges from the base (or in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}, level-0) rules without being directly specified by the experimenter or designer. However, even here most systems still shortcut this by providing a seed or universal ancestor (\eg \textcite{Ofria2004}) that contains a working module for replication that can be then modified (for good or ill) in each subsequent generation.
 
 \subsubsection{String-manipulation systems}
@@ -274,7 +276,7 @@ An underlying principle in both systems is that the mechanism of evolution must 
 	\label{alg:stringmolgraphmol}
 \end{algorithm}
 
-Each of the four functions in \cref{alg:stringmolgraphmol}--\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}--can be either ``crisp'' (\ie perfect) or embodied (variable, and subject to evolution). As an example of an embodied function, StringMol's \emph{start} function uses pattern-matching to determine the binding region between the replicase and the other string where the replicase should begin copying. By changing the subsequences in either string the strength of bind can be varied, with a corresponding shift to the beginning of the copy region even though the pattern-matching algorithm itself does not change (it is a ``level-0'' component in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}). The same pattern-matching is used in StringMol's \emph{at-end} function to determine the end of the region to be copied.
+Each of the four functions referenced in \cref{alg:stringmolgraphmol} (\emph{start}, \emph{at-end}, \emph{char-copy} and \emph{next}) can be either ``crisp'' (\ie perfect or precise) or embodied (variable or fuzzy, and subject to evolution). As an example of an embodied function, StringMol's \emph{start} function uses pattern-matching to determine the binding region between the replicase and the other string where the replicase should begin copying. By changing the subsequences in either string the strength of bind can be varied, with a corresponding shift to the beginning of the copy region even though the pattern-matching algorithm itself does not change (it is a ``level-0'' component in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}). The same pattern-matching is used in StringMol's \emph{at-end} function to determine the end of the region to be copied.
 
 StringMol includes an embodied \emph{start} and \emph{at-end}, crisp \emph{next}, and stochastic \emph{char-copy}; GraphMol has an embodied \emph{start}, \emph{at-end} and \emph{next}, with a crisp \emph{char-copy}. The primary difference between the two is opposite approaches to \emph{next} (``in order to investigate a method of embodying the copying process that would be completely different from Stringmol's.'' \parencite[p.145]{Nellis2012})
 
@@ -284,19 +286,18 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 
 \section{Research questions}\label{research-questions}
 
-Of the forms of replicators defined by \textcite{Zachar2010} and described in \cref{replicators-in-evolutionary-theory}, only full informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution:
+Of the forms of replicators defined by \textcite{Zachar2010} and described in \cref{replicators-in-evolutionary-theory}, only unlimited heredity informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution:
 
 \begin{itemize}[noitemsep]
 	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.
 	\item Variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
-	\item Informational replicators based on shortcuts are evolutionarily restricted as their inheritance/heredity mechanism is not evolvable.
+	\item Informational replicators based on shortcuts are fundamentally limited as their inheritance/heredity mechanism is not evolvable.
 \end{itemize} 
 
-None of the artificial systems reviewed in \cref{previous-work} reach the goal of a full informational replicator, but it is apparent that this is a non-trivial objective.
+None of the artificial systems reviewed in \cref{previous-work} reach the goal of an unlimited heredity informational replicator, but it is apparent that this is a non-trivial objective. Furthermore, of the emergent systems reviewed, none reach any more than exact heredity.
 
 \Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
 Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
-
 
 This thesis is therefore motivated by the following research questions:
 

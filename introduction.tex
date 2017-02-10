@@ -153,7 +153,7 @@ Each bRBN is a synchronous RBN, made up of a number of nodes, each with an initi
 
 A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (as the preferred measures of auto-catalytic sets and \glspl{hypercycle} are too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}. 
 
-The development of RBN-World involved many design choices, some essentially adhoc, such as the choice of \gls{rbn}: ``...the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.''
+The development of RBN-World involved many design choices, some essentially adhoc, such as the choice of \gls{rbn}: ``...the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.'' \parencite[p. 192]{Faulconbridge2011}
 
 The model for \emph{Chemical Evolution by Natural Selection} in \textcite{Fernando:2008xy,Fernando:2007pf} is driven by origin-of-life objectives (``the evolution of chemical networks that lead to autonomous systems''), and takes the form of a simulation of laboratory experiments of lipid aggregates (``phase separated ‘individuals’, e.g. liposomes'') in a reactor. The molecules and food molecules (that make up an autocatalytic cycle) share a common representation and underlying chemistry, while replication, unlike the (rare) autocatalytic cycles in \textcite{Faulconbridge2011}, is by `` division by externally imposed agitation, i.e. replication rather than self-replication.''. New molecular species (evolutionary variation), comes from chemical ``avalanches'' initiated when two existing species are chosen at random, tested to see if a reaction between them is possible by thermodynamics, and then the resulting products seeded in the reactor at low concentrations. These new reactions may be autocatalytic, or the products may complete a food-set for another autocatalytic reaction, or they may enable a side-reaction from an existing autocatalytic one. Introducing these new species into the reactor therefore can trigger the rapid formation of a series of novel products--a chemical avalanche.
 
@@ -264,7 +264,7 @@ The base elements in StringMol are single-character symbols, each representing a
 
 GraphMol instead is graph based. ``The world defined by GraphMol contains chemicals (represented as graphs) that bind to each other via multiple binding sites, and then run simple computer programs (encoded in the graphs) that modify the binding of these chemicals.''. No explicit rationale for graphs is presented, other than as a natural extension from StringMol given the stated importance of a rich binding mechanism. 
 
-An underlying principle in both systems is that the mechanism of evolution must be itself evolvable; functions such as template copying must be embodied mechanisms in the world so that they can be affected by evolution, and so evolved.  Crucially therefore both StringMol and GraphMol have embodied template copying, where a ``replicase'' molecule can copy another following the algorithm in \cref{alg:stringmolgraphmol}.
+An underlying principle in both systems is that the mechanism of evolution must be itself evolvable; functions such as template copying must be embodied mechanisms in the world so that they can be affected by evolution, and so evolved.  Crucially both StringMol and GraphMol have embodied template copying, where a ``replicase'' molecule can copy another following the algorithm in \cref{alg:stringmolgraphmol}.
 
 \begin{algorithm}[ht]
 	$\text{i} \leftarrow \text{start(string B)}$\;
@@ -290,8 +290,8 @@ Of the forms of replicators defined by \textcite{Zachar2010} and described in \c
 
 \begin{itemize}[noitemsep]
 	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.
-	\item Variable replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
-	\item Informational replicators based on shortcuts are fundamentally limited as their inheritance/heredity mechanism is not evolvable.
+	\item Limited heredity replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
+	\item Informational replicators based on replication ``shortcuts'' are in practice still limited as their inheritance/heredity mechanism is not evolvable.
 \end{itemize} 
 
 None of the artificial systems reviewed in \cref{previous-work} reach the goal of an unlimited heredity informational replicator, but it is apparent that this is a non-trivial objective. Furthermore, of the emergent systems reviewed, none reach any more than exact heredity.

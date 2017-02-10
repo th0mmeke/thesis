@@ -58,7 +58,7 @@
 \restylefloat{figure}
 	
 \author{Thomas Young}
-\title{Towards Emergent\\Replicators\\in an Artificial\\Chemistry}
+\title{Towards Emergent\\Replicators\\in a Molecular\\Artificial Chemistry}
 \degree{A thesis submitted for the degree of Doctor of Philosophy in Computer Science in the University of Canterbury}
 \abstract{}
 
@@ -71,9 +71,9 @@
 \begin{document}
 \include{glossary}
 \include{introduction}
+\include{model}
 \include{toyworld}
 \include{toyworld2}
-\include{model}
 \include{conclusions}
 \part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place

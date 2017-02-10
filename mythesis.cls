@@ -174,7 +174,7 @@
   \sffamily%
   \fontsize{18}{20}\selectfont\par\noindent\textcolor{darkgray}{\textls[200]{\MakeTextUppercase{\theAuthor}}}%
   \vspace{11.5pc}%
-  \fontsize{36}{40}\selectfont\par\noindent\textcolor{darkgray}{\textls[200]{\MakeTextUppercase{\theTitle}}}%
+  \fontsize{32}{36}\selectfont\par\noindent\textcolor{darkgray}{\textls[200]{\MakeTextUppercase{\theTitle}}}%
   \vfill%
   \fontsize{14}{16}\selectfont\par\noindent{\allcaps{\theDegree}}%%
   \vspace{2pc}%

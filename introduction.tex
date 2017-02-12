@@ -1,16 +1,16 @@
 \chapter{Introduction}
 
-In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements. The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
-
-Unfortunately, the emergence of an informational replicator from low-level elements has been extremely hard to achieve in artificial systems, and remains an open problem. Previous work has either introduced handbuilt replicators (\eg \cite{Hutton2003}), or relied upon specific, non-evolvable scaffolding in the base system (\eg the h-copy operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
-
-However, there is another, simpler, form of biological replicator that also can maintain information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
-
-Although the gap from variable to informational replicators seems large, and the pathway that leads from a variable repliactor to an informational one poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. 
-
-Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without demonstrating their emergence from lower-level elements. Almost all prevous work though has been concerned with the pathway to a variable replicator in a chemically and biologically plausible system. One major assumption of this work is that real-world molecular biology relies upon catalysed reactions, and therefore any pathway should also be catalytic in nature. However, if the goal is any type of variable replicator rather than biologically plausible variable replicators, non-catalytic pathways become a valid option.
-
-Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
+%In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements. The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
+%
+%Unfortunately, the emergence of an informational replicator from low-level elements has been extremely hard to achieve in artificial systems, and remains an open problem. Previous work has either introduced handbuilt replicators (\eg \cite{Hutton2003}), or relied upon specific, non-evolvable scaffolding in the base system (\eg the \url{h-copy} operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
+%
+%However, there is another, simpler, form of biological replicator that also can maintain information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
+%
+%Although the gap from variable to informational replicators seems large, and the pathway that leads from a variable repliactor to an informational one poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. 
+%
+%Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without demonstrating their emergence from lower-level elements. Almost all prevous work though has been concerned with the pathway to a variable replicator in a chemically and biologically plausible system. One major assumption of this work is that real-world molecular biology relies upon catalysed reactions, and therefore any pathway should also be catalytic in nature. However, if the goal is any type of variable replicator rather than biologically plausible variable replicators, non-catalytic pathways become a valid option.
+%
+%Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
 
 \section{Context}\label{context}
 
@@ -45,7 +45,7 @@ orders of magnitude over the uncatalysed reaction, enabling reactions fundamenta
 uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
 the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
 
-In \emph{Autocatalysis}, introduced by \textcite{Ostwald1890}, rather than reducing the required activation
+In \emph{autocatalysis}, introduced by \textcite{Ostwald1890}, rather than reducing the required activation
 energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
 reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
 characteristic rate acceleration over time given by the differential equation--
@@ -107,14 +107,16 @@ However, the primary postulates of origins of life research are not our postulat
 	\label{major-stages-early-life}
 \end{figure}
 
-\section{Previous work}\label{previous-work}
+
+\subsection{Replicators in evolutionary theory}\label{replicators-in-evolutionary-theory}
 
 Although artificial systems are the main focus of this thesis, there is a natural overlap with research in biology into the origins of life. In particular the transition from chemistry to biology has several central concerns in common with our field of emergent replication in artificial systems. For example, how does the interaction of lower-level elements can form long-lived composite structures? What are the necessary and sufficient conditions for evolution? How does an evolutionary process begin in a non-evolutionary system? This overlap means that much of the most relevant previous work is to be found in origins-of-life research. 
 
-In this particular \namecref{previous-work} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with artificial systems. 
+In this particular \namecref{replicators-in-evolutionary-theory} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with artificial systems. 
 
-\subsection{Replicators in evolutionary theory}\label{replicators-in-evolutionary-theory}
-We begin by reviewing the concept of replicators in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}. 
+We begin by reviewing the concept of replicators in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
+	
+	First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}. 
 
 In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
 
@@ -130,15 +132,18 @@ Relatively recently, \textcite{Zachar2010} saw a need to reexamine the definitio
 
 %A regenerating/recreating entity can produce at least one entity equivalent to it. It is possible that the original entity immediately decomposes (that is, cannot be the subject of further turns of the cycle), causing sequential replacement, although this is the most simple of regenerating entities. If it can effectively increase the number of entities equivalent to itself, then it is autocatalytic and is a \emph{replicator}.
 
-They conclude that a replicator is ``any autocatalytic entity for which there is a selection process defined'', using autocatalysis in the general sense of a cyclical process that increases $A$ by $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$), and where selection has the fairly standard definition of ``a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010}
+They conclude that a \textit{replicator} is ``any autocatalytic entity for which there is a selection process defined'', using autocatalysis in the general sense of a cyclical process that increases $A$ by $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$), and where selection has the fairly standard definition of ``a process, acting on a particular population of entities in a particular environment, which sorts entities according to their phenotypes.'' \parencite[p.21]{Zachar2010}
 
-In the following \namecrefs{non-informational-exact-replicators} we review some pertinent previous work following the classification\footnote{With the exception of \emph{reproducers} (replicators with a developmental component) as these extend informational replicators.} presented in \textcite{Zachar2010} and extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}: 
+Building on thsis, \textcite{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}, go on to develop a general classification of replicators as a logical sequence of forms:  
 
-''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state. If such changes can be passed on to the offspring then the replicator is \emph{informational}. If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' \parencite[p.21]{Zachar2010}
+\begin{enumerate}
+	\item ''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. 
+	\item If a variation can arise in the structure in such a way that it does not change equivalence of the entity, then it is a \emph{variable} replicator, with more than one stable state.
+	\item If such changes can be passed on to the offspring then the replicator is \emph{informational}. 
+	\item If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' 
+\end{enumerate} \parencite[p.21, numbering added for emphasis]{Zachar2010}
 
-	\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
-	
-	First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}
+\section{Previous work}\label{previous-work}
 
 \subsection{Replication without self-replication}
 
@@ -175,9 +180,7 @@ The model of \cite{Vasas2015, Vasas2012, Vasas2012a}, derived from \cite{Farmer1
 
 \subsection{Unlimited heredity replicators with shortcut replication mechanism}
 
-A \emph{shortcut} is where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entity it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is Squirm3.
-
-\emph{Squirm3} \parencite{Hutton2007,Hutton2002}. An artificial system capable of life-like \gls{oe} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
+A \emph{shortcut} is where the replication mechanism is directly implemented by the experimenter rather than being an emergent property \parencite{BanzhafBaumgaertnerBeslonEtAl2016}. As the mechanism is external to the entity it is not under selection; shortcut replicators are not, by our definition, open-ended. One of the most well-known systems with a shortcut replication system is \emph{Squirm3} \parencite{Hutton2007,Hutton2002}, an artificial system capable of life-like \gls{oe} (creativity), initially developed with the goal of testing the hypothesis of \textcite{Taylor2001} \parencite[p.341]{Hutton2002}.
 
 All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g., a, b, c\dots) and \emph{states} (e.g., 0, 1, 2\dots). Atoms and hence molecules are located on a 2D grid, and molecules cannot overlap or pass through each other. All reaction rules, such as \emph{R1: e8 + e0 $\rightarrow$ e4e3}, are pre-specified (\textcite[p.4]{Hutton2007} and \textcite[p.49]{Faulconbridge2011}), and a shortcut consisting of a set of eight rules in \textcite{Hutton2002} is sufficient to replicate single molecules. As all reaction rules, including those responsible for replication and hence inheritance, are exogenous to the model, the inheritance mechanism in Squirm3 is not evolvable. 
 
@@ -236,7 +239,7 @@ Tierra was also the starting point for \textcite{Taylor2001, Taylor:1999sc} to e
 
 Like Tierra, the automata engine in Avida is based on a Turing tape-like metaphor, with instruction, read, write, and flow control heads that can be moved forward and backwards through memory using relative rather than absolute addressing. Instructions are grouped into instruction sets, with the default set containing 26 instructions, and by definition every program is valid. Each organism runs on its own virtual automata; the only interaction between organisms is via resources in the shared environment and through competition for virtual machine CPU cycles based on ``merit'' or fitness. Direct Tierra-style interactions by insertion of code into another organism is not enabled by default, but is possible through configuration. Phenotypes take the form of computations (entities take in resources, perform computations that result in merit, and perhaps produce output or by-product resources): ``\ldots by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources'' \parencite{Ofria2004}. Interestingly, the resources in the environment are not the same as the elements of the organisms (instructions from an instruction set.) Avidan organisms are not fully-embedded in their environment.
 
-New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is placed at the beginning of its code, the write-head placed at the start of the newly allocated memory and successive h-copy instructions copy the instruction from the read-head to the write-head and advance both. Either once all instructions have been copied (or perhaps before) h-divide splits the child from the parent (all instructions between read-head and write-head go to the child) and starts both executing in a clean state. Variation is introduced through mutations which can be introduced through either h-copy (the write-head writes a random instruction rather than the instruction at the read-head) or in h-divide (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for h-copy, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for h-divide. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \textcite[A1.3]{Ofria2004} consists of 15 instructions.
+New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is placed at the beginning of its code, the write-head placed at the start of the newly allocated memory and successive \url{h-copy} instructions copy the instruction from the read-head to the write-head and advance both. After all instructions have been copied, \url{h-divide} splits the child from the parent (all instructions between read-head and write-head go to the child) and start execution in both parent and child from a clean state. Variation comes through mutations which can be introduced through either \url{h-copy} (the write-head writes a random instruction rather than the instruction at the read-head) or in \url{h-divide} (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for \url{h-copy}, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for \url{h-divide}. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \textcite[A1.3]{Ofria2004} consists of 15 instructions.
 
 Avida is extremely configurable, but provides little guidance or theoretical justification for any particular configuration. Indeed this variability allows it to function most usefully as a general testbed for experiments, \eg ``in one experiment we wanted to study a population that could not adapt, but that would nevertheless accumulate deleterious or neutral mutations through drift'' \parencite{Ofria2004}.
 
@@ -284,9 +287,26 @@ These mechanism differences (the choices of which functions are crisp and which 
 
 Despite the use of the term ``embodied'', those functions that aren't ``crisp'' are not in fact fully self-referential as the pattern-matching algorithm itself remains unaffected by evolution. There is also a disconnect between the properties of the targets of the matches and the functioning of the algorithm. The algorithm matches on the symbol, and is completely unaffected by the meaning or properties of those symbols, the underlying microcode. In this it differs significantly from a completely endogenous system such as a biological replicase, where the match or bind is actioned by the same chemical rules that construct and maintain the replicase from component atoms.
 
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Previous work.}
+		\label{tab1}
+		\begin{tabular}{@{}p{3cm}p{3cm}p{4cm}p{3cm}@{}}
+			\toprule
+			Artificial replicator            	& Model form					& Exact$\Leftrightarrow$Variable \parencite{Zachar2010}& Endogenous$\Leftrightarrow$Exogenous replication\\ 
+			\midrule
+
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+Informational$\Leftrightarrow$Non-informational \parencite{Zachar2010}
+
 \section{Research questions}\label{research-questions}
 
-Of the forms of replicators defined by \textcite{Zachar2010} and described in \cref{replicators-in-evolutionary-theory}, only unlimited heredity informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution:
+Of the forms of replicators defined by \textcite{Zachar2010} and described in \cref{previous-work}, only unlimited heredity informational replicators provide both the representational range and the evolutionary flexibility for open-ended evolution:
 
 \begin{itemize}[noitemsep]
 	\item Exact replicators lack heredity as they cannot pass on variability to their descendents.

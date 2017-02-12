@@ -118,7 +118,7 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 \end{enumerate}
 
 
-From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the form of a reaction cycle can also be considered the species of the reaction cycle, and it is this nomenclature that we shall adopt from here onwards.
+From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the \textit{form} of a reaction cycle can also be considered the \textit{species} of the reaction cycle, and we shall use species to mean the form of the reaction cycle from here onwards.
 
 Therefore we seek reaction cycles of the same species where one cycle gives rise ($\rightarrow$) to two or more cycles of the same species. What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared simulation molecules (individual molecules, not species.)
 
@@ -229,7 +229,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 
 \section{Initial conditions}
 
-The foodset contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O. Each replicate (run) of the experiment was for 100,000 generations, with an initial \gls{ke} for the reactor vessel of 50 units, switching every 10,000 generations alternately between \gls{ke}=140 and \gls{ke}=50. At every step, 5 molecules randomly chosen molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
+The foodset contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O. Each replicate (run) of the experiment was for 100,000 generations, with an initial \gls{ke} for the reactor vessel of 50 units, switching every 10,000 generations alternately between \gls{ke}=140 and \gls{ke}=50. At every step, 5 randomly-selected molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
 \section{Results and discussion}
 
@@ -290,7 +290,7 @@ Regular pertubations are at the core of the liposome model of \textcite{Fernando
 
 \section{Environmental models}\label{environmental-models}
 
-First we describe the two distinct types of relationship between an entity and its environment--stable, and changing.
+First we describe  two distinct types of relationship between an entity and its environment: stable, and changing.
 
 A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
@@ -306,7 +306,7 @@ In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a s
 
 \section{Evolutionary model}
 
-In the Local reactant selection strategy, we implement a form of spatial constraint (following \cite{Segre1998}). Specifically, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, but they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
+In the Local reactant selection strategy, we implement a form of spatial constraint (following \cite{Segre1998}). Specifically, all non-foodset reactants must come from the same area of the reactant vessel. First we select two molecules from the combined foodset and reaction vessel population. If neither is a foodset molecule, and they aren't co-located, we replace the second molecule by either a molecule from the same location, or by a foodset molecule. 
 
 The available energy for a reaction, $E_{avail}$, always equals $E_{vessel}$, regardless.
 

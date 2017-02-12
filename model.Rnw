@@ -56,8 +56,6 @@ This example of the transition to life is an example of \emph{extending} \gls{en
 
 \Textcite{Arthur2009} describes a mechanism for the evolution of technology, where evolution is used in the sense of ``all objects of some class are related by ties of common descent from the collection of earlier objects''. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lineage and provides new raw components for inclusion in later technologies. \Textcite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's answer is that novelty comes from this incorporation of new phenomena from the source, the natural world.
 
-Evolution is related to innovation: in fact, Arthur claims that by understanding the mechanism by which technologies evolve we will understand how innovations arise. In other words, innovations arise as the result of an evolutionary process, rather than \textit{de novo} from the brain of a designer. Darwinian evolution, or natural selection, is not appropriate for technology. Arthur quotes from Samuel Butler's essay ``Darwin Among the Machines'' to illustrate the impossibility of the slavish adoption of biological models: ``{[}t{]}here is nothing which our infatuated race would desire more than to see a fertile union between two steam engines\ldots{}''.
-
 The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
 
 However, even Arthur in his rejection of ``Darwinian evolution'', describes a process that still relies on selection, variation and inheritance. This is not the case in our final example, DaisyWorld.
@@ -149,7 +147,7 @@ Variation and selection are sufficient for inheritance, where the degree and var
 We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{heritability} and \emph{fitness}, are represented as explicit parameters:
 
 \begin{enumerate}
-	\item \emph{Fidelity} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
+	\item \emph{Heretability} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
 \end{enumerate}
 
@@ -451,7 +449,7 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 \Cref{hypothesis-2} allows us to make two specific predictions for changing environments:
 
 \begin{enumerate}
-	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item Heritability is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
 	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
@@ -473,12 +471,12 @@ As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and 
 		\node at (6.5,-4) {$\sigma_e$};
 		\end{tikzpicture}
 	}
-	\caption{The cube formed by the ranges of the three parameters to the environmental model, $\Theta$, $\sigma_e$ and $\delta$.}
+	\caption{The parameter space formed by the ranges of the three parameters to the environmental model, $\Theta$, $\sigma_e$ and $\delta$.}
 	\label{fig:cube}
 	\end{center}
 \end{figure}
 
-We create a set of independent datasets by sampling from four different parameter cubes, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable (the length of a cube side) is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
+We create a set of independent datasets by sampling from four different parameter sets, as defined in \cref{tbl:range-of-independent-variables}. The extremes of the ranges see a lower proportion of the runs (representing more significant environmental changes or more rapid changes) reach completion than was seen in the centre (where the environment was stable.) The range of each variable is adjusted from dataset to dataset to balance an adequate density of coverage across the overall range against the total run time.
 
 \begin{table}
 	\scriptsize
@@ -699,5 +697,5 @@ In \cref{mean-heritability-predictability} we constructed a random-effects facto
 
 The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
 
-Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution to suit the population environment.
+Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution.
 

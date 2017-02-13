@@ -51,7 +51,7 @@ However, there is an earlier, and more influential, categorisation by \textcite{
 
 \section{\textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme of Dittrich et al.}\label{dittrich}
 
-In \textcite{Dittrich:2001zr}, \glspl{achem} are classified according to the tuple \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions. 
+In \textcite{Dittrich:2001zr}, a broad variety of \glspl{achem} are classified according to the tuple \textless{}\emph{S},\emph{R},\emph{A}\textgreater{} where \emph{S} describes the form of the component molecules in the \gls{achem}, \emph{R} the rules for the interactions between the molecules, or reaction rules, and \emph{A} the mechanism used to select molecules for reactions\footnote{An alternative \textless{}\emph{S},\emph{I}\textgreater{} form is also described, where \emph{I} combines the \emph{R} and \emph{A} components, but is less descriptive and less commonly used in the literature.}. 
 
 \subsection{Set of molecules (\textless{}\emph{S}\textgreater{})}
 

@@ -155,7 +155,45 @@ Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{S
 	\item If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' 
 \end{enumerate}
 
+
+
+Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
+
+Question: at what point does an autocatalytic set become probable?
+
+Static analysis of reaction graphs.
+
+Relationship suggested between P and probability of formation of a RAF set in \cite{Hordijk2004} 
+RA means reflexively , F for food generated.
+Requires a way to determine if a given reaction network contains a RAF set - described a polynomial time algorithm
+Model later optimized in 2015, not just positive but negative or inhibitory catalysis
+Predictions tested against binary polymer model, but algorithm not specific to that model.
+Algorithm not specific to RAF, also works for F by saying no RA
+
+Lower-bound established for levels of catalysis required for a RAF set in \cite{Hordijk2011}, but restricted to RAF not F.
+Related probability of all-molecule RAF (RAF that includes all molecules in reaction network, but not necessarily all reactions) \cite[sect. 4]{Hordijk2011} formation to catalysis reviewed in \cite[sect. 6.1]{Hordijk2011}
+Derivation based on binary polymer model, includes terms for length of polymer and alphabet size
+Each molecule catalyses on average ${\lambda}n$ for polymers up to length $n$, provided $\lambda>log_e(K)$ for alphabet of size $K$.
+Assumption in derivation doesn't hold if no catalysis, that is $\lambda=0$. Come back to this.
+
+Finding all irrRAF (cores in \cite{Vasas2012}) in reaction network NP-hard problem \parencite{Steel2013}
+But sampling algorithm can 
+\begin{itemize}
+	\item find a sample set of irrRAFS, and
+	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
+\end{itemize}
+
+
+
 \section{Previous work}\label{previous-work}
+
+\emph{RBN-World} \parencite{Faulconbridge2011} is a \gls{achem} where the entities take the form of \gls{rbn} \parencite{Kauffman:1969ne}, with the addition of a bonding mechanisms to allow for their composition and decomposition. The resulting form of \gls{rbn} is called a bonding \gls{rbn} or bRBN.  Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.'' The choice of reactants is described as ``Gillespie-like'', and essentially random, uncorrelated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}.
+
+Each bRBN is a synchronous RBN, made up of a number of nodes, each with an initial state (\emph{true} or \emph{false}) assigned randomly and with an input/output matrix assigned randomly. Finally k(=2) inputs are established per node. The bonding method uses ``cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' After initial bond formation the algorithm recalculates cycle lengths, and checks again for equality. This might result then in decomposition (records are kept of composition operations so that the reverse decomposition can be easily done.)
+
+A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (as the preferred measures of auto-catalytic sets and \glspl{hypercycle} are too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}. 
+
+The development of RBN-World involved many design choices, some essentially adhoc, such as the choice of \gls{rbn}: ``...the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.'' \parencite[p. 192]{Faulconbridge2011}
 
 \subsection{Replication without self-replication}
 
@@ -165,18 +203,7 @@ Mutations in cycles are generally not heritable as mutant copies are rarely func
 
 \subsection{Exact replicators}\label{non-informational-exact-replicators}
 
-Autocatalysis by definition is replication; if the entities are molecules, the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ replicates the molecule $A$ (\eg \textcite{Lifson1997}). Evolutionary variation though is difficult as the exponential growth of the main autocatalytic product will generally overwhelm the molecules produced by any side reactions unless 1) they are also autocatalytic, and 2) the solution contains the molecules needed to initiate and maintain this alternate autocatalysis cycle.
-
-%GGL/ToyChem \textcite{Benko2003,Benko2005}                        	&Atoms/Molecules&&None--at level of reactions\\	
-%RBN-World \textcite{Faulconbridge2011}                            	&Boolean Networks and Graphs& None--at level of ACS\\
-
-\emph{RBN-World} \parencite{Faulconbridge2011} is a \gls{achem} where the entities take the form of \gls{rbn} \parencite{Kauffman:1969ne}, with the addition of a bonding mechanisms to allow for their composition and decomposition. The resulting form of \gls{rbn} is called a bonding \gls{rbn} or bRBN.  Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.'' The choice of reactants is described as ``Gillespie-like'', and essentially random, uncorrelated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}.
-
-Each bRBN is a synchronous RBN, made up of a number of nodes, each with an initial state (\emph{true} or \emph{false}) assigned randomly and with an input/output matrix assigned randomly. Finally k(=2) inputs are established per node. The bonding method uses ``cycle length as the bonding property and equality as the bonding criterion....bonds only exist between bRBNs that have the same cycle length.'' After initial bond formation the algorithm recalculates cycle lengths, and checks again for equality. This might result then in decomposition (records are kept of composition operations so that the reverse decomposition can be easily done.)
-
-A number of parameters affect the behaviour of the chemistry, and so a series of experiments sampled from the parameter-space, and then used a GA, to search for interesting variants as measured by non-catalysed ``loops'' (as the preferred measures of auto-catalytic sets and \glspl{hypercycle} are too rare for use as a measure) \parencite[chap.8]{Faulconbridge2011}. 
-
-The development of RBN-World involved many design choices, some essentially adhoc, such as the choice of \gls{rbn}: ``...the choice to use RBNs as the sub-symbolic representation in RBN-World was based on limited information. As a discrete dynamical system that is computationally tractable yet also spans a wide range of behaviours, RBNs met the appropriate criteria. It is not expected that RBNs are the best representation however; others may be more suitable for particular emergent properties.'' \parencite[p. 192]{Faulconbridge2011}
+Autocatalysis by definition is replication; if the entities are molecules, the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ replicates the molecule $A$ (\eg \textcite{Lifson1997}). Evolutionary variation though is difficult as the exponential growth of the main autocatalytic product will generally overwhelm the molecules produced by any side reactions unless \begin{inparaenum}\item they are also autocatalytic, and \item the solution contains the molecules needed to initiate and maintain this alternate autocatalysis cycle.\end{inparaenum}
 
 \subsection{Limited heredity replicators}\label{variable-replicators}
 
@@ -382,7 +409,7 @@ This thesis makes the following novel contributions:
 
 \begin{compactenum}
 \item A model for the effect of selection pressure upon heritability, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
-\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
+\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{ch:multiplication}.)
 \item A modular \gls{achem}, ToyWorld (\cref{toyworld}.)
 \item Evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{reactant-and-product-strategies}.)
 

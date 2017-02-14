@@ -72,53 +72,9 @@ See \cref{alg:flow-selection}.
 	
 \section{Measures}\label{emergent-measure}
 
-Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
+From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. 
 
-Question: at what point does an autocatalytic set become probable?
-
-
-Static analysis of reaction graphs.
-
-Relationship suggested between P and probability of formation of a RAF set in \cite{Hordijk2004} 
-RA means reflexively , F for food generated.
-Requires a way to determine if a given reaction network contains a RAF set - described a polynomial time algorithm
-Model later optimized in 2015, not just positive but negative or inhibitory catalysis
-Predictions tested against binary polymer model, but algorithm not specific to that model.
-Algorithm not specific to RAF, also works for F by saying no RA
-
-Lower-bound established for levels of catalysis required for a RAF set in \cite{Hordijk2011}, but restricted to RAF not F.
-Related probability of all-molecule RAF (RAF that includes all molecules in reaction network, but not necessarily all reactions) \cite[sect. 4]{Hordijk2011} formation to catalysis reviewed in \cite[sect. 6.1]{Hordijk2011}
-Derivation based on binary polymer model, includes terms for length of polymer and alphabet size
-Each molecule catalyses on average ${\lambda}n$ for polymers up to length $n$, provided $\lambda>log_e(K)$ for alphabet of size $K$.
-Assumption in derivation doesn't hold if no catalysis, that is $\lambda=0$. Come back to this.
-
-Finding all irrRAF (cores in \cite{Vasas2012}) in reaction network NP-hard problem \parencite{Steel2013}
-But sampling algorithm can 
-\begin{itemize}
-	\item find a sample set of irrRAFS, and
-	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
-\end{itemize}
-
-However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
-
-But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
-Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
-RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
-Fuschslin describes two approaches to analysis - static (as above) and dynamic
-
-Trace dynamic approach back to concerns in \cite{Bagley1991}
-Interested in concentrations over time - introduction of time dimension - dynamics
-Although took an ODE approach based on reaction rates, rather than in simulation.
-
-\begin{enumerate}
-	\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
-	\item But this algorithm cannot be applied to non-catalytic F-generated sets.
-	\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
-	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
-\end{enumerate}
-
-
-From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the \textit{form} of a reaction cycle can also be considered the \textit{species} of the reaction cycle, and we shall use species to mean the form of the reaction cycle from here onwards.
+As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the \textit{form} of a reaction cycle can also be considered the \textit{species} of the reaction cycle, and we shall use species to mean the form of the reaction cycle from here onwards.
 
 Therefore we seek reaction cycles of the same species where one cycle gives rise ($\rightarrow$) to two or more cycles of the same species. What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared simulation molecules (individual molecules, not species.)
 
@@ -380,6 +336,27 @@ We define a \emph{stable cycle state} as a chain of two or more cycles linked by
 Environmental variability is approximated by sample entropy, a metric of predictability.
 
 %\textcite[Appendix 1]{Edmonds1999} contains a thorough review of complexity measures. More recently, see \textcite{Prokopenko2009}, \textcite{Ladyman2011}, and also \textcite{Lloyd2001}.
+
+\section{Measures}
+
+However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
+
+But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
+Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
+RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
+Fuschslin describes two approaches to analysis - static (as above) and dynamic
+
+Trace dynamic approach back to concerns in \cite{Bagley1991}
+Interested in concentrations over time - introduction of time dimension - dynamics
+Although took an ODE approach based on reaction rates, rather than in simulation.
+
+\begin{enumerate}
+	\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
+	\item But this algorithm cannot be applied to non-catalytic F-generated sets.
+	\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
+	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
+\end{enumerate}
+
 
 \section{Experiment design}
 

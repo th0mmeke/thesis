@@ -130,7 +130,7 @@ We begin by reviewing the concept of replicators in evolutionary theory. Heredit
 
 In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
 
-But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator\footnote{In \textcite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness}? Is a set of autocatalytic reactions that splits into two replicating? \Textcite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. 
+But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator\footnote{In \textcite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness.}? Is a set of autocatalytic reactions that splits into two replicating? \Textcite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. 
 
 %\textcite{Hogeweg1998} describes attractor-based heredity (inheritance of state) and storage-based. 
 %
@@ -198,7 +198,7 @@ All elements in Squirm3 are constructed from atoms defined by \emph{types} (e.g.
 
 Individual entities in \textcite{Hutton2002} are simply single molecules. \Textcite{Hutton2007} introduces cells made up of a collection of molecules and bounded by a membrane of a particular atom type of limited reactivity; the membrane is intended to allow individuals to benefit from innovations by protecting their internal reactions from others. With a greatly increased set of predefined reaction rules (34 rules now for the cell replication shortcut, extended further again in \textcite{Lucht2012}), each cell has the capacity for division and mutation (through the stochastic application of equally-applicable rules).  Selection is purely by indirect competition for the raw materials (atoms in the environment) required by the reactions in a cell; interactions between individuals are purely through this indirect competition (niche construction without direct interaction). Cells in \textcite{Hutton2007} are incapable of making use of resources from other cells (as they are effectively protected by non-reactant membranes) and so an intermittent exogenous mechanism (``floods'') is used to return the atoms in a number of randomly chosen cells to the environment.
 
-\subsection{Unlimited heredity replicators or self-replicators}
+\subsection{Unlimited heredity replicators}
 Replication in these systems emerges from the base rules (or \textit{level-0} rules in the terminology of \textcite{BanzhafBaumgaertnerBeslonEtAl2016}) without being directly specified by the experimenter or designer. However, even here most systems still shortcut this by providing a seed or universal ancestor (\eg \textcite{Ofria2004}) that contains a working module for replication that can be then modified (for good or ill) in each subsequent generation.
 
 \subsubsection{String-manipulation systems}
@@ -343,9 +343,9 @@ This thesis is therefore motivated by the following research questions:
 
 \begin{enumerate}[label=RQ\arabic*:]
 	
-	\item \emph{What effect does selection pressure have on heredity?} A simple variable replicator is an imperfect mechanism for transmitting heritable information from one generation to the next. Can we demonstrate the existence of a pathway from an imperfect replicator to an full informational replicator with an improved capacity for heredity? We describe a model for the response of heredity to selective pressure in \cref{model}.
+	\item \emph{What is the relationship between heritability and selection pressure?} A simple replicator is an imperfect mechanism for transmitting heritable information from one generation to the next; can we show a pathway from an imperfect replicator to an full informational replicator with an improved capacity for heredity? We describe a model for the response of heredity to selective pressure in \cref{ch:models-of-inheritance}.
 	
-	\item \emph{What elements of replication can be demonstrated in an \gls{achem}?} Although replicators have been studied extensively, previous models have provided, or assumed, the provision of a replication mechanism rather than having the mechanism evolve. We would like to show that replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in the remaining of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a modular \gls{achem} that embodies a new structure for \glspl{achem}, and show that it is capable of reaction cycles. We then conclude with an investigation into the emergence of variable replication based on these cycles in \cref{emergence-of-variable-replicators}.
+	\item \emph{What elements of replication can be demonstrated in a molecular \gls{achem}?} Although replicators have been studied extensively, previous models have provided, or assumed, the provision of a replication mechanism rather than having the mechanism evolve. We would like to show that replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in chapters \cref{introduction-to-achems,ch:variability} of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a modular \gls{achem} that embodies a new structure for \glspl{achem}, and show that it is capable of reaction cycles. We then conclude with an investigation into the emergence from these cycles of simple multiplication in \cref{ch:multiplication}, and then variability in the sense of \textcite{Zachar2010} in \cref{ch:variability}.
 
 \end{enumerate}
 
@@ -380,15 +380,16 @@ Note that there are some differences between the design of experiments in the ph
 This thesis makes the following novel contributions:
 
 \begin{compactenum}
-\item Demonstration of the emergence of Variable Replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
-\item A modular \gls{achem}, ToyWorld, structured according to this scheme, for the evaluation of various strategies, and for the exploration of replication in glspl{achem} (\cref{toyworld}.)
-\item Evaluation of reaction and product selection strategies in an \gls{achem} (\cref{reactant-and-product-strategies}.)
-\item A parameterised model of the emergence of inheritance from variation and selection, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
+\item A model for the effect of selection pressure upon heritability, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
+\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{emergence-of-variable-replicators}.)
+\item A modular \gls{achem}, ToyWorld (\cref{toyworld}.)
+\item Evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{reactant-and-product-strategies}.)
+
 \item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
 \end{compactenum}
 
 A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
 
-The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (from \cref{toyworld2}) is also available under GNU GPL v2 from GitHub (see \cite{toyworld2}.)
+The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (from \cref{ch:variability}) is also available under GNU GPL v2 from GitHub (see \cite{toyworld2}.)
 
 

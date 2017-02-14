@@ -137,25 +137,26 @@ Artificial Chemistries have also been used in the exploration of open-ended or c
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption{A sample of Artificial Chemistries for open-ended evolution.}
+	\caption{A sample of Artificial Chemistries for open-ended evolution. Constructive chemistries are capable of ongoing extension.}
 	\label{tab1}
 	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
 		\toprule
-		Chemistry                                                          & Energy Model?                                                      & Constructive?                            \\ 
+		Chemistry                                                          & Constructive? (see \cref{constructive-chemistries})\\ 
 		\midrule
-		\cite{Ducharme2012}                                                & Yes                                                                & Yes                                      \\
-		StringMol \parencite{Hickinbotham2012}                             & No, global energy only, conservation of mass as proposed extension & Yes                                      \\
-		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                                                 & No                                       \\
-		RBN-World \parencite{Faulconbridge2011}                            & Unknown                                                            & Yes                                      \\
-		\cite{Lenaerts2009}                                                & No                                                                 & Yes - molecular interactions             \\
-		ZChem \parencite{Tominaga2004}                                     & Conservation of mass                                               & No - reactions are atomic with wildcards \\
-		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & No                                                                 & Unknown                                  \\
-		\cite{Fernando:2008xy,Fernando:2007pf}                             & Yes, and thermodynamics govern reactions                           & No - atomic reactions                    \\
-		\cite{Gardiner2007}                                                & No                                                                 & No - atomic reactions                    \\
-		NAC \parencite{Suzuki2006}                                         & Unknown                                                            & Yes                                      \\						
-		GGL/ToyChem \parencite{Benko2005}                                  & Mass conservation only                                             & Yes                                      \\
-		Lattice \gls{achem} \parencite{Ono2000,Madina2003}        & No                                                                 & No                                       \\
-		GGL/ToyChem \parencite{Benko2003}                                  & Mass conservation only                                             & No - pre-defined reactions only          \\
+		\cite{Ducharme2012}                                                & Yes                                      \\
+		StringMol \parencite{Hickinbotham2012}                             & Yes                                      \\
+		RBN-World \parencite{Faulconbridge2011}                            & Yes                                      \\
+		\cite{Lenaerts2009}                                                & Yes--molecular interactions             \\
+		NAC \parencite{Suzuki2006}                                         & Yes                                      \\						
+		GGL/ToyChem \parencite{Benko2005}                                  & Yes                                      \\
+		\midrule
+		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & Unknown                                  \\
+		\cite{Fernando:2008xy,Fernando:2007pf}                             & No--atomic reactions                    \\
+		\cite{Gardiner2007}                                                & No--atomic reactions                    \\
+		Lattice \gls{achem} \parencite{Ono2000,Madina2003}        		   & No                                       \\
+		GGL/ToyChem \parencite{Benko2003}                                  & No--pre-defined reactions only          \\
+		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                       \\
+		ZChem \parencite{Tominaga2004}                                     & No--reactions are atomic with wildcards \\
 		\bottomrule
 	\end{tabular}
 	\end{center}
@@ -173,7 +174,7 @@ In this \namecref{introduction-to-achems}, we have:
 	\item Suggested, by providing examples of other \glspl{achem} in the exploration of \gls{alife} and the origin of life, the suitability of an \gls{achem} for addressing our research questions.
 \end{itemize}
 
-From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld, that lies closer to the chemically-realistic end than to the abstract end of the \gls{achem} continuum.
+From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld.
 
 \chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{toyworld}
 
@@ -243,9 +244,7 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, for example:
 		reactions $\leftarrow$ enumerate all possible reaction options\;
 		reaction $\leftarrow$ choose from $reactions$ according to the Product selection strategy\;
 		\BlankLine
-		\uIf{reaction is possible}{
-			Update the reactor with the results of carrying out the $reaction$\;
-		}
+		Update the reactor with the results of carrying out the $reaction$\;
 	}
 	\caption{The main simulation loop in ToyWorld.}\label{alg:toyworld-main-loop}
 \end{algorithm}
@@ -416,7 +415,7 @@ By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kin
 	i$\leftarrow$0\;
 	\While{|ReactantList| = 0}{
 		i $\leftarrow$ i + 1\;
-		Advance the position of all molecules by $\Delta$t\;
+		Advance the position of all molecules by $\Delta$t\ and update $ReactantList$ with all colliding molecules\;
 		\tcp{Check that $\Delta$t is neither too small nor too large}
 		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
 			Adjust $\Delta$t\;
@@ -432,7 +431,7 @@ By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kin
 	}
 	\Return $\emptyset$
 }
-\caption{\emph{KineticReactantSelection.}. Reactant selection strategy where colliding molecules are returned as reactants.}\label{alg:kinetic-selection}
+\caption{\emph{KineticReactantSelection.} Reactant selection strategy where colliding molecules are returned as reactants.}\label{alg:kinetic-selection}
 \end{algorithm}
 
 \subsection{Intra-molecular selection and external force selection}\label{intra-molecular-selection-and-external-force-selection}
@@ -831,15 +830,11 @@ The energy and reaction models produce results consistent with our predictions f
 
 The ToyWorld model contains a number of parameters that might conceivably affect its response; as the results of any experiment, and hence the conclusions drawn, are causally related to the experimental parameters used, it's important to characterize the influence of parameters on the results. In this section we explore the following questions:
 
-\vspace{0.3cm}
-\begin{minipage}[l]{0.95\textwidth}
-	\begin{enumerate}[label=RQ2.\arabic*:]
-		\item Is there a quantitative difference between different reactant and product selection strategies?
-		\item Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?
-		\item Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?
-	\end{enumerate}
-\end{minipage}
-\vspace{0.3cm}
+\begin{enumerate}
+\item Is there a quantitative difference between different reactant and product selection strategies?
+\item Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?
+\item Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?
+\end{enumerate}
 
 To the best of our knowledge, this is the first time that reaction and product selection strategies in \glspl{achem} have been experimentally compared.
 Instead, the general approach of previous work, where there has been a quantitative evaluation, has been to propose a particular strategy, build, and evaluate against the initial goals, rather than against alternatives.
@@ -951,9 +946,9 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 % No R code...
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.45\linewidth]{figures/PlotMolecularDiversity-strategies-12-0}
-	\includegraphics[width=0.45\linewidth]{figures/PlotMolecularDiversity-strategies-16-1}
-	\caption{Diversity for Replicates 12-0 and 16-1.}\label{fig:diversity}
+	\includegraphics{figures/PlotMolecularDiversity-strategies-12-0}
+	\includegraphics{figures/PlotMolecularDiversity-strategies-16-1}
+	\caption{Diversity ((average molecular quantity)$^{-1}$) for Replicates 12-0 (top) and 16-1 (bottom).}\label{fig:diversity}
 \end{figure}
 
 \section{Analysis and discussion}
@@ -988,7 +983,7 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 %\label{fig:product_strategy}
 %\end{figure}
 
-\subsection{RQ2.1: Is there a quantitative difference between the different reactant and product selection strategies?}
+\subsection{Is there a quantitative difference between the different reactant and product selection strategies?}
 From visual inspection of \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
 We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
@@ -1007,13 +1002,13 @@ grid.arrange(ap,bp,nrow=1,ncol=2)
 %\caption{Effect of the combination of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ on Response Variables}
 %\end{figure}
 
-\subsection{RQ2.2: Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
+\subsection{Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
 From \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
-\subsection{RQ2.3: Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?}\label{RQ2.3}
+\subsection{Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?}\label{RQ2.3}
 
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
 

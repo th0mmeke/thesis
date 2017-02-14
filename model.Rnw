@@ -21,7 +21,7 @@ df
 }
 @
 
-\chapter{Inheritance under Varying Environments}\label{models-of-inheritance}
+\chapter{Heritability, Heredity and Inheritance}\label{ch:models-of-inheritance}
 
 Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
 
@@ -146,21 +146,21 @@ Variation and selection are sufficient for inheritance, where the degree and var
 
 We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{heritability} and \emph{fitness}, are represented as explicit parameters:
 
-\begin{enumerate}
-	\item \emph{Heretability} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
+\begin{itemize}
+	\item \emph{Heritability} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
-\end{enumerate}
+\end{itemize}
 
 This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of heritability as an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
 In other respects, however, it resembles a standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each transform the population. Other elements of the model are as follows:
 
-\begin{enumerate}
-	\item \emph{Population} The population consists of $n$ entities, where $\lvert n\rvert\geq 0$.
+\begin{itemize}
+	\item The \emph{population} consists of $n$ entities, where $\lvert n\rvert\geq 0$.
 	\item Each \emph{entity} is fully described by two properties -- \emph{fitness} and \emph{heritability}.
 	\item \emph{Selection} forms a new population by selecting entities from the current population, as defined in \cref{model-functions}. The probability of an element being included in the new population ($p_{selection}$ in the algorithm) may be either a fixed value, or equal to its \emph{fitness}. 
 	\item The new population created by \emph{Variation} consists of a number of new entities (``children'') for each entity (``parent'') in the current population (see \cref{model-functions}). Each entity has children with probability $p_{reproduction}$, and if it does, the number of children it has is some random number between $0$ and $n_{children}$. The properties of each child are related to the properties of its parent by a mapping, represented in the algorithm by the function $Derive$, which maps the parent value to a value in a range with an expected value equal to the parent's value and some degree of correlation captured by the value of the function $Range$.
-\end{enumerate}
+\end{itemize}
 
 The model is parameterised to make it easy to describe different specific models within this general structure; these parameters are defined in \cref{tbl:parameter_definitions}.
 

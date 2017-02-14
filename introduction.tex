@@ -203,11 +203,11 @@ Replication in these systems emerges from the base rules (or \textit{level-0} ru
 
 \subsubsection{String-manipulation systems}
 
-A new object in Fontana's Algorithmic Chemistry, or \emph{AlChemy} \parencite{Fontana1992}, is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
+A new object, $h$, in Fontana's Algorithmic Chemistry, or \emph{AlChemy} \parencite{Fontana1992}, is formed by the composition of two parent functions, $f$ and $g$: $h(x)=f(g(x))$. More formally, replication is defined as the interaction expression, $h$, of two randomly chosen objects $f$ and $g$, if, and only if, the interaction expression contains at least one variable and one primitive operator, and is shorter than some maximum length \parencite[p.173--p.180]{Fontana1992}. New objects in AlChemy are therefore the children of two parents.
 
-How then is the interaction expression $(('f)('g))$ between $f$ and $g$ evaluated to produce $h$? AlChemy is a form of pure LISP (with some ``minor idiosyncrasies''), based on toyLISP, with six primitive operators defined in \textcite[p.205]{Fontana1992}. The interaction expression is defined in \textcite[Definition A.9, p.204]{Fontana1992} as $V[(('f)('g)),()] = (V[f,(a\leftarrow g)])$, using the notation $V[e,L]=v$ to mean the expression $e$ with the ``association list'' $L$ (a list of value assignments between atoms and expressions) evaluates to $v$. The result $h$ is described as $f(g)$ and the process as $f+g \rightarrow (('f)('g)) \rightarrow h + f + g$.
+How then is the interaction expression $(('f)('g))$ between $f$ and $g$ evaluated to produce $h$? AlChemy is a form of pure LISP (with some ``minor idiosyncrasies''), based on toyLISP, with six primitive operators defined in \textcite[p.205]{Fontana1992}. The interaction expression is defined in \textcite[definition A.9, p.204]{Fontana1992} as $V[(('f)('g)),()] = (V[f,(a\leftarrow g)])$, using the notation $V[e,L]=v$ to mean the expression $e$ with the ``association list'' $L$ (a list of value assignments between atoms and expressions) evaluates to $v$. The result $h$ is described as $f(g)$ and the process as $f+g \rightarrow (('f)('g)) \rightarrow h + f + g$.
 
-Clearly reproduction in AlChemy is self-referential--the process to construct a child object is defined in the code of the parent objects. Unfortunately, inheritance doesn't follow straightforwardly as the reproduction process is unusual in some important ways. Each new object has two parents, rather than one, as is more common in artificial systems (although not necessarily in biology.) Producing new objects as a function of the two parents in turn means that the relationship between parents and child is not a straightforward mutation or other syntactic difference, but rather a complex functional relationship. What this means for the relationship between the parent's fitness and the child's fitness is not obvious. It seems that the fitness differences in AlChemy might be more extreme than in other systems where parent and child have a more straightforward relationship.
+Clearly reproduction in AlChemy is self-referential and endogenous--the process to construct a child object is defined in the code of the parent objects. However, inheritance doesn't follow straightforwardly as the reproduction process is unusual in some important ways. Producing new objects as a function of two parents means that the relationship between parents and child is not a straightforward mutation or other syntactic difference, but rather a complex functional relationship. What this means for the relationship between the parent's fitness and the child's fitness is not obvious. It seems that the fitness differences in AlChemy might be more extreme than in other systems where parent and child have a more straightforward relationship.
 
 %\begin{DRAFT}
 %\parencite{Fenizio2000}:
@@ -249,7 +249,9 @@ Tierra was also the starting point for \textcite{Taylor2001, Taylor:1999sc} to e
 
 \emph{Avida} \parencite{Ofria2004}, introduced in the summer of 1993, is based on Tierra with improvements including better metering and measuring, and a 2D lattice or well-stirred reaction vessel topography (unlike the shared linear memory of Tierra, for example). ``In principle, the only assumption made about these self-replicating automata in the core Avida software is that their initial state can be described by a string of symbols (their genome) and that they autonomously produce offspring organisms. However, in practice our work has focused on automata with a simple von Neumann architecture that operate on an assembly-like language inspired by the Tierra system.''
 
-Like Tierra, the automata engine in Avida is based on a Turing tape-like metaphor, with instruction, read, write, and flow control heads that can be moved forward and backwards through memory using relative rather than absolute addressing. Instructions are grouped into instruction sets, with the default set containing 26 instructions, and by definition every program is valid. Each organism runs on its own virtual automata; the only interaction between organisms is via resources in the shared environment and through competition for virtual machine CPU cycles based on ``merit'' or fitness. Direct Tierra-style interactions by insertion of code into another organism is not enabled by default, but is possible through configuration. Phenotypes take the form of computations (entities take in resources, perform computations that result in merit, and perhaps produce output or by-product resources): ``\ldots by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources'' \parencite{Ofria2004}. Interestingly, the resources in the environment are not the same as the elements of the organisms (instructions from an instruction set.) Avidan organisms are not fully-embedded in their environment.
+Like Tierra, the automata engine in Avida is based on a Turing tape-like metaphor, with instruction, read, write, and flow control heads that can be moved forward and backwards through memory using relative rather than absolute addressing. Instructions are grouped into instruction sets, with the default set containing 26 instructions, and by definition every program is valid. Each organism runs on its own virtual automata; the only interaction between organisms is via resources in the shared environment and through competition for virtual machine CPU cycles based on ``merit'' or fitness. Direct Tierra-style interactions by insertion of code into another organism is not enabled by default, but is possible through configuration. 
+
+Phenotypes take the form of computations (entities take in resources, perform computations that result in merit, and perhaps produce output or by-product resources): ``\ldots by inputting numbers from the environment, performing computations on those numbers, and outputting the results. The organisms receive a benefit for performing specific computations associated with resources'' \parencite{Ofria2004}. Crucially, the resources in the environment are not the same as the elements of the organisms (instructions from an instruction set.) Avidan organisms are not fully-embedded in their environment.
 
 New organisms are created asexually by the parent first allocating memory for a child. The parent's read-head is placed at the beginning of its code, the write-head placed at the start of the newly allocated memory and successive \url{h-copy} instructions copy the instruction from the read-head to the write-head and advance both. After all instructions have been copied, \url{h-divide} splits the child from the parent (all instructions between read-head and write-head go to the child) and start execution in both parent and child from a clean state. Variation comes through mutations which can be introduced through either \url{h-copy} (the write-head writes a random instruction rather than the instruction at the read-head) or in \url{h-divide} (a single random instruction may be deleted or added from the child code). Both forms of mutation happen with a fixed probability set by the inventor: COPY\_MUT\_PROB, INS\_MUT\_PROB, and DEL\_MUT\_PROB for \url{h-copy}, and DIVIDE\_INS\_PROB, DIVIDE\_DEL\_PROB for \url{h-divide}. However, there is a second, evolvable source of mutations during replication--the replication process itself is embedded in the organism, as a set of instructions, and so changes to this algorithm during the copy will persist in the child. The self-replication algorithm is initially defined in the ancestral organism used to seed a run, and as documented in \textcite[A1.3]{Ofria2004} consists of 15 instructions.
 
@@ -302,27 +304,28 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 \begin{table}
 	\scriptsize
 	\begin{center}
-		\caption{\Gls{achem} replicators in previous work, categorized according to \textcite{Zachar2010}. ODE-based models such as GARD and \textcite{Vasas2012} are not included as they are not \gls{constructive} and hence incapable of unlimited evolution.}
-		\label{tab1}
+		\caption{\Gls{achem} replicators in selected previous works, categorized according to \textcite{Zachar2010}. ODE-based models such as GARD and \textcite{Vasas2012} are not included as they are not \gls{constructive} and hence incapable of unlimited evolution; RBN-World \parencite{Faulconbridge2010} is not included as relevant results have not been reported.}
+		\label{tbl:previous-work}
 		\begin{tabular}{@{}p{3cm}p{2cm}p{3cm}p{4cm}p{3cm}@{}}
 			\toprule
-			Artificial replicator            						& Model form					& Multiplication		& Variability			& Heredity\\ 
+			Artificial replicator            						& Model form					& Multiplication					& Variability						& Heredity\\ 
 			\midrule
-			\emph{RBN-World} \parencite{Faulconbridge2011} 			& \Gls{rbn}						& & &\\
-			\emph{AlChemy} \parencite{Fontana1992}					& \\
-			\emph{StringMol} \parencite{Hickinbotham2012}           & \\
-			\emph{GraphMol} \parencite{Nellis2014}					& \\
-			\emph{Squirm3} \parencite{Hutton2002}                   & \\
-			\emph{Coreworld} \parencite{Rasmussen1990} 				& \\
-			\emph{Tierra} \parencite{Ray1991} 						& \\
-			\emph{Avida} \parencite{Ofria2004} 						& \\
-			\emph{Amoeba-II} \parencite{Pargellis2001}				& \\
+			\emph{Squirm3} \parencite{Hutton2002}                   & Molecular						& Exogenous rules					& Exogenous - hand-crafted			& Unknown - depends on rules\\
+			\emph{AlChemy} \parencite{Fontana1992}					& $\lambda$ calculus			& Endogenous - function composition	& Variable - functional equivalence & Holistic\\
+			\emph{StringMol} \parencite{Hickinbotham2012}           & Automata, encoded as strings	& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
+			\emph{GraphMol} \parencite{Nellis2014}					& Graph							& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
+			\emph{Coreworld} \parencite{Rasmussen1990} 				& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Unknown\\
+			\emph{Tierra} \parencite{Ray1991} 						& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
+			\emph{Avida} \parencite{Ofria2004} 						& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
+			\emph{Amoeba-II} \parencite{Pargellis2001}				& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 \end{table}
 
-Informational$\Leftrightarrow$Non-informational \parencite{Zachar2010}
+Of the systems discussed in \cref{previous-work}, summarised in \cref{tbl:previous-work}, the most successful approach to date has been through automata. In these systems, multiplication is by an algorithmic process where code within the parent, when executed, repeatedly copies the instructions from parent's code to a child using a specific copy operator (\eg \url{h-copy} in Avida.) Deliberate errors introduced during copying by the operator (erroneous copying, see \textcite[p.16]{Zachar2010} for the biological equivalent) provide one source of variation; another comes directly from algorithms where there can be several different instruction sequences that are functionally equivalent, so providing variability as defined by \citeauthor{Zachar2010}.
+
+The standard multiplication processes in the reviewed automata copies all instructions from the parent, and therefore the entity's genotype is the same as its full instruction set. Heredity is thus holistic, and there is no difference between genome and soma. For example, in Tierra, the 80-instruction ancestral creature includes code to determine its beginning and end in memory and then to copy everything between the two to a child entity. However, this multiplication code is part of the entity and subject to variation; it is itself evolvable and in principle at least capable of evolving towards a model where only a proportion of the entity is copied.
 
 \section{Research questions}\label{research-questions}
 
@@ -333,9 +336,7 @@ Of the forms of replicators defined by \textcite{Zachar2010} and described in \c
 	\item Limited heredity replicators are capable of only a limited number of distinct states and so suffer from a restricted representational range.
 	\item Informational replicators based on replication ``shortcuts'' are in practice still limited as their inheritance/heredity mechanism is not evolvable.
 \end{itemize} 
-
-None of the artificial systems reviewed in \cref{previous-work} reach the goal of an unlimited heredity informational replicator, but it is apparent that this is a non-trivial objective. Furthermore, of the emergent systems reviewed, none reach any more than exact heredity.
-
+ 
 \Cite{Virgo2013} points out that if goal is increased concentrations, then catalysis not only approach. Stoichiometry can also provide.
 Good as 1) less parameters (no P, no need to determine effect of given molecule on any given reaction) and 2) just needs reactions and molecules
 

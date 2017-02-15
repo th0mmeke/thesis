@@ -139,7 +139,7 @@ Artificial Chemistries have also been used in the exploration of open-ended or c
 	\begin{center}
 	\caption{A sample of Artificial Chemistries for open-ended evolution. Constructive chemistries are capable of ongoing extension.}
 	\label{tab1}
-	\begin{tabular}{@{}p{4cm}p{4.5cm}p{4.5cm}@{}}
+	\begin{tabular}{@{}p{7.5cm}p{6cm}@{}}
 		\toprule
 		Chemistry                                                          & Constructive? (see \cref{constructive-chemistries})\\ 
 		\midrule

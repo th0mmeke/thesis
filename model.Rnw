@@ -48,14 +48,9 @@ In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2
 	\end{center}
 \end{figure}
 
-Our hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead somewhere along a degree determined by selective pressure.
+Our hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead lies at a point between the two determined by selective pressure.
 
-Therefore we have the following goal for the work in this chapter:
-
-\begin{enumerate}
-	\item Can we describe and model a relationship between heritability and selective pressure for a theoretical replicator?
-	\item 
-\end{enumerate}
+Therefore we have the following goal for the work in this chapter: can we describe and model the relationship between heritability and selective pressure for a theoretical replicator?
 
 Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
 
@@ -90,7 +85,7 @@ This example of the transition to life is an example of \emph{extending} \gls{en
 
 \Textcite{Arthur2009} describes a mechanism for the evolution of technology, where evolution is used in the sense of ``all objects of some class are related by ties of common descent from the collection of earlier objects''. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lineage and provides new raw components for inclusion in later technologies. \Textcite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur's answer is that novelty comes from this incorporation of new phenomena from the source, the natural world.
 
-The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
+The first obstacle to a more general scope is the existence of innovations such as the jet engine, laser, railroad locomotive, or QuickSort computer algorithm (to name Arthur's examples.) Innovations seem to appear without obvious parentage; they do not appear to be the result of gradual changes or adaptations to earlier technologies. Arthur's answer is to look inside the innovation and to recognise that each is made up of recognisable components or modules\footnote{Similar in many ways to composomes, or compositional replicators \parencite{Segre1998}--see \cref{sec:variability-previous-work}.}; the key lies in the nature of heredity in technology. Technologies are formed by combining modules of earlier technologies. These groupings start as loose assemblages to meet some new function, but over time become fixed into a standard unit (for example, the change in DNA amplification mechanisms from assemblages of laboratory equipment to standard off-the-shelf products.)
 
 However, even Arthur in his rejection of ``Darwinian evolution'', describes a process that still relies on selection, variation and inheritance. This is not the case in our final example, DaisyWorld.
 
@@ -618,14 +613,14 @@ A summary of the results from each of the four datasets is given in \cref{tbl:su
 
 \subsection{Is heritability proportional to the predictability of the environment?}\label{mean-heritability-predictability}
 
-Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a measure of environmental predictability, our null and alternate hypotheses are:
+Our null and alternate hypotheses are:
 
 \begin{itemize}[label={}]
-	\item H$_0$: $\overline{heritability}_{end}$ is not proportional to $f(\Theta,\sigma_e,\delta)$ for all functions $f()$.
-	\item H$_1$: $\overline{heritability}_{end}$ is proportional to $f(\Theta,\sigma_e,\delta)$ for some function $f()$.
+	\item H$_0$: $\overline{heritability}_{i}=\overline{heritability}_{j} \forall i,j$.
+	\item H$_1$: $\overline{heritability}_{i}\neq\overline{heritability}_{j}$ for some $i,j$..
 \end{itemize}
 
-Because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma_e$ as a parameter to any $f().$ 
+Remembering that a function of $\Theta$, $\sigma_e$ and $\delta$ provides a measure of environmental predictability, and because only $\Theta$ and $\delta$ are predictable, and hence learnable, we would not expect $\sigma_e$ to be significant in determining predictability. 
 
 By visual inspection of \cref{fig:figure23}, $\overline{heritability}_{end}$ is related to $f(\delta)$; this is partially supported by the results of an \gls{anova} analysis, which finds both $\delta$ and $\Theta$ to be highly significant (p\textless 0.001). Therefore $\overline{heritability}_{end}$ is proportional to either $f(\delta)$ or $f(\Theta,\delta)$ (and incidentally meets our expectation that $\sigma_e$ is not a potential parameter to $f()$ as it is not learnable by an evolutionary system.)
 

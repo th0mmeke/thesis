@@ -15,7 +15,7 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Evolutionary model}
 
-See \cref{alg:flow-selection}.
+The evolutionary model used is the same as previously described, with the exception of the reactant selection strategy, $S_{reactant}=FlowReactantSelection$. The FlowReactantSelection algorithm (\cref{alg:flow-selection}) is a refinement of the earlier KineticReactionSelection strategy, modified to provide support for a FoodSet.
 
 
 \begin{algorithm}
@@ -187,7 +187,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 
 The foodset contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O. Each replicate (run) of the experiment was for 100,000 generations, with an initial \gls{ke} for the reactor vessel of 50 units, switching every 10,000 generations alternately between \gls{ke}=140 and \gls{ke}=50. At every step, 5 randomly-selected molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
-\section{Results and discussion}
+f\section{Results and discussion}
 
 <<toyworld2-replicator-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv_replicators <- read.csv('results/replicators.csv')
@@ -236,7 +236,7 @@ The conceptual basis for the experiments in this \namecref{ch:variability} is ou
 	\end{center}
 \end{figure}
 
-\section{Previous work}
+\section{Previous work}\label{sec:variability-previous-work}
 
 Pertubations were applied to a well-mixed reaction vessel by \textcite{Fontana1994a} with objects taken from lambda-calculus. Organisations (entities, \glspl{hypercycle}) in all cases were observed to be self-maintaining but not self-reproducing (excluding cases that included an explicit replication expression.) The model is without locality or spatial effects; pertubations take the form of adding a small number of copies (10 or 50) of a random object every 30,000 or 50,000 collisions. Purpose of pertubations to assess sensitivity of model to change, rather than as a mechanism to induce change. 
 

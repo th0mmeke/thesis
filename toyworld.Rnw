@@ -47,7 +47,7 @@ Another system was presented by \textcite[p.132]{Nellis2012} with \glspl{achem} 
 	\item \emph{Constraints}. Restrictions on how the world and chemistry interact. Nellis gives as an example a binding model that describes which interactions are possible between elements.
 \end{itemize}
 
-However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also coincidentally categorises \glspl{achem} against three factors, and which is commonly used in the literature (\eg \cite{Lenaerts2009,Gardiner2007}). This taxonomy is described in more detail in the \namecref{alg:2products} below.
+However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also coincidentally categorises \glspl{achem} against three factors, and which is commonly used in the literature (\eg \cite{Lenaerts2009,Gardiner2007}). This taxonomy is described in more detail in the \namecref{dittrich} below.
 
 \section{\textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme of Dittrich et al.}\label{dittrich}
 
@@ -91,7 +91,7 @@ If the reaction rules are analogous to chemistry, the reactor algorithm is analo
 	\item
 	\emph{Well-mixed/aspatial}. Either discrete time (uniform probability distribution for selecting reactions) or continuous time \parencite{Gillespie1976} assuming the reactions are known in advance (which of course is not possible for a strongly constructive \gls{achem}.)
 	\item
-	\emph{nDimensional}. A grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
+	\emph{N-dimensional}. A grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
 	\item
 	\emph{Mixed scale}. Hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelisation.
 \end{enumerate}
@@ -213,9 +213,11 @@ The name has been chosen as both an acknowledgement of ToyChem \parencite{Benko2
 \item A chemical model that details the bond changes that can occur when two molecules collide.
 \end{itemize}
 
-All atoms, and therefore molecules and reactions, are contained within a reaction vessel. ToyWorld provides a basic energy model, where molecules have kinetic energy and bond breaking requires energy input and bond formation releases energy. The reaction vessel, which provides the strategies by which reaction reactants (or input molecules) and products (output molecules) are determined, is described in detail in the following section.
+All atoms, and therefore molecules and reactions, are contained within a reaction vessel. ToyWorld provides a basic energy model, where molecules have kinetic energy and bond breaking requires energy input and bond formation releases energy. The reaction vessel, which provides the strategies by which reaction reactants (or input molecules) and products (output molecules) are determined, is described in detail in the following sections.
 
 In our model, all reactions emerge solely from the properties of the reacting molecules. For each reaction between two molecules we generate a list of reaction alternatives by enumerating all possible bond additions, bond subtractions, and changes in bond type between the reactants. For example, the reactants H\textsubscript{2} and O\textsubscript{2} generate three reaction alternatives: breaking of the H-H bond, breaking of the O=O double bond, and a transformation of the O=O double bond to a single bond. The reactants H\textsuperscript{+} and OH\textsuperscript{-} give two alternative reactions: breaking of the O-H bond (giving H+H\textsuperscript{+}+O\textsuperscript{-}) and formation of a single bond between H\textsuperscript{+} and O to give H\textsubscript{2}O.
+
+The ToyWorld ``main loop'' is described at a high-level in \cref{alg:toyworld-main-loop}: in outline, the sequence is to choose reactants from the molecules in the reactor (later described as reactant selection, or $S_{reactant}$), generate a set of possible reaction products from those reactants and select one set of products from those alternatives (product selection, or $S_{product}$ and then finally replace the reactants in the reactor by the selected products. One time through this sequence constitutes a generation. 
 
 ToyWorld is custom Python code that uses third-party packages and libraries for certain functions. The most significant chunks of external functionality come from RDKit, an open-source toolkit for ChemInformatics, and PyMunk, a physics toolkit. Additionally, we use the NetworkX package for Python for network graph manipulations (mainly in the code that searches for cycles in the reaction graphs), and we use arrays from the Numpy package for Python to record the molecular populations.
 
@@ -248,6 +250,7 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, for example:
 		reactions $\leftarrow$ enumerate all possible reaction options\;
 		reaction $\leftarrow$ choose from $reactions$ according to the Product selection strategy\;
 		\BlankLine
+		\tcp{Execute reaction in the reactor}
 		Update the reactor with the results of carrying out the $reaction$\;
 	}
 	\caption{The main simulation loop in ToyWorld.}\label{alg:toyworld-main-loop}
@@ -1020,3 +1023,5 @@ We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of fr
 In this \namecref{toyworld} we have explored the effect of four possible combinations of Reactant and Product selection strategies.
 
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
+
+Note that as these conclusions are based on results obtained from an emergent process, an explanatory model is difficult other than through reference to the original simulation. 

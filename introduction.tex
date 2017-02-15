@@ -12,15 +12,20 @@
 %
 %Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
 
-Evolutionary systems are commonly described in terms of three foundational elements, usually some form of variation, selection and heredity\footnote{Other related formalisms exist--see \cref{evolution-by-natural-selection} for a discussion. None fundamentally replace these elements however.}. Selection is the mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, or the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas. 
+Evolutionary systems are commonly described in terms of three foundational elements, usually some form of variation, selection and heredity\footnote{Other related formalisms exist, as discussed in  \cref{evolution-by-natural-selection}; however, none alter these elements fundamentally.}. Selection is the mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, or the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas. 
 
 Novelty instead is the outcome of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search--instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
 
-An open-ended evolutionary system, capable of ongoing evolution without practical limit, needs these components to be themselves subject to evolution, change and adaptation. A system where variation, selection and heredity emerges endogenously from lower-level elements seems to be one possible, and perhaps most promising, approach to open-ended evolution. After all, this is the form taken by life itself. 
+An open-ended evolutionary system, capable of ongoing evolution without practical limit, needs these components to be themselves subject to evolution, change and adaptation\footnote{This relates this work to evolvability, see for example \cref{Pigliucci2008,Wagner:1996kc, Wagner:2008mi}.}.A system where variation, selection and heredity emerges endogenously from lower-level elements seems to be one possible, and perhaps most promising, approach to open-ended evolution in artificial, rather than biological, systems. After all, this is the form taken by life itself.
 
-However, creating the conditions under which these elements may emerge has proved to be extremely difficult in artificial systems, and remains an open problem\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}. Instead, our focus is on only one of the necessary elements for \gls{oe}, the mechanism for heredity within artificial evolutionary systems.
+However, creating the conditions under which evolution emerges endogenously has proved to be extremely difficult in artificial systems, and remains an open problem\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}. Instead, our focus is on only one of the necessary elements for \gls{oe}, the mechanism for heredity within artificial evolutionary systems.
 
-In this work we explore two related aspects of an endogenous mechanism for heredity.
+In this work we explore two related aspects of an endogenous mechanism for heredity:
+
+\begin{enumerate}
+\item What is the nature of the relationship between heritability and selective pressure for a \emph{theoretical} replicator?
+\item What elements of replication can be \emph{demonstrated} in a molecular \gls{achem}?
+\end{enumerate}
 
 \section{Context}\label{context}
 
@@ -78,30 +83,19 @@ However, a consensus is forming that early life began with chemoautotrophs fuell
 
 The initiation of selection is marked by the advent of the \gls{ida}, probably from an RNA world, followed substantially later by the so-called \gls{luca} \parencite{Yarus2011}. It is important to note for clarity that \gls{luca} was almost certainly not a single entity or even species, but rather is a construct of evolutionary genetics because of the likely predominance of Lateral Gene Transfer (LGT) in archaic biology\footnote{http://sandwalk.blogspot.ca/2007/03/web-of-life.html}. 
 
-Lateral or Horizontal Gene Transfer is thought to have been so common in early life that there was no single common ancestor, but rather genes from multiple lineages intermixed during this early stage into all lineages today \parencite{Ragan2009}. Although the advantages of a distinction between genome and phenome are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \textcite{VonNeumann1966}; there is no inherent dependency on this in \gls{ens}. Early evolution may have involved the inheritance of complete portions, or components, of the phenome before the advent of a distinct genome, while research into \gls{hgt} (\eg \textcite{Ochman2000,Pace:2008vi,Ragan2009}) has shown that not only was component transfer between species a major driver of early evolution, but a horizontal component-based mechanism continues to exist even in many of today's organisms that have a genome built from DNA. 
+Lateral or Horizontal Gene Transfer is thought to have been so common in early life that there was no single common ancestor, but rather genes from multiple lineages intermixed during this early stage into all lineages today \parencite{Ragan2009}. The starting point for the development of modern replicators might therefore have began with \emph{horizontal} inheritance, although the changes from horizontal inheritance can then be heritable in a vertical sense: in organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms where the horizontal change can be subsequently inherited vertically\footnote{Mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}. 
+
+Although the advantages of a distinction between genome and phenome are discussed by many, including \parencite[section 7.2.3]{Taylor1999} and indirectly \textcite{VonNeumann1966}; there is no inherent dependency on this in \gls{ens}. Early evolution may have involved the inheritance of complete portions, or components, of the phenome before the advent of a distinct genome, while research into \gls{hgt} (\eg \textcite{Ochman2000,Pace:2008vi,Ragan2009}) has shown that not only was component transfer between species a major driver of early evolution, but a horizontal component-based mechanism continues to exist even in many of today's organisms that have a genome built from DNA. 
 
 Two alternative models exist for the step from the prebiotic world  to \gls{ida} (\cref{major-stages-early-life}): replication- or genes- or RNA-first, and metabolism- or protein-first. Both metabolism and replication were almost certainly required for \gls{ida}, however. Self-replicating RNA enzymes are described in \textcite{Lincoln2009}, forming the basis of a selective system (also see \textcite{Cheng2010,Powner2009} for formation of RNA in prebiotic conditions). 
 
-Some elements of \gls{ida}  are thought to still be with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \parencite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \parencite{Wilson2009}. The next major transition was to the Protein world, although predominance of RNA transcripts leads to suggestions that it should more accurately be called the RNA-Protein world \parencite{Altman2013}. 
+Some elements of \gls{ida}  are thought to still be with us in lineages of informational (for protein synthesis and RNA transcription) and operational genes (for some standard cellular processes) \parencite{Ragan2009}, for example the ribosome and ribonuclease P (RNase P) \parencite{Wilson2009}. The next major transition was to the protein world, although predominance of RNA transcripts leads to suggestions that it should more accurately be called the RNA-Protein world \parencite{Altman2013}. 
 
 A self-sustaining autocatalytic network (perhaps in the form of a \gls{raf} set, a ``set of molecules and reactions which is collectively autocatalytic in the sense that all molecules help in producing each other (through mutual catalysis, and supported by a food set)'' \parencite{Hordijk2011}) is generally considered essential \parencite{Pross2013}, but not sufficient \parencite{Hordijk2011}. Both competing models--replication-first and metabolism-first--build on this. In the case of replication-first, through autocatalysis as expressed by self-replication of oligomeric compounds; in metabolism-first, by cycles and networks. From another perspective, metabolism-first privileges function, while replication-first privileges descent.
 
-Two starting points - Kauffman1986, and Bagley1991.
-
-Kauffman1986, Kauffman1993
-- binary polymer model
-- polymers are strings of binary digits of maximum length, n
-- molecules catalyse randomly chosen reactions for ligation or cleavage
-- constant probability P that a molecule will catalyse any given reaction
-
-Bagley1991 - ACM or Auto-Catalytic Metabolism
-Catalysts included as mechanism to provide the permanently elevated concentrations required
-
 The main difficulty with the replication-first model concerns the sizeable step required from abiotic compounds to template-based, or information-based, replication (although ribonucleotides conceivably could form in pre-life conditions \parencite{Powner2009}). Templates encode information in biology, so template-based replication requires an encode/decode mechanism to store information in the template and to later retrieve it, as well as an information code. This is significantly more complex than simple duplication. By contrast, the main issue with the metabolism-first model concerns the necessary shift from composomal or holistic\footnote{See discussion in \cref{variable-replicators}.} inheritance to template-based, and the ability of holistic systems to represent a sufficient range of stable states for unrestricted evolution \parencite{Vasas2010}.
 
-The origin of life can be seen as the transition from chemistry to biology, and seems tantalizingly close to the artificial evolutionary goal of moving from simple, uninteresting, systems to creative systems which evolve. 
-
-However, the primary postulates of origins of life research are not our postulates. Most abiogenesis resarch assumes real-world chemistry and conditions, a constraint that doesn't apply to \gls{alife}. 
+In summary, the origin of life can be seen as the transition from chemistry to biology, and seems tantalizingly close to the artificial evolutionary goal of moving from simple, uninteresting, systems to creative systems which evolve. However, the primary postulates of origins of life research are not our postulates. Most abiogenesis resarch assumes real-world chemistry and conditions, a constraint that doesn't apply to \gls{alife}. 
 
 \begin{figure}
 	\begin{center}
@@ -117,18 +111,13 @@ However, the primary postulates of origins of life research are not our postulat
 	\label{major-stages-early-life}
 \end{figure}
 
-
 \subsection{Replicators in evolutionary theory}\label{replicators-in-evolutionary-theory}
 
 Although artificial systems are the main focus of this thesis, there is a natural overlap with research in biology into the origins of life. In particular the transition from chemistry to biology has several central concerns in common with our field of emergent replication in artificial systems. For example, how does the interaction of lower-level elements can form long-lived composite structures? What are the necessary and sufficient conditions for evolution? How does an evolutionary process begin in a non-evolutionary system? This overlap means that much of the most relevant previous work is to be found in origins-of-life research. 
 
-In this particular \namecref{replicators-in-evolutionary-theory} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with artificial systems. 
+In this particular \namecref{replicators-in-evolutionary-theory} we adopt a \textit{biological} classification of replicators from \textcite{Zachar2010} to structure our review of \textit{artificial} replication, and in other sections of this thesis we shall happily extend our scope as needed to include pertinent results from biology. However, it's important to stress that we are informed by biology, but do not hope or intend to contribute to biology in return. This remains a work concerned primarily with \emph{artificial} systems. 
 
-We begin by reviewing the concept of replicators in evolutionary theory. Heredity is one of the foundational elements of evolution, both natural and artificial, and is the means by which information from one generation can be leveraged in the next. This form of inheritance, from parent to child, is called \emph{vertical} inheritance, and the type of entity that participates in and enables vertical inheritance (that is, can form a related entity) is called a \emph{replicator}\footnote{Interestingly, in biology at least, the starting point for the development of modern replicators might have began with \emph{horizontal} inheritance. By analogy, it’s easy to envisage another kind of information transfer where information is passed from one entity to another horizontally, without replication or a parent-child relationship. In today’s biology, \gls{hgt} provides one mechanism for this; in the early prebiotic world, the horizontal transfer of information might have occurred through a number of conceptually similar mechanisms (such as auto-catalytic cores) that didn’t involve genes. 
-	
-	First, the changes from horizontal inheritance can be heritable in a vertical sense. In organisms with genes, by definition under \gls{hgt} the change becomes part of the target’s genome and hence heritable. In entities without genes, there are forms of entity where the horizontal change can be subsequently inherited vertically. Second, mechanisms for horizontal transfer don’t require replication (by definition). Therefore it’s possible that they can act as a precursor for the development of replication. That is, horizontal inheritance plus selection might be sufficient for replication, rather than replication being required for inheritance.}. 
-
-In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore likely a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
+In the transfer from the prebiotic world to the biotic one, the proportion of information held by a predecessor that could be passed on to its successor increased, over many generations, from ``none'' to ``nearly all''. \Textcite{Vasas2012a} relate heritability to the correlation between the parent and child entities. Heredity is therefore a matter of degree, rather than being a binary relationship (related or not-related), and that opens up the possibility that a series of gradual changes might over time transform a very poor replicator into a very good one. Of course, one possible process for this transformation might well be \gls{ens}.
 
 But what exactly does it mean for something to be a replicator? Is a rock that erodes to form grains of sand a replicator\footnote{In \textcite{Bourrat2015} rocks are given as examples of \emph{persistors}, unable to reproduce and subject to only a ``weak'' form of selection for hardness.}? Is a set of autocatalytic reactions that splits into two replicating? \Textcite{Dawkins1976} was the first to define replicators, including a range from biological genes to non-biological ideas (memes) in the scope of the definition. Many other definitions and formulations followed as various properties or features were examined. 
 
@@ -182,9 +171,13 @@ But sampling algorithm can
 	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
 \end{itemize}
 
-
-
 \section{Previous work}\label{previous-work}
+
+Many modern artificial replication systems trace their intellectual ancestry back to one of two main starting points--\cite{Kauffman1986}, and \cite{Bagley1991}--both motivated by the goals of origins-of-life research.
+
+\Citeauthor{Kauffman1986} describes a binary polymer model to investigate the formation of autocatalytic sets, and in particular how this is affected by the probablity of catalysis. In \citeauthor{Kauffman1986} polymers are modelled as strings of binary digits of maximum length, $n$, and molecules catalyse randomly chosen reactions for ligation or cleavage, with a constant probability $P$ that a molecule will catalyse any given reaction.
+
+\Citeauthor{Bagley1991} investigates Auto-Catalytic Metabolisms with catalysts included as mechanism to provide the permanently elevated concentrations required.
 
 \emph{RBN-World} \parencite{Faulconbridge2011} is a \gls{achem} where the entities take the form of \gls{rbn} \parencite{Kauffman:1969ne}, with the addition of a bonding mechanisms to allow for their composition and decomposition. The resulting form of \gls{rbn} is called a bonding \gls{rbn} or bRBN.  Larger structures are formed by ``bonding'' two independent bRBNs at each bRBNs bonding node. ``All reactions are between two reactants; it is assumed that more complicated reactions can be expressed as a series of two-reactant reactions with intermediate structures.'' The choice of reactants is described as ``Gillespie-like'', and essentially random, uncorrelated in any way with reaction energies or rates \parencite[chap.8]{Faulconbridge2011}.
 
@@ -301,7 +294,7 @@ Inheritance in Amoeba-II is almost too effective. Fit organisms rapidly evolve i
 %\end{DRAFT}
 \subsubsection{StringMol and GraphMol}
 
-\emph{StringMol} \parencite{Hickinbotham2011} and the related \emph{GraphMol} \parencite{Nellis2012, Nellis2014} explore computational novelty through embodiment: ``Our aim is to improve novelty-generation algorithms by making their biological models richer.'' No measure is proposed for novelty--the authors state that they're not even sure it is possible, but an informal definition is used that sees novelty as the outcome of increasing embodiment \parencite[p.87]{Nellis2012}. 
+The related automata \emph{StringMol} \parencite{Hickinbotham2011} and \emph{GraphMol} \parencite{Nellis2012, Nellis2014} explore computational novelty through embodiment: ``Our aim is to improve novelty-generation algorithms by making their biological models richer.'' No measure is proposed for novelty--the authors state that they're not even sure it is possible, but an informal definition is used that sees novelty as the outcome of increasing embodiment \parencite[p.87]{Nellis2012}. 
 
 The base elements in StringMol are single-character symbols, each representing a microcode instruction. These combine to form strings representing molecular microprograms (the strings of the name). The general arrangement feels very similar to that in Avida or Tierra, as seen for example in the various pointers, or indexes, into the code (instruction, read, write, and flow for iterations).
 
@@ -332,18 +325,18 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 	\begin{center}
 		\caption{\Gls{achem} replicators in selected previous works, categorized according to \textcite{Zachar2010}. ODE-based models such as GARD and \textcite{Vasas2012} are not included as they are not \gls{constructive} and hence incapable of unlimited evolution; RBN-World \parencite{Faulconbridge2010} is not included as relevant results have not been reported.}
 		\label{tbl:previous-work}
-		\begin{tabular}{@{}p{3cm}p{2cm}p{3cm}p{4cm}p{3cm}@{}}
+		\begin{tabular}{@{}p{3.5cm}p{1.5cm}p{3.5cm}p{3.5cm}p{2cm}@{}}
 			\toprule
 			Artificial replicator            						& Model form					& Multiplication					& Variability						& Heredity\\ 
 			\midrule
-			\emph{Squirm3} \parencite{Hutton2002}                   & Molecular						& Exogenous rules					& Exogenous - hand-crafted			& Unknown - depends on rules\\
-			\emph{AlChemy} \parencite{Fontana1992}					& $\lambda$ calculus			& Endogenous - function composition	& Variable - functional equivalence & Holistic\\
-			\emph{StringMol} \parencite{Hickinbotham2012}           & Automata, encoded as strings	& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
-			\emph{GraphMol} \parencite{Nellis2014}					& Graph							& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
-			\emph{Coreworld} \parencite{Rasmussen1990} 				& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Unknown\\
-			\emph{Tierra} \parencite{Ray1991} 						& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
-			\emph{Avida} \parencite{Ofria2004} 						& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
-			\emph{Amoeba-II} \parencite{Pargellis2001}				& Automata						& Endogenous - algorithmic			& Variable - functional equivalence	& Endogenous\\
+			\emph{Squirm3} \parencite{Hutton2002}                   & Molecular						& Exogenous rules					& Exogenous--hand-crafted			& Unknown--depends on rules\\
+			\emph{AlChemy} \parencite{Fontana1992}					& $\lambda$-calculus			& Endogenous--function composition	& Variable--functional equivalence & Holistic\\
+			\emph{StringMol} \parencite{Hickinbotham2012}           & Automata, encoded as strings	& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
+			\emph{GraphMol} \parencite{Nellis2014}					& Automata, encoded as graphs	& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
+			\emph{Coreworld} \parencite{Rasmussen1990} 				& Automata						& Endogenous--algorithmic			& Variable--functional equivalence	& Unknown\\
+			\emph{Tierra} \parencite{Ray1991} 						& Automata						& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
+			\emph{Avida} \parencite{Ofria2004} 						& Automata						& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
+			\emph{Amoeba-II} \parencite{Pargellis2001}				& Automata						& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
 			\bottomrule
 		\end{tabular}
 	\end{center}
@@ -357,14 +350,15 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 		\draw [->] (-4.9,4.9) -- (-4,4);
 		\draw [->] (-3.9,3.9) -- (-3,3);
 		\draw [->] (-2.9,2.9) -- (-2,2);
-		\node [left] at (-5.5,5.25) {embodiment};
-		\node [left] at (-4.5,4.25) {multiplication};
-		\node [left] at (-3.5,3.25) {variability};
-		\node [left] at (-2.5,2.25) {heredity};
+		\node [left] at (-5.5,5.25) {Embodiment};
+		\node [left] at (-4.5,4.25) {Multiplication};
+		\node [left] at (-3.5,3.25) {Variability};
+		\node [left] at (-2.5,2.25) {Heredity};
 		\draw [->] (-5.9,5.9) -- (-5,6.9) node [right] {GARD \parencite{Segre1998},  \cite{Vasas2012}};
 		\draw [->] (-4.9,4.9) -- (-4,5.9) node [right] {Squirm3 \parencite{Hutton2002}};
+		\node [below, text width=20em] at (0,1.5) {Automata and AlChemy \parencite{Fontana1992}};
 		\end{tikzpicture}
-		\caption{Classification of selected replicator systems according to \textcite{Zachar2010}.}
+		\caption{Replicator systems from \cref{previous-work} categorized according to the hierarchy of \citeauthor{Zachar2010}. Diagram based on a simplification of Figure 13 in \cite{Zachar2010}.}
 		\label{fig:replicator-classification}
 	\end{center}
 \end{figure}
@@ -395,7 +389,7 @@ This thesis is therefore motivated by the following research questions:
 
 \begin{enumerate}[label=RQ\arabic*:]
 	
-	\item \emph{What is the relationship between heritability and selection pressure?} A simple replicator is an imperfect mechanism for transmitting heritable information from one generation to the next; can we show a pathway from an imperfect replicator to an full informational replicator with an improved capacity for heredity? We describe a model for the response of heredity to selective pressure in \cref{ch:models-of-inheritance}.
+	\item \emph{What is the nature of the relationship between heritability and selective pressure for a theoretical replicator?} This is driven by two considerations. First, existing work in evolutionary theory (see \cref{ch:models-of-inheritance}) has suggested that heritability is the result of selection and variation under constant selective pressure. There is also a broad body of work in biology exploring aspects of the connection between fitness (the counterpart to selection) and environmental variability (for example, canalization). We are interested in a model of heredity that incorporates environmental variability as variable environments are the superset of fixed ones, and as a response to variability appears to be a factor in shaping the inheritance mechanism in biology. We believe that the factors underlying this relationship between heredity and variability also apply in artificial systems. Second, the response of heredity to selection is clearly evolutionary, and our postulate is that heredity can emerge through evolution in a molecular \gls{achem}. A coherent model would illuminate the mechanism by which this may be achieved in practice in an artificial system. Therefore, we investigate a model for the response of heredity to selective pressure in \cref{ch:models-of-inheritance}.
 	
 	\item \emph{What elements of replication can be demonstrated in a molecular \gls{achem}?} Although replicators have been studied extensively, previous models have provided, or assumed, the provision of a replication mechanism rather than having the mechanism evolve. We would like to show that replicators can in fact emerge from lower-level reactions between molecules. This question is investigated in chapters \cref{introduction-to-achems,ch:variability} of this work. We begin with an introduction to \glspl{achem} in \cref{introduction-to-achems}, then in \cref{toyworld} we introduce a modular \gls{achem} that embodies a new structure for \glspl{achem}, and show that it is capable of reaction cycles. We then conclude with an investigation into the emergence from these cycles of simple multiplication in \cref{ch:multiplication}, and then variability in the sense of \textcite{Zachar2010} in \cref{ch:variability}.
 
@@ -431,17 +425,16 @@ Note that there are some differences between the design of experiments in the ph
 
 This thesis makes the following novel contributions:
 
-\begin{compactenum}
+\begin{enumerate}
 \item A model for the effect of selection pressure upon heritability, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
-\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{ch:multiplication}.)
 \item A modular \gls{achem}, ToyWorld (\cref{toyworld}.)
-\item Evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{reactant-and-product-strategies}.)
+\item Evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{toyworld}.)
+\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{ch:multiplication}.)
+\end{enumerate}
 
-\item Using this model, a demonstration by simulation that heredity emerges under a variety of environmental forms (\cref{model-behaviour-in-changing-environments}.)
-\end{compactenum}
+The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (from \cref{ch:variability}) is also available under GNU GPL v2 from GitHub (see \cite{toyworld2}.)
 
 A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
 
-The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (from \cref{ch:variability}) is also available under GNU GPL v2 from GitHub (see \cite{toyworld2}.)
 
 

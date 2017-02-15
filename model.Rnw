@@ -23,9 +23,22 @@ df
 
 \chapter{Heritability, Heredity and Inheritance}\label{ch:models-of-inheritance}
 
+This chapter attempts to establish an overall high-level framework for the evolution of replicators; in the following chapters we shall test this framework through stepwise enhancements of a basic \gls{achem} some way towards the long-term goal of a full replicator.
+ 
+In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} relating heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. Now, if $V=$variability and $H=$heritability, then an informational replicator can be \emph{ideal} if $H=V=1$ or \emph{real} if $H\leq V\le 1$. 
+
+Our hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead somewhere along a degree determined by selective pressure.
+
+Therefore we have the following goal for the work in this chapter:
+
+\begin{enumerate}
+	\item Can we describe and model a relationship between heritability and selective pressure for a theoretical replicator?
+	\item 
+\end{enumerate}
+
 Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
 
-Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and the heritability of the trait or property is $1$. Conversely, if there is no relationship there is no heritability and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
+Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and $H=1$, where $H$ is the heritability for the trait or property. Conversely, if there is no relationship there is no heritability ($H=0$) and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
 
 \section{Evolution by Natural Selection}\label{evolution-by-natural-selection}
 

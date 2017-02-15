@@ -27,6 +27,27 @@ This chapter attempts to establish an overall high-level framework for the evolu
  
 In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} relating heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. Now, if $V=$variability and $H=$heritability, then an informational replicator can be \emph{ideal} if $H=V=1$ or \emph{real} if $H\leq V\le 1$. 
 
+\begin{figure}[t]
+	\begin{center}
+		\vspace{10pt}
+		\begin{tikzpicture}[shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+		\draw (-4,3) rectangle (5,2);
+		\filldraw [fill=lightgray] (-2,3) rectangle (2,2);
+		\filldraw [fill=gray] (2,3) rectangle (5,2);
+		\node at (-3,2.5) {$V^c$};
+		\node at (-0,2.5) {$V\backslash H$};
+		\node at (3.5,2.5) {$H$};
+		\draw [gray](-4,3.25) -- (-4,3.5) -- (2,3.5) -- (2,3.25);
+		\node at (-3,4) {$H^c$};
+		\draw [gray](-2,4) -- (-2,4.25) -- (5,4.25) -- (5,4);
+		\node at (1.5,4.5) {$V$};
+		\node at (-4.5,2.5) {$I$};
+		\end{tikzpicture}
+		\caption{Reproduction of Figure 10 from \textcite{Zachar2010}. This diagram of the total information content of a replicator ($I$) illustrates the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.)}
+		\label{fig:zachar-fig-10}
+	\end{center}
+\end{figure}
+
 Our hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead somewhere along a degree determined by selective pressure.
 
 Therefore we have the following goal for the work in this chapter:

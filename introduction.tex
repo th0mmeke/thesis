@@ -350,6 +350,31 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 	\end{center}
 \end{table}
 
+\begin{figure}[t]
+	\begin{center}
+		\vspace{10pt}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+		\draw [->] (-5.9,5.9) -- (-5,5);
+		\draw [->] (-4.9,4.9) -- (-4,4);
+		\draw [->] (-3.9,3.9) -- (-3,3);
+		\draw [->] (-2.9,2.9) -- (-2,2);
+		\node [left] at (-5.5,5.25) {embodiment};
+		\node [left] at (-4.5,4.25) {multiplication};
+		\node [left] at (-3.5,3.25) {variability};
+		\node [left] at (-2.5,2.25) {heredity};
+		\draw [->] (-5.9,5.9) -- (-5,6.9) node [right] {GARD \parencite{Segre1998},  \cite{Vasas2012}};
+		\draw [->] (-4.9,4.9) -- (-4,5.9) node [right] {Squirm3 \parencite{Hutton2002}};
+		\end{tikzpicture}
+		\caption{Classification of selected replicator systems according to \textcite{Zachar2010}.}
+		\label{fig:replicator-classification}
+	\end{center}
+\end{figure}
+
+
+\begin{tikzpicture}
+
+\end{tikzpicture}
+
 Of the systems discussed in \cref{previous-work}, summarised in \cref{tbl:previous-work}, the most successful approach to date has been through automata. In these systems, multiplication is by an algorithmic process where code within the parent, when executed, repeatedly copies the instructions from parent's code to a child using a specific copy operator (\eg \url{h-copy} in Avida.) Deliberate errors introduced during copying by the operator (erroneous copying, see \textcite[p.16]{Zachar2010} for the biological equivalent) provide one source of variation; another comes directly from algorithms where there can be several different instruction sequences that are functionally equivalent, so providing variability as defined by \citeauthor{Zachar2010}.
 
 The standard multiplication processes in the reviewed automata copies all instructions from the parent, and therefore the entity's genotype is the same as its full instruction set. Heredity is thus holistic, and there is no difference between genome and soma. For example, in Tierra, the 80-instruction ancestral creature includes code to determine its beginning and end in memory and then to copy everything between the two to a child entity. However, this multiplication code is part of the entity and subject to variation; it is itself evolvable and in principle at least capable of evolving towards a model where only a proportion of the entity is copied.

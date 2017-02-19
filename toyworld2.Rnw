@@ -104,7 +104,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 		}
 		\Return list of cycles\;
 	}
-	\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is used to bound the cost of the shortest path search.}
+	\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is used to bound the cost of the shortest path search.}\alg{identify-cycles}
 \end{algorithm}
 
 
@@ -152,7 +152,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 		
 		\Return Clusters
 	}
-	\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}
+	\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}\label{alg:identify-clusters}
 \end{algorithm}
 
 
@@ -182,7 +182,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 	}
 	\Return $AutocatalyticCycles$
 }
-\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}
+\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}\label{alg:identify-autocatalytic-cycles}
 \end{algorithm}
 
 \section{Experiment design}

@@ -15,62 +15,62 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 
 \section{Evolutionary model}
 
-The evolutionary model used is the same as previously described, with the exception of the reactant selection strategy, $S_{reactant}=FlowReactantSelection$. The FlowReactantSelection algorithm (\cref{alg:flow-selection}) is a refinement of the earlier KineticReactionSelection strategy, modified to provide support for a FoodSet.
+The evolutionary model used is the same as previously described, with the exception of the reactant selection strategy, $S_{reactant}=LocalReactantSelection$. The FlowReactantSelection algorithm (\cref{alg:flow-selection}) is a refinement of the earlier UniformReactionSelection strategy, modified to provide support for a FoodSet and spatial reactant selection through locality.
 
 
-\begin{algorithm}
-\Def{FlowReactantSelection(population, foodset)}{
-\label{key}	\uIf{|population| < 2}{
-		\Return $\emptyset$
-	}
+%\begin{algorithm}
+%\Def{FlowReactantSelection(population, foodset)}{
+%\label{key}	\uIf{|population| < 2}{
+%		\Return $\emptyset$
+%	}
+%	
+%	i$\leftarrow$0\;
+%	\While{|ReactantList| = 0}{
+%		i $\leftarrow$ i + 1\;
+%		
+%		Remove TURNOVER molecules from the reaction vessel\;
+%		
+%		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same \gls{ke} as the initial set of molecules\;
+%		
+%		\For{Molecule in AddList}{
+%			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
+%			Velocity.Angle$\leftarrow$ chosen with uniform probability from [$0, 2\pi$)\;
+%			
+%			\uIf{$\frac{1}{4}\pi < velocity.angle \leq \frac{3}{4}\pi$}{
+%				Location$\leftarrow$ some point along the bottom wall\;
+%			}
+%			\uElseIf{$\frac{3}{4}\pi < velocity.angle \leq \frac{5}{4}\pi$}{
+%				Location$\leftarrow$ some point along the left wall\;
+%			}
+%			\uElseIf{$\frac{5}{4}\pi < velocity.angle \leq \frac{7}{4}\pi$}{
+%				Location$\leftarrow$ some point along the top wall\;
+%			}
+%			\Else{
+%				Location$\leftarrow$ some point along the right wall\;
+%			}
+%			AddMolecule(Molecule, location=Location, velocity=Velocity)\;
+%		}
+%		
+%		Advance the position of all molecules by $\Delta$t\;
+%		\tcp{Check that $\Delta$t is neither too small nor too large}
+%		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
+%			Adjust $\Delta$t\;
+%			i$\leftarrow$0\;
+%		}
+%	}
+%	\tcp{Construct reactant portion of reaction}
+%	\While{|ReactantList| > 0}{
+%		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
+%		InitialKE$\leftarrow \sum{ke_{i}}, \forall i \in$ Reactants\;
+%		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
+%		\Return Reaction(Reactants, energy=ReactionEnergy)\;
+%	}
+%	\Return $\emptyset$
+%}
+%\caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
+%\end{algorithm}
 	
-	i$\leftarrow$0\;
-	\While{|ReactantList| = 0}{
-		i $\leftarrow$ i + 1\;
-		
-		Remove TURNOVER molecules from the reaction vessel\;
-		
-		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same \gls{ke} as the initial set of molecules\;
-		
-		\For{Molecule in AddList}{
-			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
-			Velocity.Angle$\leftarrow$ chosen with uniform probability from [$0, 2\pi$)\;
-			
-			\uIf{$\frac{1}{4}\pi < velocity.angle \leq \frac{3}{4}\pi$}{
-				Location$\leftarrow$ some point along the bottom wall\;
-			}
-			\uElseIf{$\frac{3}{4}\pi < velocity.angle \leq \frac{5}{4}\pi$}{
-				Location$\leftarrow$ some point along the left wall\;
-			}
-			\uElseIf{$\frac{5}{4}\pi < velocity.angle \leq \frac{7}{4}\pi$}{
-				Location$\leftarrow$ some point along the top wall\;
-			}
-			\Else{
-				Location$\leftarrow$ some point along the right wall\;
-			}
-			AddMolecule(Molecule, location=Location, velocity=Velocity)\;
-		}
-		
-		Advance the position of all molecules by $\Delta$t\;
-		\tcp{Check that $\Delta$t is neither too small nor too large}
-		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
-			Adjust $\Delta$t\;
-			i$\leftarrow$0\;
-		}
-	}
-	\tcp{Construct reactant portion of reaction}
-	\While{|ReactantList| > 0}{
-		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
-		InitialKE$\leftarrow \sum{ke_{i}}, \forall i \in$ Reactants\;
-		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
-		\Return Reaction(Reactants, energy=ReactionEnergy)\;
-	}
-	\Return $\emptyset$
-}
-\caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
-\end{algorithm}
-	
-\section{Measures}\label{emergent-measure}
+\section{Approach}\label{emergent-measure}
 
 From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. 
 
@@ -78,36 +78,35 @@ As we are concerned with reaction networks, a reasonable candidate for an emerge
 
 Therefore we seek reaction cycles of the same species where one cycle gives rise ($\rightarrow$) to two or more cycles of the same species. What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared simulation molecules (individual molecules, not species.)
 
-
-
 \begin{algorithm}
-\Def{IdentifyCycles(Reactions)}{
-	\tcp{Construct reaction graph from a list of $Reactions$}
-	\For{each $Reaction$ in $Reactions$}{
-		Add a node for the reactant side of Reaction\;
-		Add a node for the product side of Reaction\;
-		Add an edge from reactant node to product node\;
-		\For{each $Reactant$ in $Reaction$}{
-			Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
-		}
-		\For{each $Product$ in $Reaction$}{
-			Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
-		}
-	}
-	\tcp{Find all cycles for each reactant in the graph}
-	\For{each $Seed$ in $Reactants$}{
-		\For{each $Candidate$ in list of all molecules in the reaction graph of the same molecular species}{
-			\For{each $Path$ in all shortest paths from $Candidate$ to $Seed$}{
-				\uIf{the stoichiometry for $Seed$ in the cycle given by this $Path\geq 2$}{
-					Add $Path$ to the list of cycles\;
-				} 
+	\Def{IdentifyCycles(Reactions, MaxCycleSize)}{
+		\tcp{Construct reaction graph from a list of $Reactions$}
+		\For{each $Reaction$ in $Reactions$}{
+			Add a node for the reactant side of Reaction\;
+			Add a node for the product side of Reaction\;
+			Add an edge from reactant node to product node\;
+			\For{each $Reactant$ in $Reaction$}{
+				Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
+			}
+			\For{each $Product$ in $Reaction$}{
+				Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
 			}
 		}
+		\tcp{Find all cycles for each reactant in the graph}
+		\For{each $Seed$ in $Reactants$}{
+			\For{each $Candidate$ in list of all molecules in the reaction graph of the same molecular species}{
+				\For{each $Path$ in all shortest paths of length < $MaxCycleSize$ from $Candidate$ to $Seed$}{
+					\uIf{the stoichiometry for $Seed$ in the cycle given by this $Path\geq 2$}{
+						Add $Path$ to the list of cycles\;
+					} 
+				}
+			}
+		}
+		\Return list of cycles\;
 	}
-	\Return list of cycles\;
-}
-\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed.}
+	\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is used to bound the cost of the shortest path search.}\alg{identify-cycles}
 \end{algorithm}
+
 
 %# now look for cycle that is upstream of two or more other cycles
 %# "two or more other cycles":
@@ -118,47 +117,50 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 %# That is, all cycles with two or more linkage molecules, as products, to different cycles
 
 \begin{algorithm}
-\Def{IdentifyClusters(MolecularCyclesForSpecies)}{
-	Clusters$\leftarrow\emptyset$\;
-	Unclustereds$\leftarrow\emptyset$\;
-	
-	\For{CycleMolecules in MolecularCyclesForSpecies}{
-	
-		CanCluster$\leftarrow$False\;
+	\Def{IdentifyClusters(MolecularCyclesForSpecies)}{
+		Clusters$\leftarrow\emptyset$\;
+		Unclustereds$\leftarrow\emptyset$\;
 		
-		\tcp{First check if part of any existing cluster}
-		\For{Cluster in Clusters}{
-			\uIf{Cluster $\cap$ CycleMolecules}{
-				Cluster$\leftarrow$Cluster $\cup$ CycleMolecules\;
-				CanCluster$\leftarrow$True\;
-				break
-			}
-		}
-		
-		\tcp{Otherwise see if can form a new cluster with a previously unclustered cycle}
-		\uIf{$\neg$CanCluster}{
-			\For{Unclustered in Unclustereds}{
-				\uIf{Unclustered $\cap$ CycleMolecules}{
-					Clusters$\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
-					Unclustereds$\leftarrow$Unclustereds-Unclustered\;
+		\For{CycleMolecules in MolecularCyclesForSpecies}{
+			
+			CanCluster$\leftarrow$False\;
+			
+			\tcp{First check if part of any existing cluster}
+			\For{Cluster in Clusters}{
+				\uIf{Cluster $\cap$ CycleMolecules}{
+					Cluster$\leftarrow$Cluster $\cup$ CycleMolecules\;
 					CanCluster$\leftarrow$True\;
+					break
 				}
 			}
+			
+			\tcp{Otherwise see if can form a new cluster with a previously unclustered cycle}
+			\uIf{$\neg$CanCluster}{
+				\For{Unclustered in Unclustereds}{
+					\uIf{Unclustered $\cap$ CycleMolecules}{
+						Clusters$\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
+						Unclustereds$\leftarrow$Unclustereds-Unclustered\;
+						CanCluster$\leftarrow$True\;
+					}
+				}
+			}
+			\tcp{If still can't cluster, then add to Unclustereds}
+			\uIf{$\neg$CanCluster}{
+				Unclustereds$\leftarrow$Unclustereds $\cup$ Cycle\;
+			}
 		}
-		\tcp{If still can't cluster, then add to Unclustereds}
-		\uIf{$\neg$CanCluster}{
-			Unclustereds$\leftarrow$Unclustereds $\cup$ Cycle\;
-		}
+		
+		\Return Clusters
 	}
-	
-	\Return Clusters
-}
-\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}
+	\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}\label{alg:identify-clusters}
 \end{algorithm}
+
+
+
 
 \begin{algorithm}
 \Def{IdentifyAutocatalyticCycles(MolecularCyclesBySpecies)}{
-	Autocatalytic$\leftarrow\emptyset$\;
+	AutocatalyticCycles$\leftarrow\emptyset$\;
     \For{CyclesForSpecies in MolecularCyclesBySpecies}{
 		Clusters$\leftarrow$IdentifyClusters(CyclesForSpecies)\;
 		\For{Cluster in Clusters}{
@@ -172,33 +174,37 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 					NumberDownstreamCycles$\leftarrow$count of items in ReactantLinkages with a value greater than zero\;
 	
 					\uIf{NumberDownstreamCycles > 1}{ 
-						Autocatalytic$\leftarrow$Autocatalytic $\cup$ ReactantLinkages\;
+						AutocatalyticCycles$\leftarrow$AutocatalyticCycles $\cup$ ReactantLinkages\;
 					}
 				}
 			}
 		}
 	}
-	\Return $Autocatalytic$
+	\Return $AutocatalyticCycles$
 }
-\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}
+\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}\label{alg:identify-autocatalytic-cycles}
 \end{algorithm}
 
-\section{Initial conditions}
+\section{Experiment design}
 
 The foodset contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O. Each replicate (run) of the experiment was for 100,000 generations, with an initial \gls{ke} for the reactor vessel of 50 units, switching every 10,000 generations alternately between \gls{ke}=140 and \gls{ke}=50. At every step, 5 randomly-selected molecules were removed from the reaction vessel and replaced by 5 new molecules chosen with uniform probability from the foodset (TURNOVER=5.) 
 
-f\section{Results and discussion}
+Other parameters were set as follows: for dataset 1487376025 only $MaxCycleSize=7$ (only cycles containing seven or fewer molecules are included); for other datasets $MaxCycleSize=10$.
+\section{Results and discussion}
 
 <<toyworld2-replicator-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv_replicators <- read.csv('results/replicators.csv')
 names(csv_replicators)[names(csv_replicators)=="Datetime"] <- "Dataset"
 
-r <- csv_replicators[csv_replicators$Dataset=='1484540618',]
+#r <- csv_replicators[csv_replicators$Dataset=='1484540618',c("Dataset","Replicate","Clusters","Replicators")]
+r <- csv_replicators[csv_replicators$Environment==0,c("Dataset","Replicate","Clusters","Replicators")]
 
 library(plyr)
 library(xtable)
-print(xtable(r, caption='Summary results for variable replicator detection.', label='tbl:toyworld2-replicator-results'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(r, caption='Summary results from applying \\cref{ch:multiplication} to datasets generated by various $S_{reactant}$, all though under stable environments (no external selective pressure).', label='tbl:toyworld2-replicator-results'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
+
+\section{Conclusions}
 
 \chapter{From Multiplication to Variability}\label{ch:variability}
 
@@ -340,7 +346,7 @@ Environmental variability is approximated by sample entropy, a metric of predict
 \section{Measures}
 
 However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
-
+\begin{DRAFT}
 But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
 Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
 RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
@@ -357,6 +363,7 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 	\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
 \end{enumerate}
 
+\end{DRAFT}
 
 \section{Experiment design}
 

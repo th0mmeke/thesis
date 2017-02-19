@@ -27,53 +27,7 @@ In this work we explore two related aspects of an endogenous mechanism for hered
 \item What elements of replication can be \emph{demonstrated} in a molecular \gls{achem}?
 \end{enumerate}
 
-\section{Context}\label{context}
-
-\Glspl{achem} are not necessarily models of real-world physical chemistry but most \glspl{achem} borrow, at least, from the language of real-world chemistry. An understanding of the key concepts in physical chemistry is therefore useful in appreciating \glspl{achem}.
-
-The richness of the physical world is built on a substantial foundation of chemical complexity. A \textit{reaction} transforms \emph{reactants} into \emph{products}, and is often described by the quantities (or stoichiometry) of the reactants and resulting product molecules. The reaction can also be characterised by a description of the dynamics, or kinetics, of the reaction to explain how the reaction proceeds in response to temperature changes or to varying concentrations of reactants. Reactions often require an input of energy, such as from molecular collisions, to proceed; the energy required is called the reaction's activation energy (\(E_a\)), and is specific to the particular reaction. In general there is no accurate mechanism to predict reaction dynamics without experiment.
-
-The \textit{reaction rate} is the change in concentration of a substance over time: \(\frac{-d[A]}{dt} = k[A][B]\) (where the notation \([X]\) means that concentration of \(X\) and \(k\) is the reaction rate constant) leading to Arrenhius' description of the relationship between the activation energy (\(E_a\)), the temperature (\(T\)) and the rate constant (\(k\)): \(k = Ae^{E_a/RT}\) ($R$ is the universal gas constant.) The \textit{reaction order} describes how the reaction rate changes with the concentration of the reactants, usually captured as a first-, second-, or third-degree polynomial expression determined empirically. For example, the reaction rate equation for \(2NO + Cl_2 \rightarrow 2NOCl\) is \(rate = k[NO]^2[Cl_2]\) (experimentally determined), and is second-order with respect to \(NO\), first-order with \(Cl_2\) and overall (the sum of terms), third-order (example taken from \textcite{Kotz2006}.)
-
-Reactions can generally be decomposed to a chain of \emph{elementary steps}, with each step resulting in a single change, such as bond formation or cleavage, to the reacting molecules. Elementary steps are somewhat predictable, practical reactions somewhat less so. Generally in experimental chemistry we know the reactants and products and can sometimes deduce the sequence of elementary steps.
-
-In modelling, we can either represent reactions exactly as an atomic transformation from reactants to products with characteristics that can only be determined experimentally, or we can attempt to construct the reaction from a sequence of elementary steps with the properties of the reaction derived from the properties of the steps involved. This later approach is the only practical one when the reaction is novel, or when we lack experimental data. Several alternate sequences of steps, or \textit{reaction pathways}, may be possible between reactants and products. Each pathway will have a different activation energy, and hence reaction rate.
-
-The kinetics of elementary steps are defined by the \emph{stoichiometry}. In theory you might expect to be able to predict the overall reactions kinetics from the composition of these elementary steps. In practice, the results are close, but not exact, when compared to experiment. However they form a useful abstraction for analysis. The reaction rate of an elementary step is defined by the stoichiometry, where the rate equation is the product of the reactant concentrations and the rate constant. Therefore a step with one reactant has order 1, a bimolecular step (\(A + B\)) has order 2 and so on. The step \(2A + B\) has rate equation \(k[A][A][B] = k[A]^2[B]\) and is of order 3. 
-
-Elementary steps are an abstraction, an aid to analysis, of the underlying molecular dynamics. At the molecular level, reactions can be
-modelled as a series of collisions between molecules. The reaction rate is then determined by the percentage of collisions (or in other words,
-the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
-structure or shape (in other words, the activation energy).
-
-For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (ones that can enter into other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction--for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
-
-Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
-activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
-reactants. There are therefore two clear mechanisms to alter the rate for a reaction: either reduce activation energy, or increase
-concentrations. A catalyst does precisely the first, and autocatalysis is one method for the second.
-
-A \emph{catalyst} is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
-affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
-The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
-orders of magnitude over the uncatalysed reaction, enabling reactions fundamental to life that would be effectively impossible in an
-uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
-the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
-
-In \emph{autocatalysis}, introduced by \textcite{Ostwald1890}, rather than reducing the required activation
-energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
-reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
-characteristic rate acceleration over time given by the differential equation--
-\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
-
-Autocatalysis may be realised by \begin{inparaenum}
-	\item Either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, branching chain reactions or autocatalytic sets \parencite{King1978}.
-	\item By a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other.
-\end{inparaenum}
-
-However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
-
-\subsection{The emergence of biological replicators}
+\section{Context - the emergence of biological replicators}\label{context}
 
 Biological evolution has produced ecosystems of astonishing variety and range, occupying essentially every viable niche on, above, and within the Earth from a common origin in the prebiotic world many millions of years ago. This has been far more than a working out of a single theme; instead a hugely impressive radiation of form and function has left that original ancestor far behind. The only connection that remains is the unbroken lineage of genes that links that earliest ancestor to every descendent organism alive today.
 
@@ -144,7 +98,7 @@ Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{S
 	\item If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' 
 \end{enumerate}
 
-
+\begin{DRAFT}
 Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
 
 Question: at what point does an autocatalytic set become probable?
@@ -170,6 +124,7 @@ But sampling algorithm can
 	\item find a sample set of irrRAFS, and
 	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
 \end{itemize}
+\end{DRAFT}
 
 \section{Previous work}\label{previous-work}
 

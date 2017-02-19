@@ -25,7 +25,7 @@ df
 
 This chapter attempts to establish an overall high-level framework for the evolution of replicators; in the following chapters we shall test this framework through stepwise enhancements of a basic \gls{achem} some way towards the long-term goal of a full replicator.
  
-In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} relating heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. Now, if $V=$variability and $H=$heritability, then an informational replicator can be \emph{ideal} if $H=V=1$ or \emph{real} if $H\leq V\le 1$. 
+In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} relating heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. Now, if variability is represented by $V$, and heritability by $H$, then an informational replicator is \emph{ideal} if $H=V=1$ and \emph{real} if $H\leq V\le 1$. 
 
 \begin{figure}[t]
 	\begin{center}

@@ -16,7 +16,7 @@ Evolutionary systems are commonly described in terms of three foundational eleme
 
 Novelty instead is the outcome of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search--instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
 
-An open-ended evolutionary system, capable of ongoing evolution without practical limit, needs these components to be themselves subject to evolution, change and adaptation\footnote{This relates this work to evolvability, see for example \cref{Pigliucci2008,Wagner:1996kc, Wagner:2008mi}.}.A system where variation, selection and heredity emerges endogenously from lower-level elements seems to be one possible, and perhaps most promising, approach to open-ended evolution in artificial, rather than biological, systems. After all, this is the form taken by life itself.
+An open-ended evolutionary system, capable of ongoing evolution without practical limit, needs these components to be themselves subject to evolution, change and adaptation\footnote{This relates this work to evolvability; see for example \textcite{Pigliucci2008,Wagner:1996kc,Wagner:2008mi}.}.A system where variation, selection and heredity emerges endogenously from lower-level elements seems to be one possible, and perhaps most promising, approach to open-ended evolution in artificial, rather than biological, systems. After all, this is the form taken by life itself.
 
 However, creating the conditions under which evolution emerges endogenously has proved to be extremely difficult in artificial systems, and remains an open problem\footnote{See recent review in \cite{BanzhafBaumgaertnerBeslonEtAl2016}}. Instead, our focus is on only one of the necessary elements for \gls{oe}, the mechanism for heredity within artificial evolutionary systems.
 
@@ -323,7 +323,7 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 \begin{table}
 	\scriptsize
 	\begin{center}
-		\caption{\Gls{achem} replicators in selected previous works, categorized according to \textcite{Zachar2010}. ODE-based models such as GARD and \textcite{Vasas2012} are not included as they are not \gls{constructive} and hence incapable of unlimited evolution; RBN-World \parencite{Faulconbridge2010} is not included as relevant results have not been reported.}
+		\caption{\Gls{achem} replicators in selected previous works, categorized according to \textcite{Zachar2010}. ODE-based models such as GARD and \textcite{Vasas2012} are not included as they are not \gls{constructive} and hence incapable of unlimited evolution; RBN-World \parencite{Faulconbridge2010} is not included as self-replication has not been reported.}
 		\label{tbl:previous-work}
 		\begin{tabular}{@{}p{3.5cm}p{1.5cm}p{3.5cm}p{3.5cm}p{2cm}@{}}
 			\toprule
@@ -368,9 +368,9 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 
 \end{tikzpicture}
 
-Of the systems discussed in \cref{previous-work}, summarised in \cref{tbl:previous-work}, the most successful approach to date has been through automata. In these systems, multiplication is by an algorithmic process where code within the parent, when executed, repeatedly copies the instructions from parent's code to a child using a specific copy operator (\eg \url{h-copy} in Avida.) Deliberate errors introduced during copying by the operator (erroneous copying, see \textcite[p.16]{Zachar2010} for the biological equivalent) provide one source of variation; another comes directly from algorithms where there can be several different instruction sequences that are functionally equivalent, so providing variability as defined by \citeauthor{Zachar2010}.
+Of the systems discussed in \cref{previous-work} (summarised in \cref{tbl:previous-work}), the most successful approach to date has been through automata. In these systems, multiplication is by an algorithmic process where code within the parent, when executed, repeatedly copies the instructions from parent's code to a child using a specific copy operator (\eg \url{h-copy} in Avida.) Deliberate errors introduced during copying by the operator (erroneous copying, see \textcite[p.16]{Zachar2010} for the biological equivalent) provide one source of variation; another comes directly from algorithms where there can be several different instruction sequences that are functionally equivalent, so providing variability as defined by \citeauthor{Zachar2010}.
 
-The standard multiplication processes in the reviewed automata copies all instructions from the parent, and therefore the entity's genotype is the same as its full instruction set. Heredity is thus holistic, and there is no difference between genome and soma. For example, in Tierra, the 80-instruction ancestral creature includes code to determine its beginning and end in memory and then to copy everything between the two to a child entity. However, this multiplication code is part of the entity and subject to variation; it is itself evolvable and in principle at least capable of evolving towards a model where only a proportion of the entity is copied.
+The initial multiplication process in each of the reviewed automata copies all instructions from the parent; therefore the entity's genotype is the same as its instruction set. Heredity is thus holistic and in the notation of \citeauthor{Zachar2010}, $H=V$ (discussed further in \cref{ch:models-of-inheritance}). For example, in Tierra, the 80-instruction ancestral creature includes code to determine its beginning and end in memory and then to copy everything between the two to a child entity. However, this multiplication code is part of the entity and subject to variation; it is itself evolvable and in principle at least capable of evolving towards a model where only a proportion of the entity is copied.
 
 \section{Research questions}\label{research-questions}
 
@@ -427,14 +427,20 @@ This thesis makes the following novel contributions:
 
 \begin{enumerate}
 \item A model for the effect of selection pressure upon heritability, incorporating an exogenous property for fitness suggested by \textcite{Bourrat2015}.
-\item A modular \gls{achem}, ToyWorld (\cref{toyworld}.)
-\item Evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{toyworld}.)
-\item Demonstration of the emergence of simple replicators \parencite{Zachar2010} from a molecular \gls{achem} (\cref{ch:multiplication}.)
+\item A new and modular \gls{achem}, ToyWorld (\cref{toyworld}.)
+\item The evaluation of various reaction and product selection strategies in a molecular \gls{achem} (\cref{toyworld}.)
+\item A demonstration of the emergence of simple replicator forms from a molecular \gls{achem} (\cref{ch:multiplication}.)
 \end{enumerate}
 
-The source code for ToyWorld, the \gls{achem} from \cref{toyworld}, has been released under an GNU GPL v2 open source licence and is available from GitHub (see \cite{toyworld}). Similarly, the source for ToyWorld2 (from \cref{ch:variability}) is also available under GNU GPL v2 from GitHub (see \cite{toyworld2}.)
-
 A version of \cref{reactant-and-product-strategies} was published as \textcite{Young2015}, and material from \cref{model-validation} appears in \textcite{Young2013}.
+
+The source code for all software developed for use in this work is available on GitHub under the GNU GPL v3 open source licence:
+\begin{itemize}
+	\item For ToyWorld, the \gls{achem} from \cref{toyworld}, see \cite{toyworld}.
+	\item For the updated version, ToyWorld2, used in the experiments in \cref{ch:multiplication,ch:variability)}, see \cite{toyworld2}.
+	\item Finally, the model source from \cref{ch:models-of-inheritance} is available at \url{http://github.com/th0mmeke/thesis-models}. 
+\end{itemize}
+
 
 
 

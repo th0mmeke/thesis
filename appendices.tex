@@ -8,11 +8,13 @@
 			\toprule
 			Input & Analysis script (see \cite{toyworld2}) & Output\\
 			\midrule
-			Reaction data 									& \url{analyse_cycles.py}						& Cycles by species and by molecule \\
-			Reaction data									& \url{analyse_irrfgenerated.py}				& All irreduceable f-generated sets in the reaction data\\
+			Reaction data 									& \url{analyse_cycles.py}						& Cycles by species and by molecule, by \cref{alg:identify-cycles} \\ % <filebase>.json -> IdentifyMoleculeCycles.get_reactant_stoichiometry() -> <filebase>-molecules.json
+			Reaction data									& \url{analyse_irrfgenerated.py}				& All irreduceable f-generated sets in the reaction data\\ % <filebase>.json -> <filebase>-irrraf.json
 			\midrule
-			Cycles by molecule								& \url{analyse_stable_cycles.py}				& All stable cycles (contiguous series of cycles of the same form)\\
-			Cycles by molecule								& \url{analyse_overlapping_species.py}			& All clusters of stable cycles connected by shared molecules\\
+			Cycles by molecule								& \url{analyse_stable_cycles.py}				& All multipliers (contiguous series of cycles of the same form)\\ % <filebase>.json -> cycle_utilities.discover_multipliers() -> <filebase>-states.json 
+			Cycles by molecule								& \url{analyse_overlapping_species.py}			& All clusters of stable cycles connected by shared molecules, discovered by \cref{alg:identify-clusters}\\ % <filebase>-molecules.json -> cycle_utilities.identify_clusters() -> <filebase>-replicators.json
+			Cycles by molecule								& \url{analyse_autocatalyis.py}					& All cycles that have two or more linkage molecules, as products, to two or more different cycles. Discovered by \cref{alg:identify-autocatalytic-cycles}\\ % <filebase>-molecules.json -> cycle_utilities.discover_autocatalysis() -> <filebase>-autocatalytic.json
+			\midrule
 			Environmental metadata and Cycles by molecule	& \url{analyse_stable_cycles_by_environment.py}	& Table by stable cycle of H, and min, mean, max counts for contiguous generations of stable cycles\\
 %			Environment metadata and Cycles by species		& \url{analyse_cycles_by_environment.py}		& Table by cycle of H, number of cycles  \\			
 			\bottomrule
@@ -51,6 +53,7 @@
 %			\toprule
 %			Dataset         	& $S_{reactant}$						& Notes																& Used in Chapter \\
 %			\midrule
+%			1487535886			& UniformReactantSelection, KineticReactantSelection & \\
 %			1487376025			& KineticReactantSelection				& Fixed environment 												& \\
 
 %			1480963448, 1481665906, 1481670569, 1481939843, 1481952255 	& LocalReactantSelection - AR and bistate timeseries environments 	& \cref{ch:variability}

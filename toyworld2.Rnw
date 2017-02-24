@@ -9,74 +9,19 @@ opts_chunk$set(fig.path='generated_figures/')
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
 
-\chapter{The Emergence of Multiplication}\label{ch:multiplication}
-
-
-
-\section{Evolutionary model}
-
-The evolutionary model used is the same as previously described, with the exception of the reactant selection strategy, $S_{reactant}=LocalReactantSelection$. The FlowReactantSelection algorithm (\cref{alg:flow-selection}) is a refinement of the earlier UniformReactionSelection strategy, modified to provide support for a FoodSet and spatial reactant selection through locality.
-
-
-%\begin{algorithm}
-%\Def{FlowReactantSelection(population, foodset)}{
-%\label{key}	\uIf{|population| < 2}{
-%		\Return $\emptyset$
-%	}
-%	
-%	i$\leftarrow$0\;
-%	\While{|ReactantList| = 0}{
-%		i $\leftarrow$ i + 1\;
-%		
-%		Remove TURNOVER molecules from the reaction vessel\;
-%		
-%		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same \gls{ke} as the initial set of molecules\;
-%		
-%		\For{Molecule in AddList}{
-%			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
-%			Velocity.Angle$\leftarrow$ chosen with uniform probability from [$0, 2\pi$)\;
-%			
-%			\uIf{$\frac{1}{4}\pi < velocity.angle \leq \frac{3}{4}\pi$}{
-%				Location$\leftarrow$ some point along the bottom wall\;
-%			}
-%			\uElseIf{$\frac{3}{4}\pi < velocity.angle \leq \frac{5}{4}\pi$}{
-%				Location$\leftarrow$ some point along the left wall\;
-%			}
-%			\uElseIf{$\frac{5}{4}\pi < velocity.angle \leq \frac{7}{4}\pi$}{
-%				Location$\leftarrow$ some point along the top wall\;
-%			}
-%			\Else{
-%				Location$\leftarrow$ some point along the right wall\;
-%			}
-%			AddMolecule(Molecule, location=Location, velocity=Velocity)\;
-%		}
-%		
-%		Advance the position of all molecules by $\Delta$t\;
-%		\tcp{Check that $\Delta$t is neither too small nor too large}
-%		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
-%			Adjust $\Delta$t\;
-%			i$\leftarrow$0\;
-%		}
-%	}
-%	\tcp{Construct reactant portion of reaction}
-%	\While{|ReactantList| > 0}{
-%		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
-%		InitialKE$\leftarrow \sum{ke_{i}}, \forall i \in$ Reactants\;
-%		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
-%		\Return Reaction(Reactants, energy=ReactionEnergy)\;
-%	}
-%	\Return $\emptyset$
-%}
-%\caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
-%\end{algorithm}
-	
-\section{Approach}\label{emergent-measure}
+\chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
 From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt the stronger sense of exact replication which is that the forms are identical. 
 
 As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles; reasonable as cycles are potentially longlived even though the consituent molecules are produced and consumed. The form of a reaction cycle is not the sequence of individual molecules, linked by reactions, as individual molecules are unique and transitory, but rather the sequence of molecular species. A molecular species is a type to which individual molecules of the same chemical composition belong: the class of all 'OH' molecules, not one individual molecule. By extension, the \textit{form} of a reaction cycle can also be considered the \textit{species} of the reaction cycle, and we shall use species to mean the form of the reaction cycle from here onwards.
 
 Therefore we seek reaction cycles of the same species where one cycle gives rise ($\rightarrow$) to two or more cycles of the same species. What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared simulation molecules (individual molecules, not species.)
+
+\section{Evolutionary model}
+
+The evolutionary model used is the same as previously described, with the exception of the reactant selection strategy, $S_{reactant}=LocalReactantSelection$. The FlowReactantSelection algorithm (\cref{alg:flow-selection}) is a refinement of the earlier UniformReactionSelection strategy, modified to provide support for a FoodSet and spatial reactant selection through locality.
+
+\section{Measures}
 
 \begin{algorithm}
 	\Def{IdentifyCycles(Reactions, MaxCycleSize)}{
@@ -104,86 +49,50 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 		}
 		\Return list of cycles\;
 	}
-	\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is used to bound the cost of the shortest path search.}\alg{identify-cycles}
+	\caption[\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify all potentially autocatalytic cycles within a reaction network, using the definition of autocatalysis from \cref{context}. A cycle is a sequence of reactions where at least one product in the final reaction is of the same species as a reactant in the first reaction of the cycle. The cycle is potentially autocatalytic if the stoichiometry of that product molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is used to bound the cost of the shortest path search.}\label{alg:identify-cycles}
 \end{algorithm}
 
-
-%# now look for cycle that is upstream of two or more other cycles
-%# "two or more other cycles":
-%#   linkages = find all molecules in two (or more) cycles
-%#   find all cycles with two (or more) linkage molecules
-%# "upstream":
-%#   linkage molecule appears as product, not reactant in upstream cycle
-%# That is, all cycles with two or more linkage molecules, as products, to different cycles
-
 \begin{algorithm}
-	\Def{IdentifyClusters(MolecularCyclesForSpecies)}{
-		Clusters$\leftarrow\emptyset$\;
-		Unclustereds$\leftarrow\emptyset$\;
-		
-		\For{CycleMolecules in MolecularCyclesForSpecies}{
-			
-			CanCluster$\leftarrow$False\;
-			
-			\tcp{First check if part of any existing cluster}
-			\For{Cluster in Clusters}{
-				\uIf{Cluster $\cap$ CycleMolecules}{
-					Cluster$\leftarrow$Cluster $\cup$ CycleMolecules\;
-					CanCluster$\leftarrow$True\;
-					break
-				}
-			}
-			
-			\tcp{Otherwise see if can form a new cluster with a previously unclustered cycle}
-			\uIf{$\neg$CanCluster}{
-				\For{Unclustered in Unclustereds}{
-					\uIf{Unclustered $\cap$ CycleMolecules}{
-						Clusters$\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
-						Unclustereds$\leftarrow$Unclustereds-Unclustered\;
-						CanCluster$\leftarrow$True\;
-					}
-				}
-			}
-			\tcp{If still can't cluster, then add to Unclustereds}
-			\uIf{$\neg$CanCluster}{
-				Unclustereds$\leftarrow$Unclustereds $\cup$ Cycle\;
-			}
-		}
-		
-		\Return Clusters
-	}
-	\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}\label{alg:identify-clusters}
-\end{algorithm}
-
-
-
-
-\begin{algorithm}
-\Def{IdentifyAutocatalyticCycles(MolecularCyclesBySpecies)}{
-	AutocatalyticCycles$\leftarrow\emptyset$\;
-    \For{CyclesForSpecies in MolecularCyclesBySpecies}{
-		Clusters$\leftarrow$IdentifyClusters(CyclesForSpecies)\;
-		\For{Cluster in Clusters}{
-			Products$\leftarrow$\{all products generated by cycles in Cluster\}\;
-			Reactants$\leftarrow$\{all reactants for every cycle in Cluster\}\;
-			Linkages$\leftarrow$Products $\cap$ Reactants\;
-			\uIf{Linkages}{
-				ProductLinkageMoleculesByCycle$\leftarrow$\{products for cycle $\cap$ Reactants for every cycle in cluster\}\;
-				\For{LinkageMoleculesInCycle in ProductLinkageMoleculesByCycle}{
-					ReactantLinkages$\leftarrow$\{reactants for cycle $\cap$ LinkageMoleculesInCycle for every cycle in cluster\}\;
-					NumberDownstreamCycles$\leftarrow$count of items in ReactantLinkages with a value greater than zero\;
 	
-					\uIf{NumberDownstreamCycles > 1}{ 
-						AutocatalyticCycles$\leftarrow$AutocatalyticCycles $\cup$ ReactantLinkages\;
-					}
-				}
-			}
-		}
-	}
-	\Return $AutocatalyticCycles$
-}
-\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}\label{alg:identify-autocatalytic-cycles}
+%	for cycle in cycles:
+%	if type(cycle) == dict:
+%	grouped_cycles[len(cycle['cycle'])].append(cycle['cycle'])
+%	else:
+%	grouped_cycles[len(cycle)].append(cycle)
+%	
+%	stable_cycles = defaultdict(list)
+%	cycle_form = {}
+%	
+%	for cycles_of_length in grouped_cycles.itervalues():
+%	# cycles_of_length has all cycles of same length, but not guaranteed to be of same type
+%	smiles_cycles = defaultdict(list)
+%	for cycle in cycles_of_length:
+%	s = map_id_to_smiles(cycle, smiles)
+%	smiles_cycles[frozenset(s)].append(get_molecules_in_cycle(cycle))
+%	
+%	cycle_form[frozenset(s)] = s
+%	
+%	# smiles_cycles now contains lists of all identical cycles types, so just have to match up the connected ones
+%	
+%	for cycle_type, cycles_of_type in smiles_cycles.iteritems():
+%	# cycle_type is the smiles form, cycles_of_type every unique cycle with molecule ids
+%	clusters = [cycles_of_type.pop()]
+%	counts = defaultdict(int)
+%	for cycle_molecules in cycles_of_type:
+%	for i in range(0, len(clusters)):
+%	if clusters[i].intersection(cycle_molecules):
+%	clusters[i].union(cycle_molecules)
+%	counts[i] += 1
+%	break
+%	if len(counts) > 0 and max(counts.values()) > 1:
+%	stable_cycles[max(counts.values())].append(cycle_form[cycle_type])  # Longest stable duration > 1
+%	
+%	return stable_cycles, [x[0] for x in cycle_form.itervalues()]
+		
+	\caption[\emph{IdentifyMultipliers}. Algorithm to identify all multipliers within a reaction network.}\label{alg:identify-multipliers}
+	
 \end{algorithm}
+
 
 \section{Experiment design}
 
@@ -331,6 +240,58 @@ Our approach to incorporating an environmental factor ($X_t$) into the least ene
 
 The environmental change modifies the energy required for a bond change in a reaction. Positive environmental change reduces the energy required; a negative change increases the energy required. The major effect is to shift the likelihood of marginal reactions, sometimes allowing reactions which would otherwise lack the energy to be viable, and at other times preventing reaction options that would normally be possible.
 
+%\begin{algorithm}
+%\Def{FlowReactantSelection(population, foodset)}{
+%\label{key}	\uIf{|population| < 2}{
+%		\Return $\emptyset$
+%	}
+%	
+%	i$\leftarrow$0\;
+%	\While{|ReactantList| = 0}{
+%		i $\leftarrow$ i + 1\;
+%		
+%		Remove TURNOVER molecules from the reaction vessel\;
+%		
+%		AddList$\leftarrow$chhose TURNOVER new molecules from foodset with uniform probability, and give each the same \gls{ke} as the initial set of molecules\;
+%		
+%		\For{Molecule in AddList}{
+%			Velocity.Speed$\leftarrow\sqrt{\frac{2ke}{mass}}$\;
+%			Velocity.Angle$\leftarrow$ chosen with uniform probability from [$0, 2\pi$)\;
+%			
+%			\uIf{$\frac{1}{4}\pi < velocity.angle \leq \frac{3}{4}\pi$}{
+%				Location$\leftarrow$ some point along the bottom wall\;
+%			}
+%			\uElseIf{$\frac{3}{4}\pi < velocity.angle \leq \frac{5}{4}\pi$}{
+%				Location$\leftarrow$ some point along the left wall\;
+%			}
+%			\uElseIf{$\frac{5}{4}\pi < velocity.angle \leq \frac{7}{4}\pi$}{
+%				Location$\leftarrow$ some point along the top wall\;
+%			}
+%			\Else{
+%				Location$\leftarrow$ some point along the right wall\;
+%			}
+%			AddMolecule(Molecule, location=Location, velocity=Velocity)\;
+%		}
+%		
+%		Advance the position of all molecules by $\Delta$t\;
+%		\tcp{Check that $\Delta$t is neither too small nor too large}
+%		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
+%			Adjust $\Delta$t\;
+%			i$\leftarrow$0\;
+%		}
+%	}
+%	\tcp{Construct reactant portion of reaction}
+%	\While{|ReactantList| > 0}{
+%		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
+%		InitialKE$\leftarrow \sum{ke_{i}}, \forall i \in$ Reactants\;
+%		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
+%		\Return Reaction(Reactants, energy=ReactionEnergy)\;
+%	}
+%	\Return $\emptyset$
+%}
+%\caption[\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset.]{\emph{FlowReactantSelection}. Reactant selection strategy where \emph{TURNOVER} molecules are removed from the reaction vessel at every generation and replaced by the same number of new molecules chosen without preference from the foodset. Note that the influx and matching outflow is not therefore at a constant rate.}\label{alg:flow-selection}
+%\end{algorithm}
+
 \section{Hypothesis and predictions}
 
 \begin{hypothesis}
@@ -364,6 +325,82 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 \end{enumerate}
 
 \end{DRAFT}
+
+
+%# now look for cycle that is upstream of two or more other cycles
+%# "two or more other cycles":
+%#   linkages = find all molecules in two (or more) cycles
+%#   find all cycles with two (or more) linkage molecules
+%# "upstream":
+%#   linkage molecule appears as product, not reactant in upstream cycle
+%# That is, all cycles with two or more linkage molecules, as products, to different cycles
+
+\begin{algorithm}
+	\Def{IdentifyClusters(MolecularCyclesForSpecies)}{
+		Clusters$\leftarrow\emptyset$\;
+		Unclustereds$\leftarrow\emptyset$\;
+		
+		\For{CycleMolecules in MolecularCyclesForSpecies}{
+			
+			CanCluster$\leftarrow$False\;
+			
+			\tcp{First check if part of any existing cluster}
+			\For{Cluster in Clusters}{
+				\uIf{Cluster $\cap$ CycleMolecules}{
+					Cluster$\leftarrow$Cluster $\cup$ CycleMolecules\;
+					CanCluster$\leftarrow$True\;
+					break
+				}
+			}
+			
+			\tcp{Otherwise see if can form a new cluster with a previously unclustered cycle}
+			\uIf{$\neg$CanCluster}{
+				\For{Unclustered in Unclustereds}{
+					\uIf{Unclustered $\cap$ CycleMolecules}{
+						Clusters$\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
+						Unclustereds$\leftarrow$Unclustereds-Unclustered\;
+						CanCluster$\leftarrow$True\;
+					}
+				}
+			}
+			\tcp{If still can't cluster, then add to Unclustereds}
+			\uIf{$\neg$CanCluster}{
+				Unclustereds$\leftarrow$Unclustereds $\cup$ Cycle\;
+			}
+		}
+		
+		\Return Clusters
+	}
+	\caption[\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common.]{\emph{IdentifyClusters}. Cluster identification by grouping reaction cycles of the same form that also have one or more molecules in common. \emph{MolecularCyclesForSpecies} contains all cycles of the same cycle species, that is, all cycles that share the same sequence of reactions when converted to SMILES (species) form.}\label{alg:identify-clusters}
+\end{algorithm}
+
+\begin{algorithm}
+	\Def{IdentifyAutocatalyticCycles(MolecularCyclesBySpecies)}{
+		AutocatalyticCycles$\leftarrow\emptyset$\;
+		\For{CyclesForSpecies in MolecularCyclesBySpecies}{
+			Clusters$\leftarrow$IdentifyClusters(CyclesForSpecies)\;
+			\For{Cluster in Clusters}{
+				Products$\leftarrow$\{all products generated by cycles in Cluster\}\;
+				Reactants$\leftarrow$\{all reactants for every cycle in Cluster\}\;
+				Linkages$\leftarrow$Products $\cap$ Reactants\;
+				\uIf{Linkages}{
+					ProductLinkageMoleculesByCycle$\leftarrow$\{products for cycle $\cap$ Reactants for every cycle in cluster\}\;
+					\For{LinkageMoleculesInCycle in ProductLinkageMoleculesByCycle}{
+						ReactantLinkages$\leftarrow$\{reactants for cycle $\cap$ LinkageMoleculesInCycle for every cycle in cluster\}\;
+						NumberDownstreamCycles$\leftarrow$count of items in ReactantLinkages with a value greater than zero\;
+						
+						\uIf{NumberDownstreamCycles > 1}{ 
+							AutocatalyticCycles$\leftarrow$AutocatalyticCycles $\cup$ ReactantLinkages\;
+						}
+					}
+				}
+			}
+		}
+		\Return $AutocatalyticCycles$
+	}
+	\caption[\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection.]{\emph{IdentifyAutocatalyticCycles}. Autocatalytic set detection. The input \emph{MolecularCyclesBySpecies} is the output of \emph{IdentifyCycles} grouped by cycle species, that is grouped into sets of cycles that share the same sequence of reactions when converted to species form.}\label{alg:identify-autocatalytic-cycles}
+\end{algorithm}
+
 
 \section{Experiment design}
 

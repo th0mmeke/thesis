@@ -151,7 +151,7 @@ Therefore we seek reaction cycles of the same species where one cycle gives rise
 %	
 %	return stable_cycles, [x[0] for x in cycle_form.itervalues()]
 		
-	\caption{\emph{IdentifyMultipliers}. Algorithm to identify all multipliers within a reaction network.}\label{alg:identify-multipliers}
+%	\caption{\emph{IdentifyMultipliers}. Algorithm to identify all multipliers within a reaction network.}\label{alg:identify-multipliers}
 	
 \end{algorithm}
 

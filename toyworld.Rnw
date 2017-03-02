@@ -30,7 +30,7 @@ However, the more limited objective of a less realistic, but still unbounded che
 
 A mathematical treatment of \glspl{achem} can be found in \textcite{Benko2009}. \Textcite{Dittrich:2001zr} and \textcite{Suzuki2008a} provide excellent reviews of the field, while an influential taxonomy is given in \textcite{Dittrich:2001zr}, described in \cref{classification-of-artificial-chemistries}. Every \gls{achem} defines a set of constitutive elements (molecules), a set of transformation rules (reactions) and a mechanism for choosing and ordering the sequence of reactions (a reactor algorithm) \parencite{Dittrich:2001zr}. These components and taxonomies are described in more detail in the next \namecref{classification-of-artificial-chemistries}, but first we digress to provide a short review of chemistry in the real, rather than artificial, world.
 
-\section{An introduction to real-world chemistry}
+\section{An introduction to real-world chemistry}\label{sec:real-world-chemistry}
 
 \Glspl{achem} are not necessarily models of real-world physical chemistry but most \glspl{achem} borrow, at least, from the language of real-world chemistry. An understanding of the key concepts in physical chemistry is therefore useful in appreciating \glspl{achem}.
 

@@ -27,7 +27,18 @@ For exact multiplication, we seek reaction cycles of the same species where one 
 
 What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared molecules (individual molecules, not species.) 
 
-The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles} and \cref{alg:identify-clusters} respectively.
+The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles-sampling} and \cref{alg:identify-clusters} respectively.
+
+Cycle detection forms the basis for all further analysis, including the identification of autocatalytic cycles, and hence multiplication and variability. An algorithm to detect all cycles (such as \cref{alg:identify-cycles}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
+
+The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are closed not by returning to the same node, but by visiting any node of the same species as previously visited as a cycle consists of molecule species while the graph is by molecule instances and therefore by definition acyclic. 
+
+The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, similar to that in \textcite[p.7]{Hordijk2015a}. We sample a proportion (currently 10\%) of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling} is quite robust as shown by the variance of the number of cycles identified by repeating the procedure a number of times, each time with a new choice of sample molecules. 
+
+There is a significant limitation to this approach however. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph should also be maintained.
+
+Remember that our primary interest is in whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles-sampling} instead of the exhaustive \cref{alg:identify-cycles}.
+
 
 \begin{algorithm}
 	\Def{DiscoverMultipliers(Reactions)}{
@@ -67,6 +78,7 @@ The algorithm for detecting these multipliers is given in \cref{alg:discover-mul
 			Add an edge from reactant node to product node\;
 			\For{each $Reactant$ in $Reaction$}{
 				Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
+				$Reactants \leftarrow Reactants \cup Reactant$\;
 			}
 			\For{each $Product$ in $Reaction$}{
 				Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
@@ -85,6 +97,37 @@ The algorithm for detecting these multipliers is given in \cref{alg:discover-mul
 		\Return list of cycles\;
 	}
 	\caption[\emph{IdentifyCycles}. Algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Algorithm to identify autocatalytic cycles of molecules within a reaction network. A cycle is a sequence of reactions where at least one product molecule in the final reaction is of the same species as a reactant molecule in the first reaction of the cycle. The cycle is considered autocatalytic for a given product molecule if the stoichiometry for the molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. $MaxCycleSize$ is a constant chosen to bound the cost of the shortest path search.}\label{alg:identify-cycles}
+\end{algorithm}
+
+\begin{algorithm}
+	\Def{IdentifyCycles(Reactions)}{
+		\tcp{Construct reaction graph from a list of $Reactions$}
+		\For{each $Reaction$ in $Reactions$}{
+			Add a node for the reactant side of Reaction\;
+			Add a node for the product side of Reaction\;
+			Add an edge from reactant node to product node\;
+			\For{each $Reactant$ in $Reaction$}{
+				Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
+				$Reactants \leftarrow Reactants \cup Reactant$\;
+			}
+			\For{each $Product$ in $Reaction$}{
+				Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
+			}
+		}
+		\tcp{Find all cycles for a sample of reactants in the graph}
+		$Seeds \leftarrow$ sample with uniform probability 10\% of $Reactants$\;
+		\For{each $Seed$ in $Seeds$}{
+			\For{each $Candidate$ in list of all molecules in the reaction graph of the same molecular species}{
+				\For{each $Path$ in all shortest paths of length < $MaxCycleSize$ from $Candidate$ to $Seed$}{
+					\uIf{the stoichiometry for $Seed$ in the cycle given by this $Path\geq 2$}{
+						Add $Path$ to the list of cycles\;
+					} 
+				}
+			}
+		}
+		\Return list of cycles\;
+	}
+	\caption[\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCyclesSampling}. Samplinglgorithm to identify autocatalytic cycles of molecules within a reaction network.}\label{alg:identify-cycles-sampling}
 \end{algorithm}
 
 \begin{algorithm}
@@ -476,8 +519,6 @@ The response variable for the experiments is the mean number of \emph{stable cyc
 		\end{tabular}
 	\end{center}
 \end{table}
-
-For various reasons, such as the time taken to run the simulation for a given set of parameter values, the experiment was run in a series of batches, with each batch producing a single dataset. These datasets (\cref{tbl:toyworld2-experiments}) are combined into one aggregated dataset for analysis. This combined dataset is unbalanced (in the statistical sense), with counts for each factor combination shown in \cref{tbl:toyworld2-cell-frequencies}.
 
 <<summarytable, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv_stablestates <- read.csv('results/stablestates.csv')

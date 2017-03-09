@@ -1,0 +1,56 @@
+\chapter{Experiment datasets and procedures}\label{datasets}
+
+\begin{table}
+	\scriptsize
+	\begin{center}
+		\caption{Pipelines used in this work to transform input data of one form, such as raw reaction data or cycle data into another form for analysis.}\label{tbl:datasets}
+		\begin{tabular}{p{4cm}p{4cm}p{5cm}}
+			\toprule
+			Input & Algorithm & Output\\
+			\midrule
+			Reaction network 								& \cref{alg:identify-cycles-sampling}					& Cycles by molecule\\ % <filebase>.json -> IdentifyMoleculeCycles.sample_reactant_stoichiometry() -> <filebase>-molecules.json
+			\midrule
+			Cycles by molecule								& \cref{alg:discover-multipliers}				& All multipliers\\ % <filebase>-molecules.json -> cycle_utilities.discover_multipliers() -> <filebase>-multipliers.json
+%			
+%			Cycles by molecule								& \url{analyse_stable_cycles.py}				& All multipliers (contiguous series of cycles of the same form)\\ % <filebase>-molecules.json -> cycle_utilities.discover_multipliers() -> <filebase>-states.json 
+%			Cycles by molecule								& \url{analyse_overlapping_species.py}			& All clusters of stable cycles connected by shared molecules, discovered by \cref{alg:identify-clusters}\\ % <filebase>-molecules.json -> cycle_utilities.identify_clusters() -> <filebase>-replicators.json
+%			Cycles by molecule								& \url{analyse_autocatalyis.py}					& All cycles that have two or more linkage molecules, as products, to two or more different cycles. Discovered by \cref{alg:identify-autocatalytic-cycles}\\ % <filebase>-molecules.json -> cycle_utilities.discover_autocatalysis() -> <filebase>-autocatalytic.json
+%			Reaction data									& \url{analyse_irrfgenerated.py}				& All irreduceable f-generated sets in the reaction data\\ % <filebase>.json -> <filebase>-irrraf.json	
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+%\begin{table}
+%	\scriptsize
+%	\begin{center}
+%		\caption{Reactant and product selection strategies listed along with the chapters in which they are first described.}\label{tbl:toyworld-strategies}
+%		\begin{tabular}{p{4cm}p{4cm}p{5cm}}
+%			\toprule
+%			Strategy 			& Name & Chapter\\
+%			\midrule
+%			Reactant selection	& UniformReactantSelection	& \cref{toyworld}\\
+%			Reactant selection	& KineticReactantSelection	& \cref{toyworld}\\
+%			Reactant selection	& KineticReactantSelection	& \cref{toyworld}\\
+%			Reactant selection	& FlowReactantSelection		& \cref{ch:multiplication}\\
+%			Reactant selection	& LocalReactantSelection	& \cref{ch:variability}\\
+%			\midrule
+%			Product selection	& UniformProductSelection	& \cref{toyworld}\\
+%			Product selection	& LeastEnergyProductSelection	& \cref{toyworld}\\
+%			Product selection	& BiasedLeastEnergyProductSelection	& \cref{ch:variability}\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{center}
+%\end{table}
+
+
+<<toyworld2-replicator-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+metadata <- read.csv('results/metadata.csv')
+names(metadata)[names(metadata)=="S_Product"] <- "Product strategy"
+names(metadata)[names(metadata)=="S_Reactant"] <- "Reactant strategy"
+
+library(xtable)
+print(xtable(metadata, sanitize.text.function=function(x){x}, caption='Summary of datasets used in experiments.', label='tbl:metadata-summary'), booktabs=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+@
+
+

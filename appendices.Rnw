@@ -46,6 +46,7 @@
 
 <<toyworld2-replicator-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 metadata <- read.csv('results/metadata.csv')
+levels(metadata$S_Product) <- c("LeastEnergy", "Uniform")
 names(metadata)[names(metadata)=="S_Product"] <- "Product strategy"
 names(metadata)[names(metadata)=="S_Reactant"] <- "Reactant strategy"
 

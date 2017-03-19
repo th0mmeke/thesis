@@ -89,7 +89,7 @@ They conclude that a \textit{replicator} is ``any autocatalytic entity for which
 
 Note that replicators in this definition are subsets of autocatalytic entities: replication implies multiplication, but replicators must also have some property (a phenotype) that is visible to an external process (selection.) \Citeauthor{Zachar2010} further discriminate between types of replicator based on two further factors: variability and heredity. If the replicator can change and yet still be equivalent under selection, then it is a variable replicator, which can exist in several equivalent states. An exact replicator on the other hand is one in which any change causes the entity to fail, or to respond differently under selection. Variability is the first stage towards metabolism and a genotype/phenotype distinction. Heredity describes which elements of variability are passed on to a descendent (the genotype.) If variability can be passed on, then the replicator is informational--the change in information can persist. If all changes are passed on, then the replicator is an \emph{ideal} replicator, where the genotype encompasses the entire entity, while if they are not, the replicator is \emph{real}.
 
-Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}, go on to develop a general classification of replicators as a logical sequence of forms \parencite[p.21, line breaks and numbering added for emphasis]{Zachar2010}:  
+Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}, go on to develop a general classification of replicators, shown in \cref{fig:replicators}, as a logical sequence of forms \parencite[p.21, line breaks and numbering added for emphasis]{Zachar2010}:  
 
 \begin{enumerate}
 	\item ''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. 
@@ -97,6 +97,24 @@ Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{S
 	\item If such changes can be passed on to the offspring then the replicator is \emph{informational}. 
 	\item If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' 
 \end{enumerate}
+
+\begin{figure}[t]
+	\begin{center}
+		\vspace{10pt}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+		\draw [->] (-5.9,5.9) -- (-5,5);
+		\draw [->] (-4.9,4.9) -- (-4,4);
+		\draw [->] (-3.9,3.9) -- (-3,3);
+		\draw [->] (-2.9,2.9) -- (-2,2);
+		\node [left] at (-5.5,5.25) {Embodiment};
+		\node [left] at (-4.5,4.25) {Multiplication};
+		\node [left] at (-3.5,3.25) {Variability};
+		\node [left] at (-2.5,2.25) {Heredity};
+		\end{tikzpicture}
+		\caption{Replicator systems according to the hierarchy of \citeauthor{Zachar2010}. Diagram redrawn from \cite[Fig.13]{Zachar2010}.}
+		\label{fig:replicators}
+	\end{center}
+\end{figure}
 
 \begin{DRAFT}
 Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
@@ -315,7 +333,7 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 		\draw [->] (-4.9,4.9) -- (-4,5.9) node [right] {Squirm3 \parencite{Hutton2002}};
 		\node [below, text width=20em] at (0,1.5) {Automata and AlChemy \parencite{Fontana1992}};
 		\end{tikzpicture}
-		\caption{Replicator systems from \cref{previous-work} categorized according to the hierarchy of \citeauthor{Zachar2010}. Diagram based on a simplification of Figure 13 in \cite{Zachar2010}.}
+		\caption{Replicator systems from \cref{previous-work} categorized according to the hierarchy of \citeauthor{Zachar2010}. Diagram redrawn from \cite[Fig.13]{Zachar2010}.}
 		\label{fig:replicator-classification}
 	\end{center}
 \end{figure}

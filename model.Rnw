@@ -382,15 +382,9 @@ In this \namecref{model-behaviour-in-changing-environments} we describe an appro
 
 Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
 
-\subsubsection{Abrupt environmental change}\label{abrupt-environmental-change}
+Statistical techniques are commonplace for time-series predictions \parencite{Brockwell:2002dq}, where a \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$ \parencite{Brockwell:2002dq}. 
 
-Although the generator described earlier produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change is steady and gradual. An extension would be to co-opt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
-
-\subsubsection{Parameterised time-series model}
-
-Environmental change may be represented as a parameterised time-series\footnote{A \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$ \parencite{Brockwell:2002dq}.} of particular form. 
-
-Statistical techniques are commonplace for time-series predictions \parencite{Brockwell:2002dq}. ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series--the I or ``Integrated'' component of the model provides the differencing.
+ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series--the I or ``Integrated'' component of the model provides the differencing.
 
 Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series \textit{from} the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our headline measure for environmental change.
 

@@ -21,7 +21,11 @@ As we are concerned with reaction networks, a reasonable candidate for an emerge
 
 We could have instead chosen to investigate entities of quite different forms within the bounds of the same \gls{achem}, such as molecular species; interrelated groups or sets of reaction cycles; or even full information replicators. Why do we choose reaction cycles instead of entities at any of these other levels of complexity? Our goal is to identify multiplying entities; however the definition of multiplication (given above) is of little direct assistance. Multiplying entities are entities which multiply. Help though comes from the context of multipliers within evolutionary systems: as we have seen in \cref{evolution-by-natural-selection}, entities that evolve are multipliers that can vary, under selection. This establishes a useful lower bound on the level of any candidate type of entity. For example, our entity must be capable of variation without cfhanging its inherent nature. This is somewhat indeterminate when considering chemical elements, but it seems clear that molecules at least are not capable of variation without becoming a different type of molecule (adding a carbon atom to a molecule does not go unnoticed.)
 
-At the other extreme, requiring multipliers to be full informational replicators is clearly overly restrictive. Holistic replicators are not informational replicators, yet no one disputes that they are multipliers. For our purposes, the most useful or valuable definition therefore of an entity when investigating multiplication therefore is the simplest or lowest level entity that posses the capacity for variation and selection. This is somewhat circular, as we hope to establish variation and selection in reference to multipliers, but can serve, as mentioned, as a sanity check when evaluating candidates. Molecules are too low while single cycles are not obviously ruled out; therefore we concentrate on single cycles for now.
+At the other extreme, requiring multipliers to be full informational replicators is clearly overly restrictive. Holistic replicators are not informational replicators, yet no one disputes that they are multipliers. For our purposes, the most useful or valuable definition therefore of an entity when investigating multiplication is the simplest or lowest level entity that posses the capacity for variation and selection. This is somewhat circular, as we hope to establish variation and selection in reference to multipliers, but can serve, as mentioned, as a sanity check when evaluating candidates. Molecules are too low while single cycles are not obviously ruled out; therefore we concentrate on single cycles for now.
+
+\begin{hypothesis}
+	That exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
+\end{hypothesis}
 
 \section{Measures}
 
@@ -173,11 +177,11 @@ Remember that our primary interest is in whether multipliers exist in a reaction
 
 \section{Experiment design}
 
-Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network, and so to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
+Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network, and so, given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
 
 \begin{itemize}[label={}]
-	\item H$_0$:  No multipliers exist in any experimental run.
-	\item H$_1$:  Multipliers exist in one or more experimental run.
+	\item H$_0$:  No multiplying single reaction-cycle entities exist in any experimental run.
+	\item H$_1$:  Multiplying singlereaction-cycle entities exist in one or more experimental runs.
 \end{itemize}
 
 Experimental factors are taken from from \cref{toyworld}: $S_{reactant}$, with a single level of KineticReactantSelection (\cref{alg:kinetic-selection}) and $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.) This gives two sets of factors--KineticReactantSelection$\times$LeastEnergy and KineticReactantSelection$\times$Uniform--each of which is run for 100,000 generations twice (that is, two replicates for each factor combination.) 
@@ -315,7 +319,7 @@ First we explore if there is a relationship between multiplication and selective
 Although selective pressure can be purely internal to the reactor, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than external selective pressure applied explicity. In these experiments we concentrate on external selective pressure, as described in the earlier \namecref{environmental-models}, \cref{environmental-models}.
 
 \begin{hypothesis}
-	That the number of multipliers increases in proportion to the degree of environmental variability, up to a point.
+	That the number of single-cycle multipliers increases in proportion to the degree of environmental variability, up to a point.
 \end{hypothesis}
 
 Environmental variability is approximated by sample entropy \parencite{Richman2000}, a metric of predictability.
@@ -378,7 +382,7 @@ print(xtable(csv_multipliers[csv_multipliers$Environment!=0,!names(csv_multiplie
 	drop <- c('S_Reactant')
 	
 	library(xtable)
-	print(xtable(csv_multipliers[csv_multipliers$Dataset!=1489951262,!names(csv_multipliers) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies under forms of environmental change given by the columns $Target$ and $Shape$.', label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+	print(xtable(csv_multipliers[csv_multipliers$Dataset!=1489951262,!names(csv_multipliers) %in% drop], caption='Numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies under forms of environmental change given by the columns $Target$ and $Shape$. Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.2.', label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
 \subsection{Discussion}

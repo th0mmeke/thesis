@@ -5,6 +5,7 @@ metadata <- read.csv('results/metadata.csv')
 levels(metadata$S_Product) <- c("LeastEnergy", "Uniform")
 names(metadata)[names(metadata)=="S_Product"] <- "Product strategy"
 names(metadata)[names(metadata)=="S_Reactant"] <- "Reactant strategy"
+names(csv_multipliers)[names(csv_multipliers)=="Sample.Entropy"] <- "Sample Entropy"
 
 library(xtable)
 print(xtable(metadata, sanitize.text.function=function(x){x}, caption='Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment: DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by \\textcite{Richman2000}.', label='tbl:metadata-summary'), booktabs=TRUE, tabular.environment="longtable", floating=FALSE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top", add.to.row = list(pos = list(0), command = "\\hline \\endhead "), hline.after=c(-1))
@@ -21,7 +22,7 @@ print(xtable(metadata, sanitize.text.function=function(x){x}, caption='Summary o
 			\midrule
 			Reaction network 								& \cref{alg:identify-cycles-sampling}			& Cycles by molecule\\ % <filebase>.json -> IdentifyMoleculeCycles.sample_reactant_stoichiometry() -> <filebase>-molecules.json
 			Cycles by molecule								& \cref{alg:discover-multipliers}				& All multipliers\\ % <filebase>-molecules.json -> cycle_utilities.discover_multipliers() -> <filebase>-multipliers.json
-			Multipliers										& 												& All variable replicators\\ % <filebase>-multipliers.json -> analyse_variable_multipliers.py -> <filebase>-variables.json
+			Multipliers										& \cref{alg:discover-variable-multipliers}		& All variable replicators\\ % <filebase>-multipliers.json -> analyse_variable_multipliers.py -> <filebase>-variables.json
 			\bottomrule
 		\end{tabular}
 	\end{center}

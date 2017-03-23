@@ -24,7 +24,7 @@ We could have instead chosen to investigate entities of quite different forms wi
 At the other extreme, requiring multipliers to be full informational replicators is clearly overly restrictive. Holistic replicators are not informational replicators, yet no one disputes that they are multipliers. For our purposes, the most useful or valuable definition therefore of an entity when investigating multiplication is the simplest or lowest level entity that posses the capacity for variation and selection. This is somewhat circular, as we hope to establish variation and selection in reference to multipliers, but can serve, as mentioned, as a sanity check when evaluating candidates. Molecules are too low while single cycles are not obviously ruled out; therefore we concentrate on single cycles for now.
 
 \begin{hypothesis}
-	That exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
+	Exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
 \end{hypothesis}
 
 \section{Measures}
@@ -39,11 +39,13 @@ The algorithm for detecting these multipliers is given in \cref{alg:discover-mul
 
 Cycle detection forms the basis for all further analysis, including the identification of autocatalytic cycles, and hence multiplication and variability. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles-sampling}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
 
-The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are closed not by returning to the same node, but by visiting any node of the same species as previously visited as a cycle consists of molecule species while the graph is by molecule instances and therefore by definition acyclic. 
+The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are closed not by returning to the same node, but by visiting any node of the same species as previously visited as a cycle consists of molecule species while the graph is by molecule instances and therefore by definition acyclic.
 
-The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, similar to that in \textcite[p.7]{Hordijk2015a}. We sample a proportion (currently 10\%) of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling}) is quite robust as shown by the variance of the number of cycles identified by repeating the procedure a number of times, each time with a new choice of sample molecules. 
+Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commeasurate effect on analysis times.
 
-There is a significant limitation to this approach however. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph should also be maintained.
+The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, inspired by the analogous strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion (currently 5\%) of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling}) is quite robust as shown by the variance of the number of cycles identified by repeating the procedure a number of times, each time with a new choice of sample molecules. 
+
+There is a significant limitation to this approach however. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant. The experiments in this chapter all use a sampling proportion $p=0.05$.
 
 Remember that our primary interest is in whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles-sampling} instead of the exhaustive alternative.
 
@@ -99,7 +101,7 @@ Remember that our primary interest is in whether multipliers exist in a reaction
 			}
 		}
 		\tcp{Find all cycles for a sample of reactants in the graph}
-		$Seeds \leftarrow$ sample with uniform probability some proportion $P$ of $Reactants$\;
+		$Seeds \leftarrow$ sample with uniform probability some proportion $p$ of $Reactants$\;
 		\For{each $Seed$ in $Seeds$}{
 			$ShortestPaths \leftarrow$ FindCyclesFromNode($Seed$)\;
 			\For{each $Path$ in $ShortestPaths$}{
@@ -110,7 +112,7 @@ Remember that our primary interest is in whether multipliers exist in a reaction
 		}
 		\Return list of cycles\;
 	}
-	\caption[\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles of molecules within a reaction network. A cycle is a sequence of reactions where at least one product molecule in the final reaction is of the same species as a reactant molecule in the first reaction of the cycle. The cycle is considered autocatalytic for a given product molecule if the stoichiometry for the molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed.}\label{alg:identify-cycles-sampling}
+	\caption[\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles of molecules within a reaction network. A cycle is a sequence of reactions where at least one product molecule in the final reaction is of the same species as a reactant molecule in the first reaction of the cycle. The cycle is considered autocatalytic for a given product molecule if the stoichiometry for the molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. The sampling proportion $p$ determines the proportion of the total set of reactants to be used as seeds when searching for cycles.}\label{alg:identify-cycles-sampling}
 \end{algorithm}
 
 
@@ -180,8 +182,8 @@ Remember that our primary interest is in whether multipliers exist in a reaction
 Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network, and so, given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
 
 \begin{itemize}[label={}]
-	\item H$_0$:  No multiplying single reaction-cycle entities exist in any experimental run.
-	\item H$_1$:  Multiplying singlereaction-cycle entities exist in one or more experimental runs.
+	\item H$_0$:  No multiplying single reaction-cycle entities exist in any reaction network generated by a \gls{achem}.
+	\item H$_1$:  Multiplying single reaction-cycle entities exist in a \gls{achem} reaction network.
 \end{itemize}
 
 Experimental factors are taken from from \cref{toyworld}: $S_{reactant}$, with a single level of KineticReactantSelection (\cref{alg:kinetic-selection}) and $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.) This gives two sets of factors--KineticReactantSelection$\times$LeastEnergy and KineticReactantSelection$\times$Uniform--each of which is run for 100,000 generations twice (that is, two replicates for each factor combination.) 
@@ -207,19 +209,23 @@ library(xtable)
 print(xtable(csv_multipliers[csv_multipliers$Environment==0 & csv_multipliers$Dataset!=1489951262,!names(csv_multipliers) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure).', label='tbl:toyworld2-multiplier-results', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-All runs of the experiment resulted in multipliers by our earlier definition. The numbers are not large, but they are non-zero and so sufficient to reject H$_0$ in favour of the alternate hypothesis that multipliers can emerge in an non-neutral \gls{achem}.
+Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles-sampling}, with a sampling proportion $p=0.05$, and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
+
+All runs of the experiment resulted in multipliers by our earlier definition. The numbers are not large, but they are non-zero and so sufficient to reject H$_0$ in favour of the alternate hypothesis that multipliers can emerge in a \gls{achem}.
 
 Every combination of factors produced at least one multiplier. The range of the number of multipliers in each replicate however was not significantly different to the range in numbers in different factor combinations; the type of product selection strategy does not seem to be of great importance to the formation of multipliers. 
 
 An alternative explanation is simply that multiplier emergence is a product of chance and that given enough generations, enough cycles will form that probabilities will favour two or more being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent.
 
-This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low, on the order of 4 to 5 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. Under this interpretation, it doesn't seem that there is anything in the \gls{achem} to privilege their emergence. This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. Our control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies, which chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers are those that result from chance alone.
+This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low, on the order of 4 to 5 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
+
+Under this interpretation, it doesn't seem that there is anything in the \gls{achem} to privilege their emergence. This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. Our control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies, which chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers are those that result from chance alone.
 
 <<toyworld2-multiplier-control, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 print(xtable(csv_multipliers[csv_multipliers$Environment==0 & csv_multipliers$Dataset==1489951262,!names(csv_multipliers) %in% drop], caption='Numbers of multipliers from 10 replicates of control experiment. Multipliers identified by \\cref{alg:discover-multipliers}, in reaction networks generated by Uniform $S_{reactant}$ and $S_{product}$ strategies, under stable environments (no external selective pressure).', label='tbl:toyworld2-multiplier-control', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
-No replicate of the control experiments generated multipliers, and so we reject this alternate explanation (that multipliers result from chance alone) in favour of our original hypothesis, that multipliers emerge from biases in the \gls{achem}.
+No replicate of the control experiments generated multipliers, and so we reject this alternate explanation (that multipliers result from chance alone) in favour of our modified hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affected the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is an artifact of sampling.
 
 \section{Conclusions}
 

@@ -171,6 +171,38 @@ The initial hypothesis of \textcite{Bourrat2015} assumes a perfectly predictable
 Variation and selection are sufficient for inheritance, where the degree and variance of inheritance is proportional to the predictability of the environment.
 \end{hypothesis}\label{hypothesis-2} 
 
+The conceptual basis for the experiments in this \namecref{ch:models-of-inheritance} is outlined in \cref{fig:conceptual-model-for-environmental-change}. 
+
+\begin{figure}
+	\begin{center}
+		\resizebox{0.8\textwidth}{!}{
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, font=\sffamily\Large\bfseries, thick,
+			main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
+			\node[main node] (evo) at (0,10) {Evolutionary model};
+			\node[main node] (env) at (0,0) {Environmental model};
+			\node[main node] (pop) at (6,10) {Population};
+			\node[main node] (ts) at (6,0) {Time series of environmental changes};
+			\node[main node] (r1) at (12,10) {Metrics};
+			\node[main node] (r2) at (12,0) {Metrics};
+			\node[main node] (test) at (12,5) {Hypothesis test};
+			\node at (4,14) {Simulation};
+			
+			\path[every node/.style={font=\sffamily,fill=white,inner sep=1pt}]
+			(env) edge [->] (ts)
+			(evo) edge [->] (pop)
+			(pop) edge [->] (r1)
+			(ts) edge [->] node[text width=2.5cm,right,xshift=5pt]{Apply at each generation} (pop)
+			(r1) edge [->] (test)
+			(r2) edge [->] (test)
+			(ts) edge [->] (r2);
+			\draw [every node] (3,13) rectangle (9,-3);
+			\end{tikzpicture}
+		}
+		\caption{Conceptual model for experiments incorporating environmental change.}
+		\label{fig:conceptual-model-for-environmental-change}
+	\end{center}
+\end{figure}
+
 \section{Evolutionary model relating variation and inheritance}\label{base-model}
 
 We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{heritability} and \emph{fitness}, are represented as explicit parameters:

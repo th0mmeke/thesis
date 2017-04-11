@@ -24,19 +24,19 @@ load.multipliers <- function(t) {
 
 \chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
-We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. Without the ability to copy oneself there can be no intergenerational change, and more fundamentally, no ongoing mechanism for selection between entities. In \citeauthor{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicator-classification}) and so in this \namecref{ch:multiplication} we begin to investigate evolutionary emergence in \glspl{achem} by looking for muliplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
+We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \citeauthor{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicator-classification}) and so in this \namecref{ch:multiplication} we begin to investigate evolutionary emergence in \glspl{achem} by identifying multiplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
 
 \section{Choice of entity}
 
-From the earlier definition of exact replication \cref{non-informational-exact-replicators}, given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, we look for entities $A$ and $B_k$, where $A$ and $B_k$ are ``equivalent''. Strictly speaking, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt a more restricted sense of multiplication where the forms must be identical rather than equivalent. 
+From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are ``equivalent''. Strictly speaking, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt a more restricted sense of multiplication where the forms must be identical rather than equivalent. 
 
 As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles. This is justifiable as cycles are potentially long-lived even though constituent molecules are produced and consumed. A reaction cycle is not defined by the sequence of individual molecules linked by reactions, as individual molecules are unique and transitory and so cannot form cycles, but rather by a sequence of molecular species. Molecular species define disjoint groups to which individual molecules of the same chemical composition belong: for example, the 'OH' species that includes all individual 'OH' molecules. 
 
-We could have instead investigate entities of quite different forms, such as molecular species, or interrelated groups or sets of reaction cycles. Why then choose reaction cycles instead of entities at any of these other levels of complexity? 
+We could have instead investigated entities of quite different forms, such as molecular species, or interrelated groups (or sets) of reaction cycles. Why then choose reaction cycles instead of any of these other alternative levels of entity? 
 
-Our goal is to identify multiplying entities; however the definition of multiplication (given above) is of little direct assistance. Multiplying entities are entities which multiply. 
+Our goal is to identify multipliers, however the definition of multiplication (given above) is of little direct assistance: multiplying entities may be of any form.
 
-Help though comes from considering the context of multipliers within evolutionary systems: as we have seen in \cref{evolution-by-natural-selection}, entities that evolve are multipliers that can vary, under selection. This establishes a useful lower bound on the level of any candidate type of entity. For example, our entity must be capable of variation without changing its inherent nature. This is somewhat indeterminate when considering chemical elements, but it seems clear that molecules at least are not capable of variation without becoming a different type of molecule (adding a carbon atom to a molecule does not go unnoticed.)
+Assistance comes from considering the context of multipliers within evolutionary systems: as we have seen in \cref{evolution-by-natural-selection}, entities that evolve are multipliers that can vary under selection. This establishes a useful lower bound on the level of any candidate type of entity. For example, our entity must be capable of variation without changing its inherent nature. This is somewhat indeterminate when considering chemical elements, but it seems clear that molecules at least are not capable of variation without becoming a different type of molecule (adding a carbon atom to a molecule does not go unnoticed.)
 
 At the other extreme, requiring multipliers to be full informational replicators is clearly overly restrictive. Holistic replicators are not informational replicators, yet no one disputes that they are multipliers. 
 
@@ -48,27 +48,32 @@ For our purposes, the most useful or valuable class of entity when investigating
 
 \section{Measures}
 
-For exact multiplication, we seek reaction cycles of the same species where one cycle results in two or more cycles of the same species. Although one product cycle would be sufficient for replacement, as has been argued elsewhere (\eg \textcite{Zachar2010}), simple replacement exposes an entity to depletion from side-reactions and other forms of degradation
+For exact multiplication, we seek reaction cycles where a cycle results in two or more cycles of the same species. Although one product cycle would be sufficient for replacement, as has been argued elsewhere (\eg \textcite{Zachar2010}), simple replacement exposes an entity to depletion from side-reactions and other forms of degradation.
 
 For template autocatalysis (\cref{sec:real-world-chemistry}) of cycles, where the autocatalysis results from stoichiometry, the connecting molecules must also have a stoichiometry $n>1$. For exact multiplication we can derive the cycle stoichiometry ($k$) for exact multiplication by substituting $A$ for $B$ in the above autocatalytic expression to obtain $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma A_k$. Now as molecules are unique, each connecting molecule will appear once as product of one $A$ cycle and once as a reactant of one other $A$ cycle. Therefore $k=n$ and as $k>1$ for template autocatalysis, $n>1$.
 
-What exactly is meant though by the $\rightarrow$ relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared molecules (individual molecules, not species.) 
+What exactly is meant though by the stoichiometric relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared molecules (individual molecules, not species.) 
 
 The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles-sampling} and \cref{alg:identify-clusters} respectively.
 
 \section{Cycle detection in a reaction network}
 
-Identifying single reaction-cycles as the entities in our hypothesis, means that cycle detection is critical to our analysis. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles-sampling}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
+Choosing single reaction-cycles as the entity in the hypothesis means that cycle detection is central to our analysis. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles-sampling}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
 
-The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are closed not by returning to the same node, but by visiting any node of the same species as previously visited as a cycle consists of molecule species while the graph is by molecule instances and therefore by definition acyclic.
+The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
 
 Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commeasurate effect on analysis times.
 
-The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, inspired by the analogous strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion (currently 5\%) of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling}) is quite robust as shown by the variance of the number of cycles identified by repeating the procedure a number of times, each time with a new choice of sample molecules. 
+The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous, but not identical, strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling}) is quite robust when tested by examining the variance of the number of cycles identified from a selection of sample molecules. 
 
-There is a significant limitation to this approach however. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant. The experiments in this chapter all use a sampling proportion $p=0.05$.
+There is a significant limitation to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant.
 
-Remember that our primary interest is in whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles-sampling} instead of the exhaustive alternative.
+
+
+
+The experiments in this chapter all use a sampling proportion $p=0.05$.
+
+It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles-sampling} instead of the exhaustive alternative.
 
 
 \begin{algorithm}
@@ -207,9 +212,9 @@ Multipliers are structures that, in our context of \glspl{achem}, emerge from th
 	\item H$_1$:  Multiplying single reaction-cycle entities exist in a \gls{achem} reaction network.
 \end{itemize}
 
-Experimental factors are taken from from \cref{toyworld}: $S_{reactant}$, with a single level of KineticReactantSelection (\cref{alg:kinetic-selection}) and $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.) This gives two sets of factors--KineticReactantSelection$\times$LeastEnergy and KineticReactantSelection$\times$Uniform--each of which is run for 100,000 generations twice (that is, two replicates for each factor combination.) 
+We continue to use the parameterized evolutionary model from \cref{toyworld} with a single experimental factor: $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.) $S_{reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}).
 
-The initial population for each run contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units.
+There are two replicates for each of the two factor levels, and each replicate runs for 100,000 generations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units. 
 
 \section{Discussion}
 
@@ -255,7 +260,7 @@ An alternative explanation is simply that multiplier emergence is a product of c
 
 This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low, on the order of 4 to 5 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
 
-Under this interpretation, it doesn't seem that there is anything in the \gls{achem} to privilege their emergence. This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. Our control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies, which chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers are those that result from chance alone. The statistical hypothesis is as follows:
+Under this interpretation, it doesn't seem that there is anything in the \gls{achem} to privilege the emergence of multipliers. This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. Our control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies, which chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers are those that result from chance alone. The statistical hypothesis is as follows:
 
 \begin{itemize}[label={}]
 	\item H$_0$: $x_i=x_j \forall i,j$, where $x$ indicates the presence of multipliers: $x_i=|{multipliers}_i|>0$.
@@ -280,72 +285,50 @@ library(xtable)
 print(xtable(a, caption='ANOVA analysis.', label='tbl:anova-multipliers'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. An \gls{anova} test of the statistical hypothesis (\cref{tbl:anova-multipliers}) gives $Pr(>F)=\Sexpr{a$`Pr(>F)`}$, and so we reject this alternate explanation (that multipliers result from chance alone) in favour of our modified hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affected the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is an artifact of sampling.
-
-
+The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. An \gls{anova} test of the statistical hypothesis (\cref{tbl:anova-multipliers}) gives $Pr(>F)=\Sexpr{a$`Pr(>F)`}[1]$, and so we reject the alternate explanation (that multipliers result from chance alone) in favour of our original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
 
 \section{Conclusions}
 
+
+
 \chapter{From Multiplication to Variability}\label{ch:variability}
 
-A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change: we do not model fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
+Having shown the existence of multipliers in the previous \namecref{ch:multiplication}, we now move on to variable replicators. A variable replicator is a multiplier that can change its structure while remaining the same under selection \parencite{Zachar2010}. We would expect to see an entity that can occupy any one of a small number of stable states with transitions between states triggered, for example, by some external event. 
+
+Although there is no theoretical limit on the number of possible states, for pre-template replicators the number of states is constrained by the ability of the entity to sustain non-interfering chemical networks (see introduction in \cref{variable-replicators}.) Similarly, although the transitions between states may be internally triggered, the requirement that states are stable means that the trigger is much more likely to be external, such as a change of external environment.
+
+In this \namecref{ch:variability} we continue our exploration of the reaction networks produced by our base evolutionary model by seeking evidence of variable replicators. For this we require some extensions to our earlier models and algorithms. First, given the association between variable replicators and environmental change just mentioned, we need to develop a model for environmental change. And second, we need a method to detect variable replicators in the reactions generated by our evolutionary model. These two elements are covered in sections \cref{environmental-models} and \cref{sec:variable-replicator-measures} respectively.
+
+Finally, we combine these elements into an investigation by experimentation of variable replicators in our \gls{achem}. The experiment design is introduced in \cref{sec:variable-replicator-design}, followed by results and discussion.
 
 \section{Previous work}\label{sec:variability-previous-work}
 
-Pertubations were applied to a well-mixed reaction vessel by \textcite{Fontana1994a} with objects taken from $\lambda$-calculus. Organisations (entities, \glspl{hypercycle}) in all cases were observed to be self-maintaining but not self-reproducing (excluding cases that included an explicit replication expression.) The model is without locality or spatial effects; pertubations take the form of adding a small number of copies (10 or 50) of a random object every 30,000 or 50,000 collisions. Purpose of pertubations to assess sensitivity of model to change, rather than as a mechanism to induce change. 
+We are not aware of any directly comparable previous work. Pertubations are applied to a well-mixed reaction vessel by \textcite{Fontana1994a} with objects taken from $\lambda$-calculus. Organisations (entities, \glspl{hypercycle}) in all cases are observed to be self-maintaining but not self-reproducing (excluding cases that included an explicit replication expression.) The model is without locality or spatial effects; pertubations take the form of adding a small number of copies (10 or 50) of a random object every 30,000 or 50,000 collisions. Purpose of pertubations to assess sensitivity of model to change, rather than as a mechanism to induce change. 
 
-A series of successively enhanced models--Polymer-GARD (P-GARD) \parencite{Shenhav2005}, Environment Exchange Polymer-GARD (EE-GARD) \parencite{Shenhav2007}, and Universe-GARD, proposed in \cite{Markovitch2012}--address extending the range of composomal inheritance. P-GARD lacks a mechanism for environmental variation, although EE-GARD, which builds upon P-GARD, moves towards such a mechanism by allowing the composome split or fission events result in half of the composome molecules being returned to the environment. This return mechanism is the enabler for the claim in \textcite[p1819]{Shenhav2007} that the composomes and environment coevolve. Universe-GARD further extends the importance of variation of environment; the population of the main GARD environment is continually exchanged with that of an enveloping ``universe'' that contains significantly more molecular species. No results have yet been reported however.
+A series of successively enhanced models--Polymer-GARD (P-GARD) \parencite{Shenhav2005}, Environment Exchange Polymer-GARD (EE-GARD) \parencite{Shenhav2007}, and Universe-GARD, proposed in \cite{Markovitch2012}--address extending the range of composomal inheritance. P-GARD lacks a mechanism for environmental variation, although EE-GARD, which builds upon P-GARD, moves towards such a mechanism by allowing the composome split or fission events result in half of the composome molecules being returned to the environment. This return mechanism is the enabler for the claim in \textcite[p1819]{Shenhav2007} that the composomes and environment coevolve. Universe-GARD further extends the importance of variation of environment; the population of the main GARD environment is continually exchanged with that of an enveloping ``universe'' that contains significantly more molecular species. No results have yet been reported however to the best of our knowledge.
 
 Regular pertubations are at the core of the liposome model of \textcite{Fernando:2007pf}, where periodic ``avalanches'' of novel side-reactions result in new and rare reaction products which inject variation into the simulation, either by making new reactions possible, or shifting the balance between competing reactions, or by perhaps altering the reaction rates through changes to catalysis. Avalanches are described as an exploration mechanism, extending the range of the simulation into otherwise unlikely regions, although no experimental assessment of their effectiveness was performed.
 
-\section{Measures}
-
-However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
-\begin{DRAFT}
-	But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
-	Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
-	RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
-	Fuschslin describes two approaches to analysis - static (as above) and dynamic
-	
-	Trace dynamic approach back to concerns in \cite{Bagley1991}
-	Interested in concentrations over time - introduction of time dimension - dynamics
-	Although took an ODE approach based on reaction rates, rather than in simulation.
-	
-	\begin{enumerate}
-		\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
-		\item But this algorithm cannot be applied to non-catalytic F-generated sets.
-		\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
-		\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
-	\end{enumerate}
-	
-\end{DRAFT}
+\Textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
 
 \section{Sources of selection pressure}\label{environmental-models}
 
-In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
+A \emph{stable} environment is one where the relative fitness of a phenotype with respect to the environment is independent of time. This is similar to statistical stationarity: the phenotype's fitness is independent of when it is measured.  A \emph{changing} environment is therefore one in which the relative phenotypical fitness is time-dependent. In the model in this chapter the environmental change only occurs between generations, and the phenotype of an entity remains constant over its lifespan. Only environmental changes can result in a fitness change in this model: we do not consider fitness changes as a result of processes that operate on a sub-generational timescale such as learning or development.
 
 A model for changing environments must describe two particular components of change: the \emph{target} of the change, and the \emph{shape} of the change, as outlined in \cref{fig:conceptual-model-for-environmental-change}. 
 
 The \emph{target} of change refers to the aspect of the evolutionary model that is affected by the change. Any model parameter might be a target, as might be combinations of parameters. For example, in the evolutionary model in \cref{ch:variability}, any or all of the parameters $S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ could be targets of environmental change.
 
-The \emph{shape} of change describes the way change varies over time, and is given by $\delta$ at timestep $t$, where $\delta_t\in R$. 
+The \emph{shape} of change describes the way change varies over time, as a series of $\delta$ at timestep $t$, where $\delta_t\in R$. Although the shape can clearly take an infinite number of different forms, we concentrate on two representative forms:
 
-\subsection{Bistate selection pressure}
-\begin{DRAFT}
-Change every 10000 generations between -20 and +20 values.
-\end{DRAFT}
+\begin{itemize}
+\item \emph{Bistate} selection pressure, where the shape of change follows a pattern that switches between two alternate states at regular intervals. We would expect a variable replicator to transition between states in concert with the bistate changes.
+\item \emph{AR-timeseries}, following the environmental model introduced in \cref{environmental-model}, and described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. An AR-timeseries combines a regular component (described by $\Theta$ and $\delta$) and an unpredictable component ($\sigma_e$.) Selection pressure is neither constant nor regular, and so the response of a variable replicator might be more complex than in the simpler bistate case.
+\end{itemize}
 
-\subsection{Predictable and unpredictable pressures}
+\section{Hypothesis and predictions}
 
-Following \cref{environmental-model}, an alternative environmental model is based on an AR-timeseries, described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
-
-\begin{DRAFT}
-	Change every 1000 generations. DFA and SampEn lower than might be expected as a result.
-\end{DRAFT}
-
-\subsection{Hypothesis and predictions}
-
-First we explore if there is a relationship between multiplication and selective pressure. We require selective pressure for variable replicators as the ``variable'' portion of the name is in the context of selection. Rather than skipping directly to variable replicators in the presence of selection, we start with the simpler case of extending our investigation into multipliers from stable environments to varying environments as a source of selective pressure.
+First we explore if there is a relationship between simple multiplication and selective pressure. We require selective pressure for variable replicators as the ``variable'' portion of the name is in the context of selection. Rather than skipping directly to variable replicators in the presence of selection, we start with the simpler case of extending our investigation into multipliers from stable environments to varying environments as a source of selective pressure.
 
 Although selective pressure can be purely internal to the reactor, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than external selective pressure applied explicity. In these experiments we concentrate on external selective pressure, as described in the earlier \namecref{environmental-models}, \cref{environmental-models}.
 
@@ -380,7 +363,29 @@ Instead, we need a way to parameterise the set of interesting environmental chan
 	\caption{\emph{DiscoverVariableMultipliers}. Detect candidate variable replicators within a reaction network, where a candidate is a continuous sequence of multipliers linked by shared molecules. The output is candidate variable replicators only as response to selection is not checked here. The algorithm is similar to that for detecting multipliers (\cref{alg:discover-multipliers}) without the need to check stoichiometry.}\label{alg:discover-variable-multipliers}
 \end{algorithm}
 
-\subsection{Experiment design}
+\section{Measures}\label{sec:variable-replicator-measures}
+
+However, this algorithm for irreducible RAFs cannot be applied as-is to discover irreducible F-generated sets as it does not consider stoichiometry. When applied to RAFs, the algorithm correctly ensures that the RA property is maintained by considering catalytic relationships. In the F-generated case--without catalytic relationships--autocatalysis is carried by stoichiometry, which is not maintained by the algorithm.
+\begin{DRAFT}
+But as pointed out by \cite[p.66]{Fuchslin2010}, static analysis can be misleading. 
+Recognized by \cite{Hordijk2011}, but not addressed in later work (still static)
+RAFs/cores may in fact be transient, as reaction rates insufficient to overcome outflux ratios in say flow reactor
+Fuschslin describes two approaches to analysis - static (as above) and dynamic
+
+Trace dynamic approach back to concerns in \cite{Bagley1991}
+Interested in concentrations over time - introduction of time dimension - dynamics
+Although took an ODE approach based on reaction rates, rather than in simulation.
+
+\begin{enumerate}
+\item We have an algorithm to detect irrRAF in reaction network (based on static approach) which equate to the \emph{cores} of \cite{Vasas2012}.
+\item But this algorithm cannot be applied to non-catalytic F-generated sets.
+\item We can develop algorithm for detecting stoichiometrically autocatalytic sets.
+\item But specific results (\eg probabilities, lower-bounds) from previous work \parencite{Hordijk2011} not applicable as assume catalysis, and sometimes the binary polymer model.
+\end{enumerate}
+
+\end{DRAFT}
+
+\section{Experiment design}\label{sec:variable-replicator-design}
 
 \begin{itemize}[label={}]
 	\item H$_0$:  There is no difference in the number of multipliers between different strengths of selective pressure. 
@@ -392,7 +397,22 @@ Instead, we need a way to parameterise the set of interesting environmental chan
 	\item H$_1$:  Variable replicators exist in one or more experimental run.
 \end{itemize}
 
-\subsection{Results}
+
+\subsection{Bistate selection pressure}
+\begin{DRAFT}
+Change every 10000 generations between -20 and +20 values.
+\end{DRAFT}
+
+\subsection{Predictable and unpredictable pressures}
+
+Following \cref{environmental-model}, an alternative environmental model is based on an AR-timeseries, described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value.
+
+\begin{DRAFT}
+Change every 1000 generations. DFA and SampEn lower than might be expected as a result.
+\end{DRAFT}
+
+
+\section{Results}
 
 %<<toyworld2-vmultiplier-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 %drop <- c('S_Reactant')
@@ -411,7 +431,7 @@ library(xtable)
 print(xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies under forms of environmental change given by the columns $Target$ and $Shape$. Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.2.', label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2)), booktabs=TRUE, tabular.environment="longtable", floating=FALSE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top", add.to.row = list(pos = list(0), command = "\\hline \\endhead "), hline.after=c(-1))
 @
 
-\subsection{Discussion}
+\section{Discussion}
 
 \section{Conclusions}
 

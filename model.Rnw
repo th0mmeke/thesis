@@ -23,9 +23,11 @@ df
 
 \chapter{Heritability, Heredity and Inheritance}\label{ch:models-of-inheritance}
 
-This chapter attempts to establish an overall high-level framework for the evolution of replicators; in the following chapters we shall test this framework through stepwise enhancements of a basic \gls{achem} some way towards the long-term goal of a full replicator.
+This chapter attempts to establish an overall high-level framework for the evolution of replicators; in the following chapters we shall test this framework through stepwise enhancements of a basic \gls{achem} along the way towards the long-term goal of a full replicator.
  
-In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} relating heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. Now, if variability is represented by $V$, and heritability by $H$, then an informational replicator is \emph{ideal} if $H=V=1$ and \emph{real} if $H\leq V\le 1$. 
+In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2010} for heritability and variation (in the sense of changes to which selection is blind.) Replicators are classified by \citeauthor{Zachar2010} by reference to the elements of this model--variable replicators are those that can acquire variation during their lifetime, informational replicators are those that can pass on these changes to their offspring--but the model does not address causality. 
+
+Now, if variability is represented by $V$, and heritability by $H$, then an informational replicator is \emph{ideal} if $H=V=1$ (all variation is heritable, and all changes are inherited) and \emph{real} if $H\leq V\le 1$ \parencite{Zachar2010}. Our working hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead lies at a point between the two determined by selective pressure.
 
 \begin{figure}[t]
 	\begin{center}
@@ -48,13 +50,13 @@ In an earlier \namecref{base-model}, we described the model of \textcite{Zachar2
 	\end{center}
 \end{figure}
 
-Our hypothesis is that a theoretical replicator (rather than a specific actual one, which may be constrained by its structure or evolutionary history), is not fixed \emph{ideal} or fixed \emph{real}, but instead lies at a point between the two determined by selective pressure.
-
 Therefore we have the following goal for the work in this chapter: can we describe and model the relationship between heritability and selective pressure for a theoretical replicator?
 
-Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to the correlation for either a single property or to a group of properties shared between offspring and parent. There is a subtle difference between heredity, heritability and inheritance; inheritance is a process, while heredity is the relationship between entities linked by inheritance, and can be measured by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
+\section{The relationship between heritability, heredity and inheritance}
 
-Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and $H=1$, where $H$ is the heritability for the trait or property. Conversely, if there is no relationship there is no heritability ($H=0$) and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
+There is a subtle difference between \gls{heredity}, \gls{heritability} and inheritance; inheritance is the process that results in heredity (for example, Lamarkism or \gls{ens}), while heredity is the relationship between entities linked by inheritance and is measured at the population-level by heritability. As noted by \textcite{Griesemer2005}, ``[o]ne must clearly distinguish between heredity (a relation), heritability (a capacity), and inheritance (a process).''
+
+Heredity describes the similarity of an offspring to its parent, and depending on the context, can refer to either a single property or to a group of properties shared between offspring and parent. Heredity is related to variation: low variation implies high heredity and vice versa. For the single property (or in biology, trait) case, when the value for a parent's property and an offspring's property are identical we say we have complete or full inheritance and if this is the case for all entities in the population, then $H=1$, where $H$ is the heritability for the trait or property. Conversely, if there is no relationship there is no heritability ($H=0$) and the entities are effectively unrelated. We can extend the measure to a group of properties simply by averaging the degree of similarity for each property across all properties.
 
 \section{Evolution by Natural Selection}\label{evolution-by-natural-selection}
 
@@ -208,7 +210,7 @@ The conceptual basis for the experiments in this \namecref{ch:models-of-inherita
 We now introduce a general model of the relationship between \emph{Variation}, \emph{Selection} and \emph{Inheritance} in a population of evolving abstract entities (\cref{base-model-algorithm}) where the key elements, \emph{heritability} and \emph{fitness}, are represented as explicit parameters:
 
 \begin{itemize}
-	\item \emph{Heritability} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's.
+	\item \emph{Heritability} is the likelihood that a child's value for a property will resemble that of its parent. The range is $[0,1]$, where a value of $0$ means that the value for a child's property has no inherent relationship to its parent's value, while $heritability = 1$ means the child's value will be identical to the parent's. This is a slight modification of the classic definition of heritability, which is concerned with the population-level attribution of the sources of variation, but co-option, rather than inventing new terminology, seems appropriate given both have to do with the source of heritable variation.
 	\item \emph{Fitness} represents the probability that an entity will survive and possibly also reproduce, and has the usual range for a probability of $[0,1]$.
 \end{itemize}
 
@@ -505,7 +507,7 @@ ggplot(t2) + geom_line(aes(x=t,y=fitness)) + facet_wrap(~theta+sigma+delta, labe
 
 \begin{enumerate}
 	\item Heritability is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
+	\item Variation in heritability, $\sigma_{heritability}$, is proportional to the degree of environmental variability.. As a corollary, $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
 As all three independent variables for our experiment, $\Theta$, $\sigma_e$ and $\delta$, are continuous in $\mathbb{R}$, and as we wish to test the specific relationship of heritability across a range of these variables without being restricted to the initial choice of fixed levels, we shift from the fixed-effect factorial designs used earlier to a random effects model \parencite[chap.13]{Montgomery2009}. The independent variables in each run are the parameters to the environmental model, with values taken from a uniform random sample from their range. Or in other words, a series of random samples with uniform probability from a cube formed by a parameter on each of the three axes (see \cref{fig:cube}.)
@@ -733,24 +735,24 @@ From a visual inspection of \cref{fig:sd-heritability} we can reject H$_0$ in fa
 
 In this chapter we have shown by experiment that, as predicted, in stable environments:
 \begin{itemize}
-	\item Inheritance increases towards an upper limit of $1.0$, or perfect inheritance.
-	\item The variance of inheritance decreases towards a lower limit of $0$.
+	\item Heritability increases towards an upper limit of $1.0$, or perfect inheritance.
+	\item The variance of heritability decreases towards a lower limit of $0$.
 \end{itemize}
 
-This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. As hypothesised earlier in \cref{h2} though, this should be different in systems where the environment changes, and in the following \namecref{model-behaviour-in-changing-environments} we shall put this to the test.
+This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. 
 
-The previous \namecref{model-behaviour-in-changing-environments} has tested our hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two--$\Theta$ and $\delta$--are more discoverable by an evolutionary learner than the other, $\sigma_e$.
+In \namecref{model-behaviour-in-changing-environments} we tested the hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two--$\Theta$ and $\delta$--are more discoverable by an evolutionary learner than the other, $\sigma_e$.
 
 \Cref{h2} made these predictions:
 
 \begin{enumerate}
-	\item Fidelity is proportional to the predictability of the environment, that is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-	\item The higher the variability in the environment, the higher the $\sigma_{heritability}$. As a corollary, the $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
+	\item Heritability is proportional to the predictability of the environment: at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+	\item Variation in heritability, $\sigma_{heritability}$, is proportional to the degree of environmental variability. As a corollary, the $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
 \end{enumerate}
 
-In \cref{mean-heritability-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: heritability in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested below in future work.
+In \cref{mean-heritability-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: heritability in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering of predictability based on $\Theta$, $\delta$ and $\sigma_e$, as suggested later in future work.
 
-The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability} with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
+The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability}, with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
 
-Overall this \namecref{model-behaviour-in-changing-environments} provides good support for our hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution.
+Overall this \namecref{model-behaviour-in-changing-environments} provides support for our initial working hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution.
 

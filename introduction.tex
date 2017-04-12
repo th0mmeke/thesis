@@ -1,17 +1,5 @@
 \chapter{Introduction}
 
-%In this work, we examine one aspect of the emergence of open-ended evolution from low-level elements. The central element of the problem is well known (\eg, \textcite{Maynard-Smith:1995lw, Szathmary2000}): for open-ended evolution (evolution which can continue without exhausting its capacity for variation), the potential for variation must be very high: indeed the system must be capable of representing a larger number of types than there are entities \parencite{Szathmary1999}. In biological evolutionary theory, this type of replicator is sometimes known as a modular replicator (\eg \cite{Szathmary2000}) or more recently, an informational replicator (\textcite{Orgel1992} for an earlier sense, or \cite{Zachar2010}). 
-%
-%Unfortunately, the emergence of an informational replicator from low-level elements has been extremely hard to achieve in artificial systems, and remains an open problem. Previous work has either introduced handbuilt replicators (\eg \cite{Hutton2003}), or relied upon specific, non-evolvable scaffolding in the base system (\eg the \url{h-copy} operator in Avida \parencite{Ofria2004}.) No generic approach is known in the literature.
-%
-%However, there is another, simpler, form of biological replicator that also can maintain information--the variable \parencite{Zachar2010}, or holistic replicator, of which composomes (compositional replicators \parencite{Segre1998}) are perhaps the best-known example. 
-%
-%Although the gap from variable to informational replicators seems large, and the pathway that leads from a variable repliactor to an informational one poorly understood, variable replicators have the great advantage that emergent examples seem feasible in low-level reaction systems. 
-%
-%Existing work has modeled forms of variable replicator (\eg \cite{Vasas2012}) without demonstrating their emergence from lower-level elements. Almost all prevous work though has been concerned with the pathway to a variable replicator in a chemically and biologically plausible system. One major assumption of this work is that real-world molecular biology relies upon catalysed reactions, and therefore any pathway should also be catalytic in nature. However, if the goal is any type of variable replicator rather than biologically plausible variable replicators, non-catalytic pathways become a valid option.
-%
-%Furthermore, although variable replicators have well-established limitations in the quantity of information that can be stored, we observe that previous work has assumed stable environments. Variable or changing environments have known effects on variation and range in macro-evolutionary systems, and we conjecture that this effect might well also apply at macro-molecular scales, so increasing the information storage capacity of a variable replicator.
-
 Evolutionary systems are commonly described in terms of three foundational elements, usually some form of variation, selection and heredity\footnote{Other related formalisms exist, as discussed in  \cref{evolution-by-natural-selection}; however, none alter these elements fundamentally.}. Selection is the mechanism by which possibilities are pruned, and focus is maintained. Selection guides evolution by directing the search into promising areas, acting upon the phenome, or the form developed from a genome under the influence of the environment. However, it is not a generator of new ideas. 
 
 Novelty instead is the outcome of the second element, variation. Variation extends the search into different areas, and creates new alternatives for selection to evaluate. The final element, inheritance, elevates evolution beyond random search--instead of starting afresh at each generation, inheritance causes the search to be cumulative, with gains preserved. Variation and inheritance together are the source of new forms; each variation is a modification of the previous generation, forming a spreading tree of related entities when viewed over time. Unlike selection, variation and inheritance are processes that act upon the genome directly.
@@ -23,7 +11,7 @@ However, creating the conditions under which evolution emerges endogenously has 
 In this work we explore two related aspects of an endogenous mechanism for heredity:
 
 \begin{enumerate}
-\item What is the nature of the relationship between heritability and selective pressure for a \emph{theoretical} replicator?
+\item What is the nature of the relationship between heredity and selective pressure for a \emph{theoretical} replicator?
 \item What elements of replication can be \emph{demonstrated} in a molecular \gls{achem}?
 \end{enumerate}
 
@@ -89,7 +77,7 @@ They conclude that a \textit{replicator} is ``any autocatalytic entity for which
 
 Note that replicators in this definition are subsets of autocatalytic entities: replication implies multiplication, but replicators must also have some property (a phenotype) that is visible to an external process (selection.) \Citeauthor{Zachar2010} further discriminate between types of replicator based on two further factors: variability and heredity. If the replicator can change and yet still be equivalent under selection, then it is a variable replicator, which can exist in several equivalent states. An exact replicator on the other hand is one in which any change causes the entity to fail, or to respond differently under selection. Variability is the first stage towards metabolism and a genotype/phenotype distinction. Heredity describes which elements of variability are passed on to a descendent (the genotype.) If variability can be passed on, then the replicator is informational--the change in information can persist. If all changes are passed on, then the replicator is an \emph{ideal} replicator, where the genotype encompasses the entire entity, while if they are not, the replicator is \emph{real}.
 
-Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}, go on to develop a general classification of replicators, shown in \cref{fig:replicators}, as a logical sequence of forms \parencite[p.21, line breaks and numbering added for emphasis]{Zachar2010}:  
+Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{Szathmary1999,Szathmary:2006ty}, go on to develop a general classification of replicators as a logical sequence of forms \parencite[p.21, line breaks and numbering added for emphasis]{Zachar2010}:  
 
 \begin{enumerate}
 	\item ''The simplest of replicators is the \emph{exact replicator}, which is \emph{non-informational}, and any change made to it causes a change in the phenotype. 
@@ -97,6 +85,8 @@ Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{S
 	\item If such changes can be passed on to the offspring then the replicator is \emph{informational}. 
 	\item If the non-heritable part is constructed by a developmental process, then the replicator is a \emph{reproducer}.'' 
 \end{enumerate}
+
+An alternative hierarchy, from the same source \parencite{Zachar2010}, is shown in simplified form in \cref{fig:replicators}. Here the hierarchy is by a cumulative arrangement of features from basic embodiment through to heredity; the main discriminators from the earlier definition are arranged to the right of the figure.
 
 \begin{figure}[t]
 	\begin{center}
@@ -106,43 +96,19 @@ Building on this, \citeauthor{Zachar2010}, extending earlier work by \textcite{S
 		\draw [->] (-4.9,4.9) -- (-4,4);
 		\draw [->] (-3.9,3.9) -- (-3,3);
 		\draw [->] (-2.9,2.9) -- (-2,2);
-		\node [left] at (-5.5,5.25) {Embodiment};
-		\node [left] at (-4.5,4.25) {Multiplication};
-		\node [left] at (-3.5,3.25) {Variability};
-		\node [left] at (-2.5,2.25) {Heredity};
+		\node [left,font=\itshape] at (-5.5,5.25) {Embodiment};
+		\node [left,font=\itshape] at (-4.5,4.25) {Multiplication};
+		\node [left,font=\itshape] at (-3.5,3.25) {Variability};
+		\node [left,font=\itshape] at (-2.5,2.25) {Heredity};
+		\draw [<->] (-1,4.9) --node[left]{Exact} (-1,4);
+		\draw [<->] (-1,3.9) --node[left]{Variable} (-1,2);
+		\draw [<->] (0,4.9) --node[right]{Non-Informational} (0,3);
+		\draw [<->] (0,2.9) --node[right]{Informational} (0,2);
 		\end{tikzpicture}
 		\caption{Replicator systems according to the hierarchy of \citeauthor{Zachar2010}. Diagram redrawn from \cite[Fig.13]{Zachar2010}.}
 		\label{fig:replicators}
 	\end{center}
 \end{figure}
-
-\begin{DRAFT}
-Motivation: if high levels of catalysis required, unlikely in early pre-enzyme world.
-
-Question: at what point does an autocatalytic set become probable?
-
-Static analysis of reaction graphs.
-
-Relationship suggested between P and probability of formation of a RAF set in \cite{Hordijk2004} 
-RA means reflexively , F for food generated.
-Requires a way to determine if a given reaction network contains a RAF set - described a polynomial time algorithm
-Model later optimized in 2015, not just positive but negative or inhibitory catalysis
-Predictions tested against binary polymer model, but algorithm not specific to that model.
-Algorithm not specific to RAF, also works for F by saying no RA
-
-Lower-bound established for levels of catalysis required for a RAF set in \cite{Hordijk2011}, but restricted to RAF not F.
-Related probability of all-molecule RAF (RAF that includes all molecules in reaction network, but not necessarily all reactions) \cite[sect. 4]{Hordijk2011} formation to catalysis reviewed in \cite[sect. 6.1]{Hordijk2011}
-Derivation based on binary polymer model, includes terms for length of polymer and alphabet size
-Each molecule catalyses on average ${\lambda}n$ for polymers up to length $n$, provided $\lambda>log_e(K)$ for alphabet of size $K$.
-Assumption in derivation doesn't hold if no catalysis, that is $\lambda=0$. Come back to this.
-
-Finding all irrRAF (cores in \cite{Vasas2012}) in reaction network NP-hard problem \parencite{Steel2013}
-But sampling algorithm can 
-\begin{itemize}
-	\item find a sample set of irrRAFS, and
-	\item establish a probable lower-bound on number of irrRAFS in network (Hordijk2015 p7) based on Type 1 error probability (similar in approach to the "birthday problem".)
-\end{itemize}
-\end{DRAFT}
 
 \section{Previous work}\label{previous-work}
 
@@ -305,7 +271,7 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 			Artificial replicator            						& Model form					& Multiplication					& Variability						& Heredity\\ 
 			\midrule
 			\emph{Squirm3} \parencite{Hutton2002}                   & Molecular						& Exogenous rules					& Exogenous--hand-crafted			& Unknown--depends on rules\\
-			\emph{AlChemy} \parencite{Fontana1992}					& $\lambda$-calculus			& Endogenous--function composition	& Variable--functional equivalence & Holistic\\
+			\emph{AlChemy} \parencite{Fontana1992}					& $\lambda$-calculus			& Endogenous--function composition	& Variable--functional equivalence  & Holistic\\
 			\emph{StringMol} \parencite{Hickinbotham2012}           & Automata, encoded as strings	& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
 			\emph{GraphMol} \parencite{Nellis2014}					& Automata, encoded as graphs	& Endogenous--algorithmic			& Variable--functional equivalence	& Endogenous\\
 			\emph{Coreworld} \parencite{Rasmussen1990} 				& Automata						& Endogenous--algorithmic			& Variable--functional equivalence	& Unknown\\
@@ -316,32 +282,6 @@ Despite the use of the term ``embodied'', those functions that aren't ``crisp'' 
 		\end{tabular}
 	\end{center}
 \end{table}
-
-\begin{figure}[t]
-	\begin{center}
-		\vspace{10pt}
-		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
-		\draw [->] (-5.9,5.9) -- (-5,5);
-		\draw [->] (-4.9,4.9) -- (-4,4);
-		\draw [->] (-3.9,3.9) -- (-3,3);
-		\draw [->] (-2.9,2.9) -- (-2,2);
-		\node [left] at (-5.5,5.25) {Embodiment};
-		\node [left] at (-4.5,4.25) {Multiplication};
-		\node [left] at (-3.5,3.25) {Variability};
-		\node [left] at (-2.5,2.25) {Heredity};
-		\draw [->] (-5.9,5.9) -- (-5,6.9) node [right] {GARD \parencite{Segre1998},  \cite{Vasas2012}};
-		\draw [->] (-4.9,4.9) -- (-4,5.9) node [right] {Squirm3 \parencite{Hutton2002}};
-		\node [below, text width=20em] at (0,1.5) {Automata and AlChemy \parencite{Fontana1992}};
-		\end{tikzpicture}
-		\caption{Replicator systems from \cref{previous-work} categorized according to the hierarchy of \citeauthor{Zachar2010}. Diagram redrawn from \cite[Fig.13]{Zachar2010}.}
-		\label{fig:replicator-classification}
-	\end{center}
-\end{figure}
-
-
-\begin{tikzpicture}
-
-\end{tikzpicture}
 
 Of the systems discussed in \cref{previous-work} (summarised in \cref{tbl:previous-work}), the most successful approach to date has been through automata. In these systems, multiplication is by an algorithmic process where code within the parent, when executed, repeatedly copies the instructions from parent's code to a child using a specific copy operator (\eg \url{h-copy} in Avida.) Deliberate errors introduced during copying by the operator (erroneous copying, see \textcite[p.16]{Zachar2010} for the biological equivalent) provide one source of variation; another comes directly from algorithms where there can be several different instruction sequences that are functionally equivalent, so providing variability as defined by \citeauthor{Zachar2010}.
 

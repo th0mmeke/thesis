@@ -24,7 +24,7 @@ load.multipliers <- function(t) {
 
 \chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
-We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \citeauthor{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicator-classification}) and so in this \namecref{ch:multiplication} we begin to investigate evolutionary emergence in \glspl{achem} by identifying multiplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
+We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \citeauthor{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicators}) and so in this \namecref{ch:multiplication} we begin to investigate evolutionary emergence in \glspl{achem} by identifying multiplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
 
 \section{Choice of entity}
 
@@ -332,36 +332,13 @@ First we explore if there is a relationship between simple multiplication and se
 
 Although selective pressure can be purely internal to the reactor, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than external selective pressure applied explicity. In these experiments we concentrate on external selective pressure, as described in the earlier \namecref{environmental-models}, \cref{environmental-models}.
 
+Our working hypothesis therefore is:
+
 \begin{hypothesis}
 	That the number of single-cycle multipliers increases in proportion to the degree of environmental variability, up to a point.
 \end{hypothesis}
 
-Environmental variability is approximated by sample entropy \parencite{Richman2000}, a metric of predictability.
 
-Taking a random sample from this space at each step is unlikely to result in enough resolution to test any relevant hypothesis. At the other extreme, taking only a small number of predetermined changes is likely to lead to a sampling fallacy where the choices bias the conclusions.
-
-Instead, we need a way to parameterise the set of interesting environmental changes so we can sample from a constrained but not predetermined parameter space. The range covered by the parameter space should include both predictable and unpredictable changes as the difference between the two is core to our hypothesis.
-
-
-\begin{algorithm}
-	\Def{DiscoverVariableMultipliers(MultipliersBySpecies)}{
-		Candidates $\leftarrow\emptyset$\;
-		\BlankLine
-		Products $\leftarrow$\{products in cycle - reactants in cycle for each cycle in MultipliersBySpecies\}\;
-		Reactants $\leftarrow$\{reactants in cycle - products in cycle for each cycle in MultipliersBySpecies\}\;
-		LinkingMolecules $\leftarrow$Products $\cap$ Reactants\;
-				
-		\uIf{LinkingMolecules}{
-			\For{Cycle in Cluster}{
-				\If{products of cycle $\cap$ LinkingMolecules $\neq \emptyset$ or reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$}{
-					MultipliersInSpecies $\leftarrow$ MultipliersInSpecies + Cycle\;
-				}
-			}
-		}
-		\Return $Candidates$
-	}
-	\caption{\emph{DiscoverVariableMultipliers}. Detect candidate variable replicators within a reaction network, where a candidate is a continuous sequence of multipliers linked by shared molecules. The output is candidate variable replicators only as response to selection is not checked here. The algorithm is similar to that for detecting multipliers (\cref{alg:discover-multipliers}) without the need to check stoichiometry.}\label{alg:discover-variable-multipliers}
-\end{algorithm}
 
 \section{Measures}\label{sec:variable-replicator-measures}
 
@@ -385,18 +362,39 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 
 \end{DRAFT}
 
-\section{Experiment design}\label{sec:variable-replicator-design}
 
-\begin{itemize}[label={}]
-	\item H$_0$:  There is no difference in the number of multipliers between different strengths of selective pressure. 
-	\item H$_1$:  The number of multipliers depends on the strength of external selective pressure.
-\end{itemize}
+\begin{algorithm}
+\Def{DiscoverVariableMultipliers(MultipliersBySpecies)}{
+	Candidates $\leftarrow\emptyset$\;
+	\BlankLine
+	Products $\leftarrow$\{products in cycle - reactants in cycle for each cycle in MultipliersBySpecies\}\;
+	Reactants $\leftarrow$\{reactants in cycle - products in cycle for each cycle in MultipliersBySpecies\}\;
+	LinkingMolecules $\leftarrow$Products $\cap$ Reactants\;
+	
+	\uIf{LinkingMolecules}{
+		\For{Cycle in Cluster}{
+			\If{products of cycle $\cap$ LinkingMolecules $\neq \emptyset$ or reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$}{
+				MultipliersInSpecies $\leftarrow$ MultipliersInSpecies + Cycle\;
+			}
+		}
+	}
+	\Return $Candidates$
+}
+\caption{\emph{DiscoverVariableMultipliers}. Detect candidate variable replicators within a reaction network, where a candidate is a continuous sequence of multipliers linked by shared molecules. The output is candidate variable replicators only as response to selection is not checked here. The algorithm is similar to that for detecting multipliers (\cref{alg:discover-multipliers}) without the need to check stoichiometry.}\label{alg:discover-variable-multipliers}
+\end{algorithm}
+
+
+\section{Experiment design}\label{sec:variable-replicator-design}
+%
+%\begin{itemize}[label={}]
+%	\item H$_0$:  There is no difference in the number of multipliers between different strengths of selective pressure. 
+%	\item H$_1$:  The number of multipliers depends on the strength of external selective pressure.
+%\end{itemize}
 
 \begin{itemize}[label={}]
 	\item H$_0$:  No variable replicators exist in any experimental run.
 	\item H$_1$:  Variable replicators exist in one or more experimental run.
 \end{itemize}
-
 
 \subsection{Bistate selection pressure}
 \begin{DRAFT}

@@ -276,7 +276,7 @@ RDKit provides a number of convenient functions to the ToyWorld Chemical Model:
 	\item Utility functions: combining two representations, each of one	molecule, into one representation of two molecules, and vice versa, and sanitising the representation of a molecule by checking for molecular validity.
 \end{enumerate}
 
-PyMunk is used extensively in ToyWorld for 2D physics calculations, for example:
+PyMunk is used extensively in ToyWorld for 2D physics calculations, including:
 
 \begin{enumerate}
 	\item Calculating the future position of a molecule inside a reaction vessel based on the molecules velocity and current position.
@@ -354,7 +354,7 @@ As the model enforces conservation of mass, reactions can be represented solely 
 \begin{table}
 	\scriptsize
 	\begin{center}
-	\caption[Bond energies in ToyWorld.]{Relative energies required to break and/or form a bond. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The values in this table are those used in the experiments, and are those adopted by default in ToyWorld, but may easily be changed.}\label{default_bond_energies}
+	\caption[Bond energies in ToyWorld.]{Relative energies required to break and/or form a bond. Creating a bond between Atom 1 and Atom 2 releases molecular potential energy in the form of kinetic energy while breaking a bond does the opposite. The values in this table correspond to the -1 level for the $E_{Bonds}$ factor in the experiments of \cref{sec:toyworld-experiment-design}.}\label{default_bond_energies}
 	\begin{tabular}{@{}lp{2.5cm}p{2.5cm}p{4cm}@{}}
 		\toprule
 		Bond Type & Atom 1 & Atom 2 & Energy of both break and formation (in simulation units)\\
@@ -900,15 +900,15 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 	\scriptsize
 	\begin{center}
 	\caption{Factors, or independent variables.}\label{tbl:factors}
-	\begin{tabular}{p{1.4cm}p{2.2cm}p{4.4cm}p{5.5cm}}
+	\begin{tabular}{p{1.4cm}p{4.4cm}p{2.2cm}p{5.5cm}}
 		\toprule
-		Factor                & +1 value                          & -1 value                                                                                        & Description                                                    \\
+		Factor                & -1 value                          & +1 value                                                                                        & Description                                                    \\
 		\midrule
 		\noalign{\smallskip}
-		$S_\mathrm{Reactant}$ & Kinetic                           & Uniform                                                                                         & See Section \cref{reactant-selection-strategies}               \\
-		$S_\mathrm{Product}$  & LeastEnergy                       & Uniform                                                                                         & See Section \cref{product-selection-strategies}                \\
-		$E_\mathrm{Vessel}$   & 300                               & 100                                                                                             & Initial kinetic energy of each molecule in the reaction vessel \\
-		$E_\mathrm{Bonds}$    & Single=50, Double=100, Triple=200 & Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3 & Energy required to break a bond of the given type              \\
+		$S_\mathrm{Reactant}$ & Uniform                           & Kinetic                                                                                         & See Section \cref{reactant-selection-strategies}               \\
+		$S_\mathrm{Product}$  & Uniform                      	  & LeastEnergy                                                                                     & See Section \cref{product-selection-strategies}                \\
+		$E_\mathrm{Vessel}$   & 100                               & 300                                                                                             & Initial kinetic energy of each molecule in the reaction vessel \\
+		$E_\mathrm{Bonds}$    & Simplified real-world chemistry. Average values for Single=77.7, Double=148.2, and Triple=224.3 (see \cref{default_bond_energies})  & Single=50, Double=100, Triple=200 & Energy required to break a bond of the given type              \\
 		\bottomrule
 	\end{tabular}
 	\end{center}
@@ -918,7 +918,7 @@ We concentrate on three related response, or dependent, variables--Number of cyc
 
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
 
-\section{Experiment design}
+\section{Experiment design}\label{sec:toyworld-experiment-design}
 The experiments follow a full factorial design over four factors ($S_\mathrm{Reactant}$, $S_\mathrm{Product}$, $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$), each at two levels, run in a randomised order, with three (3) replicates of each combination of factors executed in sequence before beginning the next combination. The first replicate of each combination starts with a predefined random seed incremented by one for each successive replicate of the same combination. The factor levels used are given in \cref{tbl:factors}.
 
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
@@ -1007,34 +1007,27 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 \section{Analysis and discussion}
 \Cref{fig:cyclesbypartition} suggests that the first partition, representing the vessel a quarter of the way into its lifespan, is quantitatively different from the other three partitions, with a significantly greater range for all three response variables. Intuitively this corresponds with an initial period where the diversity in the reaction vessel rapidly increases from the limited starting set of molecules, as seen in some (\eg \cref{fig:diversity}) but not necessarily all of the replicates. Diversity here is measured by (average molecular quantity)$^{-1}$. All following sections therefore exclude data from the first partition of reaction numbers from 4750 to 5000.
 
-<<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by Reactant Strategy (y-axis scales vary)'>>=
+<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Product}$ (Product Strategy) (y-axis scales vary)'>>=
 df <- subset(df,df$Partition.Start != "4750")
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers by Product Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform","Energy")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length by Product Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform","Energy"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count by Product Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform","Energy")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers by Product Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length by Product Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count by Product Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-%\begin{figure}[t]
-%\centering
-%\includegraphics[width=0.95\linewidth]{figures/reactant_strategy}
-%\caption{Response by $S_\mathrm{Reactant}$}
-%\label{fig:reactant_strategy}
-%\end{figure}
-
-<<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by Product Strategy (y-axis scales vary)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers by Reactant Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform","Kinetic")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length by Reactant Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform","Kinetic"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count by Reactant Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform","Kinetic")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+<<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Reactant}$ (Reactant Strategy) (y-axis scales vary)'>>=
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers by Reactant Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length by Reactant Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count by Reactant Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
-%\begin{figure}[t]
-%\centering
-%\includegraphics[width=0.95\linewidth]{figures/product_strategy}
-%\caption{Response by $S_\mathrm{Product}$}
-%\label{fig:product_strategy}
-%\end{figure}
+<<bondstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Bond}$ (Bond Energy) (y-axis scales vary)'>>=
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Bond.Energies)) + labs(title="Log cycle numbers by Bond Energy", y="Number of cycles") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Bond.Energies)) + labs(title="Cycle length by Bond Energy", y="Length of longest cycle") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Bond.Energies)) + labs(title="Log cycle count by Bond Energy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+grid.arrange(ap,bp,cp,nrow=1,ncol=3)
+@
 
 \subsection{Is there a quantitative difference between the different reactant and product selection strategies?}
 From visual inspection of \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
@@ -1047,14 +1040,6 @@ bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=interaction(Rea
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
-%\begin{figure}[t]
-%\centering
-%\subcaptionbox{Cycle Count by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_count}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_count}}
-%\subcaptionbox{Cycle Length by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_length}}[0.45\linewidth][l]{\includegraphics[width=0.45\linewidth]{figures/cycle_length}}
-%\subcaptionbox{Count of Most Common Cycle by Strategy Combination %($S_\mathrm{Reactant}$:$S_\mathrm{Product}$)\label{fig:cycle_common}}[0.45\linewidth][r]{\includegraphics[width=0.45\linewidth]{figures/cycle_common}}
-%\caption{Effect of the combination of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ on Response Variables}
-%\end{figure}
-
 \subsection{Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
 
 From \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
@@ -1063,11 +1048,13 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 
 \subsection{Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?}\label{RQ2.3}
 
-We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles. No other significant relationships exist.
+We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles (see \cref{fig:bondstrategy}). No other significant relationships exist.
 
 \section{Conclusions}
-In this \namecref{toyworld} we have explored the effect of four possible combinations of Reactant and Product selection strategies.
+In this \namecref{toyworld} we have introduced the ToyWorld \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
 
-By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$.
+By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy. 
+
+Other parameters to the model, such as $E_{Vessel}$, the initial kinetic energy of the molecular population, and $E_{bonds}$, the bonding model, had lesser effects on cycle formation, with the only significant relationship being that of $E_{bonds}$ on the number of cycles produced.
 
 Note that as these conclusions are based on results obtained from an emergent process, an explanatory model is difficult other than through reference to the original simulation. 

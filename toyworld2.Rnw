@@ -56,19 +56,19 @@ For template autocatalysis (\cref{sec:real-world-chemistry}) of cycles, where th
 
 What exactly is meant though by the stoichiometric relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared molecules (individual molecules, not species.) 
 
-The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles-sampling} and \cref{alg:identify-clusters} respectively.
+The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles} and \cref{alg:identify-clusters} respectively.
 
 \section{Cycle detection in a reaction network}
 
-Choosing single reaction-cycles as the entity in the hypothesis means that cycle detection is central to our analysis. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles-sampling}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
+Choosing single reaction-cycles as the entity in the hypothesis means that cycle detection is central to our analysis. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
 
 The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
 
 Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commeasurate effect on analysis times.
 
-The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous, but not identical, strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles-sampling}) is quite robust when tested by examining the variance of the number of cycles identified from a selection of sample molecules. 
+The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous, but not identical, strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles}) is quite robust when tested by examining the variance of the number of cycles identified from a selection of sample molecules. 
 
-There is a significant limitation to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (see \cref{fig:samplingrange}.)
+There is a significant implication to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (see \cref{fig:samplingrange}.)
 
 <<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (top) and number of multipliers (bottom) for different sampling rates ($p$ in text). Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot.'>>=
 colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
@@ -82,7 +82,7 @@ grid.arrange(ap,bp,nrow=2,ncol=1)
 
 The experiments in this chapter all use a sampling proportion $p=0.2$, as a balance between performance and predictability (as very small values for $p$ produce noisy results.)
 
-It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles-sampling} instead of the exhaustive alternative.
+It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles} instead of the exhaustive alternative.
 
 
 \begin{algorithm}
@@ -96,18 +96,18 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 			Clusters $\leftarrow$IdentifyClusters(CyclesForSpecies)\;
 			\For{Cluster in Clusters}{
 				
-				Products $\leftarrow$\{products in cycle - reactants in cycle for each cycle in Cluster\}\;
-				Reactants $\leftarrow$\{reactants in cycle - products in cycle for each cycle in Cluster\}\;
-				LinkingMolecules $\leftarrow$Products $\cap$ Reactants\;
+				AllProducts $\leftarrow \bigcup_{\forall x \in Cluster}$ Products(x)$\setminus$Reactants(x)\;
+				AllReactants $\leftarrow \bigcup_{\forall x \in Cluster}$ Reactants(x)$\setminus$Products(x)\;
+				LinkingMolecules $\leftarrow$AllProducts $\cap$ AllReactants\;
 				
-				\uIf{LinkingMolecules}{
-					ProductCycles $\leftarrow$\{each cycle where products of cycle $\cap$ LinkingMolecules $\neq \emptyset$\}\;
-					ReactantCycles $\leftarrow$\{each cycle where reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$\}\;
+				\uIf{LinkingMolecules$\neq \emptyset$}{
+					ProductCycles $\leftarrow$ \{x$\in$Cluster $\mid$ Products(x) $\cap$ LinkingMolecules $\neq \emptyset$\}\;
+					ReactantCycles $\leftarrow$ \{x$\in$Cluster $\mid$ Reactants(x) $\cap$ LinkingMolecules $\neq \emptyset$\}\;
 					\tcp{Check overall stoichiometry is greater than 1.0}
 					\If{|ReactantCycles| > |ProductCycles|}{
 						\For{Cycle in Cluster}{
-							\If{products of cycle $\cap$ LinkingMolecules $\neq \emptyset$ or reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$}{
-								MultipliersInSpecies $\leftarrow$ MultipliersInSpecies + Cycle\;
+							\If{(products of cycle $\cap$ LinkingMolecules $\neq \emptyset)\lor($reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$)}{
+								MultipliersInSpecies $\leftarrow$ MultipliersInSpecies $\cup$ Cycle\;
 							}
 						}
 						MultipliersBySpecies $\leftarrow$ MultipliersInSpecies\;
@@ -123,31 +123,32 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 \begin{algorithm}
 	\Def{IdentifyCycles(Reactions)}{
 		\tcp{Construct reaction graph from a list of $Reactions$}
-		\For{each $Reaction$ in $Reactions$}{
+		\For{Reaction in Reactions}{
 			Add a node for the reactant side of Reaction\;
 			Add a node for the product side of Reaction\;
 			Add an edge from reactant node to product node\;
-			\For{each $Reactant$ in $Reaction$}{
-				Add node for $Reactant$, and edge from $Reactant$ to node for reactant side of Reaction\;
-				$Reactants \leftarrow Reactants \cup Reactant$\;
+			\For{Reactant in Reaction}{
+				Add node for Reactant and edge from Reactant to node for reactant side of Reaction\;
+				Reactants $\leftarrow$ Reactants $\cup$ Reactant\;
 			}
-			\For{each $Product$ in $Reaction$}{
-				Add node for $Product$, and edge from $Product$ to node for product side of Reaction\;
+			\For{Product in Reaction}{
+				Add node for Product, and edge from Product to node for product side of Reaction\;
 			}
 		}
 		\tcp{Find all cycles for a sample of reactants in the graph}
-		$Seeds \leftarrow$ sample with uniform probability some proportion $p$ of $Reactants$\;
-		\For{each $Seed$ in $Seeds$}{
-			$ShortestPaths \leftarrow$ FindCyclesFromNode($Seed$)\;
-			\For{each $Path$ in $ShortestPaths$}{
-				\uIf{the stoichiometry for $Seed$ in the cycle given by this $Path\geq 2$}{
-					Add $Path$ to the list of cycles\;
+		Cycles $\leftarrow \emptyset$\;
+		Seeds $\leftarrow$ sample with uniform probability some proportion $p$ of $Reactants$\;
+		\For{Seed in Seeds}{
+			ShortestPaths $\leftarrow$ FindCyclesFromNode(Seed)\;
+			\For{Path in ShortestPaths}{
+				\uIf{the stoichiometry for Seed in the cycle given by this Path$\geq 2$}{
+					Cycles $\leftarrow$ Cycles $\cup$ Path\;
 				} 
 			}
 		}
-		\Return list of cycles\;
+		\Return Cycles\;
 	}
-	\caption[\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCyclesSampling}. Sampling algorithm to identify autocatalytic cycles of molecules within a reaction network. A cycle is a sequence of reactions where at least one product molecule in the final reaction is of the same species as a reactant molecule in the first reaction of the cycle. The cycle is considered autocatalytic for a given product molecule if the stoichiometry for the molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. The sampling proportion $p$ determines the proportion of the total set of reactants to be used as seeds when searching for cycles.}\label{alg:identify-cycles-sampling}
+	\caption[\emph{IdentifyCycles}. Sampling algorithm to identify autocatalytic cycles within a reaction network.]{\emph{IdentifyCycles}. Sampling algorithm to identify autocatalytic cycles of molecules within a reaction network. A cycle is a sequence of reactions where at least one product molecule in the final reaction is of the same species as a reactant molecule in the first reaction of the cycle. The cycle is considered autocatalytic for a given product molecule if the stoichiometry for the molecule is greater than one, or in other words, if the cycle produces more of the product than is consumed. The sampling proportion $p$ determines the proportion of the total set of reactants to be used as seeds when searching for cycles.}\label{alg:identify-cycles}
 \end{algorithm}
 
 
@@ -157,8 +158,8 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 		$Stack \leftarrow$ [($Source$, [$Source$])]\;
 		\While{Stack}{
 			$(Vertex, Path) \leftarrow Stack.pop()$\;
-			\For{$NextNode$ in predecessors(vertex) - path}{
-				\If{$NextNode$ is a molecule and species of $NextNode$ = $Target$}{
+			\For{$NextNode$ in predecessors(vertex)$\setminus$path}{
+				\If{$NextNode$ is a molecule $\land$ species of $NextNode$ = $Target$}{
 					Yield reversed($Path$ + [$NextNode$])\;
 				}
 				\Else{
@@ -195,8 +196,8 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 			\uIf{$\neg$CanCluster}{
 				\For{Unclustered in Unclustereds}{
 					\uIf{Unclustered $\cap$ CycleMolecules}{
-						Clusters $\leftarrow$Clusters + new cluster of [Unclustered $\cup$ Cycle]\;
-						Unclustereds $\leftarrow$Unclustereds-Unclustered\;
+						Clusters $\leftarrow$Clusters $\cup$ new cluster of [Unclustered $\cup$ Cycle]\;
+						Unclustereds $\leftarrow$Unclustereds$\setminus$Unclustered\;
 						CanCluster $\leftarrow$True\;
 					}
 				}
@@ -233,7 +234,7 @@ There are two replicates for each of the two factor levels, and each replicate r
 %drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
 %
 %library(xtable)
-%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.2.', label='tbl:toyworld2-multiplier-results-020', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.2.', label='tbl:toyworld2-multiplier-results-020', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 %@
 %
 %<<toyworld2-multiplier-results-005, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
@@ -242,7 +243,7 @@ There are two replicates for each of the two factor levels, and each replicate r
 %drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
 %
 %library(xtable)
-%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.05.', label='tbl:toyworld2-multiplier-results-005', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.05.', label='tbl:toyworld2-multiplier-results-005', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 %@
 
 <<toyworld2-multiplier-results020, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
@@ -260,10 +261,10 @@ drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
 
 library(xtable)
 
-print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} shown in column labels. Sample Entropy scaled by a factor of 1000 for legibility.', label='tbl:toyworld2-multiplier-results', digits=c(0,0,0,0,0,0,0,0,2,0,0,2)), booktabs=TRUE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top")
+print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} shown in column labels. Sample Entropy scaled by a factor of 1000 for legibility.', label='tbl:toyworld2-multiplier-results', digits=c(0,0,0,0,0,0,0,0,2,0,0,2)), booktabs=TRUE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles-sampling}, with a sampling proportion $p=0.05$, and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
+Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles}, with a sampling proportion $p=0.05$, and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
 
 An alternative explanation is simply that multiplier emergence is a product of chance and that given enough generations, enough cycles will form that probabilities will favour two or more being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent.
 
@@ -282,7 +283,7 @@ csv <- load.multipliers('results/multipliers-020.csv')
 
 drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
 
-print(xtable(csv[csv$Environment==0 & csv$Dataset==1489951262,!names(csv) %in% drop], caption='Numbers of multipliers from 10 replicates of control experiment. Multipliers identified by \\cref{alg:discover-multipliers}, in reaction networks generated by Uniform $S_{reactant}$ and $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.2.', label='tbl:toyworld2-multiplier-control', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(csv[csv$Environment==0 & csv$Dataset==1489951262,!names(csv) %in% drop], caption='Numbers of multipliers from 10 replicates of control experiment. Multipliers identified by \\cref{alg:discover-multipliers}, in reaction networks generated by Uniform $S_{reactant}$ and $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.2.', label='tbl:toyworld2-multiplier-control', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
 <<anova-multipliers, results='asis',echo=FALSE>>=
@@ -376,14 +377,14 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 \Def{DiscoverVariableMultipliers(MultipliersBySpecies)}{
 	Candidates $\leftarrow\emptyset$\;
 	\BlankLine
-	Products $\leftarrow$\{products in cycle - reactants in cycle for each cycle in MultipliersBySpecies\}\;
-	Reactants $\leftarrow$\{reactants in cycle - products in cycle for each cycle in MultipliersBySpecies\}\;
-	LinkingMolecules $\leftarrow$Products $\cap$ Reactants\;
+	AllProducts $\leftarrow \bigcup_{\forall x \in MultipliersBySpecies}$ Products(x)$\setminus$Reactants(x)\;
+	AllReactants $\leftarrow \bigcup_{\forall x \in MultipliersBySpecies}$ Reactants(x)$\setminus$Products(x)\;
+	LinkingMolecules $\leftarrow$AllProducts $\cap$ AllReactants\;
 	
 	\uIf{LinkingMolecules}{
 		\For{Cycle in Cluster}{
-			\If{products of cycle $\cap$ LinkingMolecules $\neq \emptyset$ or reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$}{
-				MultipliersInSpecies $\leftarrow$ MultipliersInSpecies + Cycle\;
+			\If{(Products(cycle) $\cap$ LinkingMolecules $\neq \emptyset)\lor($Reactants(cycle) $\cap$ LinkingMolecules $\neq \emptyset$)}{
+				MultipliersInSpecies $\leftarrow$ MultipliersInSpecies $\cup$ Cycle\;
 			}
 		}
 	}
@@ -435,7 +436,7 @@ drop <- c('S_Reactant')
 
 library(xtable)
 
-print(xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies under forms of environmental change given by the columns $Target$ and $Shape$. Sampling proportion $p$ in \\cref{alg:identify-cycles-sampling} set to 0.2. Sample Entropy scaled by a factor of 1000 for legibility.', label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2)), booktabs=TRUE, tabular.environment="longtable", floating=FALSE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top", add.to.row = list(pos = list(0), command = "\\hline \\endhead "), hline.after=c(-1))
+print(xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies under forms of environmental change given by the columns $Target$ and $Shape$. Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.2. Sample Entropy scaled by a factor of 1000 for legibility.', label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2)), booktabs=TRUE, tabular.environment="longtable", floating=FALSE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top", add.to.row = list(pos = list(0), command = "\\hline \\endhead "), hline.after=c(-1))
 @
 
 \section{Discussion}

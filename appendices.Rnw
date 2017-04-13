@@ -21,7 +21,7 @@ print(xtable(metadata, sanitize.text.function=function(x){x}, caption='Summary o
 			\toprule
 			Input & Algorithm & Output\\
 			\midrule
-			Reaction network 								& \cref{alg:identify-cycles-sampling}			& Cycles by molecule\\ % <filebase>.json -> IdentifyMoleculeCycles.sample_reactant_stoichiometry() -> <filebase>-molecules.json
+			Reaction network 								& \cref{alg:identify-cycles}			& Cycles by molecule\\ % <filebase>.json -> IdentifyMoleculeCycles.sample_reactant_stoichiometry() -> <filebase>-molecules.json
 			Cycles by molecule								& \cref{alg:discover-multipliers}				& All multipliers\\ % <filebase>-molecules.json -> cycle_utilities.discover_multipliers() -> <filebase>-multipliers.json
 			Multipliers										& \cref{alg:discover-variable-multipliers}		& All variable replicators\\ % <filebase>-multipliers.json -> analyse_variable_multipliers.py -> <filebase>-variables.json
 			\bottomrule

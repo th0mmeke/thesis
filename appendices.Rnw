@@ -9,9 +9,38 @@ names(metadata)[names(metadata)=="S_Reactant"] <- "Reactant strategy"
 names(metadata)[names(metadata)=="Sample.Entropy"] <- "Sample Entropy"
 
 library(xtable)
-print(xtable(metadata, sanitize.text.function=function(x){x}, caption='Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment: DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by \\textcite{Richman2000}. Sample Entropy scaled by a factor of 1000 for legibility.', label='tbl:metadata-summary'), booktabs=TRUE, tabular.environment="longtable", floating=FALSE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top", add.to.row = list(pos = list(0), command = "\\hline \\endhead "), hline.after=c(-1))
-@
 
+# Using idea from http://stackoverflow.com/questions/33159114/how-to-only-show-table-caption-once-in-list-of-table-for-a-table-split-onto-mu
+
+csvTab <- xtable(metadata, sanitize.text.function=function(x){x}, label='tbl:metadata-summary')
+
+cat(sprintf("
+\\begingroup\\scriptsize
+\\begin{longtable}{rrrllllrr}
+\\caption{%1$s} \\\\ \\hline
+\\endfirsthead
+\\\\ \\hline \\\\
+%2$s \\\\
+\\hline
+\\endhead
+\\hline
+{\\footnotesize %3$s}
+\\endfoot
+\\endlastfoot",
+"Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment: DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by \\textcite{Richman2000}. Sample Entropy scaled by a factor of 1000 for legibility.",
+paste(paste("\\begin{sideways}", colnames(csvTab), "\\end{sideways}"), collapse = " & "),
+"Continued on next page"))
+
+print(csvTab,
+include.colnames = TRUE,
+include.rownames = FALSE,
+rotate.colnames=TRUE,
+caption.placement="top",
+only.contents = TRUE
+)
+
+cat("\\end{longtable}\\endgroup")
+@
 
 \begin{table}
 	\scriptsize

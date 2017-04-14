@@ -297,6 +297,30 @@ print(xtable(a, caption='ANOVA analysis.', label='tbl:anova-multipliers'), bookt
 
 The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. An \gls{anova} test of the statistical hypothesis (\cref{tbl:anova-multipliers}) gives $Pr(>F)=\Sexpr{a$`Pr(>F)`}[1]$, and so we reject the alternate explanation (that multipliers result from chance alone) in favour of our original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
 
+\begin{figure}[t]
+\begin{center}
+\vspace{10pt}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+\node (s0) at (0,6) {[H+]};
+\node (s1) at (0,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+\node (s2) at (0,4) {[O-]};
+\node (s3) at (0,3) {[H+]+[O-]$\rightarrow$[H][O]};
+\node (s4) at (0,2) {[H][O]};
+\node (s5) at (0,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+\node (s6) at (0,0) {[H+]};
+\draw [->] (s0) -- (s1);
+\draw [->] (s1) -- (s2);
+\draw [->] (s2) -- (s3);
+\draw [->] (s3) -- (s4);
+\draw [->] (s4) -- (s5);
+\draw [->] (s5) -- (s6);
+\draw [->] (s6) -- (-3,0) -- (-3,7) -- (0,7) -- (s0);
+\end{tikzpicture}
+\caption{Example multiplier from experimental results. For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
+\label{fig:example-multiplier}
+\end{center}
+\end{figure}
+
 \section{Conclusions}
 
 

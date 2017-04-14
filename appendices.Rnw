@@ -36,6 +36,7 @@ include.colnames = TRUE,
 include.rownames = FALSE,
 rotate.colnames=TRUE,
 caption.placement="top",
+hline.after=c(20,40),
 only.contents = TRUE
 )
 

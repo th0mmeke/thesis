@@ -481,6 +481,7 @@ print(csvTab,
 	include.rownames = FALSE,
 	rotate.colnames=TRUE,
 	caption.placement="top",
+	hline.after=c(40),
 	only.contents = TRUE
 )
 			

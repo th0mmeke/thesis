@@ -287,17 +287,17 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, including:
 
 \begin{algorithm}[ht]
 	\BlankLine
-	\While{generation $\leq$ generations}{
+	\While{Generation $\leq$ number of generations}{
 		\BlankLine
 		\tcp{Selection of reactants}
-		reactants $\leftarrow$ outcome of the Reactant selection strategy\;
+		Reactants $\leftarrow$ outcome of the Reactant selection strategy\;
 		\BlankLine
 		\tcp{Construction of reaction}
-		reactions $\leftarrow$ enumerate all possible reaction options\;
-		reaction $\leftarrow$ choose from $reactions$ according to the Product selection strategy\;
+		Reactions $\leftarrow$ enumerate all possible reaction options\;
+		Reaction $\leftarrow$ choose from Reactions according to the Product selection strategy\;
 		\BlankLine
 		\tcp{Execute reaction in the reactor}
-		Update the reactor with the results of carrying out the $reaction$\;
+		Update the reactor with the results of carrying out the Reaction\;
 	}
 	\caption{The main simulation loop in ToyWorld.}\label{alg:toyworld-main-loop}
 \end{algorithm}
@@ -460,13 +460,13 @@ In a uniform selection strategy ($S_\mathrm{Reactant} = \mathrm{Uniform}$), reac
 By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position--molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula. The algorithm for this strategy is given in \cref{alg:kinetic-selection}. At every step the molecules in the reaction vessel move $\delta t$ units along their velocity vectors, bouncing with no loss of energy off the reaction vessel sidewalls. All molecules that collide during this step are added to the tail of the $ReactantList$.
 
 \begin{algorithm}
-	\Def{KineticReactantSelection(population)}{
-		\uIf{|population| < 2}{
+	\Def{KineticReactantSelection(Population)}{
+		\uIf{|Population| < 2}{
 			\Return $\emptyset$
 		}
 		
 		i$\leftarrow$0\;
-		\While{|ReactantList| = 0}{
+		\While{ReactantList$=\emptyset$}{
 			i $\leftarrow$ i + 1\;
 			Advance the position of all molecules by $\Delta_t$\;
 			Update ReactantList with all colliding molecules\;
@@ -477,7 +477,7 @@ By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kin
 			}
 		}
 		\tcp{Construct reactant portion of reaction}
-		\While{|ReactantList| > 0}{
+		\While{ReactantList$\neq \emptyset$}{
 			Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
 			InitialKE$\leftarrow \sum{\text{KE}_{i}}, \forall i \in$ Reactants\;
 			ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
@@ -622,11 +622,11 @@ extension, for four products, a square and so on.
 	\BlankLine
 	$\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text{sum of reactant internal energies}-\text{kinetic energy of CoM}$\;
 	\BlankLine
-	\For(\tcp*[f]{Transform into CoM frame}){$i\leftarrow 1$ \KwTo $\text{number of Products}$}{\label{alg:lab_to_CoM_frame}
+	\For(\tcp*[f]{Transform into CoM frame}){$i\leftarrow 1$ \KwTo |Products|}{\label{alg:lab_to_CoM_frame}
 		$v^\prime_i\leftarrow v_i-\text{CoM velocity}$\;
 	}
 	\BlankLine
-	\uIf(\tcp*[f]{Conservation of momentum implies all excess energy must go into internal energy}){Number of products = 1}{\label{alg:allocate_energies}
+	\uIf(\tcp*[f]{Conservation of momentum implies all excess energy must go into internal energy}){|Products|=1}{\label{alg:allocate_energies}
 		$\text{Internal energy of Products}\leftarrow \text{collision energy}$\;
 	}
 	\uElse{
@@ -634,7 +634,7 @@ extension, for four products, a square and so on.
 		$\text{Internal energy of Products}\leftarrow \text{collision energy}-\text{ke}$\;
 	}
 	\BlankLine
-	\Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){Number of products}{
+	\Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){|Products|}{
 		\uCase(\tcp*[f]{One product}){1}{
 			$mv^\prime\leftarrow (0,0,0)$\;
 		}
@@ -651,11 +651,11 @@ extension, for four products, a square and so on.
 		}
 	}
 	\BlankLine
-	\For(\tcp*[f]{Convert momentums to velocities...}){$i\leftarrow 1$ \KwTo $\text{number of products}$}{
+	\For(\tcp*[f]{Convert momentums to velocities...}){$i\leftarrow 1$ \KwTo $\text{|Products|}$}{
 		$v^\prime_i\leftarrow mv^\prime_i / \text{mass}_i$\;
 	}
 	\BlankLine
-	\For(\tcp*[f]{Transform back to standard frame}){$i\leftarrow 1$ \KwTo $\text{number of products}$}{\label{alg:CoM_to_lab_frame}
+	\For(\tcp*[f]{Transform back to standard frame}){$i\leftarrow 1$ \KwTo $\text{|Products|}$}{\label{alg:CoM_to_lab_frame}
 		$v_i\leftarrow v^\prime_i+\text{CoM velocity}$\;
 	}
 	\caption{Algorithm to set post-collision velocities and internal energies.}\label{alg:post_collision_adjustments}

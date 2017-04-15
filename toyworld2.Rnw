@@ -401,8 +401,8 @@ Although took an ODE approach based on reaction rates, rather than in simulation
 \Def{DiscoverVariableMultipliers(MultipliersBySpecies)}{
 	Candidates $\leftarrow\emptyset$\;
 	\BlankLine
-	AllProducts $\leftarrow \bigcup_{\forall x \in MultipliersBySpecies}$ Products(x)$\setminus$Reactants(x)\;
-	AllReactants $\leftarrow \bigcup_{\forall x \in MultipliersBySpecies}$ Reactants(x)$\setminus$Products(x)\;
+	AllProducts $\leftarrow \bigcup_{\forall x \in \text{MultipliersBySpecies}}$ Products(x)$\setminus$Reactants(x)\;
+	AllReactants $\leftarrow \bigcup_{\forall x \in \text{MultipliersBySpecies}}$ Reactants(x)$\setminus$Products(x)\;
 	LinkingMolecules $\leftarrow$AllProducts $\cap$ AllReactants\;
 	
 	\uIf{LinkingMolecules}{

@@ -245,38 +245,38 @@ The model is parameterised to make it easy to describe different specific models
 \end{table}
 
 \begin{algorithm}
-\For{each generation $\in [1\dots$number of generations]}{
-	$population\leftarrow Selection(population)$\;
-	$population\leftarrow population \cup Variation(population)$\;
+\For{Generation $\in [1\dots\text{number of generations}]$}{
+	Population$\leftarrow$ Selection(Population)\;
+	Population$\leftarrow$ Population $\cup$ Variation(Population)\;
 	\BlankLine
-	\lIf{$population$ size is too small}{break}
+	\lIf{|Population| < MINIMUMSIZE}{break}
 }
 \caption{Algorithm for the inheritance and variation model.}\label{base-model-algorithm}
 \end{algorithm}
 
 \begin{algorithm}
-\Def{Selection(population)}{
-	$population_{new}\leftarrow \{\}$\;
-	\For{each $entity \in population$} {
-		\Prob($p_{selection}$:){
-			Add $entity$ to $population_{new}$\;
+\Def{Selection(Population)}{
+	Population$_{new}\leftarrow \emptyset$\;
+	\For{Entity $\in$ Population} {
+		\Prob(p$_{selection}$:){
+			Population$_{new}\leftarrow$ Population$_{new} \cup $Entity\;
 		}
 	}
-	\Return $population_{new}$\;
+	\Return Population$_{new}$\;
 }
 \BlankLine
-\Def{Variation(population)}{
-	$population_{new}\leftarrow \{\}$\;
-	\For{each $entity$ with $fitness$ and $heritability$ in $population$}{
+\Def{Variation(Population)}{
+	Population$_{new}\leftarrow \emptyset$\;
+	\For{Entity with Fitness and Heritability in Population}{
 		\BlankLine
-		\Prob($p_{reproduction}$:){
-			\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
-				$child\leftarrow$ Reproduce($entity$)\;
-				Add $child$ to $population_{new}$\;
+		\Prob(p$_{reproduction}$:){
+			\For{some number of Children $\in \mathcal{U}[0,n_{children}]$} {
+				Child$\leftarrow$ Reproduce(Entity)\;
+				Population$_{new}\leftarrow$ Population$_{new} \cup$ Child\;
 			}
 		}
 	}
-	\Return $population_{new}$\;
+	\Return Population$_{new}$\;
 }
 \caption{Definitions for the functions \emph{Selection} and \emph{Variation}.}\label{model-functions}
 \end{algorithm}

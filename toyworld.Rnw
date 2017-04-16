@@ -1,7 +1,7 @@
 <<setup, include=FALSE>>=
 library(knitr)
 library(cowplot) # styling of plots, extension of ggplot2
-theme_set(theme_cowplot(font_size=8))
+theme_set(theme_cowplot(font_size=10))
 library(gridExtra) # grid layouts for ggplot2
 library(lattice) # needed for bwplot etc
 library(english) # convert numbers to words
@@ -982,6 +982,7 @@ A view of the results is given in \cref{tbl:results}: reaction networks built fr
 
 <<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis, y-axis scales vary)'>>=
 df<-load.toyworld("results/EvaluatorActualCycles.out")
+names(df)[names(df)=="No. of Species.x"] <- "No. of Species (p=0.05)"
 
 ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Partition.Start)) + labs(title='Cycle numbers by Partition', x='Start of partition', y='Number of cycles') + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Partition.Start)) + labs(title='Cycle length by Partition', x='Start of partition', y='Length of longest cycle')
@@ -1003,23 +1004,23 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 
 <<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Product}$ (Product Strategy) (y-axis scales vary)'>>=
 df <- subset(df,df$Partition.Start != "4750")
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers by Product Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length by Product Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count by Product Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers", x=expression(E[Product]), y="Number of cycles") + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length ", x=expression(E[Product]), y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count", x=expression(E[Product]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Reactant}$ (Reactant Strategy) (y-axis scales vary)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers by Reactant Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length by Reactant Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count by Reactant Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers", x=expression(E[Reactant]), y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length", x=expression(E[Reactant]), y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count", x=expression(E[Reactant]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<bondstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Bond}$ (Bond Energy) (y-axis scales vary)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Bond.Energies)) + labs(title="Log cycle numbers by Bond Energy", y="Number of cycles") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Bond.Energies)) + labs(title="Cycle length by Bond Energy", y="Length of longest cycle") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Bond.Energies)) + labs(title="Log cycle count by Bond Energy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Bond.Energies)) + labs(title="Log cycle numbers", x=expression(E[Bond]), y="Number of cycles") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Bond.Energies)) + labs(title="Cycle length", x=expression(E[Bond]), y="Length of longest cycle") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Bond.Energies)) + labs(title="Log cycle count", x=expression(E[Bond]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 

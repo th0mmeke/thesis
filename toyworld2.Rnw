@@ -74,8 +74,8 @@ There is a significant implication to this approach. Because we are sampling ``s
 colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
 m <- read.csv('results/cycles_and_multipliers.csv', colClasses=colClasses)
 
-ap <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of Cycles')
-bp <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) +  scale_x_continuous(limits = c(0, 9)) + geom_smooth(aes(x=Sample.Rate, y=Multiplier.Species, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of Multiplier Species')
+ap <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of cycles')
+bp <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) +  scale_x_continuous(limits = c(0, 9)) + geom_smooth(aes(x=Sample.Rate, y=Multiplier.Species, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of multiplier species')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 

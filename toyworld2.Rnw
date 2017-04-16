@@ -302,7 +302,7 @@ The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate o
 \begin{figure}[t]
 \begin{center}
 \vspace{10pt}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm, thick,main node/.style={circle,fill=blue!20,draw, font=\sffamily\Large\bfseries,minimum size=15mm}]
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,font=\sffamily\scriptsize]
 \node (s0) at (0,6) {[H+]};
 \node (s1) at (0,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
 \node (s2) at (0,4) {[O-]};
@@ -316,9 +316,49 @@ The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate o
 \draw [->] (s3) -- (s4);
 \draw [->] (s4) -- (s5);
 \draw [->] (s5) -- (s6);
-\draw [->] (s6) -- (-3,0) -- (-3,7) -- (0,7) -- (s0);
+
+\node (s10) at (5,6) {[H+]};
+\node (s11) at (5,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+\node (s12) at (5,4) {[O-]};
+\node (s13) at (5,3) {[H+]+[O-]$\rightarrow$[H][O]};
+\node (s14) at (5,2) {[H][O]};
+\node (s15) at (5,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+\node (s16) at (5,0) {[H+]};
+\draw [->] (s10) -- (s11);
+\draw [->] (s11) -- (s12);
+\draw [->] (s12) -- (s13);
+\draw [->] (s13) -- (s14);
+\draw [->] (s14) -- (s15);
+\draw [->] (s15) -- (s16);
+
+\node (s20) at (10,6) {[H+]};
+\node (s21) at (10,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+\node (s22) at (10,4) {[O-]};
+\node (s23) at (10,3) {[H+]+[O-]$\rightarrow$[H][O]};
+\node (s24) at (10,2) {[H][O]};
+\node (s25) at (10,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+\node (s26) at (10,0) {[H+]};
+\draw [->] (s20) -- (s21);
+\draw [->] (s21) -- (s22);
+\draw [->] (s22) -- (s23);
+\draw [->] (s23) -- (s24);
+\draw [->] (s24) -- (s25);
+\draw [->] (s25) -- (s26);
+
+\draw [->] (s6) -- (2.5,0) -- (2.5,7) -- (5,7) -- (s10);
+\draw [->] (s16) -- (7.5,0) -- (7.5,7) -- (10,7) -- (s20);
+
+\draw [-] (-2.25,-0.5) -- (-2.25,-1) -- (2.25,-1) -- (2.25,-0.5);
+\node at (0,-1.5) {Reaction Cycle (Species 'Y')};
+\draw [-] (2.75,-0.5) -- (2.75,-1) -- (7.25,-1) -- (7.25,-0.5);
+\node at (5,-1.5) {Reaction Cycle (Species 'Y')};
+\draw [-] (7.75,-0.5) -- (7.75,-1) -- (12.25,-1) -- (12.25,-0.5);
+\node at (10,-1.5) {Reaction Cycle (Species 'Y')};
+
+\draw [-] (-2.5,-2.5) -- (-2.5,-3) -- (12.5,-3) -- (12.5,-2.5);
+\node at (5,-3.5) {Multiplying Replicator (Species 'YYY')};
 \end{tikzpicture}
-\caption{Example multiplier from experimental results (of type 'Y' - see \cref{tbl:replicator-species}). For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
+\caption{Example multiplier from experimental results (of type or species 'YYY' - see \cref{tbl:replicator-species}). For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
 \label{fig:example-multiplier}
 \end{center}
 \end{figure}

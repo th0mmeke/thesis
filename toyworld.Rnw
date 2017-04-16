@@ -990,13 +990,6 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 \label{fig:partitions}
 
-%\begin{figure}[h]
-%\centering
-%	\includegraphics[width=0.95\linewidth]{figures/partitions}
-%	\caption{Cycles by reaction partition (starting reaction number for each partition along x-axis)}
-%	\label{fig:partitions}
-%\end{figure}
-
 % No R code...
 \begin{figure}[h]
 	\centering

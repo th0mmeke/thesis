@@ -404,7 +404,9 @@ The \emph{shape} of change describes the way change varies over time, as a serie
 
 \section{Hypothesis and predictions}
 
-First we explore if there is a relationship between simple multiplication and selective pressure. We require selective pressure for variable replicators as the ``variable'' portion of the name is in the context of selection. Rather than skipping directly to variable replicators in the presence of selection, we start with the simpler case of extending our investigation into multipliers from stable environments to varying environments as a source of selective pressure.
+First we explore if there is a relationship between simple multiplication and selective pressure. We require selective pressure for variable replicators as the ``variable'' portion of the name is in the context of selection. 
+
+We start by extending our investigation into multipliers from stable environments to varying environments as a source of selective pressure.
 
 Although selective pressure can be purely internal to the reactor, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than external selective pressure applied explicity. In these experiments we concentrate on external selective pressure, as described in the earlier \namecref{environmental-models}, \cref{environmental-models}.
 

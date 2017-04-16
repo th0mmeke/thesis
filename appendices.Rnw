@@ -59,28 +59,30 @@ cat("\\end{longtable}\\endgroup")
 	\end{center}
 \end{table}
 
-%\begin{table}
-%	\scriptsize
-%	\begin{center}
-%		\caption{Reactant and product selection strategies listed along with the chapters in which they are first described.}\label{tbl:toyworld-strategies}
-%		\begin{tabular}{p{4cm}p{4cm}p{5cm}}
-%			\toprule
-%			Strategy 			& Name & Chapter\\
-%			\midrule
-%			Reactant selection	& UniformReactantSelection	& \cref{toyworld}\\
-%			Reactant selection	& KineticReactantSelection	& \cref{toyworld}\\
-%			Reactant selection	& KineticReactantSelection	& \cref{toyworld}\\
-%			Reactant selection	& FlowReactantSelection		& \cref{ch:multiplication}\\
-%			Reactant selection	& LocalReactantSelection	& \cref{ch:variability}\\
-%			\midrule
-%			Product selection	& UniformProductSelection	& \cref{toyworld}\\
-%			Product selection	& LeastEnergyProductSelection	& \cref{toyworld}\\
-%			Product selection	& BiasedLeastEnergyProductSelection	& \cref{ch:variability}\\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-%\end{table}
+<<setlocale, include=FALSE>>=
+Sys.setlocale("LC_COLLATE", "C") # Case sensitive sort
+@
 
+<<replicator-species, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
+metadata <- read.csv('results/variable-mapping.csv', colClasses=c('character','character'), col.names=c('Species','Steps in Cycle'))
+names(metadata)[names(metadata)=="Steps.in.Cycle"] <- "Steps in Cycle"
 
+library(xtable)
+
+# Using idea from http://stackoverflow.com/questions/33159114/how-to-only-show-table-caption-once-in-list-of-table-for-a-table-split-onto-mu
+
+csvTab <- xtable(metadata[order(metadata$Species),], sanitize.text.function=function(x){x}, label='tbl:replicator-species', caption='All observed multipliers labelled by single character or digit species identifier. Each multiplier is represented as a series of reactions, numbered in sequence.',
+)
+
+print(csvTab,
+include.colnames = TRUE,
+include.rownames = FALSE,
+floating=TRUE,
+caption.placement="top",
+size="tiny", 
+scalebox = 0.85,
+floating.environment = "sidewaystable"
+)
+@
 
 

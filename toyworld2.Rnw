@@ -318,7 +318,7 @@ The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate o
 \draw [->] (s5) -- (s6);
 \draw [->] (s6) -- (-3,0) -- (-3,7) -- (0,7) -- (s0);
 \end{tikzpicture}
-\caption{Example multiplier from experimental results. For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
+\caption{Example multiplier from experimental results (of type 'Y' - see \cref{tbl:replicator-species}). For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
 \label{fig:example-multiplier}
 \end{center}
 \end{figure}
@@ -537,7 +537,7 @@ csv <- read.csv('results/variable-makeup.csv')
 
 
 names(csv)[names(csv)=="Variable.Multiplier"] <- "Cycle Sequence"
-print(xtable(csv, caption='Cycle forms for each candidate variable multipler identified in the reaction graph. All cycles of same species (see text) replaced by the same single character or digit.', label='tbl:toyworld2-variable-multiplier-sequences'), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(csv, caption='Cycle forms for each candidate variable multipler identified in the reaction graph. All cycles of same species (see text) replaced by the same single character or digit (see \cref{tbl:replicator-species}.)', label='tbl:toyworld2-variable-multiplier-sequences'), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
 \section{Discussion}

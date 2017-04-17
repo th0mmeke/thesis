@@ -72,7 +72,7 @@ library(xtable)
 
 # Using idea from http://stackoverflow.com/questions/33159114/how-to-only-show-table-caption-once-in-list-of-table-for-a-table-split-onto-mu
 
-csvTab <- xtable(metadata[order(metadata$Species),], sanitize.text.function=function(x){x}, label='tbl:replicator-species', caption='All reaction cycles in observed multipliers labelled by single character or digit species identifier. Each cycle is represented as a series of reactions, numbered in sequence.',
+csvTab <- xtable(metadata[order(metadata$Species),], sanitize.text.function=function(x){x}, label='tbl:replicator-species', caption='All reaction cycles in all observed multipliers from \\cref{ch:multiplication,ch:variability} labelled by an arbitrarily-assigned single character or digit species identifier. Each cycle is represented as a series of reactions, numbered in sequence.',
 )
 
 print(csvTab,

@@ -26,49 +26,54 @@ load.multipliers <- function(t) {
 
 \chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
-We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \textcite{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicators}) and so in this \namecref{ch:multiplication} we begin to investigate evolutionary emergence in \glspl{achem} by identifying multiplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
+We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \textcite{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicators}) and so in this \namecref{ch:multiplication} we continue our investigation of evolutionary emergence in \glspl{achem} by identifying multiplying entities. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
 
 \section{Choice of entity}
 
-From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are ``equivalent''. Strictly speaking, equivalent in this context means equivalent under selection \parencite{Zachar2010}, however at this stage we are yet to demonstrate selection and hence we adopt a more restricted sense of multiplication where the forms must be identical rather than equivalent. 
+From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are equivalent under selection \parencite{Zachar2010}.
 
-As we are concerned with reaction networks, a reasonable candidate for an emergent entity from reactions would be reaction cycles. This is justifiable as cycles are potentially long-lived even though constituent molecules are produced and consumed. A reaction cycle is not defined by the sequence of individual molecules linked by reactions, as individual molecules are unique and transitory and so cannot form cycles, but rather by a sequence of molecular species. Molecular species define disjoint groups to which individual molecules of the same chemical composition belong: for example, the 'OH' species that includes all individual 'OH' molecules. 
+As we are concerned with reaction networks, reaction cycles are a plausible candidate for an entity formed from reactions. A reaction cycle is not defined by the sequence of individual molecules linked by reactions, as individual molecules are unique and transitory and so cannot form cycles, but rather by a sequence of molecular species. Molecular species define disjoint groups to which individual molecules of the same chemical composition belong: for example, the 'OH' species that includes all individual 'OH' molecules. In this way the cycle itself may be quite long-lived even though constituent molecules are produced and consumed.  
 
-We could have instead investigated entities of quite different forms, such as molecular species, or interrelated groups (or sets) of reaction cycles. Why then choose reaction cycles instead of any of these other alternative levels of entity? 
+Other candidate entities are available though, such as molecular species, or interrelated groups (or sets) of reaction cycles. Why then should we choose reaction cycles instead of any of these other alternative levels of entity? The definition of multiplication (given above) is of little direct assistance: multiplying entities may be of any form.
 
-Our goal is to identify multipliers, however the definition of multiplication (given above) is of little direct assistance: multiplying entities may be of any form.
-
-Assistance comes from considering the context of multipliers within evolutionary systems: as we have seen in \cref{evolution-by-natural-selection}, entities that evolve are multipliers that can vary under selection. This establishes a useful lower bound on the level of any candidate type of entity. For example, our entity must be capable of variation without changing its inherent nature. This is somewhat indeterminate when considering chemical elements, but it seems clear that molecules at least are not capable of variation without becoming a different type of molecule (adding a carbon atom to a molecule does not go unnoticed.)
+But if we consider the context of multipliers within evolutionary systems (from \cref{evolution-by-natural-selection}), entities that evolve are multipliers that can vary under selection. This establishes a useful lower bound on the level of any candidate type of entity. For example, our entity must be capable of variation without changing its inherent nature. This is necessarily less definite for chemical elements, but it seems clear that molecules at least are not capable of variation without becoming a different type of molecule (adding a carbon atom to a molecule does not go unnoticed.)
 
 At the other extreme, requiring multipliers to be full informational replicators is clearly overly restrictive. Holistic replicators are not informational replicators, yet no one disputes that they are multipliers. 
 
-For our purposes, the most useful or valuable class of entity when investigating multiplication will be the simplest type that possesses the capacity for variation and selection: single reaction cycles. Given that, we can state our hypothesis as:
+For our purposes, the most useful or valuable class of entity when investigating multiplication will be the simplest type that possesses the capacity for variation and selection: single reaction cycles. 
 
-\begin{hypothesis}
-	Exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
-\end{hypothesis}
 
 \section{Measures}
 
-For exact multiplication, we seek reaction cycles where a cycle results in two or more cycles of the same species. Although one product cycle would be sufficient for replacement, as has been argued elsewhere (\eg \textcite{Zachar2010}), simple replacement exposes an entity to depletion from side-reactions and other forms of degradation.
+
+
+For exact multiplication, we seek reaction cycles where a cycle results in two or more cycles of the same species. Although one product cycle would be sufficient for replacement, as has been argued elsewhere (\eg \textcite{Zachar2010}), replacement alone without excess production exposes an entity to depletion from side-reactions and other forms of degradation.
 
 For template autocatalysis (\cref{sec:real-world-chemistry}) of cycles, where the autocatalysis results from stoichiometry, the connecting molecules must also have a stoichiometry $n>1$. For exact multiplication we can derive the cycle stoichiometry ($k$) for exact multiplication by substituting $A$ for $B$ in the above autocatalytic expression to obtain $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma A_k$. Now as molecules are unique, each connecting molecule will appear once as product of one $A$ cycle and once as a reactant of one other $A$ cycle. Therefore $k=n$ and as $k>1$ for template autocatalysis, $n>1$.
 
-What exactly is meant though by the stoichiometric relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage over the relationship arrow: we require that the entities on left- and right-hand sides are connected by one or more shared molecules (individual molecules, not species.) 
+What exactly is meant though by this stoichiometric relationship? When discussing non-physical replicators, such as memes, this relationship must also necessarily be non-physical and hence the general definition of replication cannot be restricted to a physical linkage between left- and right-hand sides of the relationship arrow. Our molecules and reaction cycles are simulations, not embodied in the real-world, but we can assume a simulated physical linkage between parent and offspring entities: we require that they are connected by one or more shared molecules (individual molecules, not species.)
+
+Combining these two elements allows us to define an exact multiplier. An exact multiplier consists of:
+
+\begin{itemize}
+	\item\textit{ Two or more} copies of the \textit{same reaction cycle species}, where
+	\item The reaction cycle species has \textit{stoichiometry greater than one}stoichiometry greater than one, and
+	\item Where \textit{each cycle in the multiplier is connected to at least one other multiplier cycle} by a molecule that is a product of one cycle and a reactant in the other.
+\end{itemize}
 
 The algorithm for detecting these multipliers is given in \cref{alg:discover-multipliers}. The functions $IdentifyCycles$, to detect cycles where at least one product molecule is produced in excess quantities ($n>1$ from above), and $IdentifyClusters$, for clustering cycles of the same form that are interconnected by shared molecules, are defined in \cref{alg:identify-cycles} and \cref{alg:identify-clusters} respectively.
 
 \section{Cycle detection in a reaction network}
 
-Choosing single reaction-cycles as the entity in the hypothesis means that cycle detection is central to our analysis. An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. The cost stems from the initial shortest-path cycle detection which is called once for every molecule of every reactant species in the dataset, without consideration for previously identified cycles.
+Choosing single reaction-cycles as entities in the hypothesis means that cycle detection is central to our analysis. The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000 (as a molecule can be part of multiple cycles.) Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
 
-The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000, as a molecule can be part of multiple cycles. Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
+An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. 
 
 Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commeasurate effect on analysis times.
 
-The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous, but not identical, strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules. This procedure (documented in \cref{alg:identify-cycles}) is quite robust when tested by examining the variance of the number of cycles identified from a selection of sample molecules. 
+The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules.
 
-There is a significant implication to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (see \cref{fig:samplingrange}.)
+There is a significant implication to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by careful consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (as shown in \cref{fig:samplingrange}.) This means that relative comparisons will hold true regardless of sampling proportion.
 
 <<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (top) and number of multipliers (bottom) for different sampling rates ($p$ in text). Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot.'>>=
 colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
@@ -79,10 +84,9 @@ bp <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, N
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
+It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles} instead of the exhaustive alternative.
 
 The experiments in this chapter all use a sampling proportion $p=0.2$, as a balance between performance and predictability (as very small values for $p$ produce noisy results.)
-
-It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles} instead of the exhaustive alternative.
 
 
 \begin{algorithm}
@@ -117,7 +121,7 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 		}
 		\Return $MultipliersBySpecies$
 	}
-	\caption{\emph{DiscoverMultipliers}. Detect multiplying replicators within a reaction network.}\label{alg:discover-multipliers}
+	\caption{\emph{DiscoverMultipliers}. Detect multiplying exact replicators within a reaction network.}\label{alg:discover-multipliers}
 \end{algorithm}
 
 \begin{algorithm}
@@ -215,36 +219,24 @@ It's worth remembering however that our primary interest in this \namecref{ch:mu
 
 \section{Experiment design}
 
-Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network, and so, given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
+We can now state the working hypothesis of this chapter as:
+
+\begin{hypothesis}
+	Exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
+\end{hypothesis}
+
+Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network; given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
 
 \begin{itemize}[label={}]
 	\item H$_0$:  No multiplying single reaction-cycle entities exist in any reaction network generated by a \gls{achem}.
 	\item H$_1$:  Multiplying single reaction-cycle entities exist in a \gls{achem} reaction network.
 \end{itemize}
 
-We continue to use the parameterized evolutionary model from \cref{toyworld} with a single experimental factor: $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.) $S_{reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}).
+Our model design is informed by the results of \cref{toyworld}. We use the ToyWorld parameterized evolutionary model with a single experimental factor, $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.), while $S_{reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}).
 
-There are two replicates for each of the two factor levels, and each replicate runs for 100,000 generations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units. 
+There are two replicates for each of the two factor levels, and each replicate runs for 100,000 generations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units, again following follow the parameter values established in \cref{toyworld}.
 
 \section{Discussion}
-
-%<<toyworld2-multiplier-results020, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
-%csv <- load.multipliers('results/multipliers-020.csv')
-%
-%drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
-%
-%library(xtable)
-%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.2.', label='tbl:toyworld2-multiplier-results-020', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
-%@
-%
-%<<toyworld2-multiplier-results-005, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
-%csv <- load.multipliers('results/multipliers-005.csv')
-%
-%drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
-%
-%library(xtable)
-%print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} set to 0.05.', label='tbl:toyworld2-multiplier-results-005', digits=c(0,0,0,0,0,0,0,0,2)), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
-%@
 
 <<toyworld2-multiplier-results020, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv2 <- load.multipliers('results/multipliers-020.csv')
@@ -264,19 +256,90 @@ library(xtable)
 print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption='Summary results for numbers of multipliers measured by \\cref{alg:discover-multipliers} in reaction networks generated by LeastEnergy and Uniform $S_{product}$ strategies, under stable environments (no external selective pressure). Sampling proportion $p$ in \\cref{alg:identify-cycles} shown in column labels.', label='tbl:toyworld2-multiplier-results', digits=c(0,0,0,0,0,0,0,0,2,0,0,2)), booktabs=TRUE, include.rownames=FALSE, rotate.colnames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles}, with a sampling proportion $p=0.05$, and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
+Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles}, with a sampling proportion $p=0.20$ ($p=0.05$ also shown for comparison), and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
 
-An alternative explanation is simply that multiplier emergence is a product of chance and that given enough generations, enough cycles will form that probabilities will favour two or more being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent.
+From \cref{tbl:toyworld2-multiplier-results} we can see that exact multipliers arise in approximately half of the experiment runs. Most of those runs produced only one type (species) of multiplier; the remaining runs with multipliers produced two types. Each type existed only once in a run (lineages), and the number of cycles in each lineage was again quite low: 3 cycles only. One of the resulting multipliers is shown in \cref{fig:example-multiplier}, constructed from three instances of the same cycle species ('Y'--see \cref{tbl:replicator-species} for other species descriptions.)
 
-This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low, on the order of 4 to 5 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
+Exact multipliers do occur, but infrequently, and they are not long-lived.
 
-Under this interpretation, it doesn't seem that there is anything in the \gls{achem} to privilege the emergence of multipliers. This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. Our control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies, which chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers are those that result from chance alone. The statistical hypothesis is as follows:
+\begin{figure}[ht]
+	\begin{center}
+		\vspace{10pt}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,font=\sffamily\scriptsize]
+		\node (s0) at (0,6) {[H+]};
+		\node (s1) at (0,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+		\node (s2) at (0,4) {[O-]};
+		\node (s3) at (0,3) {[H+]+[O-]$\rightarrow$[H][O]};
+		\node (s4) at (0,2) {[H][O]};
+		\node (s5) at (0,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+		\node (s6) at (0,0) {[H+]};
+		\draw [->] (s0) -- (s1);
+		\draw [->] (s1) -- (s2);
+		\draw [->] (s2) -- (s3);
+		\draw [->] (s3) -- (s4);
+		\draw [->] (s4) -- (s5);
+		\draw [->] (s5) -- (s6);
+		
+		\node (s10) at (5,6) {[H+]};
+		\node (s11) at (5,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+		\node (s12) at (5,4) {[O-]};
+		\node (s13) at (5,3) {[H+]+[O-]$\rightarrow$[H][O]};
+		\node (s14) at (5,2) {[H][O]};
+		\node (s15) at (5,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+		\node (s16) at (5,0) {[H+]};
+		\draw [->] (s10) -- (s11);
+		\draw [->] (s11) -- (s12);
+		\draw [->] (s12) -- (s13);
+		\draw [->] (s13) -- (s14);
+		\draw [->] (s14) -- (s15);
+		\draw [->] (s15) -- (s16);
+		
+		\node (s20) at (10,6) {[H+]};
+		\node (s21) at (10,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
+		\node (s22) at (10,4) {[O-]};
+		\node (s23) at (10,3) {[H+]+[O-]$\rightarrow$[H][O]};
+		\node (s24) at (10,2) {[H][O]};
+		\node (s25) at (10,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
+		\node (s26) at (10,0) {[H+]};
+		\draw [->] (s20) -- (s21);
+		\draw [->] (s21) -- (s22);
+		\draw [->] (s22) -- (s23);
+		\draw [->] (s23) -- (s24);
+		\draw [->] (s24) -- (s25);
+		\draw [->] (s25) -- (s26);
+		
+		\draw [->] (s6) -- (2.5,0) -- (2.5,7) -- (5,7) -- (s10);
+		\draw [->] (s16) -- (7.5,0) -- (7.5,7) -- (10,7) -- (s20);
+		
+		\draw [-] (-2.25,-0.5) -- (-2.25,-1) -- (2.25,-1) -- (2.25,-0.5);
+		\node at (0,-1.5) {Reaction Cycle (Species 'Y')};
+		\draw [-] (2.75,-0.5) -- (2.75,-1) -- (7.25,-1) -- (7.25,-0.5);
+		\node at (5,-1.5) {Reaction Cycle (Species 'Y')};
+		\draw [-] (7.75,-0.5) -- (7.75,-1) -- (12.25,-1) -- (12.25,-0.5);
+		\node at (10,-1.5) {Reaction Cycle (Species 'Y')};
+		
+		\draw [-] (-2.5,-2.5) -- (-2.5,-3) -- (12.5,-3) -- (12.5,-2.5);
+		\node at (5,-3.5) {Multiplying Replicator (Species 'YYY')};
+		\end{tikzpicture}
+		\caption{Example multiplier from experimental results (of type or species 'YYY' - see \cref{tbl:replicator-species}). A multiplier is formed from two or more of the same species of reaction cycle, connected by shared molecules. For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
+		\label{fig:example-multiplier}
+	\end{center}
+\end{figure}
+
+\subsection{Do multipliers arise simply by chance?}
+
+Perhaps multiplier emergence is simply a product of chance, and that given enough generations, probabilities will favour two or more of the cycles that form being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent to exclude chance events.
+
+This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low at 3 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
+
+This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. 
+
+The control uses the Uniform $S_{product}$ and $S_{reactant}$ strategies to chose reaction products and reactants (respectively) with uniform probability, and hence any multipliers will be those that result from chance alone. The statistical hypothesis is as follows:
 
 \begin{itemize}[label={}]
 	\item H$_0$: $x_i=x_j \forall i,j$, where $x$ indicates the presence of multipliers: $x_i=|{multipliers}_i|>0$.
 	\item H$_1$: $x_i\neq x_j$ for some $i,j$.
 \end{itemize}
-
 
 <<toyworld2-multiplier-control, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv <- load.multipliers('results/multipliers-020.csv')
@@ -297,79 +360,15 @@ b <- t.test(csv[csv$S_Product!="Uniform" || csv$S_Reactant!="UniformReactantSele
 #print(xtable(a, caption='ANOVA analysis.', label='tbl:anova-multipliers'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. Testing the statistical hypothesis with a two-sample, two-tailed, Student's t-test gives $t-statistic=\Sexpr{b$statistic[1]}$ and $p=\Sexpr{b$p.value[1]}$, and so we reject H$_0$ (that multipliers result from chance alone) in favour of the original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
-
-\begin{figure}[t]
-\begin{center}
-\vspace{10pt}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,font=\sffamily\scriptsize]
-\node (s0) at (0,6) {[H+]};
-\node (s1) at (0,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
-\node (s2) at (0,4) {[O-]};
-\node (s3) at (0,3) {[H+]+[O-]$\rightarrow$[H][O]};
-\node (s4) at (0,2) {[H][O]};
-\node (s5) at (0,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
-\node (s6) at (0,0) {[H+]};
-\draw [->] (s0) -- (s1);
-\draw [->] (s1) -- (s2);
-\draw [->] (s2) -- (s3);
-\draw [->] (s3) -- (s4);
-\draw [->] (s4) -- (s5);
-\draw [->] (s5) -- (s6);
-
-\node (s10) at (5,6) {[H+]};
-\node (s11) at (5,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
-\node (s12) at (5,4) {[O-]};
-\node (s13) at (5,3) {[H+]+[O-]$\rightarrow$[H][O]};
-\node (s14) at (5,2) {[H][O]};
-\node (s15) at (5,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
-\node (s16) at (5,0) {[H+]};
-\draw [->] (s10) -- (s11);
-\draw [->] (s11) -- (s12);
-\draw [->] (s12) -- (s13);
-\draw [->] (s13) -- (s14);
-\draw [->] (s14) -- (s15);
-\draw [->] (s15) -- (s16);
-
-\node (s20) at (10,6) {[H+]};
-\node (s21) at (10,5) {[H][O]+[H+]$\rightarrow$[H+]+[O-]+[H+]};
-\node (s22) at (10,4) {[O-]};
-\node (s23) at (10,3) {[H+]+[O-]$\rightarrow$[H][O]};
-\node (s24) at (10,2) {[H][O]};
-\node (s25) at (10,1) {[H+]+[H][O]$\rightarrow$[H+]+[H+]+[O-]};
-\node (s26) at (10,0) {[H+]};
-\draw [->] (s20) -- (s21);
-\draw [->] (s21) -- (s22);
-\draw [->] (s22) -- (s23);
-\draw [->] (s23) -- (s24);
-\draw [->] (s24) -- (s25);
-\draw [->] (s25) -- (s26);
-
-\draw [->] (s6) -- (2.5,0) -- (2.5,7) -- (5,7) -- (s10);
-\draw [->] (s16) -- (7.5,0) -- (7.5,7) -- (10,7) -- (s20);
-
-\draw [-] (-2.25,-0.5) -- (-2.25,-1) -- (2.25,-1) -- (2.25,-0.5);
-\node at (0,-1.5) {Reaction Cycle (Species 'Y')};
-\draw [-] (2.75,-0.5) -- (2.75,-1) -- (7.25,-1) -- (7.25,-0.5);
-\node at (5,-1.5) {Reaction Cycle (Species 'Y')};
-\draw [-] (7.75,-0.5) -- (7.75,-1) -- (12.25,-1) -- (12.25,-0.5);
-\node at (10,-1.5) {Reaction Cycle (Species 'Y')};
-
-\draw [-] (-2.5,-2.5) -- (-2.5,-3) -- (12.5,-3) -- (12.5,-2.5);
-\node at (5,-3.5) {Multiplying Replicator (Species 'YYY')};
-\end{tikzpicture}
-\caption{Example multiplier from experimental results (of type or species 'YYY' - see \cref{tbl:replicator-species}). For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
-\label{fig:example-multiplier}
-\end{center}
-\end{figure}
+The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. Testing the statistical hypothesis with a two-sample, two-tailed, Student's t-test gives a t-statistic of $\Sexpr{b$statistic[1]}$ with $p=\Sexpr{b$p.value[1]}$, and so we reject H$_0$ (multipliers result from chance alone) in favour of the original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
 
 \section{Conclusions}
 
-
+In summary, exact multipliers do arise in the ToyWorld \gls{achem}, but not in any great numbers, and when they do, they do not persist for long. We have shown though that they do occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance.
 
 \chapter{From Multiplication to Variability}\label{ch:variability}
 
-Having shown the existence of multipliers in the previous \namecref{ch:multiplication}, we now move on to variable replicators. A variable replicator is a multiplier that can change its structure while remaining the same under selection \parencite{Zachar2010}. We would expect to see an entity that can occupy any one of a small number of stable states with transitions between states triggered, for example, by some external event. 
+Having shown the existence of exact multipliers in the previous \namecref{ch:multiplication}, we now move on to variable replicators. A variable replicator is a multiplier that can change its structure while remaining the same under selection \parencite{Zachar2010}. We would expect to see an entity that can occupy any one of a small number of stable states with transitions between states triggered, for example, by some external event. 
 
 Although there is no theoretical limit on the number of possible states, for pre-template replicators the number of states is constrained by the ability of the entity to sustain non-interfering chemical networks (see introduction in \cref{variable-replicators}.) Similarly, although the transitions between states may be internally triggered, the requirement that states are stable means that the trigger is much more likely to be external, such as a change of external environment.
 

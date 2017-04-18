@@ -45,7 +45,7 @@ Now, if variability is represented by $V$, and heritability by $H$, then an info
 		\node at (1.5,4.5) {$V$};
 		\node at (-4.5,2.5) {$I$};
 		\end{tikzpicture}
-		\caption{Reproduction of Figure 10 from \textcite{Zachar2010}. This diagram of the total information content of a replicator ($I$) illustrates the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.)}
+		\caption[Diagram of the total information content of a replicator ($I$) illustrating the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.]{Reproduction of Figure 10 from \textcite{Zachar2010}. This diagram of the total information content of a replicator ($I$) illustrates the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.)}
 		\label{fig:zachar-fig-10}
 	\end{center}
 \end{figure}

@@ -18,16 +18,17 @@ csvTab <- xtable(metadata, sanitize.text.function=function(x){x}, label='tbl:met
 cat(sprintf("
 \\begingroup\\scriptsize
 \\begin{longtable}{rrrllllrr}
-\\caption{%1$s} \\\\ \\hline
+\\caption[%1$s]{%2$s} \\\\ \\hline
 \\endfirsthead
 \\\\ \\hline \\\\
-%2$s \\\\
+%3$s \\\\
 \\hline
 \\endhead
 \\hline
-{\\footnotesize %3$s}
+{\\footnotesize %4$s}
 \\endfoot
 \\endlastfoot",
+"Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment.",
 "Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment: DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by \\textcite{Richman2000}. Sample Entropy scaled by a factor of 1000 (see \\cref{sec:variable-replicator-design}).",
 paste(paste("\\begin{sideways}", colnames(csvTab), "\\end{sideways}"), collapse = " & "),
 "Continued on next page"))

@@ -1046,7 +1046,7 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles (see \cref{fig:bondstrategy}). No other significant relationships exist.
 
 \section{Conclusions}
-In this \namecref{ch:toyworld} we have introduced the ToyWorld \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
+In this \namecref{ch:toyworld} we have introduced the ToyWorld \gls{achem}, a modular molecular \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
 
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy. 
 

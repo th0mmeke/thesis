@@ -45,7 +45,7 @@ Now, if variability is represented by $V$, and heritability by $H$, then an info
 		\node at (1.5,4.5) {$V$};
 		\node at (-4.5,2.5) {$I$};
 		\end{tikzpicture}
-		\caption{Reproduction of Figure 10 from \textcite{Zachar2010}. This diagram of the total information content of a replicator ($I$) illustrates the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.)}
+		\caption[Diagram of the total information content of a replicator ($I$) illustrating the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.]{Reproduction of Figure 10 from \textcite{Zachar2010}. This diagram of the total information content of a replicator ($I$) illustrates the relationship between heritable information ($H$) and variable information ($V$). Areas $V^c$ and $H^c$ indicate regions which are fixed or conserved; $V^c$ because change would cause the entity to become either non-functional or to be treated differently under selection, and $H^c$ the portion of variability that is not heritable.)}
 		\label{fig:zachar-fig-10}
 	\end{center}
 \end{figure}
@@ -101,7 +101,7 @@ Over the years a significant body of literature has accumulated on models of bio
 
 Different forms of inheritance, such as acquired characteristics (Lamarckian inheritance), have been compared and contrasted to the canonical non-acquired form in \gls{ens} by a number of authors (including for example \textcite{Jablonka1995, Paenke:2007ie,Gaucherel2012}), going back to the competing models for inheritance of Darwin and Lamarck. 
 
-Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying (\cite{Eigen1971} in biochemistry and Muller's Ratchet \parencite{Muller1964} in population genetics, compared in \textcite{Wagner1993}), and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
+Early hypotheses in the metabolism-first or replicator-first debate led to the recognition of the significance of error threshold rates for mutations during copying (\textcite{Eigen1971} in biochemistry and Muller's Ratchet \parencite{Muller1964} in population genetics, compared in \textcite{Wagner1993}), and later investigation of the interaction between inheritance (of genotypes, when non-acquired), selection (on the phenotype), and development (linking genotype to phenotype) inspired the theory of neutral landscapes \parencite{Kimura:1968uq}. 
 
 By comparison, little explicit modelling of inheritance has been done in \gls{alife}. Most relevant work has already been reviewed in \cref{previous-work} where it generally forms one element of a wider investigation into \gls{oe}. In relation to \gls{ea}, many models for inheritance from variation and recombination have been proposed. These however are less relevant to our needs as they rely on exogenous, or external, predefined mechanisms rather than emerging from the properties of the genotypes. 
 
@@ -216,7 +216,46 @@ We now introduce a general model of the relationship between \emph{Variation}, \
 
 This strategy of making otherwise derived variables explicit is also followed by Bourrat, who describes it as ``explaining variables which have previously been taken for granted in a model (such as reproduction and inheritance), by reference to other, more fundamental variables present in the model'' \parencite[p.129]{Bourrat2015}. Our model owes a direct debt to Bourrat in the representation of heritability as an explicit parameter (related to the two parameters ``heredity of the ability to procreate'' and ''transmission of the ability to procreate'' in \textcite{Bourrat2015}). 
 
-In other respects, however, it resembles a standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each transform the population. Other elements of the model are as follows:
+In other respects, however, it resembles a standard \gls{ea}. The model consists of a population of abstract entities, and two simple functions--\emph{Selection} and \emph{Variation}--that each transform the population. Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
+
+\begin{algorithm}
+	\For{Generation $\in [1\dots\text{number of generations}]$}{
+		Population$\leftarrow$ Selection(Population)\;
+		Population$\leftarrow$ Population $\cup$ Variation(Population)\;
+		\BlankLine
+		\lIf{|Population| < MINIMUMSIZE}{break}
+	}
+	\caption{Algorithm for the inheritance and variation model.}\label{base-model-algorithm}
+\end{algorithm}
+
+\begin{algorithm}
+	\Def{Selection(Population)}{
+		Population$_{new}\leftarrow \emptyset$\;
+		\For{Entity $\in$ Population} {
+			\Prob(p$_{selection}$:){
+				Population$_{new}\leftarrow$ Population$_{new} \cup $Entity\;
+			}
+		}
+		\Return Population$_{new}$\;
+	}
+	\BlankLine
+	\Def{Variation(Population)}{
+		Population$_{new}\leftarrow \emptyset$\;
+		\For{Entity with Fitness and Heritability in Population}{
+			\BlankLine
+			\Prob(p$_{reproduction}$:){
+				\For{some number of Children $\in \mathcal{U}[0,n_{children}]$} {
+					Child$\leftarrow$ Reproduce(Entity)\;
+					Population$_{new}\leftarrow$ Population$_{new} \cup$ Child\;
+				}
+			}
+		}
+		\Return Population$_{new}$\;
+	}
+	\caption{Definitions for the functions \emph{Selection} and \emph{Variation}.}\label{model-functions}
+\end{algorithm}
+
+Other elements of the model are as follows:
 
 \begin{itemize}
 	\item The \emph{population} consists of $n$ entities, where $\lvert n\rvert\geq 0$.
@@ -243,45 +282,6 @@ The model is parameterised to make it easy to describe different specific models
 	\end{tabular}
 	\end{center}
 \end{table}
-
-\begin{algorithm}
-\For{each generation $\in [1\dots$number of generations]}{
-	$population\leftarrow Selection(population)$\;
-	$population\leftarrow population \cup Variation(population)$\;
-	\BlankLine
-	\lIf{$population$ size is too small}{break}
-}
-\caption{Algorithm for the inheritance and variation model.}\label{base-model-algorithm}
-\end{algorithm}
-
-\begin{algorithm}
-\Def{Selection(population)}{
-	$population_{new}\leftarrow \{\}$\;
-	\For{each $entity \in population$} {
-		\Prob($p_{selection}$:){
-			Add $entity$ to $population_{new}$\;
-		}
-	}
-	\Return $population_{new}$\;
-}
-\BlankLine
-\Def{Variation(population)}{
-	$population_{new}\leftarrow \{\}$\;
-	\For{each $entity$ with $fitness$ and $heritability$ in $population$}{
-		\BlankLine
-		\Prob($p_{reproduction}$:){
-			\For{some number of children $\in \mathcal{U}[0,n_{children}]$} {
-				$child\leftarrow$ Reproduce($entity$)\;
-				Add $child$ to $population_{new}$\;
-			}
-		}
-	}
-	\Return $population_{new}$\;
-}
-\caption{Definitions for the functions \emph{Selection} and \emph{Variation}.}\label{model-functions}
-\end{algorithm}
-
-Each \gls{run} consists of a fixed number of time steps (generations), where at each step these two functions are applied in sequence to the current population to form a replacement population as documented in \cref{base-model-algorithm}. 
 
 \section{Hypothesis test under stable environment}\label{experimental-test-of-h2-under-fixed-conditions}
 
@@ -315,7 +315,7 @@ The factors and levels along with their mapping to model parameters are given in
 	\scriptsize
 	\begin{center}
 	\caption{Factors mapped to model parameters, plus factor levels, for the initial investigation into model sensitivity to parameter settings.}\label{tbl:factor-levels-c7}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+	\begin{tabular}{@{}p{3.5cm}p{3cm}p{3cm}p{4cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule

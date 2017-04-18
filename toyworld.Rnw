@@ -1,7 +1,7 @@
 <<setup, include=FALSE>>=
 library(knitr)
 library(cowplot) # styling of plots, extension of ggplot2
-theme_set(theme_cowplot(font_size=8))
+theme_set(theme_cowplot(font_size=10))
 library(gridExtra) # grid layouts for ggplot2
 library(lattice) # needed for bwplot etc
 library(english) # convert numbers to words
@@ -22,7 +22,7 @@ Artificial Chemistries provide an interesting testbed for investigating various 
 
 Fundamentally, \glspl{achem} provide a tunable evolutionary system, capable of highly complex behaviour, built around familiar metaphors (in many cases real-world chemistry, and potentially biology). In a molecular \gls{achem}, a set of rules describing how atoms interact gives rise to emergent forms: molecules. At a higher level, these molecules, under the same interaction rules, also interact in patterns (reactions.)
 
-Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence of reactions eventually returns to an earlier state. Cycles in particular are interesting as many biological processes are cyclical\footnote{In the broadest sense life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities.}. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in \gls{achem} evolution and biology, we believe like others (\eg \cite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in \glspl{achem}.
+Still higher emergent levels emerge under favourable conditions. Reactions may form cycles, where a sequence of reactions eventually returns to an earlier state. Cycles in particular are interesting as many biological processes are cyclical\footnote{In the broadest sense life can be seen as an autocatalytic process where an entity catalyses the production of one or more descendant entities.}. Replication, resulting in an exact copy of an entity, is a macro-example of a cycle; metabolism is another. Building on the apparent correspondence between higher emergent levels in \gls{achem} evolution and biology, we believe like others (\eg \textcite{Steel2013}) that cycles, of some form, are a necessary building-block for more complicated structures in \glspl{achem}.
 
 Artificial chemistries are regularly employed in three application areas: real-world chemistry simulators; tools for the exploration of artificial life, and models to test various hypotheses of the origin of life. Chemistry emulators and origins-of-life tools aim for fidelity with real-world chemistry, unlike most artificial life models. Real-world fidelity requires either the use of a library of predefined reactions, which conflicts with the goal of unlimited extension, or a chemically plausible method of constructing reactions from first principles. Because of the complexities of real-world chemistry this later method appears to be quite difficult, and the goal of a realistic, computationally practical, artificial chemistry remains open. 
 
@@ -93,7 +93,7 @@ Another system was presented by \textcite[p.132]{Nellis2012} with \glspl{achem} 
 	\item \emph{Constraints}. Restrictions on how the world and chemistry interact. Nellis gives as an example a binding model that describes which interactions are possible between elements.
 \end{itemize}
 
-However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also coincidentally categorises \glspl{achem} against three factors, and which is commonly used in the literature (\eg \cite{Lenaerts2009,Gardiner2007}). This taxonomy is described in more detail in the \namecref{dittrich} below.
+However, there is an earlier, and more influential, categorisation by \textcite{Dittrich:2001zr} which also coincidentally categorises \glspl{achem} against three factors, and which is commonly used in the literature (\eg \textcite{Lenaerts2009,Gardiner2007}). This taxonomy is described in more detail in the \namecref{dittrich} below.
 
 \section{\textless{}\emph{S},\emph{R},\emph{A}\textgreater{} classification scheme of Dittrich et al.}\label{dittrich}
 
@@ -132,23 +132,23 @@ The reactor algorithm provides the mechanism to select (in effect, to order) rea
 
 If the reaction rules are analogous to chemistry, the reactor algorithm is analogous to physics--the way molecules move and collide in the reaction vessel determines which reactions are possible (for example, by providing enough kinetic energy to overcome a reaction's activation energy), and the order in which the reactions occur.
 
-\Cite{Faulconbridge2011} identifies three basic types of \emph{mixing method} or reactor algorithm:
+\Textcite{Faulconbridge2011} identifies three basic types of \emph{mixing method} or reactor algorithm:
 \begin{enumerate}
 	\item
 	\emph{Well-mixed/aspatial}. Either discrete time (uniform probability distribution for selecting reactions) or continuous time \parencite{Gillespie1976} assuming the reactions are known in advance (which of course is not possible for a strongly constructive \gls{achem}.)
 	\item
 	\emph{N-dimensional}. A grid with reactions in adjacent cells, or a continuous space where molecules have position and velocity. The main advantage is the ability to simulate spatial affects; the primary disadvantage is performance.
 	\item
-	\emph{Mixed scale}. Hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \cite{Jeschke2008}). One possible advantage is the potential for parallelisation.
+	\emph{Mixed scale}. Hierarchical spaces, such as aspatial cells within bigger grid, mostly for simulating biology (\eg \textcite{Jeschke2008}). One possible advantage is the potential for parallelisation.
 \end{enumerate}
 
 \section{Applications in real-world chemistry}\label{applications-in-real-world-chemistry}
 
-\Glspl{achem} may be applied to backward-chain from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \cite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \cite{Faulon2001}). Finally, \glspl{achem} can be used in the modelling of biological phenomenon such as enzyme function (\eg \cite{Flamm2010}.)
+\Glspl{achem} may be applied to backward-chain from a set of desired products to identify a set of currently-available initial molecules, for example in drug discovery (\eg \textcite{Hartenfeller2011}). A second use is in reaction network discovery, where the goal is to describe a closed set of reactions and reactants from some initial reactants and reactions (\eg \textcite{Faulon2001}). Finally, \glspl{achem} can be used in the modelling of biological phenomenon such as enzyme function (\eg \textcite{Flamm2010}.)
 
-The primary requirement in these cases is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a family of Artificial Chemistries, beginning with \textcite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters taken directly from chemical experiments and later extended (for example in \cite{Benko2005}) to a general purpose model with parameters derived from theoretical chemistry. The model was used in \textcite{Hogerl2010} for the study of the behaviour and topology of chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (\eg \cite{Flamm2010,Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts.
+The primary requirement in these cases is fidelity with real-world chemistry, which requires either a library of empirically derived reaction definitions and rates, or a model capable of accurately simulating quantum-mechanical processes. The latter approach has been taken by a family of Artificial Chemistries, beginning with \textcite{Benko2003}, built on Extended H\"{u}ckel Theory with parameters taken directly from chemical experiments and later extended (for example in \textcite{Benko2005}) to a general purpose model with parameters derived from theoretical chemistry. The model was used in \textcite{Hogerl2010} for the study of the behaviour and topology of chemical reaction networks, specifically Diels-Alder and Formose reaction networks, and in a series of papers (\eg \textcite{Flamm2010,Ullrich2010}) for the examination of the evolution of metabolic networks in early organisms using a simple model of RNA coding for catalysts.
 
-The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The CASREACT Chemical Reaction database \footnote{\url{https://www.cas.org/content/reactions}} references more than 80.5 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Cite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for \textit{de novo} drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approaches. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
+The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The CASREACT Chemical Reaction database \footnote{\url{https://www.cas.org/content/reactions}} references more than 80.5 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Textcite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for \textit{de novo} drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approaches. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
 Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but necessarily simplified, approach taken by \textcite{Flamm2010,Ullrich2010}. Determining the shape, and hence the function, of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. For example, acid-base reactions result from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
 	
@@ -156,7 +156,7 @@ Finally, \Glspl{achem} have been used as tools to explore the role of function p
 
 Real-world chemical processes are also important to modelling scenarios for the origin of life or other related areas such as the formation of metabolic networks in the earliest protocells. In most cases though the specific focus is less on the bottom up model constructed from the most basic elements (although Kauffman's autocatalytic protein sets, and Kaneko's protocell toy mode are counter-examples,) and more on task-based models of processes where the particular base level is predetermined by the researcher, such as Ganti's chemoton \parencite{Ganti:2003hl}.
 
-\Textcite{Farmer1986} describe an \gls{ode} model of polymers where bidirectional reactions connect each polymer condensate $c$ from monomer or polymer constituents $a$ and $b$, catalysed by some enzyme $e$, in the presence of water $h$. All reactions are catalysed (by some randomly chosen polymer), principally to reduce computational complexity; this is justified by the order of magnitude difference in the reaction rates between catalysed and uncatalysed reactions.  The model commences with a food set or initial population of monomers and simple polymers in a well-mixed chemostat, no pertubations, and ends when no further new polymers are generated.
+\Textcite{Farmer1986} describe an \gls{ode} model of polymers where bidirectional reactions connect each polymer condensate $c$ from monomer or polymer constituents $a$ and $b$, catalysed by some enzyme $e$, in the presence of water $h$. All reactions are catalysed (by some randomly chosen polymer), principally to reduce computational complexity; this is justified by the order of magnitude difference in the reaction rates between catalysed and uncatalysed reactions.  The model commences with a food set or initial population of monomers and simple polymers in a well-mixed chemostat, no perturbations, and ends when no further new polymers are generated.
 
 Some other examples of artificial chemistries for the investigation of the origin of life include:
 
@@ -189,16 +189,16 @@ Artificial Chemistries have also been used in the exploration of open-ended or c
 		\toprule
 		Chemistry                                                          & Constructive? (see \cref{constructive-chemistries})\\ 
 		\midrule
-		\cite{Ducharme2012}                                                & Yes                                      \\
+		\textcite{Ducharme2012}                                                & Yes                                      \\
 		StringMol \parencite{Hickinbotham2012}                             & Yes                                      \\
 		RBN-World \parencite{Faulconbridge2011}                            & Yes                                      \\
-		\cite{Lenaerts2009}                                                & Yes--molecular interactions             \\
+		\textcite{Lenaerts2009}                                                & Yes--molecular interactions             \\
 		NAC \parencite{Suzuki2006}                                         & Yes                                      \\						
 		GGL/ToyChem \parencite{Benko2005}                                  & Yes                                      \\
 		\midrule
 		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & Unknown                                  \\
-		\cite{Fernando:2008xy,Fernando:2007pf}                             & No--atomic reactions                    \\
-		\cite{Gardiner2007}                                                & No--atomic reactions                    \\
+		\textcite{Fernando:2008xy,Fernando:2007pf}                             & No--atomic reactions                    \\
+		\textcite{Gardiner2007}                                                & No--atomic reactions                    \\
 		Lattice \gls{achem} \parencite{Ono2000,Madina2003}        		   & No                                       \\
 		GGL/ToyChem \parencite{Benko2003}                                  & No--pre-defined reactions only          \\
 		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                       \\
@@ -220,9 +220,9 @@ In this \namecref{introduction-to-achems}, we have:
 	\item Suggested, by providing examples of other \glspl{achem} in the exploration of \gls{alife} and the origin of life, the suitability of an \gls{achem} for addressing our research questions.
 \end{itemize}
 
-From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld.
+From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{ch:toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld.
 
-\chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{toyworld}
+\chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{ch:toyworld}
 
 At this point we have essentially completed the investigation of our first research question, and now move on to the second: the emergence of replicators in an \gls{achem} from the interaction of molecules through reactions. The work in the previous \namecref{ch:models-of-inheritance} established that heritability increases under selective pressure until either \emph{ideal} replication is achieved, or, when the selective pressure is varying, replication is \emph{real}. In both cases however heritability increases and the variability of selective pressure causes a tuning or adaptation of the heredity mechanism to the environmental conditions--in intuitive terms, heritability fixes at the maximum where risk is low, and adapts to the level of risk otherwise.
 
@@ -230,7 +230,7 @@ Entities within the model are described by only two parameters: fitness (implyin
 
 The approach taken in the following chapters is to begin with a simple molecular \gls{achem} and demonstrate one-by-one the required elements for the realized entities, beginning in this chapter with foundational elements (reactions and cycles), then to show multiplication (required for heritability) and finally variability, all under various forms of selection.
 
-We begin by introducing in this \namecref{toyworld} a new molecular \gls{achem}. There is no shortage of existing \glspl{achem} so it is natural to ask why we introduce yet another: the primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally from an engineering viewpoint, the understanding that comes from designing and building a system from the beginning.
+We begin by introducing in this \namecref{ch:toyworld} a new molecular \gls{achem}. There is no shortage of existing \glspl{achem} so it is natural to ask why we introduce yet another: the primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally from an engineering viewpoint, the understanding that comes from designing and building a system from the beginning.
 
 The experimental requirements are however the primary driver. Our need is for a chemistry that is parameterised in all important aspects, so that experimental factors may be easily transformed into model parameters.
 
@@ -287,17 +287,17 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, including:
 
 \begin{algorithm}[ht]
 	\BlankLine
-	\While{generation $\leq$ generations}{
+	\While{Generation $\leq$ number of generations}{
 		\BlankLine
 		\tcp{Selection of reactants}
-		reactants $\leftarrow$ outcome of the Reactant selection strategy\;
+		Reactants $\leftarrow$ outcome of the Reactant selection strategy\;
 		\BlankLine
 		\tcp{Construction of reaction}
-		reactions $\leftarrow$ enumerate all possible reaction options\;
-		reaction $\leftarrow$ choose from $reactions$ according to the Product selection strategy\;
+		Reactions $\leftarrow$ enumerate all possible reaction options\;
+		Reaction $\leftarrow$ choose from Reactions according to the Product selection strategy\;
 		\BlankLine
 		\tcp{Execute reaction in the reactor}
-		Update the reactor with the results of carrying out the $reaction$\;
+		Update the reactor with the results of carrying out the Reaction\;
 	}
 	\caption{The main simulation loop in ToyWorld.}\label{alg:toyworld-main-loop}
 \end{algorithm}
@@ -460,31 +460,32 @@ In a uniform selection strategy ($S_\mathrm{Reactant} = \mathrm{Uniform}$), reac
 By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position--molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula. The algorithm for this strategy is given in \cref{alg:kinetic-selection}. At every step the molecules in the reaction vessel move $\delta t$ units along their velocity vectors, bouncing with no loss of energy off the reaction vessel sidewalls. All molecules that collide during this step are added to the tail of the $ReactantList$.
 
 \begin{algorithm}
-\Def{KineticReactantSelection(population)}{
-	\uIf{|population| < 2}{
+	\Def{KineticReactantSelection(Population)}{
+		\uIf{|Population| < 2}{
+			\Return $\emptyset$
+		}
+		
+		i$\leftarrow$0\;
+		\While{ReactantList$=\emptyset$}{
+			i $\leftarrow$ i + 1\;
+			Advance the position of all molecules by $\Delta_t$\;
+			Update ReactantList with all colliding molecules\;
+			\tcp{Check that $\Delta_t$ is neither too small nor too large}
+			\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
+				Adjust $\Delta_t$ appropriately\;
+				i$\leftarrow$0\;
+			}
+		}
+		\tcp{Construct reactant portion of reaction}
+		\While{ReactantList$\neq \emptyset$}{
+			Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
+			InitialKE$\leftarrow \sum{\text{KE}_{i}}, \forall i \in$ Reactants\;
+			ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
+			\Return Reaction between Reactants with energy=ReactionEnergy\;
+		}
 		\Return $\emptyset$
 	}
-	
-	i$\leftarrow$0\;
-	\While{|ReactantList| = 0}{
-		i $\leftarrow$ i + 1\;
-		Advance the position of all molecules by $\Delta$t\ and update $ReactantList$ with all colliding molecules\;
-		\tcp{Check that $\Delta$t is neither too small nor too large}
-		\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
-			Adjust $\Delta$t\;
-			i$\leftarrow$0\;
-		}
-	}
-	\tcp{Construct reactant portion of reaction}
-	\While{|ReactantList| > 0}{
-		Reactants$\leftarrow$pop first pair of molecules from ReactantList\;
-		InitialKE$\leftarrow \sum{ke{i}}, \forall i \in$ Reactants\;
-		ReactionEnergy$\leftarrow$InitialKE - KE of the Centre of Mass of the Reactants\;
-		\Return Reaction(Reactants, energy=ReactionEnergy)\;
-	}
-	\Return $\emptyset$
-}
-\caption{\emph{KineticReactantSelection.} Reactant selection strategy where colliding molecules are returned as reactants.}\label{alg:kinetic-selection}
+	\caption{\emph{KineticReactantSelection.} Reactant selection strategy where colliding molecules are returned as reactants.}\label{alg:kinetic-selection}
 \end{algorithm}
 
 \subsection{Intra-molecular selection and external force selection}\label{intra-molecular-selection-and-external-force-selection}
@@ -621,11 +622,11 @@ extension, for four products, a square and so on.
 	\BlankLine
 	$\text{collision energy}\leftarrow \text{sum of reactant kinetic energies}+\text{sum of reactant internal energies}-\text{kinetic energy of CoM}$\;
 	\BlankLine
-	\For(\tcp*[f]{Transform into CoM frame}){$i\leftarrow 1$ \KwTo $\text{number of Products}$}{\label{alg:lab_to_CoM_frame}
+	\For(\tcp*[f]{Transform into CoM frame}){$i\leftarrow 1$ \KwTo |Products|}{\label{alg:lab_to_CoM_frame}
 		$v^\prime_i\leftarrow v_i-\text{CoM velocity}$\;
 	}
 	\BlankLine
-	\uIf(\tcp*[f]{Conservation of momentum implies all excess energy must go into internal energy}){Number of products = 1}{\label{alg:allocate_energies}
+	\uIf(\tcp*[f]{Conservation of momentum implies all excess energy must go into internal energy}){|Products|=1}{\label{alg:allocate_energies}
 		$\text{Internal energy of Products}\leftarrow \text{collision energy}$\;
 	}
 	\uElse{
@@ -633,7 +634,7 @@ extension, for four products, a square and so on.
 		$\text{Internal energy of Products}\leftarrow \text{collision energy}-\text{ke}$\;
 	}
 	\BlankLine
-	\Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){Number of products}{
+	\Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){|Products|}{
 		\uCase(\tcp*[f]{One product}){1}{
 			$mv^\prime\leftarrow (0,0,0)$\;
 		}
@@ -650,11 +651,11 @@ extension, for four products, a square and so on.
 		}
 	}
 	\BlankLine
-	\For(\tcp*[f]{Convert momentums to velocities...}){$i\leftarrow 1$ \KwTo $\text{number of products}$}{
+	\For(\tcp*[f]{Convert momentums to velocities...}){$i\leftarrow 1$ \KwTo $\text{|Products|}$}{
 		$v^\prime_i\leftarrow mv^\prime_i / \text{mass}_i$\;
 	}
 	\BlankLine
-	\For(\tcp*[f]{Transform back to standard frame}){$i\leftarrow 1$ \KwTo $\text{number of products}$}{\label{alg:CoM_to_lab_frame}
+	\For(\tcp*[f]{Transform back to standard frame}){$i\leftarrow 1$ \KwTo $\text{|Products|}$}{\label{alg:CoM_to_lab_frame}
 		$v_i\leftarrow v^\prime_i+\text{CoM velocity}$\;
 	}
 	\caption{Algorithm to set post-collision velocities and internal energies.}\label{alg:post_collision_adjustments}
@@ -822,7 +823,7 @@ The outcomes for each reaction alternative from an example collision are shown i
 
 \section{Validation of the energy model}\label{model-validation}
 
-The energy-model presented in this \namecref{toyworld} leads to some particular expectations for the behaviour of ToyWorld:
+The energy-model presented in this \namecref{ch:toyworld} leads to some particular expectations for the behaviour of ToyWorld:
 
 \begin{enumerate}
 \item Given two reactants, changing the reaction energy should result in different sets of reaction products.
@@ -981,6 +982,7 @@ A view of the results is given in \cref{tbl:results}: reaction networks built fr
 
 <<cyclesbypartition, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Cycles by reaction partition (starting reaction number for each partition along x-axis, y-axis scales vary)'>>=
 df<-load.toyworld("results/EvaluatorActualCycles.out")
+names(df)[names(df)=="No. of Species.x"] <- "No. of Species (p=0.05)"
 
 ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Partition.Start)) + labs(title='Cycle numbers by Partition', x='Start of partition', y='Number of cycles') + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Partition.Start)) + labs(title='Cycle length by Partition', x='Start of partition', y='Length of longest cycle')
@@ -988,13 +990,6 @@ cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Partition.St
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 \label{fig:partitions}
-
-%\begin{figure}[h]
-%\centering
-%	\includegraphics[width=0.95\linewidth]{figures/partitions}
-%	\caption{Cycles by reaction partition (starting reaction number for each partition along x-axis)}
-%	\label{fig:partitions}
-%\end{figure}
 
 % No R code...
 \begin{figure}[h]
@@ -1009,23 +1004,23 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 
 <<productstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Product}$ (Product Strategy) (y-axis scales vary)'>>=
 df <- subset(df,df$Partition.Start != "4750")
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers by Product Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length by Product Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count by Product Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","LeastEnergy (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Product.Strategy)) + labs(title="Log cycle numbers", x=expression(E[Product]), y="Number of cycles") + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Product.Strategy)) + labs(title="Cycle length ", x=expression(E[Product]), y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Product.Strategy)) + labs(title="Log cycle count", x=expression(E[Product]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform(-1)","LeastEnergy(+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<reactantstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Reactant}$ (Reactant Strategy) (y-axis scales vary)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers by Reactant Strategy", y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length by Reactant Strategy", y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count by Reactant Strategy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Reactant.Strategy)) + labs(title="Log cycle numbers", x=expression(E[Reactant]), y="Number of cycles") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Reactant.Strategy)) + labs(title="Cycle length", x=expression(E[Reactant]), y="Length of longest cycle") + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Reactant.Strategy)) + labs(title="Log cycle count", x=expression(E[Reactant]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Uniform (-1)","Kinetic (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 <<bondstrategy, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Response by $E_\\mathrm{Bond}$ (Bond Energy) (y-axis scales vary)'>>=
-ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Bond.Energies)) + labs(title="Log cycle numbers by Bond Energy", y="Number of cycles") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
-bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Bond.Energies)) + labs(title="Cycle length by Bond Energy", y="Length of longest cycle") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)"))
-cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Bond.Energies)) + labs(title="Log cycle count by Bond Energy", y="Count of most common cycle")  + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=Bond.Energies)) + labs(title="Log cycle numbers", x=expression(E[Bond]), y="Number of cycles") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
+bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=Bond.Energies)) + labs(title="Cycle length", x=expression(E[Bond]), y="Length of longest cycle") + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)"))
+cp <- ggplot(df) + geom_boxplot(aes(y=Count.of.most.common.cycle, x=Bond.Energies)) + labs(title="Log cycle count", x=expression(E[Bond]), y="Count of most common cycle")  + scale_x_discrete(labels=c("Simplified (-1)","Fixed (+1)")) + scale_y_continuous(trans="log10", breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000))
 grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
@@ -1034,10 +1029,10 @@ From visual inspection of \cref{fig:reactantstrategy}, there appears to be a sig
 
 We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
-<<reactantproductcombination, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Effect of the combination of Reactant and Product Strategies on the number of cycles (left), and length of longest cycle (right.)'>>=
+<<reactantproductcombination, pdfcrop=TRUE, echo=FALSE, cache=TRUE, warning=FALSE, fig.show='hold', fig.scap=NA, fig.cap='Effect of the combination of Reactant and Product Strategies on the number of cycles (top), and length of longest cycle (bottom.)'>>=
 ap <- ggplot(df) + geom_boxplot(aes(y=Number.of.cycles, x=interaction(Reactant.Strategy,Product.Strategy))) + scale_y_continuous(trans="log10", limits=c(1,1000), breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000)) + scale_x_discrete(labels=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy"))+ labs(x='', y='Number of cycles')
 bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=interaction(Reactant.Strategy,Product.Strategy))) + scale_y_continuous(trans="log10", limits=c(1,1000), breaks=c(0,1,2,3,4,5,6,7,8,9,10,100,1000)) + scale_x_discrete(labels=c("Uniform:Uniform","Kinetic:Uniform","Uniform:Energy","Kinetic:Energy")) + labs(x='', y='Length of longest cycle')
-grid.arrange(ap,bp,nrow=1,ncol=2)
+grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
 \subsection{Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
@@ -1051,7 +1046,7 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles (see \cref{fig:bondstrategy}). No other significant relationships exist.
 
 \section{Conclusions}
-In this \namecref{toyworld} we have introduced the ToyWorld \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
+In this \namecref{ch:toyworld} we have introduced the ToyWorld \gls{achem}, a modular molecular \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
 
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy. 
 

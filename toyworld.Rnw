@@ -220,9 +220,9 @@ In this \namecref{introduction-to-achems}, we have:
 	\item Suggested, by providing examples of other \glspl{achem} in the exploration of \gls{alife} and the origin of life, the suitability of an \gls{achem} for addressing our research questions.
 \end{itemize}
 
-From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld.
+From the brief review in \cref{achem-and-ool} of \glspl{achem} in the exploration of the origin of life it is clear that there is little consensus around the form of the preferred \gls{achem} to adopt. In the next \namecref{ch:toyworld}, we shall move from the general description of \glspl{achem} to the introduction of a new and specific \gls{achem}, ToyWorld.
 
-\chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{toyworld}
+\chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{ch:toyworld}
 
 At this point we have essentially completed the investigation of our first research question, and now move on to the second: the emergence of replicators in an \gls{achem} from the interaction of molecules through reactions. The work in the previous \namecref{ch:models-of-inheritance} established that heritability increases under selective pressure until either \emph{ideal} replication is achieved, or, when the selective pressure is varying, replication is \emph{real}. In both cases however heritability increases and the variability of selective pressure causes a tuning or adaptation of the heredity mechanism to the environmental conditions--in intuitive terms, heritability fixes at the maximum where risk is low, and adapts to the level of risk otherwise.
 
@@ -230,7 +230,7 @@ Entities within the model are described by only two parameters: fitness (implyin
 
 The approach taken in the following chapters is to begin with a simple molecular \gls{achem} and demonstrate one-by-one the required elements for the realized entities, beginning in this chapter with foundational elements (reactions and cycles), then to show multiplication (required for heritability) and finally variability, all under various forms of selection.
 
-We begin by introducing in this \namecref{toyworld} a new molecular \gls{achem}. There is no shortage of existing \glspl{achem} so it is natural to ask why we introduce yet another: the primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally from an engineering viewpoint, the understanding that comes from designing and building a system from the beginning.
+We begin by introducing in this \namecref{ch:toyworld} a new molecular \gls{achem}. There is no shortage of existing \glspl{achem} so it is natural to ask why we introduce yet another: the primary reasons are lack of access to existing code; specific requirements of the \gls{achem} imposed by the planned series of experiments; an easy ability to modify and extend the chemistry to include specific functions, and finally from an engineering viewpoint, the understanding that comes from designing and building a system from the beginning.
 
 The experimental requirements are however the primary driver. Our need is for a chemistry that is parameterised in all important aspects, so that experimental factors may be easily transformed into model parameters.
 
@@ -823,7 +823,7 @@ The outcomes for each reaction alternative from an example collision are shown i
 
 \section{Validation of the energy model}\label{model-validation}
 
-The energy-model presented in this \namecref{toyworld} leads to some particular expectations for the behaviour of ToyWorld:
+The energy-model presented in this \namecref{ch:toyworld} leads to some particular expectations for the behaviour of ToyWorld:
 
 \begin{enumerate}
 \item Given two reactants, changing the reaction energy should result in different sets of reaction products.
@@ -1046,7 +1046,7 @@ We conclude that the greatest levels of emergence are likely to be seen with the
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles (see \cref{fig:bondstrategy}). No other significant relationships exist.
 
 \section{Conclusions}
-In this \namecref{toyworld} we have introduced the ToyWorld \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
+In this \namecref{ch:toyworld} we have introduced the ToyWorld \gls{achem}, and explored the effect of four possible combinations of Reactant ($S_\mathrm{Reactant}$) and Product ($S_\mathrm{Product}$) selection strategies on cycle formation.
 
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy. 
 

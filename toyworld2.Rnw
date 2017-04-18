@@ -27,7 +27,7 @@ load.multipliers <- function(t) {
 \chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
 We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \textcite{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicators}) and so in this \namecref{ch:multiplication} we continue our investigation of evolutionary emergence in \glspl{achem} by identifying multiplying entities. 
-From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are equivalent under selection \parencite{Zachar2010}. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
+From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are equivalent under selection \parencite{Zachar2010}. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{ch:toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
 
 \section{Choice of entity}
 
@@ -55,8 +55,8 @@ What exactly is meant though by this stoichiometric relationship? When discussin
 Combining these two elements allows us to define an exact multiplier. An exact multiplier consists of:
 
 \begin{itemize}
-	\item\textit{ Two or more} copies of the \textit{same reaction cycle species}, where
-	\item The reaction cycle species has \textit{stoichiometry greater than one}stoichiometry greater than one, and
+	\item \textit{Two or more} copies of the \textit{same reaction cycle species}, where
+	\item The reaction cycle species has \textit{stoichiometry greater than one}, and
 	\item Where \textit{each cycle in the multiplier is connected to at least one other multiplier cycle} by a molecule that is a product of one cycle and a reactant in the other.
 \end{itemize}
 
@@ -221,7 +221,7 @@ The experiments in this chapter all use a sampling proportion $p=0.2$, as a bala
 We can now state the working hypothesis of this chapter as:
 
 \begin{hypothesis}
-	Exact multipliers, in the form of single reaction cycles, can emerge in an \gls{achem}.
+	Exact multipliers, in the form of entities composed of a repeated reaction cycle, can emerge in an \gls{achem}.
 \end{hypothesis}
 
 Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network; given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
@@ -231,9 +231,9 @@ Multipliers are structures that, in our context of \glspl{achem}, emerge from th
 	\item H$_1$:  Multiplying single reaction-cycle entities exist in a \gls{achem} reaction network.
 \end{itemize}
 
-Our model design is informed by the results of \cref{toyworld}. We use the ToyWorld parameterized evolutionary model with a single experimental factor, $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.), while $S_{reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}).
+Our model design is informed by the results of \cref{ch:toyworld}. We use the ToyWorld parameterized evolutionary model with a single experimental factor, $S_{product}$, with two levels of LeastEnergy and Uniform (\cref{product-selection-strategies}.), while $S_{reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}).
 
-There are two replicates for each of the two factor levels, and each replicate runs for 100,000 generations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units, again following follow the parameter values established in \cref{toyworld}.
+There are two replicates for each of the two factor levels, and each replicate runs for 100,000 generations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O, and the initial reactor kinetic energy is set to 100 units, again following follow the parameter values established in \cref{ch:toyworld}.
 
 \section{Discussion}
 
@@ -363,7 +363,19 @@ The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate o
 
 \section{Conclusions}
 
-In summary, exact multipliers do arise in the ToyWorld \gls{achem}, but not in any great numbers, and when they do, they do not persist for long. We have shown though that they do occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance.
+We began this \namecref{ch:multiplication} with an examination of the most appropriate form of entity for an examination into multiplication in \glspl{achem}. The same reaction network contains a variety of candidate entities arranged in a compositional hierarchy. At the base level of the \gls{achem} are atoms, formed by reactions into molecules. Reactions and molecules can be grouped into various other forms: reaction cycles, where the products of the final reaction in the cycle go on to become reactants in the first reaction of the next iteration of the cycle, and the various forms of reaction sets, such as the autocatalytic sets introduced earlier in this work. And of course groups of reactions and molecules can likely form higher level entities in turn. We selected reaction cycles as the appropriate entity form as the simplest of the candidate forms capable of both variation and selection.
+
+Next we considered the definition of exact multiplication, and concluded that an exact multiplier consisting of reaction cycles must meet three conditions:
+
+\begin{enumerate}
+	\item The multiplier must consist of two or more copies of the same reaction cycle species.
+	\item The reaction cycle species must have stoichiometry greater than one.
+	\item Each cycle in the multiplier must be connected to at least one other multiplier cycle by a molecule that is a product of one cycle and a reactant in the other.
+\end{enumerate}
+
+However, to identify multipliers using this definition we must first identify reaction cycles in the reaction graph and exhaustive enumeration of these cycles is impractical. Instead we introduced a sampling algorithm that discovers cycles by searching from a subset of ``seed'' molecules, chosen with uniform probability from the full set of reactant and product molecules in the reaction graph. The sampling algorithm discovers cycle numbers in rough proportion to the sampling proportion $p$, and we showed that this is sufficient for multiplier discovery.
+
+Finally, we tested the hypothesis that multipliers of the form described can arise in an \gls{achem} by experiment using the ToyWorld \gls{achem} from \cref{ch:toyworld}. In summary, exact multipliers do arise in the ToyWorld \gls{achem}, but not in any great numbers, and when they do, they do not persist for long. We have shown though that they do occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance.
 
 \chapter{From Multiplication to Variability}\label{ch:variability}
 

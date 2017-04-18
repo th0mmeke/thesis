@@ -50,6 +50,11 @@
 	\def\@fs@post{\end{mdframed}}\let\@fs@iftopcapt\iffalse}
 \makeatother
 
+% https://tex.stackexchange.com/questions/33538/how-to-get-an-approximately-proportional-to-symbol
+\newcommand{\appropto}{\mathrel{\vcenter{
+			\offinterlineskip\halign{\hfil$##$\cr
+				\propto\cr\noalign{\kern2pt}\sim\cr\noalign{\kern-2pt}}}}}
+			
 \usepackage{versions}
 %\excludeversion{DRAFT}
 \markversion{DRAFT}

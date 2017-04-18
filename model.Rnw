@@ -315,7 +315,7 @@ The factors and levels along with their mapping to model parameters are given in
 	\scriptsize
 	\begin{center}
 	\caption{Factors mapped to model parameters, plus factor levels, for the initial investigation into model sensitivity to parameter settings.}\label{tbl:factor-levels-c7}
-	\begin{tabular}{@{}p{2.5cm}p{3cm}p{2cm}p{6cm}@{}}
+	\begin{tabular}{@{}p{3.5cm}p{3cm}p{3cm}p{4cm}@{}}
 		\toprule
 		Factor                 &Model parameter		&Number of Levels 	& Levels\\
 		\midrule

@@ -27,7 +27,7 @@ load.multipliers <- function(t) {
 \chapter{The Emergence of Multipliers}\label{ch:multiplication}
 
 We now move on to the question of multiplication in \glspl{achem}. In \cref{evolution-by-natural-selection}, we saw that the ability to multiply or increase in number is fundamental to all common formulations for evolution. In \textcite{Zachar2010}, multiplication is the first of the main discriminators beyond embodiment, or the state of being, (see \cref{fig:replicators}) and so in this \namecref{ch:multiplication} we continue our investigation of evolutionary emergence in \glspl{achem} by identifying multiplying entities. 
-From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are equivalent under selection \parencite{Zachar2010}. As a secondary goal, we are also interested to learn if our underlying hypothesis from \cref{ch:toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
+From the earlier definition of replication (\cref{non-informational-exact-replicators}), given by the autocatalytic reaction $\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$, $A$ is a multiplying entity if $A$ and some $n<k$ of the $B_k$ are equivalent under selection \parencite{Zachar2010}. As a secondary goal, we are also interested to learn if our assumption from \cref{ch:toyworld}, that simple measures of cycle formation in a chemistry can predict the subsequent emergence of replicators, holds at this next level of investigation.
 
 \section{Choice of entity}
 
@@ -74,16 +74,16 @@ The approach we take instead is to relax the requirement to identify all cycles 
 
 There is a significant implication to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by careful consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (as shown in \cref{fig:samplingrange}.) This means that relative comparisons will hold true regardless of sampling proportion.
 
-<<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (top) and number of multipliers (bottom) for different sampling rates ($p$ in text). Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot.'>>=
+<<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (left) and number of multipliers (right) for different sampling rates ($p$, in text). Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot. Four replicates chosen with uniform probability from each dataset for analysis.'>>=
 colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
 m <- read.csv('results/cycles_and_multipliers.csv', colClasses=colClasses)
 
-ap <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of cycles')
-bp <- ggplot(subset(m,Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) +  scale_x_continuous(limits = c(0, 9)) + geom_smooth(aes(x=Sample.Rate, y=Multiplier.Species, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of multiplier species')
+ap <- ggplot(subset(m, Environment==0 & Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of cycles')
+bp <- ggplot(subset(m, Environment==0 & Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) +  scale_x_continuous(limits = c(0, 9)) + geom_smooth(aes(x=Sample.Rate, y=Multiplier.Species, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of multiplier species')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
 
-It's worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles} instead of the exhaustive alternative.
+It is worth remembering however that our primary interest in this \namecref{ch:multiplication} is simply whether multipliers exist in a reaction graph; if they exist in the cycles in a sampled reaction graph then they certainly exist in the set of all cycles. This is sufficient to justify the use of the much faster sampling algorithm in \cref{alg:identify-cycles} instead of the exhaustive alternative.
 
 The experiments in this chapter all use a sampling proportion $p=0.2$, as a balance between performance and predictability (as very small values for $p$ produce noisy results.)
 
@@ -325,7 +325,7 @@ Exact multipliers do occur, but infrequently, and they are not long-lived.
 	\end{center}
 \end{figure}
 
-\subsection{Do multipliers arise simply by chance?}
+\subsection{Do multipliers arise simply by chance?}\label{sec:multipliers-by-chance}
 
 Perhaps multiplier emergence is simply a product of chance, and that given enough generations, probabilities will favour two or more of the cycles that form being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent to exclude chance events.
 
@@ -361,6 +361,32 @@ b <- t.test(csv[csv$S_Product!="Uniform" || csv$S_Reactant!="UniformReactantSele
 
 The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. Testing the statistical hypothesis with a two-sample, two-tailed, Student's t-test gives a t-statistic of $\Sexpr{b$statistic[1]}$ with $p=\Sexpr{b$p.value[1]}$, and so we reject H$_0$ (multipliers result from chance alone) in favour of the original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
 
+\subsection{Is the number of reaction cycles a good predictor for the number of multipliers?}
+
+Returning to the underlying assumption of \cref{ch:toyworld}, is there a relationship between the number of cycles and the number of exact multipliers? If there is, then the parameters for a \gls{achem} designed to investigate replicators (of which exact multipliers are the simplest form) could be established based simply on a count of cycles calculated from some calibration runs. If not, then cycle counts cannot be used as a guide for parameter choices, and in the absence of any other predictor, all parameter combinations must be considered in any replicator experiment.
+
+The test hypothesis is as follows:
+
+\begin{itemize}[label={}]
+	\item H$_0$: $|Multipliers|\appropto |Cycles|$ for all parameter combinations.
+	\item H$_1$: $|Multipliers|$ cannot be predicted from $|Cycles|$.
+\end{itemize}
+
+<<cycles-to-multipliers, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Relationship between the number of cycles and the number of multipliers for a sample of replicates from datasets 1489554358, 1489565574 and 1489951262, including linear regression line and 95\\% confidence region.'>>=
+colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
+m <- read.csv('results/cycles_and_multipliers.csv', colClasses=colClasses)
+
+ggplot(m,aes(Number.of.Cycles, Multiplier.Species)) + geom_point(shape=1) +  geom_smooth(method=lm) + labs(x='Number of cycles', y='Number of multiplier species')
+@
+
+A scatterplot of the relationship (\cref{fig:cycles-to-multipliers}) shows only a weak relationship between cycles and multipliers. The association between the two variables is positive, and the form appears to be essentially linear. However, the correspondence with the simple linear regression is poor, and the predictive value of cycles appears weak.
+
+We examine this further by testing the predictive value of the relationship for two specific datasets. 
+
+From the previous \namecref{sec:multipliers-by-chance} we have the example of a dataset (1489951262) in which the number of multipliers is zero in all runs, and the number of cycles is non-zero (\Sexpr{mean(subset(m, Dataset==1489951262)$Number.of.Cycles)}.) However, in another dataset (1489554358) both the number of multipliers (\Sexpr{mean(subset(m, Dataset==1489554358)$Multiplier.Species)}) and the number of cycles (\Sexpr{mean(subset(m, Dataset==1489554358)$Number.of.Cycles)}) are non-zero.
+
+We reject H$_0$ as the relationship between cycles and multipliers in these two datasets is complex, and conclude that the number of multipliers cannot easily be predicted from the number of cycles. Our original supposition, that we could use a simple count of cycles to select the parameters, and parameter values, for a \gls{achem} to investigate replication is not supported by these results.
+
 \section{Conclusions}
 
 We began this \namecref{ch:multiplication} with an examination of the most appropriate form of entity for an examination into multiplication in \glspl{achem}. The same reaction network contains a variety of candidate entities arranged in a compositional hierarchy. At the base level of the \gls{achem} are atoms, formed by reactions into molecules. Reactions and molecules can be grouped into various other forms: reaction cycles, where the products of the final reaction in the cycle go on to become reactants in the first reaction of the next iteration of the cycle, and the various forms of reaction sets, such as the autocatalytic sets introduced earlier in this work. And of course groups of reactions and molecules can likely form higher level entities in turn. We selected reaction cycles as the appropriate entity form as the simplest of the candidate forms capable of both variation and selection.
@@ -381,7 +407,7 @@ Finally, we tested the hypothesis that multipliers of the form described can ari
 
 Having shown the existence of exact multipliers in the previous \namecref{ch:multiplication}, we now move on to considering the implications of selective pressure and variability. First, we replace the stable environment of the previous \namecref{ch:multiplication} by a varying selective pressure and examine the effect that that has upon the emergence of multipliers. Second, we investigate the emergence of variable replicators.
 
-A variable replicator is a multiplier that can change its structure while remaining the same under selection \parencite{Zachar2010}. The selection requirement provides an objective way of discriminating between changes that maintain continuity between different forms or states of the same fundamental entity from those changes that result in something intrinisically different. Although there is no obvious limit to the number of possible states that can be occupied by a variable replicator, for pre-template replicators the maximum number is constrained by the ability of the entity to sustain non-interfering chemical networks (see introduction in \cref{variable-replicators}.) 
+A variable replicator is a multiplier that can change its structure while remaining the same under selection \parencite{Zachar2010}. The selection requirement provides an objective way of discriminating between changes that maintain continuity between different forms or states of the same fundamental entity from those changes that result in something intrinisically different. Although there is no obvious limit to the number of possible states that can be occupied by a variable replicator, for pre-template replicators the maximum number is constrained by the ability of the entity to sustain non-interfering chemical networks (see introduction in \cref{variable-replicators}.) Thus we can consider pre-template variable replicators as multipliers that can occupy any of a limited set of states without losing their underlying identity.
 
 For these two studies we require some extensions to our earlier models and algorithms. Given the association between variable replicators and explicit selection, we need to develop a model for environmental change. And we need to extend our method for detecting multipliers to detect variable replicators in the reactions generated by our evolutionary model. These two extensions are covered in sections \cref{environmental-models} and \cref{sec:variable-replicator-measures} respectively.
 
@@ -407,34 +433,36 @@ The \emph{shape} of change describes the way change varies over time, as a serie
 
 In previous work, \textcite{Jablonka1995} and \textcite{Paenke:2007ie} share a simple model for environmental change, with instantaneous switches between two defined environments according to some schedule. \Textcite{Gaucherel2012} also describes a single model for environmental change--a period of ``smooth'' change (either according to a form of $sine$ curve or unchanging) followed by an abrupt change, repeated--with variation in the length and degree of each period. By contrast, \textcite[79]{Schuster2011}, when describing the relationship between fitness landscapes and error thresholds, details five distinct models of change: ``(i) the single-peak landscape corresponding to a mean field approximation, (ii) the hyperbolic landscape, (iii) the step-linear landscape, (iv) the multiplicative landscape, and (v) the additive or linear landscape.''
 
-Although the shape can clearly take an infinite number of different forms, we concentrate on two representative forms, one adopted from \citeauthor{Jablonka1995,Paenke:2007ie} and one novel:
+Although the shape can clearly take an infinite number of different forms, we concentrate on two representative forms, one adopted from \citeauthor{Jablonka1995}, and one novel:
 
 \begin{itemize}
-\item \emph{Bistate} selection pressure, where the shape of change follows a pattern that switches between two alternate states at regular intervals. We would expect a variable replicator to transition between states in concert with the bistate changes.
-\item \emph{AR-timeseries}, a new approach following the environmental model introduced in \cref{environmental-model}, and described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. An AR-timeseries combines a regular component (described by $\Theta$ and $\delta$) and an unpredictable component ($\sigma_e$.) Selection pressure is neither constant nor regular, and so the response of a variable replicator might be more complex than in the simpler bistate case.
+\item \emph{Bistate} selection pressure, where the shape of change follows a pattern that switches between two alternate states at regular intervals. Alternate every 10,000 generations between -20 and +20 values.
+\item \emph{AR-timeseries}, a new approach following the environmental model introduced in \cref{environmental-model}, and described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. An AR-timeseries combines a regular component (described by $\Theta$ and $\delta$) and an unpredictable component ($\sigma_e$.) Unlike the bistate case, the AR-timeseries is neither constant nor completely regular. The timeseries values are applied to the target of change every 1000 generations.
 \end{itemize}
 
-Although selective pressure can be purely internal to the reactor, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than external selective pressure applied explicity. In these experiments we concentrate solely on external selective pressure.
+Although selective pressure can be purely intrinsic, for example in the competition between reaction cycles for molecules \parencite{Eigen1971}, this is inherently more difficult to model and to control than explicit selective pressure, supplied by an external agency. In these experiments we concentrate solely on explicit selective pressure.
 
 \section{Experiment design}\label{sec:variable-replicator-design}
 
-Shape of change:
+Factors and levels are given in \cref{tbl:factor-levels-ch-variability}.
 
-\begin{itemize}
-	\item \emph{Bistate selective pressure}. Alternate every 10,000 generations between -20 and +20 values.
-	\item \emph{AR-timeseries}, following \cref{environmental-model}, described by \cref{ar-1-time-series} with three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. The timeseries values are applied to the target of change every 1000 generations.
-\end{itemize}
-
-Target of change:
-
-\begin{itemize}
-	\item \emph{Kinetic Energy}.
-	\item \emph{Reactor population}.
-\end{itemize}
-
-Measure of AR-timeseries variability:
+\begin{table}
+\scriptsize
+\begin{center}
+\caption{Factors mapped to model parameters, plus factor levels, for all experiments in \cref{ch:variability}.}\label{tbl:factor-levels-ch-variability}
+\begin{tabular}{@{}p{2.5cm}p{2cm}p{3cm}p{3cm}p{3cm}@{}}
+\toprule
+Factor				&Model			&Model parameter	&-1 value		&+1 value\\
+\midrule
+$E_{shape}$     	&Environmental	&Shape				&Bistate    	&AR\\
+$E_{target}$        &Environmental	&Target				&Kinetic Energy	&Reactor population\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
 
 DFA and Sample Entropy calculated from the timeseries as applied to the target of change, that is, with a change every 1000 generations. The sample entropy in particular is lower than might be expected as a result.
+
 
 \section{Exact multipliers under varying selective pressure}
 
@@ -491,6 +519,7 @@ cat("\\end{longtable}\\endgroup")
 @
 
 \subsection{Discussion}
+
 
 \section{The emergence of variable replicators}
 

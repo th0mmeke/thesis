@@ -508,12 +508,12 @@ library(xtable)
 
 # Using idea from http://stackoverflow.com/questions/33159114/how-to-only-show-table-caption-once-in-list-of-table-for-a-table-split-onto-mu
 
-csvTab <-  xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption=, label='tbl:toyworld2-vmultiplier-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2))
+csvTab <-  xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2))
 
 cat(sprintf("
 \\begingroup\\scriptsize
 \\begin{longtable}{rrrrlllrrrrr}
-\\caption{%1$s} \\\\ \\hline
+\\caption{%1$s}\\label{tbl:toyworld2-vmultiplier-020-results} \\\\ \\hline
 \\endfirsthead
 \\\\ \\hline \\\\
 %2$s \\\\
@@ -593,6 +593,14 @@ We now move on to the question of the emergence of variable replicators.
 
 \subsection{Results and discussion}
 
+As might be expected, as the reaction cycles that make up a variable replicator do not have to be identical (unlike those in an exact multiplier), the number of lineages and the average length of lineages for candidate variable replicators in the raw results in \cref{tbl:toyworld2-variable-020-results} significantly exceed those seen for exact multipliers.
+
+We can develop a notation for replicator species by denoting each species of reaction cycle by a single digit or character; a replicator composed of a particular sequence of cycles can then be categorized as belonging to the species represented by the single digit or character sequence of cycle species. Applying this method to the various species of replicators identified in this experiment produces \cref{tbl:toyworld2-variable-multiplier-sequences}.
+
+Interestingly, if the states in a variable replicator are equally likely, as seems plausible although we have no particular evidence, then we would expect a replicator to revisit states over time. However, none of our identified replicators do this; they either occupy only one state (in which case they cannot be claimed as a variable replicator), or move through a non-repeating sequence of unique states.
+
+Finally, note that some cycle species (\eg 'M' and 'G') appear in more than one run, although the majority are endemic to a single run.
+
 <<toyworld2-variable-020-results, fig.pos='ht', results='asis', echo=FALSE, cache=TRUE, warning=FALSE>>=
 csv <- load.multipliers('results/variables.csv')
 
@@ -603,12 +611,12 @@ library(xtable)
 
 # Using idea from http://stackoverflow.com/questions/33159114/how-to-only-show-table-caption-once-in-list-of-table-for-a-table-split-onto-mu
 
-csvTab <-  xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, caption=, label='tbl:toyworld2-variable-020-results', digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2))
+csvTab <- xtable(csv[csv$Dataset!=1489951262,!names(csv) %in% drop], sanitize.text.function=function(x){x}, digits=c(0,0,0,0,0,0,0,0,2,2,0,0,2))
 
 cat(sprintf("
 \\begingroup\\scriptsize
 \\begin{longtable}{rrrrlllrrrrr}
-\\caption{%1$s} \\\\ \\hline
+\\caption{%1$s}\\label{tbl:toyworld2-variable-020-results} \\\\ \\hline
 \\endfirsthead
 \\\\ \\hline \\\\
 %2$s \\\\
@@ -639,7 +647,7 @@ csv <- read.csv('results/variable-makeup.csv')
 
 
 names(csv)[names(csv)=="Variable.Multiplier"] <- "Cycle Sequence"
-print(xtable(csv, caption='Cycle forms for each candidate variable multipler identified in the reaction graph. All cycles of same species (see text) replaced by the same single character or digit (see \\cref{tbl:replicator-species}.)', label='tbl:toyworld2-variable-multiplier-sequences'), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
+print(xtable(csv, caption='Cycle forms for each multiplier and variable replicator identified in the reaction graph. All cycles of same species (see text) replaced by the same single character or digit (see \\cref{tbl:replicator-species}.)', label='tbl:toyworld2-variable-multiplier-sequences'), booktabs=TRUE, rotate.colnames=TRUE, include.rownames=FALSE, size="scriptsize", caption.placement="top")
 @
 
 \section{Conclusions}

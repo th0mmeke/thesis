@@ -182,7 +182,7 @@ The conceptual basis for the experiments in this \namecref{ch:models-of-inherita
 			main node/.style={circle,fill=blue!20,draw, align=center,text width=4cm,minimum size=15mm}]
 			\node[main node] (evo) at (0,10) {Evolutionary model};
 			\node[main node] (env) at (0,0) {Environmental model};
-			\node[main node] (pop) at (6,10) {Population};
+			\node[main node] (pop) at (6,10) {Target of change \eg population};
 			\node[main node] (ts) at (6,0) {Time series of environmental changes};
 			\node[main node] (r1) at (12,10) {Metrics};
 			\node[main node] (r2) at (12,0) {Metrics};
@@ -200,7 +200,7 @@ The conceptual basis for the experiments in this \namecref{ch:models-of-inherita
 			\draw [every node] (3,13) rectangle (9,-3);
 			\end{tikzpicture}
 		}
-		\caption{Conceptual model for experiments incorporating environmental change.}
+		\caption{Conceptual model for experiments incorporating environmental change. The environmental model provides an extrinsic source of selective pressure, described as a time-series applied to some target within the base evolutionary model. The metrics from the environmental model describe the shape of the time-series; the metrics from the evolutionary model summarize the evolutionary outcomes.}
 		\label{fig:conceptual-model-for-environmental-change}
 	\end{center}
 \end{figure}

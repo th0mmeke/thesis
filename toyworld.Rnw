@@ -926,7 +926,7 @@ Each replicate used the same initial population of 800 molecules, made up of 100
 
 \section{Results}
 
-The overall sequence of experiments to run was defined by an experiment design. The experiments were run in the order they were defined, with all replicates of an experiment being completed before moving to the replicates of the next experiment in the sequence. All replicates of an experiment were run with the same set of parameters with the exception of a random seed which varied between replicates in a predictable way. The reactions in the replicate were grouped into fixed-size blocks and run in sequence with results saved incrementally between each block.
+The overall sequence of experiments to run was defined by the experiment design. The experiments were run in the order they were defined, with all replicates of an experiment being completed before moving to the replicates of the next experiment in the sequence. All replicates of an experiment were run with the same set of parameters with the exception of a random seed which varied between replicates in a predictable way. The reactions in the replicate were grouped into fixed-size blocks and run in sequence with results saved incrementally between each block.
 
 All replicates completed a set of 20,000 reactions; given the initial population size of 800 molecules, and from the summary of results below, we believe that this captures a representative set of reactions. This also simplifies the analysis as we can assume a balanced set of treatments in the statistical sense (that is, the sample sizes for all treatments are equal).
 

@@ -668,6 +668,13 @@ print(xtable(csv, caption='Cycle forms for each multiplier and variable replicat
 
 \section{Conclusions}
 
+This concludes our investigation into replication in an gls{achem}. The previous \namecref{ch:multiplication} introduced exact multipliers in stable environments; in this \namecref{ch:variability} we introduced a changing environment and examined the effect of varying external selective pressure upon multiplication. The effects of selection were also fundamental to the final portion of the \namecref{ch:variability}: a search for variable replicators, or replicators that can take several states, each state equivalent under selection.
+
+The \namecref{ch:variability} began by constructing a model for environmental change, made up of two dimensions: shape of change, and the target of change. The target of change defines the area of the evolutionary model to be affected by change, while the shape of change (essentially a time-series) captures the magnitude of the change to be applied at each time-step to the target. For the experiments described in the \cref{ch:variability}, each of shape and target is associated with two alternative formulations.
+
+Shape in our experiments follows either a straightforward alternation between two stable values (``bistate''), or a more complex form described by an AR-timeseries. In order that the forms may be simply described, we summarize each time-series by two metrics: DFA, a form of Hurst parameter, and Sample Entropy, a measure of complexity. The two targets of change addressed in this \namecref{ch:variability} are kinetic energy (the overall kinetic energy of the molecules within the reactor population) and the reactor population itself.
+
+However, our experiment results were inconclusive. Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates--limited sets of repeated reaction cycles--none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing the condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state, and so on balance we feel that the results cannot be other than inconclusive.
 
 
 

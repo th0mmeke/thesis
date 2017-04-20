@@ -2,16 +2,50 @@
 
 This thesis has explored two related topics in the emergence of evolutionary replicators from artificial chemistries: first, how environmental variability affects heritability in a simple evolutionary model, and second, how the reactions in an artificial chemistry can result in simple replicating entities. The combination of these two topics suggests a pathway towards the formation of full informational replicators in artificial chemistries purely through evolutionary bootstrapping.
 
-\begin{enumerate}[label=RQ\arabic*:]
-\item What is the nature of the relationship between heredity and selective pressure for a \emph{theoretical} replicator?
-\item What elements of replication can be \emph{demonstrated} in a molecular \gls{achem}?
-\end{enumerate}
+\section{What is the nature of the relationship between heredity and selective pressure for a \emph{theoretical} replicator?}
 
-\section{Findings}
+Model relating heritability and fitness
+
+\emph{AR-timeseries}, described by three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. An AR-timeseries combines a regular component (described by $\Theta$ and $\delta$) and an unpredictable component ($\sigma_e$.) Unlike the bistate case, the AR-timeseries is neither constant nor completely regular.
+
+\subsection{Main findings}
 
 \begin{enumerate}
 \item Heritability is proportional to the predictability of the environment: at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
 \item Variation in heritability, $\sigma_{heritability}$, is proportional to the degree of environmental variability. As a corollary, the $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
+\end{enumerate}
+
+\section{What elements of replication can be \emph{demonstrated} in a molecular artificial chemistry?}
+
+Evolutionary model with two main elements, reactant selection and product selection.
+
+We extended the environmental model from RQ1 from one to two dimensions, now not only shape but target. We also added a second shape or form: \emph{Bistate} selective pressure, where the shape of change follows a pattern that switches between two alternate states at regular intervals. 
+
+As for the target of change, we begin with two defined alternatives:
+
+\begin{itemize}
+	\item \emph{KE}, where each molecule's kinetic energy is increased by the change value of $\delta$: $KE_{new} = KE+\delta$. As seen in \cref{ch:toyworld}, the population composition is influenced by the kinetic energy available for reactions. Changing the KE of the reaction vessel should indirectly result in a change in reactor population, and hence influence the types of reactions and reaction cycles that develop.
+	\item \emph{Population}, in which the $\delta$ value is used to adjust the population size. If $\delta$ is negative, then $|\delta|$ molecules chosen with uniform probability are removed from the population; if $\delta$ is positive, then $\delta$ molecules chosen again with uniform probability from the initial population are added to the current population. In summary, environmental changes will directly affect the composition of the reactor population, once again influencing the relative proportions of reaction cycle species.
+\end{itemize}
+
+Sampling algorithm for cycle detection in a reaction network.
+Algorithm to identify exact multipliers from reaction cycles, where we developed a specific definition for exact multipliers as \textit{Two or more} copies of the \textit{same reaction cycle species}, where the reaction cycle species has \textit{stoichiometry greater than one}, and where \textit{each cycle in the multiplier is connected to at least one other multiplier cycle} by a molecule that is a product of one cycle and a reactant in the other.
+Identify variable replicator candidates (without consideration of selection) from reaction cycles, where our interpretation of a variable replicator is a multiplier that can occupy any of a limited set of states without losing its underlying identity.
+
+\subsection{Main findings}
+
+\begin{enumerate}
+	
+\item The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments.
+
+\item Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy.
+
+\item Other parameters to the model, such as $E_{Vessel}$, the initial kinetic energy of the molecular population, and $E_{bonds}$, the bonding model, had lesser effects on cycle formation, with the only significant relationship being that of $E_{bonds}$ on the number of cycles produced.
+
+\item Exact multipliers do arise in the ToyWorld \gls{achem}, but not in any great numbers, and when they do, they do not persist for long. We have shown though that they do occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance. It is also apparent that our earlier supposition, that the number of reaction cycles would be a good proxy or predictor for multiplier or replicator activity, is not supported by the evidence.
+
+\item Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates--limited sets of repeated reaction cycles--none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing the condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state, and so on balance we feel that the results cannot be other than inconclusive.
+
 \end{enumerate}
 
 \section{Limitations}\label{sec:limitations}

@@ -77,8 +77,10 @@
 \include{glossary}
 \include{introduction}
 \include{model}
+\include{achems}
 \include{toyworld}
-\include{toyworld2}
+\include{multiplication}
+\include{variability}
 \include{conclusions}
 \part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place

@@ -36,7 +36,7 @@ As a secondary goal, we are also interested to learn if our assumption from \cre
 
 As we are concerned with reaction networks, reaction cycles--a sequence of reactions where one or more of the products of the final reaction in the cycle are of the same species as the same number of reactants for the first reaction in the cycle--are a plausible candidate for an entity formed from reactions. 
 
-Although most works influenced by origins-of-life objectives both require and assume catalysis as the mechanism by which molecules can rapidly increase in concentration, as has been pointed out before (\cite{King1978} and recently \cite{Virgo2013}) if the goal is increased concentrations then simple stoichiometry (reaction dynamics) can also suffice. The major advantage of stoichiometry over catalysis for artificial evolution is that no additional mechanism is required other than existing reaction dynamics; catalytic systems must somehow determine the catalytic effect of a molecule upon a particular reaction, and without a full quantum chemical model this is inherently prone to assumptions. For these reasons we shall not base our entity definition upon catalysis, but instead on the stoichiometry of sequences of reactions.
+Although most works influenced by origins-of-life objectives both require and assume catalysis as the mechanism by which molecules can rapidly increase in concentration, as has been pointed out before (\cite{King1978} and recently \cite{Virgo2013}) if the goal is increased concentrations then simple stoichiometry (reaction dynamics) can also suffice. The major advantage of stoichiometry over catalysis for artificial evolution is that no additional mechanism is required other than existing reaction dynamics; catalytic systems however must somehow determine the catalytic effect of a molecule upon a particular reaction, and without a full quantum chemical model this is inherently prone to assumptions. For these reasons we shall not base our entity definition upon catalysis, but instead on the stoichiometry of sequences of reactions.
 
 A reaction cycle is not defined by the sequence of individual molecules linked by reactions, as individual molecules are unique and transitory and so cannot form cycles, but rather by a sequence of molecular species. Molecular species define disjoint groups to which individual molecules of the same chemical composition belong: for example, the 'OH' species that includes all individual 'OH' molecules. In this way the cycle itself may be quite long-lived even though constituent molecules are produced and consumed.  
 
@@ -68,21 +68,21 @@ The algorithm for detecting these multipliers is given in \cref{alg:discover-mul
 
 \section{Cycle detection in a reaction network}
 
-Choosing single reaction-cycles as entities in the hypothesis means that cycle detection is central to our analysis. The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for n nodes, e edges and c elementary circuits. This is problematic when applied to each of our reaction graphs, where n=100000, e=200000, and a typical value for c might be somewhere between 10000 and 60000 (as a molecule can be part of multiple cycles.) Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
+Choosing single reaction-cycles as entities in the hypothesis means that cycle detection is central to our analysis. The time complexity of standard cycle detection algorithms is generally a factor of the number of nodes and the number of edges. For example, Johnson's algorithm for elementary circuits has time complexity O((n+e)(c+1)) for $n$ nodes, $e$ edges and $c$ elementary circuits \parencite{Johnson1975a}. This is problematic when applied to each of our reaction graphs, where $n=100,000$, $e=200,000$, and a typical value for $c$ might be somewhere between 10,000 and 60,000 (as a molecule can be part of multiple cycles.) Furthermore, standard cycle detection algorithms require adaptation as our cycles are completed not by returning to the same node, but by visiting any node of the same species as a cycle consists of molecule species while the graph is by molecule instances and therefore (by definition) acyclic.
 
 An algorithm to detect all cycles (where the sampling proportion is 1.0 or 100\% in \cref{alg:identify-cycles}) however is extremely expensive, and analysis of datasets containing 50,000 or more runs can take several days using this algorithm on a modern workstation. 
 
-Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commeasurate effect on analysis times.
+Detecting all cycles is not only slow, but generates very large files. Tests against some representative reaction networks results in lists of cycles that are larger than a workstation can hold in memory without swapping; this has a commensurate effect on analysis times.
 
 The approach we take instead is to relax the requirement to identify all cycles in favour of a sampling or lower-bounds approach, suggested by an analogous strategy in \textcite[p.7]{Hordijk2015a}. We sample a proportion of all reactant molecules and search the reaction graph only for cycles incorporating one or more of the sampled molecules.
 
 There is a significant implication to this approach. Because we are sampling ``seed'' molecules, the cycles identified will be clustered around the seed molecules in the reaction graph, while intervening sections of the reaction graph will remain unexplored; any chains of cycles may be broken at these unexplored regions. This can be mitigated, although not prevented, by careful consideration of the sample size. Additionally, as the number of cycles detected is a factor of the proportion of seed/non-seed molecules, if that proportion is constant between graphs then the relative numbers of cycles detected in each graph will also be constant (as shown in \cref{fig:samplingrange}.) This means that relative comparisons will hold true regardless of sampling proportion.
 
-<<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (left) and number of multipliers (right) for different sampling rates ($p$, in text). Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot. Four replicates chosen with uniform probability from each dataset for analysis.'>>=
+<<samplingrange, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Comparison of number of cycles (left) and number of multipliers (right) for different sampling rates ($p$, in text). Note the highly linear relationship between sampling rate and number of cycles. Values are grouped by source dataset; two datasets (1489554358 and 1489565574) result in two grouped sets of data in each plot. Three replicates chosen with uniform probability for analysis.'>>=
 colClasses <- c("factor","integer","integer","integer","integer", "integer","integer", "integer" , "integer")
 m <- read.csv('results/cycles_and_multipliers.csv', colClasses=colClasses)
 
-ap <- ggplot(subset(m, Environment==0 & Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of cycles')
+ap <- ggplot(subset(m, Environment==0 & Dataset!=1489951262), aes(x=Sample.Rate,y=Number.of.Cycles, group=Dataset)) + geom_point() + scale_y_continuous(limits = c(0, NA)) + scale_x_continuous(limits = c(0, 9)) +geom_smooth(, na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of cycles')
 bp <- ggplot(subset(m, Environment==0 & Dataset!=1489951262)) + scale_y_continuous(limits = c(0, NA)) +  scale_x_continuous(limits = c(0, 9)) + geom_smooth(aes(x=Sample.Rate, y=Multiplier.Species, group=Dataset), na.rm=TRUE) + labs(x='Sampling Rate (p)', y='Number of multiplier species')
 grid.arrange(ap,bp,nrow=1,ncol=2)
 @
@@ -228,14 +228,14 @@ We can now state the working hypothesis of this chapter as:
 	Exact multipliers, in the form of entities composed of a repeated reaction cycle, can emerge in an \gls{achem}.
 \end{hypothesis}
 
-Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network; given the nature of emergence, to determine if a \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
+Multipliers are structures that, in our context of \glspl{achem}, emerge from the reactions in a reaction network; given the nature of emergence, to determine if an \gls{achem} can result in multipliers, we turn to experiment. The hypothesis test is as follows:
 
 \begin{itemize}[label={}]
-	\item H$_0$:  No multiplying single reaction-cycle entities exist in any reaction network generated by a \gls{achem}.
-	\item H$_1$:  Multiplying single reaction-cycle entities exist in a \gls{achem} reaction network.
+	\item H$_0$:  No multiplying single reaction-cycle entities exist in any reaction network generated by an \gls{achem}.
+	\item H$_1$:  Multiplying single reaction-cycle entities exist in an \gls{achem} reaction network.
 \end{itemize}
 
-We again use the ToyWorld parameterized evolutionary model introduced in \cref{ch:toyworld}. The experiments follow a full factorial design although with only a single factor ($S_\mathrm{Product}$) at two levels,  while $S_\mathrm{Reactant}$ is set to KineticReactantSelection (\cref{alg:kinetic-selection}). The experiments run in a randomised order, with two (2) replicates of each combination of factors executed in sequence before beginning the next combination. The factors and levels used are given in \cref{tbl:multiplication-factors}.
+We again use the ToyWorld parameterized evolutionary model introduced in \cref{ch:toyworld}. The experiments follow a full factorial design although with only a single factor ($S_\mathrm{Product}$) at two levels(Uniform and LeastEnergy),  while $S_\mathrm{Reactant}$ is set to Kinetic (\cref{alg:kinetic-selection}). The experiments run in a randomised order, with two (2) replicates of each combination of factors executed in sequence before beginning the next combination. The factors and levels used are given in \cref{tbl:multiplication-factors}.
 
 \begin{table}
 	\scriptsize
@@ -383,7 +383,7 @@ The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate o
 
 \subsection{Is the number of reaction cycles a good predictor for the number of multipliers?}
 
-Returning to the underlying assumption of \cref{ch:toyworld}, is there a relationship between the number of cycles and the number of exact multipliers? If there is, then the parameters for a \gls{achem} designed to investigate replicators (of which exact multipliers are the simplest form) could be established based simply on a count of cycles calculated from some calibration runs. If not, then cycle counts cannot be used as a guide for parameter choices, and in the absence of any other predictor, all parameter combinations must be considered in any replicator experiment.
+Returning to the underlying assumption of \cref{ch:toyworld}, is there a relationship between the number of cycles and the number of exact multipliers? If there is, then the parameters for an \gls{achem} designed to investigate replicators (of which exact multipliers are the simplest form) could be established based simply on a count of cycles calculated from some calibration runs. If not, then cycle counts cannot be used as a guide for parameter choices, and in the absence of any other predictor, all parameter combinations must be considered in any replicator experiment.
 
 The test hypothesis is as follows:
 
@@ -405,7 +405,7 @@ We examine this further by testing the predictive value of the relationship for 
 
 From the previous \namecref{sec:multipliers-by-chance} we have the example of a dataset (1489951262) in which the number of multipliers is zero in all runs, and the number of cycles is non-zero (\Sexpr{mean(subset(m, Dataset==1489951262)$Number.of.Cycles)}.) However, in another dataset (1489554358) both the number of multipliers (\Sexpr{mean(subset(m, Dataset==1489554358)$Multiplier.Species)}) and the number of cycles (\Sexpr{mean(subset(m, Dataset==1489554358)$Number.of.Cycles)}) are non-zero.
 
-We reject H$_0$ as the relationship between cycles and multipliers in these two datasets is complex, and conclude that the number of multipliers cannot easily be predicted from the number of cycles. Our original supposition, that we could use a simple count of cycles to select the parameters, and parameter values, for a \gls{achem} to investigate replication is not supported by these results.
+We reject H$_0$ as the relationship between cycles and multipliers in these two datasets is complex, and conclude that the number of multipliers cannot easily be predicted from the number of cycles. Our original supposition, that we could use a simple count of cycles to select the parameters, and parameter values, for an \gls{achem} to investigate replication is not supported by these results.
 
 \section{Conclusions}
 

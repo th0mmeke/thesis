@@ -339,7 +339,7 @@ In \textcite{Gaucherel2012} the approach is to remove individuals from the popul
 
 Translating model parameters into factors in the experiment design results in the first column of \cref{tbl:factor-levels-c7}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
-From the results of earlier parameter selection experiments, we discovered that the model response is sensitive to the values of emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$, but has little sensitivity to $n_{children}$.
+From the results of earlier parameter selection experiments, we discovered that the model response is sensitive to the values of \emph{Distribution}, \emph{Reproduction}, $p_{reproduction}$ and $p_{selection}$, but has little sensitivity to $n_{children}$.
 
 \subsection{Does average inheritance approach perfect inheritance?}\label{does-average-inheritance-approach-perfect-inheritance}
 

@@ -1,51 +1,53 @@
-\chapter{Conclusions}\label{thesis-conclusions}
+\chapter{Conclusions}\label{ch:thesis-conclusions}
 
 This thesis has explored two related topics in the emergence of evolutionary replicators from artificial chemistries: first, how environmental variability affects heritability in a simple evolutionary model, and second, how the reactions in an artificial chemistry can result in simple replicating entities. The combination of these two topics suggests a pathway towards the formation of full informational replicators in artificial chemistries purely through evolutionary bootstrapping.
 
-\section{What is the nature of the relationship between heredity and selective pressure for a \emph{theoretical} replicator?}
+To conclude, we shall first return to our research questions from \cref{research-questions}, and for each question summarize the major results and findings. Then, in order to qualify the scope of the results, we critique some aspects of the work in \cref{sec:limitations}, which naturally leads in to our final \namecref{sec:future-work} a consideration of future work in \cref{sec:future-work}.
 
-Model relating heritability and fitness
+\section{RQ1: What is the nature of the relationship between heredity and selective pressure for a \emph{theoretical} replicator?}
 
-\emph{AR-timeseries}, described by three parameters $\Theta$, $\sigma_e$ and $\delta$. $\Theta$ is the AR coefficient, $e_t$ is a random, normally distributed, error component around a mean of $0$, where $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$, and $\delta$ is a fixed bias value. An AR-timeseries combines a regular component (described by $\Theta$ and $\delta$) and an unpredictable component ($\sigma_e$.) Unlike the bistate case, the AR-timeseries is neither constant nor completely regular.
+This research question served as the primary motivation behind the work documented in \cref{ch:models-of-inheritance}, and in particular the model relating heritability and fitness described in that \namecref{ch:models-of-inheritance}. By making the usually implicit measures of heritability and fitness explicit for each entity, the model allows us to measure them directly as the population of an otherwise standard evolutionary system evolves. Our first experiment tested the evolution of heritability in a stable environment (without external selective pressure), before we introduced an explicit model of environmental change for the second and final experiment in this \namecref{ch:models-of-inheritance}. 
+
+The environmental model incorporates a novel application of an AR-timeseries, combining a regular component (described by two parameters $\Theta$ and $\delta$) and an unpredictable component (the parameter $\sigma_e$.) At each generation of the evolutionary model, the corresponding value from the timeseries is added to the fitness value of each entity in the population, so efficiently simulating the effects of external environmental change.
 
 \subsection{Main findings}
 
+In summary, the main findings related to RQ1 are:
+
 \begin{enumerate}
-\item Heritability is proportional to the predictability of the environment: at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
-\item Variation in heritability, $\sigma_{heritability}$, is proportional to the degree of environmental variability. As a corollary, the $\sigma_{heritability}$ under changing conditions will be greater than that under stable conditions.
+\item Heritability is proportional to the predictability of the environment, and is at a minimum in conditions of maximum unpredictability, and at a maximum in stable conditions.
+\item The variation in heritability, $\sigma_{heritability}$, is proportional to the degree of environmental variability. As a corollary, the $\sigma_{heritability}$ under changing conditions is greater than that under stable conditions.
 \end{enumerate}
 
-\section{What elements of replication can be \emph{demonstrated} in a molecular artificial chemistry?}
+These results align with an intuitive understanding of the effects of environmental change: in varying environments, a reservoir of variation provides flexibility, whereas perfect inheritance restricts the variation in a population, and limits the populations ability to respond to change. 
 
-Evolutionary model with two main elements, reactant selection and product selection.
+\section{RQ2: What elements of replication can be \emph{demonstrated} in a molecular artificial chemistry?}
 
-We extended the environmental model from RQ1 from one to two dimensions, now not only shape but target. We also added a second shape or form: \emph{Bistate} selective pressure, where the shape of change follows a pattern that switches between two alternate states at regular intervals. 
+Our approach to this research question is based upon the exploration of a hierarchy of replication proposed by \textcite{Zachar2010}. We began in \cref{ch:toyworld} by describing a modularized \gls{achem} for experimentation, ToyWorld, and conjectured that a count of reaction cycles might serve as a proxy for the number of higher level replicators (although this was later shown to be unsupported.) We showed that the strategies used to select reactants and products in the \gls{achem} affected the higher level entities observed in the resulting reaction networks. 
 
-As for the target of change, we begin with two defined alternatives:
+The following two chapters used the ToyWorld \gls{achem} to search for first multipliers and then variable replicators in the reaction graphs that resulted from a selection of reactant and product selection strategies. We also extended the environmental model from \cref{ch:models-of-inheritance} from one to two dimensions, to include not only the shape or form of the timeseries, but the element of the evolutionary model to receive the change (the target). To the single shape of an AR-timeseries from \cref{ch:models-of-inheritance}, we also added a second in the form of a bistate series that switches between two alternate values at regular intervals. 
 
-\begin{itemize}
-	\item \emph{KE}, where each molecule's kinetic energy is increased by the change value of $\delta$: $KE_{new} = KE+\delta$. As seen in \cref{ch:toyworld}, the population composition is influenced by the kinetic energy available for reactions. Changing the KE of the reaction vessel should indirectly result in a change in reactor population, and hence influence the types of reactions and reaction cycles that develop.
-	\item \emph{Population}, in which the $\delta$ value is used to adjust the population size. If $\delta$ is negative, then $|\delta|$ molecules chosen with uniform probability are removed from the population; if $\delta$ is positive, then $\delta$ molecules chosen again with uniform probability from the initial population are added to the current population. In summary, environmental changes will directly affect the composition of the reactor population, once again influencing the relative proportions of reaction cycle species.
-\end{itemize}
+As for the target of change, we defined two alternatives, one being kinetic energy (where each molecule's kinetic energy is increased or decreased by the change value) and the other directly affecting population, by adding or removing the number of molecules specified by the change value.
 
-Sampling algorithm for cycle detection in a reaction network.
-Algorithm to identify exact multipliers from reaction cycles, where we developed a specific definition for exact multipliers as \textit{Two or more} copies of the \textit{same reaction cycle species}, where the reaction cycle species has \textit{stoichiometry greater than one}, and where \textit{each cycle in the multiplier is connected to at least one other multiplier cycle} by a molecule that is a product of one cycle and a reactant in the other.
-Identify variable replicator candidates (without consideration of selection) from reaction cycles, where our interpretation of a variable replicator is a multiplier that can occupy any of a limited set of states without losing its underlying identity.
+Finally, to detect replicators within the reaction networks, we defined three novel algorithms:
+\begin{enumerate}
+\item Reaction cycle detection based on sampling to generate a set of seed molecules \cref{alg:identify-cycles}.
+\item Identification of exact multipliers from reaction cycles, based on a specific definition for exact multipliers as two or more copies of the same reaction cycle species, where the reaction cycle species has stoichiometry greater than one, and where each cycle in the multiplier is connected to at least one other multiplier cycle by a molecule that is a product of one cycle and a reactant in the other \cref{alg:discover-multipliers}.
+\item Identification of variable replicator candidates (without consideration of selection) from reaction cycles, where we define variable replicators as multipliers that can occupy any of a limited set of states without losing their underlying identity \cref{alg:discover-variable-multipliers}.
+\end{enumerate}
 
 \subsection{Main findings}
 
+The main findings for RQ2 are summarized below.
+
 \begin{enumerate}
-	
-\item The choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments.
-
-\item Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy.
-
-\item Other parameters to the model, such as $E_{Vessel}$, the initial kinetic energy of the molecular population, and $E_{bonds}$, the bonding model, had lesser effects on cycle formation, with the only significant relationship being that of $E_{bonds}$ on the number of cycles produced.
-
-\item Exact multipliers do arise in the ToyWorld \gls{achem}, but not in any great numbers, and when they do, they do not persist for long. We have shown though that they do occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance. It is also apparent that our earlier supposition, that the number of reaction cycles would be a good proxy or predictor for multiplier or replicator activity, is not supported by the evidence.
-
-\item Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates--limited sets of repeated reaction cycles--none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing the condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state, and so on balance we feel that the results cannot be other than inconclusive.
-
+\item Exact multipliers do arise in the ToyWorld \gls{achem} (in approximately one-third of all runs), but not in any large number, and when they do, they do not persist for long.
+\item Multipliers occur as the result of a non-neutral combination of Product and Reactant selection strategies, and not purely by chance. 
+\item The hypothesised relationship between environmental variabilty and the numbers of multipliers remains unproven. 
+\item Although ToyWorld produces a number of variable replicator candidates (sequences of repeated reaction cycles), none were observed that meet all of our criteria for variable replication. Specifically, although we observe exact multipliers, and variable replicator candidates, we do not observe candidates that only occupy a restricted or limited set of states, or that exist in multiple runs (see discussion in \cref{sec:limitations})
+\item The choice of $S_\mathrm{Reactant}$ has a significant effect on the emergence of reaction cycles in ToyWorld; $S_\mathrm{Product}$ is of lesser effect.
+\item A Kinetic Reactant selection strategy is more effective for cycle emergence than a Uniform one. The number of cycles, and length of longest cycle, are maximized under the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy.
+\item Other parameters to the ToyWorld model have lesser effects on cycle formation; only the relationship of $E_{bonds}$ to the number of cycles produced has any significance.
 \end{enumerate}
 
 \section{Limitations}\label{sec:limitations}
@@ -62,7 +64,7 @@ Finally, the current approach of graph analysis of complete reaction networks, e
 
 \section{Future work}\label{sec:future-work}
 
-The previous \namecref{sec:limitations} has identified issues primarily with the scope of the present work. In this \namecref{sec:future-work}, we concentrate on improvements that could be made within the current scope. 
+The previous \namecref{sec:limitations} has identified issues primarily with the scope of the present work. In this \namecref{sec:future-work}, we concentrate on those improvements that could be made within the current scope. 
 
 Although the AR-timeseries generator described in \cref{environmental-model} produces a time series for environmental change with the property of stationarity, the $\delta$ term makes the evolutionary model of fitness non-stationary. However, any change still remains steady and gradual. An extension would be to co-opt the idea of concept drift from time series analysis to induce an abrupt change with probability $p$ at each generation. Each change would therefore form a new `concept`. Instead of the environment changing in a predictable and describable way from one generation to another, the change could not be predictable from the earlier history.
 
@@ -83,6 +85,4 @@ In \cref{ch:variability} we have assumed that each environmental change affected
 The first level is the simplest application of environmental change, and the one adopted earlier in this \namecref{ch:variability}, while the second represents the common scenario where we expect similar entities to react in similar ways to change, and where similarity is a result of descent: entities that share a common ancestor are more similar to each other than they are to other lineages. 
 
 The third scope level implies that each entity has an independent response to environmental changes. This seems problematic; environmental response is a function of phenotypes, and we would expect related entities to have related phenotypes\footnote{In general, although in biology there can be significant phenotypic differences between related entities.}. Thus instead of single-member groups we would expect lineage-related groups.
-
-\section{Concluding remarks}
 

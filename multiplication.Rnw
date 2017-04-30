@@ -34,7 +34,7 @@ As a secondary goal, we are also interested to learn if our assumption from \cre
 
 \section{Choice of entity}
 
-As we are concerned with reaction networks, reaction cycles--a sequence of reactions where one or more of the products of the final reaction in the cycle are of the same species as the same number of reactants for the first reaction in the cycle--are a plausible candidate for an entity formed from reactions. 
+As we are concerned with reaction networks, reaction cycles---a sequence of reactions where one or more of the products of the final reaction in the cycle are of the same species as the same number of reactants for the first reaction in the cycle---are a plausible candidate for an entity formed from reactions. 
 
 Although most works influenced by origins-of-life objectives both require and assume catalysis as the mechanism by which molecules can rapidly increase in concentration, as has been pointed out before (\cite{King1978} and recently \cite{Virgo2013}) if the goal is increased concentrations then simple stoichiometry (reaction dynamics) can also suffice. The major advantage of stoichiometry over catalysis for artificial evolution is that no additional mechanism is required other than existing reaction dynamics; catalytic systems however must somehow determine the catalytic effect of a molecule upon a particular reaction, and without a full quantum chemical model this is inherently prone to assumptions. For these reasons we shall not base our entity definition upon catalysis, but instead on the stoichiometry of sequences of reactions.
 
@@ -277,7 +277,7 @@ print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% d
 
 Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles}, with a sampling proportion $p=0.20$ ($p=0.05$ also shown for comparison), and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
 
-From \cref{tbl:toyworld2-multiplier-results} we can see that exact multipliers arise in approximately half of the experiment runs. Most of those runs produced only one type (species) of multiplier; the remaining runs with multipliers produced two types. Each type existed only once in a run (lineages), and the number of cycles in each lineage was again quite low: 3 cycles only. One of the resulting multipliers is shown in \cref{fig:example-multiplier}, constructed from three instances of the same cycle species ('Y'--see \cref{tbl:replicator-species} for other species descriptions.)
+From \cref{tbl:toyworld2-multiplier-results} we can see that exact multipliers arise in approximately half of the experiment runs. Most of those runs produced only one type (species) of multiplier; the remaining runs with multipliers produced two types. Each type existed only once in a run (lineages), and the number of cycles in each lineage was again quite low: 3 cycles only. One of the resulting multipliers is shown in \cref{fig:example-multiplier}, constructed from three instances of the same cycle species ('Y', see \cref{tbl:replicator-species} for other species descriptions.)
 
 Exact multipliers do occur, but infrequently, and they are not long-lived.
 
@@ -340,7 +340,7 @@ Exact multipliers do occur, but infrequently, and they are not long-lived.
 		\draw [-] (-2.5,-2.5) -- (-2.5,-3) -- (12.5,-3) -- (12.5,-2.5);
 		\node at (5,-3.5) {Multiplying Replicator (Species 'YYY')};
 		\end{tikzpicture}
-		\caption{Example multiplier from experimental results (of type or species 'YYY' - see \cref{tbl:replicator-species}). A multiplier is formed from two or more of the same species of reaction cycle, connected by shared molecules. For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
+		\caption{Example multiplier from experimental results (of type or species 'YYY', see \cref{tbl:replicator-species}). A multiplier is formed from two or more of the same species of reaction cycle, connected by shared molecules. For clarity, the only molecules shown are those that form part of the multiplier cycle (all others can be easily discovered from the reaction equations.)}
 		\label{fig:example-multiplier}
 	\end{center}
 \end{figure}
@@ -349,7 +349,7 @@ Exact multipliers do occur, but infrequently, and they are not long-lived.
 
 Perhaps multiplier emergence is simply a product of chance, and that given enough generations, probabilities will favour two or more of the cycles that form being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent to exclude chance events.
 
-This alternative explanation is not incompatible with our results. The average lineage size--the number of cycles in each instance of a multiplier--is quite low at 3 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
+This alternative explanation is not incompatible with our results. The average lineage size---the number of cycles in each instance of a multiplier---is quite low at 3 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
 
 This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. 
 

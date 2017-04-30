@@ -31,7 +31,7 @@ modelled as a series of collisions between molecules. The reaction rate is then 
 the concentration) that are energetic enough to overcome the inherent stability of the interacting molecules and cause a change in molecular
 structure or shape (in other words, the activation energy).
 
-For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (ones that can enter into other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction--for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
+For an entity to emerge from a network of reactions, the core problem is how to privilege the reactions that are useful in producing products (ones that can enter into other necessary reactions), over the ones that are not. Given a collection of molecules, the set of all possible reactions is determined by the chemistry that governs how molecules interact to form other molecules. The reactions that actually take place though are driven by molecular concentrations and kinetics. Molecules increase in concentration as they are produced in reactions, and become scarcer as they are consumed as reactants. More common molecules are more likely to be chosen as reactants, and less common ones less likely. This can also affect the direction of a reaction: for reactions which may run in either direction, the relative concentrations of molecules on one side of the reaction versus those on the other side determines the direction in which the reaction is most likely to run.
 
 Recall that the rate of a reaction is a function of concentration (at the gross level) or collision rate (at the molecular level) and the
 activation energy for the reaction, which at the molecular level is directly related to the energy required to overcome the stability of the
@@ -40,7 +40,7 @@ concentrations. A catalyst does precisely the first, and autocatalysis is one me
 
 A \emph{catalyst} is anything that isn't consumed by the reaction and that affects the rate (or the kinetic equation for the reaction) without
 affecting the reaction's equilibrium constant. Catalysts allow the reaction to proceed by an alternate, lower activation energy, pathway.
-The reaction equation remains the same, but the dynamics are changed--in the case of biological enzymes the rate can be increased by several
+The reaction equation remains the same, but the dynamics are changed. In the case of biological enzymes the rate can be increased by several
 orders of magnitude over the uncatalysed reaction, enabling reactions fundamental to life that would be effectively impossible in an
 uncatalysed form. At the molecular level catalysts often function by providing a substrate that preferentially attacks the bonds critical to
 the reaction. The platinum within an automotive catalytic converter is a well-known example of a catalytic substrate. Catalysts are often show above the reaction arrow in standard chemical reaction notation, \eg$A\xrightarrow{catalyst} B$.
@@ -48,12 +48,11 @@ the reaction. The platinum within an automotive catalytic converter is a well-kn
 In \emph{autocatalysis}, introduced by \textcite{Ostwald1890}, rather than reducing the required activation
 energy, autocatalysis increases the reactant concentrations: autocatalysis reactions form feedback loops where a compound is both a
 reactant and a product. In the standard definition, an autocatalytic reaction is one that is catalysed by its own products, resulting in a
-characteristic rate acceleration over time given by the differential equation--
-\[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
+characteristic rate acceleration over time given by the differential equation \[\frac{dx_i}{dt} = k(\mathbf{X}) \cdot x^n_i + f(\mathbf{X})\] where $n$ is the order of the reaction, and $f(\mathbf{X})$ the contribution from all other elements of the system \parencite{Plasson2010}. As an example, in the indirect network autocatalysis of glycolysis where the pattern is ATP \(\rightarrow\) n.ATP.
 
 Autocatalysis may be realised by \begin{inparaenum}
 	\item either a single reaction \eg$\Sigma x_i + A\rightarrow \Sigma y_j + \Sigma B_k$ (where $n$ of the ${B_0, B_1...B_k}$ products are equivalent to $A$) or a linear chain of reactions through intermediate products, called template autocatalysis, branching chain reactions or autocatalytic sets \parencite{King1978}, or
-	\item by a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis--as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other.
+	\item by a reaction network. Networks may be indirect through a series of intermediary products, or collective where there is no connection between the component cycles other than through catalysis, as seen for example in the replication of viroids where each RNA strand can catalyse the production of the other.
 \end{inparaenum}
 
 However, in all cases, the reactions reduce to the defining $A \rightarrow A_0...A_n$ pattern described by Ostwald's differential equation \parencite{Plasson2010}.
@@ -93,7 +92,7 @@ Reaction rules in an artificial chemistry describe how reactants are transformed
 
 %\quote{A distinguishing feature of chemistry is that the changes of molecules upon interaction are not limited to quantitative physical properties such as free energy, density, or concentrations, since molecular interactions do not only produce more of what is already there--rather, novel molecules can be generated.}{\parencite{Benko2009}}
 
-The action of the reaction rules are \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components--a form of emergence, explicitly linked to the production of novelties: \quote{construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.}{\parencite{Fontana1994}}
+The action of the reaction rules are \textit{constructive} \parencite{Fontana1994} if new components may be generated through the action of other components---a form of emergence, explicitly linked to the production of novelties: \quote{construction: to understand how the organizations upon which the process of natural selection is based arise, and to understand how mutation can give rise to organizational, that is: phenotypic, novelty.}{\parencite{Fontana1994}}
 
 A strongly constructive system is one which maintains closure\footnote{Or as stated by \textcite[217]{Fontana1994},``A strongly constructive system that contains agent \emph{A} must cope with the network of its implications. But, then, it also must cope with the implications of the implications. And so on.''}, and in which there is self-consistency and some form of logical structure. Both implicit laws and implicit molecule definitions are required for constructive chemistries:
 
@@ -102,9 +101,9 @@ A strongly constructive system is one which maintains closure\footnote{Or as sta
 	\item Implicit molecule definitions provide a description for a molecule's construction, while explicit molecule definitions are taken from an fixed set of symbols.
 \end{itemize}
 
-Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense--new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions ``on-the-fly'' from the structures of the interacting molecules. 
+Strongly constructive chemistries provide a mechanism for exploration in the \gls{ea} sense: new products can be generated, and new products can participate in reactions. A weakly constructive approach might be to pre-specify all possible reactions; the strongly constructive approach is to generate reactions ``on-the-fly'' from the structures of the interacting molecules. 
 
-Pre-specification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be predetermined--rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \textcite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \textcite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
+Pre-specification is well suited to simulating real chemistry as it allows properties of reactions observed in chemical experiments to be attached to their simulated equivalents. However, it does not allow for arbitrary reactions, and it requires reaction properties to be predetermined---rather difficult for novel or artificial reactions. Clearly, although constructive, this is not strongly constructive (in the sense of \textcite{Fontana1994,Dittrich:2001zr}) as it is not open-ended. However, \textcite{Hartenfeller2011} suggests that it is still useful for applications such as drug discovery.
 
 An artificial chemistry with the ability to create reactions ``on-the-fly'' given a set of possible reactants may discover more than one possible reaction pathway between the same reactants and products. The method used to choose one reaction pathway from the alternatives is an important component of the artificial chemistry, and the mechanism may be tuned or tailored to privilege or preferentially chose particular types of pathways independent to other factors such as temperature or concentration. In Chemistry the choice of reaction pathway is fundamentally linked to those other properties and cannot be treated independently.
 
@@ -112,7 +111,7 @@ An artificial chemistry with the ability to create reactions ``on-the-fly'' give
 
 The reactor algorithm provides the mechanism to select (in effect, to order) reactions, or in the words of \textcite[sect. 4.1.3]{Faulconbridge2011}, the ``...algorithm which describes the order of and intervals between reactions, starting from an initial collection of molecules...''
 
-If the reaction rules are analogous to chemistry, the reactor algorithm is analogous to physics--the way molecules move and collide in the reaction vessel determines which reactions are possible (for example, by providing enough kinetic energy to overcome a reaction's activation energy), and the order in which the reactions occur.
+If the reaction rules are analogous to chemistry, the reactor algorithm is analogous to physics: the way molecules move and collide in the reaction vessel determines which reactions are possible (for example, by providing enough kinetic energy to overcome a reaction's activation energy), and the order in which the reactions occur.
 
 \Textcite{Faulconbridge2011} identifies three basic types of \emph{mixing method} or reactor algorithm:
 \begin{enumerate}
@@ -132,7 +131,7 @@ The primary requirement in these cases is fidelity with real-world chemistry, wh
 
 The core problem in drug-discovery is the selection of a set of reactions to generate a given product. The CASREACT Chemical Reaction database \footnote{\url{https://www.cas.org/content/reactions}} references more than 80.5 million known reactions in published work; clearly it is impractical in a laboratory setting to simply apply each of these in turn to a set of initial molecules in the hope that the goal compound will emerge. \Textcite{Hartenfeller2012} used simulations in reaction-SMARTS and RDKit \parencite{rdkit} to conclude that a much smaller set of 58 reactions, acting on a set of 10,000 to 50,000 ``building block'' molecules, might instead meet the requirements for \textit{de novo} drug discovery. Of the 58 nominated reactions, 29 were ring-forming; the suggestion is that as so many interesting compounds involve molecular rings, the lack of ring forming reactions was a deficiency of previous approaches. With this small reaction set, chosen for the practicality of transferral to the laboratory benchtop, the combinatorics are such that a search mechanism is needed to identify the most promising pathways from the initial molecule set to the destination compound.
 
-Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but necessarily simplified, approach taken by \textcite{Flamm2010,Ullrich2010}. Determining the shape, and hence the function, of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule--the arrangement of the elements in space--drives many of even the simplest chemical reactions. For example, acid-base reactions result from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
+Finally, \Glspl{achem} have been used as tools to explore the role of function prediction, for example in the interesting, but necessarily simplified, approach taken by \textcite{Flamm2010,Ullrich2010}. Determining the shape, and hence the function, of an enzyme from its RNA transcript is perhaps the most important problem in current molecular biology: the three-dimensional structure of a molecule---the arrangement of the elements in space---drives many of even the simplest chemical reactions. For example, acid-base reactions result from the shift of charge from one region of a molecule to another, revealing one region while shielding another from activity. Some of the most complex reactions are shape-driven: the function of many enzymes (biological catalysts) derives from their shape, and furthermore this shape is often under regulatory control. \Textcite{Flamm2010,Ullrich2010} attach a catalytic function to a molecule based on its secondary structure (shape) and then investigates the influence of these functions upon the evolution of early metabolic networks. 
 	
 \section{Origins of life modelling with artificial chemistries}\label{achem-and-ool}
 
@@ -153,7 +152,7 @@ Some other examples of artificial chemistries for the investigation of the origi
 \item
 \emph{\Textcite{Dorin:2006fk}}. Concerned, almost uniquely, with a chemical ecosystem, based on a set of atoms interacting in pre-specified ways to represent biological photosynthesis, respiration and biosynthesis (or growth). The goal is to explore the interactions in an ecosystem made up of a set of organisms pre-built to perform various defined roles.
 \item
-\emph{\Textcite{Gardiner2007}}. A string-based chemistry to investigate protein metabolism evolution under genetic control. Three types of molecule--protein, gene and service molecule--react in ways determined by the types of interacting molecules. The type and pattern of molecules define the type of interaction.
+\emph{\Textcite{Gardiner2007}}. A string-based chemistry to investigate protein metabolism evolution under genetic control. Three types of molecule---protein, gene and service molecule---react in ways determined by the types of interacting molecules. The type and pattern of molecules define the type of interaction.
 \item
 \emph{\Textcite{Fernando:2008xy,Fernando:2007pf}}. A flow-reactor for the evolution of metabolism in lipid aggregates based on predefined molecular types and reactions.
 \end{itemize}
@@ -174,17 +173,17 @@ Artificial Chemistries have also been used in the exploration of open-ended or c
 		\textcite{Ducharme2012}                                                & Yes                                      \\
 		StringMol \parencite{Hickinbotham2012}                             & Yes                                      \\
 		RBN-World \parencite{Faulconbridge2011}                            & Yes                                      \\
-		\textcite{Lenaerts2009}                                                & Yes--molecular interactions             \\
+		\textcite{Lenaerts2009}                                                & Yes---molecular interactions             \\
 		NAC \parencite{Suzuki2006}                                         & Yes                                      \\						
 		GGL/ToyChem \parencite{Benko2005}                                  & Yes                                      \\
 		\midrule
 		Substrate-Catalyst-Link (SCL) \parencite{Varela:1974qd,Suzuki2008} & Unknown                                  \\
-		\textcite{Fernando:2008xy,Fernando:2007pf}                             & No--atomic reactions                    \\
-		\textcite{Gardiner2007}                                                & No--atomic reactions                    \\
+		\textcite{Fernando:2008xy,Fernando:2007pf}                             & No---atomic reactions                    \\
+		\textcite{Gardiner2007}                                                & No---atomic reactions                    \\
 		Lattice \gls{achem} \parencite{Ono2000,Madina2003}        		   & No                                       \\
-		GGL/ToyChem \parencite{Benko2003}                                  & No--pre-defined reactions only          \\
+		GGL/ToyChem \parencite{Benko2003}                                  & No---pre-defined reactions only          \\
 		Squirm3 \parencite{Hutton2002,Lucht2012}                           & No                                       \\
-		ZChem \parencite{Tominaga2004}                                     & No--reactions are atomic with wildcards \\
+		ZChem \parencite{Tominaga2004}                                     & No---reactions are atomic with wildcards \\
 		\bottomrule
 	\end{tabular}
 	\end{center}
@@ -196,7 +195,7 @@ In this \namecref{introduction-to-achems}, we have:
 
 \begin{itemize}
 	\item Introduced the basic elements of \glspl{achem}.
-	\item Established those elements within a commonly-used classification scheme \parencite{Dittrich:2001zr} which uses the three factors--\emph{S} describing the form of the component molecules, \emph{R} the rules for the interactions between the molecules, and \emph{A} the mechanism used to select molecules for reactions--to classify \glspl{achem}.
+	\item Established those elements within a commonly-used classification scheme \parencite{Dittrich:2001zr} which uses the three factors---\emph{S} describing the form of the component molecules, \emph{R} the rules for the interactions between the molecules, and \emph{A} the mechanism used to select molecules for reactions---to classify \glspl{achem}.
 	\item Provided a reminder of the requirement for constructive reaction rules in open-ended chemical systems.
 	\item Reviewed the three dominant areas for the use of \glspl{achem}: real-world chemical modeling, artificial life, and the origin of life.
 	\item Suggested, by providing examples of other \glspl{achem} in the exploration of \gls{alife} and the origin of life, the suitability of an \gls{achem} for addressing our research questions.

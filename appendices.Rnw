@@ -28,7 +28,7 @@ cat(sprintf("
 {\\footnotesize %4$s}
 \\endfoot
 \\endlastfoot",
-"Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment.",
+"Summary of parameters for experiments in \cref{ch:multiplication,ch:variability}, reported in \\cref{tbl:toyworld2-multiplier-results,tbl:toyworld2-multiplier-control,tbl:toyworld2-vmultiplier-020-results,tbl:toyworld2-variable-020-results}. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment.",
 "Summary of parameters for each set of replicates in the experiments. The columns dataset, experiment and environment define each experiment, with parameters given by columns reactant strategy, product strategy, and environmental change target and shape. The two final columns, DFA and sample entropy, provide two alternative measures for the variability of the environmental model for the experiment: DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by \\textcite{Richman2000}. Sample Entropy scaled by a factor of 1000 (see \\cref{sec:variable-replicator-design}).",
 paste(paste("\\begin{sideways}", colnames(csvTab), "\\end{sideways}"), collapse = " & "),
 "Continued on next page"))
@@ -38,7 +38,6 @@ include.colnames = TRUE,
 include.rownames = FALSE,
 rotate.colnames=TRUE,
 caption.placement="top",
-hline.after=c(20,40),
 only.contents = TRUE
 )
 

@@ -11,14 +11,14 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 load.multipliers <- function(t) {
 	colClasses <- c("factor","integer","integer","integer","factor","factor","factor","factor","numeric","numeric","integer","integer","numeric")
 	csv <- read.csv(t, colClasses=colClasses)
-	csv[csv$Average.Lineage.Size==0,]$Average.Lineage.Size <- NaN
+	#csv[csv$Average.Lineage.Size==0,]$Average.Lineage.Size <- NaN
 	csv[is.infinite(csv$Sample.Entropy),]$Sample.Entropy <- 0
 	csv$Sample.Entropy <- csv$Sample.Entropy * 1000
-	csv[csv$Lineages==0,]$Lineages <- NaN
+	#csv[csv$Lineages==0,]$Lineages <- NaN
 	names(csv)[names(csv)=="Datetime"] <- "Dataset"
 	names(csv)[names(csv)=="Sample.Entropy"] <- "Sample Entropy"
 	names(csv)[names(csv)=="Multiplier.Species"] <- "No. of Species"
-	names(csv)[names(csv)=="Average.Lineage.Size"] <- "Average Lineage Size"
+	names(csv)[names(csv)=="Average.Lineage.Size"] <- "Average Multiplier Size"
 	levels(csv$S_Product) <- c("LeastEnergy", "Uniform")
 	csv
 }
@@ -90,12 +90,11 @@ The experiments in this chapter all use a sampling proportion $p=0.2$, as a bala
 
 \begin{algorithm}
 	\Def{DiscoverMultipliers(Reactions)}{
-		MultipliersBySpecies $\leftarrow\emptyset$\;
+		Multipliers $\leftarrow\emptyset$\;
 		MolecularCycles $\leftarrow$ IdentifyCycles(Reactions)\;
 		MolecularCyclesBySpecies $\leftarrow$ MolecularCycles grouped by cycle species\;
 		\BlankLine
 		\For{CyclesForSpecies in MolecularCyclesBySpecies}{
-			MultipliersInSpecies $\leftarrow\emptyset$\;
 			Clusters $\leftarrow$IdentifyClusters(CyclesForSpecies)\;
 			\For{Cluster in Clusters}{
 				
@@ -110,15 +109,14 @@ The experiments in this chapter all use a sampling proportion $p=0.2$, as a bala
 					\If{|ReactantCycles| > |ProductCycles|}{
 						\For{Cycle in Cluster}{
 							\If{(products of cycle $\cap$ LinkingMolecules $\neq \emptyset)\lor($reactants of cycle $\cap$ LinkingMolecules $\neq \emptyset$)}{
-								MultipliersInSpecies $\leftarrow$ MultipliersInSpecies $\cup$ Cycle\;
+								Multipliers $\leftarrow$ Multipliers $\cup$ Cycle\;
 							}
 						}
-						MultipliersBySpecies $\leftarrow$ MultipliersInSpecies\;
 					}
 				}
 			}
 		}
-		\Return $MultipliersBySpecies$
+		\Return $Multipliers$
 	}
 	\caption{\emph{DiscoverMultipliers}. Detect multiplying exact replicators within a reaction network.}\label{alg:discover-multipliers}
 \end{algorithm}
@@ -258,11 +256,11 @@ csv2 <- load.multipliers('results/multipliers-020.csv')
 csv1 <- load.multipliers('results/multipliers-005.csv')
 csv <- merge(csv1,csv2, by=1:10)
 names(csv)[names(csv)=="No. of Species.x"] <- "No. of Species (p=0.05)"
-names(csv)[names(csv)=="Average Lineage Size.x"] <- "Average Lineage Size (p=0.05)"
-names(csv)[names(csv)=="Lineages.x"] <- "Lineages (p=0.05)"
+names(csv)[names(csv)=="Average Lineage Size.x"] <- "Average Multiplier Size (p=0.05)"
+names(csv)[names(csv)=="Lineages.x"] <- "Multipliers(p=0.05)"
 names(csv)[names(csv)=="No. of Species.y"] <- "No. of Species (p=0.2)"
-names(csv)[names(csv)=="Average Lineage Size.y"] <- "Average Lineage Size (p=0.2)"
-names(csv)[names(csv)=="Lineages.y"] <- "Lineages (p=0.2)"
+names(csv)[names(csv)=="Average Lineage Size.y"] <- "Average Multiplier Size (p=0.2)"
+names(csv)[names(csv)=="Lineages.y"] <- "Multipliers(p=0.2)"
 
 drop <- c('S_Reactant', 'Target', 'Shape', 'Sample Entropy', 'DFA')
 
@@ -273,9 +271,7 @@ print(xtable(csv[csv$Environment==0 & csv$Dataset!=1489951262,!names(csv) %in% d
 
 Identification of cycles within the reaction network (our hypothesised reaction-cycle entities) is by \cref{alg:identify-cycles}, with a sampling proportion $p=0.20$ ($p=0.05$ also shown for comparison), and \cref{alg:discover-multipliers} applied to identify any multipliers within those cycles.
 
-From \cref{tbl:toyworld2-multiplier-results} we can see that exact multipliers arise in approximately half of the experiment runs. Most of those runs produced only one type (species) of multiplier; the remaining runs with multipliers produced two types. Each type existed only once in a run (lineages), and the number of cycles in each lineage was again quite low: 3 cycles only. One of the resulting multipliers is shown in \cref{fig:example-multiplier}, constructed from three instances of the same cycle species ('Y', see \cref{tbl:replicator-species} for other species descriptions.)
-
-Exact multipliers do occur, but infrequently, and they are not long-lived.
+From \cref{tbl:toyworld2-multiplier-results} we can see that exact multipliers arise in approximately half of the experiment runs. Most of those runs produced only one type (species) of multiplier; the remaining runs with multipliers produced two types. Each type existed only once in a run (so the number of multiplier entities equals the number of species), and the number of cycles in each multiplier was again quite low: 3 cycles only. One of the resulting multipliers is shown in \cref{fig:example-multiplier}, constructed from three instances of the same cycle species ('Y', see \cref{tbl:replicator-species} for other species descriptions.) Exact multipliers do occur, but infrequently, and they are not long-lived.
 
 \begin{figure}[ht]
 	\begin{center}
@@ -343,9 +339,9 @@ Exact multipliers do occur, but infrequently, and they are not long-lived.
 
 \subsection{Do multipliers arise simply by chance?}\label{sec:multipliers-by-chance}
 
-Perhaps multiplier emergence is simply a product of chance, and that given enough iterations, probabilities will favour two or more of the cycles that form being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent to exclude chance events.
+Perhaps multiplier emergence is simply a product of chance, and that given enough iterations, probabilities will favour two or more of the cycles that form being linked by molecules in a way that meets our definition of a multiplier. In this view, multipliers are inevitable in an \gls{achem} because the definition is not sufficiently stringent to exclude unsurprising events.
 
-This alternative explanation is not incompatible with our results. The average lineage size---the number of cycles in each instance of a multiplier---is quite low at 3 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
+This alternative explanation is not incompatible with our results. The average multiplier size---the number of cycles in each instance of a multiplier---is quite low at 3 cycles per lineage. That would suggest that the multipliers are not particularly stable; that they form, and then after a short period, dissipate. 
 
 This can be tested by comparing the number of replicators in these experiments with those generated by a control experiment with a neutral bias. 
 

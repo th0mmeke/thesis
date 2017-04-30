@@ -11,10 +11,10 @@ knit_hooks$set(pdfcrop = hook_pdfcrop)
 load.multipliers <- function(t) {
 	colClasses <- c("factor","integer","integer","integer","factor","factor","factor","factor","numeric","numeric","integer","integer","numeric")
 	csv <- read.csv(t, colClasses=colClasses)
-	csv[csv$Average.Lineage.Size==0,]$Average.Lineage.Size <- NaN
+	#csv[csv$Average.Lineage.Size==0,]$Average.Lineage.Size <- NaN
 	csv[is.infinite(csv$Sample.Entropy),]$Sample.Entropy <- 0
 	csv$Sample.Entropy <- csv$Sample.Entropy * 1000
-	csv[csv$Lineages==0,]$Lineages <- NaN
+	#csv[csv$Lineages==0,]$Lineages <- NaN
 	names(csv)[names(csv)=="Datetime"] <- "Dataset"
 	names(csv)[names(csv)=="Sample.Entropy"] <- "Sample Entropy"
 	names(csv)[names(csv)=="Multiplier.Species"] <- "No. of Species"
@@ -92,7 +92,7 @@ $E_\mathrm{Target}$  	&Environmental	&KE				&Population			&See \cref{environment
 
 First we explore the nature of any relationship between simple multiplication and selective pressure. We start by extending our investigation of exact multipliers in stable environments into the effects of selective pressure from varying environments, using the number of multipliers as our response variable for the effect.
 
-We use two proxy metrics calculated from $E_\mathrm{Shape}$ as our measure of selective pressure: DFA and Sample Entropy. DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by the method provided in \textcite{Richman2000}. Both are calculated from the timeseries as applied to the target, with changes at intervals of 1000 iterations for the AR-timeseries, and every 10,000 iterations for the bistate case. As a result the sample entropy in particular is significantly lower than the sample entropy of the source timeseries.
+We use two proxy metrics calculated from $E_\mathrm{Shape}$ as our measure of selective pressure: \acrshort{dfa} and Sample Entropy. \acrshort{dfa} is the calculated Hurst parameter ($H$) using Detrended Fluctuation Analysis, while sample entropy is assessed by the method provided in \textcite{Richman2000}. Both are calculated from the timeseries as applied to the target, with changes at intervals of 1000 iterations for the AR-timeseries, and every 10,000 iterations for the bistate case. As a result the sample entropy in particular is significantly lower than the sample entropy of the source timeseries.
 
 Our hypothesis test is:
 
@@ -218,7 +218,7 @@ Now, we can develop a notation for replicator species by denoting each species o
 
 Our null hypothesis is that changes in variable replicator state only arise as the result of external selection. That is, that replicator states behave differently under selection. This can be tested by comparing the sequence of states of the same replicator across a variety of environments, each providing a different selective pressure. 
 
-Note though that only four cycle species ('M', 'G', 'P' and 'i') appear in more than one run, with the great majority of species endemic to a single run. As a result, only three candidate replicators ('MMM', 'GGG' and 'iii') appear in more than one run in our results, and as single-state replicators none can be considered variable. The cycle 'P' appears in two candidate replicators, but as in one instance it appears with 'Q' and in the other by itself, these also cannot be considered as instances of the same replicator as the two candidates have a different number of states. Unfortunately therefore we cannot test the hypothesis by examining the behaviour of the same replicator across different environments.
+Note though that only four cycle species ('M', 'G', 'P' and 'i') appear in more than one run, with the great majority of species endemic to a single run. As a result, only three candidate replicators ('MMM', 'GGG' and 'iii') appear in more than one run in our results, and as these are all single-state replicators none can be considered variable by definition. The cycle 'P' appears in two candidate replicators, but as in one instance it appears with 'Q' and in the other by itself, these also cannot be considered as instances of the same replicator as the two candidates have a different number of states. Unfortunately therefore we cannot test the hypothesis by examining the behaviour of the same replicator across different environments.
 
 Furthermore, if the states in a variable replicator are equally likely, as seems plausible although we have no particular evidence, then we would expect a replicator to revisit states over time. However, none of our identified replicators do this; they either occupy only one state (in which case they cannot be claimed as a variable replicator), or move through a non-repeating sequence of unique states.
 
@@ -280,7 +280,7 @@ The \namecref{ch:variability} began by constructing a model for environmental ch
 
 Shape in our experiments follows either a straightforward alternation between two stable values (``bistate''), or a more complex form described by an AR-timeseries. In order that the forms may be simply described, we summarize each time-series by two metrics: DFA, a type of Hurst parameter, and Sample Entropy, a measure of complexity. The two targets of change addressed in this \namecref{ch:variability} are kinetic energy (the overall kinetic energy of the molecules within the reactor population) and the reactor population itself.
 
-However, our experiment results were inconclusive. Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates---limited sets of repeated reaction cycles---none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing this condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state. On balance we feel that the results cannot be other than inconclusive.
+Our experiment results were inconclusive. Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates---limited sets of repeated reaction cycles---none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing this condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state. On balance we feel that the results cannot be other than inconclusive.
 
 
 

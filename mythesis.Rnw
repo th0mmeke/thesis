@@ -92,7 +92,6 @@ ToyWorld is the second contribution of this thesis. We test the influence of two
 \include{multiplication}
 \include{variability}
 \include{conclusions}
-\part{Appendices}
 \renewcommand{\theHchapter}{A\arabic{chapter}}  % http://tex.stackexchange.com/questions/174887/link-to-appendix-from-anywhere-in-the-document-goes-to-the-wrong-place
 \appendix{
 \include{appendices}

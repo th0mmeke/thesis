@@ -18,9 +18,9 @@ df
 
 \chapter{Reaction Cycles in a Molecular Artificial Chemistry}\label{ch:toyworld}
 
-The work in an earlier \namecref{ch:models-of-inheritance} established that heritability increases under selective pressure until either \emph{ideal} replication is achieved, or, when the selective pressure is varying, replication is \emph{real}. In both cases however heritability increases and the variability of selective pressure causes a tuning or adaptation of the heredity mechanism to the environmental conditions--in intuitive terms, heritability fixes at the maximum where risk is low, and adapts to the level of risk otherwise.
+The work in an earlier \namecref{ch:models-of-inheritance} established that heritability increases under selective pressure until either \emph{ideal} replication is achieved, or, when the selective pressure is varying, replication is \emph{real}. In both cases however heritability increases and the variability of selective pressure causes a tuning or adaptation of the heredity mechanism to the environmental conditions. In intuitive terms, heritability fixes at the maximum where risk is low, and adapts to the level of risk otherwise. Entities within the model were described by only two parameters: fitness (implying selection) and heritability (implying multiplication). 
 
-Entities within the model are described by only two parameters: fitness (implying selection) and heritability (implying multiplication). The key question that motivates the remaining work in this thesis is: can we replace the simple abstract entities with realized entities with associated and emergent (endogenous rather than exogenous) fitness and heritability? More specifically, are we able to create realized entities that are equivalent to the abstract entities in the model, and does the model still hold with realized entities?
+The key question that motivates the remaining work in this thesis is: can we replace the simple abstract entities with realized entities with associated and emergent (endogenous rather than exogenous) fitness and heritability? More specifically, are we able to create realized entities that are equivalent to the abstract entities in the model, and does the model from \cref{ch:models-of-inheritance} still hold with realized entities?
 
 The approach taken in the following chapters is to begin with a simple molecular \gls{achem} and demonstrate one-by-one the required elements for the realized entities, beginning in this chapter with foundational elements (reactions and cycles), then multiplication (required for heritability) and finally variability, all under various forms of selection.
 
@@ -57,7 +57,7 @@ All atoms, and therefore molecules and reactions, are contained within a reactio
 
 In our model, all reactions emerge solely from the properties of the reacting molecules. For each reaction between two molecules we generate a list of reaction alternatives by enumerating all possible bond additions, bond subtractions, and changes in bond type between the reactants. For example, the reactants H\textsubscript{2} and O\textsubscript{2} generate three reaction alternatives: breaking of the H-H bond, breaking of the O=O double bond, and a transformation of the O=O double bond to a single bond. The reactants H\textsuperscript{+} and OH\textsuperscript{-} give two alternative reactions: breaking of the O-H bond (giving H+H\textsuperscript{+}+O\textsuperscript{-}) and formation of a single bond between H\textsuperscript{+} and O to give H\textsubscript{2}O.
 
-The ToyWorld ``main loop'' is described at a high-level in \cref{alg:toyworld-main-loop}: in outline, the sequence is to choose reactants from the molecules in the reactor (later described as reactant selection, or $S_{reactant}$), generate a set of possible reaction products from those reactants and select one set of products from those alternatives (product selection, or $S_{product}$ and then finally replace the reactants in the reactor by the selected products. One time through this sequence constitutes a generation. 
+The ToyWorld ``main loop'' is described at a high-level in \cref{alg:toyworld-main-loop}: in outline, the sequence is to choose reactants from the molecules in the reactor (later described as reactant selection, or $S_{reactant}$), generate a set of possible reaction products from those reactants and select one set of products from those alternatives (product selection, or $S_{product}$ and then finally replace the reactants in the reactor by the selected products. One time through this sequence constitutes a iteration. 
 
 ToyWorld is custom Python code that uses third-party packages and libraries for certain functions. The most significant chunks of external functionality come from RDKit, an open-source toolkit for ChemInformatics, and PyMunk, a physics toolkit. Additionally, we use the NetworkX package for Python for network graph manipulations (mainly in the code that searches for cycles in the reaction graphs), and we use arrays from the Numpy package for Python to record the molecular populations.
 
@@ -81,7 +81,7 @@ PyMunk is used extensively in ToyWorld for 2D physics calculations, including:
 
 \begin{algorithm}[ht]
 	\BlankLine
-	\While{Generation $\leq$ number of generations}{
+	\While{t $\leq$ number of iterations}{
 		\BlankLine
 		\tcp{Selection of reactants}
 		Reactants $\leftarrow$ outcome of the Reactant selection strategy\;
@@ -251,23 +251,23 @@ In a uniform selection strategy ($S_\mathrm{Reactant} = \mathrm{Uniform}$), reac
 
 \subsection{Kinetic selection.}\label{kinetic-selection.}
 
-By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position--molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula. The algorithm for this strategy is given in \cref{alg:kinetic-selection}. At every step the molecules in the reaction vessel move $\delta t$ units along their velocity vectors, bouncing with no loss of energy off the reaction vessel sidewalls. All molecules that collide during this step are added to the tail of the $ReactantList$.
+By contrast, in a kinetic selection strategy ($S_\mathrm{Reactant} = \mathrm{Kinetic}$) molecules have spatial position (and implicitly, velocity) within some assumed reaction vessel, and selection is determined by molecular position--molecules which are spatially co-located (that is, in collision) form a reactant set. Molecules move at constant velocity until they collide with something else (either another molecule or possibly a boundary of an explicit reaction vessel) and then either react, or bounce.  Currently in our work we assume that all molecules have a fixed and common size and shape (circular in two-dimensions), irrespective of molecular formula. The algorithm for this strategy is given in \cref{alg:kinetic-selection}. At every step the molecules in the reaction vessel move $\Delta_t$ units along their velocity vectors, bouncing with no loss of energy off the reaction vessel sidewalls. All molecules that collide during this step are added to the tail of the $ReactantList$.
 
 \begin{algorithm}
 	\Def{KineticReactantSelection(Population)}{
 		\uIf{|Population| < 2}{
 			\Return $\emptyset$
 		}
-		
-		i$\leftarrow$0\;
+		\tcp{Step simulation until have a pool of colliding molecules}
 		\While{ReactantList$=\emptyset$}{
-			i $\leftarrow$ i + 1\;
 			Advance the position of all molecules by $\Delta_t$\;
-			Update ReactantList with all colliding molecules\;
-			\tcp{Check that $\Delta_t$ is neither too small nor too large}
-			\uIf{i > 30 and (|ReactantList| = 0 or |ReactantList| > 10)}{
-				Adjust $\Delta_t$ appropriately\;
-				i$\leftarrow$0\;
+			ReactantList$\leftarrow$ ReactantList $\cup$ {colliding molecules}\;
+			\tcp{Adjust $\Delta_t$ to maintain pool size}
+			\uIf{|ReactantList|=0}{
+				Increase $\Delta_t$\;
+			}
+			\uElseIf{|ReactantList|>10} {
+				Reduce $\Delta_t$\;	
 			}
 		}
 		\tcp{Construct reactant portion of reaction}
@@ -407,9 +407,8 @@ of the reacting system, the vector sum of the momentum of the products
 must equal zero. Therefore one possible solution to the product
 velocities is to arrange their vector momentums according to simple
 geometry: for two products, we arrange their momentums in a line (line
-\ref{alg:2products} in \cref{alg:post_collision_adjustments}); for three
-products, an equilateral triangle (line \ref{alg:3products}), and by
-extension, for four products, a square and so on.
+\ref{alg:2products} in \cref{alg:post_collision_adjustments}), and for three
+products, an equilateral triangle (line \ref{alg:3products}). Further extension beyond three products is not required in ToyWorld as, given two reactants, at most three products can result from the single-bond additions, changes or subtractions of the chemical model.
 
 \begin{algorithm}
 	$\text{kinetic energy of CoM}\leftarrow \frac{1}{2}(\text{sum of reactant masses})(\text{velocity of CoM})^2$\;
@@ -424,8 +423,8 @@ extension, for four products, a square and so on.
 		$\text{Internal energy of Products}\leftarrow \text{collision energy}$\;
 	}
 	\uElse{
-		$\text{ke}\leftarrow \text{random}([0,1])$\;
-		$\text{Internal energy of Products}\leftarrow \text{collision energy}-\text{ke}$\;
+		$\text{KE}\leftarrow \text{random}([0,1])$\;
+		$\text{Internal energy of Products}\leftarrow \text{collision energy}-\text{KE}$\;
 	}
 	\BlankLine
 	\Switch(\tcp*[f]{Find a set of momentum vectors that sum to zero...}){|Products|}{
@@ -433,12 +432,12 @@ extension, for four products, a square and so on.
 			$mv^\prime\leftarrow (0,0,0)$\;
 		}
 		\uCase(\tcp*[f]{Two products}){2}{\label{alg:2products}
-			$mv\leftarrow 2\text{ke}\prod\limits_{i=1}^n \text{mass}_i/\sum\limits_{i=1}^n \text{mass}_i$\;
+			$mv\leftarrow 2\text{KE}\prod\limits_{i=1}^n \text{mass}_i/\sum\limits_{i=1}^n \text{mass}_i$\;
 			$mv^\prime_1\leftarrow (v^\prime_{i\theta}+\frac{\pi}{2},v^\prime_{i\rho}+\frac{\pi}{2},mv)$\;
 			$mv^\prime_2\leftarrow (v^\prime_{i\theta}+\frac{3\pi}{2},v^\prime_{i\rho}+\frac{3\pi}{2},mv)$\;
 		}
 		\uCase(\tcp*[f]{Three products}){3}{\label{alg:3products}
-			$mv\leftarrow 2\text{ke}\prod\limits_{i=1}^n \text{mass}_i/\sum\limits_{i=1}^n \text{mass}_i$\;
+			$mv\leftarrow 2\text{KE}\prod\limits_{i=1}^n \text{mass}_i/\sum\limits_{i=1}^n \text{mass}_i$\;
 			$mv^\prime_1\leftarrow (v^\prime_{i\theta}+\frac{\pi}{3},0,mv)$\;
 			$mv^\prime_2\leftarrow (v^\prime_{i\theta}-\frac{\pi}{3},0,mv)$\;
 			$mv^\prime_3\leftarrow (v^\prime_{i\theta}-\pi,0,mv)$\;
@@ -452,12 +451,12 @@ extension, for four products, a square and so on.
 	\For(\tcp*[f]{Transform back to standard frame}){$i\leftarrow 1$ \KwTo $\text{|Products|}$}{\label{alg:CoM_to_lab_frame}
 		$v_i\leftarrow v^\prime_i+\text{CoM velocity}$\;
 	}
-	\caption{Algorithm to set post-collision velocities and internal energies.}\label{alg:post_collision_adjustments}
+	\caption{Algorithm to set post-collision velocities and internal energies for reactions resulting in one to three products. Extension to more than three products possible by following the same pattern, although this is not necessary in ToyWorld (see text.)}\label{alg:post_collision_adjustments}
 \end{algorithm}
 
 Following a standard method, we first transfer the molecules from the frame of reference of the reaction vessel into the centre of mass (CoM) reference frame by subtracting the velocity of the CoM from each particle (line \ref{alg:lab_to_CoM_frame}). Correspondingly, we also adjust the energy of the collision by subtracting the KE of the CoM. We recognise that in the CoM frame the vector sum of the momentums will be zero; working in this frame reduces the number of vectors we must sum by one (the momentum of the CoM itself.)
 
-We then choose, from a uniform distribution, the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5 x velocity x momentum$, and arrange the vector momentums according to the geometry described earlier.
+We then choose, from a uniform distribution, the proportion of total available energy to allocate to the product kinetic energies and assign the remainder to internal energy (line \ref{alg:allocate_energies}.) From the kinetic energy allocation we can determine the total scalar momentum of the products using $KE = 0.5\times velocity\times momentum$, and arrange the vector momentums according to the geometry described earlier.
 
 Finally, we convert from the CoM reference frame to the initial frame by adding back the velocity of the CoM (line \ref{alg:CoM_to_lab_frame}).  This method satisfies our requirements of conservation of momentum and energy for arbitrary numbers of reactants and products while being computationally straightforward. The limitation is that product vectors are arranged in regular and consistent, although reasonably realistic, configurations. An improvement would be to perturb the geometry of the vectors in the CoM frame to remove the regularity.
 
@@ -845,5 +844,3 @@ In this \namecref{ch:toyworld} we have introduced the ToyWorld \gls{achem}, a mo
 By experiment we have shown that the choice of $S_\mathrm{Reactant}$ is critical to the behaviour of this \gls{achem}; $S_\mathrm{Product}$ on the other hand appears to have a lesser effect on the emergence of cycles in our experiments. Furthermore, $S_\mathrm{Reactant} = \mathrm{Kinetic}$ is more effective for cycle emergence than $S_\mathrm{Reactant} = \mathrm{Uniform}$. The number of cycles, and length of longest cycle, are both maximized with the combination of a Kinetic Reactant selection strategy and a LeastEnergy Product selection strategy. 
 
 Other parameters to the model, such as $E_{Vessel}$, the initial kinetic energy of the molecular population, and $E_{bonds}$, the bonding model, had lesser effects on cycle formation, with the only significant relationship being that of $E_{bonds}$ on the number of cycles produced.
-
-Note that as these conclusions are based on results obtained from an emergent process, an explanatory model is difficult other than through reference to the original simulation. 

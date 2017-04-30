@@ -80,7 +80,7 @@ Factor                	&Model			&-1 value		&+1 value			&Description             
 \midrule
 \noalign{\smallskip}
 $S_\mathrm{Product}$  	&Evolutionary	&Uniform		&LeastEnergy    	&See \cref{product-selection-strategies}                \\
-$E_\mathrm{Shape}$  	&Environmental	&Bistate (alternate every 10,000 generations between -20 and +20 values.)		&AR-timeseries (applied every 1000 generations.)		&See \cref{environmental-models}                \\
+$E_\mathrm{Shape}$  	&Environmental	&Bistate (alternate every 10,000 iterations between -20 and +20 values.)		&AR-timeseries (applied every 1000 iterations.)		&See \cref{environmental-models}                \\
 $E_\mathrm{Target}$  	&Environmental	&KE				&Population			&See \cref{environmental-models}                \\
 \noalign{\smallskip}
 \bottomrule
@@ -92,7 +92,7 @@ $E_\mathrm{Target}$  	&Environmental	&KE				&Population			&See \cref{environment
 
 First we explore the nature of any relationship between simple multiplication and selective pressure. We start by extending our investigation of exact multipliers in stable environments into the effects of selective pressure from varying environments, using the number of multipliers as our response variable for the effect.
 
-We use two proxy metrics calculated from $E_\mathrm{Shape}$ as our measure of selective pressure: DFA and Sample Entropy. DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by the method provided in \textcite{Richman2000}. Both are calculated from the timeseries as applied to the target, with changes at intervals of 1000 generations for the AR-timeseries, and every 10,000 generations for the bistate case. As a result the sample entropy in particular is significantly lower than the sample entropy of the source timeseries.
+We use two proxy metrics calculated from $E_\mathrm{Shape}$ as our measure of selective pressure: DFA and Sample Entropy. DFA is the calculated Hurst parameter ($H$) using detrended fluctuation analysis, while sample entropy is assessed by the method provided in \textcite{Richman2000}. Both are calculated from the timeseries as applied to the target, with changes at intervals of 1000 iterations for the AR-timeseries, and every 10,000 iterations for the bistate case. As a result the sample entropy in particular is significantly lower than the sample entropy of the source timeseries.
 
 Our hypothesis test is:
 

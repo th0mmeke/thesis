@@ -327,7 +327,7 @@ The factors and levels along with their mapping to model parameters are given in
 	\end{center}
 \end{table}
 
-Each combination of factor levels has 10 replicates, to give a total of $2\times2\times2\times1\times2\times10$ or 160 experiment runs.
+Each combination of factor levels has 10 replicates, to give a total of $2\times2\times2\times1\times2\times10$ or 160 experiment runs. The initial population for each run consists of 5,000 entities, each with heritability and fitness chosen independently and with uniform probability from the range [0,0.3]. Each run contains \Sexpr{max(df_full['gen'])} generations.
 
 \subsection{Sensitivity of the model to parameter values}\label{reducing-the-parameter-space-for-the-experiments}
 
@@ -335,7 +335,7 @@ In the absence of any restrictions on population size there is nothing to preven
 
 The size of the population is determined by how population entities are introduced and removed. In standard Evolutionary Computation (\eg \textcite[50]{DeJong2006}) the choice of strategy is important to the performance and outcomes of the algorithm. New entities can be straight replacements, like-for-like, of their parent, or be placed in competition against entities in the parent population, or completely replace the parent population. Elements may be removed as a result of selection, or through fitness-independent sampling to maintain a particular population size, or through some end-of-life calculation. The population size limit may act as both upper and lower bound on population size to maintain a specific size, or solely as upper bound.
 
-In \textcite{Gaucherel2012} the approach is to remove individuals from the population stochastically, with probability related to $e$ to the negative power of the population size multiplied by a configurable parameter, $\mu$. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of entities are extracted from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \textcite[sect. 4.3.1]{DeJong2006} and \textcite[sect. 4.2]{Vose:1999di}.) Here though we separate the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used.
+In \textcite{Gaucherel2012} the approach is to remove individuals from the population stochastically, with probability related to $e$ to the negative power of the population size multiplied by a configurable parameter, $\mu$. In the ``canonical'' Evolutionary Computation algorithm, a population limit results from selection where a set number of entities are extracted from the original population, chosen by one of a wide range of selection algorithms (among many sources, see overviews in \textcite[sect. 4.3.1]{DeJong2006} and \textcite[sect. 4.2]{Vose:1999di}.) Here though we separate the selection function from the population size limit in order to qualify the effect of the specific limiting mechanism used. To constrain population size without introducing an associated selection bias, in the experiments in this chapter at each generation we remove with uniform probability the exact number of entities (without regard for fitness) to maintain a fixed population size of 5,000 entities.
 
 Translating model parameters into factors in the experiment design results in the first column of \cref{tbl:factor-levels-c7}. As is usual with exploratory experiments with a number of parameters, where each run of the model has some cost in time or other resources, the key problem is to understand the relationship between parameters and response variables at an acceptable cost. In this case, our main cost is time - each run of an evolutionary model is cheap in resources but takes a little time. Exhaustively sampling the entire parameter space is unrealistic. Therefore, we first reduce the search space by limiting the number of values that each parameter can take. By choosing these values appropriately, we can construct an analysis model from the results that is sufficiently accurate for our exploratory purposes at a greatly reduced cost in time.
 
@@ -553,7 +553,7 @@ We create a set of independent datasets by sampling from four different paramete
 	\end{center}
 \end{table}
 
-The other factors and levels along with their mapping to model parameters, are shown below:
+The population consists of 5,000 entities, each with fitness and heritability chosen independently and with uniform probability from the range [0,0.3], and each run is for 500 generations. The other factors and levels along with their mapping to model parameters, are shown below:
 \begin{itemize}
 	\item$p_{reproduction}$ = fitness.
 	\item $p_{selection}$ = fitness.

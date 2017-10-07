@@ -468,148 +468,160 @@ The outcomes for each reaction alternative from an example collision are shown i
 	\centering
 	\subcaptionbox{O=C=O + C$\rightarrow$ [O] + C + [C]=O}[0.5\textwidth]{%
 		\begin{tikzpicture}[scale=3,tdplot_main_coords]
-			\coordinate (O) at (0,0,0);
-			\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
-			\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
-			\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
-			\node at (1,1,0) {};
-			\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
-			\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
-			\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
-			\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-			\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
-			\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
-			\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
-			\tdplotsetcoord{O0}{0.791487199406}{-24.6589855625}{-70.1992043245};
-			\tdplotsetcoord{O1}{0.790684881135}{-24.6841653158}{-219.830383842};
-			\tdplotsetcoord{O2}{0.342756745318}{-57.7497471497}{-145.082834065};
-			\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[O]};
-			\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[H]C([H])([H])[H]};
-			\draw[color=blue,-stealth] (O) -- (O2) node[font=\tiny,color=black]{[C]=O};
-			\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
-			\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
-			\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
-		\end{tikzpicture}}%
-	\subcaptionbox{O=C=O + C$\rightarrow$ C + [O][C]=O}[0.5\textwidth]{%
-		\begin{tikzpicture}[scale=3,tdplot_main_coords]
-			\coordinate (O) at (0,0,0);
-			\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
-			\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
-			\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
-			\node at (1,1,0) {};
-			\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
-			\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
-			\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
-			\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-			\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
-			\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
-			\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
-			\tdplotsetcoord{O0}{0.964870972861}{170.402519717}{-86.502709589};
-			\tdplotsetcoord{O1}{0.690770768471}{-121.920061352}{-167.114195829};
-			\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[H]C([H])([H])[H]};
-			\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[O][C]=O};
-			\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
-			\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
-		\end{tikzpicture}}%
-%\end{figure}\begin{figure}
-
-\centering
-\subcaptionbox{O=C=O + C$\rightarrow$ [O] + C + [C]=O}[0.5\textwidth][l]{%
-	\begin{tikzpicture}[scale=3,tdplot_main_coords]
 		\coordinate (O) at (0,0,0);
 		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
 		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
 		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
 		\node at (1,1,0) {};
-		\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
-		\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
+		%\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
 		\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
-		\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-		\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[above,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
+		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
+		\tdplotsetcoord{O0}{0.791487199406}{-24.6589855625}{-70.1992043245};
+		\tdplotsetcoord{O1}{0.790684881135}{-24.6841653158}{-219.830383842};
+		\tdplotsetcoord{O2}{0.342756745318}{-57.7497471497}{-145.082834065};
+		\draw[color=blue,-stealth] (O) -- (O0) node[above,font=\tiny,color=black]{[O]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[above left,font=\tiny,color=black]{[H]C([H])([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O2) node[right,font=\tiny,color=black]{[C]=O};
+		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
+		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
+		\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
+		\end{tikzpicture}}%
+	\subcaptionbox{O=C=O + C$\rightarrow$ C + [O][C]=O}[0.5\textwidth]{%
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
+		\coordinate (O) at (0,0,0);
+		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+		\node at (1,1,0) {};
+		%\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
+		\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[above,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
+		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
+		\tdplotsetcoord{O0}{0.964870972861}{170.402519717}{-86.502709589};
+		\tdplotsetcoord{O1}{0.690770768471}{-121.920061352}{-167.114195829};
+		\draw[color=blue,-stealth] (O) -- (O0) node[below,font=\tiny,color=black]{[H]C([H])([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[below,font=\tiny,color=black]{[O][C]=O};
+		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
+		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
+		\end{tikzpicture}}%
+	%\end{figure}\begin{figure}
+	
+	\centering
+	\subcaptionbox{O=C=O + C$\rightarrow$ [O] + C + [C]=O}[0.5\textwidth][l]{%
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
+		\coordinate (O) at (0,0,0);
+		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+		\node at (1,1,0) {};
+		%\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
+		\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[above,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
 		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
 		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
 		\tdplotsetcoord{O0}{0.95444795957}{-20.4286793523}{-48.3296764651};
 		\tdplotsetcoord{O1}{0.953114678315}{-20.4573799628}{-241.693389093};
 		\tdplotsetcoord{O2}{0.239763118095}{-84.1834478971}{-145.082834065};
-		\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[O]};
-		\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[H]C([H])([H])[H]};
-		\draw[color=blue,-stealth] (O) -- (O2) node[font=\tiny,color=black]{[C]=O};
+		\draw[color=blue,-stealth] (O) -- (O0) node[above,font=\tiny,color=black]{[O]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[above,font=\tiny,color=black]{[H]C([H])([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O2) node[below right,font=\tiny,color=black]{[C]=O};
 		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 		\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
-	\end{tikzpicture}}%
-\subcaptionbox{O=C=O + C$\rightarrow$ C + [O][C]=O}[0.5\textwidth][r]{%
-	\begin{tikzpicture}[scale=3,tdplot_main_coords]
+		\end{tikzpicture}}%
+	\subcaptionbox{O=C=O + C$\rightarrow$ C + [O][C]=O}[0.5\textwidth][r]{%
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
 		\coordinate (O) at (0,0,0);
 		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
 		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
 		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
 		\node at (1,1,0) {};
-		\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
-		\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
+		%\tdplotsetcoord{CM0}{0.545078574376}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.545078574376}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.741455902351}{53.4742770534}{-140.637846457};
 		\tdplotsetcoord{I1}{-1.00269224405}{-269.549896905}{-273.397556374};
-		\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-		\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[above,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
 		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
 		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
 		\tdplotsetcoord{O0}{0.683938755498}{116.950434333}{-109.96313961};
 		\tdplotsetcoord{O1}{0.613112203007}{-91.4698581679}{-158.027937122};
-		\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[H]C([H])([H])[H]};
-		\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[O][C]=O};
+		\draw[color=blue,-stealth] (O) -- (O0) node[below,font=\tiny,color=black]{[H]C([H])([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[below,font=\tiny,color=black]{[O][C]=O};
 		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
-	\end{tikzpicture}}%
-%\end{figure}\begin{figure}
-
-\centering
-\subcaptionbox{O=C=O + C$\rightarrow$ [H] + [CH3] + O=C=O}[0.5\textwidth]{%
-	\begin{tikzpicture}[scale=3,tdplot_main_coords]
+		\end{tikzpicture}}%
+	%\end{figure}\begin{figure}
+	
+	\centering
+	\subcaptionbox{O=C=O + C$\rightarrow$ [H] + [CH3] + O=C=O}[0.5\textwidth]{%
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
 		\coordinate (O) at (0,0,0);
 		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
 		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
 		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
 		\node at (1,1,0) {};
-		\tdplotsetcoord{CM0}{0.13448625105}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.13448625105}{-35.9326309999}{-145.082834065};
-		\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.182938074093}{53.4742770534}{-140.637846457};
+		%\tdplotsetcoord{CM0}{0.13448625105}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.13448625105}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.182938074093}{53.4742770534}{-140.637846457};
 		\tdplotsetcoord{I1}{-0.247392444315}{-269.549896905}{-273.397556374};
-		\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-		\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[left,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
 		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
 		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
 		\tdplotsetcoord{O0}{1.0085637103}{-4.76020744144}{22.9882733079};
 		\tdplotsetcoord{O1}{0.174049248064}{-27.6898552083}{-202.938127977};
 		\tdplotsetcoord{O2}{0.113557100128}{-42.6716880361}{-145.082834065};
-		\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[H]};
-		\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[H][C]([H])[H]};
-		\draw[color=blue,-stealth] (O) -- (O2) node[font=\tiny,color=black]{O=C=O};
+		\draw[color=blue,-stealth] (O) -- (O0) node[right,font=\tiny,color=black]{[H]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[above left,font=\tiny,color=black]{[H][C]([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O2) node[right,font=\tiny,color=black]{O=C=O};
 		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 		\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
-	\end{tikzpicture}}%
-\subcaptionbox{O=C=O + C$\rightarrow$ [H] + [CH3] + O=C=O}[0.5\textwidth]{%
-	\begin{tikzpicture}[scale=3,tdplot_main_coords]
+		\end{tikzpicture}}%
+	\subcaptionbox{O=C=O + C$\rightarrow$ [H] + [CH3] + O=C=O}[0.5\textwidth]{%
+		\begin{tikzpicture}[scale=3,tdplot_main_coords]
 		\coordinate (O) at (0,0,0);
 		\draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
 		\draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
 		\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
 		\node at (1,1,0) {};
-		\tdplotsetcoord{CM0}{0.212817921117}{-35.9326309999}{-145.082834065};\tdplotsetcoord{CM1}{-0.212817921117}{-35.9326309999}{-145.082834065};
-		\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);\tdplotsetcoord{I0}{-0.289490563666}{53.4742770534}{-140.637846457};
+		%\tdplotsetcoord{CM0}{0.212817921117}{-35.9326309999}{-145.082834065};
+		%\tdplotsetcoord{CM1}{-0.212817921117}{-35.9326309999}{-145.082834065};
+		%\draw[color=black,densely dotted,-stealth] (CM0)-- (CM1);
+		\tdplotsetcoord{I0}{-0.289490563666}{53.4742770534}{-140.637846457};
 		\tdplotsetcoord{I1}{-0.391486455219}{-269.549896905}{-273.397556374};
-		\draw[color=red,-stealth] (I0) node[font=\tiny,color=black]{O=C=O}-- (O);
-		\draw[color=red,-stealth] (I1) node[font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
+		\draw[color=red,-stealth] (I0) node[below,font=\tiny,color=black]{O=C=O}-- (O);
+		\draw[color=red,-stealth] (I1) node[left,font=\tiny,color=black]{[H]C([H])([H])[H]}-- (O);
 		\draw[dotted, color=black] (O) -- (I0xy); \draw[dotted, color=black] (I0) -- (I0xy);
 		\draw[dotted, color=black] (O) -- (I1xy); \draw[dotted, color=black] (I1) -- (I1xy);
 		\tdplotsetcoord{O0}{1.00268330145}{-7.57832855688}{10.7762512874};
 		\tdplotsetcoord{O1}{0.247189031344}{-30.8825003788}{-183.173163231};
 		\tdplotsetcoord{O2}{0.193079615497}{-39.6636579632}{-145.082834065};
-		\draw[color=blue,-stealth] (O) -- (O0) node[font=\tiny,color=black]{[H]};
-		\draw[color=blue,-stealth] (O) -- (O1) node[font=\tiny,color=black]{[H][C]([H])[H]};
-		\draw[color=blue,-stealth] (O) -- (O2) node[font=\tiny,color=black]{O=C=O};
+		\draw[color=blue,-stealth] (O) -- (O0) node[right,font=\tiny,color=black]{[H]};
+		\draw[color=blue,-stealth] (O) -- (O1) node[above left,font=\tiny,color=black]{[H][C]([H])[H]};
+		\draw[color=blue,-stealth] (O) -- (O2) node[right,font=\tiny,color=black]{O=C=O};
 		\draw[dotted, color=black] (O) -- (O0xy); \draw[dotted, color=black] (O0) -- (O0xy);
 		\draw[dotted, color=black] (O) -- (O1xy); \draw[dotted, color=black] (O1) -- (O1xy);
 		\draw[dotted, color=black] (O) -- (O2xy); \draw[dotted, color=black] (O2) -- (O2xy);
-	\end{tikzpicture}}%
+		\end{tikzpicture}}%
 \caption[Reaction alternatives generated by ToyWorld from a collision between O=C=O and C molecules.]{Reaction alternatives generated by ToyWorld from a collision between O=C=O and C molecules. Each alternative generates a unique set of products, with corresponding velocities calculated by \cref{alg:post_collision_adjustments} so as to preserve energy and momentum.}
 \label{fig:collision_diagrams}
 \end{figure}

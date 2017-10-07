@@ -83,7 +83,7 @@ Although \gls{ens} is usually only discussed within the context of modern day bi
 
 A specific example lies in the transition from non-living to living things. One of the main problems (of several) in extending \gls{ens} to prebiotic entities is that the meaning of the foundational elements---such as variation, selection, heredity, multiplication---are generally couched in biological terms. For example, heredity is often discussed in terms of alleles, or traits, rather than in more general ways. However, there must have been some point at which the prebiotic processes transitioned to \gls{ens}, and it is clear that this transition did not happen abruptly in a population of fully-fledged modern organisms. The pathway to \gls{ens}, the evolution of evolution itself, is one of the main open problems in origins-of-life research, and it involves an extension of those foundational elements back into the prebiotic world.
 
-This example of the transition to life is an example of \emph{extending} \gls{ens}; two further examples are now presented that are \emph{alternatives} to \gls{ens}: DaisyWorld, or regulation without selection, and evolution in an entirely non-living domain---the evolution of technology. 
+This example of the transition to life is an example of \emph{extending} \gls{ens}; two further examples are now presented that are \emph{alternatives} to \gls{ens}: the evolution of technology, or evolution in an entirely non-living domain, and DaisyWorld, demonstrating regulation without selection.
 
 \Textcite{Arthur2009} describes a mechanism for the evolution of technology, where evolution is used in the sense of ``all objects of some class are related by ties of common descent from the collection of earlier objects''. Evolution in technology occurs by using earlier technologies as building blocks in the composition of new technologies, and these new technologies then become building blocks for use in later technologies, and so on. Arthur calls this ``combinatorial evolution.'' But what is the starting point? How is this regression grounded? Arthur proposes that the capture and harnessing of natural phenomena starts each lineage and provides new raw components for inclusion in later technologies. \Textcite{Bourrat2015} comments that distributive evolution (where only the distribution of elements changes, as result of selection or drift) cannot result in novelties: Arthur anticipates this objection by stating that novelty comes from this incorporation of new phenomena from the source, the natural world.
 
@@ -361,8 +361,8 @@ As we are primarily interested in the final values for heritability, the data in
 <<lowstart, pdfcrop=TRUE, echo=FALSE, cache=TRUE, fig.pos='htp', fig.scap=NA, fig.cap='Summary results, showing on the left-hand side an overview for the final mean heritability ($\\overline{heritability}_{end}$) for each run and a density plot showing the distribution of $\\overline{heritability}_{end}$. The right-hand side shows the corresponding plots for final mean fitness ($\\overline{fitness}_{end}$)'>>=
 ap <- qplot(row.names(df),ave_cor, geom="point", data=df, xlab='Experiment run',ylab="Final mean heritability") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
 bp <- qplot(row.names(df),ave_fit, geom="point", data=df, xlab='Experiment run',ylab="Final mean fitness") + theme(axis.ticks.x=element_blank(), axis.text.x = element_blank())
-cp <- qplot(ave_cor, geom="density", data=df, xlab="Final mean heritability",ylab="")
-dp <- qplot(ave_fit, geom="density", data=df, xlab="Final mean fitness",ylab="")
+cp <- qplot(ave_cor, geom="density", data=df, xlab="Final mean heritability",ylab="Density")
+dp <- qplot(ave_fit, geom="density", data=df, xlab="Final mean fitness",ylab="Density")
 grid.arrange(ap,bp,cp,dp,nrow=2,ncol=2)
 @
 

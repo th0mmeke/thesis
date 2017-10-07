@@ -315,7 +315,7 @@ effort to develop and evaluate.
 
 \subsection{Least Energy Strategy}\label{least-energy-strategy}
 
-When following a Least Energy strategy ($S_\mathrm{Product} = \mathrm{LeastEnergy}$) we select a reaction by choosing with uniform probability from a distribution of reaction alternatives weighted by the total of the energy changes associated with the bond changes. This biases selection towards the Least Energy alternative; the strength of the bias is determined by the degree of the weighting. \cref{fig1} shows an example of the shift in products that occurs as a result of this weighting as the overall quantity of energy in the system is changed.
+When following a Least Energy strategy ($S_\mathrm{Product} = \mathrm{LeastEnergy}$) we select a reaction by choosing with uniform probability from a distribution of reaction alternatives weighted by the total of the energy changes associated with the bond changes. This biases selection towards the Least Energy alternative; the strength of the bias is determined by the degree of the weighting. \Cref{fig1} shows four examples of the shift in products that occurs as a result of this weighting as the overall quantity of energy in the system is changed.
 
 Specifically, let $E_i$ denote the energy required for the bond change in the reaction option $i$. If $E_i > 0$ the reaction is exothermic, or releases energy; otherwise it is endothermic, requiring energy to proceed.
 
@@ -624,12 +624,15 @@ The energy-model presented in this \namecref{ch:toyworld} leads to some particul
 \item The equilibrium point should depend on the energy of the system. Our energy model preferentially forms bonds at low energies, and breaks bonds at high. We expect the average length of molecules in the artificial chemistry to be greater at low energies than at high energies.
 \end{enumerate}
 
-These predictions were tested by two experiments: first, we examined the reaction products produced at a range of reaction energies for four sets of reactants. Second, for a given set of reactants, we ran the simulation for 10,000 iterations at four successive initial average kinetic energy levels--0, 67, 133, and 200 units per molecule. The experiment was run first with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
+These predictions were tested by two experiments: first, we examined the reaction products produced at a range of reaction energies for four sets of reactants. Second, for a given set of reactants, we ran the simulation for 10,000 iterations at four successive initial average kinetic energy levels--0, 67, 133, and 200 units per molecule. 
+
+The experiment was run first with a reactant set containing 100xN\textsubscript{2}O\textsubscript{4} and 100x2NO\textsubscript{2}, and then with a reactant set of 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.
 
 \begin{figure}
 	\begin{center}
-		\caption[Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2}.]{Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} with initial average KE ranging from 0 to 200 units (only molecules with significant quantities are labelled; remainder appear as light-grey lines). Molecules represented in SMILES notation.}
-		\includegraphics[width=\linewidth]{figures/results-test-N2O4a}s
+		\caption[Molecular quantities over time for initial populations of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2}, and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.]{Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} (top) and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O (bottom) with initial average KE ranging from 0 to 200 units (only molecules with significant quantities are labelled; remainder appear as light-grey lines). Molecules represented in SMILES notation.}
+		\includegraphics[width=\linewidth]{figures/results-test-N2O4a}
+		\includegraphics[width=\linewidth]{figures/results-test-H2O}
 		\label{fig1}
 	\end{center}
 \end{figure}
@@ -679,8 +682,8 @@ The ToyWorld model contains a number of parameters that might conceivably affect
 
 \begin{enumerate}
 \item Is there a quantitative difference between different reactant and product selection strategies?
-\item Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?
-\item Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?
+\item Is there a combination of reactant and product selection strategies that leads to the appearance of an increased number of cycles?
+\item Is the number of cycles significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?
 \end{enumerate}
 
 To the best of our knowledge, this is the first time that reaction and product selection strategies in \glspl{achem} have been experimentally compared.
@@ -818,7 +821,7 @@ grid.arrange(ap,bp,cp,nrow=1,ncol=3)
 @
 
 \subsection{Is there a quantitative difference between the different reactant and product selection strategies?}
-From visual inspection of \cref{fig:reactantstrategy}, there appears to be a significant difference between the Uniform and Kinetic reactant selection strategies for number and length of cycles. Kinetic reactant selection seems to result in significantly higher levels of emergent behaviour than Uniform reactant selection. Similarly, from \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
+From visual inspection of \cref{fig:reactantstrategy}, the number and length of cycles produced by Kinetic reactant selection seems to show a significant increase compared to those produced by Uniform reactant selection. Similarly, from \cref{fig:productstrategy}, there is very little apparent difference between the two product strategies, Uniform selection and Least Energy selection.
 
 We use \gls{anova} to further examine the relationship of $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ to the response variables using a two-factor with two-levels (2x2) model with interaction effects. There is a highly significant difference (p\textless 0.001) between the Uniform and Kinetic reactant selection strategies when comparing the number of cycles (f-value=40.442) and length of cycles (f-value=361.891) (confirming the impression given by \cref{fig:reactantstrategy}), although again without difference for the count of the most common cycle. The effect of $S_\mathrm{Product}$ on cycle number and length is also significant (f-value=4.050 and 5.705 respectively, p\textless 0.05) and there is a first-order interaction between $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$ for number of cycles (f-value=4.011, p\textless 0.05).
 
@@ -828,13 +831,13 @@ bp <- ggplot(df) + geom_boxplot(aes(y=Length.of.longest.cycle, x=interaction(Rea
 grid.arrange(ap,bp,nrow=2,ncol=1)
 @
 
-\subsection{Is there a combination of reactant and product selection strategies that leads to increased emergence as measured by cycles?}
+\subsection{Is there a combination of reactant and product selection strategies that leads to the appearance of an increased number of cycles?}
 
 From \cref{fig:reactantproductcombination} it is clear that there is no significant relationship between strategy and the number of occurrence of the most common cycle. However, it seems that such a relationship does exist for the number and length of cycles, with the strongest effect as a result of $S_\mathrm{Reactant}$, and a lesser effect from the choice of $S_\mathrm{Product}$.
 
 We conclude that the greatest levels of emergence are likely to be seen with the combination of $S_\mathrm{Reactant} = \mathrm{Kinetic}$ and $S_\mathrm{Product} = \mathrm{LeastEnergy}$.
 
-\subsection{Is emergence significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?}\label{RQ2.3}
+\subsection{Is the number of cycles significantly affected by the values of other parameters of an \gls{achem}, such as initial kinetic energy or bond energies?}\label{RQ2.3}
 
 We construct a two-factor with two-levels (2x2) \gls{anova} model (degrees of freedom=1) with interaction effects to examine the relationship of the independent variables $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ to the response variables, and applied it to our dataset (summarised in \cref{tbl:results}). $E_\mathrm{Bonds}$ is significant (f-value=4.221, p\textless 0.05) to number of cycles (see \cref{fig:bondstrategy}). No other significant relationships exist.
 

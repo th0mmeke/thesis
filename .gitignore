@@ -6,6 +6,12 @@ oldResults/
 Icon*
 tmp-*.tex
 pw.txt
+*.blg
+*.glg
+*.gls
+*.lof
+*.lot
+*.toc
 *.log
 *.aux
 *.bbl

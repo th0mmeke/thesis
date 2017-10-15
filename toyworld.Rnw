@@ -633,9 +633,14 @@ The experiment was run first with a reactant set containing 100xN\textsubscript{
 
 \begin{figure}
 	\begin{center}
-		\caption[Molecular quantities over time for initial populations of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2}, and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.]{Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} (top) and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O (bottom) with initial average KE ranging from 0 to 200 units (only molecules with significant quantities are labelled; remainder appear as light-grey lines). Molecules represented in SMILES notation.}
-		\includegraphics[width=\linewidth]{figures/results-test-N2O4a}
-		\includegraphics[width=\linewidth]{figures/results-test-H2O}
+		\vspace{0.5cm}
+		
+		\includegraphics[width=0.75\linewidth]{figures/results-test-N2O4a}
+		
+		\vspace{1cm}
+		
+		\includegraphics[width=0.75\linewidth]{figures/results-test-H2O}
+		\caption[Molecular quantities over time for initial populations of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2}, and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O.]{Molecular quantities over time for initial population of N\textsubscript{2}O\textsubscript{4} and 2NO\textsubscript{2} (top two rows) and 100xH\textsubscript{2}, 100xO\textsubscript{2} and 100xH\textsubscript{2}O (bottom two rows) with initial average KE ranging from 0 to 200 units (only molecules with significant quantities are labelled; remainder appear as light-grey lines). Molecules represented in SMILES notation.}
 		\label{fig1}
 	\end{center}
 \end{figure}

@@ -682,6 +682,8 @@ The energy and reaction models produce results consistent with our predictions f
 
 \section{Response of the model to reactant and product strategies}\label{reactant-and-product-strategies}
 
+We now return to the goal of this chapter: to establish the effect of reactant and product selection strategies on cycle formation. Cycles are of fundamental importance in our work as they are the mechanism by which autocatalysis is achieved, and therefore they are themselves candidate replicators. 
+
 In this section we explore the following questions:
 
 \begin{enumerate}
@@ -723,11 +725,12 @@ For simplicity of analysis, all of our factors are two-level, meaning they take 
 \end{table}
 
 \subsection{Response variables}
-We concentrate on three related response, or dependent, variables--Number of cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
+
+A reaction cycle is formed by a sequence of reactions where one or more of the products of the final reaction in the cycle are of the same species as the same number of reactants in first reaction in the cycle. That is, reaction cycles are partially-closed (as not every molecule must be both reactant and product in the cycle) and capable of autocatalysis.
+
+We concentrate on three related response, or dependent, variables--Number of reaction cycles, Length of longest cycle, and Count of most common cycle. All three are derived from a reconstruction of the network of reactions that occur during each experiment run, where every edge represents a specific reaction connecting a particular set of reactants with a particular set of products. Note that the nodes in the constructed network capture specific molecules, rather than molecular types or species that share the same chemical formula (as would be more usual in the construction of a Reaction Network for real-world chemistry.)
 
 We exclude all unique cycles, and all cycles with three or fewer elements (for example, where a molecule loses, then regains, an atom repeatedly). Unique cycles by nature are unlikely to be representative; very short cycles on the other hand are so common as to dominate other more interesting cycles in any analysis.
-
-
 
 \section{Results}
 

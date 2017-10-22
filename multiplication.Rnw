@@ -229,7 +229,7 @@ Multipliers are structures that, in our context of \glspl{achem}, emerge from th
 	\item H$_1$:  Multiplying single reaction-cycle entities exist in an \gls{achem} reaction network.
 \end{itemize}
 
-We again use the ToyWorld parameterized evolutionary model introduced in \cref{ch:toyworld}. The experiments follow a full factorial design although with only a single factor ($S_\mathrm{Product}$) at two levels(Uniform and LeastEnergy),  while $S_\mathrm{Reactant}$ is set to Kinetic (\cref{alg:kinetic-selection}). The experiments run in a randomised order, with two (2) replicates of each combination of factors executed in sequence before beginning the next combination. The factors and levels used are given in \cref{tbl:multiplication-factors}.
+We again use the ToyWorld parameterized evolutionary model introduced in \cref{ch:toyworld}. The experiments follow a full factorial design although with only a single factor ($S_\mathrm{Product}$) at two levels (Uniform and LeastEnergy),  while $S_\mathrm{Reactant}$ is set to Kinetic (\cref{alg:kinetic-selection}). The experiments run in a randomised order, with two (2) replicates of each combination of factors executed in sequence before beginning the next combination. The factors and levels used are given in \cref{tbl:multiplication-factors}.
 
 \begin{table}
 	\scriptsize
@@ -247,7 +247,7 @@ We again use the ToyWorld parameterized evolutionary model introduced in \cref{c
 	\end{center}
 \end{table}
 
-Each replicate runs for 100,000 iterations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O (all in SMILES notation), and the initial reactor kinetic energy is set to 100 units.
+Each replicate runs for 100,000 iterations. The initial population for each replicate contains 10$\times$[H][H] molecules, 10$\times$FO, 20$\times$O, 10$\times$[O-][N+](=O)[N+]([O-])=O, 10$\times$N(=O)[O], and 20$\times$O=C=O (all in SMILES notation), and the initial reactor kinetic energy ($E_\mathrm{Vessel}$) is set to 100 units.
 
 \section{Results and discussion}
 

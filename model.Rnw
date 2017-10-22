@@ -416,13 +416,13 @@ In this \namecref{model-behaviour-in-changing-environments} we describe an appro
 
 \subsection{Environmental model}\label{environmental-model}
 
-Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. 
+Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. This relationship is simply modelled by constructing the entity fitness at timestep $t+1$ as the entity's fitness at timestep $t$ plus the environmental contribution at timestep $t$.
 
 Statistical techniques are commonplace for time-series predictions \parencite{Brockwell:2002dq}, where a \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$ \parencite{Brockwell:2002dq}. 
 
 Although time-series modelling provides techniques for describing time-series data in terms of an underlying model, the process can also be reversed to produce a time-series \textit{from} the model; in other words, if the variety of environmental change required to test our hypothesis can be described by a standard time-series model, the parameters that determine that model can also serve as our headline measure for environmental change.
 
-ARMA models are used for \emph{stationary} series, that is a time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time, equivalent to saying the series does not demonstrate concept drift. ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series---the I or ``Integrated'' component of the model provides the differencing.
+There are various forms of standard time-series models. ARMA models, combining autoregressive (AR) and moving average (MA) components, are often used for \emph{stationary} series, that is time-series whose joint probability distribution (and hence whose statistical properties such as mean and variance) do not change over time. This is equivalent to saying the series does not demonstrate concept drift. By contrast, ARIMA models apply for non-stationary series where the difference between two sequential values of the original series can be shown to produce a stationary series---the I or ``Integrated'' component of the model provides the differencing.
 
 Our environmental model provides an enhanced AR(1) or first-order autoregressive time-series, with each timestep corresponding to one evolutionary generation. Specifically, we describe the evolutionary change at each timestep as a function of the previous timestep:
 

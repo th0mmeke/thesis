@@ -702,7 +702,7 @@ The experiments follow a full factorial design over four factors ($S_\mathrm{Rea
 Each replicate used the same initial population of 800 molecules, made up of 100 molecules each of [H][H], O=O, [O-][N+](=O)[N+]([O-])=O, and N(=O)[O] and 200 molecules each of O and O=C=O (all represented in SMILES \parencite{smiles}.) This initial population is somewhat arbitrary, although reasonable; given that ToyWorld is a strongly constructive chemistry, we would expect that any differences between initial populations would reduce as the simulation proceeds.
 
 \subsection{Factors}
-Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$. We also introduce two secondary factors, overall reaction vessel energy ($E_\mathrm{Vessel}$) and bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
+Our two primary factors, or independent variables, are $S_\mathrm{Reactant}$ and $S_\mathrm{Product}$. We also introduce two secondary factors, initial reaction vessel kinetic energy ($E_\mathrm{Vessel}$) and bond energy ($E_\mathrm{Bonds}$), to assess the sensitivity of the simulation to other parameters.
 
 For simplicity of analysis, all of our factors are two-level, meaning they take one of two possible levels, or values, in each run. The parameter values chosen for each level of $E_\mathrm{Vessel}$ and $E_\mathrm{Bonds}$ were chosen as representative from a set of alternatives used in initial exploratory experiments; in each case they allowed the simulation to run for an extended period without running out of possible reactions (from lack of energy for example.)
 

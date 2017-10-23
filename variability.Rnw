@@ -282,5 +282,12 @@ Shape in our experiments follows either a straightforward alternation between tw
 
 Our experiment results were inconclusive. Although the \gls{achem} produced exact multipliers in approximately one-third of all runs, a relationship between environmental variabilty and the numbers of multipliers was unproven. Similarly, although the \gls{achem} generated a number of variable replicator candidates---limited sets of repeated reaction cycles---none of the candidates were other than endemic to a single run. As the condition for a full variable replicator is that each state should be equivalent under selection, the lack of alternative forms in other runs prevents us from properly testing this condition. However, we would have expected a variable replicator to oscillate between a set of states while our candidates never repeated the same state. On balance we feel that the results cannot be other than inconclusive.
 
+Biology gives us many examples of functional replicators, but provides little guidance on alternative approaches; we don't wish to bias our simulation model in a direction which may very well be wrong. Unfortunately, although we have no prior knowledge to estimate probabilities, it is clear that even without the constraint of attempting to replicate the process by which replication evolved on Earth, replication is very unlikely.
+
+The fundamental step appears to be the shift from a limited heredity replicator to an unlimited one. At that point, the necessary leap in information that must be maintained and managed by the entities genome looks to require a quite different mechanism for information storage--a shift from an analog genome to a digital (for example, templated) one, associated with a process to map between genome and phenome. The outcome of this change is a capacity for increased expressiveness, and an increased ability to respond to complexity in the environment.
+
+This is not straightforward though as it requires a two-way mapping mechanism from genome to phenome and back (to incorporate changes), with the target of selection accordingly moving to the phenome. It is not at all clear how this shift (an evolutionary transition in Maynard-Smith and Szathmary's terminology) might evolve in our system.
+
+
 
 

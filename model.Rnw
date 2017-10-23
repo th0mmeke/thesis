@@ -416,7 +416,7 @@ In this \namecref{model-behaviour-in-changing-environments} we describe an appro
 
 \subsection{Environmental model}\label{environmental-model}
 
-Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. This relationship is simply modelled by constructing the entity fitness at timestep $t+1$ as the entity's fitness at timestep $t$ plus the environmental contribution at timestep $t$.
+Alongside the evolutionary model from \cref{base-model} we now add an environmental model to describe the changing fitness relationship between entities and the environment at each step of the evolutionary model. This relationship is simply modelled by constructing the entity fitness at timestep $t+1$ as the entity's fitness at timestep $t$ plus the environmental contribution at timestep $t$, bound to the range for fitness of $[0,1]$.
 
 Statistical techniques are commonplace for time-series predictions \parencite{Brockwell:2002dq}, where a \emph{time series} is a set of observations $x_i$, each one being recorded at a specific time $t$ where an observation $x_i \in$ some set $\{X\}$, assumed to be $\mathbb{R}$ \parencite{Brockwell:2002dq}. 
 
@@ -743,7 +743,11 @@ In this chapter we have shown by experiment that, as predicted, in stable enviro
 
 This is encouraging, and the first point confirms the main result from the exploration by \textcite{Bourrat2015}. However, from the viewpoint of a creative open-ended evolutionary process, this is not in fact what is desired: perfect inheritance means an absence of novelty. 
 
-In \cref{model-behaviour-in-changing-environments} we tested the hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two---$\Theta$ and $\delta$---are more discoverable by an evolutionary learner than the other, $\sigma_e$.
+In \cref{model-behaviour-in-changing-environments} we tested the hypothesis predictions from \cref{h2} for changing environments. First we defined what we mean by environmental change. Our key assumption is that this change may be modelled as a timeseries, specifically one that is autoregressive (AR). In \cref{environmental-model} we described an environmental model based on a AR(1) timeseries defined by three independent parameters, $\Theta$, $\delta$ and $\sigma_e$. Specifically, the change in fitness at each timestep $t$ is given by the function $\Theta x_{t-1} + e_t + \delta$, where $e_t$ is an error term related to $\sigma_e$ by $e_t\stackrel{iid}{\sim}N(0,\sigma^{2}_e)$. From this description it is clear that of these three parameters, two---$\Theta$ and $\delta$---are more discoverable by an evolutionary learner than the other, $\sigma_e$.
+
+We assume that all entities experience the same relationship to the environment: environmental changes, through the proxy of fitness changes, apply to all equally. Although we experimented with modelling fitness change by lineage---the chain of entities that trace ancestry back to some shared ancestor---the assumption that lineages are homogeneous seems as arbitrary as the assumption that all entities respond alike. 
+
+Our model is equally blind to co-evolution, as the only relationship an entity has is with the environment, and not directly with other entities. As co-evolutionary phenomenon in biology though are primarily inter-species, and our model is effectively single-species, co-evolution is outside the current model's scope. 
 
 \Cref{h2} made these predictions:
 
@@ -754,7 +758,11 @@ In \cref{model-behaviour-in-changing-environments} we tested the hypothesis pred
 
 In \cref{mean-heritability-predictability} we constructed a random-effects factorial experiment where the simulation model from \cref{base-model} was combined with the environmental model to confirm the first prediction: heritability in changing environments is indeed related to environmental predictability. However, this conclusion would be strengthened by an ordering based on $\Theta$, $\delta$ and $\sigma_e$, as adopted for in the experiments in \cref{ch:variability}.
 
-The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability}, with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship.
+The second prediction was also confirmed in similar fashion in \cref{sd-heritability-predictability}, with a similar caveat. Although we can show a clear difference between stable and changing environments, without an absolute ordering over $\Theta$, $\delta$ and $\sigma_e$ it is difficult to show a proportional relationship. Furthermore, our model is primarily concerned with the connection between predictability and heredity, and is essentially silent on unpredictable change such as experienced during times of evolutionary transitions. However, to go from limited replication to unlimited heredity replicators, it is our belief that we require novelty, rather than steady improvement. Modelling the unpredictable is, almost by definition though, difficult.
 
-Overall this \namecref{ch:models-of-inheritance} provides support for our initial working hypothesis that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution.
+Within these bounds though this \namecref{ch:models-of-inheritance} provides support for our initial working hypothesis from RQ1 that an effective inheritance mechanism can not only emerge from a low-heredity environment through evolution, but that it can be tuned and optimised by evolution. Environmental variation plays a key role, and this insight forms the basis for the work described in the remainder of this thesis.
+- 
+- 
+- 
+
 

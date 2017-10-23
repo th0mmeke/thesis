@@ -171,7 +171,7 @@ The experiments in this chapter all use a sampling proportion $p=0.2$, as a bala
 			}
 		}
 	}
-	\caption[\emph{FindCyclesFromNode}. Recusive algorithm to identify cycles from a seed molecule.]{\emph{FindCyclesFromNode}. Recursive breadth-first algorithm to identify all shortest paths (and hence cycles) from $Source$ to any predecessor molecule of the same molecular species as $Source$ in the directed reaction graph.$MAXDEPTH$ is a constant to bound the cost of finding cycles.}\label{alg:find-cycles-from-seed}
+	\caption[\emph{FindCyclesFromNode}. Recursive algorithm to identify cycles from a seed molecule.]{\emph{FindCyclesFromNode}. Recursive breadth-first algorithm to identify all shortest paths (and hence cycles) from $Source$ to any predecessor molecule of the same molecular species as $Source$ in the directed reaction graph.$MAXDEPTH$ is a constant to bound the cost of finding cycles.}\label{alg:find-cycles-from-seed}
 \end{algorithm}
 
 
@@ -371,7 +371,7 @@ b <- t.test(csv[csv$S_Product!="Uniform" || csv$S_Reactant!="UniformReactantSele
 #print(xtable(a, caption='ANOVA analysis.', label='tbl:anova-multipliers'), booktabs=TRUE, include.rownames=TRUE, size="scriptsize", caption.placement="top")
 @
 
-The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. Testing the statistical hypothesis with a two-sample, two-tailed, Student's t-test gives a t-statistic of $\Sexpr{b$statistic[1]}$ with $p=\Sexpr{b$p.value[1]}$, and so we reject H$_0$ (multipliers result from chance alone) in favour of the original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtably affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
+The results are shown in \cref{tbl:toyworld2-multiplier-control}; no replicate of the control experiments generated multipliers. Testing the statistical hypothesis with a two-sample, two-tailed, Student's t-test gives a t-statistic of $\Sexpr{b$statistic[1]}$ with $p=\Sexpr{b$p.value[1]}$, and so we reject H$_0$ (multipliers result from chance alone) in favour of the original hypothesis, that multipliers emerge from biases in the \gls{achem}. Although the sampling proportion $p$ undoubtedly affects the total number of multipliers identified in each experiment, the relative numbers between experiments are maintained and hence we do not believe that this result is solely an artifact of sampling.
 
 \subsection{Is the number of reaction cycles a good predictor for the number of multipliers?}
 

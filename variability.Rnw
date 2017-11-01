@@ -286,7 +286,7 @@ Similarly, although the \gls{achem} generated a number of variable replicator ca
 
 Biology gives us many examples of functional replicators, but provides little guidance on alternative approaches; we don't wish to bias our simulation model in a direction which may very well be wrong. Unfortunately, although we have no prior knowledge to estimate probabilities, it is clear that even without the constraint of attempting to replicate the process by which replication evolved on Earth, replication is very unlikely.
 
-The critical step appears to be the shift from a limited heredity replicator to an unlimited one. At that point, the necessary leap in information that must be maintained and managed by the entities genome seems to require a quite different mechanism for information storage---a shift from an analog genome to a digital (for example, templated) one, associated with a process to map between genome and phenome. The outcome of this change is a capacity for increased expressiveness, and an increased ability to respond to complexity in the environment.
+The critical step appears to be the shift from a limited heredity replicator to an unlimited one. At that point, the necessary leap in information that must be maintained and managed by the entity's genome seems to require a quite different mechanism for information storage---a shift from an analog genome to a digital (for example, templated) one, associated with a process to map between genome and phenome. The outcome of this change is a capacity for increased expressiveness, and an increased ability to respond to complexity in the environment.
 
 
 

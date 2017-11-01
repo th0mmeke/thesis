@@ -49,7 +49,7 @@
 \RequirePackage{letterspace} % Set up letterspacing (using microtype package) -- requires pdfTeX v1.40+
 
 \ifmyhyperref
-\RequirePackage[pageanchor,hyperindex]{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 \RequirePackage{bookmark}
 \fi
 \RequirePackage{cleveref}
